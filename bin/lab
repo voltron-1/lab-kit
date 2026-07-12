@@ -1,0 +1,204 @@
+#!/usr/bin/env bash
+# bin/lab — LAB-KIT entrypoint: arg parsing, dispatch, and the five thin
+# cmd_* orchestrators. All domain logic lives in lib/*.sh.
+set -euo pipefail
+
+LAB_ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+readonly LAB_ROOT
+
+# shellcheck source=lib/common.sh
+source "$LAB_ROOT/lib/common.sh"
+# shellcheck source=lib/state.sh
+source "$LAB_ROOT/lib/state.sh"
+# shellcheck source=lib/catalog.sh
+source "$LAB_ROOT/lib/catalog.sh"
+# shellcheck source=lib/workspace.sh
+source "$LAB_ROOT/lib/workspace.sh"
+# shellcheck source=lib/quiz.sh
+source "$LAB_ROOT/lib/quiz.sh"
+# shellcheck source=lib/hints.sh
+source "$LAB_ROOT/lib/hints.sh"
+# shellcheck source=lib/render.sh
+source "$LAB_ROOT/lib/render.sh"
+
+# A SIGINT/SIGTERM at ANY point during a state_apply write only ever leaves
+# a temp file behind (the real .progress.json is never opened for writing —
+# see lib/state.sh) — these traps just make sure that temp file is cleaned
+# up, and that Ctrl-C prints a clear message instead of a raw kill.
+trap 'state_cleanup_tmp' EXIT
+trap 'state_cleanup_tmp; printf "\nlab: interrupted — nothing recorded\n" >&2; trap - INT; kill -INT "$$"' INT
+trap 'state_cleanup_tmp; exit 143' TERM
+
+usage() {
+  cat <<'EOF'
+usage: lab status
+       lab start [track] <id> [--force]
+       lab check [track] <id>
+       lab resume
+       lab hint  [track] <id>
+
+track is optional when the lab id is unambiguous across installed tracks.
+EOF
+}
+
+LAB_FORCE="false"
+LAB_ARGS=()
+
+strip_force() {
+  LAB_FORCE="false"
+  LAB_ARGS=()
+  local a
+  for a in "$@"; do
+    if [[ "$a" == "--force" ]]; then
+      LAB_FORCE="true"
+    else
+      LAB_ARGS+=("$a")
+    fi
+  done
+}
+
+cmd_status() {
+  render_status
+}
+
+cmd_start() {
+  strip_force "$@"
+  [[ "${#LAB_ARGS[@]}" -ge 1 ]] || die "usage: lab start [track] <id> [--force]"
+  local resolved track id dir
+  resolved="$(catalog_resolve "${LAB_ARGS[@]}")"
+  track="$(cut -f1 <<< "$resolved")"
+  id="$(cut -f2 <<< "$resolved")"
+  dir="$(catalog_lab_dir "$track" "$id")"
+  catalog_lint_lab "$track" "$dir"
+
+  local skip_ids_json skip_count
+  skip_ids_json="$(catalog_skip_candidates "$track" "$id")"
+  skip_count="$(jq 'length' <<< "$skip_ids_json")"
+
+  if [[ "$skip_count" -gt 0 && "$LAB_FORCE" != "true" ]]; then
+    local frontier ftitle
+    frontier="$(catalog_frontier "$track")"
+    ftitle="$(catalog_meta "$track" "$frontier" "title")"
+    die "$track $id is locked — next unlocked lab in '$track' is $frontier ($ftitle).
+     pass it first, or skip permanently:
+       lab start $track $id --force
+                  (marks the skipped lab(s) $MARK_SKIPPED forever — never $MARK_PASS)"
+  fi
+
+  if [[ "$skip_count" -gt 0 ]]; then
+    local skip_list
+    skip_list="$(jq -r 'join(", ")' <<< "$skip_ids_json")"
+    printf '%s  forcing past the lock — %s marked skipped (permanent — never %s)\n' \
+      "$MARK_SKIPPED" "$skip_list" "$MARK_PASS"
+  fi
+
+  ws_provision "$track" "$id" "$dir"
+  state_record_start "$track" "$id" "$skip_ids_json"
+  render_brief "$track" "$id"
+  recall_run "$track" "$id" "$dir"
+}
+
+cmd_check() {
+  [[ "$#" -ge 1 ]] || die "usage: lab check [track] <id>"
+  local resolved track id dir
+  resolved="$(catalog_resolve "$@")"
+  track="$(cut -f1 <<< "$resolved")"
+  id="$(cut -f2 <<< "$resolved")"
+  dir="$(catalog_lab_dir "$track" "$id")"
+  catalog_lint_lab "$track" "$dir"
+
+  ws_exists "$track" "$id" || die "$track $id hasn't been started — nothing to grade
+     run: lab start $track $id"
+
+  printf '\nchecks — %s %s\n' "$track" "$id"
+  printf -- '--------------------------------------------------------------\n'
+  local check_rc=0
+  if ws_run_check "$track" "$id" "$dir"; then
+    check_rc=0
+  else
+    check_rc=$?
+  fi
+
+  case "$check_rc" in
+    0) : ;;
+    1)
+      printf '\nRESULT: FAIL — %s %s (checks failed)\n' "$track" "$id"
+      printf 'fix the %s items in workspace/%s/%s/, then re-run: lab check %s %s\n' \
+        "$MARK_FAIL" "$track" "$id" "$track" "$id"
+      printf 'stuck? lab hint %s %s\n' "$track" "$id"
+      state_record_check "$track" "$id" false "[]"
+      exit 1
+      ;;
+    124)
+      printf '\n!! grader timed out (120s) — this is a lab bug, not your mistake. please report it.\n' >&2
+      exit 2
+      ;;
+    130|143)
+      printf '\nlab: interrupted — nothing recorded\n' >&2
+      exit 2
+      ;;
+    *)
+      printf '\n!! this is a lab bug, not your mistake (grader exit %s) — please report it.\n' "$check_rc" >&2
+      exit 2
+      ;;
+  esac
+
+  if quiz_run "$track" "$id" "$dir"; then
+    local recap_json title nid
+    recap_json="$(recap_lines_json "$dir")"
+    state_record_check "$track" "$id" true "$recap_json"
+    title="$(catalog_meta "$track" "$id" "title")"
+    printf '\nRESULT: PASS — %s %s · %s %s\n' "$track" "$id" "$title" "$MARK_PASS"
+    printf '\nrecap\n'
+    render_recap_lines "$recap_json"
+    nid="$(catalog_frontier "$track")"
+    if [[ -n "$nid" ]]; then
+      printf '\nunlocked → %s %s — %s\n' "$track" "$nid" "$(catalog_meta "$track" "$nid" "title")"
+      printf 'next     → lab start %s %s\n' "$track" "$nid"
+    else
+      printf '\nunlocked → %s track complete\n' "$track"
+      printf 'next     → lab status\n'
+    fi
+    exit 0
+  else
+    state_record_check "$track" "$id" false "[]"
+    printf '\nRESULT: FAIL — %s %s (quiz)\n' "$track" "$id"
+    printf 'answers stay hidden. re-read the BRIEF, then re-run: lab check %s %s\n' "$track" "$id"
+    exit 1
+  fi
+}
+
+cmd_resume() {
+  render_resume
+}
+
+cmd_hint() {
+  [[ "$#" -ge 1 ]] || die "usage: lab hint [track] <id>"
+  local resolved track id dir
+  resolved="$(catalog_resolve "$@")"
+  track="$(cut -f1 <<< "$resolved")"
+  id="$(cut -f2 <<< "$resolved")"
+  dir="$(catalog_lab_dir "$track" "$id")"
+  ws_exists "$track" "$id" || die "start the lab before asking for hints — run: lab start $track $id"
+  hint_next "$track" "$id" "$dir"
+}
+
+main() {
+  require_deps
+  state_gc_tmp
+  local cmd="${1:-help}"
+  if [[ "$#" -ge 1 ]]; then
+    shift
+  fi
+  case "$cmd" in
+    status) cmd_status "$@" ;;
+    start)  cmd_start "$@" ;;
+    check)  cmd_check "$@" ;;
+    resume) cmd_resume "$@" ;;
+    hint)   cmd_hint "$@" ;;
+    help|-h|--help) usage ;;
+    *) die "unknown command '$cmd' — run: lab help" ;;
+  esac
+}
+
+main "$@"

@@ -1,0 +1,7 @@
+# runtime state — never committed
+/.progress.json
+/.progress.json.*
+/workspace/
+
+# session scratch
+/logs/
