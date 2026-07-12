@@ -1,0 +1,5 @@
+# Justified exceptions to tools/lint-labs.sh's absolute-path-literal ban.
+# One entry per line: <path>:<line> — <reason>
+# Every "# lint-allow: <reason>" comment in a check.sh must have a
+# matching entry here (double opt-in — a lone inline comment is not
+# enough to suppress the lint).
