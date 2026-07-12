@@ -1,0 +1,15 @@
+{
+  "title": "Bash Literacy Lab",
+  "tagline": "Read. Audit. Harden. Direct.",
+  "order": 20,
+  "phases": {
+    "p0": "Toolchain & Kit",
+    "p1": "The Expansion Model",
+    "p2": "Control Flow & Silent Failure",
+    "p3": "The Footgun Gallery",
+    "p4": "Untrusted Input & Injection",
+    "p5": "Text Processing & Pipelines",
+    "p6": "Reading Real Deploy Scripts",
+    "p7": "Directing & Auditing AI Bash"
+  }
+}

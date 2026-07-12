@@ -1,0 +1,15 @@
+{
+  "title": "Rust Literacy Lab",
+  "tagline": "Read. Audit. Direct.",
+  "order": 10,
+  "phases": {
+    "p0": "Toolchain & Kit",
+    "p1": "Reading Basic Rust",
+    "p2": "Ownership, Borrowing, Lifetimes",
+    "p3": "Types, Traits, Error Handling",
+    "p4": "Security-Critical Rust",
+    "p5": "Concurrency & Async",
+    "p6": "Reading Real Security Tools",
+    "p7": "Directing & Auditing AI Rust"
+  }
+}

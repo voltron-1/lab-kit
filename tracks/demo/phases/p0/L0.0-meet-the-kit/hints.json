@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The check grades exactly the artifacts the GUIDED STEPS name: fixed.conf, sysinfo.txt, location.txt. ls the workspace and compare against the step list — something is missing or misnamed.",
+    "Run: diff broken.conf fixed.conf — you should see exactly two changed lines (max_retries and workspace_fence). sysinfo.txt must contain the output of step 3's command, and location.txt must be written from INSIDE workspace/demo/L0.0.",
+    "From workspace/demo/L0.0: cp broken.conf fixed.conf; edit max_retries to the number 3 and workspace_fence to on; then uname -r > sysinfo.txt and pwd > location.txt. Re-run lab check demo L0.0."
+  ]
+}

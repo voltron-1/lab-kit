@@ -1,0 +1,52 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "source": "README.md",
+      "prompt": "Which command re-primes you after time away?",
+      "options": { "a": "lab status", "b": "lab resume", "c": "lab hint" },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "source": "README-first.txt",
+      "prompt": "How many hint levels does every lab have?",
+      "options": { "a": "2", "b": "3", "c": "unlimited" },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "source": "demo L0.0 — lab.md",
+      "prompt": "What directory does lab start provision for demo L0.0? (path from repo root, no trailing slash)",
+      "answer_b64": "d29ya3NwYWNlL2RlbW8vTDAuMA==",
+      "accept_b64": ["d29ya3NwYWNlL2RlbW8vTDAuMC8="]
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "source": "README.md",
+      "prompt": "lab start refuses a lab past the next unlocked one. What overrides that, and at what cost?",
+      "options": {
+        "a": "--force; the skipped lab(s) are marked ⏭ permanently",
+        "b": "--skip; no cost",
+        "c": "--unlock; it resets the track"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "source": "demo L0.0 — lab.md",
+      "prompt": "What makes .progress.json survive Ctrl-C mid-write?",
+      "options": {
+        "a": "file locking",
+        "b": "write to a temp file, then atomic mv",
+        "c": "a rolling backup copy"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

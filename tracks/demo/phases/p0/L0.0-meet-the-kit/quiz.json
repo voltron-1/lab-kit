@@ -1,0 +1,33 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "In lab status, what does the ⏭ mark mean?",
+      "options": {
+        "a": "passed after a retry",
+        "b": "locked until the previous lab passes",
+        "c": "forced past with --force — it will never show ✓"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Which file at the repo root stores your progress?",
+      "answer_b64": "LnByb2dyZXNzLmpzb24=",
+      "accept_b64": ["cHJvZ3Jlc3MuanNvbg=="]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What does lab resume replay?",
+      "options": {
+        "a": "the full lab.md of your last lab",
+        "b": "the last passed lab's 3-line recap, plus the next lab and its one-line brief",
+        "c": "your complete quiz answer history"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

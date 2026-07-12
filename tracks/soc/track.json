@@ -1,0 +1,15 @@
+{
+  "title": "SOC Analyst Lab",
+  "tagline": "Triage. Investigate. Escalate. Verify.",
+  "order": 30,
+  "phases": {
+    "p0": "Toolbelt & Kit",
+    "p1": "How Attacks Become Alerts",
+    "p2": "Network Triage Fundamentals",
+    "p3": "Endpoint Triage Fundamentals",
+    "p4": "Triage Craft & the Queue",
+    "p5": "Phishing & Malware Triage",
+    "p6": "Investigation & Escalation",
+    "p7": "The AI-Assisted Analyst"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Demo Lab",
+  "tagline": "The kit driving itself.",
+  "order": 0,
+  "phases": {
+    "p0": "Kit Mechanics"
+  }
+}
