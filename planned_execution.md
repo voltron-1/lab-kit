@@ -10,6 +10,9 @@ PROMPTS.md Prompt 2, TRACK: bash PHASE: 0+1).
 ## LAST SESSION
 2026-07-12 — Bootstrap: shared `lab` CLI + check harness, demo track
 (`demo L0.0`), README, this file. See BOOTSTRAP below for the commit.
+Also read in a fourth curriculum map, PowerShell Literacy Lab (track
+`ps`), added to the roadmap below — not yet built, no CLI/track.json
+changes made.
 
 ## BOOTSTRAP
 - [x] Bootstrap: lab CLI, check harness, demo lab (L0.0), README,
@@ -47,6 +50,16 @@ PROMPTS.md Prompt 2, TRACK: bash PHASE: 0+1).
 - [ ] soc p5 — Phishing & Malware Triage (6 labs)
 - [ ] soc p6 — Investigation & Escalation (6 labs)
 - [ ] soc p7 — The AI-Assisted Analyst (7 labs)
+
+### ps — PowerShell Literacy Lab (54 labs)
+- [ ] ps p0 — Toolchain & Kit (3 labs)
+- [ ] ps p1 — The Object Pipeline (8 labs)
+- [ ] ps p2 — Control Flow, Errors & Modules (7 labs)
+- [ ] ps p3 — The Windows Integration Layer (8 labs)
+- [ ] ps p4 — PowerShell as Attack Surface (9 labs)
+- [ ] ps p5 — Deobfuscation & Malware Reading (7 labs)
+- [ ] ps p6 — Reading Real Security Tools (5 labs)
+- [ ] ps p7 — Directing & Auditing AI PowerShell (7 labs)
 
 ## DEFERRED
 - (none)
