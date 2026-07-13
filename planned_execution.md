@@ -1,18 +1,21 @@
 # LAB-KIT — Planned Execution
 
 ## NEXT UP
-Phase: bash p0+1 — Toolchain & Kit, then The Expansion Model (built
-together per the curriculum map — Phase 0 is plumbing, Phase 1 is
-unusable without it).
-Next unstarted item: `- [ ] bash p0` below (Phase Builder protocol,
-PROMPTS.md Prompt 2, TRACK: bash PHASE: 0+1).
+Phase: bash p0+1 — Toolchain & Kit, then The Expansion Model. The plan
+is written and committed; the build (scaffolding actual lab
+directories under tracks/bash/phases/) has not started.
+Next unstarted item: execute `docs/plans/bash-p01-plan.md` lab-by-lab
+per the Phase Builder protocol (PROMPTS.md Prompt 2, TRACK: bash
+PHASE: 0+1, step 4 onward — build, self-test, then tag `bash-p0` /
+`bash-p1`).
 
 ## LAST SESSION
-2026-07-12 — Bootstrap: shared `lab` CLI + check harness, demo track
-(`demo L0.0`), README, this file. See BOOTSTRAP below for the commit.
-Also read in a fourth curriculum map, PowerShell Literacy Lab (track
-`ps`), added to the roadmap below — not yet built, no CLI/track.json
-changes made.
+2026-07-13 — bash p0+1 build plan authored (one agent per lab) and
+empirically verified (execution + ShellCheck on the baseline machine —
+bash 5.2.21, `/bin/sh`→dash, shellcheck 0.9.0) against
+docs/curriculum/bash-literacy-lab-curriculum-v1.md and
+docs/kit-contracts.md. Committed & pushed as `docs/plans/bash-p01-plan.md`
+(commit b61b60e). No lab content built yet — planning only.
 
 ## BOOTSTRAP
 - [x] Bootstrap: lab CLI, check harness, demo lab (L0.0), README,
@@ -32,8 +35,8 @@ changes made.
 - [ ] rust p7 — Directing & Auditing AI Rust (7 labs)
 
 ### bash — Bash Literacy Lab (54 labs)
-- [ ] bash p0 — Toolchain & Kit (3 labs)
-- [ ] bash p1 — The Expansion Model (8 labs)
+- [~] bash p0 — Toolchain & Kit (3 labs) — plan: `docs/plans/bash-p01-plan.md` (commit b61b60e); build not started
+- [~] bash p1 — The Expansion Model (8 labs) — plan: `docs/plans/bash-p01-plan.md` (commit b61b60e); build not started
 - [ ] bash p2 — Control Flow & Silent Failure (8 labs)
 - [ ] bash p3 — The Footgun Gallery (9 labs)
 - [ ] bash p4 — Untrusted Input & Injection (8 labs)
