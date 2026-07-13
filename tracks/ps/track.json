@@ -1,0 +1,15 @@
+{
+  "title": "PowerShell Literacy Lab",
+  "tagline": "Read. Deobfuscate. Audit. Direct.",
+  "order": 40,
+  "phases": {
+    "p0": "Toolchain & Kit",
+    "p1": "The Object Pipeline",
+    "p2": "Control Flow, Errors & Modules",
+    "p3": "The Windows Integration Layer",
+    "p4": "PowerShell as Attack Surface",
+    "p5": "Deobfuscation & Malware Reading",
+    "p6": "Reading Real Security Tools",
+    "p7": "Directing & Auditing AI PowerShell"
+  }
+}
