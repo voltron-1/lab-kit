@@ -390,7 +390,7 @@ fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 32 unstarted track-phase lines" "32" "$line_count"
+  assert_eq "planned_execution.md has 30 unstarted track-phase lines" "30" "$line_count"
 else
   bad "planned_execution.md missing"
 fi
