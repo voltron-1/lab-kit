@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads exactly one artifact: predictions.txt with keys p1, p2, p3, p4 — values are the exact lines argv.sh printed (p4 is a single letter), no spaces around =.",
+    "For each line ask: how far past the $ does a valid name run (letters, digits, underscore)? ${v}wide stops the name at v; $vwide does not stop at v. For p4: bash treats name=value as an assignment only when it contains no spaces.",
+    "Run v=world, then run each printed line exactly as shown and transcribe each output line verbatim into predictions.txt; for p4, run v = world, read what the shell says it tried to do, and record the matching letter."
+  ]
+}

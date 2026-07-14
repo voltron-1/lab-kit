@@ -1,0 +1,8 @@
+{
+  "id": "L1.2",
+  "title": "Variables — $VAR, ${VAR}, and when braces matter",
+  "type": "PREDICT",
+  "objective": "Predict exactly which words reach a command when $v, ${v}wide, and $vwide expand, and explain why v = world with spaces runs a command instead of assigning.",
+  "gate": false,
+  "est_minutes": 10
+}

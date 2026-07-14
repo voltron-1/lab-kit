@@ -1,0 +1,32 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "`name=report` is set and you want the string `report_backup`. Which gets it?",
+      "options": {
+        "a": "\"$name_backup\"",
+        "b": "\"${name}_backup\"",
+        "c": "either one"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Teaser for L1.4: after v=world, what does echo '$v' print?",
+      "options": {
+        "a": "world",
+        "b": "$v",
+        "c": "nothing"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "The p4 demo made the shell search for a command named v and fail. What number did echo $? print?",
+      "answer_b64": "MTI3"
+    }
+  ]
+}
