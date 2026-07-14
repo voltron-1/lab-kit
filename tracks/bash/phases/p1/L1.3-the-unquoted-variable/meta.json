@@ -1,0 +1,8 @@
+{
+  "id": "L1.3",
+  "title": "The unquoted variable — word splitting, the #1 Bash bug",
+  "type": "PREDICT",
+  "objective": "Predict exactly how an unquoted $var splits into multiple words, and prove with argv.sh and cp that double quotes are what keep one filename one argument.",
+  "gate": false,
+  "est_minutes": 15
+}

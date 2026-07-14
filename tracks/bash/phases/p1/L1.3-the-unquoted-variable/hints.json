@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads predictions.txt — four keys (p1, p2, p3, p5), no spaces around =  — plus one file it expects to find inside backup/. ls the workspace and compare against the step list.",
+    "p1 and p2 are full argv.sh output lines in N|<...> form — decide how many words the shell hands over once $f is replaced by its value, unquoted vs quoted; p3 and p5 are single letters; the backup/ file only appears if your cp used quotes.",
+    "Run each line and transcribe: f=\"report final.txt\"; bash argv.sh $f; bash argv.sh \"$f\"; cp $f backup/; cp \"$f\" backup/; ls backup; opt=-n; bash argv.sh $opt; echo $opt — the run is the legitimate answer sheet; copy the two argv.sh lines into p1/p2 verbatim and pick the letters matching what you saw."
+  ]
+}

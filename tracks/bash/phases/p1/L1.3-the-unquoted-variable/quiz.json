@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "`bash argv.sh $f` became two arguments. Which pipeline step manufactured the second word?",
+      "options": {
+        "a": "tokenization of the line you typed — the space was always a separator",
+        "b": "word splitting of the unquoted expansion RESULT, after $f was replaced",
+        "c": "pathname expansion matched two files"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The reflex rule this course drills from here on:",
+      "options": {
+        "a": "quote a variable only when you know it contains spaces",
+        "b": "double-quote every expansion unless you can say exactly why not",
+        "c": "prefer single quotes around $var"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Which characters in pure DATA (say, a filename) can change what a command does?",
+      "options": {
+        "a": "only shell metacharacters you type yourself, like ; and |",
+        "b": "a space, a newline, or a leading dash",
+        "c": "none — data is inert once it's inside a variable"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
