@@ -1,0 +1,33 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A command line is transformed in a fixed order before anything runs. Which order?",
+      "options": {
+        "a": "split into words → glob → expand variables",
+        "b": "tokenize → expand ($var, $(cmd)) → word-split the unquoted results → glob",
+        "c": "glob → expand → split → tokenize"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Which quoting style lets $var expand but stops the result from being word-split?",
+      "answer_b64": "ZG91Ymxl",
+      "accept_b64": ["ZG91YmxlIHF1b3Rlcw==", "ZG91YmxlLXF1b3Rlcw=="]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why is an unquoted $(cmd) the same bug as an unquoted $var?",
+      "options": {
+        "a": "both re-run the command once per output word",
+        "b": "both produce text that then gets word-split and glob-expanded",
+        "c": "command substitution ignores surrounding quotes"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

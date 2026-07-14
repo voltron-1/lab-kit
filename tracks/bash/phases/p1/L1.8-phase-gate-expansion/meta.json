@@ -1,0 +1,11 @@
+{
+  "id": "L1.8",
+  "title": "Phase gate: predict the output of an expansion-heavy script, line by line",
+  "type": "PREDICT",
+  "objective": "Prove the Phase 1 expansion model is internalized by predicting all ten numbered output lines of an expansion-heavy script before running it once.",
+  "gate": true,
+  "est_minutes": 20,
+  "teaching_samples": {
+    "files/report.sh": ["SC2046", "SC2086", "SC2154"]
+  }
+}

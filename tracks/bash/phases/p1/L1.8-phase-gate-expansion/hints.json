@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads one artifact: predictions.txt - ten keys p1..p10, no spaces around =, each value the FULL output line including its N: prefix. Check every key exists and is spelled exactly pN.",
+    "Replay the fixed order on each line: expand ($var, ${var}, $(cmd)) then word-split whatever came out unquoted then glob. Four traps: $host_id is ONE name; the hosts= assignment never splits; a glob with no match stays literal; the last line prints $? of grep -q FATAL app.log - recall which number means success.",
+    "Predict all ten first, then run bash report.sh once - the run is the answer sheet. Transcribe every line you missed into its key exactly, N: prefix included, then re-run lab check bash L1.8."
+  ]
+}
