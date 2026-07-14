@@ -1,0 +1,18 @@
+KIT NOTES — every graded answer in this lab is a line in this file.
+
+The lab CLI has five verbs:
+  lab status              the phase map: every lab, its mark, what's next
+  lab start <track> <id>  opens a lab — prints the brief, seeds the workspace
+  lab check <track> <id>  grades a lab — runs check.sh, then a 3-question quiz
+  lab hint <track> <id>   climbs the hint ladder one level per run
+  lab resume              replays your last recap card and names the next lab
+
+Re-entry after any gap — a day or a month — is: lab resume.
+The check is all-or-nothing: grader passing AND quiz 3/3. A 2/3 quiz
+fails the whole check; nothing is lost, you just rerun lab check.
+The hint ladder has exactly 3 levels. Level 1 never gives the answer.
+Status marks: ✓ passed · ▶ in progress · ○ not done · ⏭ skipped.
+⏭ is permanent: a lab you forced past with --force never becomes ✓.
+This track grades key=value answer lines. The grader greps for the exact
+line: lowercase keys, no spaces around = — q1=b passes, Q1 = b fails.
+This track runs every script as: bash <script> — never ./script.

@@ -1,0 +1,33 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A lab shows ⏭ in lab status. You go back, do the work, and pass its check. Its mark becomes…",
+      "options": {
+        "a": "✓ — a pass always upgrades the mark",
+        "b": "▶ — in progress until the next lab passes",
+        "c": "⏭ — skipped is permanent; it never becomes ✓"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Which command replays your last recap card?",
+      "answer_b64": "bGFiIHJlc3VtZQ==",
+      "accept_b64": ["cmVzdW1l"]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why must an answer line be exactly q1=b, never Q1 = b?",
+      "options": {
+        "a": "style preference — the grader normalizes case and spacing",
+        "b": "check.sh greps the anchored pattern ^q1=b$ — any other spelling doesn't match and the check fails",
+        "c": "the CLI rewrites the file before grading"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

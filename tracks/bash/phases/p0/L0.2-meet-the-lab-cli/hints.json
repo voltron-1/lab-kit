@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader wants exactly two files, both named in steps 4-5: answers.txt and location.txt. ls the workspace and compare it against the step list.",
+    "answers.txt needs exactly three lines shaped q1=<letter>, q2=<number>, q3=<letter> — lowercase keys, no spaces around =. location.txt must be pwd's output, written from inside workspace/bash/L0.2, not from the repo root.",
+    "All three answers are single lines of kit-notes.txt: the re-entry verb, the hint-ladder count, and the all-or-nothing check rule. Write the three answer lines, run pwd > location.txt from the workspace, then rerun lab check bash L0.2."
+  ]
+}
