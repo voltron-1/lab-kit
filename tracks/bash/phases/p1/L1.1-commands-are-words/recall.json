@@ -1,0 +1,44 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "source": "bash L0.1",
+      "prompt": "/bin/sh on Ubuntu is really…",
+      "options": { "a": "bash", "b": "dash", "c": "zsh" },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "source": "bash L0.1",
+      "prompt": "shellcheck prints nothing after checking your script — what does that mean?",
+      "options": { "a": "it crashed", "b": "clean — silence is the pass state", "c": "you need to add -v" },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "source": "bash L0.3",
+      "prompt": "The shebang line decides the interpreter when you run…",
+      "options": { "a": "bash script.sh", "b": "./script.sh", "c": "cat script.sh" },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "source": "bash L0.2",
+      "prompt": "lab check passes when…",
+      "options": { "a": "the grader passes", "b": "the grader passes AND the quiz is 3/3", "c": "the quiz is 2/3" },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "source": "bash L0.3",
+      "prompt": "`[[ -z \"$x\" ]]` under dash…",
+      "options": { "a": "works", "b": "fails — [[ is a bash extension", "c": "works if quoted" },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The shell splits a line into words. What does word 0 become?",
+      "options": {
+        "a": "the first argument",
+        "b": "the program that runs",
+        "c": "the shell's prompt"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "You type `echo one     two` and see `one two`. Who collapsed the whitespace?",
+      "options": {
+        "a": "echo trims repeated spaces from its input string",
+        "b": "the terminal rewrites the line as you type",
+        "c": "the shell split the line into two words before echo ran; echo just joins its argv with single spaces"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Quoting \"hello   world\" changes…",
+      "options": {
+        "a": "which program runs",
+        "b": "what the program receives — one argument instead of two",
+        "c": "nothing; quotes are stripped before anything else happens"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

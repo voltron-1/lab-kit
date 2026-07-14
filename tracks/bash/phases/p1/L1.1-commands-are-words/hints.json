@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads predictions.txt — four keys p1-p4, no spaces around =, each value the complete line argv.sh prints; compare your file against the four sample lines in lab.md.",
+    "Every value has the shape N|<arg><arg>… — the count, a pipe, then each argument in its own angle brackets; count words as the shell would (separators collapse), and remember quotes make their contents ONE word, spacing intact; p4 still prints a line.",
+    "Run each of the four lines and transcribe each output byte-for-byte as the value (p1= + the full line), then re-run lab check bash L1.1 — the run is the legitimate answer sheet."
+  ]
+}
