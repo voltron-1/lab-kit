@@ -1,0 +1,42 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "You run `bash deploy.sh` in your terminal. What does the `#!/bin/sh` line do?",
+      "options": {
+        "a": "forces the script to run under sh anyway",
+        "b": "nothing — it's a comment; the shebang only picks the interpreter when the file itself is exec'd (./deploy.sh)",
+        "c": "makes bash switch into POSIX mode"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Name one bash-only construct from deploy.sh that dash rejects.",
+      "answer_b64": "W1s=",
+      "accept_b64": [
+        "W1sgXV0=",
+        "ZG91YmxlIGJyYWNrZXQ=",
+        "ZG91YmxlIGJyYWNrZXRz",
+        "JHt0YXJnZXReXn0=",
+        "JHt2YXJeXn0=",
+        "Xl4=",
+        "Y2FzZSBtb2RpZmljYXRpb24=",
+        "dXBwZXJjYXNlIGV4cGFuc2lvbg=="
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What is dash?",
+      "options": {
+        "a": "Debian's small, fast, POSIX-compliant sh — what /bin/sh points to on Debian/Ubuntu",
+        "b": "bash running in POSIX mode",
+        "c": "an obsolete shell that bash replaced"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

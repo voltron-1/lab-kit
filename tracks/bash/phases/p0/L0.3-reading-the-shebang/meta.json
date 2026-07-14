@@ -1,0 +1,11 @@
+{
+  "id": "L0.3",
+  "title": "Reading the shebang — #!/bin/bash vs #!/bin/sh vs dash, and why it matters",
+  "type": "DECODE",
+  "objective": "Read a script's shebang to name its target interpreter, and demonstrate why bash-only syntax under #!/bin/sh detonates on Debian/Ubuntu, where sh is dash.",
+  "gate": true,
+  "est_minutes": 15,
+  "teaching_samples": {
+    "files/deploy.sh": ["SC3010", "SC3059"]
+  }
+}

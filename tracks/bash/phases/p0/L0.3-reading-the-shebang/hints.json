@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads five artifacts — dash-run.txt, bash-run.txt, sh-target.txt, sc-out.txt, answers.txt; ls the workspace and compare against steps 8-13; answers.txt needs exactly four lowercase q-keys.",
+    "dash-run.txt must hold BOTH dash error lines (line 4's [[: not found and line 7's Bad substitution) — that requires the 2>&1 in step 8; sh-target.txt is the output of readlink -f /bin/sh; each answer is an exact line like q1=x, no spaces around =.",
+    "Re-run steps 8-11 verbatim, then cat dash-run.txt sc-out.txt sh-target.txt — q1 is answered by sh-target.txt, q3 by the SC3010 wording, q2 by imagining the same run inside an Alpine container, and q4 by asking how many directions restore shebang-syntax agreement; write the four letters into answers.txt and re-check."
+  ]
+}
