@@ -1,0 +1,33 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Backticks `cmd` versus $(cmd)?",
+      "options": {
+        "a": "different features — backticks also capture stderr",
+        "b": "the same feature — but $(...) nests without escaping, so prefer it",
+        "c": "backticks run in the current shell, $() in a subshell"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "In echo \"now: $(date)\", does the substitution still run inside the double quotes?",
+      "options": {
+        "a": "yes — double quotes permit $-expansions; single quotes would not",
+        "b": "no — any quotes make it literal text",
+        "c": "only if date is exported"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "$(cmd) captures exactly one of cmd's output streams — which one?",
+      "answer_b64": "c3Rkb3V0",
+      "accept_b64": ["c3RhbmRhcmQgb3V0cHV0", "c3RhbmRhcmQgb3V0", "c3Rkb3V0IG9ubHk="]
+    }
+  ]
+}

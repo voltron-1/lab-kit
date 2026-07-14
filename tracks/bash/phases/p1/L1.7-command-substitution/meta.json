@@ -1,0 +1,8 @@
+{
+  "id": "L1.7",
+  "title": "Command substitution — $(...) and reading nested commands",
+  "type": "PREDICT",
+  "objective": "Predict exactly what $(...) substitutes — the command's stdout with trailing newlines stripped — and whether the result splits or stays one word, reading nested substitutions inside-out.",
+  "gate": false,
+  "est_minutes": 15
+}

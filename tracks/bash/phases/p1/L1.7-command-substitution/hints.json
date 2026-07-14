@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads predictions.txt: five keys p1..p5, no spaces around =. p1-p4 take the whole argv.sh output line in the N|<...> format; p5 takes a single letter.",
+    "Substitute first: $(...) becomes the command's stdout minus trailing newlines. Then apply L1.3's rule - unquoted results split on whitespace, double-quoted results stay one word. For p4 work inside-out: what does pwd print, and which part does basename keep? For p5, ask which stream $() actually captures.",
+    "Run each sample line and transcribe its output byte-for-byte, | and <> included. For p5 run the transcript in your shell - v=$(cat missing.txt), then echo $?, then bash argv.sh $v - and note where the error text appeared, what $? held, and how many words $v produced."
+  ]
+}
