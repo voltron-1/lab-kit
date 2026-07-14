@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads four keys from answers.txt (q1-q4) and runs pulse.sh itself. Each answer comes from one numbered step - rerun the step whose number the question names before guessing.",
+    "q1 and q2 want the single digit $? holds immediately after the command - run it, then echo $? with nothing in between (or on the same line: cmd; echo $?). q3: list every command that ran between the ls and the second echo. q4: look at pulse.sh line 4 - if runs grep and reads exactly one thing back from it.",
+    "Transcribe reality: bash pulse.sh; echo $? gives q1's digit and grep -q FATAL app.log; echo $? gives q2's. For q3, the first echo is itself a command that exits 0 - pick the option that says it overwrote $?. For q4, grep -q produces no stdout at all, so text cannot be what if tests - pick the exit-code option."
+  ]
+}

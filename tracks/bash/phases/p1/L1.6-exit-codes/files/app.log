@@ -1,0 +1,6 @@
+2026-07-12 09:00:01 INFO service started pid=4312
+2026-07-12 09:00:02 INFO config loaded ok
+2026-07-12 09:00:05 INFO listener up on port 8443
+2026-07-12 09:14:31 ERROR upstream timeout after 30s
+2026-07-12 09:14:33 INFO retry 1 succeeded
+2026-07-12 09:30:00 INFO heartbeat ok

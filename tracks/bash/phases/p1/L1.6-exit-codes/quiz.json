@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "You type: `true; false; echo $?` — what prints?",
+      "options": {
+        "a": "0",
+        "b": "1",
+        "c": "nothing — false stops the line"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A script ends without any explicit exit. Its exit code is…",
+      "options": {
+        "a": "always 0",
+        "b": "the exit code of the last command it ran",
+        "c": "undefined until you set it"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why do hardened scripts write `if grep -q ERROR log` instead of running grep and then testing `[ $? -eq 0 ]`?",
+      "options": {
+        "a": "purely style — the two are identical in every way",
+        "b": "if cmd reads the code directly, leaving no window for another command to overwrite $?",
+        "c": "[ ] cannot compare numbers"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
