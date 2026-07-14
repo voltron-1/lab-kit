@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads predictions.txt - six keys p1...p6, no spaces around =, each value the FULL line argv.sh prints in N|<...> format; start from a fresh ls, because every answer is determined by what is actually in this directory.",
+    "Inventory at run time is app.conf, app.log, argv.sh, error.log, notes.txt, predictions.txt, sub/ - walk each pattern against that list in byte order; remember readme.md sits INSIDE sub/ (p3), argv.sh itself starts with a (p4), and quotes change what expands (p5 vs p6).",
+    "Run each of the six printed lines exactly as shown and transcribe each output line verbatim into predictions.txt - the run is the legitimate answer source; then lab check bash L1.5."
+  ]
+}

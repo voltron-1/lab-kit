@@ -1,0 +1,8 @@
+{
+  "id": "L1.5",
+  "title": "Globbing — * ? [...] and pathname expansion",
+  "type": "PREDICT",
+  "objective": "Predict exactly which filenames each glob expands to against a pinned workspace — including the no-match-stays-literal trap and quotes turning globbing off — before running anything.",
+  "gate": false,
+  "est_minutes": 15
+}

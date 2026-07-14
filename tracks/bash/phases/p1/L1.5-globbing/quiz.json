@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A directory contains NO .log files and you run `rm *.log`. What does rm actually receive?",
+      "options": {
+        "a": "nothing — the glob expands to zero words and rm silently succeeds",
+        "b": "the literal string *.log — rm then fails: rm: cannot remove '*.log': No such file or directory",
+        "c": "the shell aborts with a no-match error and rm never runs"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "In this workspace, what does `bash argv.sh \"*\"` print?",
+      "options": {
+        "a": "0|",
+        "b": "7|<app.conf><app.log><argv.sh><error.log><notes.txt><predictions.txt><sub>",
+        "c": "1|<*>"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "pat=\"*.log\", then `bash argv.sh $pat` (unquoted). Which happens first?",
+      "options": {
+        "a": "globbing, then $pat expansion",
+        "b": "$pat expansion first — globbing then operates on its result because it is unquoted",
+        "c": "neither: a variable's value can never be globbed"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
