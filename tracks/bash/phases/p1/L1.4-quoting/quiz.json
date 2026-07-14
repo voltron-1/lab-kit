@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "When is a BARE (unquoted) expansion the right call?",
+      "options": {
+        "a": "whenever the value contains no spaces",
+        "b": "never — always quote everything",
+        "c": "when you deliberately want the shell to split or glob the result — e.g. a variable holding a glob pattern that should match files; rare, and it should look intentional"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Inside \"'$user'\" (double quotes outermost), what do the single quotes do?",
+      "options": {
+        "a": "they block the expansion — the argument is literally $user",
+        "b": "nothing special — they are ordinary characters there, and $user still expands",
+        "c": "it is a syntax error: quotes cannot appear inside quotes"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "(L1.7 preview) Does \"$(hostname)\" still run hostname inside double quotes?",
+      "options": {
+        "a": "yes — command substitution expands inside double quotes; the quotes only stop splitting/globbing of its output",
+        "b": "no — double quotes make it literal text",
+        "c": "only when the shell is interactive"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

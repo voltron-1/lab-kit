@@ -1,0 +1,8 @@
+{
+  "id": "L1.4",
+  "title": "Quoting — single vs double vs none, decided by what you want expanded",
+  "type": "PREDICT",
+  "objective": "Choose between single, double, and no quotes by predicting exactly which expansions fire and how many words reach the command.",
+  "gate": false,
+  "est_minutes": 15
+}

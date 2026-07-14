@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads predictions.txt: five keys p1-p5, no spaces around =, each value the complete line argv.sh printed - count, pipe, and angle brackets included.",
+    "One rule per line: single = literal always (line 1); double = expand but keep one word (lines 2, 3); bare words expand separately (line 4); inside double quotes a single quote is just a character and the $ still fires (line 5). Re-check your word count on p4 and your quote characters on p5.",
+    "With user=root set in this shell, run each sample line exactly as printed and transcribe each output line verbatim as its key's value - run, copy, paste, all five. The run is the answer sheet."
+  ]
+}
