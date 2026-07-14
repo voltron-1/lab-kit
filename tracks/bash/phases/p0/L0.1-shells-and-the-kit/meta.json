@@ -1,0 +1,8 @@
+{
+  "id": "L0.1",
+  "title": "Shells and the kit — which shell am I in, install ShellCheck & shfmt",
+  "type": "GUIDED",
+  "objective": "Identify the shell you are running, prove /bin/sh is dash on this OS, and install ShellCheck and shfmt, leaving four redirected evidence files in the workspace.",
+  "gate": false,
+  "est_minutes": 15
+}

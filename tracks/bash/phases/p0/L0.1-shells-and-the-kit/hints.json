@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads exactly four files — shell.txt, sh-target.txt, shellcheck.txt, shfmt.txt; ls the workspace and compare against step 4: one is missing, empty, or misspelled.",
+    "Each file is one step-4 command redirected with > from inside workspace/bash/L0.1 — shell identity into shell.txt, the resolved sh symlink into sh-target.txt, each tool's --version into its own file; if shfmt.txt is the failure, run shfmt --version by itself first — \"command not found\" means the step-3 install didn't finish.",
+    "Replay verbatim from the workspace: ps -p $$ -o comm= > shell.txt; readlink -f /bin/sh > sh-target.txt; shellcheck --version > shellcheck.txt; shfmt --version > shfmt.txt — then lab check bash L0.1."
+  ]
+}

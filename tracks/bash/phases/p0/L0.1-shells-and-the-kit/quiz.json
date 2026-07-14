@@ -1,0 +1,33 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "In `ps -p $$ -o comm=`, what does `$$` expand to?",
+      "options": {
+        "a": "the exit code of the last command",
+        "b": "the PID of the shell you are running",
+        "c": "the number of arguments the shell was given"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "You run shellcheck on a script; it prints nothing and exits 0. In one word, what is the script's status?",
+      "answer_b64": "Y2xlYW4=",
+      "accept_b64": ["cGFzcw==", "cGFzc2Vk", "b2s="]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "A script pastes fine into your bash terminal but dies when a container runs it with /bin/sh. Likeliest reason?",
+      "options": {
+        "a": "/bin/sh on Debian/Ubuntu is dash — bash-only syntax doesn't exist there",
+        "b": "/bin/sh refuses files without the execute bit",
+        "c": "the container strips environment variables"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
