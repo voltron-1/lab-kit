@@ -260,7 +260,126 @@ out="$("$LAB" status 2>&1)"
 assert_contains "L0.1 stays skipped even after passing" "$out" "⏭  L0.1"
 assert_not_contains "L0.1 never shows a pass mark" "$out" "✓  L0.1"
 
-# --- 7. README / planned_execution shape ---
+# --- 7. bash track P0+P1: fabricated pass + one negative case per lab ---
+# Linear progression means each lab must end up PASSED before the next one
+# unlocks, so every block below drives a negative case (missing artifact ->
+# fail) BEFORE completing the fabrication and passing -- never after, so a
+# later fail can't be mistaken for reverting an already-passed lab (status
+# is sticky once passed; see lib/state.sh:state_record_check).
+note "bash track P0+P1: fabricated pass + negative case per lab"
+
+bash_check_fail_missing() {
+  local id="$1" missing="$2" out rc
+  out="$("$LAB" check bash "$id" 2>&1)"; rc=$?
+  assert_eq "bash $id check fails before $missing exists" "1" "$rc"
+  assert_contains "bash $id fail result names FAIL" "$out" "RESULT: FAIL"
+}
+
+bash_check_pass() {
+  local id="$1" quiz="$2" out rc
+  out="$(printf '%s' "$quiz" | "$LAB" check bash "$id" 2>&1)"; rc=$?
+  assert_eq "bash $id check passes" "0" "$rc"
+  assert_contains "bash $id result names PASS" "$out" "RESULT: PASS"
+}
+
+# L0.1 — Shells and the kit
+"$LAB" start bash L0.1 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L0.1"
+printf 'bash\n' > "$WS/shell.txt"
+printf '/usr/bin/dash\n' > "$WS/sh-target.txt"
+printf 'version: 0.9.0\n' > "$WS/shellcheck.txt"
+bash_check_fail_missing "L0.1" "shfmt.txt"
+printf 'v3.8.0\n' > "$WS/shfmt.txt"
+bash_check_pass "L0.1" $'b\nclean\na\n'
+
+# L0.2 — Meet the lab CLI
+"$LAB" start bash L0.2 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L0.2"
+printf 'q1=b\nq2=3\nq3=b\n' > "$WS/answers.txt"
+bash_check_fail_missing "L0.2" "location.txt"
+(cd -- "$WS" && pwd > location.txt)
+bash_check_pass "L0.2" $'c\nlab resume\nb\n'
+
+# L0.3 — Reading the shebang (gate)
+"$LAB" start bash L0.3 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L0.3"
+(cd -- "$WS" && readlink -f /bin/sh > sh-target.txt
+ dash deploy.sh > dash-run.txt 2>&1
+ bash deploy.sh > bash-run.txt 2>&1
+ printf 'q1=b\nq2=b\nq3=b\nq4=c\n' > answers.txt)
+bash_check_fail_missing "L0.3" "sc-out.txt"
+(cd -- "$WS" && shellcheck -s sh deploy.sh > sc-out.txt 2>&1)
+bash_check_pass "L0.3" $'b\n[[\na\n'
+
+# L1.1 — Commands are just words (phase opener: recall must never gate)
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start bash L1.1 2>&1)"; rc=$?
+assert_eq "'lab start bash L1.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L1.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/bash/L1.1"
+bash_check_fail_missing "L1.1" "predictions.txt"
+printf '%s\n' 'p1=2|<hello><world>' 'p2=2|<hello><world>' 'p3=1|<hello   world>' 'p4=0|' > "$WS/predictions.txt"
+bash_check_pass "L1.1" $'b\nc\nb\n'
+
+# L1.2 — Variables and braces
+"$LAB" start bash L1.2 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L1.2"
+bash_check_fail_missing "L1.2" "predictions.txt"
+printf '%s\n' 'p1=1|<world>' 'p2=1|<worldwide>' 'p3=0|' 'p4=b' > "$WS/predictions.txt"
+bash_check_pass "L1.2" $'b\nb\n127\n'
+
+# L1.3 — The unquoted variable
+"$LAB" start bash L1.3 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L1.3"
+mkdir -p "$WS/backup"
+printf '%s\n' 'p1=2|<report><final.txt>' 'p2=1|<report final.txt>' 'p3=b' 'p5=b' > "$WS/predictions.txt"
+bash_check_fail_missing "L1.3" "backup/report final.txt"
+printf 'Q2 incident report\n' > "$WS/backup/report final.txt"
+bash_check_pass "L1.3" $'b\nb\nb\n'
+
+# L1.4 — Quoting
+"$LAB" start bash L1.4 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L1.4"
+bash_check_fail_missing "L1.4" "predictions.txt"
+printf '%s\n' "p1=1|<\$user>" 'p2=1|<root>' 'p3=1|<phase root>' 'p4=2|<phase><root>' "p5=1|<'root'>" > "$WS/predictions.txt"
+bash_check_pass "L1.4" $'c\nb\na\n'
+
+# L1.5 — Globbing
+"$LAB" start bash L1.5 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L1.5"
+bash_check_fail_missing "L1.5" "predictions.txt"
+printf '%s\n' 'p1=2|<app.log><error.log>' 'p2=2|<app.conf><app.log>' 'p3=1|<*.md>' \
+  'p4=4|<app.conf><app.log><argv.sh><error.log>' 'p5=2|<app.log><error.log>' 'p6=1|<*.log>' \
+  > "$WS/predictions.txt"
+bash_check_pass "L1.5" $'b\nc\nb\n'
+
+# L1.6 — Exit codes
+"$LAB" start bash L1.6 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L1.6"
+bash_check_fail_missing "L1.6" "answers.txt"
+printf 'q1=1\nq2=1\nq3=b\nq4=b\n' > "$WS/answers.txt"
+bash_check_pass "L1.6" $'b\nb\nb\n'
+
+# L1.7 — Command substitution
+"$LAB" start bash L1.7 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L1.7"
+bash_check_fail_missing "L1.7" "predictions.txt"
+printf '%s\n' 'p1=1|<2.4.1>' 'p2=2|<web01><web02>' 'p3=1|<web01 web02>' 'p4=1|<L1.7>' 'p5=b' \
+  > "$WS/predictions.txt"
+bash_check_pass "L1.7" $'b\na\nstdout\n'
+
+# L1.8 — Phase gate (gate)
+"$LAB" start bash L1.8 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L1.8"
+bash_check_fail_missing "L1.8" "predictions.txt"
+printf '%s\n' 'p1=1:' 'p2=2:web01_id' 'p3=3:*.log' 'p4=4:web01 web02' 'p5=5:argc=2' \
+  'p6=6:app.log error.log' 'p7=7:*.conf' 'p8=8:L1.8' 'p9=9:argc=2' 'p10=10:rc=1' \
+  > "$WS/predictions.txt"
+bash_check_pass "L1.8" $'b\ndouble\nb\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 11 bash P0+P1 labs passed (11/11)" "$out" "(11/11)"
+
+# --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
 if [[ -f "$COPY/README.md" ]]; then
   cmd_count="$(grep -cE '^[[:space:]]{4,}\S.*#[[:space:]]*[0-9]' "$COPY/README.md")"
