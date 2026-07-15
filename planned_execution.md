@@ -1,53 +1,50 @@
 # LAB-KIT — Planned Execution
 
 ## NEXT UP
-Phase: bash p3 — The Footgun Gallery. bash p2 is done (see LAST
-SESSION). Next unstarted item: bash p3's PLAN session (Phase Builder
-protocol, PROMPTS.md Prompt 2, TRACK: bash PHASE: 3) — its first job is
-to design and prove the decoy-tree containment mechanism (see
-DEPENDENCY FLAGGED below) before speccing L3.2 (the rm -rf
-empty-variable lab) or any other footgun lab.
+Phase: bash p3 — The Footgun Gallery. The p3 PLAN session is done — the
+build plan is written and pushed (docs/plans/bash-p3-plan.md, commit
+8796cb3; see LAST SESSION). Next unstarted item: bash p3's BUILD session
+(Phase Builder protocol, PROMPTS.md Prompt 2, TRACK: bash PHASE: 3,
+BUILD) — execute the plan lab by lab (L3.1–L3.9), self-test each with
+real captured output (fail + pass paths), and re-prove containment in
+the self-test before shipping any footgun lab. The containment design is
+already decided and approved (see DEPENDENCY RESOLVED below), so the
+build executes it rather than re-deriving it.
 
-DEPENDENCY FLAGGED for bash p3 — The Footgun Gallery, still unresolved:
-the decoy-tree / shadowed-destructive-command containment mechanism was
-deliberately NOT built in p0+1 or p2 (harness/checklib.sh already ships
-make_decoy_tree, decoy_intact, decoy_changed as forward-compatible
-primitives, but no lab exercises them yet — p2 confirmed it stayed at
-zero destructive commands throughout, per its own build report below).
-p3's PLAN session must design and prove the containment story before
-its first footgun lab, not rediscover the requirement mid-build — see
-PROMPTS.md's bash-specific quality gates and the restatement with
-specifics in docs/plans/bash-p2-plan.md §7.
+DEPENDENCY RESOLVED for bash p3 — The Footgun Gallery: the decoy-tree /
+shadowed-destructive-command containment mechanism is now designed and
+proved in the p3 plan (docs/plans/bash-p3-plan.md §3). Two mechanisms:
+(A) the inherited make_decoy_tree / decoy_intact / decoy_changed helpers
+(real, fenced decoy deletion for the word-splitting and filename-attack
+labs), and (B) a NEW fail-closed shadowed-rm fence (files/fence.sh —
+APPROVED 2026-07-15) for the labs whose footgun targets `/` itself (L3.2
+empty-variable rm -rf, L3.7 eval, the L3.9 gate). Both were exercised at
+plan time in an isolated scratchpad — empty-variable `rm -rf "$DIR/"`
+(= `rm -rf /`) was intercepted and logged, real filesystem untouched.
+The BUILD session ships fence.sh + run-fenced.sh and must re-prove
+containment in its own self-test per PROMPTS.md's bash gate.
 
 ## LAST SESSION
-2026-07-15 — bash p2 built, self-tested, and closed out: all 8 labs
-(L2.1-L2.8) built lab-by-lab from docs/plans/bash-p2-plan.md, each
-self-tested with real captured output (fail path + pass path) on the
-baseline machine (Ubuntu 24.04.4, bash 5.2.21, shellcheck 0.9.0, dash
-0.5.12-6ubuntu5) and committed individually (8 commits, `bash L2.1:
-...` through `bash L2.8: ...`). tools/lint-labs.sh and
-tools/shellcheck-all.sh clean throughout (one mid-build catch: a
-check.sh hint in L2.8 spelled out the literal path `/dev/null` and the
-absolute-path-literal lint correctly flagged it — reworded, no
-`lint-allow.txt` entry needed). tests/acceptance.sh extended with a
-fabricated pass + one negative case per lab (commit 158566a) —
-131/131 assertions pass; L2.8's negative case is the FIX-type-
-appropriate one (the shipped flawed script left unedited fails the
-honesty-test assertion), not a generic missing artifact. Also verified
-L2.8's behavioral grading independently accepts BOTH valid fixes (the
-`set -euo pipefail` preamble and bare `|| exit` guards), per design.
-`lab status` renders 19/19 ✓ across the full bash catalog; `lab resume`
-verified after the L2.8 gate. p2 shipped zero destructive commands —
-decoy-tree helpers remain untouched, as required (see DEPENDENCY
-FLAGGED above). One flagged interpretation call from the plan session,
-carried through unchanged in the build (logged in
-docs/plans/bash-p2-plan.md §6 for reference): L2.2's before/after
-strict-mode demos use one script per flag with the flag toggled on the
-command line, not three separate off/on file pairs. Tagged `bash-p2`.
-Earlier the same week: bash p0+1 built and closed out (11 labs, tagged
-`bash-p0`/`bash-p1`), and the bash p2 build plan written and pushed
-(`docs/plans/bash-p2-plan.md`, commit b1a6512) — full detail in this
-file's history at commits 6ec3a48 and 0db647e.
+2026-07-15 — bash p3 PLAN session: the Phase 3 (The Footgun Gallery)
+build plan was written and pushed (docs/plans/bash-p3-plan.md, 1393
+lines, commit 8796cb3). All nine labs (L3.1–L3.9) are fully specified —
+exact vulnerable/hardened scripts, check.sh logic, quizzes, recaps —
+plus the L3.1 phase-opener recall (5 questions, all sourced from and
+validated against the Phase-2 recap cards on disk). Containment was
+designed AND proved this session (see DEPENDENCY RESOLVED above): the
+footgun behaviors and the NEW fail-closed shadowed-rm fence were
+verified empirically in an isolated scratchpad (no repo / real-FS
+writes), and the fence was approved. SC-code sets per teaching sample
+were left [VERIFY-AT-BUILD] against the build machine's shellcheck
+0.9.0. Plan only — no lab files built; this planned_execution.md refresh
+was made afterward at my request (the plan session itself touched only
+bash-p3-plan.md).
+Earlier the same week: bash p2 built, self-tested, and closed out (all
+8 labs L2.1–L2.8 from docs/plans/bash-p2-plan.md, 8 individual commits,
+tests/acceptance.sh at 131/131, `lab status` 19/19 ✓, tagged `bash-p2`);
+bash p0+1 built and closed out (11 labs, tagged `bash-p0`/`bash-p1`);
+and the p2/p0+1 build plans written and pushed. Full detail for those in
+this file's history at commits 0e7e647, 6ec3a48, and 0db647e.
 
 ## BOOTSTRAP
 - [x] Bootstrap: lab CLI, check harness, demo lab (L0.0), README,
@@ -70,7 +67,7 @@ file's history at commits 6ec3a48 and 0db647e.
 - [x] bash p0 — Toolchain & Kit (3 labs) — tag `bash-p0`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p1 — The Expansion Model (8 labs) — tag `bash-p1`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p2 — Control Flow & Silent Failure (8 labs) — tag `bash-p2`; plan: `docs/plans/bash-p2-plan.md` (commit b1a6512)
-- [ ] bash p3 — The Footgun Gallery (9 labs) — depends on: decoy-tree/shadowed-destructive-command containment design (flagged in NEXT UP above; not yet built)
+- [~] bash p3 — The Footgun Gallery (9 labs) — plan written & pushed (`docs/plans/bash-p3-plan.md`, commit 8796cb3); containment design approved (see DEPENDENCY RESOLVED); labs not yet built — next is the BUILD session
 - [ ] bash p4 — Untrusted Input & Injection (8 labs)
 - [ ] bash p5 — Text Processing & Pipelines (6 labs)
 - [ ] bash p6 — Reading Real Deploy Scripts (5 labs)
