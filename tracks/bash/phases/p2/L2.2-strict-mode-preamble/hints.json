@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads six run captures (e-off, e-on, u-off, u-on, p-off, p-on - all .txt) plus answers.txt with keys q1..q4. Each capture is one command redirected with > name.txt 2>&1, then echo the exit= line onto it - both commands are printed verbatim in the steps.",
+    "Off-captures use plain bash; on-captures add exactly one thing: -e, -u, or -o pipefail between bash and the script name. The exit= lines must differ between each pair - if yours match, the flag run didn't happen. Letters: q1 is about what -o consumes, q2 maps a flag to the typo, q3 names whose code a bare pipeline reports, q4 is the if-condition exemption.",
+    "Replay all six capture commands exactly as printed in steps 1-3, cat each file to confirm the exit= line, then write q1=b-shaped letter lines for the four questions - each one is answered by a sentence printed beside its pair in lab.md."
+  ]
+}

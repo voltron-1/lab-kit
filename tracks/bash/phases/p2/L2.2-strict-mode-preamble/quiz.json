@@ -1,0 +1,33 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "shellcheck gives e-demo.sh a completely clean pass, yet it lied about the backup. Why can't shellcheck catch this?",
+      "options": {
+        "a": "shellcheck only checks quoting",
+        "b": "missing strict mode is a runtime-behavior gap, not a syntax pattern — no SC code exists for 'you forgot set -e'",
+        "c": "it would, but only with -S error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Your script must also run under /bin/sh on Debian (dash — L0.3). Which part of the preamble breaks there?",
+      "options": {
+        "a": "-e",
+        "b": "-u",
+        "c": "-o pipefail — dash dies with 'Illegal option -o pipefail' (verified: exit 2)"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "What single line does this track expect immediately after every shebang?",
+      "answer_b64": "c2V0IC1ldW8gcGlwZWZhaWw=",
+      "case_sensitive": false
+    }
+  ]
+}

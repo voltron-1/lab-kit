@@ -1,0 +1,13 @@
+{
+  "id": "L2.2",
+  "title": "The strict-mode preamble — set -euo pipefail and what each flag stops",
+  "type": "DECODE",
+  "objective": "Explain what each of -e, -u, and pipefail individually stops, by watching the same three failures run silent without the flag and fatal with it.",
+  "gate": false,
+  "est_minutes": 20,
+  "teaching_samples": {
+    "files/e-demo.sh": [],
+    "files/u-demo.sh": ["SC2034", "SC2154"],
+    "files/p-demo.sh": ["SC2126"]
+  }
+}
