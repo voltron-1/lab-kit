@@ -1,0 +1,8 @@
+{
+  "id": "L2.5",
+  "title": "case statements",
+  "type": "DECODE",
+  "objective": "Read a case statement as glob patterns racing top-to-bottom for one word — first match wins, ;; stops, *) is the default, and no match at all is a silent success.",
+  "gate": false,
+  "est_minutes": 10
+}

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads answers.txt - keys q1..q4 (three letters and one digit) - and runs triage.sh itself. Every answer comes from the run matrix in step 2.",
+    "q1/q2: alert_web.log matches TWO patterns; which one is tried first, and what one edit changes that race? q3: rerun the no-arg row - the usage arm names its own exit. q4: mentally delete the *) arm - what's left to run, and what code does an un-entered case leave?",
+    "Rerun all six matrix rows and transcribe: q1=b if the scanner arm fired, q2 is the move-the-arm option, q3 is the digit echo $? printed, q4 is the exits-0-silently option."
+  ]
+}

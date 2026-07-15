@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "case patterns are…",
+      "options": {
+        "a": "regular expressions",
+        "b": "glob patterns — the same *, ?, [...] rules as pathname expansion (L1.5), matched against a string instead of filenames",
+        "c": "literal strings only"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What does ;; do at the end of an arm?",
+      "options": {
+        "a": "ends the whole case",
+        "b": "ends that arm with NO fallthrough — the next patterns are never tried after a match",
+        "c": "repeats the arm once"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "In `alert_*|ioc_*)`, the | is…",
+      "options": {
+        "a": "a pipe between two commands",
+        "b": "alternation: either pattern matches this one arm",
+        "c": "an OR of exit codes"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
