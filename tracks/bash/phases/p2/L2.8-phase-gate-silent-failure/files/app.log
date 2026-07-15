@@ -1,0 +1,6 @@
+2026-07-13 09:00:01 INFO service started
+2026-07-13 09:14:31 ERROR upstream timeout
+2026-07-13 09:14:33 INFO retry 1 ok
+2026-07-13 09:20:05 ERROR disk full on /var
+2026-07-13 09:20:06 ERROR write failed
+2026-07-13 09:30:00 INFO heartbeat ok

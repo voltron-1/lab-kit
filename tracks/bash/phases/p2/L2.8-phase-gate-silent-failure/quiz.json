@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "shellcheck printed NOTHING for the broken script. The lesson?",
+      "options": {
+        "a": "shellcheck is useless",
+        "b": "silent failure is invisible to static analysis — strict mode at run time plus your own tracing are what catch it; the linter guards syntax, not honesty",
+        "c": "always run shellcheck twice"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "After your fix, someone runs it on a log with ZERO error lines. What happens?",
+      "options": {
+        "a": "clean success — empty archive",
+        "b": "grep exits 1 on no-match (L1.6), so under -e the script DIES: 'no errors' needs an explicit decision, e.g. grep … || true (L2.4), if empty-is-fine",
+        "c": "cp fails again"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "The trust rule this phase installs:",
+      "options": {
+        "a": "always read exit codes twice",
+        "b": "a script's exit code is only meaningful if every failure inside it either stops the script or is explicitly handled — otherwise 0 just means 'the last line ran'",
+        "c": "never trust echo"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "L2.8",
+  "title": "Phase gate: a script that fails silently — trace it, find where it lied",
+  "type": "FIX",
+  "objective": "Prove the phase is internalized: trace a script that reports success while doing nothing, name the exact command that failed and both mechanisms hiding it, then fix it so its exit code tells the truth.",
+  "gate": true,
+  "est_minutes": 20,
+  "teaching_samples": {
+    "files/archive-errors.sh": []
+  }
+}

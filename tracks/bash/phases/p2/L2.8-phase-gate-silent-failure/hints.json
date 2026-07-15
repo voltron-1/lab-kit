@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Two deliverables: the trace (broken-run.txt captured BEFORE the fix, plus answers.txt q1..q4) and the fix (the grader runs your edited script against app.log, checks archive/errors.txt holds all 3 ERROR lines, and runs it against missing.log expecting a NONZERO exit).",
+    "Trace: follow each line's operands - one command names a directory that doesn't exist; its complaint went where 2>/dev/null sends things; then ask what the LAST verdict was (L1.6). Fix: the goals are (1) failures must stop the script - L2.2's preamble is the track default, (2) the real directory is archive/, (3) errors must be allowed to reach your eyes.",
+    "Three edits: insert set -euo pipefail after the header comment; change archiv/ to archive/; delete 2>/dev/null (and, ideally, the trailing exit 0). Then rerun the three step-5 verification commands and lab check bash L2.8."
+  ]
+}
