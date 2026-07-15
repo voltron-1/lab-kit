@@ -377,7 +377,98 @@ printf '%s\n' 'p1=1:' 'p2=2:web01_id' 'p3=3:*.log' 'p4=4:web01 web02' 'p5=5:argc
 bash_check_pass "L1.8" $'b\ndouble\nb\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 11 bash P0+P1 labs passed (11/11)" "$out" "(11/11)"
+# denominator is the full bash catalog (P0+P1+P2 = 19), not just the 11
+# passed so far -- P2's lab directories already exist on disk at this point.
+assert_contains "status shows 11 of 19 bash labs passed so far (11/19)" "$out" "(11/19)"
+
+# --- 7b. bash track P2: fabricated pass + one negative case per lab ---
+note "bash track P2: fabricated pass + negative case per lab"
+
+# L2.1 — if and test (phase opener: recall must never gate)
+out="$(printf 'b\nb\nb\ndouble\nb\n' | "$LAB" start bash L2.1 2>&1)"; rc=$?
+assert_eq "'lab start bash L2.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L2.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/bash/L2.1"
+bash_check_fail_missing "L2.1" "answers.txt"
+printf 'q1=0\nq2=1\nq3=b\nq4=2\nq5=1\nq6=0\n' > "$WS/answers.txt"
+bash_check_pass "L2.1" $'b\nb\nc\n'
+
+# L2.2 — The strict-mode preamble
+"$LAB" start bash L2.2 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L2.2"
+printf '%s\n' 'x' 'backup complete' 'exit=0' > "$WS/e-off.txt"
+printf '%s\n' 'x' 'exit=1' > "$WS/e-on.txt"
+printf '%s\n' 'cleaning staging/' 'exit=0' > "$WS/u-off.txt"
+printf '%s\n' 'y: unbound variable' 'exit=1' > "$WS/u-on.txt"
+printf '%s\n' 'z' '0' 'exit=0' > "$WS/p-off.txt"
+printf 'q1=b\nq2=c\nq3=a\nq4=b\n' > "$WS/answers.txt"
+bash_check_fail_missing "L2.2" "p-on.txt"
+printf '%s\n' 'z' '0' 'exit=2' > "$WS/p-on.txt"
+bash_check_pass "L2.2" $'b\nc\nset -euo pipefail\n'
+
+# L2.3 — Loops
+"$LAB" start bash L2.3 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L2.3"
+bash_check_fail_missing "L2.3" "predictions.txt"
+printf '%s\n' 'p1=3' 'p2=loading web01.conf' 'p3=7' 'p4=2' 'p5=3' 'p6=got *.missing' \
+  > "$WS/predictions.txt"
+bash_check_pass "L2.3" $'b\nb\nb\n'
+
+# L2.4 — && and || short-circuit
+"$LAB" start bash L2.4 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L2.4"
+printf '%s\n' 'p1=rc=1' 'p2=fallback' 'p3=recovered' 'p4=b' 'p5=1' 'p6=deploying from deploy_dir' \
+  > "$WS/predictions.txt"
+bash_check_fail_missing "L2.4" "deploy_dir"
+mkdir -p "$WS/deploy_dir"
+bash_check_pass "L2.4" $'b\nb\nb\n'
+
+# L2.5 — case statements
+"$LAB" start bash L2.5 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L2.5"
+bash_check_fail_missing "L2.5" "answers.txt"
+printf 'q1=b\nq2=b\nq3=2\nq4=b\n' > "$WS/answers.txt"
+bash_check_pass "L2.5" $'b\nb\nb\n'
+
+# L2.6 — Functions, local, return vs echo
+"$LAB" start bash L2.6 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L2.6"
+bash_check_fail_missing "L2.6" "answers.txt"
+printf 'q1=7\nq2=b\nq3=changed\nq4=44\nq5=b\n' > "$WS/answers.txt"
+bash_check_pass "L2.6" $'b\nb\nb\n'
+
+# L2.7 — trap cleanup
+"$LAB" start bash L2.7 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L2.7"
+printf '%s\n' 'staged: payload.txt' 'verified: version line present' \
+  'installed: payload.installed' 'cleanup: staging file removed' 'exit=0' > "$WS/good-run.txt"
+printf '%s\n' 'staged: payload-bad.txt' 'cleanup: staging file removed' 'exit=1' > "$WS/bad-run.txt"
+printf 'name: x\n' > "$WS/payload.installed"
+bash_check_fail_missing "L2.7" "answers.txt"
+printf 'q1=b\nq2=1\nq3=b\nq4=b\n' > "$WS/answers.txt"
+bash_check_pass "L2.7" $'b\nb\nb\n'
+
+# L2.8 — Phase gate (gate, FIX): negative case is the shipped flawed script
+# left UNEDITED (per the map's FIX-type intent), not a missing artifact.
+"$LAB" start bash L2.8 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L2.8"
+(cd -- "$WS" && bash archive-errors.sh app.log > broken-run.txt 2>&1; echo "exit=$?" >> broken-run.txt)
+printf 'q1=b\nq2=b\nq3=b\nq4=a\n' > "$WS/answers.txt"
+bash_check_fail_missing "L2.8" "the fix (script left unedited)"
+cat > "$WS/archive-errors.sh" <<'SCRIPT'
+#!/usr/bin/env bash
+set -euo pipefail
+# archive-errors.sh — extract the ERROR lines from a log and file them in archive/.
+log="$1"
+grep ERROR "$log" > errors.txt
+cp errors.txt archive/errors.txt
+rm -f errors.txt
+echo "archived: ERROR lines from $log are in archive/errors.txt"
+SCRIPT
+bash_check_pass "L2.8" $'b\nb\nb\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 19 bash P0+P1+P2 labs passed (19/19)" "$out" "(19/19)"
 
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
@@ -389,8 +480,11 @@ else
 fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
+  # 32 total track-phase lines; bash p0-p2 are done/in-progress ([x]/[~], not
+  # [ ]), leaving 29 unstarted -- update this count whenever a phase's marker
+  # changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 30 unstarted track-phase lines" "30" "$line_count"
+  assert_eq "planned_execution.md has 29 unstarted track-phase lines" "29" "$line_count"
 else
   bad "planned_execution.md missing"
 fi
