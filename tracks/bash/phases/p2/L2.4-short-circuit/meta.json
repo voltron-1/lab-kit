@@ -1,0 +1,8 @@
+{
+  "id": "L2.4",
+  "title": "&& and || — short-circuit logic and the cmd || exit idiom",
+  "type": "PREDICT",
+  "objective": "Predict which side of && and || runs — including the a && b || c trap — and read the cmd || exit guard idiom that hardened scripts are built from.",
+  "gate": false,
+  "est_minutes": 10
+}

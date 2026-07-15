@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Why is `a && b || c` NOT the same as if a; then b; else c; fi?",
+      "options": {
+        "a": "it is the same",
+        "b": "c also runs when a succeeded but b FAILED — || reacts to the most recent verdict",
+        "c": "&& binds tighter than ||"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A cleanup script runs `cd staging && rm -f *.tmp` (discussed, not run). What is the && buying?",
+      "options": {
+        "a": "speed — both run in parallel",
+        "b": "if cd fails, rm never runs — without &&, rm would happily delete *.tmp in whatever directory you were actually in",
+        "c": "nothing; ; would be identical"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Under set -e (L2.2), what does `grep -q ERROR log || true` say?",
+      "options": {
+        "a": "nothing — it's dead code",
+        "b": "'a no-match here is fine, don't die': the || makes the failure handled, so -e lets the script continue",
+        "c": "it inverts grep's answer"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

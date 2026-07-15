@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads predictions.txt - six keys p1..p6 - and checks that deploy_dir exists (step 4's mkdir). p1/p2/p3/p6 are exact output lines, p4 a letter, p5 a digit.",
+    "Walk every line left to right keeping one running verdict: && skips its right side after a failure, || skips after a success, and each command replaces the verdict. For p5: the left side of || failed, so what does exit 1 make the SCRIPT report? For p6, basename trims the path to just the directory name.",
+    "Run every sample exactly as printed (p5 and p6 use guard.sh - never type the exit sample at your bare prompt) and transcribe each result into its key; the run is the answer sheet."
+  ]
+}
