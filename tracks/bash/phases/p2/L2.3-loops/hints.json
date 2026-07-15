@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads predictions.txt - six keys p1..p6, no spaces around =. Four values are bare counts (how many lines the loop printed), two are exact output lines (p2 the first glob-loop line, p6 the no-match loop's only line).",
+    "Decide each count by what the loop iterates OVER: p1 a 3-word list; p3 the WORDS of tasks.txt after splitting (count them on paper); p4 lines that end with a newline - check tasks.txt's last byte; p5 adds the guard that rescues one more. p2/p6: replay L1.5's glob rules against ls.",
+    "Run each sample line exactly as printed and count the bracketed/prefixed lines it prints; transcribe counts and the two exact lines into their keys. The run is the legitimate answer sheet - then lab check bash L2.3."
+  ]
+}

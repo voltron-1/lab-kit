@@ -1,0 +1,8 @@
+{
+  "id": "L2.3",
+  "title": "Loops — for, while, and the correct way to read a file line by line",
+  "type": "PREDICT",
+  "objective": "Predict how many iterations each loop really runs — for iterates words, while read iterates lines, and a missing final newline silently eats the last one.",
+  "gate": false,
+  "est_minutes": 15
+}

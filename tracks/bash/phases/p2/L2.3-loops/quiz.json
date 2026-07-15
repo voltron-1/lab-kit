@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "`for x in $(cat hosts.txt)` iterates over…",
+      "options": {
+        "a": "the lines of hosts.txt",
+        "b": "the whitespace-split (and glob-expanded) WORDS of hosts.txt — for never sees lines",
+        "c": "the bytes of hosts.txt"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Plain `while read -r line` dropped 'rotate keys'. Why?",
+      "options": {
+        "a": "read can't handle spaces",
+        "b": "the last line has no trailing newline: read fills $line but returns nonzero at EOF, so the loop body never runs for it — the || [ -n \"$line\" ] guard is the fix",
+        "c": "while loops cap at the file's line count minus one"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What does the IFS= in `while IFS= read -r line` buy you?",
+      "options": {
+        "a": "it speeds up the read",
+        "b": "it stops read from stripping leading/trailing whitespace, so the line arrives byte-exact",
+        "c": "it disables globbing"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
