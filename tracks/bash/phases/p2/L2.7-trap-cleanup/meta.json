@@ -1,0 +1,8 @@
+{
+  "id": "L2.7",
+  "title": "trap — cleanup on exit, and why installers use it",
+  "type": "DECODE",
+  "objective": "Read a trap … EXIT handler and explain why it runs on every way out — success, set -e death, or interrupt — which is exactly why installers stage work through one.",
+  "gate": false,
+  "est_minutes": 15
+}

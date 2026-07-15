@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads good-run.txt, bad-run.txt, answers.txt (q1..q4), and the workspace itself: payload.installed must exist and payload.staging must NOT. Both captures are printed verbatim in steps 3-4.",
+    "Each capture is the run redirected with 2>&1 (the cleanup line travels on stderr) plus the appended exit= line. bad-run.txt must show staged + cleanup but never verified. Letters: q1 names what EXIT covers, q3 what the trap did to the staging file, q4 what a late registration would miss.",
+    "Rerun steps 3 and 4 exactly as printed, ls after each, and transcribe: q2 is the digit on bad-run.txt's exit= line; q1/q3/q4 are the every-exit-path, debris-removed, and register-before-risk options."
+  ]
+}

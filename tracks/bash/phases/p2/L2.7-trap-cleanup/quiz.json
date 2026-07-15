@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Cleanup written as the last lines of a script vs a trap on EXIT?",
+      "options": {
+        "a": "identical",
+        "b": "bottom-of-script cleanup never runs when the script dies early — the trap runs on every exit path; a promise vs a guarantee",
+        "c": "traps are faster"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why do installers in particular lean on trap?",
+      "options": {
+        "a": "tradition",
+        "b": "installs stage temp files/dirs and half-written configs; when an install dies mid-flight, the trap is what keeps the machine free of debris that would poison the next attempt",
+        "c": "package managers require it"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Did the EXIT trap change the bad run's exit code?",
+      "options": {
+        "a": "yes — traps exit 0",
+        "b": "no — the run still reported 1; a trap only changes the verdict if the handler itself calls exit",
+        "c": "it reports the trap's own last command"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
