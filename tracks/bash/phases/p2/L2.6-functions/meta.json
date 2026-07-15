@@ -1,0 +1,8 @@
+{
+  "id": "L2.6",
+  "title": "Functions — local, and return (a code) vs echo (a value)",
+  "type": "DECODE",
+  "objective": "Read a function and name its two output channels — return carries a one-byte verdict to if/&&/||, echo carries text to $( ) capture — and say why local keeps a function's variables out of the caller's world.",
+  "gate": false,
+  "est_minutes": 15
+}

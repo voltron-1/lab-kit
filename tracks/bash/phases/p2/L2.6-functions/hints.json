@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads answers.txt - five keys q1..q5 - and runs healthcheck.sh. q1/q3/q4 are transcribed from the experiments; q2/q5 are letters about which channel carried what.",
+    "Two channels, never mixed: exit code (return, read by if and echo $?) and stdout (echo, read by capture). q2: what did the capture see when the function produced no stdout? q4: exit codes are one byte - compute 300 mod 256. q3: no local means the assignment escaped.",
+    "Rerun each experiment exactly as printed and transcribe: q1=7, q3 and q4 are what echo printed; for q2 and q5 pick the option naming the stdout-capture channel."
+  ]
+}

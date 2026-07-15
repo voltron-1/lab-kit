@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Why does this track want local on every variable a function creates?",
+      "options": {
+        "a": "speed",
+        "b": "without it, every assignment lands in the caller's namespace — the function silently edits the world that called it",
+        "c": "bash requires it in strict mode"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A function must hand back a hostname (a string). Which design?",
+      "options": {
+        "a": "return the hostname",
+        "b": "echo it and let the caller capture with $(fn) — return moves one byte of verdict, never text",
+        "c": "store it in $?"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "`if is_healthy \"$n\"; then` — what exactly does if consume?",
+      "options": {
+        "a": "the function's stdout",
+        "b": "the function's return/exit code — same as any command (pulse.sh, L1.6)",
+        "c": "the value of n"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
