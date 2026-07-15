@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads answers.txt — six keys q1..q6, no spaces around =, plus it runs gatekeeper.sh itself. Four keys are single digits you transcribe from echo $? after the numbered experiments; q3 is a letter.",
+    "q1/q2: what does an EMPTY unquoted expansion leave behind for [ vs [[? q4: count the words [ receives once the space-bearing value splits. q5: > inside [[ compares strings - '10' vs '9' character by character. q6: (( )) reports arithmetic truth as exit 0.",
+    "Rerun each experiment exactly as printed and transcribe the digit after echo $?. For q3, experiment 1 handed [ exactly one argument (-n itself) - pick the option that says a one-argument test checks that string for non-emptiness."
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "L2.1",
+  "title": "if and test — [ ] vs [[ ]] vs (( )), and which to trust",
+  "type": "DECODE",
+  "objective": "Read any if line by naming which test construct it uses, what exit code it branches on, and which of [ ], [[ ]], and (( )) to trust for strings, numbers, and POSIX portability.",
+  "gate": false,
+  "est_minutes": 15
+}

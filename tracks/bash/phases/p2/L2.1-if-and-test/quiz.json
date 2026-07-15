@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "`[ $name = admin ]` errors when name holds `admin user`, but `[[ $name = admin ]]` works. Why?",
+      "options": {
+        "a": "[[ auto-quotes everything",
+        "b": "[[ is parsed as syntax BEFORE expansion — its operand positions are fixed, so the result never word-splits; [ is just a command receiving whatever words survive expansion",
+        "c": "[ requires -s for strings"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "`(( 5 ))` exits 0 and `(( 0 ))` exits 1. What's going on?",
+      "options": {
+        "a": "a bash bug",
+        "b": "two opposite conventions meeting: in arithmetic nonzero is TRUE, and true is then reported as exit code 0",
+        "c": "(( )) inverts every value"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "A script's shebang is #!/bin/sh and it must stay dash-safe (L0.3). Which test tool is available?",
+      "options": {
+        "a": "[[ ]]",
+        "b": "(( ))",
+        "c": "[ ] — the POSIX test command; [[ and (( are bashisms (shellcheck would say SC3010)"
+      },
+      "answer_b64": "Yw=="
+    }
+  ]
+}

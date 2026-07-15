@@ -1,0 +1,45 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "source": "bash L0.1",
+      "prompt": "On Debian/Ubuntu, /bin/sh is a symlink to which shell?",
+      "options": { "a": "bash", "b": "dash", "c": "busybox sh" },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "source": "bash L1.3",
+      "prompt": "An unquoted $var whose value contains spaces…",
+      "options": { "a": "stays one word — the quotes are only style", "b": "splits into multiple words on IFS whitespace — the #1 bash bug", "c": "raises a syntax error" },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "source": "bash L1.5",
+      "prompt": "A glob like *.conf that matches no file…",
+      "options": { "a": "expands to an empty string", "b": "stays the literal text *.conf", "c": "aborts the command with an error" },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 4,
+      "type": "text",
+      "source": "bash L1.4",
+      "prompt": "Which quoting style lets $var expand but stops the result from word-splitting?",
+      "answer_b64": "ZG91Ymxl",
+      "accept_b64": ["ZG91YmxlIHF1b3Rlcw==", "ZG91YmxlLXF1b3Rlcw=="],
+      "case_sensitive": false
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "source": "bash L1.6",
+      "prompt": "Right after a command, $? prints 0. That means…",
+      "options": { "a": "it failed", "b": "it succeeded — 0 is success, backwards from most languages", "c": "it produced no output" },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
