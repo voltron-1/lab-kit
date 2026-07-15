@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "for f in $(cat list) splits the file into…",
+      "options": {
+        "a": "lines",
+        "b": "words on $IFS — a spaced filename becomes two iterations",
+        "c": "one string"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which single change stops mv $f $dest from breaking on a spaced name?",
+      "options": {
+        "a": "rename the file",
+        "b": "double-quote it: mv -- \"$f\" \"$dest\"/",
+        "c": "add set -e"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "The -- in mv -- \"$f\" \"$dest\"/ is there to…",
+      "options": {
+        "a": "speed mv up",
+        "b": "stop a filename that starts with - from being read as an option",
+        "c": "make mv recursive"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

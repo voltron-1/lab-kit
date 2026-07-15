@@ -1,0 +1,11 @@
+{
+  "id": "L3.1",
+  "title": "Word splitting, deep — the classic bugs and their quoted fixes",
+  "type": "TAME",
+  "objective": "Take a working-but-dangerous file-mover and harden it: name each place an unquoted expansion word-splits or globs, then quote/rewrite so a filename with a space, a glob char, or a leading dash survives intact.",
+  "gate": false,
+  "est_minutes": 15,
+  "teaching_samples": {
+    "files/stage.sh": ["SC2013", "SC2086"]
+  }
+}

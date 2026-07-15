@@ -1,0 +1,60 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "source": "bash L2.2",
+      "prompt": "Which strict-mode flag makes an unset or typo'd variable fatal?",
+      "options": { "a": "-e", "b": "-u", "c": "pipefail" },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "source": "bash L2.4",
+      "prompt": "true && false || echo X — does X print?",
+      "options": {
+        "a": "no — || pairs with true's success",
+        "b": "yes — || reacts to the most recent verdict, false's failure",
+        "c": "syntax error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "source": "bash L2.7",
+      "prompt": "A trap registered on EXIT runs…",
+      "options": {
+        "a": "only after exit 0",
+        "b": "only on errors",
+        "c": "on every way out — success, failure, or interrupt"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "source": "bash L2.6",
+      "prompt": "out=$(f) where f's body is only \"return 3\" leaves out holding…",
+      "options": {
+        "a": "3",
+        "b": "nothing — return sends a one-byte code, not text; $( ) captures stdout only",
+        "c": "the string \"return 3\""
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "source": "bash L2.3",
+      "prompt": "for w in $(cat file) iterates over…",
+      "options": {
+        "a": "the file's lines",
+        "b": "the whitespace-split words of the file",
+        "c": "exactly one item"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
