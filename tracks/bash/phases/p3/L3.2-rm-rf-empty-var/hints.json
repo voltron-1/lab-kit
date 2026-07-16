@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Look at line 5 of cleanup.sh: rm -rf \"$BUILD_DIR/\". If BUILD_DIR is ever empty, that quoted string collapses to just the trailing slash — the whole filesystem root.",
+    "The fix is one token: \"${BUILD_DIR:?BUILD_DIR is empty}\" (or set -u earlier in the script) makes an empty/unset BUILD_DIR a fatal error BEFORE rm ever runs — that's ShellCheck's own SC2115 advice.",
+    "Write answers.txt with line=5, flaw=empty-var-rm, and fix=... naming the :? guard. Then author hardened.sh from scratch: #!/usr/bin/env bash, set -euo pipefail, the same BUILD_DIR assignment, then rm -rf \"${BUILD_DIR:?BUILD_DIR is empty — refusing to rm}/\". Test it with BUILD_DIR=\"\" (must abort, no rm) and unset (must still clean normally), then lab check bash L3.2."
+  ]
+}

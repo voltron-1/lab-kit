@@ -1,0 +1,11 @@
+{
+  "id": "L3.2",
+  "title": "rm -rf \"$DIR/\" — the empty-variable catastrophe",
+  "type": "AUDIT",
+  "objective": "Read a cleanup script and name the exact line where an unset or typo'd variable turns rm -rf \"$DIR/\" into rm -rf on the filesystem root; state the one-token fix that makes it fail safe.",
+  "gate": false,
+  "est_minutes": 15,
+  "teaching_samples": {
+    "files/cleanup.sh": ["SC2115"]
+  }
+}

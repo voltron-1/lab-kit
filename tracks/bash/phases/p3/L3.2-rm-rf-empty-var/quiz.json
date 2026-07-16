@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "rm -rf \"$DIR/\" with DIR unset becomes…",
+      "options": {
+        "a": "a no-op",
+        "b": "rm -rf on the filesystem root — it wipes everything",
+        "c": "a syntax error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which turns the empty case fatal BEFORE rm runs?",
+      "options": {
+        "a": "quoting \"$DIR\" harder",
+        "b": "\"${DIR:?}\" (or set -u) — an empty/unset var aborts the script",
+        "c": "rm -ri"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "ShellCheck's take on this line:",
+      "options": {
+        "a": "silent — it can't see it",
+        "b": "SC2115 warns exactly this: use ${var:?} so it never expands to root",
+        "c": "it rewrites the line for you"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
