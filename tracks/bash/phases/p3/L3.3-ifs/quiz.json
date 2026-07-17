@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "IFS controls…",
+      "options": {
+        "a": "which commands exist",
+        "b": "how the shell splits unquoted expansions into words",
+        "c": "file permissions"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "With IFS='', set -- $data where data='a b c' gives argc…",
+      "options": {
+        "a": "3",
+        "b": "1 — splitting is disabled",
+        "c": "0"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "A function that relies on word-splitting should…",
+      "options": {
+        "a": "trust the caller's IFS",
+        "b": "set IFS explicitly (e.g. local IFS=$' \\t\\n') so a hostile inherited IFS can't re-steer it",
+        "c": "never use loops"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

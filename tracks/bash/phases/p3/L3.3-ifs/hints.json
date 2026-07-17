@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run split-demo.sh and read its three lines of output carefully — each one tells you the argc/field count for one IFS setting on one piece of data.",
+    "default IFS (space/tab/newline) splits 'a b c' into 3 words; IFS=':' has no effect on 'a b c' (no colons) but splits the passwd line into 7 colon-separated fields; IFS='' disables splitting entirely, so 'a b c' counts as exactly 1 word.",
+    "answers.txt needs: default_argc=3, passwd_fields=7, empty_argc=1, ifs_controls=splitting, and attack=<one line naming how an inherited/hostile IFS re-steers an unquoted for loop — try IFS=/ before a loop over a path variable and watch it split on / instead of whitespace>. Then lab check bash L3.3."
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "L3.3",
+  "title": "IFS — what it controls and how changing it breaks (or attacks) a script",
+  "type": "DECODE",
+  "objective": "Explain what IFS decides (how the shell cuts unquoted expansions into words) and predict how the same line behaves under the default IFS, IFS=':', and an empty IFS — including how a script that trusts an inherited IFS can be mis-steered.",
+  "gate": false,
+  "est_minutes": 12,
+  "teaching_samples": {
+    "files/split-demo.sh": ["SC2016", "SC2086"]
+  }
+}
