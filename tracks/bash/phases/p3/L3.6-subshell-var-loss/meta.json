@@ -1,0 +1,11 @@
+{
+  "id": "L3.6",
+  "title": "Subshells vs current shell — why … | while read eats your variables",
+  "type": "PREDICT",
+  "objective": "Predict the value a variable holds after a cmd | while read … done loop versus a while read … done < <(cmd) loop, and explain that the pipeline runs its right-hand side in a subshell whose variable changes are lost.",
+  "gate": false,
+  "est_minutes": 12,
+  "teaching_samples": {
+    "files/counter.sh": ["SC2030", "SC2031"]
+  }
+}
