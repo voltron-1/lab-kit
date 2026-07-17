@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A file named -rf in a dir where you run `rm *`…",
+      "options": {
+        "a": "is ignored",
+        "b": "sorts first and is parsed as the flags -r -f — your flat delete goes recursive",
+        "c": "causes a syntax error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which defuses it?",
+      "options": {
+        "a": "rm *.",
+        "b": "rm -- * or rm ./* — end options, or make every name start with a path",
+        "c": "rm -i *"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "The general principle this teaches:",
+      "options": {
+        "a": "never name files with dashes",
+        "b": "a filename is untrusted data; an unguarded command can read it as syntax (flags), so guard the boundary (--, ./)",
+        "c": "globs are always safe"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
