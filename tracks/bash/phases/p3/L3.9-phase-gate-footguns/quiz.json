@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The single most dangerous line in deploy.sh if $1 is empty:",
+      "options": {
+        "a": "the cp",
+        "b": "rm -rf \"$REL/\" — empty REL makes it rm -rf on the filesystem root",
+        "c": "the echo"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Hardening the untrusted-action dispatch line means…",
+      "options": {
+        "a": "quoting the action harder",
+        "b": "replacing the built-and-reparsed string with a case allowlist that calls known steps directly",
+        "c": "adding set -u only"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "\"ShellCheck-clean\" for your hardened deploy.sh proves…",
+      "options": {
+        "a": "it's fully safe",
+        "b": "the bugs ShellCheck can see are gone — you still had to close the injection classes it can't see yourself",
+        "c": "nothing"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
