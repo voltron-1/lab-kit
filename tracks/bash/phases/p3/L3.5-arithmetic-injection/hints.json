@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Look at line 5 of calc.sh: result=$(( n * 2 )). $(( )) evaluates its operand as an arithmetic EXPRESSION, and that evaluation is recursive.",
+    "If n is 'a[$(id -u)]', bash parses it as an array reference — and an array subscript is command-substituted, so the command inside actually runs before the multiplication happens. ShellCheck has no warning for this at all.",
+    "Write answers.txt with line=5, flaw=arith-cmdsub, and fix=... naming numeric validation before (( )). Then author hardened.sh from scratch: read $1 into n, reject it with a nonzero exit if it isn't all digits (e.g. a case pattern like '' | *[!0-9]*), only then do result=$(( n * 2 )). Test with a real number (must still work) and with an injection payload (must be refused), then lab check bash L3.5."
+  ]
+}
