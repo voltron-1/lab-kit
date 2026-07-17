@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/update-project-board.sh",
+            "if": "Bash(gh pr merge*)",
+            "timeout": 30,
+            "statusMessage": "Syncing project board..."
+          }
+        ]
+      }
+    ]
+  }
+}
