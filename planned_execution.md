@@ -3,18 +3,33 @@
 ## NEXT UP
 Phase: bash p3 — The Footgun Gallery, BUILD session in progress (Phase
 Builder protocol, PROMPTS.md Prompt 2, TRACK: bash PHASE: 3, BUILD).
-2 of 9 labs built and committed (L3.1 `c25da72`, L3.2 `4535599`). Next
-unstarted item: **L3.3 — `IFS`** (DECODE) — what it controls and how
-changing it breaks (or attacks) a script (docs/plans/bash-p3-plan.md
-§6 L3.3). One lab per session (gated); wait for go-ahead before each.
-Containment (decoy tree + the shadowed-rm fence) is designed, approved,
-and now proven twice — at plan time in an isolated scratchpad, and for
-real in-repo during L3.2's build (`ls / | wc -l`: 28 before/after the
-fenced flawed-script run) — so remaining labs execute it rather than
-re-deriving or re-proving it from scratch.
+3 of 9 labs built and committed (L3.1 `c25da72`, L3.2 `4535599`, L3.3
+`bfc11d3`). Next unstarted item: **L3.4 — filename attacks** (AUDIT) —
+files named `-rf`/`--`/newlines turning `rm *` recursive
+(docs/plans/bash-p3-plan.md §6 L3.4). One lab per session (gated); wait
+for go-ahead before each. Containment (decoy tree + the shadowed-rm
+fence) is designed, approved, and now proven twice — at plan time in an
+isolated scratchpad, and for real in-repo during L3.2's build
+(`ls / | wc -l`: 28 before/after the fenced flawed-script run) — so
+remaining labs execute it rather than re-deriving or re-proving it from
+scratch.
 
 ## LAST SESSION
-2026-07-16 — bash p3 BUILD, L3.2 (`rm -rf "$DIR/"` — the empty-variable
+2026-07-16 — bash p3 BUILD, L3.3 (`IFS` — what it controls and how
+changing it breaks or attacks a script, DECODE): split the same data
+three ways under default/colon/empty IFS, predicted argc/field counts,
+demonstrated the re-steering attack for real (`IFS=/` before an
+unquoted for-loop over a path splits it into 4 tokens instead of 1). No
+destructive command, so no decoy/fence needed. Committed `bfc11d3`
+directly to `main` (this file's refresh lagged that commit by a day —
+`lab status` and `tests/acceptance.sh` confirm it's clean and counted:
+`bash 22/22 ✓`, `lint-labs.sh` clean, `acceptance.sh` 128/131, same 3
+pre-existing stale-count failures noted below, still deferred to
+close-out). Every unit of work in this repo from here forward goes
+through Pull → Branch → Work → Stage → Commit → Push → PR → Merge, per
+the standing instruction given after L3.2 — L3.3's direct-to-main push
+was the last one under the old default.
+Earlier the same day, bash p3 BUILD, L3.2 (`rm -rf "$DIR/"` — the empty-variable
 catastrophe, AUDIT): built check.sh/lab.md/meta.json/quiz.json/
 hints.json/recap.md from the plan spec, self-tested end-to-end through
 the real `lab` CLI (fail path 8/9 — missing `hardened.sh` correctly
@@ -70,7 +85,7 @@ board: [LAB-KIT: Bash Literacy Lab](https://github.com/users/voltron-1/projects/
 - [x] bash p0 — Toolchain & Kit (3 labs) — tag `bash-p0`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p1 — The Expansion Model (8 labs) — tag `bash-p1`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p2 — Control Flow & Silent Failure (8 labs) — tag `bash-p2`; plan: `docs/plans/bash-p2-plan.md` (commit b1a6512)
-- [~] bash p3 — The Footgun Gallery (9 labs) — plan: `docs/plans/bash-p3-plan.md` (commit 8796cb3); containment proven (scratchpad + in-repo); 2/9 built — L3.1 word splitting, L3.2 empty-var rm -rf — merged via PR #1 (`c0ede9e`); next is L3.3 IFS
+- [~] bash p3 — The Footgun Gallery (9 labs) — plan: `docs/plans/bash-p3-plan.md` (commit 8796cb3); containment proven (scratchpad + in-repo); 3/9 built — L3.1 word splitting, L3.2 empty-var rm -rf (PR #1, `c0ede9e`), L3.3 IFS (`bfc11d3`); next is L3.4 filename attacks
 - [ ] bash p4 — Untrusted Input & Injection (8 labs)
 - [ ] bash p5 — Text Processing & Pipelines (6 labs)
 - [ ] bash p6 — Reading Real Deploy Scripts (5 labs)
