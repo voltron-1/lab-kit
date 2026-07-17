@@ -1,0 +1,11 @@
+{
+  "id": "L3.5",
+  "title": "Arithmetic — (( )) and the injection people forget it allows",
+  "type": "AUDIT",
+  "objective": "Read a script that does arithmetic on an untrusted value and explain how $(( n )) / (( n )) can execute an attacker's command through an array-subscript command substitution; give the numeric-validation fix.",
+  "gate": false,
+  "est_minutes": 15,
+  "teaching_samples": {
+    "files/calc.sh": []
+  }
+}
