@@ -1291,6 +1291,34 @@ hardening is a fixed checklist: set -euo pipefail, ${VAR:?} on every path fed to
 the proof is behavioral AND static: it runs safe under the fence (rm never escapes) and it's shellcheck-clean — necessary and sufficient only together with your own audit
 ```
 
+**FOR THE PHASE 4 BUILDER — L4.1 recall.json draft (5 questions; all-P3
+consolidation before the injection/untrusted-input phase; sourced verbatim
+from the shipped recap.md consequences of the 5 candidate labs named in
+§8.7 — L3.2, L3.4, L3.5, L3.6, L3.7 — do NOT ship any of this in L3.9):**
+1. choice (source: "bash L3.2") — "rm -rf \"$DIR/\" with DIR unset
+   becomes…" a) a no-op b) **rm -rf on the filesystem root — it wipes
+   everything** c) a syntax error → **b**
+2. choice (source: "bash L3.4") — "A file named -rf in a dir where you run
+   rm *…" a) is ignored b) **sorts first and is parsed as the flags -r -f
+   — your flat delete goes recursive** c) causes a syntax error → **b**
+3. choice (source: "bash L3.5") — "result=$(( n * 2 )) with
+   n='a[$(cmd)]'…" a) prints 0 and is safe b) **runs cmd — arithmetic
+   re-evaluates n, and the array subscript is command-substituted** c) is
+   a syntax error → **b**
+4. choice (source: "bash L3.6") — "After printf … | while read …; do
+   n=$((n+1)); done, the outer n is…" a) the loop count b) **unchanged —
+   the loop ran in a subshell and its changes were discarded** c)
+   undefined → **b**
+5. choice (source: "bash L3.7") — "Building a command string from
+   untrusted input and re-parsing it as shell source…" a) is always safe
+   if quoted b) **turns any metacharacter in that input into real syntax
+   — the fix is to remove the re-parse, not quote harder** c) only
+   matters for filenames → **b**
+
+`recall.json` shape: match L3.1's file exactly (`id`, `type:"choice"`,
+`source`, `prompt`, `options{a,b,c}`, `answer_b64`). All five answers are
+`b` → `answer_b64: "Yg=="`.
+
 ---
 
 ## 7. ShellCheck code reference (pin these at build)

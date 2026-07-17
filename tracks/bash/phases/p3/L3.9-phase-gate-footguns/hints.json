@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "This is every earlier lab's bug in one script. Read line by line: an rm -rf on an unguarded var (L3.2), a $(cat) split into a for loop (L3.1/L3.3), an unquoted $f in a cp (L3.1), a bare rm *.tmp (L3.4), untrusted arithmetic (L3.5), and a dynamically-built command dispatch (L3.7). Name each line in answers.txt before touching anything.",
+    "Harden in place, one footgun at a time: add the set -euo pipefail preamble; guard REL with :? so empty is fatal before rm runs (and mkdir -p it back after cleaning, since rm -rf deletes the directory itself, not just its contents); read the manifest with while IFS= read -r instead of a $(cat)-fed for loop, quoting every expansion and using -- on cp/rm; validate scale is all-digit before the arithmetic; replace the dynamic dispatch with a case allowlist over known steps.",
+    "Concretely: REL=${1:?release dir required}; case \"$scale\" in '' | *[!0-9]*) exit 2 ;; esac; rm -rf \"${REL:?}/\"; mkdir -p \"$REL\"; while IFS= read -r f; do [[ -n \"$f\" ]] || continue; cp -- \"$f\" \"$REL\"/; done < manifest.txt; rm -f -- ./*.tmp; case \"$step\" in build) run_build ;; test) run_test ;; *) exit 2 ;; esac. First run the ORIGINAL flawed deploy.sh via run-fenced.sh with REL empty to capture fence.log evidence, THEN edit it in place, THEN lab check bash L3.9."
+  ]
+}

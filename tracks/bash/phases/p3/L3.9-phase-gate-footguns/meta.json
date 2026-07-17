@@ -1,0 +1,11 @@
+{
+  "id": "L3.9",
+  "title": "Phase gate: one script, every footgun — find and harden them all",
+  "type": "TAME",
+  "objective": "Take one realistic deploy/cleanup script that carries several Footgun-Gallery bugs at once, identify each, and harden the whole script so it is shellcheck-clean and safe under the fence.",
+  "gate": true,
+  "est_minutes": 20,
+  "teaching_samples": {
+    "files/deploy.sh": ["SC2115", "SC2013", "SC2086", "SC2035", "SC2034"]
+  }
+}
