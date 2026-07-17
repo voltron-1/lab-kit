@@ -1,0 +1,11 @@
+{
+  "id": "L3.7",
+  "title": "eval — why it's almost always the wrong answer",
+  "type": "AUDIT",
+  "objective": "Read a script that builds a command string and runs it, show how untrusted input injects an arbitrary command, and rewrite it without that construct (a case/array allowlist).",
+  "gate": false,
+  "est_minutes": 15,
+  "teaching_samples": {
+    "files/dispatch.sh": []
+  }
+}

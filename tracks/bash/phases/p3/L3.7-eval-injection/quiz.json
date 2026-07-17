@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "eval \"$action \\\"$target\\\"\" with action='ls; rm -rf ~'…",
+      "options": {
+        "a": "prints an error",
+        "b": "runs the rm — eval re-parses the whole string as shell source, so ; starts a new command",
+        "c": "treats it as one filename"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The right rewrite is to…",
+      "options": {
+        "a": "quote harder inside the re-parse",
+        "b": "remove the re-parse entirely — dispatch through a case/array allowlist and invoke the command directly, so input stays data",
+        "c": "add set -u before it"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Will ShellCheck stop you shipping this?",
+      "options": {
+        "a": "yes",
+        "b": "no dedicated block — it's a construct you must audit yourself; the linter won't save you",
+        "c": "it deletes the line"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

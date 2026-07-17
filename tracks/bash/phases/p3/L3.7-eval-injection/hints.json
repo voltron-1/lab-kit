@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Look at line 5 of dispatch.sh. It builds a string out of $action and $target, then re-parses that whole string as shell source. Anything that ends up UNQUOTED in the built string becomes real shell syntax.",
+    "The target slot is wrapped in escaped quotes in the source, so a ; inside target alone doesn't break out — but action is not quoted at all. A semicolon (or any shell metacharacter) inside action ends the first command and starts a new one, which then runs for real.",
+    "Write answers.txt with line=5, flaw=eval-injection, and fix=... naming a case (or array) allowlist that dispatches directly instead of building and re-parsing a string. Then author hardened.sh from scratch: read $1/$2, match $1 against a small set of known verbs with a case statement, invoke the matching command directly on $target (never rebuild a string), and exit 2 for anything else. Test it with a real verb (must still work) and an injection-shaped action like 'x; rm -rf ~' (must be refused before anything runs), then lab check bash L3.7."
+  ]
+}
