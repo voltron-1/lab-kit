@@ -1,0 +1,11 @@
+{
+  "id": "L3.8",
+  "title": "ShellCheck as co-pilot — reading SC codes, which are security-critical",
+  "type": "GUIDED",
+  "objective": "Run ShellCheck on a flawed script, read each SC code it emits, and sort them into security-critical (fix before shipping) vs cosmetic (style) — and name the classes ShellCheck can't see at all.",
+  "gate": false,
+  "est_minutes": 15,
+  "teaching_samples": {
+    "files/sample.sh": ["SC2115", "SC2086", "SC2035", "SC2006", "SC2166", "SC2034"]
+  }
+}
