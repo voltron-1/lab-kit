@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Look at line 4 of purge.sh: rm *. The shell expands and SORTS the glob before rm ever sees it — a file named -rf sorts ahead of ordinary names.",
+    "rm reads that leading -rf as the OPTIONS -r -f, not a filename — so a flat, non-recursive delete becomes a recursive, forced one. ShellCheck's own SC2035 names the fix: rm ./* or rm -- *.",
+    "Write answers.txt with line=4, flaw=dash-filename, and fix=... naming ./* or --. Then author hardened.sh from scratch: purge only plain FILES in the current dir (e.g. find . -maxdepth 1 -type f -exec rm -- {} +) so a -rf or -- name can never be read as an option and a subdirectory can never be recursed into. Test it, then lab check bash L3.4."
+  ]
+}

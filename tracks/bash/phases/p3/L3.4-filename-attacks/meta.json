@@ -1,0 +1,11 @@
+{
+  "id": "L3.4",
+  "title": "Filenames as attack surface — files named -rf, --, or with newlines",
+  "type": "AUDIT",
+  "objective": "Read a directory-purge script and explain how a file literally named -rf turns a flat rm * into a recursive delete, and give the two fixes (./* and --) that stop a filename from being read as a flag.",
+  "gate": false,
+  "est_minutes": 15,
+  "teaching_samples": {
+    "files/purge.sh": ["SC2035"]
+  }
+}
