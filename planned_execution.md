@@ -55,6 +55,7 @@ this file's history at commits 0e7e647, 6ec3a48, and 0db647e.
 ## TRACKS
 
 ### rust — Rust Literacy Lab (63 labs)
+board: [LAB-KIT: Rust Literacy Lab](https://github.com/users/voltron-1/projects/19) — 63 issues, 8 milestones, 264 pts
 - [ ] rust p0 — Toolchain & Kit (3 labs)
 - [ ] rust p1 — Reading Basic Rust (9 labs)
 - [ ] rust p2 — Ownership, Borrowing, Lifetimes (10 labs)
@@ -65,6 +66,7 @@ this file's history at commits 0e7e647, 6ec3a48, and 0db647e.
 - [ ] rust p7 — Directing & Auditing AI Rust (7 labs)
 
 ### bash — Bash Literacy Lab (54 labs)
+board: [LAB-KIT: Bash Literacy Lab](https://github.com/users/voltron-1/projects/18) — 54 issues, 8 milestones, 238 pts, 22 closed
 - [x] bash p0 — Toolchain & Kit (3 labs) — tag `bash-p0`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p1 — The Expansion Model (8 labs) — tag `bash-p1`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p2 — Control Flow & Silent Failure (8 labs) — tag `bash-p2`; plan: `docs/plans/bash-p2-plan.md` (commit b1a6512)
@@ -75,6 +77,7 @@ this file's history at commits 0e7e647, 6ec3a48, and 0db647e.
 - [ ] bash p7 — Directing & Auditing AI Bash (7 labs)
 
 ### soc — SOC Analyst Lab (52 labs)
+board: [LAB-KIT: SOC Analyst Lab](https://github.com/users/voltron-1/projects/20) — 52 issues, 8 milestones, 232 pts
 - [ ] soc p0 — Toolbelt & Kit (3 labs)
 - [ ] soc p1 — How Attacks Become Alerts (8 labs)
 - [ ] soc p2 — Network Triage Fundamentals (7 labs)
@@ -85,6 +88,7 @@ this file's history at commits 0e7e647, 6ec3a48, and 0db647e.
 - [ ] soc p7 — The AI-Assisted Analyst (7 labs)
 
 ### ps — PowerShell Literacy Lab (54 labs)
+board: [LAB-KIT: PowerShell Literacy Lab](https://github.com/users/voltron-1/projects/21) — 54 issues, 8 milestones, 237 pts
 - [ ] ps p0 — Toolchain & Kit (3 labs)
 - [ ] ps p1 — The Object Pipeline (8 labs)
 - [ ] ps p2 — Control Flow, Errors & Modules (7 labs)
@@ -103,3 +107,11 @@ Markers: `[ ]` todo · `[~]` in-progress · `[x]` done (link PR/tag/evidence) ·
 Completion source of truth: git tags `<track>-p<N>` per the Phase Builder
 protocol in `PROMPTS.md`; this file is the sequenced view derived from
 them, never the other way around.
+
+Each track also has a GitHub Projects v2 board (linked under its heading
+above) — one issue per lab as a user story (`sp:N` story points, Fibonacci
+by lab type; milestone = phase), for granular tracking below the
+phase-level view this file gives. Boards mirror this file's completion
+state; they do not compete with git tags as the source of truth either —
+a lab's issue is closed when its commit/tag lands, not the other way
+around.
