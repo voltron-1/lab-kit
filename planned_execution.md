@@ -30,7 +30,9 @@ grow." Re-proved containment for real in this repo's workspace: fenced
 `tests/acceptance.sh` 128/131 — the 3 failures are pre-existing stale
 counts from the L3.1 session (confirmed via `git stash` against HEAD
 before this session), deferred to the phase's close-out step along with
-extending acceptance.sh and re-tagging.
+extending acceptance.sh and re-tagging. L3.1 + L3.2 shipped via PR #1
+(branch `bash-p3-l3.1-l3.2`, merge commit `c0ede9e`) — the repo's first
+PR; branch deleted post-merge, back to direct-to-main for routine work.
 Earlier, 2026-07-15 same-day: bash p3 PLAN session wrote and pushed the
 Phase 3 build plan (docs/plans/bash-p3-plan.md, 1393 lines, commit
 8796cb3) — all nine labs (L3.1–L3.9) fully specified, containment
@@ -66,7 +68,7 @@ this file's history at commits 0e7e647, 6ec3a48, and 0db647e.
 - [x] bash p0 — Toolchain & Kit (3 labs) — tag `bash-p0`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p1 — The Expansion Model (8 labs) — tag `bash-p1`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p2 — Control Flow & Silent Failure (8 labs) — tag `bash-p2`; plan: `docs/plans/bash-p2-plan.md` (commit b1a6512)
-- [~] bash p3 — The Footgun Gallery (9 labs) — plan: `docs/plans/bash-p3-plan.md` (commit 8796cb3); containment proven (scratchpad + in-repo); 2/9 built — L3.1 word splitting (`c25da72`), L3.2 empty-var rm -rf (`4535599`); next is L3.3 IFS
+- [~] bash p3 — The Footgun Gallery (9 labs) — plan: `docs/plans/bash-p3-plan.md` (commit 8796cb3); containment proven (scratchpad + in-repo); 2/9 built — L3.1 word splitting, L3.2 empty-var rm -rf — merged via PR #1 (`c0ede9e`); next is L3.3 IFS
 - [ ] bash p4 — Untrusted Input & Injection (8 labs)
 - [ ] bash p5 — Text Processing & Pipelines (6 labs)
 - [ ] bash p6 — Reading Real Deploy Scripts (5 labs)
