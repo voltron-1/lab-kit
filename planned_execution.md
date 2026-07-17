@@ -1,44 +1,43 @@
 # LAB-KIT — Planned Execution
 
 ## NEXT UP
-Phase: bash p3 — The Footgun Gallery. The p3 PLAN session is done — the
-build plan is written and pushed (docs/plans/bash-p3-plan.md, commit
-8796cb3; see LAST SESSION). Next unstarted item: bash p3's BUILD session
-(Phase Builder protocol, PROMPTS.md Prompt 2, TRACK: bash PHASE: 3,
-BUILD) — execute the plan lab by lab (L3.1–L3.9), self-test each with
-real captured output (fail + pass paths), and re-prove containment in
-the self-test before shipping any footgun lab. The containment design is
-already decided and approved (see DEPENDENCY RESOLVED below), so the
-build executes it rather than re-deriving it.
-
-DEPENDENCY RESOLVED for bash p3 — The Footgun Gallery: the decoy-tree /
-shadowed-destructive-command containment mechanism is now designed and
-proved in the p3 plan (docs/plans/bash-p3-plan.md §3). Two mechanisms:
-(A) the inherited make_decoy_tree / decoy_intact / decoy_changed helpers
-(real, fenced decoy deletion for the word-splitting and filename-attack
-labs), and (B) a NEW fail-closed shadowed-rm fence (files/fence.sh —
-APPROVED 2026-07-15) for the labs whose footgun targets `/` itself (L3.2
-empty-variable rm -rf, L3.7 eval, the L3.9 gate). Both were exercised at
-plan time in an isolated scratchpad — empty-variable `rm -rf "$DIR/"`
-(= `rm -rf /`) was intercepted and logged, real filesystem untouched.
-The BUILD session ships fence.sh + run-fenced.sh and must re-prove
-containment in its own self-test per PROMPTS.md's bash gate.
+Phase: bash p3 — The Footgun Gallery, BUILD session in progress (Phase
+Builder protocol, PROMPTS.md Prompt 2, TRACK: bash PHASE: 3, BUILD).
+2 of 9 labs built and committed (L3.1 `c25da72`, L3.2 `4535599`). Next
+unstarted item: **L3.3 — `IFS`** (DECODE) — what it controls and how
+changing it breaks (or attacks) a script (docs/plans/bash-p3-plan.md
+§6 L3.3). One lab per session (gated); wait for go-ahead before each.
+Containment (decoy tree + the shadowed-rm fence) is designed, approved,
+and now proven twice — at plan time in an isolated scratchpad, and for
+real in-repo during L3.2's build (`ls / | wc -l`: 28 before/after the
+fenced flawed-script run) — so remaining labs execute it rather than
+re-deriving or re-proving it from scratch.
 
 ## LAST SESSION
-2026-07-15 — bash p3 PLAN session: the Phase 3 (The Footgun Gallery)
-build plan was written and pushed (docs/plans/bash-p3-plan.md, 1393
-lines, commit 8796cb3). All nine labs (L3.1–L3.9) are fully specified —
-exact vulnerable/hardened scripts, check.sh logic, quizzes, recaps —
-plus the L3.1 phase-opener recall (5 questions, all sourced from and
-validated against the Phase-2 recap cards on disk). Containment was
-designed AND proved this session (see DEPENDENCY RESOLVED above): the
-footgun behaviors and the NEW fail-closed shadowed-rm fence were
-verified empirically in an isolated scratchpad (no repo / real-FS
-writes), and the fence was approved. SC-code sets per teaching sample
-were left [VERIFY-AT-BUILD] against the build machine's shellcheck
-0.9.0. Plan only — no lab files built; this planned_execution.md refresh
-was made afterward at my request (the plan session itself touched only
-bash-p3-plan.md).
+2026-07-16 — bash p3 BUILD, L3.2 (`rm -rf "$DIR/"` — the empty-variable
+catastrophe, AUDIT): built check.sh/lab.md/meta.json/quiz.json/
+hints.json/recap.md from the plan spec, self-tested end-to-end through
+the real `lab` CLI (fail path 8/9 — missing `hardened.sh` correctly
+blocked — then pass path 9/9 + quiz 3/3), committed `4535599`. Running
+the guided demo for real (not just in a scratchpad) caught a real bug in
+the draft lab.md — the guided steps had the learner reset `fence.log`
+before testing the hardened script, which erased the evidence check.sh
+needed from the earlier flawed-script demo and produced a false FAIL;
+fixed by dropping the reset and reframing the proof as "the file doesn't
+grow." Re-proved containment for real in this repo's workspace: fenced
+`rm -rf /` intercepted, `fence.log` got `FENCE-BLOCKED: rm -rf /`, real
+`/` entry count unchanged (28 → 28). `tools/lint-labs.sh` clean;
+`tests/acceptance.sh` 128/131 — the 3 failures are pre-existing stale
+counts from the L3.1 session (confirmed via `git stash` against HEAD
+before this session), deferred to the phase's close-out step along with
+extending acceptance.sh and re-tagging.
+Earlier, 2026-07-15 same-day: bash p3 PLAN session wrote and pushed the
+Phase 3 build plan (docs/plans/bash-p3-plan.md, 1393 lines, commit
+8796cb3) — all nine labs (L3.1–L3.9) fully specified, containment
+designed and proved in an isolated scratchpad, SC-code sets flagged
+[VERIFY-AT-BUILD]; then, later the same day, **L3.1** (word splitting,
+TAME) was built, self-tested, and committed (`c25da72`) — this file's
+refresh lagged that by a day and is now caught up.
 Earlier the same week: bash p2 built, self-tested, and closed out (all
 8 labs L2.1–L2.8 from docs/plans/bash-p2-plan.md, 8 individual commits,
 tests/acceptance.sh at 131/131, `lab status` 19/19 ✓, tagged `bash-p2`);
@@ -67,7 +66,7 @@ this file's history at commits 0e7e647, 6ec3a48, and 0db647e.
 - [x] bash p0 — Toolchain & Kit (3 labs) — tag `bash-p0`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p1 — The Expansion Model (8 labs) — tag `bash-p1`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p2 — Control Flow & Silent Failure (8 labs) — tag `bash-p2`; plan: `docs/plans/bash-p2-plan.md` (commit b1a6512)
-- [~] bash p3 — The Footgun Gallery (9 labs) — plan written & pushed (`docs/plans/bash-p3-plan.md`, commit 8796cb3); containment design approved (see DEPENDENCY RESOLVED); labs not yet built — next is the BUILD session
+- [~] bash p3 — The Footgun Gallery (9 labs) — plan: `docs/plans/bash-p3-plan.md` (commit 8796cb3); containment proven (scratchpad + in-repo); 2/9 built — L3.1 word splitting (`c25da72`), L3.2 empty-var rm -rf (`4535599`); next is L3.3 IFS
 - [ ] bash p4 — Untrusted Input & Injection (8 labs)
 - [ ] bash p5 — Text Processing & Pipelines (6 labs)
 - [ ] bash p6 — Reading Real Deploy Scripts (5 labs)
