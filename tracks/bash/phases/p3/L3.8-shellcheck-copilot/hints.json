@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run: shellcheck -x -S style sample.sh. Read each code's message, then ask: could this actually be exploited or cause real damage (security-critical), or is it just a style/readability nit (cosmetic)?",
+    "SC2115 (rm -rf could hit the filesystem root), SC2086 (unquoted var word-splits/globs), and SC2035 (a dash-led filename becomes a flag) are all security-critical — you've built labs around every one of these bugs already this phase. SC2034 (unused var) and SC2006 (backticks) are cosmetic — annoying, not dangerous.",
+    "Write answers.txt with sc2115=security, sc2086=security, sc2035=security, sc2034=cosmetic, sc2006=cosmetic, and blindspot=... naming ONE class ShellCheck never warns about at all — the L3.7 lab's re-parsing construct, L3.5's arithmetic command-substitution injection, or a missing set -euo pipefail preamble. Then lab check bash L3.8."
+  ]
+}

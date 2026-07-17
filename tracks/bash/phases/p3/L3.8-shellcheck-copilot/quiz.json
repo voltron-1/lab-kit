@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Of SC2115, SC2034, SC2006 — which must you fix before shipping?",
+      "options": {
+        "a": "all three",
+        "b": "SC2115 — it's the rm -rf / catastrophe; the other two are cosmetic",
+        "c": "none"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A script that is 100% ShellCheck-clean is…",
+      "options": {
+        "a": "proven safe",
+        "b": "free of the bugs ShellCheck knows — but some real injection classes and a missing strict-mode preamble are invisible to it",
+        "c": "unrunnable"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "SC1090/SC1091 (\"can't follow source\") means…",
+      "options": {
+        "a": "a real bug",
+        "b": "usually informational — the path is dynamic; it's not a defect (our own check.sh handles it with a # shellcheck source= directive)",
+        "c": "the file is corrupt"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
