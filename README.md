@@ -1,7 +1,7 @@
 # LAB-KIT
 
-Terminal training tracks — rust, bash, soc — driven by one shared `lab`
-CLI. Pure bash + jq. Built for Ubuntu 24.04 on WSL2.
+Terminal training tracks — rust, bash, soc, ps — driven by one shared
+`lab` CLI. Pure bash + jq. Built for Ubuntu 24.04 on WSL2.
 
 ## Quickstart — clone to first lab in 5 commands
 
@@ -50,7 +50,7 @@ has an `L0.0`).
     harness/checklib.sh     helpers every lab's check.sh sources
     tracks/<track>/phases/p<N>/<id>-<slug>/   lab content
     workspace/               yours — gitignored, rebuilt by `lab start`
-    docs/curriculum/          the three binding curriculum maps
+    docs/curriculum/          the four binding curriculum maps
 
 ## Adding a track
 
