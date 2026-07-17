@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Two bugs, both word-splitting: the for f in $(cat manifest) line splits the FILE into words instead of lines, and the mv $f $archive line splits each NAME again if it has a space.",
+    "Fix 1 (L2.3 pattern): while IFS= read -r f; do ... done < \"$manifest\" — reads lines, not words. Fix 2: quote every expansion — mv -- \"$f\" \"$archive\"/ — the -- stops a dash-leading name from being read as an option.",
+    "Full target shape: set -euo pipefail at the top; while IFS= read -r f; do [[ -n \"$f\" ]] || continue; mv -- \"$f\" \"$archive\"/; done < \"$manifest\"; echo staged. Then shellcheck stage.sh and lab check bash L3.1."
+  ]
+}
