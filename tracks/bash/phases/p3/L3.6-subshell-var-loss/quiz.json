@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "After printf … | while read …; do n=$((n+1)); done, the outer n is…",
+      "options": {
+        "a": "the loop count",
+        "b": "unchanged — the loop ran in a subshell and its changes were discarded",
+        "c": "undefined"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "To keep the count, rewrite as…",
+      "options": {
+        "a": "for over $(cmd)",
+        "b": "while read …; done < <(cmd) — process substitution keeps the loop in the current shell",
+        "c": "add set -e"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "The general rule:",
+      "options": {
+        "a": "pipes are slow",
+        "b": "the right-hand side of a pipe runs in a subshell; variable assignments there don't reach the parent",
+        "c": "while can't read"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "A pipe (|) runs each side as a separate process. The right-hand side of cmd | while read …; done is a CHILD process (a subshell) — anything it assigns to a variable dies with that subshell.",
+    "while read …; done < <(cmd) redirects input from a process substitution instead of a pipe — the while loop itself stays in your CURRENT shell, so its variable assignments survive after the loop ends.",
+    "Write predictions.txt with pipe=0, procsub=3, and why=... naming the subshell (e.g. 'the pipe's right-hand side runs in a subshell, so count changes are lost when it exits'). Then run counter.sh and compare — read the honor line first: the check can't tell whether you predicted before running, you're only cheating your own reps."
+  ]
+}
