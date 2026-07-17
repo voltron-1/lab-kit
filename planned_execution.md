@@ -8,10 +8,13 @@ running lab-to-lab through to phase close-out per explicit go-ahead
 but still one commit/PR per lab, self-tested before every commit, and
 stopping immediately on a break, a real design decision, or two
 consecutive self-test failures.
-5 of 9 labs built and committed (L3.1 `c25da72`, L3.2 `4535599`, L3.3
-`bfc11d3`, L3.4 `9aad58a` via PR #228, L3.5 `b24968d`). Next unstarted
-item: **L3.6 — subshell var loss** (PREDICT) — why `… | while read`
-eats your variables (docs/plans/bash-p3-plan.md §6 L3.6). Containment
+6 of 9 labs built and committed (L3.1 `c25da72`, L3.2 `4535599`, L3.3
+`bfc11d3`, L3.4 `9aad58a` via PR #228, L3.5 `b24968d` via PR #229, L3.6
+`cf798ed`). Next unstarted item: **L3.7 — eval** (AUDIT) — why it's
+almost always the wrong answer (docs/plans/bash-p3-plan.md §6 L3.7),
+uses `fence.sh`/`run-fenced.sh` again; the injection vector is the
+unquoted `$action` slot, not `$target` (correction already noted after
+L3.1). Containment
 (decoy tree + the shadowed-rm fence) is designed, approved, and proven
 twice — at plan time in an isolated scratchpad, and for real in-repo
 during L3.2's build (`ls / | wc -l`: 28 before/after the fenced
@@ -19,7 +22,23 @@ flawed-script run) — so remaining labs execute it rather than
 re-deriving or re-proving it from scratch.
 
 ## LAST SESSION
-2026-07-17 — bash p3 BUILD, L3.5 (`(( ))` arithmetic — the injection
+2026-07-17 — bash p3 BUILD, L3.6 (subshells vs current shell — why
+`… | while read` eats your variables, PREDICT): `cmd | while read … done`
+runs the loop in a subshell, so its variable changes are lost when the
+subshell exits (`count` stays `0`); `while read … done < <(cmd)` keeps the
+loop in the current shell, so the variable survives (`count=3`). Verified
+for real; ShellCheck's SC2030/SC2031 fire exactly on this and ARE the
+lesson. `code-reviewer` sub-agent caught a real issue: the first-draft
+lab.md revealed the actual output values and handed the learner the
+literal correct `predictions.txt` content, letting the lab be "solved" by
+transcription without ever running `counter.sh` — a break from every
+other shipped PREDICT-type lab's convention (checked all 9: L1.1-L1.8,
+L2.3, L2.4). Fixed to match: guided steps tell the learner what to run
+and to compare against their own prediction, never printing the answer.
+Self-tested fail path (0/4), pass path (4/4 + 3/3 quiz), negative case
+(`pipe=3` correctly fails just that one assertion). Shipped via its own
+branch+PR+merge (`bash-p3-l3.6`).
+Also this session, bash p3 BUILD, L3.5 (`(( ))` arithmetic — the injection
 people forget it allows, AUDIT): `result=$(( n * 2 ))` on untrusted `n`
 runs an attacker's command, because arithmetic evaluation is recursive
 and an array-subscript reference inside it — `a[$(cmd)]` — is
@@ -118,7 +137,7 @@ board: [LAB-KIT: Bash Literacy Lab](https://github.com/users/voltron-1/projects/
 - [x] bash p0 — Toolchain & Kit (3 labs) — tag `bash-p0`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p1 — The Expansion Model (8 labs) — tag `bash-p1`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p2 — Control Flow & Silent Failure (8 labs) — tag `bash-p2`; plan: `docs/plans/bash-p2-plan.md` (commit b1a6512)
-- [~] bash p3 — The Footgun Gallery (9 labs) — plan: `docs/plans/bash-p3-plan.md` (commit 8796cb3); containment proven (scratchpad + in-repo); 5/9 built — L3.1 word splitting, L3.2 empty-var rm -rf (PR #1, `c0ede9e`), L3.3 IFS (`bfc11d3`), L3.4 filename attacks (PR #228, `9aad58a`), L3.5 arithmetic injection (`b24968d`); next is L3.6 subshell var loss
+- [~] bash p3 — The Footgun Gallery (9 labs) — plan: `docs/plans/bash-p3-plan.md` (commit 8796cb3); containment proven (scratchpad + in-repo); 6/9 built — L3.1 word splitting, L3.2 empty-var rm -rf (PR #1, `c0ede9e`), L3.3 IFS (`bfc11d3`), L3.4 filename attacks (PR #228, `9aad58a`), L3.5 arithmetic injection (PR #229, `b24968d`), L3.6 subshell var loss (`cf798ed`); next is L3.7 eval
 - [ ] bash p4 — Untrusted Input & Injection (8 labs)
 - [ ] bash p5 — Text Processing & Pipelines (6 labs)
 - [ ] bash p6 — Reading Real Deploy Scripts (5 labs)
