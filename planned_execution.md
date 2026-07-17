@@ -8,11 +8,12 @@ running lab-to-lab through to phase close-out per explicit go-ahead
 but still one commit/PR per lab, self-tested before every commit, and
 stopping immediately on a break, a real design decision, or two
 consecutive self-test failures.
-7 of 9 labs built and committed (L3.1 `c25da72`, L3.2 `4535599`, L3.3
+8 of 9 labs built and committed (L3.1 `c25da72`, L3.2 `4535599`, L3.3
 `bfc11d3`, L3.4 `9aad58a` via PR #228, L3.5 `b24968d` via PR #229, L3.6
-`cf798ed` via PR #230, L3.7 `deea6f8`). Next unstarted item: **L3.8 —
-ShellCheck as co-pilot** (GUIDED) — reading SC codes, which are
-security-critical (docs/plans/bash-p3-plan.md §6 L3.8). Containment
+`cf798ed` via PR #230, L3.7 `deea6f8` via PR #231, L3.8 `921d2b0`). Next
+unstarted item: **L3.9 — phase gate** (TAME) — one script, every footgun,
+find and harden them all (docs/plans/bash-p3-plan.md §6 L3.9); both
+containment mechanisms (decoy tree + fence) in one lab. Containment
 (decoy tree + the shadowed-rm fence) is designed, approved, and proven
 twice — at plan time in an isolated scratchpad, and for real in-repo
 during L3.2's build (`ls / | wc -l`: 28 before/after the fenced
@@ -20,7 +21,25 @@ flawed-script run) — so remaining labs execute it rather than
 re-deriving or re-proving it from scratch.
 
 ## LAST SESSION
-2026-07-17 — bash p3 BUILD, L3.7 (`eval` — why it's almost always the wrong
+2026-07-17 — bash p3 BUILD, L3.8 (ShellCheck as co-pilot — reading SC
+codes, which are security-critical, GUIDED): sample.sh is never executed,
+only shellchecked. Verified the real emitted set (`shellcheck -x -S
+style`): SC2115, SC2086, SC2035, SC2006, SC2166, SC2034 — the sample's own
+inline comments speculated about SC2010/SC2012 and a second SC2086,
+neither of which actually fire; pinned the verified set instead of the
+speculative one. Learner classifies each code security-critical vs
+cosmetic and names one blind spot ShellCheck can't see. check.sh reused
+L3.7's two lint-workaround techniques (joined string literals for the
+banned-token answer regex; reworded a hint to avoid a bare trailing `/`
+the absolute-path scanner flags even in prose). `code-reviewer` sub-agent
+caught a real gap: the blindspot check's second assertion wasn't anchored
+to the `blindspot=` line, so a wrong answer plus an unrelated stray
+mention of the keyword elsewhere in the file would false-pass — reproduced
+the exact failure mode, then fixed by anchoring the regex to that line.
+Self-tested fail path (0/7), pass path (7/7 + 3/3 quiz), negative case
+(`sc2115=cosmetic` correctly fails). Shipped via its own branch+PR+merge
+(`bash-p3-l3.8`).
+Also this session, bash p3 BUILD, L3.7 (`eval` — why it's almost always the wrong
 answer, AUDIT): dispatch.sh builds a command string from an untrusted
 action and target and evals the result — fenced with fence.sh/run-fenced.sh
 from L3.2 since the demo detonates a real `rm -rf ~` payload (verified:
@@ -158,7 +177,7 @@ board: [LAB-KIT: Bash Literacy Lab](https://github.com/users/voltron-1/projects/
 - [x] bash p0 — Toolchain & Kit (3 labs) — tag `bash-p0`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p1 — The Expansion Model (8 labs) — tag `bash-p1`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p2 — Control Flow & Silent Failure (8 labs) — tag `bash-p2`; plan: `docs/plans/bash-p2-plan.md` (commit b1a6512)
-- [~] bash p3 — The Footgun Gallery (9 labs) — plan: `docs/plans/bash-p3-plan.md` (commit 8796cb3); containment proven (scratchpad + in-repo); 7/9 built — L3.1 word splitting, L3.2 empty-var rm -rf (PR #1, `c0ede9e`), L3.3 IFS (`bfc11d3`), L3.4 filename attacks (PR #228, `9aad58a`), L3.5 arithmetic injection (PR #229, `b24968d`), L3.6 subshell var loss (PR #230, `cf798ed`), L3.7 eval injection (`deea6f8`); next is L3.8 ShellCheck co-pilot
+- [~] bash p3 — The Footgun Gallery (9 labs) — plan: `docs/plans/bash-p3-plan.md` (commit 8796cb3); containment proven (scratchpad + in-repo); 8/9 built — L3.1 word splitting, L3.2 empty-var rm -rf (PR #1, `c0ede9e`), L3.3 IFS (`bfc11d3`), L3.4 filename attacks (PR #228, `9aad58a`), L3.5 arithmetic injection (PR #229, `b24968d`), L3.6 subshell var loss (PR #230, `cf798ed`), L3.7 eval injection (PR #231, `deea6f8`), L3.8 ShellCheck co-pilot (`921d2b0`); next is L3.9 phase gate (closes out the phase)
 - [ ] bash p4 — Untrusted Input & Injection (8 labs)
 - [ ] bash p5 — Text Processing & Pipelines (6 labs)
 - [ ] bash p6 — Reading Real Deploy Scripts (5 labs)
