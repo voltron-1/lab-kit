@@ -377,9 +377,10 @@ printf '%s\n' 'p1=1:' 'p2=2:web01_id' 'p3=3:*.log' 'p4=4:web01 web02' 'p5=5:argc
 bash_check_pass "L1.8" $'b\ndouble\nb\n'
 
 out="$("$LAB" status 2>&1)"
-# denominator is the full bash catalog (P0+P1+P2 = 19), not just the 11
-# passed so far -- P2's lab directories already exist on disk at this point.
-assert_contains "status shows 11 of 19 bash labs passed so far (11/19)" "$out" "(11/19)"
+# denominator is the full bash catalog on disk (P0-P3 = 28), not just the 11
+# passed so far -- every phase's lab directories already exist on disk at
+# this point, regardless of progress state.
+assert_contains "status shows 11 of 28 bash labs passed so far (11/28)" "$out" "(11/28)"
 
 # --- 7b. bash track P2: fabricated pass + one negative case per lab ---
 note "bash track P2: fabricated pass + negative case per lab"
@@ -467,8 +468,160 @@ echo "archived: ERROR lines from $log are in archive/errors.txt"
 SCRIPT
 bash_check_pass "L2.8" $'b\nb\nb\n'
 
+# --- 7c. bash track P3 (The Footgun Gallery): fabricated pass + negative
+# case per lab. Every AUDIT/TAME lab's negative case matches the FIX-type
+# convention above (L2.8): leave the shipped flawed script unedited /
+# artifacts absent, never a separately-deleted file. ---
+note "bash track P3: fabricated pass + negative case per lab"
+
+# L3.1 — Word splitting, deep (TAME: edit stage.sh in place)
+"$LAB" start bash L3.1 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L3.1"
+bash_check_fail_missing "L3.1" "the fix (stage.sh left unedited)"
+cat > "$WS/stage.sh" <<'SCRIPT'
+#!/usr/bin/env bash
+set -euo pipefail
+manifest=$1
+archive=$2
+while IFS= read -r f; do
+  [[ -n "$f" ]] || continue
+  mv -- "$f" "$archive"/
+done < "$manifest"
+echo staged
+SCRIPT
+bash_check_pass "L3.1" $'b\nb\nb\n'
+
+# L3.2 — rm -rf "$DIR/" — the empty-variable catastrophe (AUDIT, fenced)
+"$LAB" start bash L3.2 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L3.2"
+bash_check_fail_missing "L3.2" "hardened.sh"
+printf "line=5\\nflaw=empty-var-rm\\nfix=\${BUILD_DIR:?BUILD_DIR is empty}\\n" > "$WS/answers.txt"
+printf 'FENCE-BLOCKED: rm -rf /\n' > "$WS/fence.log"
+cat > "$WS/hardened.sh" <<'SCRIPT'
+#!/usr/bin/env bash
+set -euo pipefail
+BUILD_DIR="${BUILD_DIR-$(dirname "$0")/build}"
+rm -rf "${BUILD_DIR:?BUILD_DIR is empty — refusing to rm}/"
+echo clean
+SCRIPT
+bash_check_pass "L3.2" $'b\nb\nb\n'
+
+# L3.3 — IFS (DECODE: identification only, no hardened script)
+"$LAB" start bash L3.3 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L3.3"
+bash_check_fail_missing "L3.3" "answers.txt"
+printf 'default_argc=3\npasswd_fields=7\nempty_argc=1\nifs_controls=splitting\nattack=IFS=/ before an unquoted for loop over a path splits it into extra tokens\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L3.3" $'b\nb\nb\n'
+
+# L3.4 — Filenames as attack surface (AUDIT, decoy only)
+"$LAB" start bash L3.4 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L3.4"
+bash_check_fail_missing "L3.4" "hardened.sh"
+printf 'line=4\nflaw=dash-filename\nfix=rm -- ./* (or rm ./*) so a name can never be read as an option\n' \
+  > "$WS/answers.txt"
+cat > "$WS/hardened.sh" <<'SCRIPT'
+#!/usr/bin/env bash
+set -euo pipefail
+find . -maxdepth 1 -type f -exec rm -- {} +
+echo purged
+SCRIPT
+bash_check_pass "L3.4" $'b\nb\nb\n'
+
+# L3.5 — Arithmetic injection (AUDIT, no decoy/fence)
+"$LAB" start bash L3.5 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L3.5"
+bash_check_fail_missing "L3.5" "hardened.sh"
+printf 'line=5\nflaw=arith-cmdsub\nfix=validate n is all-digit before it reaches (( )); reject anything else\n' \
+  > "$WS/answers.txt"
+cat > "$WS/hardened.sh" <<'SCRIPT'
+#!/usr/bin/env bash
+set -euo pipefail
+n=$1
+case "$n" in
+  '' | *[!0-9]*) echo "refusing non-numeric input: $n" >&2; exit 2 ;;
+esac
+result=$(( n * 2 ))
+echo "result=$result"
+SCRIPT
+bash_check_pass "L3.5" $'b\nb\nb\n'
+
+# L3.6 — Subshell var loss (PREDICT: predictions.txt only)
+"$LAB" start bash L3.6 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L3.6"
+bash_check_fail_missing "L3.6" "predictions.txt"
+printf 'pipe=0\nprocsub=3\nwhy=the pipe runs the while in a subshell, so count changes are lost\n' \
+  > "$WS/predictions.txt"
+bash_check_pass "L3.6" $'b\nb\nb\n'
+
+# L3.7 — eval injection (AUDIT, fenced)
+"$LAB" start bash L3.7 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L3.7"
+bash_check_fail_missing "L3.7" "hardened.sh"
+printf 'line=5\nflaw=eval-injection\nfix=dispatch through a case/array allowlist — never build a string and re-parse it\n' \
+  > "$WS/answers.txt"
+cat > "$WS/hardened.sh" <<'SCRIPT'
+#!/usr/bin/env bash
+set -euo pipefail
+action=$1
+target=$2
+case "$action" in
+  stat) stat -- "$target" ;;
+  size) wc -c -- "$target" ;;
+  type) file -- "$target" ;;
+  *) echo "unknown action: $action" >&2; exit 2 ;;
+esac
+SCRIPT
+bash_check_pass "L3.7" $'b\nb\nb\n'
+
+# L3.8 — ShellCheck as co-pilot (GUIDED: answers.txt only, no script executed)
+"$LAB" start bash L3.8 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L3.8"
+bash_check_fail_missing "L3.8" "answers.txt"
+printf 'sc2115=security\nsc2086=security\nsc2035=security\nsc2034=cosmetic\nsc2006=cosmetic\nblindspot=eval injection\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L3.8" $'b\nb\nb\n'
+
+# L3.9 — Phase gate (TAME, gate, BOTH containment mechanisms): edit
+# deploy.sh in place; fence.log must carry the flawed-run evidence too
+# (deploy.sh is edited in place, so this can't be regenerated from the
+# now-hardened script — see lab.md's deploy.sh.flawed snapshot approach).
+"$LAB" start bash L3.9 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L3.9"
+bash_check_fail_missing "L3.9" "the fix (deploy.sh left unedited) + fence.log evidence"
+printf 'a_rmrf=8\nb_split=9\nc_unquoted=10\nd_dashname=12\ne_arith=14\nf_eval=15\n' > "$WS/answers.txt"
+printf 'FENCE-BLOCKED: rm -rf /\n' > "$WS/fence.log"
+cat > "$WS/deploy.sh" <<'SCRIPT'
+#!/usr/bin/env bash
+set -euo pipefail
+run_build() { echo "building..."; }
+run_test() { echo "testing..."; }
+
+REL=${1:?release dir required}
+scale=${2:?scale required}
+step=${3:?build step required}
+
+case "$scale" in '' | *[!0-9]*) echo "scale must be numeric" >&2; exit 2 ;; esac
+
+rm -rf "${REL:?}/"
+mkdir -p "$REL"
+while IFS= read -r f; do
+  [[ -n "$f" ]] || continue
+  cp -- "$f" "$REL"/
+done < manifest.txt
+rm -f -- ./*.tmp
+workers=$(( scale * 2 ))
+case "$step" in
+  build) run_build ;;
+  test)  run_test ;;
+  *) echo "unknown step: $step" >&2; exit 2 ;;
+esac
+echo "deployed with $workers workers"
+SCRIPT
+bash_check_pass "L3.9" $'b\nb\nb\n'
+
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 19 bash P0+P1+P2 labs passed (19/19)" "$out" "(19/19)"
+assert_contains "status shows all 28 bash P0-P3 labs passed (28/28)" "$out" "(28/28)"
 
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
@@ -480,11 +633,10 @@ else
 fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
-  # 32 total track-phase lines; bash p0-p2 are done/in-progress ([x]/[~], not
-  # [ ]), leaving 29 unstarted -- update this count whenever a phase's marker
-  # changes.
+  # 32 total track-phase lines; bash p0-p3 are done ([x]), leaving 28
+  # unstarted -- update this count whenever a phase's marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 29 unstarted track-phase lines" "29" "$line_count"
+  assert_eq "planned_execution.md has 28 unstarted track-phase lines" "28" "$line_count"
 else
   bad "planned_execution.md missing"
 fi

@@ -1,27 +1,33 @@
 # LAB-KIT — Planned Execution
 
 ## NEXT UP
-Phase: bash p3 — The Footgun Gallery, BUILD session in progress (Phase
-Builder protocol, PROMPTS.md Prompt 2, TRACK: bash PHASE: 3, BUILD),
-running lab-to-lab through to phase close-out per explicit go-ahead
-(2026-07-17) — no longer gating for a fresh approval between each lab,
-but still one commit/PR per lab, self-tested before every commit, and
-stopping immediately on a break, a real design decision, or two
-consecutive self-test failures.
-8 of 9 labs built and committed (L3.1 `c25da72`, L3.2 `4535599`, L3.3
-`bfc11d3`, L3.4 `9aad58a` via PR #228, L3.5 `b24968d` via PR #229, L3.6
-`cf798ed` via PR #230, L3.7 `deea6f8` via PR #231, L3.8 `921d2b0`). Next
-unstarted item: **L3.9 — phase gate** (TAME) — one script, every footgun,
-find and harden them all (docs/plans/bash-p3-plan.md §6 L3.9); both
-containment mechanisms (decoy tree + fence) in one lab. Containment
-(decoy tree + the shadowed-rm fence) is designed, approved, and proven
-twice — at plan time in an isolated scratchpad, and for real in-repo
-during L3.2's build (`ls / | wc -l`: 28 before/after the fenced
-flawed-script run) — so remaining labs execute it rather than
-re-deriving or re-proving it from scratch.
+Phase: **bash p3 — The Footgun Gallery is DONE** (9/9 labs, tag
+`bash-p3`). Next unstarted item: **bash p4 — Untrusted Input &
+Injection** (8 labs) — needs a PLAN session first (no
+`docs/plans/bash-p4-plan.md` exists yet); per PROMPTS.md's Phase Builder
+protocol this is a fresh phase requiring its own plan-and-approve pass
+before any build work starts. The 2026-07-17 go-ahead to run lab-to-lab
+without per-lab gating was scoped to finishing bash p3 specifically —
+starting bash p4 (plan or build) needs its own go-ahead.
 
 ## LAST SESSION
-2026-07-17 — bash p3 BUILD, L3.8 (ShellCheck as co-pilot — reading SC
+2026-07-17 — bash p3 CLOSE-OUT: extended `tests/acceptance.sh` with a P3
+section (9 labs, fabricated pass + negative case each, mirroring the P2
+section's established pattern) and fixed the 3 stale-count failures
+deferred since the L3.1 session — a "(11/19)"/"(19/19)" denominator that
+assumed only P0-P2 existed on disk (now "(11/28)"/"(28/28)", since P3's 9
+lab directories exist on disk from the moment they're checked out,
+regardless of progress state) and a "29 unstarted track-phase lines"
+count that only ever needed to become 28 once this file's own bash-p3
+marker moved past `[ ]` (already true since L3.4, when it went to `[~]`).
+`tests/acceptance.sh` now 167/167, `tools/lint-labs.sh` and
+`tools/shellcheck-all.sh` both clean. `code-reviewer` sub-agent caught one
+real doc-drift issue (a new comment claimed bash p3 was `[x]` done before
+this file's own marker was flipped) — resolved by landing the marker flip
+in this same close-out. Drafted L4.1's `recall.json` (P4 opener) during
+L3.9's build, appended to `docs/plans/bash-p3-plan.md` per the build
+protocol's own handoff step. Tagged `bash-p3`.
+Also this session, bash p3 BUILD, L3.8 (ShellCheck as co-pilot — reading SC
 codes, which are security-critical, GUIDED): sample.sh is never executed,
 only shellchecked. Verified the real emitted set (`shellcheck -x -S
 style`): SC2115, SC2086, SC2035, SC2006, SC2166, SC2034 — the sample's own
@@ -177,7 +183,7 @@ board: [LAB-KIT: Bash Literacy Lab](https://github.com/users/voltron-1/projects/
 - [x] bash p0 — Toolchain & Kit (3 labs) — tag `bash-p0`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p1 — The Expansion Model (8 labs) — tag `bash-p1`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p2 — Control Flow & Silent Failure (8 labs) — tag `bash-p2`; plan: `docs/plans/bash-p2-plan.md` (commit b1a6512)
-- [~] bash p3 — The Footgun Gallery (9 labs) — plan: `docs/plans/bash-p3-plan.md` (commit 8796cb3); containment proven (scratchpad + in-repo); 8/9 built — L3.1 word splitting, L3.2 empty-var rm -rf (PR #1, `c0ede9e`), L3.3 IFS (`bfc11d3`), L3.4 filename attacks (PR #228, `9aad58a`), L3.5 arithmetic injection (PR #229, `b24968d`), L3.6 subshell var loss (PR #230, `cf798ed`), L3.7 eval injection (PR #231, `deea6f8`), L3.8 ShellCheck co-pilot (`921d2b0`); next is L3.9 phase gate (closes out the phase)
+- [x] bash p3 — The Footgun Gallery (9 labs) — tag `bash-p3`; plan: `docs/plans/bash-p3-plan.md` (commit 8796cb3); L3.1 word splitting, L3.2 empty-var rm -rf (PR #1, `c0ede9e`), L3.3 IFS (`bfc11d3`), L3.4 filename attacks (PR #228, `9aad58a`), L3.5 arithmetic injection (PR #229, `b24968d`), L3.6 subshell var loss (PR #230, `cf798ed`), L3.7 eval injection (PR #231, `deea6f8`), L3.8 ShellCheck co-pilot (PR #232, `921d2b0`), L3.9 phase gate (PR #233, `72a3688`)
 - [ ] bash p4 — Untrusted Input & Injection (8 labs)
 - [ ] bash p5 — Text Processing & Pipelines (6 labs)
 - [ ] bash p6 — Reading Real Deploy Scripts (5 labs)
