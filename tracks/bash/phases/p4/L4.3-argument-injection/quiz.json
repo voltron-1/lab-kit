@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A filename beginning with - is dangerous as an argument because…",
+      "options": {
+        "a": "it's hidden from ls",
+        "b": "the program reads it as an option/flag, not a path",
+        "c": "it's too long"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "mv \"$f\" dir/ is hardened by…",
+      "options": {
+        "a": "quoting $f more",
+        "b": "mv -- \"$f\" dir/ — -- ends option parsing so $f is always a path",
+        "c": "checking the file exists first"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "CWE-88 argument injection differs from CWE-78 command injection in that…",
+      "options": {
+        "a": "it needs no untrusted input",
+        "b": "the input is parsed as options to ONE program, not as a brand-new shell command",
+        "c": "it only affects mv"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

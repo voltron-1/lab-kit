@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Look at line 5 of stage-upload.sh: mv \"$f\" staging/. Nothing marks where mv's options end and its paths begin — a $f that starts with a dash is read as a flag, not a filename.",
+    "Try: bash stage-upload.sh \"-texfil-target/\" (with an exfil-target/ dir already created). mv reads -texfil-target/ as -t exfil-target/ — 'use exfil-target/ as the target directory' — and moves the entire staging/ dir into it, since staging/ is the only argument left.",
+    "Write answers.txt with line=5, flaw=argument-injection, cwe=CWE-88, and fix=... naming the -- guard. Then author hardened.sh from scratch: #!/usr/bin/env bash, set -euo pipefail, f=$1, then mv -- \"$f\" staging/ — the -- makes $f always a path. Test it with the same injection-shaped name (mv should fail cleanly, staging/ untouched), a real dash-prefixed filename (should still land in staging/), and a normal filename, then lab check bash L4.3."
+  ]
+}
