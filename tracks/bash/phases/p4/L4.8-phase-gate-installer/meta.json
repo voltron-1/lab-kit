@@ -1,0 +1,11 @@
+{
+  "id": "L4.8",
+  "title": "Phase gate: audit a realistic malicious installer end to end",
+  "type": "AUDIT",
+  "objective": "Audit a realistic malicious installer end to end: map every fetch-and-run, privilege change, and injection to a line, decode its obfuscated blob to a file, extract the indicators of compromise, and render the verdict.",
+  "gate": true,
+  "est_minutes": 20,
+  "teaching_samples": {
+    "files/setup.sh": []
+  }
+}

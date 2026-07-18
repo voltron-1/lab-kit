@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Auditing a real installer, the first question is…",
+      "options": {
+        "a": "is it POSIX-compliant",
+        "b": "what does it fetch-and-run that I can't see, and does anything run with elevated privilege",
+        "c": "is it fast"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A downloaded binary installed setuid root with no explanation is dangerous because…",
+      "options": {
+        "a": "setuid binaries are always slow",
+        "b": "/usr/local/bin should be read-only",
+        "c": "it drops attacker-supplied code as root-setuid — persistent privileged code, planted by the installer"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "This installer should be…",
+      "options": {
+        "a": "never run — verdict unsafe; report the indicators of compromise",
+        "b": "run inside a container to see what happens",
+        "c": "run as a normal, non-root user"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

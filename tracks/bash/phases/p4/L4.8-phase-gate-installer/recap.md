@@ -1,0 +1,3 @@
+a real malicious installer chains the whole phase: PATH poisoning, a predictable temp name, a remote script piped into a shell, an unexplained setuid privilege drop, a plain-HTTP binary, an unguarded argument reaching an extraction command, an obfuscated payload, rc-file persistence, and environment exfiltration
+audit method: read top to bottom, map every fetch-and-run and every privilege change to a line, decode obfuscation to a file, and extract the indicators of compromise — hardcoded addresses, persistence, exfiltration targets
+verdict discipline: one unexplained remote-exec or exfil line is reason enough to refuse the whole script — you don't need every finding to decide never to pipe it into a shell
