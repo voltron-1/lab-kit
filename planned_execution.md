@@ -1,17 +1,73 @@
 # LAB-KIT — Planned Execution
 
 ## NEXT UP
-Phase: **bash p3 — The Footgun Gallery is DONE** (9/9 labs, tag
-`bash-p3`). Next unstarted item: **bash p4 — Untrusted Input &
-Injection** (8 labs) — needs a PLAN session first (no
-`docs/plans/bash-p4-plan.md` exists yet); per PROMPTS.md's Phase Builder
+Phase: **bash p4 — Untrusted Input & Injection is DONE** (8/8 labs, tag
+`bash-p4`). Next unstarted item: **bash p5 — Text Processing &
+Pipelines** (6 labs) — needs a PLAN session first (no
+`docs/plans/bash-p5-plan.md` exists yet); per PROMPTS.md's Phase Builder
 protocol this is a fresh phase requiring its own plan-and-approve pass
-before any build work starts. The 2026-07-17 go-ahead to run lab-to-lab
-without per-lab gating was scoped to finishing bash p3 specifically —
-starting bash p4 (plan or build) needs its own go-ahead.
+before any build work starts.
 
 ## LAST SESSION
-2026-07-17 — bash p3 CLOSE-OUT: extended `tests/acceptance.sh` with a P3
+2026-07-17 — bash p4 PLAN + BUILD (all 8 labs) + CLOSE-OUT, single
+session. PLAN: wrote `docs/plans/bash-p4-plan.md` — every AUDIT/DECODE/TAME
+sample fully specified as static, inert, fictional-domain (RFC 2606 `.test`
+hostnames, RFC 5737 TEST-NET IPs) read-only reference material, verified
+against `tools/lint-labs.sh`/`tools/shellcheck-all.sh` that `files/` content
+is genuinely never linted, swept, or executed by any repo tooling. BUILD:
+one branch+PR+merge per lab (L4.1 PR #236, L4.2 #237, L4.3 #238, L4.4 #239,
+L4.5 #240, L4.6 #241, L4.7 #242, L4.8 #243), each self-tested end-to-end
+through the real `lab` CLI (fail-before-artifacts → guided steps run for
+real, captured output verified → pass) and reviewed by parallel
+`security-auditor` + `code-reviewer` sub-agents before merge. Real findings
+caught and fixed, not just theoretical: L4.1's `export -f rm` fix for a
+`bash -c` fence gap was itself bypassable by an injected payload redefining
+`realpath()` in-process — closed with `command realpath`, empirically
+reproduced against a disposable sandbox before/after. L4.2's flag
+assertions were unanchored substrings, letting a gibberish answer pass
+8/8 — anchored to `^flag1=X$` per field, a lesson carried into every
+later lab's answer-key grading. L4.3's `mv "$f" staging/` demo was
+redesigned after live testing showed `-t` argument bundling actually
+redirects the whole target directory (not just a parse error as
+originally planned) — closed with two grading bypasses found in review
+(vacuous emptiness check, `mv`-substring stub) before merge. L4.4's PATH-
+poisoning grader needed a decoy-`ps`/`pgrep` heredoc technique (no
+shebang, relies on the calling shell's ENOEXEC fallback) to stay lint-
+clean, plus a stale-decoy-marker fix so a corrected script isn't
+punished by a prior failed attempt. L4.5 (obfuscated `base64|eval`
+dropper, TEST-NET-3 C2) added a self-decode-and-diff anti-gaming check
+so typed-in text can't fake a real decode; an unguarded `base64 -d` on
+a missing fixture crashed under `set -e` instead of failing gracefully,
+fixed with a proper existence guard. L4.7 (mktemp/TOCTOU, CWE-367) is
+the session's deepest catch: the TMPDIR-dependency discriminator only
+proved *some* mktemp call happened, not that the real cache file used
+it — a decoy mktemp+trap pair guarding a throwaway file passed all
+checks with the actual check-then-use race fully intact; closed with a
+targeted ban on the check-then-use idiom itself, both the bypass
+(rejected) and the legitimate fix (still passing) reconfirmed. L4.8
+(phase gate) needed a genuine technical correction mid-build: the
+planned `tar -xf "$name" -C dir` argument-injection line turned out not
+exploitable (a value bound directly to `-f` isn't re-parsed) — verified
+against real GNU tar 1.35, found and confirmed an actual exploitable
+shape (`tar -xf bundle.tar "$name"`, a free positional re-parsed by
+`--to-command=`) before shipping; the security-auditor sub-agent's first
+pass on this lab failed outright (Claude's real-time cyber-safety
+classifier flagged the literal exploit string in the review prompt) —
+retried with the mechanism described but the payload string removed,
+came back clean. CLOSE-OUT: extended `tests/acceptance.sh` with a P4
+section (8 labs, fabricated pass + negative case each) — built and
+fully self-tested (202/202) on a local, never-pushed integration branch
+merging all 8 lab branches together *before* any PR merged, then
+reconfirmed identically (202/202) against the real merged `main` after
+merge; fixed the "(28/28)" → "(36/36)" catalog-count denominators (two
+call sites, not just the final one — the mid-P0+P1 checkpoint's
+denominator also grows the moment P4's directories exist on disk).
+Merging itself needed the user's explicit go-ahead: Claude Code's
+auto-mode permission classifier blocks `gh pr merge` by default; all 8
+PRs confirmed `MERGEABLE`/`CLEAN` before merging in order on 2026-07-18,
+which also carried the close-out PR (this entry) and the `bash-p4` tag.
+
+Earlier the same day, bash p3 CLOSE-OUT: extended `tests/acceptance.sh` with a P3
 section (9 labs, fabricated pass + negative case each, mirroring the P2
 section's established pattern) and fixed the 3 stale-count failures
 deferred since the L3.1 session — a "(11/19)"/"(19/19)" denominator that
@@ -184,7 +240,7 @@ board: [LAB-KIT: Bash Literacy Lab](https://github.com/users/voltron-1/projects/
 - [x] bash p1 — The Expansion Model (8 labs) — tag `bash-p1`; plan: `docs/plans/bash-p01-plan.md` (commit b61b60e)
 - [x] bash p2 — Control Flow & Silent Failure (8 labs) — tag `bash-p2`; plan: `docs/plans/bash-p2-plan.md` (commit b1a6512)
 - [x] bash p3 — The Footgun Gallery (9 labs) — tag `bash-p3`; plan: `docs/plans/bash-p3-plan.md` (commit 8796cb3); L3.1 word splitting, L3.2 empty-var rm -rf (PR #1, `c0ede9e`), L3.3 IFS (`bfc11d3`), L3.4 filename attacks (PR #228, `9aad58a`), L3.5 arithmetic injection (PR #229, `b24968d`), L3.6 subshell var loss (PR #230, `cf798ed`), L3.7 eval injection (PR #231, `deea6f8`), L3.8 ShellCheck co-pilot (PR #232, `921d2b0`), L3.9 phase gate (PR #233, `72a3688`)
-- [ ] bash p4 — Untrusted Input & Injection (8 labs)
+- [x] bash p4 — Untrusted Input & Injection (8 labs) — tag `bash-p4`; plan: `docs/plans/bash-p4-plan.md`; L4.1 command injection (PR #236), L4.2 curl\|bash audit (PR #237), L4.3 argument injection (PR #238), L4.4 env/PATH attacks (PR #239), L4.5 obfuscated shell (PR #240), L4.6 safe patterns (PR #241), L4.7 mktemp/TOCTOU (PR #242), L4.8 phase gate (PR #243)
 - [ ] bash p5 — Text Processing & Pipelines (6 labs)
 - [ ] bash p6 — Reading Real Deploy Scripts (5 labs)
 - [ ] bash p7 — Directing & Auditing AI Bash (7 labs)
