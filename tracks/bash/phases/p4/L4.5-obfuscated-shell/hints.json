@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Never run dropper.sh and never pipe the decode of payload.b64 into a shell. Decode it to a FILE instead: base64 -d payload.b64 > decoded.txt — that command is always safe, since you're just converting bytes, not executing anything.",
+    "Read decoded.txt with cat. Look for: where does it download from (a hardcoded address is a red flag), where does it save the download (a dotfile hides from a plain ls), does it launch anything, and does it install any kind of persistence (cron, rc files, systemd units)?",
+    "Write answers.txt with verdict=malicious, flag1=obfuscation, flag2=remote-download, flag3=hidden-file, flag4=persistence, and c2=203.0.113.9 (the hardcoded address decoded.txt downloads from). Then lab check bash L4.5."
+  ]
+}
