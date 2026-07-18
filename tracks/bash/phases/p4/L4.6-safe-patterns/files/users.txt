@@ -1,0 +1,3 @@
+alice:admin
+bob:user
+carol:user

@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The most important habit for untrusted input is…",
+      "options": {
+        "a": "quote everything twice",
+        "b": "base64-encode it first",
+        "c": "pass it as data/arguments to a program, never build a shell string it can break out of"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "An allowlist (case $x in *[!a-z]*) reject) beats trying to strip out bad characters because…",
+      "options": {
+        "a": "it accepts only known-good and rejects everything else, so an unforeseen attack is rejected by default",
+        "b": "it's shorter to type",
+        "c": "stripping characters is always faster"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "grep -F -- \"$x\" file is fully defended because…",
+      "options": {
+        "a": "grep is a trusted binary",
+        "b": "-F treats $x as a literal (no regex injection), -- ends options (no flag injection), \"$x\" is quoted (no word-splitting)",
+        "c": "it's fast"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

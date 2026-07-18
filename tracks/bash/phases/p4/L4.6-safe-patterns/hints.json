@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read each line of safe-input.sh and match it to a lesson from earlier in this phase: line 4 (PATH) is L4.4, line 5 requires the argument, line 6's case statement is an allowlist tested against line 7's pattern, line 9 (-F, --, quoting) closes L4.1/L4.2/L4.3/L4.5 all at once.",
+    "validation is what kind of check line 6's case statement is (accept known-good, reject everything else — not a list of specific bad characters to strip). grep_f is what -F makes $name (not a pattern, just literal text). dashdash is what -- ends (option parsing). path is what kind of PATH line 4 sets (starts with /, not relative or inherited).",
+    "Write answers.txt exactly: validation=allowlist, grep_f=literal, dashdash=options, path=absolute, safest=arguments. Then lab check bash L4.6."
+  ]
+}
