@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read every line of install.sh and ask of each one: does this fetch-and-run something I can't see, or claim a privilege it didn't explain? You never run this file — this lab is graded on your written analysis, not on executing anything.",
+    "Five red flags, one per line: line 8 chains a second remote script into sh; line 9 uses sudo unexplained; line 11 downloads a binary over plain HTTP before running it; line 14 writes itself into .bashrc; line 15 posts $(env) to a remote endpoint.",
+    "Write answers.txt with verdict=unsafe, then flag1..flag5 naming remote-exec, privilege, http-binary, persistence, exfil (in any order, one flag name is enough per line to match), and safe_alternative=... describing download-then-read-then-run. Then lab check bash L4.2."
+  ]
+}

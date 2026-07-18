@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "curl https://x/install.sh | bash is dangerous mainly because…",
+      "options": {
+        "a": "curl is slow",
+        "b": "you execute code you never read, chosen by whoever controls the URL",
+        "c": "bash is deprecated"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "curl http://…/agent -o f; chmod +x f; ./f is worse than HTTPS because…",
+      "options": {
+        "a": "http is slower",
+        "b": "no TLS means a network attacker can swap the binary for their own",
+        "c": "chmod is unsafe"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "The safe way to handle a one-line installer is to…",
+      "options": {
+        "a": "run it in your home directory",
+        "b": "download it, read it, and only then decide to run it",
+        "c": "pipe it to bash as root"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
