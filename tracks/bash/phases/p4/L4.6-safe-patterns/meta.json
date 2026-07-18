@@ -1,0 +1,11 @@
+{
+  "id": "L4.6",
+  "title": "Handling untrusted input correctly — the safe patterns",
+  "type": "DECODE",
+  "objective": "Read correct, defensive input-handling code and name why each guard works — allowlist validation, quoting, --, -F, and an absolute PATH.",
+  "gate": false,
+  "est_minutes": 12,
+  "teaching_samples": {
+    "files/safe-input.sh": []
+  }
+}
