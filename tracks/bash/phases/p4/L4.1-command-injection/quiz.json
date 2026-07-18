@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Untrusted data becomes executed code the moment it…",
+      "options": {
+        "a": "is stored in a variable",
+        "b": "is spliced into a string a shell re-parses and runs",
+        "c": "contains a space"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The fix for line=$(bash -c \"grep ^$name: file\") is to…",
+      "options": {
+        "a": "add more quotes around $name",
+        "b": "call grep directly with $name as a separate quoted argument — never build a shell string",
+        "c": "escape semicolons in $name"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "CWE-78 requires…",
+      "options": {
+        "a": "root privileges",
+        "b": "a network service",
+        "c": "untrusted data reaching a command interpreter"
+      },
+      "answer_b64": "Yw=="
+    }
+  ]
+}

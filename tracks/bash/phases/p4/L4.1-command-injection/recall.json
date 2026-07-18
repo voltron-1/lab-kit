@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "source": "bash L3.2",
+      "prompt": "rm -rf \"$DIR/\" with DIR unset becomes…",
+      "options": {
+        "a": "a no-op",
+        "b": "rm -rf on the filesystem root — it wipes everything",
+        "c": "a syntax error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "source": "bash L3.4",
+      "prompt": "A file named -rf in a dir where you run rm *…",
+      "options": {
+        "a": "is ignored",
+        "b": "sorts first and is parsed as the flags -r -f — your flat delete goes recursive",
+        "c": "causes a syntax error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "source": "bash L3.5",
+      "prompt": "result=$(( n * 2 )) with n='a[$(cmd)]'…",
+      "options": {
+        "a": "prints 0 and is safe",
+        "b": "runs cmd — arithmetic re-evaluates n, and the array subscript is command-substituted",
+        "c": "is a syntax error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "source": "bash L3.6",
+      "prompt": "After printf … | while read …; do n=$((n+1)); done, the outer n is…",
+      "options": {
+        "a": "the loop count",
+        "b": "unchanged — the loop ran in a subshell and its changes were discarded",
+        "c": "undefined"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "source": "bash L3.7",
+      "prompt": "Building a command string from untrusted input and re-parsing it as shell source…",
+      "options": {
+        "a": "is always safe if quoted",
+        "b": "turns any metacharacter in that input into real syntax — the fix is to remove the re-parse, not quote harder",
+        "c": "only matters for filenames"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

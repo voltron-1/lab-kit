@@ -1,0 +1,11 @@
+{
+  "id": "L4.1",
+  "title": "Command injection — how untrusted data becomes executed code (CWE-78)",
+  "type": "AUDIT",
+  "objective": "Read a lookup script that splices untrusted input into a shell string and hands it to bash -c, find the exact line where that input becomes executed code, and rewrite it to pass the value as data instead.",
+  "gate": false,
+  "est_minutes": 15,
+  "teaching_samples": {
+    "files/lookup.sh": []
+  }
+}
