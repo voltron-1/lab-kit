@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read setup.sh top to bottom and map every fetch-and-run, every privilege change, and every injection to a line number — nine findings total, one per lesson this phase covered (L4.2, L4.3, L4.4, L4.5, chained together). Never run this script.",
+    "Nine findings, in line order: 5 (PATH puts . first), 6 (predictable temp name), 8 (a second remote script piped into a shell), 9 (unexplained root privilege installing a setuid binary), 11 (plain-HTTP binary download), 13 (an unguarded argument reaches tar with no -- guard — a value like --to-command=... runs as a real option), 16 (a base64 blob decoded straight into a re-parsing builtin), 17 (writes itself into a shell rc file), 18 (posts the whole environment to a remote endpoint). Decode payload.b64 to a FILE (base64 -d payload.b64 > decoded.txt) and read it for the c2 address.",
+    "Write answers.txt exactly: verdict=unsafe, search_path=5, predictable_temp=6, remote_exec=8, privilege=9, http_binary=11, arg_injection=13, obfuscation=16, persistence=17, exfil=18, c2=198.51.100.7. Then lab check bash L4.8."
+  ]
+}
