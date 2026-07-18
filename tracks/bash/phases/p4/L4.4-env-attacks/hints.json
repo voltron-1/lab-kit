@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Look at line 5 of healthcheck.sh: PATH=.:/usr/local/bin:$PATH. The current directory (.) is searched FIRST — if the script's real working directory is writable by anyone, a dropped 'ps' or 'pgrep' runs instead of the trusted one.",
+    "Demo it: printf 'touch marker\\n' > ps; chmod +x ps; PATH=\".:$PATH\" bash healthcheck.sh — the decoy ps runs and creates marker, proving the real ps was never called.",
+    "Write answers.txt with line=5, flaw=untrusted-search-path, cwe=CWE-426, fix=... naming a pinned absolute minimal PATH, and also=IFS (the sibling footgun from L3.3). Then author hardened.sh from scratch: #!/usr/bin/env bash, set -euo pipefail, then PATH=/usr/bin:/bin before any command lookup — reassigning PATH inside the script wins regardless of what the caller passed in. Test it against the same decoy attack, then lab check bash L4.4."
+  ]
+}

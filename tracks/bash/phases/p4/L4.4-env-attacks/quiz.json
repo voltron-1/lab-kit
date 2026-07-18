@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "PATH=.:$PATH in a root cron job is dangerous because…",
+      "options": {
+        "a": "it's slow",
+        "b": "a file the attacker drops in the current directory runs before the real command, with the job's own privilege",
+        "c": ". isn't a real directory"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "CWE-426 untrusted search path is fixed by…",
+      "options": {
+        "a": "quoting variables",
+        "b": "pinning an absolute, minimal PATH with no current-directory entry",
+        "c": "running as a different user"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "A hostile inherited IFS can…",
+      "options": {
+        "a": "do nothing on its own",
+        "b": "change how unquoted expansions split, re-steering loops and command parsing",
+        "c": "only affect echo"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
