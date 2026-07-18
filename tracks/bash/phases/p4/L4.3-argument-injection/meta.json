@@ -1,0 +1,11 @@
+{
+  "id": "L4.3",
+  "title": "Argument injection and the -- end-of-options guard (CWE-88)",
+  "type": "AUDIT",
+  "objective": "Read an upload-staging script and find the line where a client-chosen filename can be read as an option instead of a path, then add the -- guard that closes it.",
+  "gate": false,
+  "est_minutes": 12,
+  "teaching_samples": {
+    "files/stage-upload.sh": []
+  }
+}
