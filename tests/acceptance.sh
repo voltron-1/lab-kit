@@ -377,10 +377,10 @@ printf '%s\n' 'p1=1:' 'p2=2:web01_id' 'p3=3:*.log' 'p4=4:web01 web02' 'p5=5:argc
 bash_check_pass "L1.8" $'b\ndouble\nb\n'
 
 out="$("$LAB" status 2>&1)"
-# denominator is the full bash catalog on disk (P0-P3 = 28), not just the 11
+# denominator is the full bash catalog on disk (P0-P4 = 36), not just the 11
 # passed so far -- every phase's lab directories already exist on disk at
 # this point, regardless of progress state.
-assert_contains "status shows 11 of 28 bash labs passed so far (11/28)" "$out" "(11/28)"
+assert_contains "status shows 11 of 36 bash labs passed so far (11/36)" "$out" "(11/36)"
 
 # --- 7b. bash track P2: fabricated pass + one negative case per lab ---
 note "bash track P2: fabricated pass + negative case per lab"
@@ -621,7 +621,120 @@ SCRIPT
 bash_check_pass "L3.9" $'b\nb\nb\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 28 bash P0-P3 labs passed (28/28)" "$out" "(28/28)"
+assert_contains "status shows all 28 bash P0-P3 labs passed, P4 still pending (28/36)" "$out" "(28/36)"
+
+# --- 7d. bash track P4 (Untrusted Input & Injection): fabricated pass +
+# negative case per lab. Every AUDIT/TAME lab's negative case matches the
+# FIX-type convention above (L2.8/L3.x): leave the shipped flawed script
+# unedited / artifacts absent, never a separately-deleted file. ---
+note "bash track P4: fabricated pass + negative case per lab"
+
+# L4.1 — Command injection (AUDIT, fenced real detonation; phase opener:
+# recall must never gate)
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start bash L4.1 2>&1)"; rc=$?
+assert_eq "'lab start bash L4.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L4.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/bash/L4.1"
+bash_check_fail_missing "L4.1" "hardened.sh"
+printf 'line=5\nflaw=command-injection\ncwe=CWE-78\nfix=call grep directly, pass "$name" as a separate argument, no shell string\n' \
+  > "$WS/answers.txt"
+cat > "$WS/hardened.sh" <<'SCRIPT'
+#!/usr/bin/env bash
+set -euo pipefail
+name=$1
+line=$(grep -- "^$name:" greetings.txt || true)
+echo "$line"
+SCRIPT
+bash_check_pass "L4.1" $'b\nb\nc\n'
+
+# L4.2 — The curl | bash audit (AUDIT, pure reading, nothing executed)
+"$LAB" start bash L4.2 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L4.2"
+bash_check_fail_missing "L4.2" "answers.txt"
+printf 'verdict=unsafe\nflag1=remote-exec\nflag2=privilege\nflag3=http-binary\nflag4=persistence\nflag5=exfil\nsafe_alternative=download to a file, read it, pin a version, then run\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L4.2" $'b\nb\nb\n'
+
+# L4.3 — Argument injection and the -- guard (AUDIT, no fence)
+"$LAB" start bash L4.3 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L4.3"
+bash_check_fail_missing "L4.3" "hardened.sh"
+printf 'line=5\nflaw=argument-injection\ncwe=CWE-88\nfix=mv -- "$f" staging/  (end-of-options guard)\n' \
+  > "$WS/answers.txt"
+cat > "$WS/hardened.sh" <<'SCRIPT'
+#!/usr/bin/env bash
+set -euo pipefail
+f=$1
+mv -- "$f" staging/
+SCRIPT
+bash_check_pass "L4.3" $'b\nb\nb\n'
+
+# L4.4 — Environment attacks: PATH, IFS (AUDIT, no fence)
+"$LAB" start bash L4.4 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L4.4"
+bash_check_fail_missing "L4.4" "hardened.sh"
+printf 'line=5\nflaw=untrusted-search-path\ncwe=CWE-426\nfix=pin an absolute, minimal PATH with no current-directory entry\nalso=IFS\n' \
+  > "$WS/answers.txt"
+cat > "$WS/hardened.sh" <<'SCRIPT'
+#!/usr/bin/env bash
+set -euo pipefail
+PATH=/usr/bin:/bin
+if pgrep -x acme-agent > /dev/null; then
+  exit 0
+fi
+logger "acme-agent not running"
+SCRIPT
+bash_check_pass "L4.4" $'b\nb\nb\n'
+
+# L4.5 — Reading obfuscated shell (AUDIT, decode-to-file, genuine-decode
+# check.sh diffs the learner's decoded.txt against its own reference decode)
+"$LAB" start bash L4.5 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L4.5"
+bash_check_fail_missing "L4.5" "answers.txt"
+printf 'verdict=malicious\nflag1=obfuscation\nflag2=remote-download\nflag3=hidden-file\nflag4=persistence\nc2=203.0.113.9\n' \
+  > "$WS/answers.txt"
+(cd -- "$WS" && base64 -d payload.b64 > decoded.txt)
+bash_check_pass "L4.5" $'a\nb\nc\n'
+
+# L4.6 — Handling untrusted input correctly (DECODE: comprehension only,
+# safe-input.sh is correct reference code, never executed by check.sh)
+"$LAB" start bash L4.6 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L4.6"
+bash_check_fail_missing "L4.6" "answers.txt"
+printf 'validation=allowlist\ngrep_f=literal\ndashdash=options\npath=absolute\nsafest=arguments\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L4.6" $'c\na\nb\n'
+
+# L4.7 — Temp files done right: mktemp and TOCTOU (TAME: edit cache.sh in
+# place)
+"$LAB" start bash L4.7 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L4.7"
+bash_check_fail_missing "L4.7" "the fix (cache.sh left unedited)"
+printf 'flaw=toctou\ncwe=CWE-367\n' > "$WS/answers.txt"
+cat > "$WS/cache.sh" <<'SCRIPT'
+#!/usr/bin/env bash
+process() { wc -c < "$1"; }
+set -euo pipefail
+tmp=$(mktemp)
+trap 'rm -f -- "$tmp"' EXIT
+echo "$DATA" > "$tmp"
+process "$tmp"
+SCRIPT
+bash_check_pass "L4.7" $'c\na\nb\n'
+
+# L4.8 — Phase gate: audit a realistic malicious installer end to end
+# (AUDIT, gate, pure reading, decode-to-file, genuine-decode + 9-finding
+# line map + IOC)
+"$LAB" start bash L4.8 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L4.8"
+bash_check_fail_missing "L4.8" "answers.txt"
+printf 'verdict=unsafe\nsearch_path=5\npredictable_temp=6\nremote_exec=8\nprivilege=9\nhttp_binary=11\narg_injection=13\nobfuscation=16\npersistence=17\nexfil=18\nc2=198.51.100.7\n' \
+  > "$WS/answers.txt"
+(cd -- "$WS" && base64 -d payload.b64 > decoded.txt)
+bash_check_pass "L4.8" $'b\nc\na\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 36 bash P0-P4 labs passed (36/36)" "$out" "(36/36)"
 
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
@@ -633,10 +746,10 @@ else
 fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
-  # 32 total track-phase lines; bash p0-p3 are done ([x]), leaving 28
+  # 32 total track-phase lines; bash p0-p4 are done ([x]), leaving 27
   # unstarted -- update this count whenever a phase's marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 28 unstarted track-phase lines" "28" "$line_count"
+  assert_eq "planned_execution.md has 27 unstarted track-phase lines" "27" "$line_count"
 else
   bad "planned_execution.md missing"
 fi
