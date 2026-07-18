@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "tmp=/tmp/app.$$ is unsafe because…",
+      "options": {
+        "a": "$$ is slow to compute",
+        "b": "/tmp is read-only on most systems",
+        "c": "the name is predictable, so an attacker can pre-create or symlink it in shared /tmp before you write"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "mktemp is safer than a hand-built path because it…",
+      "options": {
+        "a": "creates a uniquely-named file atomically, closing the check-then-use race entirely",
+        "b": "is faster to type",
+        "c": "encrypts the file"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "A TOCTOU race (CWE-367) is…",
+      "options": {
+        "a": "a slow disk",
+        "b": "the gap between checking a file's state and using it, during which an attacker changes it",
+        "c": "a quoting bug"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

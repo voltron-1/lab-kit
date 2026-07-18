@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Look at cache.sh: tmp=/tmp/acme-cache.$$ builds a predictable name from the PID, in a directory everyone can write to. Then it checks [ ! -e \"$tmp\" ] and only afterward writes to it — two separate steps with a gap between them.",
+    "Write answers.txt with flaw=toctou and cwe=CWE-367. Then edit cache.sh in place: replace tmp=/tmp/acme-cache.$$ with tmp=$(mktemp) (unpredictable, created atomically — no gap left to race), and add trap 'rm -f -- \"$tmp\"' EXIT right after it (fires on every way out, not just the last line). Keep the rest of the script the same.",
+    "Final cache.sh: #!/usr/bin/env bash, the process() function unchanged, set -euo pipefail, tmp=$(mktemp), trap 'rm -f -- \"$tmp\"' EXIT, echo \"$DATA\" > \"$tmp\", process \"$tmp\" — no separate rm -f line needed, the trap handles it. Test with TMPDIR pointed at a throwaway directory, then lab check bash L4.7."
+  ]
+}
