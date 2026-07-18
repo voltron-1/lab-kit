@@ -1,0 +1,11 @@
+{
+  "id": "L4.2",
+  "title": "The curl | bash audit — reading an installer before you pipe it to a shell",
+  "type": "AUDIT",
+  "objective": "Read a one-line installer the way an attacker hopes you won't: render a safe/unsafe verdict and cite every red flag by name before deciding whether it could ever be piped to a shell.",
+  "gate": false,
+  "est_minutes": 15,
+  "teaching_samples": {
+    "files/install.sh": []
+  }
+}
