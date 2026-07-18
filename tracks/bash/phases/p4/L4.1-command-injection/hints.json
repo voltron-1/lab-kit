@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Look at line 5 of lookup.sh: line=$(bash -c \"grep ^$name: greetings.txt\"). $name has no quotes at all around it in that built string — it lands in the command line bash -c re-parses, not just as an argument to grep.",
+    "Try: bash lookup.sh 'x; echo INJECTED #' < /dev/null — the semicolon ends the grep command and starts a brand-new one, chosen by whoever controls $name. That's the injection, harmlessly demonstrated.",
+    "Write answers.txt with line=5, flaw=command-injection, cwe=CWE-78, and fix=... naming a direct call. Then author hardened.sh from scratch: #!/usr/bin/env bash, set -euo pipefail, name=$1, then line=$(grep -- \"^$name:\" greetings.txt || true); echo \"$line\" — no bash -c, no re-parse. Test it with the same injection-shaped name (must find nothing, fence.log must stay empty) and with 'alice' (must still work), then lab check bash L4.1."
+  ]
+}
