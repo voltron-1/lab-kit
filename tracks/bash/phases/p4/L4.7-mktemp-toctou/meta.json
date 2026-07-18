@@ -1,0 +1,11 @@
+{
+  "id": "L4.7",
+  "title": "Temp files done right — mktemp and TOCTOU races (CWE-367)",
+  "type": "TAME",
+  "objective": "Harden an insecure temp-file script in place: replace the predictable name and the check-then-use race with mktemp and a cleanup trap.",
+  "gate": false,
+  "est_minutes": 15,
+  "teaching_samples": {
+    "files/cache.sh": []
+  }
+}
