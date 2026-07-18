@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "eval \"$(printf %s \"$P\" | base64 -d)\" is a malware-dropper pattern because…",
+      "options": {
+        "a": "it hides the real commands until runtime, when they're decoded and executed unseen",
+        "b": "base64 is encryption",
+        "c": "printf is dangerous"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The safe way to triage an obfuscated blob is to…",
+      "options": {
+        "a": "run it in a VM to see what happens",
+        "b": "decode it to a file and read it — never pipe the decode into a shell",
+        "c": "delete it without looking"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "The strongest indicator of compromise to extract here is…",
+      "options": {
+        "a": "the echo text",
+        "b": "the shebang",
+        "c": "the hardcoded C2 address and the crontab persistence line"
+      },
+      "answer_b64": "Yw=="
+    }
+  ]
+}

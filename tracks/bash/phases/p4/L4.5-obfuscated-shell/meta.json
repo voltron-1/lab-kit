@@ -1,0 +1,11 @@
+{
+  "id": "L4.5",
+  "title": "Reading obfuscated shell — base64 | bash, hex, and malware-triage basics",
+  "type": "AUDIT",
+  "objective": "Triage an obfuscated blob the safe way — decode it to a file, read it, and extract the indicators of compromise — without ever handing it to a shell.",
+  "gate": false,
+  "est_minutes": 15,
+  "teaching_samples": {
+    "files/dropper.sh": []
+  }
+}
