@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "diff <(sort a.txt) <(sort b.txt) avoids…",
+      "options": {
+        "a": "reading the files twice",
+        "b": "creating temp files just to diff two command outputs — each <(...) acts like a filename",
+        "c": "sorting errors"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A here-string (cmd <<< \"$var\") is best for…",
+      "options": {
+        "a": "feeding one variable's value to a command's stdin without echo | cmd or a temp file",
+        "b": "reading multiple files at once",
+        "c": "suppressing output"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Inside an unquoted heredoc (<<EOF), $variables…",
+      "options": {
+        "a": "still expand, exactly like double quotes",
+        "b": "are printed literally",
+        "c": "cause a syntax error"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
