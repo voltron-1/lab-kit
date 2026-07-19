@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "sed -E switches to…",
+      "options": {
+        "a": "silent mode",
+        "b": "extended regex, so ( ), { }, +, ? work unescaped",
+        "c": "in-place editing"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The trailing g in s/pat/repl/g means…",
+      "options": {
+        "a": "global across the whole file at once",
+        "b": "replace every match on the line, not just the first",
+        "c": "case-insensitive"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "\\1 in the replacement text refers to…",
+      "options": {
+        "a": "line 1",
+        "b": "whatever the first ( ) capture group matched",
+        "c": "the first word"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
