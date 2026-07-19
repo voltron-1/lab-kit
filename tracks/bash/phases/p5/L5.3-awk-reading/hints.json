@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "All three commands split alerts.csv on commas (-F','). Command 1 builds a running count per severity value and prints it at END. Command 2 filters rows where field 2 equals \"high\" and prints fields 1 and 3. Command 3 only fires on the first line (NR==1) and prints how many fields it split into.",
+    "predict1 is the count of each severity across all 6 data rows (skip the header with NR>1), alphabetically sorted by the trailing `| sort`. predict2 is the timestamp+host for each of the 3 'high' rows, in the order they appear in the file. predict3 is the field count (NF) of the header row plus the header text itself.",
+    "Write predictions.txt exactly: predict1_line1=high 3, predict1_line2=low 2, predict1_line3=medium 1, predict2_line1=2026-07-18T10:00:00Z host-a.test, predict2_line2=2026-07-18T10:07:00Z host-a.test, predict2_line3=2026-07-18T10:11:00Z host-b.test, predict3=3 fields: timestamp,severity,host. Then lab check bash L5.3."
+  ]
+}

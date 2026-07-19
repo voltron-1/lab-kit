@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "In awk, -F',' sets…",
+      "options": {
+        "a": "the output separator",
+        "b": "the input field separator, so $1 $2 … split on commas",
+        "c": "a filter pattern"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "NR inside an awk program is…",
+      "options": {
+        "a": "the number of fields in the current line",
+        "b": "the current input record (line) number, running across the file",
+        "c": "a user-defined variable"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "An awk program's END { } block runs…",
+      "options": {
+        "a": "once per line, last",
+        "b": "exactly once, after all input has been read",
+        "c": "only if no pattern matched"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

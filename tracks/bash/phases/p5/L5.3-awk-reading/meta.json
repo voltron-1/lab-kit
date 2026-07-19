@@ -1,0 +1,8 @@
+{
+  "id": "L5.3",
+  "title": "awk at reading level — the tool that looks like magic, demystified",
+  "type": "PREDICT",
+  "objective": "Predict the exact output of three awk one-liners over a CSV before running them, using field-splitting, an accumulating array, and a conditional pattern.",
+  "gate": false,
+  "est_minutes": 15
+}
