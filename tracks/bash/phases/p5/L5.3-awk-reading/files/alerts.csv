@@ -1,0 +1,7 @@
+timestamp,severity,host
+2026-07-18T10:00:00Z,high,host-a.test
+2026-07-18T10:05:00Z,low,host-b.test
+2026-07-18T10:07:00Z,high,host-a.test
+2026-07-18T10:09:00Z,medium,host-c.test
+2026-07-18T10:11:00Z,high,host-b.test
+2026-07-18T10:15:00Z,low,host-a.test
