@@ -377,10 +377,10 @@ printf '%s\n' 'p1=1:' 'p2=2:web01_id' 'p3=3:*.log' 'p4=4:web01 web02' 'p5=5:argc
 bash_check_pass "L1.8" $'b\ndouble\nb\n'
 
 out="$("$LAB" status 2>&1)"
-# denominator is the full bash catalog on disk (P0-P4 = 36), not just the 11
+# denominator is the full bash catalog on disk (P0-P5 = 42), not just the 11
 # passed so far -- every phase's lab directories already exist on disk at
 # this point, regardless of progress state.
-assert_contains "status shows 11 of 36 bash labs passed so far (11/36)" "$out" "(11/36)"
+assert_contains "status shows 11 of 42 bash labs passed so far (11/42)" "$out" "(11/42)"
 
 # --- 7b. bash track P2: fabricated pass + one negative case per lab ---
 note "bash track P2: fabricated pass + negative case per lab"
@@ -621,7 +621,7 @@ SCRIPT
 bash_check_pass "L3.9" $'b\nb\nb\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 28 bash P0-P3 labs passed, P4 still pending (28/36)" "$out" "(28/36)"
+assert_contains "status shows all 28 bash P0-P3 labs passed, P4 still pending (28/42)" "$out" "(28/42)"
 
 # --- 7d. bash track P4 (Untrusted Input & Injection): fabricated pass +
 # negative case per lab. Every AUDIT/TAME lab's negative case matches the
@@ -734,7 +734,69 @@ printf 'verdict=unsafe\nsearch_path=5\npredictable_temp=6\nremote_exec=8\nprivil
 bash_check_pass "L4.8" $'b\nc\na\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 36 bash P0-P4 labs passed (36/36)" "$out" "(36/36)"
+assert_contains "status shows all 36 bash P0-P4 labs passed (36/42)" "$out" "(36/42)"
+
+# --- 7e. bash track P5 (Text Processing & Pipelines): fabricated pass per
+# lab. Nothing in this phase is destructive -- every reference script is
+# real, correct, and safe to execute for real, so there is no flawed-sample
+# negative case; the negative case for every lab is simply the
+# comprehension/prediction file not existing yet. ---
+note "bash track P5: fabricated pass + negative case per lab"
+
+# L5.1 -- Pipelines and the core tools (DECODE; phase opener: recall must
+# never gate)
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start bash L5.1 2>&1)"; rc=$?
+assert_eq "'lab start bash L5.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L5.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/bash/L5.1"
+bash_check_fail_missing "L5.1" "answers.txt"
+printf 'stage4=filter\nstage5=field\nstage6=order\nstage7=count\nstage8=rank\ntop_ip=203.0.113.7\ntop_count=4\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L5.1" $'b\na\nb\n'
+
+# L5.2 -- sed at reading level (DECODE)
+"$LAB" start bash L5.2 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L5.2"
+bash_check_fail_missing "L5.2" "answers.txt"
+printf 'dash_e=extended\nflag_g=global\npurpose5=mask\npurpose6=reorder\nbackslash1=capture\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L5.2" $'b\nb\nb\n'
+
+# L5.3 -- awk at reading level (PREDICT)
+"$LAB" start bash L5.3 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L5.3"
+bash_check_fail_missing "L5.3" "predictions.txt"
+printf 'predict1_line1=high 3\npredict1_line2=low 2\npredict1_line3=medium 1\npredict2_line1=2026-07-18T10:00:00Z host-a.test\npredict2_line2=2026-07-18T10:07:00Z host-a.test\npredict2_line3=2026-07-18T10:11:00Z host-b.test\npredict3=3 fields: timestamp,severity,host\n' \
+  > "$WS/predictions.txt"
+bash_check_pass "L5.3" $'b\nb\nb\n'
+
+# L5.4 -- jq: reading JSON pipelines (DECODE)
+"$LAB" start bash L5.4 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L5.4"
+bash_check_fail_missing "L5.4" "answers.txt"
+printf 'flag_c=compact\nkey_style=literal\nline9=derived\ntest_fn=regex\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L5.4" $'b\na\nb\n'
+
+# L5.5 -- process substitution, here-docs, here-strings (DECODE)
+"$LAB" start bash L5.5 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L5.5"
+bash_check_fail_missing "L5.5" "answers.txt"
+printf 'construct4=procsub\nconstruct8=herestring\nconstruct14=heredoc\nexpands=yes\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L5.5" $'b\na\na\n'
+
+# L5.6 -- Phase gate: decode a real log-processing pipeline top to bottom
+# (DECODE, gate)
+"$LAB" start bash L5.6 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L5.6"
+bash_check_fail_missing "L5.6" "answers.txt"
+printf 'stage_grep=filter\nstage_awk=field\nstage_diff=procsub\nstage_sed=herestring\nstage_jq=reshape\nstage_heredoc=report\ntop_ip=203.0.113.7\ntop_count=4\nip_status=unknown\nnew_count=1\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L5.6" $'b\nb\nc\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 42 bash P0-P5 labs passed (42/42)" "$out" "(42/42)"
 
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
@@ -746,10 +808,10 @@ else
 fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
-  # 32 total track-phase lines; bash p0-p4 are done ([x]), leaving 27
+  # 32 total track-phase lines; bash p0-p5 are done ([x]), leaving 26
   # unstarted -- update this count whenever a phase's marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 27 unstarted track-phase lines" "27" "$line_count"
+  assert_eq "planned_execution.md has 26 unstarted track-phase lines" "26" "$line_count"
 else
   bad "planned_execution.md missing"
 fi
