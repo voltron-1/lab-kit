@@ -1,0 +1,8 @@
+{
+  "id": "L5.4",
+  "title": "jq — reading JSON pipelines (ECS / log territory)",
+  "type": "DECODE",
+  "objective": "Read a jq object-construction filter that reshapes raw JSON log lines into ECS-style dotted fields, and name what each part of the filter does — compact output, literal dotted keys, and an inline conditional.",
+  "gate": false,
+  "est_minutes": 15
+}
