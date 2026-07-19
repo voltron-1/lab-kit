@@ -1,0 +1,3 @@
+A real triage script is Phase 5's tools chained end to end — grep filters, cut/awk extract fields, sort/uniq rank, sed via a here-string reshapes a single value, jq emits structured output, a heredoc renders the human report.
+Read a long pipeline the same way regardless of length: find where each variable is assigned, trace what pipeline computed it, then follow how it's used downstream — one assignment at a time, not the whole script at once.
+diff exits nonzero when it finds differences (not an error) — under set -euo pipefail a bare $(diff … | …) can abort the script unless guarded with || true, the same silent-failure lesson from Phase 2 resurfacing in Phase 5's tooling.

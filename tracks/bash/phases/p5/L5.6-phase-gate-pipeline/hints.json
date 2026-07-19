@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "triage-summary.sh chains every construct from this phase: grep/cut/sort/uniq/awk find and format the top offender (L5.1+L5.3), an if-block checks the allowlist, process substitution finds new IPs (L5.5), a here-string feeds sed a redaction (L5.2+L5.5), jq builds a structured record from bash variables (L5.4), and a heredoc renders the human report (L5.5). Trace one assignment at a time.",
+    "stage_grep/stage_awk/stage_diff/stage_sed/stage_jq/stage_heredoc each name the JOB of that construct in one word (filter, field, procsub, herestring, reshape, report) — not what tool it is, but what it does. top_ip/top_count/ip_status/new_count are the concrete values you get from actually running ./triage-summary.sh.",
+    "Write answers.txt exactly: stage_grep=filter, stage_awk=field, stage_diff=procsub, stage_sed=herestring, stage_jq=reshape, stage_heredoc=report, top_ip=203.0.113.7, top_count=4, ip_status=unknown, new_count=1. Then lab check bash L5.6."
+  ]
+}
