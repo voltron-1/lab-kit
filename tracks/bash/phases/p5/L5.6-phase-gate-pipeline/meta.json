@@ -1,0 +1,8 @@
+{
+  "id": "L5.6",
+  "title": "Phase gate: decode a real log-processing pipeline top to bottom",
+  "type": "DECODE",
+  "objective": "Decode a realistic triage script that chains every Phase 5 construct — grep/cut/sort/uniq, awk, sed via a here-string, jq, process substitution, and a heredoc report — stage by stage, and report the concrete values it computes.",
+  "gate": true,
+  "est_minutes": 20
+}

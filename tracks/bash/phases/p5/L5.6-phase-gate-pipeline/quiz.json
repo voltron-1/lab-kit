@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "top_offender=$(… | awk '{print $2}') at the end of that pipeline exists because…",
+      "options": {
+        "a": "awk sorts the input",
+        "b": "uniq -c prints \"  count ip\", and awk pulls out just the second field (the IP) after ranking is done",
+        "c": "awk is faster than cut here"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "diff <(cut … | sort -u) <(sort \"$ALLOWLIST\") finds new IPs by…",
+      "options": {
+        "a": "checking each IP against a regex",
+        "b": "comparing two sorted, deduplicated lists and reporting lines that appear on only one side",
+        "c": "hashing every IP"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "The final cat <<REPORT … REPORT block is…",
+      "options": {
+        "a": "reading a report file from disk",
+        "b": "a jq template",
+        "c": "a heredoc — inline multi-line text with $variables expanded, printed to stdout"
+      },
+      "answer_b64": "Yw=="
+    }
+  ]
+}
