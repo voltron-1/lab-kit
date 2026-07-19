@@ -26,6 +26,11 @@ command -v shellcheck >/dev/null 2>&1 || {
 # teaching samples live (that content is never swept by this glob and
 # never executed by the harness, so it needs no exemption). A check.sh is
 # always a real, executed grader and must always be shellcheck-clean.
+# p5 is the one exception to the "files/ is never swept" rule above: unlike
+# p3/p4, p5's files/ scripts are real, correct, executable reference
+# samples that check.sh actually runs (see docs/plans/bash-p5-plan.md) —
+# so they get swept too. This glob is scoped to phases/p5 only; p3/p4's
+# files/ still holds deliberately-broken samples and must stay unswept.
 # --cached (tracked) + --others --exclude-standard (untracked but not
 # gitignored): a plain `git ls-files` alone only sees files that have been
 # `git add`-ed at least once, so a brand-new script nobody staged yet would
@@ -33,7 +38,8 @@ command -v shellcheck >/dev/null 2>&1 || {
 mapfile -d '' -t files < <(
   git ls-files -z --cached --others --exclude-standard -- \
     'bin/lab' 'harness/*.sh' 'tools/*.sh' \
-    'tracks/*/phases/*/*/check.sh'
+    'tracks/*/phases/*/*/check.sh' \
+    'tracks/*/phases/p5/*/files/*.sh'
 )
 
 if [[ "${#files[@]}" -eq 0 ]]; then
