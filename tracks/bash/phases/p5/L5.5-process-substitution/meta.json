@@ -1,0 +1,8 @@
+{
+  "id": "L5.5",
+  "title": "Process substitution <(...), here-docs, and here-strings",
+  "type": "DECODE",
+  "objective": "Read a script using all three input-without-a-temp-file constructs — process substitution, a here-string, and a heredoc — and name what each one is for.",
+  "gate": false,
+  "est_minutes": 12
+}

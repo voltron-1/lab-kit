@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "compare-hosts.sh uses three different ways to feed input to a command without a temp file: <(...) on line 4 makes a command's output look like a filename, <<< on line 8 feeds one variable to stdin, and <<REPORT...REPORT starting at line 14 is a multi-line inline block.",
+    "construct4 is what <(sort allowed.txt)/<(sort seen.txt) is called (process substitution). construct8 is what <<< \"$last_event\" is called (a here-string). construct14 is what the cat <<REPORT block is called (a heredoc). expands is whether $variables inside that unquoted heredoc expand (yes — unquoted heredocs behave like double quotes).",
+    "Write answers.txt exactly: construct4=procsub, construct8=herestring, construct14=heredoc, expands=yes. Then lab check bash L5.5."
+  ]
+}
