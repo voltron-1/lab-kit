@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "source": "bash L4.1",
+      "prompt": "Untrusted data becomes executed code the instant it…",
+      "options": {
+        "a": "is stored in a variable",
+        "b": "is spliced into a string a shell re-parses and runs",
+        "c": "is logged"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "source": "bash L4.2",
+      "prompt": "Before piping a curl | bash installer, the safe move is to…",
+      "options": {
+        "a": "run it in a VM",
+        "b": "download and read the script first — never pipe unread text straight into a shell",
+        "c": "check the domain's TLS cert"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "source": "bash L4.3",
+      "prompt": "A -- before positional arguments exists to…",
+      "options": {
+        "a": "improve readability",
+        "b": "mark the end of options, so a value starting with - can't be parsed as a flag",
+        "c": "escape spaces"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "source": "bash L4.4",
+      "prompt": "A writable or relative entry early in PATH is dangerous because…",
+      "options": {
+        "a": "it slows lookups",
+        "b": "an attacker can drop a same-named binary there and have it run instead of the real one",
+        "c": "it breaks tab-completion"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "source": "bash L4.7",
+      "prompt": "The fix for a TOCTOU race in temp-file handling is…",
+      "options": {
+        "a": "re-check the file exists right before using it",
+        "b": "create the file atomically with mktemp and never check-then-use a predictable path",
+        "c": "use a longer random name"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

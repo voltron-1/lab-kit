@@ -1,0 +1,8 @@
+{
+  "id": "L5.1",
+  "title": "Pipelines and the core tools — grep, cut, sort, uniq, wc",
+  "type": "DECODE",
+  "objective": "Read a grep | cut | sort | uniq -c | sort -rn pipeline over a log file and state what each stage does to the stream, then report the final answer it computes.",
+  "gate": false,
+  "est_minutes": 12
+}

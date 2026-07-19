@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read top-offenders.sh top to bottom, one stage at a time: grep keeps some lines, cut keeps some columns, sort orders, uniq -c counts, sort -rn ranks, head -1 keeps the winner.",
+    "stage4/stage5/stage6/stage7/stage8 map to lines 4-8 of top-offenders.sh in order. Name each stage's job in one word: filter, field, order (or group), count, rank. Then run ./top-offenders.sh for real to get top_ip and top_count.",
+    "Write answers.txt exactly: stage4=filter, stage5=field, stage6=order, stage7=count, stage8=rank, top_ip=203.0.113.7, top_count=4. Then lab check bash L5.1."
+  ]
+}

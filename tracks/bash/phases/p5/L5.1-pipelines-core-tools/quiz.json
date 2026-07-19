@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "In sort | uniq -c, sort runs first because…",
+      "options": {
+        "a": "it's alphabetical",
+        "b": "uniq -c only collapses adjacent duplicate lines — sort must group identical lines together first",
+        "c": "uniq requires numeric input"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "cut -d' ' -f1 on an access-log line extracts…",
+      "options": {
+        "a": "the first whitespace-delimited field — the client IP, in this log format",
+        "b": "the first character",
+        "c": "the first word after a comma"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "sort -rn after uniq -c ranks…",
+      "options": {
+        "a": "alphabetically",
+        "b": "numerically, largest count first",
+        "c": "by original file order"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
