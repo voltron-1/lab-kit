@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "jq -c prints each JSON object…",
+      "options": {
+        "a": "pretty-printed across many lines",
+        "b": "compact, one object per line — the natural shape for piping to other line-oriented tools",
+        "c": "as a single array"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "In {\"source.ip\": .src_ip}, \"source.ip\" is…",
+      "options": {
+        "a": "a literal string key containing a dot — not a nested path",
+        "b": "shorthand for .source.ip",
+        "c": "a jq type annotation"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "if (.action | test(\"failed\")) then … end inside a jq filter…",
+      "options": {
+        "a": "is invalid syntax",
+        "b": "branches on a regex match against the piped-in value, producing a derived field",
+        "c": "filters out non-matching records"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

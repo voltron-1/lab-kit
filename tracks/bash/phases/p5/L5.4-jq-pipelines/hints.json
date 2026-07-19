@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "reshape-ecs.sh builds one new JSON object per input line via jq's { } object-construction syntax: some keys are straight renames (.ts -> @timestamp), one key is computed with an if/then/else instead of copied.",
+    "flag_c is what -c does to the output shape (one compact line per object, not pretty-printed). key_style is what \"source.ip\" is as a key (a literal string containing a dot, not a nested .source.ip path). line9 is what kind of field event.outcome is (derived/computed, not copied straight from the input). test_fn is what kind of matching test(\"failed\") performs (regex).",
+    "Write answers.txt exactly: flag_c=compact, key_style=literal, line9=derived, test_fn=regex. Then lab check bash L5.4."
+  ]
+}
