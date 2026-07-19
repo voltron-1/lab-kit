@@ -1,0 +1,8 @@
+{
+  "id": "L5.2",
+  "title": "sed at reading level — substitution and the patterns you'll actually meet",
+  "type": "DECODE",
+  "objective": "Read a two-stage sed -E script and name what each expression does — the extended-regex flag, the global substitution flag, and how capture groups reorder fields.",
+  "gate": false,
+  "est_minutes": 12
+}

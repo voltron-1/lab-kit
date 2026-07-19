@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "redact.sh runs two sed -E expressions in order: the first masks every IP address on the line, the second reorders the surviving fields into key=value form using capture groups. Read each -e in isolation before combining them.",
+    "dash_e is what kind of regex -E turns on (extended, not basic). flag_g is what the trailing g does (repeats the substitution across the whole line). purpose5 is what happens to IPs (masked/redacted, not deleted). purpose6 is what happens to the fields (reordered into ts=/method=/path=/status=, not deleted). backslash1 is what \\1 refers to (a capture group).",
+    "Write answers.txt exactly: dash_e=extended, flag_g=global, purpose5=mask, purpose6=reorder, backslash1=capture. Then lab check bash L5.2."
+  ]
+}
