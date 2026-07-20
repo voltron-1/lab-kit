@@ -353,8 +353,8 @@ prints), `max=` → compile/run → `rustc broken.rs`, record `error=E0596` → 
 
 **CHECK LOGIC:** `assert_file_contains predictions.txt '^alias=bastion-01$'`,
 `'^max=11$'`, `'^error=E0596$'`; `assert_output_contains 'sample runs'
-'core-router + edge-fw still here' 'step 3 — rustc sample.rs -o sample' --
-./sample`; `ck_summary`.
+'core-router \+ edge-fw still here' 'step 3 — rustc sample.rs -o sample' --
+./sample` (the `+` escaped — assert patterns are ERE); `ck_summary`.
 
 **QUIZ:**
 1. choice — "How many simultaneous & borrows of one value are allowed?" a) one
@@ -1064,9 +1064,10 @@ rebuild.
    outputs; confirm the L2.7 experiment produces E0597 at the moved println. Fix
    content to reality and log every deviation.
 5. Lint gates: `./tools/lint-labs.sh` (includes the shellcheck sweep) clean.
-   ERE discipline in assert patterns: bracket characters escaped (see L2.5's
-   builder note); desc/hint strings keep apostrophes and lifetime ticks out
-   (already true in §4 — preserve that property when adjusting wording).
+   ERE discipline in assert patterns: ALL ERE metacharacters escaped — brackets
+   (L2.5), `+` (L2.3), parens, `?`, `*`, `.` where literal-critical; desc/hint
+   strings keep apostrophes and lifetime ticks out (already true in §4 —
+   preserve that property when adjusting wording).
 6. Acceptance: extend `tests/acceptance.sh` with a P2 section per the established
    per-lab pattern — fabricate passing artifacts WITHOUT a toolchain (echo answer
    files and outputs; `#!/bin/sh` stub binaries for ./sample, ./fixed, ./fixed1-3,
