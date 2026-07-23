@@ -1,0 +1,3 @@
+- PS pipelines pass .NET OBJECTS; the screen text is just the default display
+- Where-Object filters objects by property; grep filters the lossy text projection
+- reach for grep in PS and you're filtering the shadow, not the object
