@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Verify pwsh --version first. Generate psversion.txt using $PSVersionTable. Install PSScriptAnalyzer via Install-Module.",
+    "Use pwsh -Command to record psversion.txt, pssa.txt, and findings.txt per the guided steps.",
+    "Run pwsh -Command to output $PSVersionTable to psversion.txt, Get-Module PSScriptAnalyzer to pssa.txt, and Invoke-ScriptAnalyzer sample.ps1 to findings.txt."
+  ]
+}

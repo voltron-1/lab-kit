@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "$PSVersionTable.PSEdition on PowerShell 7 reports…",
+      "options": {
+        "a": "Core",
+        "b": "Desktop",
+        "c": "Framework"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which cmdlet installs a module from the PowerShell Gallery?",
+      "options": {
+        "a": "Install-Module",
+        "b": "Import-Module",
+        "c": "Get-Module"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "PSScriptAnalyzer is the PowerShell equivalent of which Bash tool?",
+      "options": {
+        "a": "shfmt",
+        "b": "ShellCheck",
+        "c": "valgrind"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
