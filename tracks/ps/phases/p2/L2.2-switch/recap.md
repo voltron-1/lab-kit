@@ -1,0 +1,3 @@
+- PS switch has NO implicit break — one value can fire several case blocks (use break/continue)
+- -Wildcard / -Regex / -File change matching; with no option the labels are exact literals
+- switch -File reads a file line by line ($_ = each line) — a log-triage pattern you'll see again
