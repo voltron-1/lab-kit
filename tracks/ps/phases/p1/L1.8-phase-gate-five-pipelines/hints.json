@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File p2.ps1 and pwsh -File p4.ps1 to inspect output values.",
+    "Record System.Diagnostics.Process in answers.md.",
+    "Write answers.md with content:\n# Phase 1 Pipeline Analysis\n- Pipeline 1 Input Type: System.Diagnostics.Process\n- Pipeline 2 Output: 10 20 30 40 50\n- Pipeline 4 Output: CHROME PWSH SSHD"
+  ]
+}

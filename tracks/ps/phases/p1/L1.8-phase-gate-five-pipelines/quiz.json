@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is the output of `1..5 | ForEach-Object { $_ * 10 }`?",
+      "options": {
+        "a": "10 20 30 40 50",
+        "b": "1 2 3 4 5",
+        "c": "50 40 30 20 10"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "In `Get-Process | Where-Object { $_.WS -gt 100MB } | Select-Object Name, Id`, what .NET object type enters the `Where-Object` stage?",
+      "options": {
+        "a": "System.Diagnostics.Process",
+        "b": "System.String",
+        "c": "PSCustomObject"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "In `Select-Object Name, Id`, what are the underlying types of `Id` vs `Name`?",
+      "options": {
+        "a": "Id is Int32, Name is String",
+        "b": "Both are String",
+        "c": "Id is String, Name is Int32"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
