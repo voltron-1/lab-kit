@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read log-relay.service and start.sh as a pair: unit sets User/Sandbox/EnvironmentFile, start.sh validates and execs.",
+    "runuser=logrelay; pullin=wants; envdash=optional; execwhy=daemon; writegate=readwritepaths; crashguard=crashloop",
+    "Write answers.txt exactly:\nrunuser=logrelay\npullin=wants\nenvdash=optional\nexecwhy=daemon\nwritegate=readwritepaths\ncrashguard=crashloop"
+  ]
+}

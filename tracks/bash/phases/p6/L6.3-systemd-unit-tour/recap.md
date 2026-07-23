@@ -1,0 +1,3 @@
+- A systemd service is two files read as one: the unit decides who/when/sandbox; the ExecStart script validates and execs the daemon.
+- After= orders, Wants= pulls in; EnvironmentFile=- is optional config; and Restart=on-failure without a validate gate is a crashloop generator.
+- The hardening block (NoNewPrivileges, ProtectSystem=strict, ReadWritePaths) is the unit stating exactly what a compromise of this service could touch.

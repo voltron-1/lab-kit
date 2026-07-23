@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "`Type=simple` means systemd considers the service started…",
+      "options": {
+        "a": "as soon as the ExecStart process is forked — there is no readiness signal",
+        "b": "after a built-in health check passes",
+        "c": "when its port opens"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "`NoNewPrivileges=true` buys you…",
+      "options": {
+        "a": "faster startup",
+        "b": "the process tree can never gain privileges via setuid or capabilities, even if compromised",
+        "c": "automatic user creation"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "The unit file is half the security review because it decides…",
+      "options": {
+        "a": "code style",
+        "b": "who runs the code, with what environment, inside what sandbox — before a single script line executes",
+        "c": "log formatting"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
