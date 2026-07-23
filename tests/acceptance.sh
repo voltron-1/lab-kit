@@ -380,7 +380,7 @@ out="$("$LAB" status 2>&1)"
 # denominator is the full bash catalog on disk (P0-P5 = 42), not just the 11
 # passed so far -- every phase's lab directories already exist on disk at
 # this point, regardless of progress state.
-assert_contains "status shows 11 of 42 bash labs passed so far (11/42)" "$out" "(11/42)"
+assert_contains "status shows 11 of 47 bash labs passed so far (11/47)" "$out" "(11/47)"
 
 # --- 7b. bash track P2: fabricated pass + one negative case per lab ---
 note "bash track P2: fabricated pass + negative case per lab"
@@ -474,8 +474,11 @@ bash_check_pass "L2.8" $'b\nb\nb\n'
 # artifacts absent, never a separately-deleted file. ---
 note "bash track P3: fabricated pass + negative case per lab"
 
-# L3.1 — Word splitting, deep (TAME: edit stage.sh in place)
-"$LAB" start bash L3.1 > /dev/null 2>&1
+# L3.1 — Word splitting, deep (TAME: edit stage.sh in place; phase opener:
+# recall must never gate)
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start bash L3.1 2>&1)"; rc=$?
+assert_eq "'lab start bash L3.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L3.1 start ran the recall quiz" "$out" "recall"
 WS="$COPY/workspace/bash/L3.1"
 bash_check_fail_missing "L3.1" "the fix (stage.sh left unedited)"
 cat > "$WS/stage.sh" <<'SCRIPT'
@@ -621,7 +624,7 @@ SCRIPT
 bash_check_pass "L3.9" $'b\nb\nb\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 28 bash P0-P3 labs passed, P4 still pending (28/42)" "$out" "(28/42)"
+assert_contains "status shows all 28 bash P0-P3 labs passed, P4 still pending (28/47)" "$out" "(28/47)"
 
 # --- 7d. bash track P4 (Untrusted Input & Injection): fabricated pass +
 # negative case per lab. Every AUDIT/TAME lab's negative case matches the
@@ -734,7 +737,7 @@ printf 'verdict=unsafe\nsearch_path=5\npredictable_temp=6\nremote_exec=8\nprivil
 bash_check_pass "L4.8" $'b\nc\na\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 36 bash P0-P4 labs passed (36/42)" "$out" "(36/42)"
+assert_contains "status shows all 36 bash P0-P4 labs passed (36/47)" "$out" "(36/47)"
 
 # --- 7e. bash track P5 (Text Processing & Pipelines): fabricated pass per
 # lab. Nothing in this phase is destructive -- every reference script is
@@ -796,7 +799,58 @@ printf 'stage_grep=filter\nstage_awk=field\nstage_diff=procsub\nstage_sed=herest
 bash_check_pass "L5.6" $'b\nb\nc\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 42 bash P0-P5 labs passed (42/42)" "$out" "(42/42)"
+assert_contains "status shows all 42 bash P0-P5 labs passed (42/47)" "$out" "(42/47)"
+
+# --- 7f. bash track P6 (Reading Real Deploy Scripts): fabricated pass per
+# lab. TOUR labs carry clean reference code; the negative case for every lab is
+# simply answers.txt not existing yet. ---
+note "bash track P6: fabricated pass + negative case per lab"
+
+# L6.1 -- Tour: a Security Onion-style installer/runbook (TOUR; phase opener:
+# recall must never gate)
+out="$(printf 'b\nb\nb\na\nb\n' | "$LAB" start bash L6.1 2>&1)"; rc=$?
+assert_eq "'lab start bash L6.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L6.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/bash/L6.1"
+bash_check_fail_missing "L6.1" "answers.txt"
+printf 'idempotent=config_changed\natomic=mv\ngatekeeper=validate_config\nverify=active\nrisk=restart\ntrusted=staged\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L6.1" $'b\na\na\n'
+
+# L6.2 -- Tour: a Docker entrypoint.sh (TOUR)
+"$LAB" start bash L6.2 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L6.2"
+bash_check_fail_missing "L6.2" "answers.txt"
+printf 'override=nothing\nprepend=log-relay\nheredoc=expands\nprobe=devtcp\nhandoff=exec\nexposure=listen\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L6.2" $'b\nb\na\n'
+
+# L6.3 -- Tour: a systemd unit + ExecStart script (TOUR)
+"$LAB" start bash L6.3 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L6.3"
+bash_check_fail_missing "L6.3" "answers.txt"
+printf 'runuser=logrelay\npullin=wants\nenvdash=optional\nexecwhy=daemon\nwritegate=readwritepaths\ncrashguard=crashloop\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L6.3" $'a\nb\nb\n'
+
+# L6.4 -- Tour: a CI pipeline script (TOUR)
+"$LAB" start bash L6.4 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L6.4"
+bash_check_fail_missing "L6.4" "answers.txt"
+printf 'thinyaml=parity\nfailstop=pipefail\nfallback=git\ntarflags=reproducible\nintegrity=sha256\nexposure=env\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L6.4" $'b\nb\nb\n'
+
+# L6.5 -- Phase gate: solo tour of an unseen deploy script (TOUR, gate)
+"$LAB" start bash L6.5 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L6.5"
+bash_check_fail_missing "L6.5" "answers.txt"
+printf 'schedule=4\nlock=flock\nlockexit=0\npinpath=cron\ntmphome=atomic\nmustpass=jq\nfailmode=kept\nwarnwho=monitoring\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L6.5" $'a\nb\nb\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 47 bash P0-P6 labs passed (47/47)" "$out" "(47/47)"
 
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
@@ -808,10 +862,10 @@ else
 fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
-  # 32 total track-phase lines; bash p0-p5 are done ([x]), leaving 26
+  # 32 total track-phase lines; bash p0-p6 are done ([x]), leaving 25
   # unstarted -- update this count whenever a phase's marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 26 unstarted track-phase lines" "26" "$line_count"
+  assert_eq "planned_execution.md has 25 unstarted track-phase lines" "25" "$line_count"
 else
   bad "planned_execution.md missing"
 fi
