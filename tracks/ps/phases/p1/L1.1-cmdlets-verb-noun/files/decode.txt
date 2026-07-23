@@ -1,0 +1,6 @@
+Get-Process | Get | read
+Set-Location | Set | change
+Invoke-Expression | Invoke | execute
+New-Object | New | change
+Get-ChildItem | Get | read
+Stop-Service | Stop | change

@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "In `Stop-Service`, name the verb and the noun.",
+      "options": {
+        "a": "verb Stop, noun Service",
+        "b": "verb Service, noun Stop",
+        "c": "verb Stop-Service, noun none"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which cmdlet lists all approved verbs?",
+      "options": {
+        "a": "Get-Verb",
+        "b": "Get-Command",
+        "c": "Get-Noun"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "A cmdlet name begins with `Invoke-`. What does that verb class signal?",
+      "options": {
+        "a": "It reads data without side effects",
+        "b": "It executes or runs an action",
+        "c": "It creates a new module"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
