@@ -1,0 +1,8 @@
+{
+  "id": "L1.5",
+  "title": "Where-Object",
+  "type": "PREDICT",
+  "objective": "Filter object streams using Where-Object, test conditions using operators like -eq and -gt, and verify that object types are preserved.",
+  "gate": false,
+  "est_minutes": 15
+}
