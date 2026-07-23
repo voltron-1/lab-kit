@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Is the `-eq` operator case-sensitive by default in PowerShell?",
+      "options": {
+        "a": "No — it is case-insensitive by default; -ceq is the case-sensitive form",
+        "b": "Yes — it is case-sensitive by default",
+        "c": "It depends on the operating system locale"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which operator performs wildcard pattern matching (`*`, `?`) in PowerShell?",
+      "options": {
+        "a": "-like",
+        "b": "-match",
+        "c": "-eq"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What does `@('a','b','admin') -eq 'admin'` return?",
+      "options": {
+        "a": "The element 'admin' (filtering matching elements)",
+        "b": "True (a boolean scalar)",
+        "c": "1 (the matching index)"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

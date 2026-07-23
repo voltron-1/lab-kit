@@ -1,0 +1,8 @@
+{
+  "id": "L2.1",
+  "title": "if/elseif/else and comparison operators — -eq,-ne,-like,-match",
+  "type": "DECODE",
+  "objective": "Decode PowerShell conditional statements, case-insensitive comparison operators, regex matching with $Matches, and array filtering behavior.",
+  "gate": false,
+  "est_minutes": 15
+}

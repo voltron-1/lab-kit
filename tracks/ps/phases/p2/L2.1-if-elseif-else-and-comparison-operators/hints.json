@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File caseq.ps1 and pwsh -File match.ps1.",
+    "Explain array filtering in verdict.txt (mentioning array and filter).",
+    "Write verdict.txt with content:\nWhen -eq is applied to an array, PowerShell filters the array and returns matching elements instead of a boolean scalar."
+  ]
+}
