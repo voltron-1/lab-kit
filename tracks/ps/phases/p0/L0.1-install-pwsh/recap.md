@@ -1,0 +1,3 @@
+- pwsh 7 is PSEdition Core, Platform Unix on WSL2; $PSVersionTable is your version truth
+- Install-Module pulls from PSGallery (needs network); PSScriptAnalyzer is your PS linter
+- PSScriptAnalyzer = ShellCheck for PowerShell — your compiler-substitute from day one
