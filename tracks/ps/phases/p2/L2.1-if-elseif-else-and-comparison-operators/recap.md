@@ -1,0 +1,3 @@
+- PS comparisons are -eq -ne -gt -lt -like (wildcard) -match (regex) — never == or >
+- -eq is case-INSENSITIVE by default; the -c prefix (-ceq/-clike/-cmatch) is case-sensitive
+- -eq against an array FILTERS (returns matches); -match fills $Matches — both change what an if means
