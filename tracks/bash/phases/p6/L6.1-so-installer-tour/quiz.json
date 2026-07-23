@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "An idempotent runbook script is one that…",
+      "options": {
+        "a": "may only run once",
+        "b": "is safe to re-run: an unchanged system means a no-op",
+        "c": "requires --force every time"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "`config_changed` uses `! cmp -s src dst` — the function succeeds (returns 0) when…",
+      "options": {
+        "a": "the files differ, i.e. there is work to do",
+        "b": "the files match",
+        "c": "cmp itself errors"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "`systemctl restart` succeeded, yet the script still runs `systemctl is-active` — because…",
+      "options": {
+        "a": "restart can 'succeed' and the unit can still die a moment later; verify state, don't trust the verb",
+        "b": "is-active is what actually starts the unit",
+        "c": "--quiet makes it faster"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

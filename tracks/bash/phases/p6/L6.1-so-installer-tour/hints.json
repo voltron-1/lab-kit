@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read files/so-sensor-refresh.sh top to bottom: constants -> helpers -> main. Trace main()'s call sequence: config_changed -> validate_config -> deploy_config -> restart_services.",
+    "idempotent=config_changed; atomic=mv; gatekeeper=validate_config; verify=active; risk=restart; trusted=staged",
+    "Write answers.txt exactly:\nidempotent=config_changed\natomic=mv\ngatekeeper=validate_config\nverify=active\nrisk=restart\ntrusted=staged"
+  ]
+}

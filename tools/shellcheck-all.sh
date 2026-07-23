@@ -39,7 +39,8 @@ mapfile -d '' -t files < <(
   git ls-files -z --cached --others --exclude-standard -- \
     'bin/lab' 'harness/*.sh' 'tools/*.sh' \
     'tracks/*/phases/*/*/check.sh' \
-    'tracks/*/phases/p5/*/files/*.sh'
+    'tracks/*/phases/p5/*/files/*.sh' \
+    'tracks/*/phases/p6/*/files/*.sh'
 )
 
 if [[ "${#files[@]}" -eq 0 ]]; then

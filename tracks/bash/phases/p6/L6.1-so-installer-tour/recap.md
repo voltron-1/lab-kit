@@ -1,0 +1,3 @@
+- Runbook shape: parse args → guard → idempotency check → validate → deploy atomically → restart → verify; each function is one sentence of the story.
+- Idempotency is a cheap comparison up front (cmp staged vs deployed) so re-runs are no-ops; --force exists for when that comparison lies.
+- Installer risk is rarely syntax — it's the restart's blast radius and the trust placed in the staged file it deploys.

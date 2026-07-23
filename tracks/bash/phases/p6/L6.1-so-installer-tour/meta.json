@@ -1,0 +1,8 @@
+{
+  "id": "L6.1",
+  "title": "Tour: a Security Onion–style installer/runbook — the `so-*` pattern",
+  "type": "TOUR",
+  "objective": "Tour a production-shaped installer/runbook script and name its idempotency check, its validate-before-deploy gate, its atomic deploy step, and where its operational risk sits.",
+  "gate": false,
+  "est_minutes": 18
+}

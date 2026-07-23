@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "source": "bash L5.1",
+      "prompt": "`uniq -c` silently undercounts unless its input is…",
+      "options": {
+        "a": "lowercased",
+        "b": "sorted, so duplicate lines are adjacent",
+        "c": "trimmed of whitespace"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "source": "bash L5.2",
+      "prompt": "In a `sed` s/// with capture groups, `\\1` in the replacement is…",
+      "options": {
+        "a": "line 1",
+        "b": "whatever the first ( ) group matched",
+        "c": "the first field of the line"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "source": "bash L5.3",
+      "prompt": "awk's `BEGIN { }` block runs…",
+      "options": {
+        "a": "once per input line",
+        "b": "once, before any input is read",
+        "c": "whenever a line contains BEGIN"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "source": "bash L5.4",
+      "prompt": "`jq -c` exists to…",
+      "options": {
+        "a": "print each result as compact single-line JSON — the NDJSON shape",
+        "b": "colorize output",
+        "c": "syntax-check the filter only"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "source": "bash L5.5",
+      "prompt": "`diff <(cmd1) <(cmd2)` works because process substitution…",
+      "options": {
+        "a": "runs both commands in parallel for speed",
+        "b": "makes each command's output readable as a filename",
+        "c": "merges stdout into stderr"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
