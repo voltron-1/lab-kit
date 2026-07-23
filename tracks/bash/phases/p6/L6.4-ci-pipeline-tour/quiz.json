@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "`set -euo pipefail` matters more in CI than anywhere else because…",
+      "options": {
+        "a": "runners are slow",
+        "b": "a stage failing mid-pipe but exiting 0 would ship a broken artifact under a green build",
+        "c": "the YAML parser requires it"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The `.sha256` file next to the tarball is only worth anything if…",
+      "options": {
+        "a": "it is gzipped too",
+        "b": "something downstream actually verifies it — a checksum nobody checks is decoration",
+        "c": "it is uploaded twice"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Runner environment variables are a secret-leak surface because…",
+      "options": {
+        "a": "they are encrypted at rest",
+        "b": "every command the script runs inherits the full environment, including any CI tokens in it",
+        "c": "they slow the build down"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

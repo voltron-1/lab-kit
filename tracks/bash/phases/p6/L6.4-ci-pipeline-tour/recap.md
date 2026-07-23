@@ -1,0 +1,3 @@
+- CI YAML should be thin: the runner ultimately executes a shell script, and one script gives local/CI parity plus something you can shellcheck.
+- set -euo pipefail is the difference between a red build and a broken artifact shipping under a green one.
+- Artifacts become trustworthy through reproducible builds (pinned tar metadata) plus a checksum the consumer actually verifies.

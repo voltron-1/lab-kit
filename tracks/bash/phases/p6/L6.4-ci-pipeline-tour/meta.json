@@ -1,0 +1,8 @@
+{
+  "id": "L6.4",
+  "title": "Tour: a CI pipeline script — what the runner actually executes",
+  "type": "TOUR",
+  "objective": "Read the script a CI runner actually executes and identify stage dispatch, failure propagation, artifact reproducibility, and the secret-exposure surface.",
+  "gate": false,
+  "est_minutes": 15
+}

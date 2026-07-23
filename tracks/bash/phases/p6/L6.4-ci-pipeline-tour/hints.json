@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read files/run-checks.sh top to bottom: runner context -> stage functions -> main case dispatch.",
+    "thinyaml=parity; failstop=pipefail; fallback=git; tarflags=reproducible; integrity=sha256; exposure=env",
+    "Write answers.txt exactly:\nthinyaml=parity\nfailstop=pipefail\nfallback=git\ntarflags=reproducible\nintegrity=sha256\nexposure=env"
+  ]
+}
