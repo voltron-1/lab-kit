@@ -1,0 +1,5 @@
+powershell.exe -ExecutionPolicy Bypass -File x.ps1     # flag overrides it
+powershell.exe -EncodedCommand <base64-UTF16LE>        # encoded; policy N/A
+Get-Content x.ps1 | powershell.exe -Command -          # pipe source to stdin
+IEX (Get-Content x.ps1 -Raw)                           # read+eval; EP never consulted
+Set-ExecutionPolicy -Scope Process Bypass              # per-process, no admin (Windows)

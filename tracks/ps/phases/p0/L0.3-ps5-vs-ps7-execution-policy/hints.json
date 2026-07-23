@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read files/bypass-list.txt for Execution Policy bypasses. Execution Policy is documented by Microsoft as anti-accidental-run safety.",
+    "Extract at least 3 bypass techniques into bypasses.txt and write your verdict in verdict.md.",
+    "Copy lines from files/bypass-list.txt into bypasses.txt (e.g. -ExecutionPolicy Bypass, -EncodedCommand, IEX), and write 'Execution Policy is a speed bump, not a security boundary.' into verdict.md."
+  ]
+}

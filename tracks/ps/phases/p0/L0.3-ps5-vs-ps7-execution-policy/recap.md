@@ -1,0 +1,3 @@
+- PS 7 = Core / .NET / cross-platform; PS 5.1 = Desktop / .NET Framework / Windows-only
+- Execution Policy is NOT a boundary — a speed bump with documented bypasses
+- AMSI and CLM (with WDAC/AppLocker) ARE real controls — bypassable, but they cost attackers and log
