@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "source": "ps L0.1",
+      "prompt": "What PSEdition does PowerShell 7 report?",
+      "options": {
+        "a": "Core",
+        "b": "Desktop",
+        "c": "Framework"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "source": "ps L0.1",
+      "prompt": "PSScriptAnalyzer is the PowerShell equivalent of which Bash tool?",
+      "options": {
+        "a": "shfmt",
+        "b": "ShellCheck",
+        "c": "valgrind"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "source": "ps L0.3",
+      "prompt": "Is PowerShell Execution Policy a security boundary?",
+      "options": {
+        "a": "No — a speed bump with documented bypasses",
+        "b": "Yes — a strict OS boundary",
+        "c": "Yes — it blocks all malicious execution"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "source": "ps L0.3",
+      "prompt": "AMSI (Antimalware Scan Interface) is best described as…",
+      "options": {
+        "a": "Just a speed bump",
+        "b": "A real security control — a genuine scan surface and telemetry source",
+        "c": "A deprecated Windows feature"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "source": "ps L0.2",
+      "prompt": "Where does all PowerShell track lab work take place?",
+      "options": {
+        "a": "/tmp/ps/",
+        "b": "workspace/ps/<id>/",
+        "c": "~/.ps-labs/"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

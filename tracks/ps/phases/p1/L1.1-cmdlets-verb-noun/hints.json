@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run Get-Verb to output approved verbs into verbs.txt. Copy files/decode.txt into workspace.",
+    "Execute pwsh -Command 'Get-Verb | Select-Object -ExpandProperty Verb > verbs.txt', then copy files/decode.txt to decode.txt.",
+    "Run:\npwsh -Command 'Get-Verb | Select-Object -ExpandProperty Verb > verbs.txt'\ncp files/decode.txt decode.txt"
+  ]
+}

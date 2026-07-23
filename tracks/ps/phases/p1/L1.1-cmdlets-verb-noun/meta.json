@@ -1,0 +1,8 @@
+{
+  "id": "L1.1",
+  "title": "Cmdlets and the verb-noun pattern",
+  "type": "DECODE",
+  "objective": "Understand the PowerShell Verb-Noun naming convention, map verb side-effect classes, and list approved verbs using Get-Verb.",
+  "gate": false,
+  "est_minutes": 15
+}

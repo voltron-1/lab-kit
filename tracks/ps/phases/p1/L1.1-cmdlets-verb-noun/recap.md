@@ -1,0 +1,3 @@
+- PS cmdlets are Verb-Noun; the verb signals the side-effect class
+- Get- is read-only; Set-/Remove-/Stop- change state; Invoke-/Start- execute
+- Get-Verb lists the approved verbs — verb literacy = reading side effects at a glance
