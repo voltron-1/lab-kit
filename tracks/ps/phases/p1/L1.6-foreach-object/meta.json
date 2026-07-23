@@ -1,0 +1,8 @@
+{
+  "id": "L1.6",
+  "title": "ForEach-Object and $_ / $PSItem",
+  "type": "PREDICT",
+  "objective": "Transform and process objects in pipeline streams using ForEach-Object, script blocks, and the $_ / $PSItem variable.",
+  "gate": false,
+  "est_minutes": 15
+}
