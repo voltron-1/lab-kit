@@ -1,0 +1,9 @@
+{
+  "id": "L1.2",
+  "title": "Objects, not text",
+  "type": "PREDICT",
+  "objective": "Understand that PowerShell pipelines pass live .NET objects rather than plain text strings, and contrast object filtering with text filtering.",
+  "gate": false,
+  "est_minutes": 20,
+  "windows_variant": true
+}

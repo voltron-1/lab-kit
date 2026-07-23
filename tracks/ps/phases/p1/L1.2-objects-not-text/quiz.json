@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What .NET type does `Get-Process` emit per row?",
+      "options": {
+        "a": "System.Diagnostics.Process",
+        "b": "System.String",
+        "c": "System.IO.FileInfo"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why does `| Where-Object { $_.WS -gt 100MB }` work while `grep` cannot filter that way?",
+      "options": {
+        "a": "Where-Object filters live objects by property; grep sees only formatted text",
+        "b": "grep is restricted by file permissions",
+        "c": "Where-Object is faster"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "In `Get-Process | grep pwsh`, what reaches `grep`'s stdin?",
+      "options": {
+        "a": "Strings (the formatted text display), not objects",
+        "b": "System.Diagnostics.Process objects",
+        "c": "Binary byte streams"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

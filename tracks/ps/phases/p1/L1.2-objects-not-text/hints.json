@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File type.ps1 to see the .NET type emitted by Get-Process.",
+    "Record System.Diagnostics.Process into prediction.txt.",
+    "Write prediction.txt with content:\nSystem.Diagnostics.Process"
+  ]
+}
