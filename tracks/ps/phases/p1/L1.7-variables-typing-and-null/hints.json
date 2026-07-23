@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File interp.ps1 and pwsh -File ntype.ps1 to inspect $null interpolation and coercion.",
+    "Write an explanation in decode.txt explaining that unassigned variables evaluate to $null.",
+    "Write decode.txt with content:\nUnassigned variables evaluate to $null and interpolate as empty strings."
+  ]
+}

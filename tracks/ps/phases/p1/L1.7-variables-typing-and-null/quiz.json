@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "You reference `$user` without assigning a value. What is its value and how does `\"hi $user\"` render?",
+      "options": {
+        "a": "$null; renders \"hi \" (empty string interpolation)",
+        "b": "An error is thrown immediately",
+        "c": "It renders as \"hi $user\" verbatim"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why is writing `$null -eq $x` (null on the left) recommended over `$x -eq $null`?",
+      "options": {
+        "a": "If $x is an array, $x -eq $null filters elements instead of performing a scalar compare",
+        "b": "$null -eq $x executes faster in C#",
+        "c": "PowerShell 7 forbids $x -eq $null"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What happens when you execute `[int]$n = \"42\"`?",
+      "options": {
+        "a": "It coerces the string \"42\" to an Int32 value 42",
+        "b": "It throws a type mismatch error",
+        "c": "It converts 42 to a FileInfo object"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

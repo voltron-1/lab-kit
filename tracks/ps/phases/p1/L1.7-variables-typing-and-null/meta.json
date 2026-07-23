@@ -1,0 +1,8 @@
+{
+  "id": "L1.7",
+  "title": "Variables, typing, and $null",
+  "type": "DECODE",
+  "objective": "Understand dynamic variable typing, empty string interpolation of $null, type coercion, and scalar null comparison best practices.",
+  "gate": false,
+  "est_minutes": 20
+}
