@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The first line of `Get-Member` output always tells you what?",
+      "options": {
+        "a": "The TypeName (.NET object type)",
+        "b": "The total number of properties",
+        "c": "The process ID"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which two primary `MemberType` categories does `Get-Member` group object capabilities into?",
+      "options": {
+        "a": "Property and Method",
+        "b": "Variable and Function",
+        "c": "String and Integer"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "You hit an unfamiliar object in a PowerShell script — which cmdlet reveals its type, properties, and methods?",
+      "options": {
+        "a": "Get-Member",
+        "b": "Get-Help",
+        "c": "Get-Command"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
