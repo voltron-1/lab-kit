@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Which command re-primes you after time away from a lab?",
+      "options": {
+        "a": "lab resume",
+        "b": "lab start",
+        "c": "lab restart"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "If `lab start` refuses a lab past the frontier, what overrides it, at what cost?",
+      "options": {
+        "a": "--skip; skipped labs are deleted",
+        "b": "--force; skipped labs are marked ⏭ permanently",
+        "c": "--bypass; skipped labs lose points"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Where does all `ps`-track lab work happen?",
+      "options": {
+        "a": "/tmp/ps/",
+        "b": "workspace/ps/<id>/",
+        "c": "~/.ps-labs/"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

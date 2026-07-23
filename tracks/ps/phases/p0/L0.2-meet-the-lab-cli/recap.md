@@ -1,0 +1,3 @@
+- lab start / check / hint / resume work identically for ps as every track
+- all ps work lives in workspace/ps/<id>/ — the fence
+- a typo'd $var is silently $null → empty output (you'll meet this again in L1.7)

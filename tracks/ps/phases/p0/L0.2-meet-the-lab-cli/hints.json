@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Copy broken.ps1 to fixed.ps1, then replace $naem with $name = \"analyst\".",
+    "Run pwsh -File fixed.ps1 to test your output, then save pwd > location.txt.",
+    "Write fixed.ps1 with content:\n$name = \"analyst\"\nWrite-Output \"Hello, $name\"\nThen run: pwd > location.txt"
+  ]
+}
