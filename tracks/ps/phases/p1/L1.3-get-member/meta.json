@@ -1,0 +1,8 @@
+{
+  "id": "L1.3",
+  "title": "Get-Member",
+  "type": "DECODE",
+  "objective": "Use Get-Member to inspect .NET object types, properties, and methods in PowerShell pipelines.",
+  "gate": false,
+  "est_minutes": 15
+}

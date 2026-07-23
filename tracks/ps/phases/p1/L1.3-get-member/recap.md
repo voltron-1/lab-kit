@@ -1,0 +1,3 @@
+- | Get-Member (gm) reveals any object's TypeName, properties, and methods
+- the TypeName line tells you exactly which .NET type you're holding
+- reading unfamiliar PS = pipe it to Get-Member and see what it really is

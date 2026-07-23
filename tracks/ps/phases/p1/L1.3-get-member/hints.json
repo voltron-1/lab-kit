@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Pipe Get-Process pwsh to Get-Member and save to members.txt, then pipe (Get-Date) to Get-Member and save to decode.txt.",
+    "Use pwsh -Command with Out-String > members.txt and Out-String > decode.txt.",
+    "Run:\npwsh -Command \"Get-Process pwsh | Get-Member | Out-String > members.txt\"\npwsh -Command \"(Get-Date) | Get-Member | Out-String > decode.txt\""
+  ]
+}
