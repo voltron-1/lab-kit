@@ -1,0 +1,3 @@
+- Cron gives you almost no environment and no overlap protection — production cron wrappers pin PATH and take a flock before doing anything.
+- Download → validate → atomic rename is the universal safe-replace pattern: the deployed artifact is either the old version or the new one, never partial.
+- Exit codes are signaling: lock contention exits 0 (expected), validation failure exits 1 (page-worthy), and WARNING lines exist for the monitoring grep.

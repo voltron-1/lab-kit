@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read files/feed-refresh.sh top to bottom: header comment schedule -> PATH export -> flock -> staleness -> fetch -> validate -> deploy.",
+    "schedule=4; lock=flock; lockexit=0; pinpath=cron; tmphome=atomic; mustpass=jq; failmode=kept; warnwho=monitoring",
+    "Write answers.txt exactly:\nschedule=4\nlock=flock\nlockexit=0\npinpath=cron\ntmphome=atomic\nmustpass=jq\nfailmode=kept\nwarnwho=monitoring"
+  ]
+}

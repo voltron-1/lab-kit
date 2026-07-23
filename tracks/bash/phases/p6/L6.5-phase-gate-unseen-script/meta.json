@@ -1,0 +1,8 @@
+{
+  "id": "L6.5",
+  "title": "Phase gate: solo tour of an unseen deploy script",
+  "type": "TOUR",
+  "objective": "Given a production cron wrapper you have never seen, answer cold: schedule, locking, environment assumptions, safe-replace mechanics, and failure semantics.",
+  "gate": true,
+  "est_minutes": 20
+}

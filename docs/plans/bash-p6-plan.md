@@ -1029,3 +1029,73 @@ question sheet.
   harness before commit (letters as base64: a=YQ==, b=Yg==, c=Yw==).
 - Banner insertion (the two TOUR-ARTIFACT comment lines) happens at build;
   re-run shellcheck after insertion (comments only — no findings expected).
+
+## Phase 7 Handoff: Draft L7.1 recall.json (Phase Opener)
+
+```json
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "source": "bash L6.1",
+      "prompt": "An idempotent runbook script is one where an unchanged system results in…",
+      "options": {
+        "a": "an error",
+        "b": "a no-op",
+        "c": "a full reinstall"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "source": "bash L6.2",
+      "prompt": "In a container entrypoint, `exec \"$@\"` at the end is load-bearing because…",
+      "options": {
+        "a": "it runs faster",
+        "b": "it hands PID 1 to the daemon so docker stop signals reach it directly",
+        "c": "it enables debugging"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "source": "bash L6.3",
+      "prompt": "A systemd unit file is half the security review because it decides…",
+      "options": {
+        "a": "the formatting of log files",
+        "b": "who runs the code, with what environment, inside what sandbox before shell executes",
+        "c": "the git commit hash"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "source": "bash L6.4",
+      "prompt": "`set -euo pipefail` in a CI pipeline script prevents…",
+      "options": {
+        "a": "slow builds",
+        "b": "a failing mid-pipe stage from exiting 0 and shipping a broken artifact under a green build",
+        "c": "git clone failures"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "source": "bash L6.5",
+      "prompt": "A cron wrapper exits 0 when locked out by `flock` because…",
+      "options": {
+        "a": "flock requires exit 0",
+        "b": "overlap is expected, and a nonzero exit would page cron mail watchers",
+        "c": "cron ignores exit codes"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
+```
+
