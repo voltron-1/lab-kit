@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File expand.ps1, itype.ps1, calc.ps1, and seltype.ps1 to inspect each behavior.",
+    "Record predictions in predictions.txt using key=value format for expand_type, select_type, and calc_column.",
+    "Write predictions.txt with content:\nexpand_type=Int32\nselect_type=PSCustomObject\ncalc_column=MB"
+  ]
+}

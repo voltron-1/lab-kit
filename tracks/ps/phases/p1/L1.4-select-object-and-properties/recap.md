@@ -1,0 +1,3 @@
+- Select-Object projects/limits which properties flow onward
+- -ExpandProperty unwraps to the raw underlying value (String, Int32, …)
+- a projection's GetType() is PSCustomObject; calc props @{Name=;Expression={}} add columns
