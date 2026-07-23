@@ -1,0 +1,3 @@
+- every PS pipeline = objects in → filter / project / transform → objects out
+- name the input type (Get-Member), the operation (Where/Select/ForEach), the output
+- you can now read any PS pipeline as data flow, not text

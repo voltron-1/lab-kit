@@ -1,0 +1,8 @@
+{
+  "id": "L1.8",
+  "title": "Phase gate: five pipelines",
+  "type": "PREDICT",
+  "objective": "Integrate Phase 1 pipeline skills by predicting input object types, pipeline operations, and output shapes for five representative pipelines.",
+  "gate": true,
+  "est_minutes": 25
+}
