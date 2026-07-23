@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Execution Policy is set to Restricted. Is it a security boundary?",
+      "options": {
+        "a": "No — a speed bump with documented, built-in bypasses",
+        "b": "Yes — a strict security boundary that prevents unauthorized execution",
+        "c": "Yes — it operates at the OS kernel level"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "AMSI (Antimalware Scan Interface) — security control or speed bump?",
+      "options": {
+        "a": "Just a speed bump with no security value",
+        "b": "A real security control — a genuine scan surface and telemetry source",
+        "c": "Not used in PowerShell"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Constrained Language Mode (CLM) enforced by WDAC/AppLocker — control or speed bump?",
+      "options": {
+        "a": "A speed bump that can be turned off with an environment variable",
+        "b": "A real security control that restricts .NET type access and COM creation",
+        "c": "Only works on Linux"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

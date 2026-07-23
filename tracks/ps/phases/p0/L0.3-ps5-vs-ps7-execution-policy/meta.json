@@ -1,0 +1,9 @@
+{
+  "id": "L0.3",
+  "title": "PS 5.1 vs PS 7, Windows vs cross-platform, and Execution Policy — what it is and what it is NOT",
+  "type": "DECODE",
+  "objective": "Classify Execution Policy, AMSI, and Constrained Language Mode, decode PS 5.1 vs PS 7 differences, and extract Execution Policy bypass techniques.",
+  "gate": true,
+  "est_minutes": 20,
+  "windows_variant": true
+}
