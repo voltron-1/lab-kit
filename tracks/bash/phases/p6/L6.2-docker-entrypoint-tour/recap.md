@@ -1,0 +1,3 @@
+- An entrypoint is a four-beat contract: default the env vars, render config from them, wait (bounded) for dependencies, exec the real process.
+- exec is the load-bearing word — the service takes PID 1 and receives docker stop's SIGTERM; without it the app dies by SIGKILL after the grace period.
+- The `${VAR:=default}` block at the top is the container's honest API surface — and a 0.0.0.0 default is where a reviewer looks first.

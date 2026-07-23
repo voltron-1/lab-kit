@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read files/entrypoint.sh section by section: defaults -> first-arg convention -> config templating -> dependency wait -> exec handoff.",
+    "override=nothing; prepend=log-relay; heredoc=expands; probe=devtcp; handoff=exec; exposure=listen",
+    "Write answers.txt exactly:\noverride=nothing\nprepend=log-relay\nheredoc=expands\nprobe=devtcp\nhandoff=exec\nexposure=listen"
+  ]
+}

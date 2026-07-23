@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Without `exec` on the final line, `docker stop` leads to…",
+      "options": {
+        "a": "a clean shutdown as usual",
+        "b": "the shell keeps PID 1, SIGTERM never reaches the service, SIGKILL fires at the grace deadline",
+        "c": "an immediate restart"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "This entrypoint's shebang must stay `#!/bin/bash` because…",
+      "options": {
+        "a": "sh has no functions",
+        "b": "`/dev/tcp` and `[[ ]]` are bash-isms that dash / BusyBox sh don't provide",
+        "c": "sh can't run in containers"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "`${VAR:=x}` differs from `${VAR:-x}` in that `:=`…",
+      "options": {
+        "a": "also assigns VAR, so the default persists for every later use",
+        "b": "only raises an error",
+        "c": "never expands anything"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
