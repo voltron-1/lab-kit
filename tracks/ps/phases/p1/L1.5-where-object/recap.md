@@ -1,0 +1,3 @@
+- Where-Object filters the stream by a boolean test; the type is preserved
+- $_ (or $PSItem) is the current object; operators are -gt -eq -like -match ...
+- 1..10 | Where-Object {$_ % 2 -eq 0} → 2 4 6 8 10

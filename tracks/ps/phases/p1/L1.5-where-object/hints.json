@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File evens.ps1 to see the even numbers output.",
+    "Record predictions in predictions.txt using numbers=2 4 6 8 10 and type_preserved=yes.",
+    "Write predictions.txt with content:\nnumbers=2 4 6 8 10\ntype_preserved=yes"
+  ]
+}
