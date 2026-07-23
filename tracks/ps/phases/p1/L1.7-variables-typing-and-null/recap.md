@@ -1,0 +1,3 @@
+- PS variables are dynamically typed — the type follows the last value assigned
+- an unassigned/typo'd variable is $null and interpolates as empty (silent bug)
+- compare with $null -eq $x (null on the left) to dodge the array-filtering trap
