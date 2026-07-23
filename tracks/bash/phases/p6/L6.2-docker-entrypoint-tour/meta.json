@@ -1,0 +1,8 @@
+{
+  "id": "L6.2",
+  "title": "Tour: a Docker entrypoint.sh — container-startup idioms",
+  "type": "TOUR",
+  "objective": "Tour a real Docker entrypoint.sh and explain the defaults block, the first-arg convention, config templating, the bounded dependency wait, and why the last line must be exec.",
+  "gate": false,
+  "est_minutes": 15
+}
