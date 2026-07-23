@@ -1,0 +1,3 @@
+- ForEach-Object runs its block once per pipeline object; $_ / $PSItem is each item
+- Where-Object filters; ForEach-Object transforms or acts (math, methods)
+- 1..3 | ForEach-Object {$_*$_} → 1 4 9

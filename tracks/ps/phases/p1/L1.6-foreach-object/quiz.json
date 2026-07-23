@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is the output of `1..3 | ForEach-Object { $_ * $_ }`?",
+      "options": {
+        "a": "1 4 9",
+        "b": "1 2 3",
+        "c": "2 4 6"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What is the key difference between `Where-Object` and `ForEach-Object`?",
+      "options": {
+        "a": "Where-Object filters items; ForEach-Object transforms or executes actions on each item",
+        "b": "Where-Object requires admin privileges; ForEach-Object does not",
+        "c": "Where-Object runs on Linux; ForEach-Object runs only on Windows"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What is the explicit long alias for `$_` inside a script block?",
+      "options": {
+        "a": "$PSItem",
+        "b": "$PSObject",
+        "c": "$CurrentItem"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File squares.ps1 and pwsh -File lengths.ps1.",
+    "Record predictions in predictions.txt using squares=1 4 9 and lengths=1 2 3.",
+    "Write predictions.txt with content:\nsquares=1 4 9\nlengths=1 2 3"
+  ]
+}
