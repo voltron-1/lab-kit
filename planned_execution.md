@@ -1,53 +1,25 @@
 # LAB-KIT — Planned Execution
 
 ## NEXT UP
-Phase: **bash p5 — Text Processing & Pipelines is DONE** (6/6 labs, tag
-`bash-p5`). Next unstarted item: **bash p6 — Reading Real Deploy
-Scripts** (5 labs) — needs a PLAN session first (no
-`docs/plans/bash-p6-plan.md` exists yet); per PROMPTS.md's Phase Builder
-protocol this is a fresh phase requiring its own plan-and-approve pass
-before any build work starts.
+Phase: **bash p6 — Reading Real Deploy Scripts is DONE** (5/5 labs, tag
+`bash-p6`). Next unstarted item: **bash p7 — Directing & Auditing AI
+Bash** (7 labs) — needs a BUILD session (plan `docs/plans/bash-p7-plan.md`
+merged in PR #264).
 
 ## LAST SESSION
-2026-07-18 — bash p5 BUILD (all 6 labs) + CLOSE-OUT, single session,
-building straight from the already-approved `docs/plans/bash-p5-plan.md`
-(PR #245, plan session same day). Phase 5 is a first for the bash track:
-no destructive-content contract, no fence/decoy machinery — every
-reference script is real, correct, `shellcheck`-clean, and meant to be
-executed for real by both the learner and `check.sh`. Gated one lab at a
-time per this repo's multi-phase execution rule: each lab built, self-
-tested end-to-end through the real `lab` CLI (fail-before-artifacts →
-correct artifact → PASS), reviewed by parallel `security-auditor` +
-`code-reviewer` sub-agents, then committed/pushed/PR'd/merged only after
-explicit go-ahead — six PRs, six merges, in sequence (L5.1 PR #246, L5.2
-#247, L5.3 #248, L5.4 #249, L5.5 #250, L5.6 #251). Scoped
-`tools/shellcheck-all.sh`'s glob to also sweep
-`tracks/*/phases/p5/*/files/*.sh` (p5-only) so this phase's genuine
-reference scripts get swept, without disturbing p3/p4's intentionally-
-broken teaching samples. Real findings caught and fixed: L5.3's
-`files/verify1.sh` (a new pattern — an internal `check.sh` tamper-check
-helper that reruns a PREDICT command for real without the lint-banned
-`bash -c`) shipped with a banner falsely claiming it was a learner-facing
-reference sample; `code-reviewer` caught it, fixed with an accurate
-purpose comment cross-referenced from `check.sh`. L5.6's phase-gate
-script (`triage-summary.sh`, chaining every construct from L5.1-L5.5)
-had `grep -qxF "$top_offender"` without a `--` guard; `security-auditor`
-flagged it against this same phase's own `L4.6-safe-patterns` precedent,
-fixed and re-verified line numbers/output/self-test unchanged. Hit and
-fixed four instances of the same lint false-positive across L5.5 and
-L5.6: `tools/lint-labs.sh`'s absolute-path heuristic flags a bare `/`
-surrounded by spaces or embedded in an inline command snippet inside
-`check.sh` hint strings (e.g. two `<(...)` mentions joined by ` / `, or a
-raw `sed` regex like `s/[0-9]+$/xxx/`) — reworded each to keep the same
-meaning without tripping the heuristic. CLOSE-OUT: extended
-`tests/acceptance.sh` with a P5 section (6 labs, fabricated pass +
-negative case each; no flawed-sample negative case needed since nothing
-in this phase is destructive) and fixed every stale catalog-count
-denominator this file's own precedent warns about — not just the final
-one: `(11/36)→(11/42)`, `(28/36)→(28/42)`, `(36/36)→(36/42)`, new
-`(42/42)` after the P5 block, and the "27 unstarted track-phase
-lines"→"26" count once this file's own bash-p5 marker flipped past
-`[ ]`. Tagged `bash-p5`.
+2026-07-22 — bash p6 BUILD (all 5 labs) + CLOSE-OUT, single session,
+building straight from the approved `docs/plans/bash-p6-plan.md` (PR #264).
+Phase 6 is the bash track's first TOUR phase: all five reference scripts
+are correct, production-shaped code (`shellcheck`-clean, never executed by
+the kit). Gated one lab at a time per multi-phase execution rule: L6.1
+so-installer (PR #273), L6.2 docker-entrypoint (PR #274), L6.3 systemd-unit
+(PR #275), L6.4 ci-pipeline (PR #276), and L6.5 phase gate (PR #277).
+Extended `tools/shellcheck-all.sh` to sweep `tracks/*/phases/p6/*/files/*.sh`.
+Self-tested each lab end-to-end through the real `lab` CLI (fail path →
+answers + quiz pass path → negative test). CLOSE-OUT: extended
+`tests/acceptance.sh` with a P6 section (5 labs), updated catalog
+denominators to `(47/47)`, updated `planned_execution.md` unstarted count
+to 25. Tagged `bash-p6`.
 
 Earlier, 2026-07-17 — bash p4 PLAN + BUILD (all 8 labs) + CLOSE-OUT, single
 session. PLAN: wrote `docs/plans/bash-p4-plan.md` — every AUDIT/DECODE/TAME
@@ -282,7 +254,7 @@ board: [LAB-KIT: Bash Literacy Lab](https://github.com/users/voltron-1/projects/
 - [x] bash p3 — The Footgun Gallery (9 labs) — tag `bash-p3`; plan: `docs/plans/bash-p3-plan.md` (commit 8796cb3); L3.1 word splitting, L3.2 empty-var rm -rf (PR #1, `c0ede9e`), L3.3 IFS (`bfc11d3`), L3.4 filename attacks (PR #228, `9aad58a`), L3.5 arithmetic injection (PR #229, `b24968d`), L3.6 subshell var loss (PR #230, `cf798ed`), L3.7 eval injection (PR #231, `deea6f8`), L3.8 ShellCheck co-pilot (PR #232, `921d2b0`), L3.9 phase gate (PR #233, `72a3688`)
 - [x] bash p4 — Untrusted Input & Injection (8 labs) — tag `bash-p4`; plan: `docs/plans/bash-p4-plan.md`; L4.1 command injection (PR #236), L4.2 curl\|bash audit (PR #237), L4.3 argument injection (PR #238), L4.4 env/PATH attacks (PR #239), L4.5 obfuscated shell (PR #240), L4.6 safe patterns (PR #241), L4.7 mktemp/TOCTOU (PR #242), L4.8 phase gate (PR #243)
 - [x] bash p5 — Text Processing & Pipelines (6 labs) — tag `bash-p5`; plan: `docs/plans/bash-p5-plan.md` (PR #245); L5.1 pipelines core tools (PR #246), L5.2 sed reading (PR #247), L5.3 awk reading (PR #248), L5.4 jq pipelines (PR #249), L5.5 process substitution (PR #250), L5.6 phase gate (PR #251)
-- [ ] bash p6 — Reading Real Deploy Scripts (5 labs)
+- [x] bash p6 — Reading Real Deploy Scripts (5 labs) — tag `bash-p6`; plan: `docs/plans/bash-p6-plan.md` (PR #264); L6.1 so installer (PR #273), L6.2 docker entrypoint (PR #274), L6.3 systemd unit (PR #275), L6.4 CI pipeline (PR #276), L6.5 phase gate (PR #277)
 - [ ] bash p7 — Directing & Auditing AI Bash (7 labs)
 
 ### soc — SOC Analyst Lab (52 labs)
