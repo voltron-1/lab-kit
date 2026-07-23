@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is the key output type difference between `Select-Object Name,Id` and `Select-Object -ExpandProperty Name`?",
+      "options": {
+        "a": "First emits a PSCustomObject with properties; second unwraps to the bare underlying value (String/Int32)",
+        "b": "First emits text; second emits binary",
+        "c": "First is read-only; second modifies system state"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What does `(Get-Process | Select-Object -First 1 Name,Id).GetType().Name` return?",
+      "options": {
+        "a": "PSCustomObject",
+        "b": "Selected.System.Diagnostics.Process",
+        "c": "System.Diagnostics.Process"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "How do you add a computed column to a `Select-Object` pipeline?",
+      "options": {
+        "a": "Using a calculated-property hashtable @{Name='X';Expression={...}}",
+        "b": "Piping to awk",
+        "c": "Using Set-Variable"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "L1.4",
+  "title": "Select-Object and properties",
+  "type": "PREDICT",
+  "objective": "Understand property projection using Select-Object, unwrapping values with -ExpandProperty, and creating calculated properties.",
+  "gate": false,
+  "est_minutes": 20
+}
