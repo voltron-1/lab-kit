@@ -1,0 +1,8 @@
+{
+  "id": "L6.3",
+  "title": "Tour: a systemd unit + its ExecStart script",
+  "type": "TOUR",
+  "objective": "Read a systemd unit and its ExecStart wrapper together and state who runs the daemon, what sandbox confines it, and why the wrapper validates then execs.",
+  "gate": false,
+  "est_minutes": 18
+}
