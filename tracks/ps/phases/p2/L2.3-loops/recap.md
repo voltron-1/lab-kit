@@ -1,0 +1,3 @@
+- for / foreach / while / do-while all exist in PS; do-while (and do-until) always run at least once
+- the foreach STATEMENT (foreach($x in $c){}) is NOT the ForEach-Object CMDLET ($_ in a pipeline)
+- read the loop header to know the trip count before you read the body
