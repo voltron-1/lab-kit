@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Does PowerShell `switch` stop processing automatically after the first matching case?",
+      "options": {
+        "a": "No — it falls through; multiple cases can run unless break or continue is used",
+        "b": "Yes — it stops automatically after the first match like C or Java",
+        "c": "Yes — unless the -All flag is passed"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which parameter option makes `switch` case labels evaluate as regular expressions?",
+      "options": {
+        "a": "-Regex",
+        "b": "-Wildcard",
+        "c": "-Exact"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What does `switch -File $path { ... }` do?",
+      "options": {
+        "a": "Reads the file line-by-line, evaluating each line as $_",
+        "b": "Matches against the file's filename string",
+        "c": "Compiles the script to a binary executable"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

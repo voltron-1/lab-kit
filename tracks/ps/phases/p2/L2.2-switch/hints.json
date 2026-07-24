@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File fallthrough.ps1 and pwsh -File scanlog.ps1.",
+    "Explain fall-through in notes.txt (mentioning break or fall).",
+    "Write notes.txt with content:\nPowerShell switch statements do not automatically break after a match and fall through to test subsequent cases unless break is used."
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "L2.2",
+  "title": "switch — regex, wildcard, file modes",
+  "type": "DECODE",
+  "objective": "Decode PowerShell switch statements, fall-through mechanics, wildcard/regex modes, and line-by-line file reading.",
+  "gate": false,
+  "est_minutes": 20
+}
