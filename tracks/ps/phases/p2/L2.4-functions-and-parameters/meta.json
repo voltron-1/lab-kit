@@ -1,0 +1,8 @@
+{
+  "id": "L2.4",
+  "title": "Functions & parameters — [Parameter()], [CmdletBinding()]",
+  "type": "DECODE",
+  "objective": "Decode PowerShell advanced functions, decorator attributes like [CmdletBinding()] and [Parameter(Mandatory)], and recognize structural legitimacy tropes during code triage.",
+  "gate": false,
+  "est_minutes": 20
+}

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File probe.ps1 to inspect advanced function parameters.",
+    "Mention Name, Mandatory, and Verbose or Common in answers.txt.",
+    "Write answers.txt with content:\nThe mandatory parameter is Name.\n[CmdletBinding()] adds common parameters like Verbose and ErrorAction to the function."
+  ]
+}
