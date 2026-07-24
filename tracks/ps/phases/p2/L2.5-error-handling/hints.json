@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File catch.ps1 and pwsh -File nocatch.ps1.",
+    "Explain non-terminating errors in why.txt (mentioning non-terminating, ErrorAction, or Stop).",
+    "Write why.txt with content:\nCmdlet errors are non-terminating by default and slip past try/catch unless elevated with -ErrorAction Stop."
+  ]
+}
