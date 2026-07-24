@@ -1,0 +1,3 @@
+- [CmdletBinding()] promotes a function to an advanced function (-Verbose, -ErrorAction, $PSCmdlet)
+- [Parameter(Mandatory)] forces supply; [ValidateSet()] restricts values before the body runs
+- decorators are a legitimacy costume — malware uses advanced function scaffolding to look real
