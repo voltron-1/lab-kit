@@ -1,0 +1,8 @@
+{
+  "id": "L2.5",
+  "title": "Error handling — try/catch/finally, $Error, -ErrorAction, $?",
+  "type": "DECODE",
+  "objective": "Decode terminating vs non-terminating errors in PowerShell, -ErrorAction Stop elevation, try/catch/finally semantics, and $? / $Error automatic variables.",
+  "gate": false,
+  "est_minutes": 20
+}

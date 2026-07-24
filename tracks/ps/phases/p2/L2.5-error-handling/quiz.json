@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Does a standard `try/catch` block catch normal cmdlet errors (like `Get-Content` on a missing file) by default?",
+      "options": {
+        "a": "No — most cmdlet errors are non-terminating; you must add -ErrorAction Stop to make them catchable",
+        "b": "Yes — try/catch automatically intercepts all errors regardless of type",
+        "c": "Yes — but only if $ErrorActionPreference is set to Ignore"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What does the automatic variable `$?` contain after executing a command?",
+      "options": {
+        "a": "A boolean indicating whether the last command succeeded (True/False)",
+        "b": "The exit code number of the last process",
+        "c": "The error message text string"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "When does a `finally` block execute in a `try/catch/finally` statement?",
+      "options": {
+        "a": "Always — regardless of whether an error was thrown or caught",
+        "b": "Only when an error occurs and is caught",
+        "c": "Only when no error occurs"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

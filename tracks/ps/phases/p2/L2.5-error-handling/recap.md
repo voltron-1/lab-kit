@@ -1,0 +1,3 @@
+- cmdlet errors are NON-TERMINATING by default; try/catch ignores them unless -ErrorAction Stop is set
+- $_ inside catch is the ErrorRecord; $? is boolean success; $Error[0] is the latest error
+- finally ALWAYS runs — use it to release locks, handles, or temporary files
