@@ -1,0 +1,8 @@
+{
+  "id": "L2.3",
+  "title": "Loops — for, foreach, while, do-while",
+  "type": "PREDICT",
+  "objective": "Predict loop execution behavior across for, foreach, while, and do-while forms, and contrast the foreach statement with the ForEach-Object cmdlet.",
+  "gate": false,
+  "est_minutes": 15
+}

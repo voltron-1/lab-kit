@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is the output of `$i = 5; do { $i; $i++ } while ($i -lt 3)`?",
+      "options": {
+        "a": "5 (runs once because condition is tested after execution)",
+        "b": "Nothing is output because 5 is not less than 3",
+        "c": "An infinite loop occurs"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What is the key difference between the `foreach` statement (`foreach ($x in $col)`) and the `ForEach-Object` cmdlet?",
+      "options": {
+        "a": "The statement iterates an in-memory collection; the cmdlet streams pipeline input and binds $_",
+        "b": "The statement requires admin privileges",
+        "c": "The cmdlet works only on numbers, while the statement works only on strings"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What is the output of `for ($i = 1; $i -le 3; $i++) { $i }`?",
+      "options": {
+        "a": "1 2 3",
+        "b": "0 1 2 3",
+        "c": "1 2"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

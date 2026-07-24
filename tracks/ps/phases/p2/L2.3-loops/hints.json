@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File forloop.ps1, foreachstmt.ps1, and dowhile.ps1.",
+    "Record predictions in prediction.txt using key=value format.",
+    "Write prediction.txt with content:\nforloop=1 2 3\nforeachstmt=3 5 7\ndowhile=5"
+  ]
+}
