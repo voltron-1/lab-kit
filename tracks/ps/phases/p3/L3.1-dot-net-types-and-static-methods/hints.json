@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File b64.ps1 and pwsh -File decode.ps1.",
+    "Map System.Convert, System.Net.WebClient, Base64, and Download/Fetch in notes.txt.",
+    "Write notes.txt with content:\nSystem.Convert handles Base64 encoding.\nSystem.Net.WebClient performs network fetch and download operations."
+  ]
+}

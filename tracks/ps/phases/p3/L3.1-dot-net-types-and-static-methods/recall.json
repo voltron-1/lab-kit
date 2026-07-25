@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "source": "ps L2.1",
+      "type": "choice",
+      "prompt": "Is the PowerShell equality comparison operator `-eq` case-sensitive by default?",
+      "options": {
+        "a": "No — it is case-insensitive by default (-ceq is the case-sensitive variant)",
+        "b": "Yes — strings must match exact casing",
+        "c": "It depends on whether $Option:CaseSensitive is set"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "source": "ps L2.2",
+      "type": "choice",
+      "prompt": "Does a PowerShell `switch` statement stop processing automatically after the first matching condition?",
+      "options": {
+        "a": "No — it falls through to subsequent conditions unless explicitly stopped with break or continue",
+        "b": "Yes — it acts like C/Java switch statements and breaks implicitly",
+        "c": "Yes — unless the -FallThrough flag is passed"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "source": "ps L2.5",
+      "type": "choice",
+      "prompt": "What parameter must be added to a cmdlet call (like `Get-Content`) to make non-terminating errors catchable by `try/catch`?",
+      "options": {
+        "a": "-ErrorAction Stop",
+        "b": "-Catch",
+        "c": "-ErrorAction Continue"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 4,
+      "source": "ps L2.4",
+      "type": "choice",
+      "prompt": "What does adding the `[CmdletBinding()]` attribute to a function definition do?",
+      "options": {
+        "a": "Promotes it to an advanced function, granting common parameters (-Verbose, -ErrorAction) and $PSCmdlet",
+        "b": "Compiles the function into a C# DLL",
+        "c": "Restricts execution to administrator privileges"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 5,
+      "source": "ps L1.3",
+      "type": "choice",
+      "prompt": "Which cmdlet inspects an object's TypeName, properties, and available methods in PowerShell?",
+      "options": {
+        "a": "Get-Member",
+        "b": "Get-Command",
+        "c": "Select-Object"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

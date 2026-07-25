@@ -1,0 +1,3 @@
+- PS calls .NET directly: [Namespace.Type]::Method() — the "more than cmdlets" tell
+- [System.Convert] + [System.Text.Encoding] are the base64 / UTF-16LE machinery behind encoded payloads
+- [System.Net.WebClient].DownloadString is the fetch half of a download cradle — you meet it here, run it never

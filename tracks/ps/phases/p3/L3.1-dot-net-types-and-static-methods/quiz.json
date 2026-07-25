@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Which .NET type contains static methods like `FromBase64String` and `ToBase64String`?",
+      "options": {
+        "a": "[System.Convert]",
+        "b": "[System.Text.Encoding]",
+        "c": "[System.Net.WebClient]"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which character encoding is represented by `[System.Text.Encoding]::Unicode`, and why is it significant in PowerShell?",
+      "options": {
+        "a": "UTF-16LE — the character encoding used by PowerShell -EncodedCommand payloads",
+        "b": "UTF-8 — the standard Linux terminal encoding",
+        "c": "ASCII — a 7-bit character encoding format"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What capability does `[System.Net.WebClient]` signal when observed in a script?",
+      "options": {
+        "a": "A network fetch (download) — the fetch half of a stager download cradle",
+        "b": "A local file deletion request",
+        "c": "A Windows registry entry modification"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
