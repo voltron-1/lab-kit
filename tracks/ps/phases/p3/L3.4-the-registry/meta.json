@@ -1,0 +1,9 @@
+{
+  "id": "L3.4",
+  "title": "The registry — Get-ItemProperty HKLM:\\..., persistence paths",
+  "type": "DECODE",
+  "objective": "Decode PowerShell registry manipulation via HKLM: and HKCU: PSDrives, identify *-ItemProperty cmdlets, and recognize autostart persistence key paths (CurrentVersion\\Run, Winlogon).",
+  "gate": false,
+  "windows_variant": true,
+  "est_minutes": 20
+}

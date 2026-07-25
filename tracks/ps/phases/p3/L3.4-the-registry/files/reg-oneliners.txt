@@ -1,0 +1,10 @@
+# Windows Registry One-Liners (Windows-only)
+
+# 1. Inspecting Autostart Run Keys
+Get-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Run'
+
+# 2. Writing Autostart Persistence (T1547.001)
+Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name 'Updater' -Value 'powershell -WindowStyle Hidden -EncodedCommand <...>'
+
+# 3. Winlogon Shell Hijack
+Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name 'Shell'
