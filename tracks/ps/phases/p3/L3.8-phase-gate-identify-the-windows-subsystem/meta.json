@@ -1,0 +1,8 @@
+{
+  "id": "L3.8",
+  "title": "Phase gate: identify the Windows subsystem in ten one-liners",
+  "type": "AUDIT",
+  "objective": "Integrate Phase 3 Windows subsystem knowledge (.NET, COM, WMI/CIM, Registry, iex, Remoting, ACLs) by classifying ten one-liners and evaluating their threat relevance.",
+  "gate": true,
+  "est_minutes": 25
+}

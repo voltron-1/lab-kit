@@ -1,0 +1,3 @@
+- you can now name the Windows subsystem behind a one-liner: .NET, COM, WMI/CIM, registry, iex, remoting, ACL
+- the download cradle = [WebClient].DownloadString + iex; Get-WmiObject is a PS5.1 tell; Run keys = persistence
+- Phase 3 is recognition — you meet the pieces here so Phase 4 (attack surface) is reading, not discovery

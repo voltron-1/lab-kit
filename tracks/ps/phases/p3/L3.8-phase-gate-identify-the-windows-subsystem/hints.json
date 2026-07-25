@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "View subsystems.txt to inspect the 10 one-liners.",
+    "Cover .NET/Convert, COM, WMI/CIM, Registry, iex/eval, Remoting, ACL, and WebClient in answers.md.",
+    "Write answers.md with classification for all 10 one-liners."
+  ]
+}
