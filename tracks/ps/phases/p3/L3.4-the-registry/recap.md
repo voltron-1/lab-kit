@@ -1,0 +1,3 @@
+- PS exposes the registry as HKLM:/HKCU: drives; *-ItemProperty reads/writes values (Windows-only)
+- Run/RunOnce, Winlogon Shell/Userinit, and Services are the classic autostart persistence keys (T1547)
+- recognizing the KEY PATH names the technique — the registry is read statically on WSL2

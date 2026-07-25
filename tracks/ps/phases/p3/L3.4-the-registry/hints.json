@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "View reg-oneliners.txt to inspect registry paths like CurrentVersion\\Run.",
+    "Mention CurrentVersion\\Run and Persistence/Autostart in persistence.txt.",
+    "Write persistence.txt with content:\nThe registry key CurrentVersion\\Run is used for autostart persistence (T1547.001) to run payloads automatically at logon."
+  ]
+}
