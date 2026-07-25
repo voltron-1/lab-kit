@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The `try/catch` around `Out-File` has no `-ErrorAction Stop`. If `Out-File` encounters a normal non-terminating write error, what happens?",
+      "options": {
+        "a": "The catch block does NOT fire (the error slips past), and script execution continues",
+        "b": "The catch block fires and prints a Write-Warning message",
+        "c": "PowerShell terminates the script immediately with a fatal error"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "If `health-snapshot.ps1` is invoked with `-Mode Verbose`, what happens?",
+      "options": {
+        "a": "PowerShell rejects it at parameter binding (ValidateSet allows only Quick/Full); the script body is never executed",
+        "b": "It enters the switch statement, hits default, and throws 'unknown mode: Verbose'",
+        "c": "It executes in verbose debug logging mode"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "In `Get-HealthTag`, a process with **250 MB** of working set memory receives which tag?",
+      "options": {
+        "a": "WARN",
+        "b": "CRITICAL",
+        "c": "OK"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
