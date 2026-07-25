@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File tagprobe.ps1 to inspect Get-HealthTag classification.",
+    "Answer the 10 comprehension questions in answers.md.",
+    "Ensure answers.md mentions key terms: 500, Quick/Full, non-terminating / ErrorAction Stop, ValidateSet, WARN, and pscustomobject."
+  ]
+}

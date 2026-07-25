@@ -1,0 +1,3 @@
+- you can now read an admin script cold: params/validation, branch logic, loops, switch, try/catch, modules
+- watch the reading traps: try/catch without -EA Stop isn't defensive; ValidateSet rejects before the body runs
+- naming what each construct does — not guessing from how professional it looks — is Phase 2 fluency

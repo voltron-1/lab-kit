@@ -1,0 +1,8 @@
+{
+  "id": "L2.7",
+  "title": "Phase gate: read an admin script cold",
+  "type": "DECODE",
+  "objective": "Integrate Phase 2 control flow, functions, error handling, and module concepts by reading a 60-line admin script cold and answering 10 comprehension questions.",
+  "gate": true,
+  "est_minutes": 30
+}
