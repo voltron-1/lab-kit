@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What does `Invoke-Command -ComputerName DC01 -ScriptBlock { whoami }` do?",
+      "options": {
+        "a": "Executes the script block remotely on host DC01 via PowerShell remoting",
+        "b": "Executes the script block on the local machine under DC01's credentials",
+        "c": "Ping tests the network connection to DC01"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which network service and default TCP ports (HTTP/HTTPS) are used by classic Windows PowerShell remoting?",
+      "options": {
+        "a": "WinRM (ports 5985 and 5986)",
+        "b": "SSH (ports 22 and 2222)",
+        "c": "RDP (ports 3389 and 3390)"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "In threat analysis, observing `-ComputerName` or `-Session` on `Invoke-Command` indicates which attacker technique?",
+      "options": {
+        "a": "Lateral movement / remote execution (T1021.006)",
+        "b": "Local privilege escalation",
+        "c": "DNS tunneling data exfiltration"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
