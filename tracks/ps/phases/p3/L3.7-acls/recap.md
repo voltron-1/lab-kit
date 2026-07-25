@@ -1,0 +1,3 @@
+- Get-Acl reads a security descriptor (.Access = the ACEs: identity -> rights -> allow/deny); Set-Acl writes it
+- weak DACLs (Users/Everyone with WriteDacl/WriteOwner/FullControl on a privileged object) = a privesc path
+- ACL semantics are Windows-only; you read Get-Acl output statically on WSL2 and spot the abusable ACE

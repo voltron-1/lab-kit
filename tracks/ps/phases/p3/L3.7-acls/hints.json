@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "View acl-output.txt to inspect the BUILTIN\\Users access rule.",
+    "Mention FullControl/WriteDacl and Privilege/Escalation in finding.txt.",
+    "Write finding.txt with content:\nThe ACE grants BUILTIN\\Users FullControl rights over the service binary, creating a privilege escalation path."
+  ]
+}

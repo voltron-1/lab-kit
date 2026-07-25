@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What does accessing `(Get-Acl path).Access` return in PowerShell?",
+      "options": {
+        "a": "The Access Control Entries (ACEs) — detailing each identity, its rights, and allow/deny status",
+        "b": "The plain text file contents",
+        "c": "The file's creation and modification timestamps"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which ACL right, when granted to `BUILTIN\\Users` on a SYSTEM service executable, represents a privilege escalation path?",
+      "options": {
+        "a": "FullControl (or WriteDacl / WriteOwner)",
+        "b": "ReadAndExecute",
+        "c": "ReadAttributes"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What happens when `Set-Acl` with Windows ACE security descriptors is executed on pwsh 7 on Linux?",
+      "options": {
+        "a": "It fails or produces limited POSIX-only results because Windows ACL security descriptors are Windows-only",
+        "b": "It modifies Windows Active Directory permissions over the network",
+        "c": "It automatically converts Windows DACLs into Linux sudoers entries"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
