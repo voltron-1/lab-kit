@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "View stager-sample.txt to inspect the DownloadString + iex pattern.",
+    "Mention Eval/Execute, DownloadString, Fetch/Download, and Memory/Disk/Fileless in audit.md.",
+    "Write audit.md with content:\nThe download cradle uses WebClient DownloadString to fetch a remote payload and Invoke-Expression (iex) to eval the string in memory.\nThis executes code directly in RAM without writing files to disk."
+  ]
+}
