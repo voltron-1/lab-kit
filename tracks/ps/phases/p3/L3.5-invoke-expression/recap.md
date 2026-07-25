@@ -1,0 +1,3 @@
+- Invoke-Expression (iex) is PowerShell's eval — it runs a STRING as code
+- iex ([WebClient]...DownloadString(url)) = fetch-and-run in memory: the canonical download cradle (never on disk)
+- you audit cradles statically here; iex + DownloadString on one 4104 line is a high-signal detection

@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What does `Invoke-Expression` (aliased as `iex`) do in PowerShell?",
+      "options": {
+        "a": "Evaluates a string as live PowerShell code (PowerShell's eval statement)",
+        "b": "Imports an external module from disk",
+        "c": "Encodes a string using UTF-16LE base64 encoding"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why is the pattern `iex (DownloadString(url))` present in nearly every stager payload?",
+      "options": {
+        "a": "It fetches remote code and executes it in memory without writing a file to disk (fileless AV evasion)",
+        "b": "It executes significantly faster than standard cmdlets",
+        "c": "It automatically grants administrator privileges"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Cross-track: Which Bash construct is the direct functional analog of PowerShell's `Invoke-Expression` (iex)?",
+      "options": {
+        "a": "eval",
+        "b": "source",
+        "c": "exec"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
