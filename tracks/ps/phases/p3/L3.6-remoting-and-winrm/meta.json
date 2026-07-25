@@ -1,0 +1,9 @@
+{
+  "id": "L3.6",
+  "title": "Remoting & WinRM — Invoke-Command, Enter-PSSession; lateral movement",
+  "type": "DECODE",
+  "objective": "Decode PowerShell remoting cmdlets (Invoke-Command, Enter-PSSession, New-PSSession), identify remote execution parameters (-ComputerName, -Session), and recognize WinRM lateral movement (T1021.006).",
+  "gate": false,
+  "windows_variant": true,
+  "est_minutes": 20
+}

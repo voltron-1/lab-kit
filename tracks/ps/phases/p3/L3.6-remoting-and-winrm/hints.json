@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File remoting-params.ps1 to verify -ComputerName parameter binding.",
+    "Mention Invoke-Command, Remote/Lateral, and T1021/WinRM in lateral.txt.",
+    "Write lateral.txt with content:\nInvoke-Command and Enter-PSSession perform remote execution and lateral movement via WinRM (T1021.006)."
+  ]
+}

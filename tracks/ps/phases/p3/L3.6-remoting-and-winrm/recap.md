@@ -1,0 +1,3 @@
+- Invoke-Command / Enter-PSSession / New-PSSession run code on REMOTE hosts (-ComputerName / -Session)
+- classic transport is WinRM (5985/5986, Windows-only); PS7 adds cross-platform SSH remoting (-HostName)
+- -ComputerName in a script is a lateral-movement tell (T1021.006) — recognition is the skill

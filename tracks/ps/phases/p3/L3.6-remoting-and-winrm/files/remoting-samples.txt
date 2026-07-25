@@ -1,0 +1,14 @@
+# PowerShell Remoting & WinRM Samples (Windows-only)
+
+# 1. Fan-out Remote Execution (WinRM T1021.006)
+Invoke-Command -ComputerName DC01 -ScriptBlock { whoami; hostname }
+
+# 2. Multi-host Remote Execution with Credentials
+Invoke-Command -ComputerName SRV1,SRV2 -Credential $c -ScriptBlock { Get-Process }
+
+# 3. Interactive Remote Shell Session
+Enter-PSSession -ComputerName WKS7
+
+# 4. Persistent Remote PSSession
+$s = New-PSSession -ComputerName DC01
+Invoke-Command -Session $s -ScriptBlock { Get-Service }
