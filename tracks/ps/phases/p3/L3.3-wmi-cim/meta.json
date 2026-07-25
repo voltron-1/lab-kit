@@ -1,0 +1,9 @@
+{
+  "id": "L3.3",
+  "title": "WMI/CIM — Get-WmiObject, Get-CimInstance; why attackers love WMI",
+  "type": "DECODE",
+  "objective": "Decode WMI/CIM administrative queries, contrast legacy Get-WmiObject (removed in PS7) with modern Get-CimInstance, and recognize WMI execution (Win32_Process.Create) and fileless persistence.",
+  "gate": false,
+  "windows_variant": true,
+  "est_minutes": 20
+}

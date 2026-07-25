@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File wmi-gone.ps1 to verify Get-WmiObject removal in PS7.",
+    "Mention Get-CimInstance, Persistence, and Execution in notes.txt.",
+    "Write notes.txt with content:\nAttackers favor WMI for reconnaissance, process execution, and fileless persistence.\nGet-WmiObject was removed in PS7 and replaced by Get-CimInstance."
+  ]
+}

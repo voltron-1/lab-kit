@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "You observe `Get-WmiObject` in a PowerShell script. What does this tell you about the target environment?",
+      "options": {
+        "a": "The script targets legacy PowerShell 5.1 (Get-WmiObject was removed in PS7 in favor of Get-CimInstance)",
+        "b": "The script is written specifically for Linux cross-platform pwsh 7",
+        "c": "The script requires administrator privileges to execute"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why is WMI/CIM frequently leveraged by attackers during post-exploitation (T1047)?",
+      "options": {
+        "a": "It provides native capabilities for system recon, process execution (Win32_Process.Create), and fileless persistence",
+        "b": "It automatically bypasses network firewalls",
+        "c": "It encrypts all hard drive contents"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What happens when `Get-CimInstance Win32_OperatingSystem` is executed on pwsh 7 on Linux?",
+      "options": {
+        "a": "It returns errors or empty output because WMI/CIM is Windows-only (no CIM repository on Linux)",
+        "b": "It reads Linux system information from /proc/sys",
+        "c": "It automatically installs Wine"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

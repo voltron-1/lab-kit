@@ -1,0 +1,12 @@
+# WMI / CIM Recon, Execution, and Persistence Samples (Windows-only)
+
+# 1. Reconnaissance
+Get-WmiObject Win32_Process              # PS5.1 legacy
+Get-CimInstance Win32_OperatingSystem    # PS7 modern equivalent
+Get-CimInstance Win32_Service | Where-Object State -eq 'Running'
+
+# 2. Execution (T1047)
+Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{CommandLine='cmd.exe /c calc.exe'}
+
+# 3. Fileless Persistence via WMI Event Subscriptions
+# __EventFilter + __EventConsumer + __FilterToConsumerBinding
