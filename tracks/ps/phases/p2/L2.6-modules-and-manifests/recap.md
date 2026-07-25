@@ -1,0 +1,3 @@
+- .psd1 is a module manifest (metadata hashtable); .psm1 is the script module code file
+- RootModule points to the code; FunctionsToExport declares the public API surface
+- Import-PowerShellDataFile parses a .psd1 as data without executing module code

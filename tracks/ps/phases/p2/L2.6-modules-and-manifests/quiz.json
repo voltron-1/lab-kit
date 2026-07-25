@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is a `.psd1` file in PowerShell?",
+      "options": {
+        "a": "A module manifest — a metadata hashtable declaring versioning, exports, and dependencies",
+        "b": "A compiled binary DLL executable",
+        "c": "A PowerShell database connection file"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What is the key difference between `.psd1` and `.psm1` files?",
+      "options": {
+        "a": ".psd1 is a metadata manifest; .psm1 contains the executable PowerShell script code",
+        "b": ".psd1 is Windows-only; .psm1 is Linux-only",
+        "c": ".psd1 is binary; .psm1 is plain text"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Which cmdlet allows safely inspecting a `.psd1` manifest as data without executing any module code?",
+      "options": {
+        "a": "Import-PowerShellDataFile",
+        "b": "Import-Module",
+        "c": "Get-Content"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

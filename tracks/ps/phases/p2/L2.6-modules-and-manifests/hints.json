@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -File readmanifest.ps1 to inspect the parsed manifest data.",
+    "Mention .psm1, RootModule, and manifest in notes.txt.",
+    "Write notes.txt with content:\nA .psd1 file is a module manifest containing metadata, while a .psm1 file contains script code. The RootModule key specifies the script code entry point."
+  ]
+}

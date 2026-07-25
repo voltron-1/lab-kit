@@ -1,0 +1,8 @@
+{
+  "id": "L2.6",
+  "title": "Modules — Import-Module, Get-Command, Get-Module; reading a manifest",
+  "type": "DECODE",
+  "objective": "Decode PowerShell module manifests (.psd1 vs .psm1), inspect exported functions using Import-PowerShellDataFile, and track module dependencies.",
+  "gate": false,
+  "est_minutes": 20
+}
