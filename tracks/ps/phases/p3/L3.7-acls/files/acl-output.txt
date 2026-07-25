@@ -1,0 +1,15 @@
+# Get-Acl 'C:\Program Files\AppService\svc.exe' | Format-List -Property AccessToString
+
+FileSystemRights  : FullControl
+AccessControlType : Allow
+IdentityReference : BUILTIN\Users
+IsInherited       : False
+InheritanceFlags  : None
+PropagationFlags  : None
+
+FileSystemRights  : FullControl
+AccessControlType : Allow
+IdentityReference : NT AUTHORITY\SYSTEM
+IsInherited       : False
+InheritanceFlags  : None
+PropagationFlags  : None

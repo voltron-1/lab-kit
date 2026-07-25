@@ -1,0 +1,9 @@
+{
+  "id": "L3.7",
+  "title": "ACLs — Get-Acl / Set-Acl; permission enumeration & abuse",
+  "type": "DECODE",
+  "objective": "Decode Windows Access Control Lists (ACLs) using Get-Acl, inspect Access Control Entries (.Access), and identify weak DACLs and privilege escalation paths.",
+  "gate": false,
+  "windows_variant": true,
+  "est_minutes": 20
+}
