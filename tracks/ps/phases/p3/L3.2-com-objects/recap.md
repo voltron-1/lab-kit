@@ -1,0 +1,3 @@
+- New-Object -ComObject <ProgID> = COM automation — a Windows-only reach into shell/app internals
+- WScript.Shell.Run/.RegWrite and Shell.Application.ShellExecute = execute + persist, often past monitored cmdlets
+- COM is Windows-only; on WSL2 you READ these one-liners — recognition is the skill, not execution

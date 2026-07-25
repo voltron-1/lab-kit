@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Which cmdlet + parameter syntax creates a COM automation object in PowerShell?",
+      "options": {
+        "a": "New-Object -ComObject <ProgID>",
+        "b": "Get-Item -Path COM:<ProgID>",
+        "c": "Import-Module -Name COM.<ProgID>"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What two primary capabilities are exposed by the `WScript.Shell` COM object methods `.Run()` and `.RegWrite()`?",
+      "options": {
+        "a": "Program execution and registry modification (persistence)",
+        "b": "File compression and network port scanning",
+        "c": "User password reset and active directory search"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What happens when `New-Object -ComObject Shell.Application` is executed on pwsh 7 on Linux?",
+      "options": {
+        "a": "It fails with an error because COM automation is supported only on Windows platforms",
+        "b": "It executes identically to Windows by using Wine",
+        "c": "It opens a Linux desktop window"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
