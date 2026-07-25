@@ -1,0 +1,3 @@
+- WMI/CIM is a Windows management layer: recon (Win32_*), execution (Win32_Process.Create), fileless persistence
+- Get-WmiObject is GONE in PS7 (a 5.1 version tell); Get-CimInstance is the modern reader — both Windows-only at runtime
+- attackers love WMI because it is powerful, native, and often under-monitored (T1047)
