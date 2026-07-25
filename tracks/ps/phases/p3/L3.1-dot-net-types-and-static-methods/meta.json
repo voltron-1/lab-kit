@@ -1,0 +1,8 @@
+{
+  "id": "L3.1",
+  "title": ".NET method calls — [System.Net.WebClient], [System.Convert], [System.Text.Encoding]",
+  "type": "DECODE",
+  "objective": "Decode direct .NET type and method calls in PowerShell, manipulate base64 and UTF-16LE text encodings, and recognize the network fetch component of download cradles.",
+  "gate": false,
+  "est_minutes": 20
+}
