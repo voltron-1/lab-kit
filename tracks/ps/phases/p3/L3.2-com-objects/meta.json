@@ -1,0 +1,9 @@
+{
+  "id": "L3.2",
+  "title": "COM objects — New-Object -ComObject Shell.Application, WScript.Shell",
+  "type": "DECODE",
+  "objective": "Decode COM object instantiation via New-Object -ComObject, identify capability ProgIDs like WScript.Shell and Shell.Application, and recognize Windows-only COM automation during security triage.",
+  "gate": false,
+  "windows_variant": true,
+  "est_minutes": 15
+}

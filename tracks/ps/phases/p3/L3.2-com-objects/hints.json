@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "View com-oneliners.txt to inspect WScript.Shell and Shell.Application methods.",
+    "Mention WScript.Shell, Shell.Application, Execution/Run, and Persistence/Registry in classify.txt.",
+    "Write classify.txt with content:\nWScript.Shell provides capabilities for program execution via Run and registry persistence via RegWrite.\nShell.Application provides capabilities for hidden program execution via ShellExecute."
+  ]
+}
