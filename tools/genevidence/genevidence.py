@@ -257,6 +257,25 @@ def generate_s1_sigma_read(scen: dict):
     if "answer_keys" in scen and "L1.4" in scen["answer_keys"]:
         sync_key_block(l14_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.4"])
 
+def generate_s1_attack_map(scen: dict):
+    l15_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p1" / "L1.5-mitre-att-ck-tactics-vs-techniques"
+    if not (l15_dir / "check.sh").exists():
+        return
+    files_dir = l15_dir / "files"
+    
+    # 1. attack-excerpt.json
+    write_file(files_dir / "attack-excerpt.json", json.dumps(scen["attack_excerpt"], indent=2) + "\n")
+    
+    # 2. alerts.jsonl
+    alerts_lines = "\n".join([json.dumps(alt) for alt in scen["alerts"]]) + "\n"
+    write_file(files_dir / "alerts.jsonl", alerts_lines)
+    
+    # 3. layer-sample.json
+    write_file(files_dir / "layer-sample.json", json.dumps(scen["layer_sample"], indent=2) + "\n")
+
+    if "answer_keys" in scen and "L1.5" in scen["answer_keys"]:
+        sync_key_block(l15_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.5"])
+
 def main():
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
@@ -278,6 +297,8 @@ def main():
             generate_s1_alert_anatomy(scen)
         elif scen_id == "s1-sigma-read":
             generate_s1_sigma_read(scen)
+        elif scen_id == "s1-attack-map":
+            generate_s1_attack_map(scen)
 
 if __name__ == "__main__":
     main()
