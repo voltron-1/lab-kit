@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader wants answers.txt (three keys), a fixed.rs without the forbidden call, and a working ./fixed.",
+    "snapshot's borrow lasts until its last use — move that use (the snapshot println) so it happens before push_str starts the mutable borrow.",
+    "Exact edit — relocate `println!(\"snapshot = {snapshot}\");` to directly above `queue.push_str(...)`, then `rustc fixed.rs -o fixed; ./fixed` and re-check."
+  ]
+}

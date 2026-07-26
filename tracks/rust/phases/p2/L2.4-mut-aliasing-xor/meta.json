@@ -1,0 +1,8 @@
+{
+  "id": "L2.4",
+  "title": "`&mut` and the aliasing-XOR-mutation law",
+  "type": "FIX",
+  "objective": "Read E0502, then apply the minimal reordering fix that respects many-readers-XOR-one-writer — without reaching for clone().",
+  "gate": false,
+  "est_minutes": 15
+}

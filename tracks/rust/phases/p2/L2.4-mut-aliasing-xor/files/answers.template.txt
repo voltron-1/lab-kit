@@ -1,0 +1,11 @@
+# Answer file format for L2.4:
+# error_code: Compiler error code emitted when compiling broken.rs (e.g. error_code=E0502)
+error_code=
+
+# q2: Why did the original order fail?
+# (a = push_str consumed queue, b = live & borrow snapshot overlapped &mut borrow needed by push_str, c = String cannot grow after a borrow)
+q2=
+
+# q3: Under Non-Lexical Lifetimes (NLL), when does a reference borrow end?
+# (a = at the closing brace of its scope, b = at its last use, c = when dropped explicitly)
+q3=
