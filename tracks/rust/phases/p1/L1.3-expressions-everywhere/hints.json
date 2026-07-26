@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Four prediction keys — the grader tells you which is missing or wrong; reread that one construct.",
+    "Evaluate the { let a = 3; a * a } block by hand (last expression, no semicolon); parity checks x, not 443; the error code is on rustc's first output line.",
+    "Run it and transcribe: rustc sample.rs -o sample; ./sample; rustc broken.rs — the output and error tag give you all four values."
+  ]
+}

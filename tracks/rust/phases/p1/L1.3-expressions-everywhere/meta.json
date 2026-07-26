@@ -1,0 +1,8 @@
+{
+  "id": "L1.3",
+  "title": "Expressions everywhere — blocks and `if` return values",
+  "type": "PREDICT",
+  "objective": "Predict values produced by block and if expressions, and read E0308 when two arms disagree on type.",
+  "gate": false,
+  "est_minutes": 10
+}
