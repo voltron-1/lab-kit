@@ -1,0 +1,15 @@
+# single lowercase tokens; technique ids like t1110.003; tactic slugs exactly as in attack-excerpt.json
+# CM-A-31: most specific technique id
+q1=
+
+# CM-A-32: most specific technique id
+q2=
+
+# CM-A-33: most specific technique id
+q3=
+
+# tactic slug of your q1 technique
+q4=
+
+# parent technique id of your q1 technique
+q5=

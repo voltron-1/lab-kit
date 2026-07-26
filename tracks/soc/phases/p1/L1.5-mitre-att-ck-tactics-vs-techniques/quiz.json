@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "In the ATT&CK Enterprise Matrix, a top-level column such as Credential Access (TA0006) represents a:",
+      "options": {
+        "a": "Technique",
+        "b": "Tactic — the adversary's goal",
+        "c": "Sub-technique",
+        "d": "Data Source"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why do detection rules and SIEM alerts map behavior to ATT&CK Technique IDs rather than specific tool names (e.g., `powershell.exe`)?",
+      "options": {
+        "a": "Technique IDs are shorter to store in database indexes",
+        "b": "Tools are cheap for adversaries to swap, but underlying behavior remains constant — technique IDs survive tool changes",
+        "c": "MITRE compliance requires technique ID mapping for licensing",
+        "d": "Tool names are case-sensitive across operating systems"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which named section on an ATT&CK technique page tells a defender what telemetry can reveal the technique?",
+      "answer_b64": "ZGV0ZWN0aW9u",
+      "accept_b64": [
+        "ZGV0ZWN0aW9u",
+        "ZGV0ZWN0aW9ucw==",
+        "ZGV0ZWN0aW9uIHN0cmF0ZWdpZXM="
+      ]
+    }
+  ]
+}

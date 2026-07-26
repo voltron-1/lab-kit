@@ -1,0 +1,15 @@
+{
+  "name": "coppermine demo",
+  "domain": "enterprise-attack",
+  "versions": {
+    "attack": "16",
+    "navigator": "5.1.0",
+    "layer": "4.5"
+  },
+  "techniques": [
+    {
+      "techniqueID": "T1110.003",
+      "score": 1
+    }
+  ]
+}

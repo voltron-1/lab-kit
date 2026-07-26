@@ -1,0 +1,3 @@
+- Tactics are the adversary's why (TA-ids, matrix columns); techniques and sub-techniques are the how (T-ids, cells).
+- Map alerts to the most specific technique the evidence supports: password spraying is t1110.003, not just t1110.
+- Map behavior, not tools — powershell.exe in an alert means t1059.001 because behavior is expensive for attackers to change.

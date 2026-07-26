@@ -1,0 +1,8 @@
+{
+  "id": "L1.5",
+  "title": "MITRE ATT&CK - tactics vs techniques; mapping an alert to a technique ID",
+  "type": "TOUR",
+  "objective": "Tell tactics from techniques from sub-techniques and map three Coppermine alerts to ATT&CK technique ids",
+  "gate": false,
+  "est_minutes": 15
+}

@@ -1,0 +1,100 @@
+scenario: s1-attack-map
+window:
+  start: "2026-03-11T14:00:00Z"
+  end: "2026-03-12T10:00:00Z"
+
+attack_excerpt:
+  - {"tid": "t1110", "name": "brute force", "tactic": "credential-access", "parent": null}
+  - {"tid": "t1110.001", "name": "password guessing", "tactic": "credential-access", "parent": "t1110"}
+  - {"tid": "t1110.003", "name": "password spraying", "tactic": "credential-access", "parent": "t1110"}
+  - {"tid": "t1059", "name": "command and scripting interpreter", "tactic": "execution", "parent": null}
+  - {"tid": "t1059.001", "name": "powershell", "tactic": "execution", "parent": "t1059"}
+  - {"tid": "t1071", "name": "application layer protocol", "tactic": "command-and-control", "parent": null}
+  - {"tid": "t1071.004", "name": "dns", "tactic": "command-and-control", "parent": "t1071"}
+  - {"tid": "t1048.003", "name": "exfiltration over unencrypted non-c2 protocol", "tactic": "exfiltration", "parent": "t1048"}
+  - {"tid": "t1566.001", "name": "spearphishing attachment", "tactic": "initial-access", "parent": "t1566"}
+  - {"tid": "t1547.001", "name": "registry run keys - startup folder", "tactic": "persistence", "parent": "t1547"}
+
+alerts:
+  - alert:
+      id: "CM-A-31"
+    "@timestamp": "2026-03-11T14:25:00Z"
+    status: "new"
+    rule:
+      id: "CM-R-0117"
+      name: "Auth: password failures across 40+ accounts from single source"
+      version: 3
+      severity: "high"
+      risk_score: 73
+      threat:
+        tactic: "UNMAPPED"
+        technique: "UNMAPPED"
+    entities:
+      src_ip: "203.0.113.66"
+      success_user: "m.reyes"
+    evidence:
+      event_ids: ["CM-0311-0140", "CM-0311-0142"]
+      query: "event.code:4625 AND source.ip:203.0.113.66"
+
+  - alert:
+      id: "CM-A-32"
+    "@timestamp": "2026-03-11T15:41:22Z"
+    status: "new"
+    rule:
+      id: "CM-R-0201"
+      name: "Endpoint: office app spawned hidden encoded interpreter"
+      version: 2
+      severity: "high"
+      risk_score: 80
+      threat:
+        tactic: "UNMAPPED"
+        technique: "UNMAPPED"
+    entities:
+      host: "WKS-ACCT-07"
+      user: "m.reyes"
+      parent_image: "WINWORD.EXE"
+      cmdline: "powershell.exe -nop -w hidden -enc JAB..."
+    evidence:
+      event_ids: ["CM-0311-0201"]
+      query: "process.parent.executable:*WINWORD.EXE AND process.executable:*powershell.exe"
+
+  - alert:
+      id: "CM-A-33"
+    "@timestamp": "2026-03-12T09:06:00Z"
+    status: "new"
+    rule:
+      id: "CM-R-0304"
+      name: "Network: periodic high-entropy TXT queries to single zone (command channel)"
+      version: 1
+      severity: "medium"
+      risk_score: 60
+      threat:
+        tactic: "UNMAPPED"
+        technique: "UNMAPPED"
+    entities:
+      host: "WKS-ENG-12"
+      zone: "tun.stonewick.example"
+      qtype: "TXT"
+      period_s: 300
+    evidence:
+      event_ids: ["CM-0312-0033"]
+      query: "dns.question.type:TXT AND dns.question.name:*tun.stonewick.example"
+
+layer_sample:
+  name: "coppermine demo"
+  domain: "enterprise-attack"
+  versions:
+    attack: "16"
+    navigator: "5.1.0"
+    layer: "4.5"
+  techniques:
+    - techniqueID: "T1110.003"
+      score: 1
+
+answer_keys:
+  L1.5:
+    q1: "t1110.003"
+    q2: "t1059.001"
+    q3: "t1071.004"
+    q4: "credential-access"
+    q5: "t1110"

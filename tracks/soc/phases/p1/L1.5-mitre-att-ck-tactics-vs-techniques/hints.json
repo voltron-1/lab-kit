@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Tactic = why, technique = how. In attack-excerpt.json a sub-technique has a non-null parent field. Match each alert to the behavior it describes, not to the tool named in it.",
+    "CM-A-31 = one source, many accounts, few passwords — look under Brute Force and pick the right sub-technique. CM-A-32: the interpreter is the technique. CM-A-33 says 'periodic command channel' — that is C2 over a protocol, not exfiltration. q4/q5 come straight from the tactic and parent fields of your q1 row.",
+    "q1=t1110.003 (spraying, not .001 guessing), q2=t1059.001, q3=t1071.004 (not t1048.003 — the stub describes a command channel), q4=credential-access, q5=t1110."
+  ]
+}
