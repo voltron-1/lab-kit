@@ -1,0 +1,3 @@
+- Cargo.toml = identity ([package]) + supply chain ([dependencies])
+- src/main.rs is the binary entry; src/lib.rs is the library the binary calls
+- cargo doc --no-deps builds locally what docs.rs hosts for every published crate

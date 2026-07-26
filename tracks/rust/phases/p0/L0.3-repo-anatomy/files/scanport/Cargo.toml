@@ -1,0 +1,7 @@
+[package]
+name = "scanport"
+version = "0.3.1"
+edition = "2021"
+description = "Tiny port-number sanity checker (teaching sample)"
+
+[dependencies]

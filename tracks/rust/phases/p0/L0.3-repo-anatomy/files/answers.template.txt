@@ -1,0 +1,18 @@
+# Answer file format for L0.3:
+# q1: Name of the crate declared in Cargo.toml
+q1=
+
+# q2: Relative path to the binary entry-point file (e.g. src/main.rs)
+q2=
+
+# q3: Relative path to the library file where parse_port is defined
+q3=
+
+# q4: Number of third-party dependencies declared under [dependencies]
+q4=
+
+# q5: Primary function of this project (a = scans remote hosts, b = validates port-number strings, c = benchmarks TCP throughput)
+q5=
+
+# q6: What is docs.rs? (a = hosted cargo doc output for published crates, b = language reference, c = crates.io mirror)
+q6=

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read Cargo.toml for q1 and q4; look at the file paths in scanport/src/ for q2 and q3.",
+    "answers.txt needs exact key-value pairs: q1=scanport, q2=src/main.rs, q3=src/lib.rs, q4=0, q5=b, q6=a.",
+    "Run `cd scanport && cargo run -- 22 99999 > ../run_out.txt && cargo doc --no-deps && cd ..` then fill answers.txt and re-check."
+  ]
+}
