@@ -1,0 +1,40 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "An ECS log record displays `event.ingested=14:04:00Z` and `@timestamp=14:00:33Z`. When did the authentication attempt actually occur on the host?",
+      "options": {
+        "a": "@timestamp (14:00:33Z)",
+        "b": "event.ingested (14:04:00Z)",
+        "c": "Whichever timestamp is later",
+        "d": "The syslog collector local header time"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why are SOC tickets, SIEM indexes, and timeline analysis standardized strictly on UTC?",
+      "options": {
+        "a": "A single shared clock orders events from hosts across any timezone without conversion errors",
+        "b": "UTC timestamps provide higher sub-millisecond precision",
+        "c": "Commercial SIEM license agreements mandate UTC storage",
+        "d": "Local wall-clock timestamps are illegal in enterprise environments"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Classic syslog text headers (e.g. `Mar 10 08:59:57`) omit which two critical elements required for precise timeline reconstruction?",
+      "options": {
+        "a": "Year and timezone offset",
+        "b": "Hostname and Process ID",
+        "c": "Seconds and milliseconds",
+        "d": "Username and source IP"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

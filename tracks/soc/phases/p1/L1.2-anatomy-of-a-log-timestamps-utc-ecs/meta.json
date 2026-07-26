@@ -1,0 +1,8 @@
+{
+  "id": "L1.2",
+  "title": "Anatomy of a log - timestamps, UTC discipline, ECS field names",
+  "type": "DECODE",
+  "objective": "Read one event in three log dialects, convert local syslog time to UTC, and order events by @timestamp using ECS field names.",
+  "gate": false,
+  "est_minutes": 15
+}

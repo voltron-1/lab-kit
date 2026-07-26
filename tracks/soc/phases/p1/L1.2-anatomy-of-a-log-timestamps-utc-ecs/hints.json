@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Pick the j.walsh 4625 and find it in all three files (grep j.walsh). Compare its three time strings before ordering anything.",
+    "raw-syslog.txt is Duluth local time (CDT, UTC-05:00) with no marker and no year; SystemTime and @timestamp are already UTC. Add 5 hours to every syslog time first.",
+    "Only @timestamp orders events: `jq -r '[.labels.exercise_id,.\"@timestamp\"]|@tsv' ecs.jsonl | sort -k2`. File order is ingest order and is wrong for two adjacent pairs."
+  ]
+}

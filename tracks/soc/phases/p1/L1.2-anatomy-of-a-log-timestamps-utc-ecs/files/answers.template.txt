@@ -1,0 +1,14 @@
+# UTC instant of the sshd "Accepted publickey" line, ISO-8601 lowercase, e.g. 2026-03-09t00:00:00z
+q1=
+
+# true chronological order of e1..e5, comma-joined, no spaces (e.g. e1,e2,e3,e4,e5)
+q2=
+
+# ECS field name carrying the client/source IP
+q3=
+
+# ECS field name carrying the Windows event number
+q4=
+
+# UTC offset of the syslog collector during the scenario week, +/-HH:MM (e.g. -05:00)
+q5=

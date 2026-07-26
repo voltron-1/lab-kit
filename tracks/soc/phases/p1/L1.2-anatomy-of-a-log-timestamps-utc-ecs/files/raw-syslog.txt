@@ -1,0 +1,5 @@
+Mar 10 08:59:57 web01 sshd[2214]: Accepted publickey for t.aoki from 192.0.2.45 port 60312 ssh2
+Mar 10 09:00:33 dc01 MSWinEventLog 4625 Security 1001 Tue Mar 10 09:00:33 2026 4625 Microsoft-Windows-Security-Auditing N/A N/A Success Audit DC01.coppermine.example An account failed to log on. Account Name: j.walsh Source Network Address: 203.0.113.66
+Mar 10 09:01:05 dc01 MSWinEventLog 256 DNS Server 2002 Tue Mar 10 09:01:05 2026 256 Microsoft-Windows-DNS-Server N/A N/A Success Audit DC01.coppermine.example DNS Server query fs01.coppermine.example type A from 10.20.31.112
+Mar 10 09:01:48 dc01 MSWinEventLog 4625 Security 1003 Tue Mar 10 09:01:48 2026 4625 Microsoft-Windows-Security-Auditing N/A N/A Success Audit DC01.coppermine.example An account failed to log on. Account Name: m.reyes Source Network Address: 203.0.113.66
+Mar 10 09:03:10 web01 sshd[2231]: Failed password for root from 192.0.2.150 port 44872 ssh2
