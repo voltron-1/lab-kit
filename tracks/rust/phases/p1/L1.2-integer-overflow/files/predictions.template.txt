@@ -1,0 +1,11 @@
+# Predict outcome of bump(255) under cargo run in DEBUG mode (panic|wrap|value):
+debug=
+
+# Predict printed value of bumped in cargo run --release mode (0..255):
+release=
+
+# Predict printed result of max.checked_add(1) (e.g. None):
+checked=
+
+# Predict printed result of max.wrapping_add(1) (e.g. 0):
+wrapped=
