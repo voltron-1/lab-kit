@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Five prediction keys; the grader names the wrong one — re-trace only that call through find_port.",
+    "p1/p2 print with {:?} so write them exactly as Debug prints an Option (Some(...) / None); p3 asks what unwrap_or(0) yields for a service NOT in the table; p4 is just the number in the if-let line.",
+    "Run it and transcribe: rustc sample.rs -o sample; ./sample; rustc broken.rs."
+  ]
+}
