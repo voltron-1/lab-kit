@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Seven prediction keys in answers.txt (strictmode, cdrisk, execflaw, sc2164, sc2006, blindspot, tell); check spelling.",
+    "strictmode missing flag is pipefail; cdrisk is wrongdir; execflaw & blindspot are evalhook; tell is comments.",
+    "Set strictmode=pipefail, cdrisk=wrongdir, execflaw=evalhook, sc2164=sc2164, sc2006=sc2006, blindspot=evalhook, tell=comments in answers.txt."
+  ]
+}

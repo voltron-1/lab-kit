@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A script that passes ShellCheck with zero warnings is...",
+      "options": {
+        "a": "Proven 100% secure and free of vulnerabilities",
+        "b": "Free of the syntax flaws ShellCheck is programmed to detect, but may still contain critical logic and trust flaws",
+        "c": "Automatically POSIX-compliant"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What happens if you double-quote the argument to `eval` (e.g. `eval \"$POST_HOOK\"`)?",
+      "options": {
+        "a": "It makes the command safe against arbitrary code execution",
+        "b": "It satisfies ShellCheck SC2086, but leaves the code execution vulnerability completely untouched",
+        "c": "It converts the variable into a read-only string"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why is an unguarded `cd $SRC_DIR` before `tar -czf ... .` dangerous?",
+      "options": {
+        "a": "If `cd` fails, the script continues executing and archives whatever directory it happened to be in",
+        "b": "The `cd` command is deprecated in modern Bash",
+        "c": "It causes significant runtime performance degradation"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

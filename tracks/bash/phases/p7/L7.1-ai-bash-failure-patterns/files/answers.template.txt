@@ -1,0 +1,21 @@
+# Answer file format for L7.1:
+# strictmode: Which missing preamble flag part is absent entirely? (pipefail|errexit|none)
+strictmode=
+
+# cdrisk: If `cd $SRC_DIR` fails, what does `tar -czf ... .` archive? (wrongdir|nothing|homedir)
+cdrisk=
+
+# execflaw: Which construct turns POST_HOOK env var into arbitrary execution? (evalhook|subshell|backtick)
+execflaw=
+
+# sc2164: Which ShellCheck code names the unguarded cd? (sc2164|sc2086|sc2006)
+sc2164=
+
+# sc2006: Which ShellCheck code names the legacy backticks? (sc2006|sc2164|sc2086)
+sc2006=
+
+# blindspot: Which of the flaws would a ShellCheck-clean rewrite still contain? (evalhook|backticks|quoting)
+blindspot=
+
+# tell: The clearest human tell of unreviewed AI-generated code here is the... (comments|indentation|filename)
+tell=
