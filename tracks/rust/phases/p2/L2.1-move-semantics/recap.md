@@ -1,0 +1,3 @@
+- assignment or a by-value call MOVES a String — the old name is dead at compile time
+- a move is a pointer handoff, not a copy; clone() is the explicit deep copy
+- E0382 = use of moved value; the error names both the move site and the use site

@@ -1,0 +1,11 @@
+# Predict printed value of beta (e.g. beta=intrusion):
+beta=
+
+# Predict printed value of size from register(gamma) (character count of "port-22"):
+size=
+
+# Predict printed value of delta from beta.clone():
+delta=
+
+# Predict compiler error code when compiling broken.rs (e.g. error=E0382):
+error=

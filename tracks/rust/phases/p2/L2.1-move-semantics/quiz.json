@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Why does Rust move a `String` on assignment instead of making an implicit copy?",
+      "options": {
+        "a": "Copying heap strings is explicitly forbidden by the language grammar",
+        "b": "`String` owns heap memory; an implicit copy would be expensive and risk double-free errors, so ownership transfers instead",
+        "c": "It is a temporary limitation of the compiler architecture"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "After a variable has been moved from, what state is the original variable in?",
+      "options": {
+        "a": "It contains a null pointer",
+        "b": "It is zero-filled",
+        "c": "It is compile-time dead — referencing or naming it at all is a build error"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which explicit method duplicates a `String`'s heap buffer instead of moving ownership?",
+      "answer_b64": "Y2xvbmU=",
+      "accept_b64": [
+        "Y2xvbmU=",
+        "Y2xvbmUoKQ==",
+        "LmNsb25l"
+      ]
+    }
+  ]
+}

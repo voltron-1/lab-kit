@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Four prediction keys (beta, size, delta, error) — the grader names each miss; no spaces around =.",
+    "Trace ownership line by line — let beta = alpha kills alpha; register(gamma) kills gamma; size is character count of \"port-22\"; error code is on rustc's first line.",
+    "Run it and transcribe: rustc sample.rs -o sample; ./sample; rustc broken.rs — the output and error tag give you all four values."
+  ]
+}

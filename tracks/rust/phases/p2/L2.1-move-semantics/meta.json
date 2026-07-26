@@ -1,0 +1,8 @@
+{
+  "id": "L2.1",
+  "title": "Move semantics — why the compiler \"took\" your variable",
+  "type": "PREDICT",
+  "objective": "Predict which String bindings die at each assignment or call, and read E0382 — use of a moved value — off real compiler output.",
+  "gate": false,
+  "est_minutes": 15
+}

@@ -1,0 +1,59 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "In Rust, variable bindings are ___ by default.",
+      "options": {
+        "a": "Mutable",
+        "b": "Immutable",
+        "c": "Uninitialized"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "When a `u8` integer overflows in a Cargo debug build (`cargo run`), what happens?",
+      "options": {
+        "a": "Performs silent two's complement wraparound",
+        "b": "Panics at runtime because overflow checks are enabled",
+        "c": "Triggers undefined behavior"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What happens when a `match` expression on an enum misses a variant?",
+      "options": {
+        "a": "Panics at runtime when that variant is matched",
+        "b": "Produces a compile error (`E0004`: non-exhaustive patterns)",
+        "c": "Silently executes the first arm"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "prompt": "What is Rust's type-system replacement for NULL pointers and sentinel values?",
+      "options": {
+        "a": "Integer 0",
+        "b": "`Option<T>` (`Some` or `None` values)",
+        "c": "Exceptions"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "prompt": "When a crate contains both `src/main.rs` and `src/lib.rs`, which file is the binary entry point?",
+      "options": {
+        "a": "src/lib.rs",
+        "b": "src/main.rs",
+        "c": "Whichever Cargo.toml names first"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
