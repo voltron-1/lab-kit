@@ -1,0 +1,8 @@
+{
+  "id": "L1.2",
+  "title": "Integers without footguns — overflow in debug vs release",
+  "type": "PREDICT",
+  "objective": "Predict the same u8 overflow panicking in debug and wrapping in release, and name the checked/wrapping alternatives (CWE-190).",
+  "gate": false,
+  "est_minutes": 15
+}

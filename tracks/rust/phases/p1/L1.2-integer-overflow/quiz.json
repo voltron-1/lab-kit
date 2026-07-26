@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is the default behavior of the Cargo debug profile when integer overflow occurs at runtime?",
+      "options": {
+        "a": "Wraps silently using two's complement",
+        "b": "Panics at runtime because overflow checks are enabled",
+        "c": "Invokes undefined behavior"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Which method on integer types returns `None` instead of panicking on overflow?",
+      "answer_b64": "Y2hlY2tlZF9hZGQ=",
+      "accept_b64": [
+        "Y2hlY2tlZF9hZGQ=",
+        "Y2hlY2tlZF9hZGQoKQ==",
+        "LmNoZWNrZWRfYWRk"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Regarding CWE-190, what is the primary risk of an un-checked integer increment on a release build of a Rust service?",
+      "options": {
+        "a": "Arbitrary memory corruption",
+        "b": "Silent wraparound causing unexpected logic errors or index corruption",
+        "c": "Immediate compiler rejection"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

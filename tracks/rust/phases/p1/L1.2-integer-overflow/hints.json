@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Two output files and four prediction keys — the grader names each missing item; re-run the exact redirects from the guided steps.",
+    "debug_out.txt must contain the panic text, so the debug run needs 2>&1 (panics print to stderr); release needs --release.",
+    "Run `cd overflow && cargo run > ../debug_out.txt 2>&1 || true && cargo run --release > ../release_out.txt 2>&1 && cd ..` then fill predictions.txt and re-check."
+  ]
+}

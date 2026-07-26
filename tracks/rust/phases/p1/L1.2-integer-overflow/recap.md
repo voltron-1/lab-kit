@@ -1,0 +1,3 @@
+- debug builds panic on overflow; release builds wrap silently — same source, two behaviors
+- wrapping_add / checked_add / saturating_add say what you MEANT — reviewers look for them
+- CWE-190: attacker-driven counters + small ints = DoS (debug) or logic corruption (release)
