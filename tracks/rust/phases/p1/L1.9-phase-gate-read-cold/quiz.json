@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Which compiler guarantee does `judge`'s `if/else` chain lack compared to an exhaustive `match` expression on an enum?",
+      "options": {
+        "a": "Runtime execution speed optimization",
+        "b": "A compile-time error if a new variant is added to the `Verdict` enum",
+        "c": "Shorter source code line count"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "In a release build of a Rust binary, what happens if an attacker drives `total += source.failures` past 255 on a `u8`?",
+      "options": {
+        "a": "The process panics immediately",
+        "b": "Silent two's complement wraparound occurs, corrupting metric totals",
+        "c": "The compiler generates a build error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "What symbol in a function parameter signature indicates 'this call borrows the argument without taking ownership'?",
+      "answer_b64": "Jg==",
+      "accept_b64": [
+        "Jg==",
+        "Ym9ycm93",
+        "cmVmZXJlbmNl",
+        "JnNvdXJjZQ=="
+      ]
+    }
+  ]
+}

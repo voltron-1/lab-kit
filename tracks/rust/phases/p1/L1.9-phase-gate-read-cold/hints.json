@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Ten prediction keys and a runnable ./triage binary — check answers.txt formatting (exact keys, no extra spaces).",
+    "q1-q3 are verdicts; q7 requires integer division (5 / 3 = 1, base 2 for non-internal = 3); q8-q10 evaluate borrows, Option, and CWE-190 overflow.",
+    "Run `rustc triage.rs -o triage && ./triage` to view outputs for q1-q6; trace q7-q10 using Phase 1 concepts."
+  ]
+}

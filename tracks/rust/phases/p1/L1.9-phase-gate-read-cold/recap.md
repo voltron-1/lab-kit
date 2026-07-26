@@ -1,0 +1,3 @@
+- you just read 60 lines of Rust cold — structs, enums, borrows, Option, expressions
+- integer division and small-int accumulators are where triage math quietly lies
+- gate passed: Phase 2 makes the borrow checker itself the subject
