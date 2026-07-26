@@ -1,0 +1,8 @@
+{
+  "id": "L1.9",
+  "title": "Phase gate: read a 60-line program cold, answer 10 questions",
+  "type": "AUDIT",
+  "objective": "Prove Phase 1: read a 60-line triage tool cold and answer 10 questions about its behavior, its types, and its one planted flaw.",
+  "gate": true,
+  "est_minutes": 20
+}

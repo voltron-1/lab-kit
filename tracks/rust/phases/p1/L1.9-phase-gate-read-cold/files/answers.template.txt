@@ -1,0 +1,30 @@
+# Answer file format for L1.9 (Phase 1 Gate):
+# q1: Verdict printed for build-server (Benign|Suspicious|Hostile)
+q1=
+
+# q2: Verdict printed for laptop-7 (Benign|Suspicious|Hostile)
+q2=
+
+# q3: Verdict printed for 203.0.113.9 (Benign|Suspicious|Hostile)
+q3=
+
+# q4: Number printed after `hostile:`
+q4=
+
+# q5: Number printed after `total failures:`
+q5=
+
+# q6: Port number printed after `watch port`
+q6=
+
+# q7: Evaluated score for an internal=false, failures=5 source (integer division!)
+q7=
+
+# q8: Why does judge(source) leave sources array usable? (a = Source is Copy, b = judge takes &Source borrow, c = judge clones)
+q8=
+
+# q9: What does service_port("http") return? (a = 0, b = None, c = panics)
+q9=
+
+# q10: What is the planted flaw/reviewer flag in this code? (a = hostile_count can go negative, b = total: u8 can overflow in CWE-190, c = String::from allocates too much)
+q10=
