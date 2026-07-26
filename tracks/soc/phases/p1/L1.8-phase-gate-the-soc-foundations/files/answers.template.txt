@@ -1,0 +1,24 @@
+# Answer format for alerts CM-A-51 through CM-A-55:
+# qNa: source slug from sources-catalog.md (e.g. entra-signin, sysmon, zeek-dns, win-security, linux-auth)
+# qNb: ATT&CK technique ID from attack-excerpt.json (e.g. t1110.003, t1059.001)
+# qNc: option letter from evidence-menu.md (a|b|c)
+
+q1a=
+q1b=
+q1c=
+
+q2a=
+q2b=
+q2c=
+
+q3a=
+q3b=
+q3c=
+
+q4a=
+q4b=
+q4c=
+
+q5a=
+q5b=
+q5c=

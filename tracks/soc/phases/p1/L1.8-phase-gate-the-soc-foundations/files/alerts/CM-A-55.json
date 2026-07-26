@@ -1,0 +1,31 @@
+{
+  "alert": {
+    "id": "CM-A-55"
+  },
+  "@timestamp": "2026-03-12T20:20:15Z",
+  "status": "new",
+  "rule": {
+    "id": "CM-R-0191",
+    "name": "Cron entry installed during interactive root SSH session",
+    "version": 1,
+    "severity": "high",
+    "risk_score": 77,
+    "threat": {
+      "tactic": "persistence",
+      "technique": null
+    }
+  },
+  "entities": {
+    "host": "WEB01",
+    "user": "root",
+    "source.ip": "203.0.113.66"
+  },
+  "evidence": {
+    "event_ids": [
+      "CM-0312-0455",
+      "CM-0312-0457",
+      "CM-0312-0460"
+    ],
+    "query": "index=linux_auth"
+  }
+}

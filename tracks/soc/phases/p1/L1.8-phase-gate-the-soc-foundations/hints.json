@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Each alert's evidence.query names an index, and sources-catalog.md maps planes to slugs — decide identity vs host vs network vs Linux syslog before touching the technique column.",
+    "For qNb, filter attack-excerpt.json by the alert's tactic, then match what the RULE's logic actually detects, not the wider story; for qNc the right pull is always raw events on the same host and plane the rule fired on.",
+    "A1 fired on a cloud sign-in policy, not a Windows 4624; A4's 4720/4732 are Windows Security codes from FS01; every wrong menu option is wrong-host, wrong-plane, or enrichment-not-evidence — eliminate those three and the letter is what's left."
+  ]
+}

@@ -1,0 +1,3 @@
+- An alert is the end of a pipeline — adversary action, telemetry, log, normalized event, rule, alert — and triage walks it backwards.
+- Source plus technique tells you exactly which raw evidence to pull; whois and geoip are enrichment, never a substitute for the events in evidence.event_ids.
+- Phase 1 gate passed: five alerts, fifteen keyed answers, all grounded in CM- event ids — Phase 2 puts a live queue in front of you.

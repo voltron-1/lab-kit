@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Which sequence correctly orders the SOC telemetry pipeline?",
+      "options": {
+        "a": "Adversary Action → Telemetry → Log → Normalized Event → Detection Rule → Alert",
+        "b": "Alert → Detection Rule → Log → Telemetry → Adversary Action",
+        "c": "Telemetry → Adversary Action → Alert → Normalized Event"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "When an analyst picks up Alert CM-A-52 to perform triage, in which direction are they traversing the pipeline?",
+      "options": {
+        "a": "Forwards: from adversary action toward the alert",
+        "b": "Backwards: from the alert toward the originating adversary action",
+        "c": "Neither: triage only evaluates the alert payload itself"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Rule CM-R-0181 fires on user t.aoki adding an account to Administrators under approved change ticket CHG-2143. The rule matched the exact behavior. What is the disposition?",
+      "options": {
+        "a": "True Positive (TP)",
+        "b": "False Positive (FP)",
+        "c": "Benign True Positive (BTP)"
+      },
+      "answer_b64": "Yw=="
+    }
+  ]
+}
