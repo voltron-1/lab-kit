@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader reads predictions.txt — four exact keys (x, count, label, error), no spaces around =.",
+    "Trace each shadowing line one at a time — each let x starts from the previous x's value; label becomes the length of \"TCP\"; the error code is the error[E....] tag on the first line rustc prints.",
+    "Compile and run both files and transcribe what you see: rustc sample.rs -o sample; ./sample; rustc broken.rs — the run is the answer sheet."
+  ]
+}

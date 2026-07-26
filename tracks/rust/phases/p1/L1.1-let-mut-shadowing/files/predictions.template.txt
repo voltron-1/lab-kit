@@ -1,0 +1,7 @@
+# Predict the output value for each variable print in sample.rs:
+x=
+count=
+label=
+
+# Predict the compiler error code produced by `rustc broken.rs` (e.g. error=E0384):
+error=

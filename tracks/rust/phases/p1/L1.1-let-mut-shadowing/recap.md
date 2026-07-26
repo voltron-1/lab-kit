@@ -1,0 +1,3 @@
+- immutable by default — mutation is an explicit opt-in with mut
+- let x = ... again is shadowing: a new binding, new type allowed, old one gone
+- E0384 = assigned twice without mut; the compiler names the fix
