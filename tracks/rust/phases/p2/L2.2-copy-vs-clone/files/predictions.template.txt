@@ -1,0 +1,11 @@
+# Predict printed value of b (e.g. b=41):
+b=
+
+# Predict printed width w from width(scan) (25 - 20):
+w=
+
+# Predict printed value of scan.first after calling width(scan):
+first=
+
+# Predict compiler error code when compiling broken.rs (e.g. error=E0204):
+error=

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Four prediction keys (b, w, first, error) — the grader names each miss; no spaces around =.",
+    "a/b are plain integers (Copy — both live); PortRange derives Copy, so scan survives the by-value call; w = last - first; the error code comes from compiling broken.rs.",
+    "Run both files and transcribe: rustc sample.rs -o sample; ./sample; rustc broken.rs."
+  ]
+}

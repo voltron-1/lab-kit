@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "When is a struct allowed to derive the `Copy` trait?",
+      "options": {
+        "a": "When the total size of the struct is under 64 bytes",
+        "b": "When every field in the struct is itself `Copy` and the struct owns no heap resources",
+        "c": "When the struct also derives `Debug` and `Default`"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why does Rust make `Copy` implicit for primitive types while requiring explicit `.clone()` calls for `String`?",
+      "options": {
+        "a": "Primitive types are faster to compile",
+        "b": "Bitwise `Copy` is invisible at call sites and only allowed where duplication is trivially cheap; heap allocation is expensive and must remain visible during code review via `.clone()`",
+        "c": "`Copy` and `Clone` behave identically at runtime"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Can a struct containing a `String` field derive `Copy`? (yes/no)",
+      "answer_b64": "bm8=",
+      "accept_b64": [
+        "bm8="
+      ]
+    }
+  ]
+}
