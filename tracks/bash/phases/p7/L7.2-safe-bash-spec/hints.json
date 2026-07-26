@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "spec.md needs all 6 section headings and all 6 commitment tags (preamble=, quoting=, validation=, forbidden=, errors=, acceptance=); check answers.txt keys.",
+    "Tag values: preamble=set -euo pipefail, quoting=always, validation=reject-unset, forbidden=evalstring, errors=fail-loud, acceptance=shellcheck-clean.",
+    "answers.txt keys: whystrict=silentsuccess, whyaccept=mechanical, whyban=code."
+  ]
+}

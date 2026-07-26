@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Why is including 'shellcheck-clean' in a spec's acceptance criteria important?",
+      "options": {
+        "a": "It converts part of code review into a mechanical check that runs automatically before human review",
+        "b": "It causes the AI model to generate code faster",
+        "c": "It replaces human code review entirely"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why does a prompt spec that simply says 'write safe Bash' fail?",
+      "options": {
+        "a": "The prompt is too long",
+        "b": "'Safe' is ambiguous and non-verifiable — the spec must explicitly name the preamble, quoting rule, forbidden constructs, and linters",
+        "c": "AI models ignore all system prompts"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why must input validation rules be explicitly stated in the prompt spec?",
+      "options": {
+        "a": "AI models will not include input validation on their own, and unvalidated input leads to injection vulnerabilities",
+        "b": "Input validation is strictly required by the POSIX standard",
+        "c": "It improves script execution speed"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
