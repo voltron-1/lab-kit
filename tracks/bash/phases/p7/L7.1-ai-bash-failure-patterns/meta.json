@@ -1,0 +1,8 @@
+{
+  "id": "L7.1",
+  "title": "Why AI Bash is dangerous by default — the recurring failure patterns",
+  "type": "AUDIT",
+  "objective": "Read a script in the style AI produces by default, name its five recurring failure patterns, and state which of them ShellCheck would never have caught.",
+  "gate": false,
+  "est_minutes": 18
+}

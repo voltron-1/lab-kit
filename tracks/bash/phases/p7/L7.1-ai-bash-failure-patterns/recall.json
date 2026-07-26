@@ -1,0 +1,59 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A runbook script that is idempotent...",
+      "options": {
+        "a": "May only be executed once",
+        "b": "Is safe to re-run: an unchanged system results in a no-op",
+        "c": "Always requires the `--force` flag"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A container entrypoint script ends in `exec \"$@\"` so that...",
+      "options": {
+        "a": "The service process becomes PID 1 and receives SIGTERM directly on container stop",
+        "b": "The parent shell can clean up temporary environment variables afterwards",
+        "c": "The container configuration is re-rendered on exit"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "In a systemd unit file, `After=` orders unit startup sequence — which directive actually pulls the target unit in?",
+      "options": {
+        "a": "Requires=",
+        "b": "Wants=",
+        "c": "PartOf="
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "prompt": "Including `set -euo pipefail` in a CI build script prevents...",
+      "options": {
+        "a": "A stage failing mid-pipeline from exiting 0 and shipping a broken artifact under a green build",
+        "b": "Slow network build steps",
+        "c": "YAML syntax parsing errors"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "prompt": "The 'download -> validate -> atomic rename' deploy pattern exists so that...",
+      "options": {
+        "a": "The download step runs faster over HTTP/2",
+        "b": "The deployed file is either the complete old version or complete new version, never a partial file",
+        "c": "The checksum verification step can be bypassed"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

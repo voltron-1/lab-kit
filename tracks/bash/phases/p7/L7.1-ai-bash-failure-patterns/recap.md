@@ -1,0 +1,3 @@
+- AI Bash fails the same five ways every time: no strict mode, unquoted expansions, unvalidated input, an unguarded cd, and an eval sold as flexibility.
+- ShellCheck catches the syntax half of that list; it never asks for strict mode, never validates input, and never judges trust.
+- Cheerful comments explaining a dangerous feature are the fastest human tell that nobody reviewed the output.
