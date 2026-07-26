@@ -4,6 +4,7 @@
       "id": 1,
       "type": "text",
       "prompt": "Per whois-stonewick.txt, on what date was stonewick.example registered? (YYYY-MM-DD)",
+      "answer_b64": "MjAyNi0wMi0yNw==",
       "accept_b64": [
         "MjAyNi0wMi0yNw==",
         "MjAyNi0wMi0yN3QxODo0NDowOXo="

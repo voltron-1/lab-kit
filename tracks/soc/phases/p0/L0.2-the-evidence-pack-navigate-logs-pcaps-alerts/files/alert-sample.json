@@ -1,0 +1,33 @@
+{
+  "alert": {
+    "id": "CM-A-0001"
+  },
+  "@timestamp": "2026-03-11T14:07:55Z",
+  "rule": {
+    "id": "CM-R-0112",
+    "name": "Multiple failed logons - single source",
+    "version": 3,
+    "severity": "low",
+    "risk_score": 21,
+    "threat": {
+      "tactic": "credential-access",
+      "technique": "T1110"
+    }
+  },
+  "entities": {
+    "source": {
+      "ip": "203.0.113.66"
+    },
+    "host": {
+      "name": "DC01"
+    }
+  },
+  "evidence": {
+    "event_ids": [
+      "CM-0311-0107",
+      "CM-0311-0111"
+    ],
+    "query": "event.code:4625 AND source.ip:203.0.113.66"
+  },
+  "status": "new"
+}

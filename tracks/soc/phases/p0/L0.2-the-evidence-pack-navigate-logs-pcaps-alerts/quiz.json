@@ -1,0 +1,40 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A raw evidence file in your workspace contains 203.0.113.66. Per the pack contract, you should:",
+      "options": {
+        "a": "Defang it in the raw evidence file",
+        "b": "Leave the file raw; defang only in your own prose, notes, and answers.txt",
+        "c": "Delete the IP from the evidence file",
+        "d": "Re-generate the evidence package"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which SIEM alert field lists the raw log event IDs that caused the rule to fire?",
+      "options": {
+        "a": "entities",
+        "b": "rule.threat.technique",
+        "c": "evidence.event_ids",
+        "d": "status"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "In event ID CM-0311-0142, what does the `0311` component encode?",
+      "options": {
+        "a": "Sequence number",
+        "b": "Month and day (March 11)",
+        "c": "Rule identification number",
+        "d": "Host subnet octet"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
