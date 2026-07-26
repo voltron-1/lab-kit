@@ -1,0 +1,8 @@
+{
+  "id": "L0.3",
+  "title": "The SOC in one lab - tiers, the alert lifecycle, what Tier 1 owns vs escalates",
+  "type": "DECODE",
+  "objective": "Split five Coppermine alerts into Tier 1 handles vs Tier 1 escalates using the charter's lifecycle and four escalation triggers",
+  "gate": true,
+  "est_minutes": 20
+}

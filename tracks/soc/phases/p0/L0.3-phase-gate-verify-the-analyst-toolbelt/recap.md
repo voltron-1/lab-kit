@@ -1,0 +1,3 @@
+- Tier 1 triages, dispositions, scopes first, and feeds tickets and tuning notes; Tier 2 investigates and responds; Tier 3 hunts and builds detections.
+- An alert moves new to triage to disposition: close it as FP or BTP, escalate only a TP toward containment.
+- Escalate on confirmed compromise, more than one host, credential compromise, or any response needing containment authority; everything else Tier 1 handles and documents.

@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "An alert is closed as Benign True Positive (BTP). What occurred?",
+      "options": {
+        "a": "Rule logic misfired on benign background noise",
+        "b": "The rule fired accurately on real behavior, but the activity was legitimate and authorized",
+        "c": "It was a true positive escalated directly to Tier 2",
+        "d": "Required telemetry was missing from the SIEM index"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "In the alert lifecycle (New -> Triage -> Disposition -> Containment), which verdict is the only one that moves an alert forward toward containment? Answer with the 2-letter verdict code.",
+      "answer_b64": "dHA=",
+      "accept_b64": [
+        "dHA=",
+        "dHJ1ZSBwb3NpdGl2ZQ=="
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Per sop-excerpt.md, which action is outside Tier 1 authority?",
+      "options": {
+        "a": "Closing an alert as False Positive (FP)",
+        "b": "Filing a detection tuning request ticket",
+        "c": "Attaching evidence event IDs to a ticket",
+        "d": "Isolating a compromised workstation host from the network"
+      },
+      "answer_b64": "ZA=="
+    }
+  ]
+}
