@@ -1,0 +1,40 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "CM-A-1024 displays `rule.severity` 'high' and `risk_score` 73. If the same rule fires tomorrow on 6 accounts instead of 42, which metric changes?",
+      "options": {
+        "a": "rule.severity",
+        "b": "risk_score",
+        "c": "Both rule.severity and risk_score",
+        "d": "Neither metric changes"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What does the `evidence.event_ids` array in a SIEM alert guarantee?",
+      "options": {
+        "a": "Every log event associated with the entire security incident",
+        "b": "Exactly the raw log events that satisfied the detection rule trigger logic",
+        "c": "All log events emitted from the source IP during that calendar day",
+        "d": "Events that have already been reviewed by a Tier 2 analyst"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "`events/raw.jsonl` contains a 4624 logon success (`CM-0311-0142`) that `alert-CM-A-1024.json` never cited. Why is this critical for triage?",
+      "options": {
+        "a": "It is not critical because the detection rule only queries 4625 failures",
+        "b": "It proves the password spray alert was a false positive",
+        "c": "The cited evidence was incomplete — the uncited success escalates the incident from an attempted spray to a confirmed credential compromise",
+        "d": "It indicates the SIEM agent dropped event records"
+      },
+      "answer_b64": "Yw=="
+    }
+  ]
+}

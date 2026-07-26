@@ -1,0 +1,3 @@
+- An alert is a claim: rule metadata says what pattern fired, and evidence.event_ids says exactly which events made it fire.
+- rule.severity is static and set by the rule author; risk_score is computed per alert — never confuse the two when working a queue.
+- Cited evidence can be incomplete — CM-A-1024 cites three failures but not the one success, and the success is what makes it urgent.

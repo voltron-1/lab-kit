@@ -1,0 +1,42 @@
+{
+  "alert": {
+    "id": "CM-A-1024"
+  },
+  "@timestamp": "2026-03-11T14:26:04Z",
+  "status": "new",
+  "rule": {
+    "id": "CM-R-0117",
+    "name": "Password Spray - Many Accounts, One Source",
+    "version": 3,
+    "severity": "high",
+    "risk_score": 73,
+    "threat": {
+      "tactic": {
+        "id": "TA0006",
+        "name": "credential-access"
+      },
+      "technique": {
+        "id": "T1110.003",
+        "name": "Password Spraying"
+      }
+    }
+  },
+  "entities": {
+    "source.ip": "203.0.113.66",
+    "user.names_sampled": [
+      "a.brandt",
+      "d.okafor",
+      "p.silva"
+    ],
+    "user.names_total": 42,
+    "host.name": "DC01"
+  },
+  "evidence": {
+    "event_ids": [
+      "CM-0311-0107",
+      "CM-0311-0121",
+      "CM-0311-0135"
+    ],
+    "query": "event.code:4625 AND source.ip:203.0.113.66 AND @timestamp:[2026-03-11T14:05:00Z TO 2026-03-11T14:25:00Z]"
+  }
+}

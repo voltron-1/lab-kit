@@ -1,0 +1,14 @@
+# rule id, lowercase (e.g. cm-r-0100)
+q1=
+
+# dotted JSON path of the STATIC rule-assigned severity field (e.g. rule.severity)
+q2=
+
+# 3 cited event ids, lowercase, comma-joined, no spaces, in evidence.event_ids array order
+q3=
+
+# the one entity value unchanged across all 3 cited events (an IPv4 address)
+q4=
+
+# event.id of the auth SUCCESS the alert did NOT cite (e.g. cm-0311-0000)
+q5=

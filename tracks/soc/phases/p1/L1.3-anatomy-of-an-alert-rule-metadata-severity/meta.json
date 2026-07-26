@@ -1,0 +1,8 @@
+{
+  "id": "L1.3",
+  "title": "Anatomy of an alert - rule metadata, severity, and the evidence behind it",
+  "type": "DECODE",
+  "objective": "Read a SIEM alert as a structured claim: rule metadata, static severity vs dynamic risk_score, and the exact events cited as evidence.",
+  "gate": false,
+  "est_minutes": 15
+}
