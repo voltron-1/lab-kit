@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Three prediction keys (alias, max, error) — the grader names the miss; no spaces around =.",
+    "max is the character count of the longer hostname — count \"core-router\"; the broken file calls a mutating method (push_str) through a read-only borrow.",
+    "Run and transcribe: rustc sample.rs -o sample; ./sample; rustc broken.rs."
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "L2.3",
+  "title": "Shared borrows — `&`",
+  "type": "PREDICT",
+  "objective": "Predict a program where multiple & borrows coexist and the owner survives every call, and read the rejection when a & borrow tries to mutate.",
+  "gate": false,
+  "est_minutes": 10
+}

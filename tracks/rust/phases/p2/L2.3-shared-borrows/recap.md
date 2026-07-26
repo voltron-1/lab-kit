@@ -1,0 +1,3 @@
+- & = shared borrow: any number may coexist, all read-only, the owner keeps ownership
+- a &-taking function costs the caller nothing — the signature promises it up front
+- mutation through & is refused: shared means look, don't touch

@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "How many simultaneous shared references (`&T`) to a single value are allowed at the same time?",
+      "options": {
+        "a": "Exactly one",
+        "b": "At most two",
+        "c": "Any number of shared references may coexist"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "After passing `&primary` into `longest_len(&primary, &backup)`, what happens to ownership of `primary`?",
+      "options": {
+        "a": "Ownership is moved into `longest_len`",
+        "b": "Ownership remains with `main` because `longest_len` only borrowed a read-only reference",
+        "c": "`primary` is cloned on the heap"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "In its compiler diagnostic messages, Rust often calls a `&T` borrow an ___ borrow (immutable/mutable).",
+      "answer_b64": "aW1tdXRhYmxl",
+      "accept_b64": [
+        "aW1tdXRhYmxl"
+      ]
+    }
+  ]
+}
