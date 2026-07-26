@@ -1,0 +1,9 @@
+# Answer file format for L1.6:
+# q1: How do Rust enums differ from traditional C enums? (a = identical just namespaced, b = each variant can carry its own typed payload as a tagged union, c = bitflag set)
+q1=
+
+# q2: What does the arm `Event::Login { user, success: true }` match? (a = every Login, b = only Logins where success is true binding user, c = any variant with user)
+q2=
+
+# q3: Exact line printed for the PortScan event (e.g. scan 1-1024)
+q3=

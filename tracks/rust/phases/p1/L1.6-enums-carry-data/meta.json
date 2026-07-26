@@ -1,0 +1,8 @@
+{
+  "id": "L1.6",
+  "title": "Enums are not C enums — variants that carry data",
+  "type": "DECODE",
+  "objective": "Read an enum whose variants carry payloads and the match arms that destructure them — the tagged union C never gave you.",
+  "gate": false,
+  "est_minutes": 15
+}

@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Where does the payload of a data-carrying Rust enum variant live?",
+      "options": {
+        "a": "In a separate heap lookup table",
+        "b": "Directly inside the enum instance (discriminant tag plus active variant fields)",
+        "c": "In global static memory"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why does `match event { Event::Heartbeat => ... }` alone fail to compile?",
+      "options": {
+        "a": "Heartbeat contains no inner payload",
+        "b": "`match` expressions in Rust must exhaustively handle every enum variant",
+        "c": "`match` requires a wildcard arm as its very first branch"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "In `describe`, what is the exact type of parameter `event` as written in the signature?",
+      "answer_b64": "JkV2ZW50",
+      "accept_b64": [
+        "JkV2ZW50",
+        "JmV2ZW50"
+      ]
+    }
+  ]
+}
