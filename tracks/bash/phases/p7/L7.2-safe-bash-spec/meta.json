@@ -1,0 +1,8 @@
+{
+  "id": "L7.2",
+  "title": "The safe-Bash spec — strict mode, quoting, and shellcheck-clean as acceptance criteria",
+  "type": "DIRECT",
+  "objective": "Write a reusable spec that forces an AI to produce hardened Bash, with shellcheck-clean as a stated acceptance criterion rather than a hope.",
+  "gate": false,
+  "est_minutes": 15
+}

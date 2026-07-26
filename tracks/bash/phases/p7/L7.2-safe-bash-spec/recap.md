@@ -1,0 +1,3 @@
+- A spec that says "be safe" produces nothing; a spec that names the preamble, the quoting rule, the banned construct, and the check produces hardened output.
+- Acceptance criteria must be mechanical: shellcheck-clean is verifiable before a human reads a single line.
+- The spec is reusable — it is the artifact you paste at the start of every future request, not a one-off.

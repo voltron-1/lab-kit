@@ -1,0 +1,9 @@
+# Answer file format for L7.2:
+# whystrict: Without the preamble, a failing middle command produces a... (silentsuccess|crash|hang)
+whystrict=
+
+# whyaccept: Naming shellcheck-clean as acceptance criteria makes review... (mechanical|optional|faster)
+whyaccept=
+
+# whyban: The forbidden construct is banned because it re-parses data as... (code|text|json)
+whyban=
