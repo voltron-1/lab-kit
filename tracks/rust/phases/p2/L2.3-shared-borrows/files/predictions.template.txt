@@ -1,0 +1,8 @@
+# Predict printed value of alias (e.g. alias=bastion-01):
+alias=
+
+# Predict returned max length from longest_len(&primary, &backup) (character count of "core-router"):
+max=
+
+# Predict compiler error code when compiling broken.rs (e.g. error=E0596):
+error=
