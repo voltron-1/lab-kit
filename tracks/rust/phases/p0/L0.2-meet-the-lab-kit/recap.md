@@ -1,0 +1,3 @@
+- lab check = check.sh grader + quiz, 3/3 — fail costs nothing but a rerun
+- this track grades key=value answer files: exact keys, no spaces around =
+- lab resume replays your last recap — 30-second re-entry is the contract

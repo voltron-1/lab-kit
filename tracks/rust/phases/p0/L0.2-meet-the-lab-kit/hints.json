@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader wants exactly two files from steps 4–5 — compare your workspace against the step list.",
+    "answers.txt needs exactly q1=/q2=/q3= lines with the letter or number, no spaces; location.txt must be written from inside workspace/rust/L0.2.",
+    "Re-read kit-notes.txt lines about resume, the hint ladder, and failed checks; the three answers are all in there — then pwd > location.txt from the workspace and re-check."
+  ]
+}
