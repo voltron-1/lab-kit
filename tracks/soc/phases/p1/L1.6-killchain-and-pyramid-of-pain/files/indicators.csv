@@ -1,0 +1,7 @@
+id,indicator_type,value,first_seen_in_incident
+i1,sha256,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,2026-03-11T15:02:00Z
+i2,ip,203.0.113.66,2026-03-11T15:46:02Z
+i3,domain,c2.stonewick.example,2026-03-11T15:46:02Z
+i4,filename,invoice_2026-03.docm,2026-03-11T15:02:00Z
+i5,user-agent,Mozilla/5.0 (WindowsPowerShell/5.1),2026-03-11T15:41:05Z
+i6,behavior,Office parent spawning powershell with -enc,2026-03-11T15:41:07Z

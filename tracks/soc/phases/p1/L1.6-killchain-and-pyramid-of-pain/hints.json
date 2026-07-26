@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "For each beat ask 'what is the attacker DOING at this instant', not 'what tool shows up'. For each indicator ask what it would cost the ATTACKER to swap it, not how hard it is for you to spot.",
+    "Beats that happen entirely off Coppermine's network sit before delivery; the Run key is about surviving reboot, not about code first running. On the pyramid, strings an attacker edits in a config (filenames, user-agents) sit one band, habits of how they operate sit at the top.",
+    "Beat B is payload construction = weaponization; D is code executing = exploitation; E is persistence = installation. i1 is a hash (trivial), i3 a domain (simple), i5 a network artifact (annoying); the row they would have to retrain themselves to replace is the behavior row."
+  ]
+}

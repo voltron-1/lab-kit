@@ -1,0 +1,31 @@
+scenario: s1-killchain
+window:
+  start: "2026-03-09T00:00:00Z"
+  end: "2026-03-13T23:59:59Z"
+
+attacker_actions:
+  - {tag: A, stage: recon, ts: "2026-03-09T13:05:00Z", prose: "WHOIS lookup reveals domain copperm1ne-billing[.]example was newly registered."}
+  - {tag: B, stage: weaponization, ts: "2026-03-10T18:40:00Z", prose: "VBA macro project built inside malicious document invoice_2026-03.docm on attacker infrastructure."}
+  - {tag: C, stage: delivery, ts: "2026-03-11T15:02:00Z", prose: "Spearphishing email from billing@copperm1ne-billing[.]example (sender IP 198.51.100.71) delivered to m.reyes containing invoice_2026-03.docm."}
+  - {tag: D, stage: exploitation, ts: "2026-03-11T15:41:07Z", prose: "User opens attachment; macros execute and WINWORD.EXE spawns powershell.exe -nop -w hidden -enc to fetch stage-2 payload from hxxps://cdn.stonewick[.]example/."}
+  - {tag: E, stage: installation, ts: "2026-03-11T15:41:20Z", prose: "Persistence established by writing a registry run key value under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run."}
+  - {tag: F, stage: c2, ts: "2026-03-11T15:46:02Z", prose: "Encrypted C2 beaconing initiated to c2.stonewick[.]example (203.0.113.66:443) every 300 seconds."}
+  - {tag: G, stage: actions, ts: "2026-03-11T16:32:00Z", prose: "Accounts Payable invoice data gathered and staged to SMB share \\\\FS01\\finance."}
+
+indicators:
+  - {id: i1, type: sha256, value: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", level: trivial, first_seen: "2026-03-11T15:02:00Z"}
+  - {id: i2, type: ip, value: "203.0.113.66", level: easy, first_seen: "2026-03-11T15:46:02Z"}
+  - {id: i3, type: domain, value: "c2.stonewick.example", level: simple, first_seen: "2026-03-11T15:46:02Z"}
+  - {id: i4, type: filename, value: "invoice_2026-03.docm", level: annoying, first_seen: "2026-03-11T15:02:00Z"}
+  - {id: i5, type: user-agent, value: "Mozilla/5.0 (WindowsPowerShell/5.1)", level: annoying, first_seen: "2026-03-11T15:41:05Z"}
+  - {id: i6, type: behavior, value: "Office parent spawning powershell with -enc", level: tough, first_seen: "2026-03-11T15:41:07Z"}
+
+answer_keys:
+  L1.6:
+    q1: "weaponization"
+    q2: "exploitation"
+    q3: "installation"
+    q4: "trivial"
+    q5: "simple"
+    q6: "annoying"
+    q7: "i6"
