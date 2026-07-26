@@ -241,6 +241,22 @@ def generate_s1_alert_anatomy(scen: dict):
     if "answer_keys" in scen and "L1.3" in scen["answer_keys"]:
         sync_key_block(l13_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.3"])
 
+def generate_s1_sigma_read(scen: dict):
+    l14_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p1" / "L1.4-reading-a-sigma-rule-logsource-detection-condition"
+    if not (l14_dir / "check.sh").exists():
+        return
+    files_dir = l14_dir / "files"
+    
+    # 1. rule-encoded-powershell.yml
+    write_file(files_dir / "rule-encoded-powershell.yml", scen["sigma_rule"].strip() + "\n")
+    
+    # 2. candidates.jsonl
+    cand_lines = "\n".join([json.dumps(cand) for cand in scen["candidates"]]) + "\n"
+    write_file(files_dir / "candidates.jsonl", cand_lines)
+
+    if "answer_keys" in scen and "L1.4" in scen["answer_keys"]:
+        sync_key_block(l14_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.4"])
+
 def main():
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
@@ -260,6 +276,8 @@ def main():
             generate_s1_log_anatomy(scen)
         elif scen_id == "s1-alert-anatomy":
             generate_s1_alert_anatomy(scen)
+        elif scen_id == "s1-sigma-read":
+            generate_s1_sigma_read(scen)
 
 if __name__ == "__main__":
     main()

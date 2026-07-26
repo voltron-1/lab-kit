@@ -1,0 +1,3 @@
+- A Sigma rule reads top-down: logsource scopes the stream, named detection blocks test fields, and one condition line combines them — an event from the wrong stream never reaches the field tests.
+- `and not <filter>` is how detection engineers carve out known-good; an event a filter suppresses was seen and excused, which is the seed of the BTP verdict.
+- `level:` is the author's severity estimate, never a verdict, and brittle selectors (powershell.exe but not pwsh.exe) are exactly why rules get tuned.

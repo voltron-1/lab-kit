@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read the rule top-down: logsource first (which stream is this rule even allowed to see?), then each named detection block, then the one condition line that combines them. One candidate event is not even from the right stream.",
+    "Map fields before matching: Image=process.executable, CommandLine=process.command_line, ParentImage=process.parent.executable. The condition needs BOTH selections true AND the filter false — check q2's parent path and q4's executable basename character by character.",
+    "Only the WINWORD->powershell event fires (q1=y, rest n). q2's event matches both selections but its parent ends in \\veeam.backup.svc.exe, so the named key filter_backup suppresses it (q5). q4's binary ends in pwsh.exe, which '\\powershell.exe' can never match — that basename is q6."
+  ]
+}
