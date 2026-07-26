@@ -192,6 +192,39 @@ def generate_s1_telemetry(scen: dict):
     if "answer_keys" in scen and "L1.1" in scen["answer_keys"]:
         sync_key_block(l11_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.1"])
 
+def generate_s1_log_anatomy(scen: dict):
+    l12_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p1" / "L1.2-anatomy-of-a-log-timestamps-utc-ecs"
+    if not (l12_dir / "check.sh").exists():
+        return
+    files_dir = l12_dir / "files"
+
+    events = scen["events"]
+    
+    # 1. raw-syslog.txt (ascending by local time in syslog_line)
+    syslog_lines = [ev["syslog_line"] for ev in sorted(events, key=lambda x: x["syslog_line"])]
+    write_file(files_dir / "raw-syslog.txt", "\n".join(syslog_lines) + "\n")
+    
+    # 2. windows-raw.json (DC01 events: e1, e4, e3)
+    evtx_list = [ev["evtx"] for ev in events if "evtx" in ev]
+    write_file(files_dir / "windows-raw.json", json.dumps(evtx_list, indent=2) + "\n")
+    
+    # 3. ecs.jsonl (file order = ingest order: e1, e2, e3, e4, e5)
+    ingest_order = ["e1", "e2", "e3", "e4", "e5"]
+    by_label = {ev["label"]: ev for ev in events}
+    ecs_lines = [json.dumps(by_label[lbl]["ecs"]) for lbl in ingest_order if lbl in by_label]
+    write_file(files_dir / "ecs.jsonl", "\n".join(ecs_lines) + "\n")
+    
+    # 4. events-map.csv
+    csv_rows = ["label,event_id,summary"]
+    for lbl in ingest_order:
+        ev = by_label[lbl]
+        msg = ev["ecs"]["message"].replace(",", " ")
+        csv_rows.append(f"{lbl},{ev['event_id']},{msg}")
+    write_file(files_dir / "events-map.csv", "\n".join(csv_rows) + "\n")
+
+    if "answer_keys" in scen and "L1.2" in scen["answer_keys"]:
+        sync_key_block(l12_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.2"])
+
 def main():
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
@@ -207,6 +240,8 @@ def main():
             generate_s0_tier_cases(scen)
         elif scen_id == "s1-telemetry":
             generate_s1_telemetry(scen)
+        elif scen_id == "s1-log-anatomy":
+            generate_s1_log_anatomy(scen)
 
 if __name__ == "__main__":
     main()

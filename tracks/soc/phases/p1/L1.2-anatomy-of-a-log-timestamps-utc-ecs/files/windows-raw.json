@@ -1,0 +1,62 @@
+[
+  {
+    "Event": {
+      "System": {
+        "Provider": {
+          "Name": "Microsoft-Windows-Security-Auditing"
+        },
+        "EventID": 4625,
+        "EventRecordID": 1001,
+        "Computer": "DC01.coppermine.example",
+        "TimeCreated": {
+          "SystemTime": "2026-03-10T14:00:33.412Z"
+        }
+      },
+      "EventData": {
+        "TargetUserName": "j.walsh",
+        "IpAddress": "203.0.113.66",
+        "LogonType": 3
+      }
+    }
+  },
+  {
+    "Event": {
+      "System": {
+        "Provider": {
+          "Name": "Microsoft-Windows-DNS-Server"
+        },
+        "EventID": 256,
+        "EventRecordID": 2002,
+        "Computer": "DC01.coppermine.example",
+        "TimeCreated": {
+          "SystemTime": "2026-03-10T14:01:05.118Z"
+        }
+      },
+      "EventData": {
+        "QueryName": "fs01.coppermine.example",
+        "ClientIP": "10.20.31.112",
+        "QueryType": "A"
+      }
+    }
+  },
+  {
+    "Event": {
+      "System": {
+        "Provider": {
+          "Name": "Microsoft-Windows-Security-Auditing"
+        },
+        "EventID": 4625,
+        "EventRecordID": 1003,
+        "Computer": "DC01.coppermine.example",
+        "TimeCreated": {
+          "SystemTime": "2026-03-10T14:01:48.892Z"
+        }
+      },
+      "EventData": {
+        "TargetUserName": "m.reyes",
+        "IpAddress": "203.0.113.66",
+        "LogonType": 3
+      }
+    }
+  }
+]

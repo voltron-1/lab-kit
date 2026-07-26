@@ -1,0 +1,143 @@
+scenario: s1-log-anatomy
+window:
+  start: "2026-03-10T13:58:00Z"
+  end: "2026-03-10T14:05:00Z"
+site_tz: "America/Chicago"
+
+events:
+  - label: e2
+    event_id: CM-0310-0210
+    t: "2026-03-10T13:59:57Z"
+    ingested: "2026-03-10T14:01:30Z"
+    host: web01
+    syslog_line: "Mar 10 08:59:57 web01 sshd[2214]: Accepted publickey for t.aoki from 192.0.2.45 port 60312 ssh2"
+    ecs:
+      labels: {"exercise_id": "e2"}
+      "@timestamp": "2026-03-10T13:59:57Z"
+      event.ingested: "2026-03-10T14:01:30Z"
+      event.id: "CM-0310-0210"
+      event.category: ["authentication"]
+      event.outcome: "success"
+      source.ip: "192.0.2.45"
+      user.name: "t.aoki"
+      host.name: "web01"
+      message: "Accepted publickey for t.aoki from 192.0.2.45 port 60312 ssh2"
+
+  - label: e1
+    event_id: CM-0310-0211
+    t: "2026-03-10T14:00:33Z"
+    ingested: "2026-03-10T14:00:34Z"
+    host: dc01
+    syslog_line: "Mar 10 09:00:33 dc01 MSWinEventLog 4625 Security 1001 Tue Mar 10 09:00:33 2026 4625 Microsoft-Windows-Security-Auditing N/A N/A Success Audit DC01.coppermine.example An account failed to log on. Account Name: j.walsh Source Network Address: 203.0.113.66"
+    evtx:
+      Event:
+        System:
+          Provider: {"Name": "Microsoft-Windows-Security-Auditing"}
+          EventID: 4625
+          EventRecordID: 1001
+          Computer: "DC01.coppermine.example"
+          TimeCreated: {"SystemTime": "2026-03-10T14:00:33.412Z"}
+        EventData:
+          TargetUserName: "j.walsh"
+          IpAddress: "203.0.113.66"
+          LogonType: 3
+    ecs:
+      labels: {"exercise_id": "e1"}
+      "@timestamp": "2026-03-10T14:00:33Z"
+      event.ingested: "2026-03-10T14:00:34Z"
+      event.id: "CM-0310-0211"
+      event.code: "4625"
+      event.category: ["authentication"]
+      event.outcome: "failure"
+      source.ip: "203.0.113.66"
+      user.name: "j.walsh"
+      host.name: "dc01"
+      message: "An account failed to log on. Account Name: j.walsh Source Network Address: 203.0.113.66"
+
+  - label: e4
+    event_id: CM-0310-0212
+    t: "2026-03-10T14:01:05Z"
+    ingested: "2026-03-10T14:03:05Z"
+    host: dc01
+    syslog_line: "Mar 10 09:01:05 dc01 MSWinEventLog 256 DNS Server 2002 Tue Mar 10 09:01:05 2026 256 Microsoft-Windows-DNS-Server N/A N/A Success Audit DC01.coppermine.example DNS Server query fs01.coppermine.example type A from 10.20.31.112"
+    evtx:
+      Event:
+        System:
+          Provider: {"Name": "Microsoft-Windows-DNS-Server"}
+          EventID: 256
+          EventRecordID: 2002
+          Computer: "DC01.coppermine.example"
+          TimeCreated: {"SystemTime": "2026-03-10T14:01:05.118Z"}
+        EventData:
+          QueryName: "fs01.coppermine.example"
+          ClientIP: "10.20.31.112"
+          QueryType: "A"
+    ecs:
+      labels: {"exercise_id": "e4"}
+      "@timestamp": "2026-03-10T14:01:05Z"
+      event.ingested: "2026-03-10T14:03:05Z"
+      event.id: "CM-0310-0212"
+      event.code: "256"
+      event.category: ["network"]
+      event.outcome: "success"
+      source.ip: "10.20.31.112"
+      user.name: "svc-none"
+      host.name: "dc01"
+      message: "DNS Server query fs01.coppermine.example type A from 10.20.31.112"
+
+  - label: e3
+    event_id: CM-0310-0213
+    t: "2026-03-10T14:01:48Z"
+    ingested: "2026-03-10T14:01:49Z"
+    host: dc01
+    syslog_line: "Mar 10 09:01:48 dc01 MSWinEventLog 4625 Security 1003 Tue Mar 10 09:01:48 2026 4625 Microsoft-Windows-Security-Auditing N/A N/A Success Audit DC01.coppermine.example An account failed to log on. Account Name: m.reyes Source Network Address: 203.0.113.66"
+    evtx:
+      Event:
+        System:
+          Provider: {"Name": "Microsoft-Windows-Security-Auditing"}
+          EventID: 4625
+          EventRecordID: 1003
+          Computer: "DC01.coppermine.example"
+          TimeCreated: {"SystemTime": "2026-03-10T14:01:48.892Z"}
+        EventData:
+          TargetUserName: "m.reyes"
+          IpAddress: "203.0.113.66"
+          LogonType: 3
+    ecs:
+      labels: {"exercise_id": "e3"}
+      "@timestamp": "2026-03-10T14:01:48Z"
+      event.ingested: "2026-03-10T14:01:49Z"
+      event.id: "CM-0310-0213"
+      event.code: "4625"
+      event.category: ["authentication"]
+      event.outcome: "failure"
+      source.ip: "203.0.113.66"
+      user.name: "m.reyes"
+      host.name: "dc01"
+      message: "An account failed to log on. Account Name: m.reyes Source Network Address: 203.0.113.66"
+
+  - label: e5
+    event_id: CM-0310-0214
+    t: "2026-03-10T14:03:10Z"
+    ingested: "2026-03-10T14:04:40Z"
+    host: web01
+    syslog_line: "Mar 10 09:03:10 web01 sshd[2231]: Failed password for root from 192.0.2.150 port 44872 ssh2"
+    ecs:
+      labels: {"exercise_id": "e5"}
+      "@timestamp": "2026-03-10T14:03:10Z"
+      event.ingested: "2026-03-10T14:04:40Z"
+      event.id: "CM-0310-0214"
+      event.category: ["authentication"]
+      event.outcome: "failure"
+      source.ip: "192.0.2.150"
+      user.name: "root"
+      host.name: "web01"
+      message: "Failed password for root from 192.0.2.150 port 44872 ssh2"
+
+answer_keys:
+  L1.2:
+    q1: "2026-03-10t13:59:57z"
+    q2: "e2,e1,e4,e3,e5"
+    q3: "source.ip"
+    q4: "event.code"
+    q5: "-05:00"

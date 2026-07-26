@@ -1,0 +1,3 @@
+- One instant has many spellings: local syslog text, Windows SystemTime, and ECS @timestamp can all describe the same moment.
+- Convert everything to UTC before comparing; classic syslog has no year and no timezone, and file order only shows arrival, never occurrence.
+- Core ECS names: @timestamp for when it happened, source.ip for the client, user.name for the account, event.code for the Windows event number.
