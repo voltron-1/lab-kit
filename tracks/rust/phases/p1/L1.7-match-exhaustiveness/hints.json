@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "The grader wants answers.txt, fixed.rs, and a runnable ./fixed — one of them is missing or the fix used a pattern the lab forbids.",
+    "The error's own text names the uncovered variant; add an arm for exactly that variant returning exactly \"isolate host\" (the check greps that string); no underscore arm anywhere.",
+    "In fixed.rs add Severity::Critical => \"isolate host\", after the High arm, then rustc fixed.rs -o fixed; ./fixed and re-check."
+  ]
+}

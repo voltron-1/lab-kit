@@ -1,0 +1,8 @@
+{
+  "id": "L1.7",
+  "title": "`match` — exhaustiveness as a security feature",
+  "type": "FIX",
+  "objective": "Read E0004, apply the minimal fix — the missing arm, never the wildcard — and say why `_` is the insecure fix.",
+  "gate": false,
+  "est_minutes": 15
+}
