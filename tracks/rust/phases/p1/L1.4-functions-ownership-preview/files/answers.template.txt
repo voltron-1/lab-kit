@@ -1,0 +1,9 @@
+# Answer file format for L1.4:
+# q1: Why is `alert` still usable after `shout(&alert)`? (a = shout returns it, b = shout only borrowed it via &str, c = String is Copy)
+q1=
+
+# q2: What did `consume(alert)` do? (a = copied alert, b = took ownership — alert is moved, c = borrowed mutably)
+q2=
+
+# q3: Compiler error code when `println!("{alert}");` is uncommented (e.g. q3=E0382)
+q3=
