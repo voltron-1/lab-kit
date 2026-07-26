@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 #!/usr/bin/env python3
 """
 Evidence Generator for SOC Analyst Lab Kit.
@@ -298,6 +297,22 @@ def generate_s1_killchain(scen: dict):
     if "answer_keys" in scen and "L1.6" in scen["answer_keys"]:
         sync_key_block(l16_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.6"])
 
+def generate_s1_dispositions(scen: dict):
+    l17_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p1" / "L1.7-disposition-taxonomy-tp-fp-btp"
+    if not (l17_dir / "check.sh").exists():
+        return
+    files_dir = l17_dir / "files"
+    
+    for case_id, c in scen["cases"].items():
+        cdir = files_dir / "cases" / case_id
+        write_file(cdir / "alert.json", json.dumps(c["alert"], indent=2) + "\n")
+        ev_lines = "\n".join([json.dumps(ev) for ev in c["events"]]) + "\n"
+        write_file(cdir / "events.jsonl", ev_lines)
+        write_file(cdir / "context.txt", c["context"].strip() + "\n")
+
+    if "answer_keys" in scen and "L1.7" in scen["answer_keys"]:
+        sync_key_block(l17_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.7"])
+
 def main():
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
@@ -323,6 +338,8 @@ def main():
             generate_s1_attack_map(scen)
         elif scen_id == "s1-killchain":
             generate_s1_killchain(scen)
+        elif scen_id == "s1-dispositions":
+            generate_s1_dispositions(scen)
 
 if __name__ == "__main__":
     main()

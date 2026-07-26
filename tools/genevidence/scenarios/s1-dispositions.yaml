@@ -1,0 +1,141 @@
+scenario: s1-dispositions
+window:
+  start: "2026-03-09T00:00:00Z"
+  end: "2026-03-13T23:59:59Z"
+
+cases:
+  c1:
+    alert:
+      alert: {id: "CM-A-11"}
+      "@timestamp": "2026-03-11T14:25:00Z"
+      status: "new"
+      rule:
+        id: "CM-R-0117"
+        name: "Password Spray - Many Accounts, One Source"
+        version: 3
+        severity: "high"
+        risk_score: 73
+        threat: {tactic: "credential-access", technique: "T1110.003"}
+      entities: {source.ip: "203.0.113.66"}
+      evidence: {event_ids: ["CM-0311-0138", "CM-0311-0139", "CM-0311-0140", "CM-0311-0142", "CM-0311-0143"]}
+    events:
+      - {"event.id": "CM-0311-0138", "@timestamp": "2026-03-11T14:06:12Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "j.walsh", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+      - {"event.id": "CM-0311-0139", "@timestamp": "2026-03-11T14:11:52Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "d.okafor", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+      - {"event.id": "CM-0311-0140", "@timestamp": "2026-03-11T14:17:03Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "t.aoki", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+      - {"event.id": "CM-0311-0142", "@timestamp": "2026-03-11T14:22:31Z", "event.code": "4624", "event.outcome": "success", "host.name": "DC01", "user.name": "m.reyes", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+      - {"event.id": "CM-0311-0143", "@timestamp": "2026-03-11T14:22:31Z", "user": "m.reyes", "app": "OWA", "source_ip": "203.0.113.66", "result": "success", "mfa": "absent"}
+    context: "m.reyes is not traveling. No change control ticket or authorization covers 203.0.113.66."
+
+  c2:
+    alert:
+      alert: {id: "CM-A-12"}
+      "@timestamp": "2026-03-10T13:15:05Z"
+      status: "new"
+      rule:
+        id: "CM-R-0134"
+        name: "Mimikatz command line"
+        version: 1
+        severity: "high"
+        risk_score: 85
+        threat: {tactic: "credential-access", technique: "T1003.001"}
+      entities: {host.name: "WKS-HD-03", user.name: "j.walsh"}
+      evidence: {event_ids: ["CM-0310-0070", "CM-0310-0071"]}
+    events:
+      - {"event.id": "CM-0310-0070", "@timestamp": "2026-03-10T13:14:58Z", "event.code": "11", "host.name": "WKS-HD-03", "user.name": "j.walsh", "file.path": "C:\\Users\\j.walsh\\Downloads\\SecurityAwareness\\how-attackers-use-mimikatz.pptx"}
+      - {"event.id": "CM-0310-0071", "@timestamp": "2026-03-10T13:15:04Z", "event.code": "4688", "host.name": "WKS-HD-03", "user.name": "j.walsh", "process.executable": "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE", "process.command_line": "\"C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE\" \"C:\\Users\\j.walsh\\Downloads\\SecurityAwareness\\how-attackers-use-mimikatz.pptx\""}
+    context: "Helpdesk team is conducting monthly security-awareness training. PowerPoint deck was downloaded directly from intranet portal."
+
+  c3:
+    alert:
+      alert: {id: "CM-A-13"}
+      "@timestamp": "2026-03-10T10:01:25Z"
+      status: "new"
+      rule:
+        id: "CM-R-0141"
+        name: "PsExec service installed on domain controller"
+        version: 2
+        severity: "high"
+        risk_score: 80
+        threat: {tactic: "execution", technique: "T1569.002"}
+      entities: {host.name: "DC01", user.name: "t.aoki"}
+      evidence: {event_ids: ["CM-0310-0019", "CM-0310-0020", "CM-0310-0021"]}
+    events:
+      - {"event.id": "CM-0310-0019", "@timestamp": "2026-03-10T10:00:12Z", "event.code": "4624", "event.outcome": "success", "host.name": "DC01", "user.name": "t.aoki", "winlog.logon.type": 3, "source.ip": "10.20.30.103"}
+      - {"event.id": "CM-0310-0020", "@timestamp": "2026-03-10T10:00:15Z", "event.code": "1", "host.name": "DC01", "user.name": "t.aoki", "process.executable": "C:\\Windows\\PSEXESVC.exe", "process.command_line": "C:\\Windows\\PSEXESVC.exe"}
+      - {"event.id": "CM-0310-0021", "@timestamp": "2026-03-10T10:01:20Z", "event.code": "4688", "host.name": "DC01", "user.name": "t.aoki", "process.executable": "C:\\Windows\\System32\\msiexec.exe", "process.parent.executable": "C:\\Windows\\PSEXESVC.exe"}
+    context: "CHG-2143 excerpt: Implementer t.aoki, task 'DC01 emergency security patching via PsExec', approved change window 2026-03-10 09:00Z-12:00Z."
+
+  c4:
+    alert:
+      alert: {id: "CM-A-14"}
+      "@timestamp": "2026-03-10T14:32:00Z"
+      status: "new"
+      rule:
+        id: "CM-R-0117"
+        name: "Password Spray - Many Accounts, One Source"
+        version: 3
+        severity: "high"
+        risk_score: 73
+        threat: {tactic: "credential-access", technique: "T1110.003"}
+      entities: {source.ip: "192.0.2.150"}
+      evidence: {event_ids: ["CM-0310-0092", "CM-0310-0093", "CM-0310-0094"]}
+    events:
+      - {"event.id": "CM-0310-0092", "@timestamp": "2026-03-10T14:31:05Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "m.reyes", "source.ip": "192.0.2.150", "winlog.logon.type": 3}
+      - {"event.id": "CM-0310-0093", "@timestamp": "2026-03-10T14:31:09Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "j.walsh", "source.ip": "192.0.2.150", "winlog.logon.type": 3}
+      - {"event.id": "CM-0310-0094", "@timestamp": "2026-03-10T14:31:13Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "d.okafor", "source.ip": "192.0.2.150", "winlog.logon.type": 3}
+    context: "Bluewater Security penetration testing engagement letter: Authorized quarterly external network assessment on 2026-03-10, originating IP 192.0.2.150."
+
+  c5:
+    alert:
+      alert: {id: "CM-A-15"}
+      "@timestamp": "2026-03-11T15:42:00Z"
+      status: "new"
+      rule:
+        id: "CM-R-0159"
+        name: "Office app spawned PowerShell with encoded command"
+        version: 1
+        severity: "high"
+        risk_score: 90
+        threat: {tactic: "execution", technique: "T1059.001"}
+      entities: {host.name: "WKS-ACCT-07", user.name: "m.reyes"}
+      evidence: {event_ids: ["CM-0311-0201", "CM-0311-0179", "CM-0311-0181"]}
+    events:
+      - {"event.id": "CM-0311-0201", "@timestamp": "2026-03-11T15:41:07Z", "event.code": "1", "host.name": "WKS-ACCT-07", "user.name": "m.reyes", "process.executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "process.parent.executable": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE", "process.command_line": "powershell.exe -nop -w hidden -enc JAB..."}
+      - {"event.id": "CM-0311-0179", "@timestamp": "2026-03-11T15:41:31Z", "event.code": "3", "host.name": "WKS-ACCT-07", "user.name": "m.reyes", "process.executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "destination.ip": "203.0.113.66", "destination.port": 443}
+      - {"event.id": "CM-0311-0181", "@timestamp": "2026-03-11T15:41:35Z", "event.code": "13", "host.name": "WKS-ACCT-07", "user.name": "m.reyes", "registry.path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\OneDriveUpd"}
+    context: "m.reyes reported email invoice attachment would not open. No approved change tickets cover office macro execution on WKS-ACCT-07."
+
+  c6:
+    alert:
+      alert: {id: "CM-A-16"}
+      "@timestamp": "2026-03-12T10:03:00Z"
+      status: "new"
+      rule:
+        id: "CM-R-0155"
+        name: "C2 beaconing - fixed interval"
+        version: 2
+        severity: "medium"
+        risk_score: 65
+        threat: {tactic: "command-and-control", technique: "T1071"}
+      entities: {host.name: "WKS-HD-03"}
+      evidence: {event_ids: ["CM-0312-0203", "CM-0312-0204", "CM-0312-0205"]}
+    events:
+      - {"event.id": "CM-0312-0203", "@timestamp": "2026-03-12T10:00:00Z", "event.dataset": "zeek.conn", "source.ip": "10.20.30.103", "destination.ip": "192.0.2.10", "destination.port": 123, "network.transport": "udp", "network.bytes": 76}
+      - {"event.id": "CM-0312-0204", "@timestamp": "2026-03-12T10:01:04Z", "event.dataset": "zeek.conn", "source.ip": "10.20.30.103", "destination.ip": "192.0.2.10", "destination.port": 123, "network.transport": "udp", "network.bytes": 76}
+      - {"event.id": "CM-0312-0205", "@timestamp": "2026-03-12T10:02:08Z", "event.dataset": "zeek.conn", "source.ip": "10.20.30.103", "destination.ip": "192.0.2.10", "destination.port": 123, "network.transport": "udp", "network.bytes": 76}
+    context: "Standard workstation image syncs time to internal NTP server 192.0.2.10 over port 123/udp (w32time service configuration)."
+
+answer_keys:
+  L1.7:
+    q1: "tp"
+    q1e: "cm-0311-0142"
+    q2: "fp"
+    q2e: "cm-0310-0071"
+    q3: "btp"
+    q3e: "cm-0310-0019"
+    q4: "btp"
+    q4e: "cm-0310-0092"
+    q5: "tp"
+    q5e: "cm-0311-0201"
+    q6: "fp"
+    q6e: "cm-0312-0203"

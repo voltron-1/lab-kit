@@ -1,0 +1,3 @@
+{"event.id": "CM-0310-0019", "@timestamp": "2026-03-10T10:00:12Z", "event.code": "4624", "event.outcome": "success", "host.name": "DC01", "user.name": "t.aoki", "winlog.logon.type": 3, "source.ip": "10.20.30.103"}
+{"event.id": "CM-0310-0020", "@timestamp": "2026-03-10T10:00:15Z", "event.code": "1", "host.name": "DC01", "user.name": "t.aoki", "process.executable": "C:\\Windows\\PSEXESVC.exe", "process.command_line": "C:\\Windows\\PSEXESVC.exe"}
+{"event.id": "CM-0310-0021", "@timestamp": "2026-03-10T10:01:20Z", "event.code": "4688", "host.name": "DC01", "user.name": "t.aoki", "process.executable": "C:\\Windows\\System32\\msiexec.exe", "process.parent.executable": "C:\\Windows\\PSEXESVC.exe"}

@@ -1,0 +1,1 @@
+Standard workstation image syncs time to internal NTP server 192.0.2.10 over port 123/udp (w32time service configuration).

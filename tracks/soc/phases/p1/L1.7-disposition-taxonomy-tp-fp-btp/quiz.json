@@ -1,0 +1,40 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Case c4: The password spray from 192.0.2.150 actually occurred. Why is the verdict Benign True Positive (BTP) rather than False Positive (FP)?",
+      "options": {
+        "a": "The rule mis-parsed the authentication logons",
+        "b": "The claimed behavior genuinely occurred but was authorized under the Bluewater engagement letter",
+        "c": "No user account was compromised, so it cannot be any kind of positive",
+        "d": "The originating source IP is an internal network address"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Case c6: 64-second periodic traffic to 192.0.2.10:123. Why is the verdict False Positive (FP) rather than Benign True Positive (BTP)?",
+      "options": {
+        "a": "NTP traffic is authorized, and authorized activity is always FP",
+        "b": "The 64-second interval is too short to qualify as C2 beaconing",
+        "c": "BTP requires the rule's threat claim to accurately describe the behavior — here the traffic is NTP, so the C2 claim itself is wrong",
+        "d": "UDP traffic cannot function as C2"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What action should closing an alert as Benign True Positive (BTP) produce?",
+      "options": {
+        "a": "An incident ticket escalated to Tier 2",
+        "b": "Nothing — close the alert silently",
+        "c": "Detection tuning feedback (e.g. allowlist the change window or authorized source IP) without an incident ticket",
+        "d": "An immediate password reset for the involved account"
+      },
+      "answer_b64": "Yw=="
+    }
+  ]
+}

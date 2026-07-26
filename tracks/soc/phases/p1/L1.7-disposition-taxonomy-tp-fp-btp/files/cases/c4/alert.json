@@ -1,0 +1,28 @@
+{
+  "alert": {
+    "id": "CM-A-14"
+  },
+  "@timestamp": "2026-03-10T14:32:00Z",
+  "status": "new",
+  "rule": {
+    "id": "CM-R-0117",
+    "name": "Password Spray - Many Accounts, One Source",
+    "version": 3,
+    "severity": "high",
+    "risk_score": 73,
+    "threat": {
+      "tactic": "credential-access",
+      "technique": "T1110.003"
+    }
+  },
+  "entities": {
+    "source.ip": "192.0.2.150"
+  },
+  "evidence": {
+    "event_ids": [
+      "CM-0310-0092",
+      "CM-0310-0093",
+      "CM-0310-0094"
+    ]
+  }
+}

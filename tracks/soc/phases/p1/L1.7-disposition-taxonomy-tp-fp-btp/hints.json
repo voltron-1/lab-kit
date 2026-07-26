@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Ask two questions per case, in order: (1) did the behavior the rule NAMES actually happen? (2) if yes, was it authorized? No->fp; yes+unauthorized->tp; yes+authorized->btp. Read context.txt last.",
+    "Two cases have paperwork that authorizes real behavior. Two cases matched something other than the named activity — check which executable actually ran (c2) and which well-known port the traffic uses (c6).",
+    "c2: 'mimikatz' appears only inside a .pptx filename in a POWERPNT.EXE command line. c6: UDP/123 is time sync. c3/c4: compare event timestamps and source against CHG-2143 and the engagement letter. For qNe pick the one event a skeptic couldn't argue with."
+  ]
+}

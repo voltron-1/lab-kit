@@ -1,0 +1,5 @@
+{"event.id": "CM-0311-0138", "@timestamp": "2026-03-11T14:06:12Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "j.walsh", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+{"event.id": "CM-0311-0139", "@timestamp": "2026-03-11T14:11:52Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "d.okafor", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+{"event.id": "CM-0311-0140", "@timestamp": "2026-03-11T14:17:03Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "t.aoki", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+{"event.id": "CM-0311-0142", "@timestamp": "2026-03-11T14:22:31Z", "event.code": "4624", "event.outcome": "success", "host.name": "DC01", "user.name": "m.reyes", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+{"event.id": "CM-0311-0143", "@timestamp": "2026-03-11T14:22:31Z", "user": "m.reyes", "app": "OWA", "source_ip": "203.0.113.66", "result": "success", "mfa": "absent"}

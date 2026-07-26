@@ -1,0 +1,3 @@
+- The verdict grades the rule's threat claim: tp means the claimed malicious activity really happened and was not authorized.
+- fp means what actually happened is not the claimed activity — a logic, parsing, or lookalike match (a filename, a protocol the rule mistook for C2).
+- btp means the rule correctly caught the behavior but the behavior was authorized — close with tuning feedback, never with an incident ticket.

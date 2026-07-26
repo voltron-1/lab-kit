@@ -1,0 +1,29 @@
+{
+  "alert": {
+    "id": "CM-A-15"
+  },
+  "@timestamp": "2026-03-11T15:42:00Z",
+  "status": "new",
+  "rule": {
+    "id": "CM-R-0159",
+    "name": "Office app spawned PowerShell with encoded command",
+    "version": 1,
+    "severity": "high",
+    "risk_score": 90,
+    "threat": {
+      "tactic": "execution",
+      "technique": "T1059.001"
+    }
+  },
+  "entities": {
+    "host.name": "WKS-ACCT-07",
+    "user.name": "m.reyes"
+  },
+  "evidence": {
+    "event_ids": [
+      "CM-0311-0201",
+      "CM-0311-0179",
+      "CM-0311-0181"
+    ]
+  }
+}
