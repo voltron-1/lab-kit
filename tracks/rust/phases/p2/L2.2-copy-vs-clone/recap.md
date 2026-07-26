@@ -1,0 +1,3 @@
+- Copy types (ints, bools, small all-Copy structs) duplicate on assignment — no move
+- String/Vec own heap: never Copy; clone() is the explicit, visible duplicate
+- E0204 = Copy derive refused over a non-Copy field — the compiler polices the line

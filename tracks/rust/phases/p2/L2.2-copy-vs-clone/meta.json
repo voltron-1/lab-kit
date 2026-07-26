@@ -1,0 +1,8 @@
+{
+  "id": "L2.2",
+  "title": "`Copy` vs `Clone`",
+  "type": "PREDICT",
+  "objective": "Predict which assignments duplicate and which move, and explain why Copy is refused the moment a type owns heap (E0204).",
+  "gate": false,
+  "est_minutes": 10
+}
