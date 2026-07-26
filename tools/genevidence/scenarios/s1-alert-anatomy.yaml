@@ -1,0 +1,56 @@
+scenario: s1-alert-anatomy
+window:
+  start: "2026-03-11T14:00:00Z"
+  end: "2026-03-11T14:30:00Z"
+
+alert:
+  alert:
+    id: "CM-A-1024"
+  "@timestamp": "2026-03-11T14:26:04Z"
+  status: "new"
+  rule:
+    id: "CM-R-0117"
+    name: "Password Spray - Many Accounts, One Source"
+    version: 3
+    severity: "high"
+    risk_score: 73
+    threat:
+      tactic:
+        id: "TA0006"
+        name: "credential-access"
+      technique:
+        id: "T1110.003"
+        name: "Password Spraying"
+  entities:
+    source.ip: "203.0.113.66"
+    user.names_sampled: ["a.brandt", "d.okafor", "p.silva"]
+    user.names_total: 42
+    host.name: "DC01"
+  evidence:
+    event_ids: ["CM-0311-0107", "CM-0311-0121", "CM-0311-0135"]
+    query: "event.code:4625 AND source.ip:203.0.113.66 AND @timestamp:[2026-03-11T14:05:00Z TO 2026-03-11T14:25:00Z]"
+
+raw_events:
+  - {"event.id": "CM-0311-0101", "@timestamp": "2026-03-11T14:05:12Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "a.brandt", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+  - {"event.id": "CM-0311-0104", "@timestamp": "2026-03-11T14:06:40Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "b.chen", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+  - {"event.id": "CM-0311-0107", "@timestamp": "2026-03-11T14:07:12Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "m.reyes", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+  - {"event.id": "CM-0311-0110", "@timestamp": "2026-03-11T14:08:15Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "d.okafor", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+  - {"event.id": "CM-0311-0114", "@timestamp": "2026-03-11T14:09:50Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "e.vance", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+  - {"event.id": "CM-0311-0119", "@timestamp": "2026-03-11T14:11:47Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "j.walsh", "source.ip": "10.20.30.103", "winlog.logon.type": 2}
+  - {"event.id": "CM-0311-0121", "@timestamp": "2026-03-11T14:12:05Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "f.lopez", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+  - {"event.id": "CM-0311-0125", "@timestamp": "2026-03-11T14:14:22Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "g.taylor", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+  - {"event.id": "CM-0311-0129", "@timestamp": "2026-03-11T14:16:01Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "h.patel", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+  - {"event.id": "CM-0311-0132", "@timestamp": "2026-03-11T14:17:45Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "i.novak", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+  - {"event.id": "CM-0311-0135", "@timestamp": "2026-03-11T14:19:10Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "p.silva", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+  - {"event.id": "CM-0311-0138", "@timestamp": "2026-03-11T14:20:30Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "k.kim", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+  - {"event.id": "CM-0311-0139", "@timestamp": "2026-03-11T14:21:58Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "l.wright", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+  - {"event.id": "CM-0311-0142", "@timestamp": "2026-03-11T14:22:31Z", "event.code": "4624", "event.outcome": "success", "host.name": "DC01", "user.name": "m.reyes", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+  - {"event.id": "CM-0311-0145", "@timestamp": "2026-03-11T14:24:00Z", "event.code": "4625", "event.outcome": "failure", "host.name": "DC01", "user.name": "n.foster", "source.ip": "203.0.113.66", "winlog.logon.type": 3}
+
+answer_keys:
+  L1.3:
+    q1: "cm-r-0117"
+    q2: "rule.severity"
+    q3: "cm-0311-0107,cm-0311-0121,cm-0311-0135"
+    q4: "203.0.113.66"
+    q5: "cm-0311-0142"

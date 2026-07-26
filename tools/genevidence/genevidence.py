@@ -225,6 +225,22 @@ def generate_s1_log_anatomy(scen: dict):
     if "answer_keys" in scen and "L1.2" in scen["answer_keys"]:
         sync_key_block(l12_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.2"])
 
+def generate_s1_alert_anatomy(scen: dict):
+    l13_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p1" / "L1.3-anatomy-of-an-alert-rule-metadata-severity"
+    if not (l13_dir / "check.sh").exists():
+        return
+    files_dir = l13_dir / "files"
+    
+    # 1. alert-CM-A-1024.json
+    write_file(files_dir / "alert-CM-A-1024.json", json.dumps(scen["alert"], indent=2) + "\n")
+    
+    # 2. events/raw.jsonl
+    raw_lines = "\n".join([json.dumps(ev) for ev in scen["raw_events"]]) + "\n"
+    write_file(files_dir / "events" / "raw.jsonl", raw_lines)
+
+    if "answer_keys" in scen and "L1.3" in scen["answer_keys"]:
+        sync_key_block(l13_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.3"])
+
 def main():
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
@@ -242,6 +258,8 @@ def main():
             generate_s1_telemetry(scen)
         elif scen_id == "s1-log-anatomy":
             generate_s1_log_anatomy(scen)
+        elif scen_id == "s1-alert-anatomy":
+            generate_s1_alert_anatomy(scen)
 
 if __name__ == "__main__":
     main()

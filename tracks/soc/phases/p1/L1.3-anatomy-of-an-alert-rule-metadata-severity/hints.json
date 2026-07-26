@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Start with `jq . alert-CM-A-1024.json`. q1-q4 are answered entirely inside the alert; only q5 needs events/raw.jsonl.",
+    "q3: `jq -r '.evidence.event_ids[]' alert-CM-A-1024.json`. q4: grep each cited id in events/raw.jsonl and compare fields — user.name changes every time, one value never does. q5: which event.code means a logon SUCCEEDED?",
+    "q5: `grep '4624' events/raw.jsonl` returns exactly one line; its event.id, lowercased, is the answer. Confirm it is NOT in evidence.event_ids — the rule only matched 4625 failures."
+  ]
+}
