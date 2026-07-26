@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Score each card against the four 'Escalate when' triggers in sop-excerpt.md; a card that touches zero triggers stays with Tier 1 no matter how scary the rule name sounds.",
+    "Exactly two cards escalate: one involves a credential that now works for someone who is not the user, the other needs an action Tier 1 has no authority to take on a domain controller.",
+    "q1: e (credential compromise). q2: h (AV contained). q3: h (no click). q4: e (unauthorized PsExec on DC). q5: h (documented backup job)."
+  ]
+}
