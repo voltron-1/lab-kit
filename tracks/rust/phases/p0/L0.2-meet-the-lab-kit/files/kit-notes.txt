@@ -1,0 +1,8 @@
+# Lab Kit Operating Notes
+1. The five primary CLI verbs are: start, check, status, hint, resume.
+2. Running `lab check` executes check.sh followed by a 3-question quiz. A 3/3 score is required to pass.
+3. If a check fails or a quiz answer is wrong, nothing is lost — fix your work and run `lab check` again.
+4. The hint ladder has 3 levels: Level 1 offers guidance without giving away the answer.
+5. `lab resume` replays your last lab's recap and points to your next step — ideal for re-entry.
+6. Progress marks: ✓ = passed, ○ = not started, ⏭ = forced using --force (permanent mark, never becomes ✓).
+7. Graded answers in this track follow strict `key=value` format with exact keys and no surrounding whitespace around `=`.

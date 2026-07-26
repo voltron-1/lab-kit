@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What does a `⏭` mark in `lab status` indicate?",
+      "options": {
+        "a": "The lab was passed on a retry attempt",
+        "b": "The lab was forced past using `--force` (a permanent mark that never converts to `✓`)",
+        "c": "The lab is currently locked"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Which CLI command displays the phase map with your completion marks (`✓`)?",
+      "answer_b64": "bGFiIHN0YXR1cw==",
+      "accept_b64": [
+        "bGFiIHN0YXR1cw==",
+        "bGFiIHN0YXR1cyBydXN0"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why must answer file keys match exact specifications (`q1=b`, not `Q1 = b`)?",
+      "options": {
+        "a": "It is purely an aesthetic preference",
+        "b": "The check script greps for exact anchored keys — extra spaces or casing typos fail the check",
+        "c": "The CLI automatically rewrites key-value formatting"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
