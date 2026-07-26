@@ -1,0 +1,3 @@
+- no null: absence is Some/None data, and the type system quarantines it
+- unwrap_or / if let / match are the doors out of Option — each names its None policy
+- Option<u16> is not u16 (E0308): the compiler bills you for the None case up front

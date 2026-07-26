@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What C/C++ hazard does Rust's `Option<T>` type eliminate?",
+      "options": {
+        "a": "Runtime stack overflow exceptions",
+        "b": "NULL pointer dereferences and ambiguous sentinel values",
+        "c": "Uncontrolled goto jumps"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Which method on `Option<T>` extracts the inner value or returns a provided default if `None`?",
+      "answer_b64": "dW53cmFwX29y",
+      "accept_b64": [
+        "dW53cmFwX29y",
+        "dW53cmFwX29yKCk=",
+        "LnVud3JhcF9vcg=="
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why won't `let p: u16 = find_port(\"ssh\");` compile even though `\"ssh\"` exists in the lookup table?",
+      "options": {
+        "a": "Type checking happens at compile time, where `Option<u16>` requires handling the `None` case regardless of runtime data",
+        "b": "`find_port` is a private module function",
+        "c": "`u16` is too small to represent port 22"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

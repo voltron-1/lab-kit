@@ -1,0 +1,14 @@
+# Predict printed result of {:?} for find_port("ssh") (e.g. p1=Some(22)):
+p1=
+
+# Predict printed result of {:?} for find_port("gopher") (e.g. p2=None):
+p2=
+
+# Predict printed fallback number from find_port("telnet").unwrap_or(0):
+p3=
+
+# Predict printed port number inside `if let Some(port) = find_port("dns")`:
+p4=
+
+# Predict compiler error code for `rustc broken.rs` (e.g. error=E0308):
+error=

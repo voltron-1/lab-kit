@@ -1,0 +1,8 @@
+{
+  "id": "L1.8",
+  "title": "No null — first contact with `Option<T>`",
+  "type": "PREDICT",
+  "objective": "Predict Some/None flows through unwrap_or and if let, and read E0308 when Option<u16> pretends to be u16.",
+  "gate": false,
+  "est_minutes": 15
+}
