@@ -1,0 +1,51 @@
+{
+  "questions": [
+    {
+      "id": "R1",
+      "prompt": "Which command re-orients you after a break — last lab, last recap, next step?",
+      "accept_b64": [
+        "bGFiIHJlc3VtZQ==",
+        "cmVzdW1l"
+      ],
+      "source": "README CLI table / L0.0"
+    },
+    {
+      "id": "R2",
+      "prompt": "You pass check.sh but score 2/3 on the quiz. What is the lab result?",
+      "options": {
+        "a": "passed",
+        "b": "not passed - the quiz gates at 3/3",
+        "c": "passed with a warning"
+      },
+      "answer_b64": "Yg==",
+      "source": "L0.0 grading walkthrough"
+    },
+    {
+      "id": "R3",
+      "prompt": "Jumping past the frontier with --force stamps every not-yet-completed lab before the target with which permanent mark (one word)?",
+      "accept_b64": [
+        "c2tpcHBlZA=="
+      ],
+      "source": "README --force semantics"
+    },
+    {
+      "id": "R4",
+      "prompt": "check.sh executes with its working directory set to:",
+      "options": {
+        "a": "the lab's files/ dir in the repo",
+        "b": "your copy under workspace/<track>/<id>/",
+        "c": "wherever you ran lab check"
+      },
+      "answer_b64": "Yg==",
+      "source": "L0.0 workspace-fence demo"
+    },
+    {
+      "id": "R5",
+      "prompt": "How many escalating hint levels does lab hint hold before it has nothing left?",
+      "accept_b64": [
+        "Mw=="
+      ],
+      "source": "README hint ladder"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Every graded item is a file in your workspace. Run ls and compare against the GUIDED STEPS output list.",
+    "toolcheck.txt wants version output for all five tools. Note that 'dig -v' prints to stderr, so add 2>&1 inside the brace group.",
+    "Produce files via: brace group > toolcheck.txt; jq -r '.user.name' sample-event.json > jq_out.txt; tshark -r fixtures.pcap -T fields -e dns.qry.name | sort -u > tshark_out.txt; rg 'escalation-marker' notes/ > rg_out.txt."
+  ]
+}

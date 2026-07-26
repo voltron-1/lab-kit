@@ -1,0 +1,8 @@
+{
+  "id": "L0.1",
+  "title": "Analyst toolbelt - install/verify jq, tshark, dig, whois, ripgrep",
+  "type": "GUIDED",
+  "objective": "Install the five analyst tools, then prove each works by extracting one fact from staged Coppermine evidence.",
+  "gate": false,
+  "est_minutes": 15
+}

@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "text",
+      "prompt": "Per whois-stonewick.txt, on what date was stonewick.example registered? (YYYY-MM-DD)",
+      "accept_b64": [
+        "MjAyNi0wMi0yNw==",
+        "MjAyNi0wMi0yN3QxODo0NDowOXo="
+      ]
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "check.sh runs with no network connection. Which two tools are therefore graded on version output plus staged mock reports?",
+      "options": {
+        "a": "jq and ripgrep",
+        "b": "dig and whois",
+        "c": "tshark and dig"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why does the tshark installation prompt about non-root packet capture permissions?",
+      "options": {
+        "a": "Reading saved .pcap files requires root privileges",
+        "b": "Live interface capture needs elevated privileges; reading saved pcaps does not",
+        "c": "tshark refuses to execute outside the wireshark group"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
