@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Three keys in answers.txt; q2 wants field names from the struct declaration.",
+    "..a fills exactly the fields NOT already written in b's literal — list those two, declaration order, q2=name,name; for q3, ask which field of a is non-Copy and whether b took it.",
+    "The two fields b didn't override are port and… reread the Endpoint declaration; then try the ungraded experiment (delete the host override) to see q3's answer prove itself."
+  ]
+}

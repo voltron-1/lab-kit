@@ -1,0 +1,9 @@
+# Answer file format for L1.5:
+# q1: What does `port,` inside `Endpoint { host: ..., port, tls: false }` signify? (a = default value, b = field-init shorthand for port: port, c = tuple field)
+q1=
+
+# q2: Which fields did `..a` supply in `b`'s definition? (comma-separated, declaration order, no spaces, e.g. port,tls)
+q2=
+
+# q3: Why is `a.host` still printable at the end of main()? (a = String is Copy, b = ..a clones, c = host was overridden in b so it was never moved out of a)
+q3=
