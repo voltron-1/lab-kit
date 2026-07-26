@@ -1,0 +1,3 @@
+- Rust enums are tagged unions: every variant carries its own typed payload
+- match destructures the payload and can condition on it (success: true vs false)
+- one Event type replaces the C struct-plus-type-int pattern — invalid states unrepresentable

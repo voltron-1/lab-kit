@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Three answer keys; q3 wants the exact printed line for the middle event — trace only that arm.",
+    "For q3, substitute first=1, last=1024 into the PortScan arm's format string, exactly as printed (dash, no spaces around it).",
+    "Run rustc sample.rs -o sample && ./sample; the second line of output is the exact answer for q3."
+  ]
+}
