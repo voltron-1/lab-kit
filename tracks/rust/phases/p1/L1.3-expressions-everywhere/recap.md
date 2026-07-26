@@ -1,0 +1,3 @@
+- almost everything is an expression: blocks, if, match all produce values
+- last line without a semicolon = the value; add the semicolon and you get ()
+- if is an expression, so both arms must agree on one type — E0308 otherwise

@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What determines the value evaluated by a block expression `{ ... }`?",
+      "options": {
+        "a": "An explicit `return` statement",
+        "b": "Its last expression, provided it has no trailing semicolon",
+        "c": "The `yield` keyword"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What happens if you append a semicolon `;` to the final expression inside a block?",
+      "options": {
+        "a": "The block's value remains unchanged",
+        "b": "The block evaluates to `()` (the unit type)",
+        "c": "It causes a compiler error in all cases"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "In `broken.rs`, what is the type of the string literal `\"six\"` in the `else` arm?",
+      "answer_b64": "JnN0cg==",
+      "accept_b64": [
+        "JnN0cg==",
+        "JydzdGF0aWMgc3Ry",
+        "c3Ry",
+        "c3RyaW5nIHNsaWNl"
+      ]
+    }
+  ]
+}

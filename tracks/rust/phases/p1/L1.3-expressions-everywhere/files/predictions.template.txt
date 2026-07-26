@@ -1,0 +1,11 @@
+# Predict printed value of x (evaluated block expression):
+x=
+
+# Predict printed value of kind from classify(443):
+kind=
+
+# Predict printed value of parity (evaluating x % 2 == 0):
+parity=
+
+# Predict compiler error code for `rustc broken.rs` (e.g. error=E0308):
+error=
