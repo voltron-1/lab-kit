@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Every graded artifact maps to one numbered step — run ls in your workspace and compare against the step list.",
+    "toolchain.txt needs both version lines (exact commands in step 2); first_run.txt must be stdout of cargo run executed inside hello_lab, redirected to ../first_run.txt.",
+    "Replay verbatim: rustc --version > toolchain.txt; cargo --version >> toolchain.txt; cargo new hello_lab; cd hello_lab; cargo run > ../first_run.txt; cd .. then re-check."
+  ]
+}

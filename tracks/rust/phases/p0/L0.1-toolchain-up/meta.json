@@ -1,0 +1,8 @@
+{
+  "id": "L0.1",
+  "title": "Toolchain up — rustup, cargo, first build on WSL2",
+  "type": "GUIDED",
+  "objective": "Install or verify the Rust toolchain and drive one full cargo new/build/run cycle, leaving graded evidence in the workspace.",
+  "gate": false,
+  "est_minutes": 20
+}

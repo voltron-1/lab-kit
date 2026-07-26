@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is the primary difference between `cargo run` and `cargo build`?",
+      "options": {
+        "a": "`cargo run` only executes an existing binary without compiling",
+        "b": "`cargo run` recompiles the project if source files changed, then executes the resulting binary",
+        "c": "They are exact alias commands for the same underlying action"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Relative to the crate root directory, where do unoptimized debug binaries land after compilation?",
+      "answer_b64": "dGFyZ2V0L2RlYnVn",
+      "accept_b64": [
+        "dGFyZ2V0L2RlYnVn",
+        "dGFyZ2V0L2RlYnVnLw=="
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What is the primary role of `rustup` in the Rust ecosystem?",
+      "options": {
+        "a": "A package registry for third-party crates",
+        "b": "An installer and version manager for Rust toolchains and components",
+        "c": "A build system and test runner"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

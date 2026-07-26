@@ -1,0 +1,3 @@
+- rustup manages toolchains; cargo builds — new/build/run is the whole loop
+- cargo run = compile if needed + execute; stdout is yours, build noise is stderr
+- debug binaries land in target/debug/<crate> — a plain executable you can run
