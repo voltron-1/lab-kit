@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "In Rust, variable bindings are ___ by default.",
+      "options": {
+        "a": "Mutable",
+        "b": "Immutable",
+        "c": "Uninitialized"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What does `let x = x + 1;` accomplish when `x` was previously declared with `let`?",
+      "options": {
+        "a": "In-place mutation of the variable `x`",
+        "b": "A compilation error due to duplicate declaration",
+        "c": "Shadowing — a new binding that hides the previous variable and can even change type"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which keyword explicitly opts a variable binding into mutability?",
+      "answer_b64": "bXV0",
+      "accept_b64": [
+        "bXV0"
+      ]
+    }
+  ]
+}

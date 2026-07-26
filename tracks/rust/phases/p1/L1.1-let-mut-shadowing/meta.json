@@ -1,0 +1,8 @@
+{
+  "id": "L1.1",
+  "title": "`let`, `mut`, shadowing — immutable by default",
+  "type": "PREDICT",
+  "objective": "Predict what let/mut/shadowing print before running, and read your first compiler rejection (E0384).",
+  "gate": false,
+  "est_minutes": 10
+}
