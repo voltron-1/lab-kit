@@ -1,0 +1,12 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	dns
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	query	qtype_name	rcode_name	answers	event_id
+1773133100.111111	D10001	10.20.30.107	53100	10.20.10.5	53	udp	saas.mail.example	A	NOERROR	192.0.2.60	CM-0310-0051
+1773133150.222222	D10002	10.20.30.107	53101	10.20.10.5	53	udp	coppermine.example	SOA	NOERROR	ns1.coppermine.example	CM-0310-0052
+1773133200.333333	D10003	10.20.30.107	53102	10.20.10.5	53	udp	wpad.coppermine.example	A	NXDOMAIN	-	CM-0310-0053
+1773134500.444444	D10004	10.20.31.112	53103	10.20.10.5	53	udp	saas.mail.example	A	NOERROR	192.0.2.60	CM-0310-0054
+1773148367.555555	D10005	10.20.31.112	53104	10.20.10.5	53	udp	c2.stonewick.example	A	NOERROR	203.0.113.66	CM-0310-0057
+1773152000.666666	D10006	10.20.30.103	53105	10.20.10.5	53	udp	saas.mail.example	A	NOERROR	192.0.2.60	CM-0310-0058

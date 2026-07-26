@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A beacon communicates with its C2 server over TLS port 443. Which telemetry source proves the connection occurred but can NEVER display the payload content?",
+      "options": {
+        "a": "telemetry/a-zeek-conn.log",
+        "b": "telemetry/d-sysmon.json",
+        "c": "telemetry/f-entra-signin.json",
+        "d": "telemetry/e-auth.log"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "An attacker executes `powershell.exe -enc ...`. Which telemetry source records the full process command line?",
+      "options": {
+        "a": "telemetry/a-zeek-conn.log",
+        "b": "telemetry/b-zeek-dns.log",
+        "c": "telemetry/c-windows-security.json",
+        "d": "telemetry/d-sysmon.json"
+      },
+      "answer_b64": "ZA=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "A password spray targets OWA and one login succeeds. Which telemetry plane confirms whether Multi-Factor Authentication (MFA) was satisfied?",
+      "options": {
+        "a": "Network telemetry",
+        "b": "Endpoint telemetry",
+        "c": "Identity telemetry"
+      },
+      "answer_b64": "Yw=="
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+- Network telemetry (zeek conn/dns) proves a conversation happened — hosts, ports, bytes, names asked — but TLS hides content and it never sees command lines.
+- Endpoint telemetry (Sysmon, Windows Security) sees inside the host: processes, full command lines, and local or domain logons.
+- Identity telemetry (Entra sign-ins) is the only plane that records app, MFA result, and source IP for cloud and VPN access.

@@ -1,0 +1,72 @@
+scenario: s1-telemetry
+window:
+  start: "2026-03-10T09:00:00Z"
+  end: "2026-03-10T17:00:00Z"
+actors: [m.reyes, d.okafor, j.walsh, t.aoki]
+hosts:
+  DC01: 10.20.10.5
+  WEB01: 10.20.10.20
+  WKS-ACCT-07: 10.20.30.107
+  WKS-ENG-12: 10.20.31.112
+  WKS-HD-03: 10.20.30.103
+
+l11_emits:
+  zeek_conn: |
+    #separator \x09
+    #set_separator	,
+    #empty_field	(empty)
+    #unset_field	-
+    #path	conn
+    #fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	service	duration	orig_bytes	resp_bytes	event_id
+    1773133200.123456	C10001	10.20.30.107	49152	192.0.2.60	443	tcp	ssl	2411.52	14280	528100	CM-0310-0031
+    1773133500.234567	C10002	10.20.10.5	123	192.0.2.10	123	udp	ntp	0.01	48	48	CM-0310-0032
+    1773134000.345678	C10003	10.20.31.112	49200	192.0.2.60	443	tcp	ssl	12.40	1020	4500	CM-0310-0033
+    1773135000.456789	C10004	10.20.30.103	49180	192.0.2.60	443	tcp	ssl	45.10	3200	12400	CM-0310-0034
+    1773136000.567890	C10005	10.20.30.107	49210	192.0.2.60	443	tcp	ssl	110.25	8900	45000	CM-0310-0035
+    1773137000.678901	C10006	10.20.10.5	123	192.0.2.10	123	udp	ntp	0.01	48	48	CM-0310-0036
+    1773138000.789012	C10007	10.20.31.112	49250	192.0.2.60	443	tcp	ssl	5.20	450	1200	CM-0310-0037
+
+  zeek_dns: |
+    #separator \x09
+    #set_separator	,
+    #empty_field	(empty)
+    #unset_field	-
+    #path	dns
+    #fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	query	qtype_name	rcode_name	answers	event_id
+    1773133100.111111	D10001	10.20.30.107	53100	10.20.10.5	53	udp	saas.mail.example	A	NOERROR	192.0.2.60	CM-0310-0051
+    1773133150.222222	D10002	10.20.30.107	53101	10.20.10.5	53	udp	coppermine.example	SOA	NOERROR	ns1.coppermine.example	CM-0310-0052
+    1773133200.333333	D10003	10.20.30.107	53102	10.20.10.5	53	udp	wpad.coppermine.example	A	NXDOMAIN	-	CM-0310-0053
+    1773134500.444444	D10004	10.20.31.112	53103	10.20.10.5	53	udp	saas.mail.example	A	NOERROR	192.0.2.60	CM-0310-0054
+    1773148367.555555	D10005	10.20.31.112	53104	10.20.10.5	53	udp	c2.stonewick.example	A	NOERROR	203.0.113.66	CM-0310-0057
+    1773152000.666666	D10006	10.20.30.103	53105	10.20.10.5	53	udp	saas.mail.example	A	NOERROR	192.0.2.60	CM-0310-0058
+
+  windows_security:
+    - {"event.id": "CM-0310-0007", "@timestamp": "2026-03-10T09:14:11Z", "event.code": "4625", "host.name": "DC01", "user.name": "j.walsh", "winlog.logon.type": 3, "source.ip": "10.20.30.103", "event.outcome": "failure"}
+    - {"event.id": "CM-0310-0008", "@timestamp": "2026-03-10T09:14:29Z", "event.code": "4624", "host.name": "DC01", "user.name": "j.walsh", "winlog.logon.type": 2, "source.ip": "10.20.30.103", "event.outcome": "success"}
+    - {"event.id": "CM-0310-0019", "@timestamp": "2026-03-10T10:00:12Z", "event.code": "4624", "host.name": "DC01", "user.name": "t.aoki", "winlog.logon.type": 3, "source.ip": "10.20.30.103", "event.outcome": "success"}
+
+  sysmon:
+    - {"event.id": "CM-0310-0061", "@timestamp": "2026-03-10T14:02:55Z", "event.code": "1", "host.name": "WKS-ACCT-07", "user.name": "m.reyes", "process.name": "cmd.exe", "process.command_line": "C:\\Windows\\System32\\cmd.exe", "process.parent.name": "explorer.exe"}
+    - {"event.id": "CM-0310-0062", "@timestamp": "2026-03-10T14:03:08Z", "event.code": "1", "host.name": "WKS-ACCT-07", "user.name": "m.reyes", "process.name": "whoami.exe", "process.command_line": "whoami /all", "process.parent.name": "cmd.exe"}
+    - {"event.id": "CM-0310-0063", "@timestamp": "2026-03-10T14:15:00Z", "event.code": "1", "host.name": "WKS-ACCT-07", "user.name": "m.reyes", "process.name": "OUTLOOK.EXE", "process.command_line": "\"C:\\Program Files\\Microsoft Office\\root\\Office16\\OUTLOOK.EXE\"", "process.parent.name": "explorer.exe"}
+
+  auth_log: |
+    2026-03-10T11:37:02.123456Z WEB01 sshd[12345]: Failed password for invalid user dokafor from 10.20.31.112 port 49822 ssh2 [CM-0310-0022]
+    2026-03-10T11:37:41.654321Z WEB01 sshd[12346]: Accepted publickey for d.okafor from 10.20.31.112 port 49824 ssh2: RSA SHA256:abc123xyz [CM-0310-0023]
+    2026-03-10T11:37:41.700000Z WEB01 sshd[12346]: pam_unix(sshd:session): session opened for user d.okafor by (uid=0) [CM-0310-0024]
+
+  entra_signin:
+    - {"event.id": "CM-0310-0045", "@timestamp": "2026-03-10T13:05:00Z", "user": "m.reyes", "app": "OWA", "source_ip": "192.0.2.44", "result": "success", "mfa": "satisfied"}
+    - {"event.id": "CM-0310-0046", "@timestamp": "2026-03-10T14:10:00Z", "user": "m.reyes", "app": "OWA", "source_ip": "192.0.2.44", "result": "success", "mfa": "satisfied"}
+    - {"event.id": "CM-0310-0047", "@timestamp": "2026-03-10T15:07:00Z", "user": "m.reyes", "app": "OWA", "source_ip": "192.0.2.44", "result": "success", "mfa": "satisfied"}
+
+answer_keys:
+  L1.1:
+    q1: "d"
+    q2: "b"
+    q3: "e"
+    q4: "f"
+    q5: "c"
+    q6: "a"
+    q7: "c"
+    q8: "e"

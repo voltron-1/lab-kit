@@ -1,0 +1,3 @@
+{"event.id": "CM-0310-0045", "@timestamp": "2026-03-10T13:05:00Z", "user": "m.reyes", "app": "OWA", "source_ip": "192.0.2.44", "result": "success", "mfa": "satisfied"}
+{"event.id": "CM-0310-0046", "@timestamp": "2026-03-10T14:10:00Z", "user": "m.reyes", "app": "OWA", "source_ip": "192.0.2.44", "result": "success", "mfa": "satisfied"}
+{"event.id": "CM-0310-0047", "@timestamp": "2026-03-10T15:07:00Z", "user": "m.reyes", "app": "OWA", "source_ip": "192.0.2.44", "result": "success", "mfa": "satisfied"}

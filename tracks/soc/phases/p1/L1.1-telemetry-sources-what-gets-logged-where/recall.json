@@ -1,0 +1,46 @@
+{
+  "questions": [
+    {
+      "id": "R1",
+      "prompt": "Ticket: 'mouse moving by itself' on WKS-HD-03 — Tier 1 handles (h) or escalates (e)?",
+      "accept_b64": [
+        "ZQ==",
+        "ZXNjYWxhdGVz"
+      ],
+      "source": "L0.3"
+    },
+    {
+      "id": "R2",
+      "prompt": "Immediately after an alert fires, what does Tier 1 do first — triage or escalate?",
+      "accept_b64": [
+        "dHJpYWdl"
+      ],
+      "source": "L0.3"
+    },
+    {
+      "id": "R3",
+      "prompt": "Which toolbelt tool parses JSON evidence: jq, tshark, or whois?",
+      "accept_b64": [
+        "anE="
+      ],
+      "source": "L0.1"
+    },
+    {
+      "id": "R4",
+      "prompt": "Defang the URL `http://c2.stonewick.example` per the pack contract:",
+      "accept_b64": [
+        "aHh4cDovL2MyLnN0b25ld2lja1suXWV4YW1wbGU=",
+        "aHh4cDovL2MyWy5dc3RvbmV3aWNrWy5dZXhhbXBsZQ=="
+      ],
+      "source": "L0.2"
+    },
+    {
+      "id": "R5",
+      "prompt": "Does editing files in workspace/soc/<id>/ modify the shipped lab under tracks/? (yes/no)",
+      "accept_b64": [
+        "bm8="
+      ],
+      "source": "L0.2"
+    }
+  ]
+}

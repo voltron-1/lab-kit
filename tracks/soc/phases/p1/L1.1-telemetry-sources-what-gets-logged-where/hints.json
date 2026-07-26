@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read each file's header first: zeek TSVs name their columns on the #fields line; the JSON sources carry event.code. List what each file CANNOT see before matching anything.",
+    "Sort each statement into a plane: mentions a process or command line -> endpoint; a connection, DNS name, or byte count -> network; an app, MFA, or sign-in -> identity. Then pick the letter inside that plane.",
+    "Command lines live only in d (sysmon event.code 1); DNS names only in b; MFA/app only in f; Windows 4624/4625 only in c; sshd lines only in e; durations/bytes only in a."
+  ]
+}
