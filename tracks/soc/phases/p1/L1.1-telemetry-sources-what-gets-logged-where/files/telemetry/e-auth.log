@@ -1,0 +1,3 @@
+2026-03-10T11:37:02.123456Z WEB01 sshd[12345]: Failed password for invalid user dokafor from 10.20.31.112 port 49822 ssh2 [CM-0310-0022]
+2026-03-10T11:37:41.654321Z WEB01 sshd[12346]: Accepted publickey for d.okafor from 10.20.31.112 port 49824 ssh2: RSA SHA256:abc123xyz [CM-0310-0023]
+2026-03-10T11:37:41.700000Z WEB01 sshd[12346]: pam_unix(sshd:session): session opened for user d.okafor by (uid=0) [CM-0310-0024]

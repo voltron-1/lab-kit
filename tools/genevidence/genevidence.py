@@ -168,6 +168,30 @@ def generate_s0_tier_cases(scen: dict):
     if "answer_keys" in scen and "L0.3" in scen["answer_keys"]:
         sync_key_block(l03_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L0.3"])
 
+def generate_s1_telemetry(scen: dict):
+    l11_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p1" / "L1.1-telemetry-sources-what-gets-logged-where"
+    if not (l11_dir / "check.sh").exists():
+        return
+    t_files = l11_dir / "files" / "telemetry"
+    
+    e = scen["l11_emits"]
+    write_file(t_files / "a-zeek-conn.log", e["zeek_conn"].strip() + "\n")
+    write_file(t_files / "b-zeek-dns.log", e["zeek_dns"].strip() + "\n")
+    
+    win_sec = "\n".join([json.dumps(row) for row in e["windows_security"]]) + "\n"
+    write_file(t_files / "c-windows-security.json", win_sec)
+    
+    sysmon = "\n".join([json.dumps(row) for row in e["sysmon"]]) + "\n"
+    write_file(t_files / "d-sysmon.json", sysmon)
+    
+    write_file(t_files / "e-auth.log", e["auth_log"].strip() + "\n")
+    
+    entra = "\n".join([json.dumps(row) for row in e["entra_signin"]]) + "\n"
+    write_file(t_files / "f-entra-signin.json", entra)
+
+    if "answer_keys" in scen and "L1.1" in scen["answer_keys"]:
+        sync_key_block(l11_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.1"])
+
 def main():
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
@@ -181,6 +205,8 @@ def main():
             generate_s0_fixtures(scen)
         elif scen_id == "s0-tier-cases":
             generate_s0_tier_cases(scen)
+        elif scen_id == "s1-telemetry":
+            generate_s1_telemetry(scen)
 
 if __name__ == "__main__":
     main()
