@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What does a parameter typed `&str` indicate to the caller?",
+      "options": {
+        "a": "The function will deallocate the string when it returns",
+        "b": "The function borrows the string; the caller retains ownership",
+        "c": "The argument must have static lifetime"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What happens when passing a `String` value to a function parameter typed `String` (without `&`)?",
+      "options": {
+        "a": "The function borrows the string immutably",
+        "b": "The string is implicitly duplicated via Copy",
+        "c": "The function takes ownership and the argument is moved from the caller"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "How would you change `consume`'s parameter type `message: String` so caller strings are borrowed rather than moved?",
+      "answer_b64": "JnN0cg==",
+      "accept_b64": [
+        "JnN0cg==",
+        "JnN0cmluZw=="
+      ]
+    }
+  ]
+}

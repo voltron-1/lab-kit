@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Three answer keys plus a working ./sample — the grader names which is missing; q1/q2 options are in step 2.",
+    "Compare the two signatures — one takes &str, one takes String; that single & is the answer to q1/q2; q3 comes from compiling the uncommented line.",
+    "Uncomment line 15 in sample.rs, run rustc sample.rs, read the error[E....] tag, set q3=E0382, put the // back, run rustc sample.rs -o sample, then re-check."
+  ]
+}

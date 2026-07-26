@@ -1,0 +1,8 @@
+{
+  "id": "L1.4",
+  "title": "Functions and the ownership preview",
+  "type": "DECODE",
+  "objective": "Explain from the signatures alone why a borrowed argument survives a call and a moved one doesn't (first sight of E0382).",
+  "gate": false,
+  "est_minutes": 15
+}

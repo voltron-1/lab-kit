@@ -1,0 +1,3 @@
+- read the signature: &str borrows (caller keeps it), String moves (caller loses it)
+- a move is not a copy — the old name is dead, and the compiler enforces the funeral
+- E0382 = used after move; the fix is usually a borrow, not a clone
