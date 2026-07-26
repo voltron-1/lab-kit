@@ -1,0 +1,24 @@
+title: Suspicious Encoded PowerShell Command Line
+id: 6f9d3a2e-4b1c-4c8e-9a7d-2f0e5b8c1d43
+status: test
+description: Detects powershell.exe launched with an encoded command, excluding the Veeam backup service parent.
+author: Coppermine Detection Engineering
+date: '2026-02-20'
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection_img:
+    Image|endswith: '\powershell.exe'
+  selection_cli:
+    CommandLine|contains: '-enc'
+  filter_backup:
+    ParentImage|endswith: '\veeam.backup.svc.exe'
+  condition: selection_img and selection_cli and not filter_backup
+falsepositives:
+  - Admin scripts passing encoded commands
+  - Backup software wrappers
+level: high
+tags:
+  - attack.execution
+  - attack.t1059.001

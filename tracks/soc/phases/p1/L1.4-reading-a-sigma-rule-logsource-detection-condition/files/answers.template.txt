@@ -1,0 +1,19 @@
+# Evaluate the rule against candidate events in candidates.jsonl
+# q1-q4: does the rule fire on this event? y or n
+# q1=CM-0311-0201
+q1=
+
+# q2=CM-0311-0021
+q2=
+
+# q3=CM-0312-0233
+q3=
+
+# q4=CM-0312-0301
+q4=
+
+# exact detection-map key name that excluded q2's event
+q5=
+
+# executable basename selection_img would need added for q4's event to match (e.g. cmd.exe)
+q6=

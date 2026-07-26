@@ -1,0 +1,8 @@
+{
+  "id": "L1.4",
+  "title": "Reading a Sigma rule - logsource, detection block, condition",
+  "type": "DECODE",
+  "objective": "Read a Sigma rule as its consumer: logsource scoping, named detection blocks, and the condition line — and predict exactly which events it fires on.",
+  "gate": false,
+  "est_minutes": 15
+}
