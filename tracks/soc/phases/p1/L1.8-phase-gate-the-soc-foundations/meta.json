@@ -1,0 +1,8 @@
+{
+  "id": "L1.8",
+  "title": "Phase gate: five alerts - name the telemetry source, the technique, and the evidence you'd pull for each",
+  "type": "DECODE",
+  "objective": "Given five alerts, name each one's telemetry source, ATT&CK technique, and the raw evidence to pull",
+  "gate": true,
+  "est_minutes": 20
+}

@@ -313,6 +313,41 @@ def generate_s1_dispositions(scen: dict):
     if "answer_keys" in scen and "L1.7" in scen["answer_keys"]:
         sync_key_block(l17_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.7"])
 
+def generate_s1_gate_five_alerts(scen: dict):
+    l18_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p1" / "L1.8-phase-gate-the-soc-foundations"
+    if not (l18_dir / "check.sh").exists():
+        return
+    files_dir = l18_dir / "files"
+    
+    # 1. alerts/CM-A-51.json .. CM-A-55.json
+    for alt_item in scen["alerts"]:
+        alt = alt_item["alert"]
+        alt_id = alt["id"]
+        write_file(files_dir / "alerts" / f"{alt_id}.json", json.dumps(alt_item, indent=2) + "\n")
+
+    # 2. evidence-menu.md
+    write_file(files_dir / "evidence-menu.md", scen["evidence_menu_md"].strip() + "\n")
+
+    # 3. attack-excerpt.json
+    write_file(files_dir / "attack-excerpt.json", json.dumps(scen["attack_excerpt"], indent=2) + "\n")
+
+    # 4. sources-catalog.md
+    catalog_md = """# Telemetry Sources Catalog
+
+| Slug | Telemetry Plane | Description & Primary Index | Telltale Fields |
+|---|---|---|---|
+| `zeek-conn` | Network | Network connection state & transport metrics (`index=zeek_conn`) | `source.ip`, `destination.ip`, `destination.port`, `network.bytes` |
+| `zeek-dns` | Network | DNS queries & responses (`index=zeek_dns`) | `dns.question.name`, `dns.question.type`, `dns.response_code` |
+| `win-security` | Host | Windows Security Audit Event Log (`index=win_security`) | `event.code` (e.g. 4624, 4625, 4720, 4732), `winlog.logon.type`, `user.name` |
+| `sysmon` | Host | Microsoft Sysmon process & system telemetry (`index=sysmon`) | `event.code` (1=Process, 3=Net, 11=File, 13=Registry), `process.command_line` |
+| `linux-auth` | Host | Linux Authentication & PAM Syslog (`index=linux_auth`) | `sshd`, `sudo`, `pam_unix`, `crontab`, `systemd` |
+| `entra-signin` | Identity | Microsoft Entra ID Cloud Sign-in Logs (`index=entra_signin`) | `user`, `app`, `mfa`, `result`, `source.ip` |
+"""
+    write_file(files_dir / "sources-catalog.md", catalog_md.strip() + "\n")
+
+    if "answer_keys" in scen and "L1.8" in scen["answer_keys"]:
+        sync_key_block(l18_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.8"])
+
 def main():
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
@@ -340,6 +375,8 @@ def main():
             generate_s1_killchain(scen)
         elif scen_id == "s1-dispositions":
             generate_s1_dispositions(scen)
+        elif scen_id == "s1-gate-five-alerts":
+            generate_s1_gate_five_alerts(scen)
 
 if __name__ == "__main__":
     main()

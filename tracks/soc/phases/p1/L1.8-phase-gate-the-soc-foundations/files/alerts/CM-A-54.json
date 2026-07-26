@@ -1,0 +1,30 @@
+{
+  "alert": {
+    "id": "CM-A-54"
+  },
+  "@timestamp": "2026-03-11T16:12:30Z",
+  "status": "new",
+  "rule": {
+    "id": "CM-R-0181",
+    "name": "Account created and added to Administrators within 60s",
+    "version": 1,
+    "severity": "high",
+    "risk_score": 81,
+    "threat": {
+      "tactic": "persistence",
+      "technique": null
+    }
+  },
+  "entities": {
+    "host": "FS01",
+    "subject": "m.reyes",
+    "target_account": "supportadmin"
+  },
+  "evidence": {
+    "event_ids": [
+      "CM-0311-0244",
+      "CM-0311-0245"
+    ],
+    "query": "index=win_security event.code:(4720 OR 4732)"
+  }
+}

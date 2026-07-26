@@ -1,0 +1,29 @@
+{
+  "alert": {
+    "id": "CM-A-51"
+  },
+  "@timestamp": "2026-03-11T14:23:05Z",
+  "status": "new",
+  "rule": {
+    "id": "CM-R-0161",
+    "name": "Successful sign-in without expected MFA claim",
+    "version": 1,
+    "severity": "high",
+    "risk_score": 73,
+    "threat": {
+      "tactic": "credential-access",
+      "technique": null
+    }
+  },
+  "entities": {
+    "user": "m.reyes",
+    "app": "OWA",
+    "source.ip": "203.0.113.66"
+  },
+  "evidence": {
+    "event_ids": [
+      "CM-0311-0143"
+    ],
+    "query": "index=entra_signin result:success mfa:absent"
+  }
+}

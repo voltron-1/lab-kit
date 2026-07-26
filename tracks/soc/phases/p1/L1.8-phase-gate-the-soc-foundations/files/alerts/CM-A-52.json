@@ -1,0 +1,30 @@
+{
+  "alert": {
+    "id": "CM-A-52"
+  },
+  "@timestamp": "2026-03-11T15:41:22Z",
+  "status": "new",
+  "rule": {
+    "id": "CM-R-0159",
+    "name": "Office application spawned encoded PowerShell",
+    "version": 2,
+    "severity": "critical",
+    "risk_score": 90,
+    "threat": {
+      "tactic": "execution",
+      "technique": null
+    }
+  },
+  "entities": {
+    "host": "WKS-ACCT-07",
+    "user": "m.reyes",
+    "parent": "WINWORD.EXE",
+    "child": "powershell.exe -nop -w hidden -enc JAB..."
+  },
+  "evidence": {
+    "event_ids": [
+      "CM-0311-0201"
+    ],
+    "query": "index=sysmon event.code:1"
+  }
+}

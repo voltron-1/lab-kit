@@ -1,0 +1,31 @@
+{
+  "alert": {
+    "id": "CM-A-53"
+  },
+  "@timestamp": "2026-03-12T09:14:00Z",
+  "status": "new",
+  "rule": {
+    "id": "CM-R-0171",
+    "name": "High-entropy subdomain burst with NXDOMAIN ratio",
+    "version": 1,
+    "severity": "high",
+    "risk_score": 68,
+    "threat": {
+      "tactic": "command-and-control",
+      "technique": null
+    }
+  },
+  "entities": {
+    "host": "WKS-ENG-12",
+    "source_ip": "10.20.31.112",
+    "zone": "tun.stonewick.example"
+  },
+  "evidence": {
+    "event_ids": [
+      "CM-0312-0310",
+      "CM-0312-0311",
+      "CM-0312-0312"
+    ],
+    "query": "index=zeek_dns"
+  }
+}
