@@ -1,0 +1,8 @@
+{
+  "id": "L1.6",
+  "title": "Kill chain & Pyramid of Pain - where an alert sits, what an indicator costs the attacker",
+  "type": "DECODE",
+  "objective": "Place incident beats on the kill chain and rate indicators by attacker replacement cost",
+  "gate": false,
+  "est_minutes": 15
+}

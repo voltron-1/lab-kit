@@ -1,0 +1,3 @@
+- The kill chain names what the attacker is doing at each beat: recon, weaponization, delivery, exploitation, installation, c2, actions.
+- The Pyramid of Pain ranks indicators by the attacker's cost to replace them: hash trivial, ip easy, domain simple, artifact annoying, tool challenging, ttp tough.
+- Tune upward: a behavior detection like Office spawning powershell -enc outlives every hash and domain block you will ever write.

@@ -1,0 +1,22 @@
+# kill-chain stage vocab: recon|weaponization|delivery|exploitation|installation|c2|actions
+# q1: stage of beat B
+q1=
+
+# q2: stage of beat D
+q2=
+
+# q3: stage of beat E
+q3=
+
+# pyramid vocab: trivial|easy|simple|annoying|challenging|tough
+# q4: level of row i1
+q4=
+
+# q5: level of row i3
+q5=
+
+# q6: level of row i5
+q6=
+
+# q7: row id (i1..i6) that costs the attacker MOST to replace
+q7=

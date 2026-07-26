@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #!/usr/bin/env python3
 """
 Evidence Generator for SOC Analyst Lab Kit.
@@ -276,6 +277,27 @@ def generate_s1_attack_map(scen: dict):
     if "answer_keys" in scen and "L1.5" in scen["answer_keys"]:
         sync_key_block(l15_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.5"])
 
+def generate_s1_killchain(scen: dict):
+    l16_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p1" / "L1.6-killchain-and-pyramid-of-pain"
+    if not (l16_dir / "check.sh").exists():
+        return
+    files_dir = l16_dir / "files"
+    
+    # 1. incident-brief.md
+    brief = "# Coppermine IR summary — WKS-ACCT-07, 2026-03-11\n\n"
+    for act in scen["attacker_actions"]:
+        brief += f"[{act['tag']}] {act['ts']} — {act['prose']}\n"
+    write_file(files_dir / "incident-brief.md", brief)
+
+    # 2. indicators.csv
+    csv_lines = ["id,indicator_type,value,first_seen_in_incident"]
+    for ind in scen["indicators"]:
+        csv_lines.append(f"{ind['id']},{ind['type']},{ind['value']},{ind['first_seen']}")
+    write_file(files_dir / "indicators.csv", "\n".join(csv_lines) + "\n")
+
+    if "answer_keys" in scen and "L1.6" in scen["answer_keys"]:
+        sync_key_block(l16_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.6"])
+
 def main():
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
@@ -299,6 +321,8 @@ def main():
             generate_s1_sigma_read(scen)
         elif scen_id == "s1-attack-map":
             generate_s1_attack_map(scen)
+        elif scen_id == "s1-killchain":
+            generate_s1_killchain(scen)
 
 if __name__ == "__main__":
     main()

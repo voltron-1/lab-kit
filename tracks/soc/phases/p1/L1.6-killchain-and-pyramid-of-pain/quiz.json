@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Your SOC blocks the SHA256 hash of `invoice_2026-03.docm`. Why is this rated as trivial pain for the attacker on the Pyramid of Pain?",
+      "options": {
+        "a": "SHA256 blocklists only function on Windows platforms",
+        "b": "Altering a single byte of the file generates a completely new SHA256 hash, bypassing blocklists",
+        "c": "SHA256 hashes can be easily reversed to reconstruct original code",
+        "d": "File hash blocklists automatically expire after 30 days"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Beats A and B occurred on attacker infrastructure. What is the EARLIEST Cyber Kill Chain stage Coppermine's own telemetry can observe in this incident? (Answer with one word)",
+      "answer_b64": "ZGVsaXZlcnk=",
+      "accept_b64": [
+        "ZGVsaXZlcnk="
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Detection engineering has one hour of development time. Per the Pyramid of Pain, which defensive enhancement inflicts the highest pain on this adversary?",
+      "options": {
+        "a": "Add the file SHA256 hash to the endpoint blocklist",
+        "b": "Block IP address 203.0.113.66 at the perimeter firewall",
+        "c": "Build and tune a behavioral detection rule for Office processes spawning PowerShell with encoded commands",
+        "d": "Add filename `invoice_2026-03.docm` to the email gateway filter"
+      },
+      "answer_b64": "Yw=="
+    }
+  ]
+}
