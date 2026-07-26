@@ -1,0 +1,28 @@
+{
+  "alert": {
+    "id": "CM-A-16"
+  },
+  "@timestamp": "2026-03-12T10:03:00Z",
+  "status": "new",
+  "rule": {
+    "id": "CM-R-0155",
+    "name": "C2 beaconing - fixed interval",
+    "version": 2,
+    "severity": "medium",
+    "risk_score": 65,
+    "threat": {
+      "tactic": "command-and-control",
+      "technique": "T1071"
+    }
+  },
+  "entities": {
+    "host.name": "WKS-HD-03"
+  },
+  "evidence": {
+    "event_ids": [
+      "CM-0312-0203",
+      "CM-0312-0204",
+      "CM-0312-0205"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "alert": {
+    "id": "CM-A-13"
+  },
+  "@timestamp": "2026-03-10T10:01:25Z",
+  "status": "new",
+  "rule": {
+    "id": "CM-R-0141",
+    "name": "PsExec service installed on domain controller",
+    "version": 2,
+    "severity": "high",
+    "risk_score": 80,
+    "threat": {
+      "tactic": "execution",
+      "technique": "T1569.002"
+    }
+  },
+  "entities": {
+    "host.name": "DC01",
+    "user.name": "t.aoki"
+  },
+  "evidence": {
+    "event_ids": [
+      "CM-0310-0019",
+      "CM-0310-0020",
+      "CM-0310-0021"
+    ]
+  }
+}

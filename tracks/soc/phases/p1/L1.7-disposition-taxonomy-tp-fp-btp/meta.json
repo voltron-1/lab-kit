@@ -1,0 +1,8 @@
+{
+  "id": "L1.7",
+  "title": "The disposition taxonomy - true positive, false positive, benign true positive, with mini-cases",
+  "type": "TRIAGE",
+  "objective": "Assign tp/fp/btp verdicts to six alerts and cite the deciding event id for each",
+  "gate": false,
+  "est_minutes": 20
+}

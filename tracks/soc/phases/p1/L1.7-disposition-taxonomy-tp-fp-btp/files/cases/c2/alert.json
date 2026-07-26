@@ -1,0 +1,28 @@
+{
+  "alert": {
+    "id": "CM-A-12"
+  },
+  "@timestamp": "2026-03-10T13:15:05Z",
+  "status": "new",
+  "rule": {
+    "id": "CM-R-0134",
+    "name": "Mimikatz command line",
+    "version": 1,
+    "severity": "high",
+    "risk_score": 85,
+    "threat": {
+      "tactic": "credential-access",
+      "technique": "T1003.001"
+    }
+  },
+  "entities": {
+    "host.name": "WKS-HD-03",
+    "user.name": "j.walsh"
+  },
+  "evidence": {
+    "event_ids": [
+      "CM-0310-0070",
+      "CM-0310-0071"
+    ]
+  }
+}
