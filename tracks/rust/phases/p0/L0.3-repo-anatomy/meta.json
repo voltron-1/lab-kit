@@ -1,0 +1,8 @@
+{
+  "id": "L0.3",
+  "title": "Anatomy of a Rust repo — Cargo.toml, src/, cargo doc, docs.rs",
+  "type": "DECODE",
+  "objective": "Open a never-seen crate and answer the two auditor questions cold: what does it do, and where is the entry point.",
+  "gate": true,
+  "est_minutes": 15
+}

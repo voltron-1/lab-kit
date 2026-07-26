@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What does a Rust crate containing both `src/main.rs` and `src/lib.rs` produce?",
+      "options": {
+        "a": "Two separate, independent CLI binaries",
+        "b": "A binary executable that can import and call code from its own library crate",
+        "c": "Documentation files only"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Which command generates offline HTML documentation for only the local crate (skipping dependencies)?",
+      "answer_b64": "Y2FyZ28gZG9jIC0tbm8tZGVwcw==",
+      "accept_b64": [
+        "Y2FyZ28gZG9jIC0tbm8tZGVwcw==",
+        "Y2FyZ28gZG9j"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What is the purpose of the `[dependencies]` section in `Cargo.toml`?",
+      "options": {
+        "a": "Configures flags for the compiler linker",
+        "b": "Declares external third-party crates fetched from crates.io",
+        "c": "Lists dev tools used strictly for CI test automation"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
