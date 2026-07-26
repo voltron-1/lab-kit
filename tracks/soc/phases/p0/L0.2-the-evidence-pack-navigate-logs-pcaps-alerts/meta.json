@@ -1,0 +1,8 @@
+{
+  "id": "L0.2",
+  "title": "Meet the lab CLI and the evidence pack - where everything lives",
+  "type": "GUIDED",
+  "objective": "Navigate the evidence-pack contract: ECS fields, CM- event ids, alert-to-event citation, defang discipline, answers convention.",
+  "gate": false,
+  "est_minutes": 10
+}

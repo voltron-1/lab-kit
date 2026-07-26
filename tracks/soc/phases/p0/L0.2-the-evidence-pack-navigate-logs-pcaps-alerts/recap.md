@@ -1,0 +1,3 @@
+- Raw evidence is never defanged; everything you write about it always is (hxxp://, evil[.]example).
+- Alerts cite raw events by CM-<MMDD>-<seq> id in evidence.event_ids — that list is your pivot into the logs.
+- lab start copies files/ into workspace/soc/<lab-id>; answers.txt in that copy is what check.sh grades.

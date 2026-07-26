@@ -120,33 +120,33 @@ def sync_key_block(check_sh_path: Path, scenario_id: str, keys: dict):
 
 def generate_s0_fixtures(scen: dict):
     l01_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p0" / "L0.1-analyst-toolbelt-install-verify-jq-tshark-dig-whois-ripgrep"
-    l01_files = l01_dir / "files"
-    
-    write_file(l01_files / "sample-event.json", json.dumps(scen["l01_emits"]["sample_event"], indent=2) + "\n")
-    pcap_data = build_pcap_dns(scen["l01_emits"]["dns_pcap_queries"])
-    write_binary(l01_files / "fixtures.pcap", pcap_data)
-    
-    notes_text = "\n".join(scen["l01_emits"]["handoff_notes"]["lines"]) + "\n"
-    write_file(l01_files / "notes" / "triage-notes.txt", notes_text)
-    
-    w = scen["l01_emits"]["whois_report"]
-    whois_text = (
-        f"Domain Name: {w['domain'].upper()}\n"
-        f"Registrar: {w['registrar']}\n"
-        f"Creation Date: {w['created']}\n"
-        f"Updated Date: {w['updated']}\n"
-        f"Registrant Organization: {w['registrant_org']}\n"
-        f"Name Server: {w['name_servers'][0]}\n"
-        f"Name Server: {w['name_servers'][1]}\n"
-    )
-    write_file(l01_files / "whois-stonewick.txt", whois_text)
+    if (l01_dir / "check.sh").exists():
+        l01_files = l01_dir / "files"
+        write_file(l01_files / "sample-event.json", json.dumps(scen["l01_emits"]["sample_event"], indent=2) + "\n")
+        pcap_data = build_pcap_dns(scen["l01_emits"]["dns_pcap_queries"])
+        write_binary(l01_files / "fixtures.pcap", pcap_data)
+        
+        notes_text = "\n".join(scen["l01_emits"]["handoff_notes"]["lines"]) + "\n"
+        write_file(l01_files / "notes" / "triage-notes.txt", notes_text)
+        
+        w = scen["l01_emits"]["whois_report"]
+        whois_text = (
+            f"Domain Name: {w['domain'].upper()}\n"
+            f"Registrar: {w['registrar']}\n"
+            f"Creation Date: {w['created']}\n"
+            f"Updated Date: {w['updated']}\n"
+            f"Registrant Organization: {w['registrant_org']}\n"
+            f"Name Server: {w['name_servers'][0]}\n"
+            f"Name Server: {w['name_servers'][1]}\n"
+        )
+        write_file(l01_files / "whois-stonewick.txt", whois_text)
     
     l02_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p0" / "L0.2-the-evidence-pack-navigate-logs-pcaps-alerts"
-    l02_files = l02_dir / "files"
-    
-    write_file(l02_files / "alert-sample.json", json.dumps(scen["l02_emits"]["alert_sample"], indent=2) + "\n")
-    events_jsonl = "\n".join([json.dumps(ev) for ev in scen["l02_emits"]["events_jsonl"]]) + "\n"
-    write_file(l02_files / "events.jsonl", events_jsonl)
+    if (l02_dir / "check.sh").exists():
+        l02_files = l02_dir / "files"
+        write_file(l02_files / "alert-sample.json", json.dumps(scen["l02_emits"]["alert_sample"], indent=2) + "\n")
+        events_jsonl = "\n".join([json.dumps(ev) for ev in scen["l02_emits"]["events_jsonl"]]) + "\n"
+        write_file(l02_files / "events.jsonl", events_jsonl)
 
     if "answer_keys" in scen:
         if "L0.1" in scen["answer_keys"]:
@@ -156,6 +156,8 @@ def generate_s0_fixtures(scen: dict):
 
 def generate_s0_tier_cases(scen: dict):
     l03_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p0" / "L0.3-phase-gate-verify-the-analyst-toolbelt"
+    if not (l03_dir / "check.sh").exists():
+        return
     l03_files = l03_dir / "files"
     
     cases_md = "# Coppermine SOC Alert Cases\n\n"

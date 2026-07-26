@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Two files hold everything: alert-sample.json (try jq '.rule' and jq '.evidence') and README-evidence.md (defang rule + the sentence about where files/ get copied). q2 wants the FIRST ID in a list.",
+    "q1: jq -r '.rule.id'. q2: jq -r '.evidence.event_ids[0]'. q3: the README defang rule brackets the final dot only. q4: the README names the path pattern workspace/soc/<lab-id> — substitute this lab's id, lowercased.",
+    "q1: cm-r-0112. q2: cm-0311-0107. q3: c2.stonewick[.]example. q4: workspace/soc/l0.2."
+  ]
+}
