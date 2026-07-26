@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "text",
+      "prompt": "Which enum variant did error E0004 name as uncovered in `broken.rs`?",
+      "answer_b64": "Y3JpdGljYWw=",
+      "accept_b64": [
+        "Y3JpdGljYWw=",
+        "U2V2ZXJpdHk6OkNyaXRpY2Fs",
+        "c2V2ZXJpdHk6OmNyaXRpY2Fs"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why is using a wildcard `_ =>` considered the wrong security fix when handling domain enums?",
+      "options": {
+        "a": "Wildcard matches execute significantly slower at runtime",
+        "b": "Newly added enum variants in future updates will silently fall into the wildcard without code review",
+        "c": "Wildcards cannot return string literal values"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What does exhaustiveness checking guarantee in Rust?",
+      "options": {
+        "a": "The compiler proves every possible enum variant is handled at compile time",
+        "b": "Unmatched enum variants panic safely at runtime",
+        "c": "Match arms are executed sequentially from top to bottom at runtime"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

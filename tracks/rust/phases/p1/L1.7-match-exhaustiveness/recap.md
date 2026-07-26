@@ -1,0 +1,3 @@
+- match must prove coverage of every variant at compile time — E0004 when it can't
+- minimal fix = name the missing variant; _ => swallows future variants unreviewed
+- an enum + exhaustive match turns "forgot a case" from a runtime bug into a build break
