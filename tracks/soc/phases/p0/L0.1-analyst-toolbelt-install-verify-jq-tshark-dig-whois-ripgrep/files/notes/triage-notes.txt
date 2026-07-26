@@ -1,0 +1,12 @@
+=== Shift Handoff Notes — 2026-03-09 ===
+Author: j.walsh (Helpdesk / T1)
+
+1. WEB01 (192.0.2.44) saw external port scan activity from research scanner 192.0.2[.]199.
+   No open management ports exposed beyond 80/443; benign research noise.
+2. SRV-BACKUP nightly robocopy job running normally at 02:00Z under svc_backup.
+3. Helpdesk ticket queue clean; 3 password reset requests resolved.
+4. Internal DNS queries resolving normally across DC01 (10.20.10.5).
+5. escalation-marker: CM-TOOLBELT-7C42
+6. Remind T2 of scheduled maintenance window on FS01 for next Tuesday.
+7. All workstation patch deployments pushed via WSUS.
+8. End of shift notes complete.

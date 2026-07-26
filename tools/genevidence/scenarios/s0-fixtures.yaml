@@ -1,0 +1,140 @@
+scenario: s0-fixtures
+window:
+  start: "2026-03-09T00:00:00Z"
+  end: "2026-03-13T23:59:59Z"
+actors: [m.reyes, d.okafor, j.walsh, svc_backup]
+hosts:
+  DC01: 10.20.10.5
+  FS01: 10.20.10.8
+  SRV-BACKUP: 10.20.10.9
+  WEB01: 10.20.10.20
+  WKS-ACCT-07: 10.20.30.107
+  WKS-HD-03: 10.20.30.103
+external_ips:
+  c2: 203.0.113.66
+  scanner: 192.0.2.199
+
+l01_emits:
+  sample_event:
+    "@timestamp": "2026-03-11T14:22:31Z"
+    event:
+      code: "4624"
+      id: "CM-0311-0142"
+      provider: "Microsoft-Windows-Security-Auditing"
+    host:
+      name: "DC01"
+    user:
+      name: "m.reyes"
+      domain: "COPPERMINE"
+    source:
+      ip: "203.0.113.66"
+    winlog:
+      logon:
+        type: 3
+
+  dns_pcap_queries:
+    - client: "10.20.30.107"
+      server: "10.20.10.5"
+      t0: "2026-03-09T13:05:00Z"
+      step_seconds: 2
+      qnames:
+        - "coppermine.example"
+        - "www.coppermine.example"
+        - "fs01.coppermine.example"
+        - "dc01.coppermine.example"
+
+  handoff_notes:
+    author: "j.walsh"
+    date: "2026-03-09"
+    lines:
+      - "=== Shift Handoff Notes — 2026-03-09 ==="
+      - "Author: j.walsh (Helpdesk / T1)"
+      - ""
+      - "1. WEB01 (192.0.2.44) saw external port scan activity from research scanner 192.0.2[.]199."
+      - "   No open management ports exposed beyond 80/443; benign research noise."
+      - "2. SRV-BACKUP nightly robocopy job running normally at 02:00Z under svc_backup."
+      - "3. Helpdesk ticket queue clean; 3 password reset requests resolved."
+      - "4. Internal DNS queries resolving normally across DC01 (10.20.10.5)."
+      - "5. escalation-marker: CM-TOOLBELT-7C42"
+      - "6. Remind T2 of scheduled maintenance window on FS01 for next Tuesday."
+      - "7. All workstation patch deployments pushed via WSUS."
+      - "8. End of shift notes complete."
+
+  whois_report:
+    domain: "stonewick.example"
+    registrar: "Nimbus Domains LLC"
+    created: "2026-02-27T18:44:09Z"
+    updated: "2026-02-27T18:44:09Z"
+    registrant_org: "REDACTED FOR PRIVACY"
+    name_servers:
+      - "ns1.stonewick.example"
+      - "ns2.stonewick.example"
+
+l02_emits:
+  alert_sample:
+    alert:
+      id: "CM-A-0001"
+    "@timestamp": "2026-03-11T14:07:55Z"
+    rule:
+      id: "CM-R-0112"
+      name: "Multiple failed logons - single source"
+      version: 3
+      severity: "low"
+      risk_score: 21
+      threat:
+        tactic: "credential-access"
+        technique: "T1110"
+    entities:
+      source:
+        ip: "203.0.113.66"
+      host:
+        name: "DC01"
+    evidence:
+      event_ids:
+        - "CM-0311-0107"
+        - "CM-0311-0111"
+      query: "event.code:4625 AND source.ip:203.0.113.66"
+    status: "new"
+
+  events_jsonl:
+    - "@timestamp": "2026-03-11T02:00:04Z"
+      event: {code: "4624", id: "CM-0311-0002"}
+      host: {name: "FS01"}
+      user: {name: "svc_backup"}
+      source: {ip: "10.20.10.9"}
+      winlog: {channel: "Security", logon: {type: 3}}
+    - "@timestamp": "2026-03-11T12:58:07Z"
+      event: {code: "4624", id: "CM-0311-0056"}
+      host: {name: "WKS-ACCT-07"}
+      user: {name: "m.reyes"}
+      source: {ip: "10.20.30.107"}
+      winlog: {channel: "Security", logon: {type: 2}}
+    - "@timestamp": "2026-03-11T13:15:44Z"
+      event: {code: "4624", id: "CM-0311-0061"}
+      host: {name: "WKS-HD-03"}
+      user: {name: "j.walsh"}
+      source: {ip: "10.20.30.103"}
+      winlog: {channel: "Security", logon: {type: 2}}
+    - "@timestamp": "2026-03-11T14:07:12Z"
+      event: {code: "4625", id: "CM-0311-0107"}
+      host: {name: "DC01"}
+      user: {name: "m.reyes"}
+      source: {ip: "203.0.113.66"}
+      winlog: {channel: "Security", logon: {type: 3}}
+    - "@timestamp": "2026-03-11T14:07:41Z"
+      event: {code: "4625", id: "CM-0311-0111"}
+      host: {name: "DC01"}
+      user: {name: "d.okafor"}
+      source: {ip: "203.0.113.66"}
+      winlog: {channel: "Security", logon: {type: 3}}
+
+answer_keys:
+  L0.1:
+    K_JQ_USER: "m.reyes"
+    K_TSHARK_QNAME: "coppermine.example"
+    K_RG_MARKER: "CM-TOOLBELT-7C42"
+  L0.2:
+    q1: "cm-r-0112"
+    q2: "cm-0311-0107"
+    q3: "c2.stonewick[.]example"
+    q4: "workspace/soc/l0.2"

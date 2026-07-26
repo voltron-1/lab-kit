@@ -1,0 +1,70 @@
+# Coppermine Logistics Universe Definition
+org:
+  name: Coppermine Logistics
+  domain: coppermine.example
+  staff_count: 400
+  hq: Duluth, MN
+  timezone: America/Chicago
+  netbios: COPPERMINE
+  scenario_window:
+    start: "2026-03-09T00:00:00Z"
+    end: "2026-03-13T23:59:59Z"
+
+subnets:
+  servers: 10.20.10.0/24
+  workstations_acct: 10.20.30.0/24
+  workstations_eng: 10.20.31.0/24
+
+servers:
+  DC01:
+    ip: 10.20.10.5
+    os: Windows Server 2022
+    roles: [AD DS, DNS]
+  FS01:
+    ip: 10.20.10.8
+    os: Windows Server 2022
+    roles: [File Server]
+  SRV-BACKUP:
+    ip: 10.20.10.9
+    os: Windows Server 2022
+    roles: [Backup Server]
+  WEB01:
+    ip: 10.20.10.20
+    public_ip: 192.0.2.44
+    os: Ubuntu 22.04
+    roles: [Nginx, SSH]
+
+workstations:
+  WKS-ACCT-07:
+    ip: 10.20.30.107
+    user: m.reyes
+    dept: Accounting
+  WKS-ENG-12:
+    ip: 10.20.31.112
+    user: d.okafor
+    dept: Engineering
+  WKS-HD-03:
+    ip: 10.20.30.103
+    user: j.walsh
+    dept: Helpdesk
+
+people:
+  m.reyes: {name: Maria Reyes, role: Accounts Payable}
+  d.okafor: {name: David Okafor, role: Engineer}
+  j.walsh: {name: Jim Walsh, role: Helpdesk Analyst}
+  t.aoki: {name: Tom Aoki, role: IT Administrator}
+  svc_backup: {name: Service Account Backup, interactive: false}
+  it_svc_tmp: {name: Temporary IT Service, interactive: false}
+
+externals:
+  c2_ip: 203.0.113.66
+  c2_domain: c2.stonewick.example
+  payload_ip: 198.51.100.23
+  payload_domain: cdn.stonewick.example
+  phish_sender_ip: 198.51.100.71
+  phish_domain: copperm1ne-billing.example
+  dns_tunnel_zone: "*.tun.stonewick.example"
+  research_scanner: 192.0.2.199
+  ntp_server: 192.0.2.10
+  pentest_ip: 192.0.2.150
+  vpn_gateway: 192.0.2.45

@@ -1,0 +1,76 @@
+scenario: s0-tier-cases
+window:
+  start: "2026-03-09T00:00:00Z"
+  end: "2026-03-13T23:59:59Z"
+actors: [m.reyes, d.okafor, j.walsh, t.aoki, svc_backup]
+hosts:
+  DC01: 10.20.10.5
+  FS01: 10.20.10.8
+  SRV-BACKUP: 10.20.10.9
+  WKS-HD-03: 10.20.30.103
+  WKS-ENG-12: 10.20.31.112
+ips:
+  spray_c2: 203.0.113.66
+  phish_sender: 198.51.100.71
+  vpn_gw: 192.0.2.45
+
+cards:
+  - n: 1
+    alert_id: "CM-A-1"
+    title: "Password spray — OWA/VPN auth failures"
+    key: "e"
+    rationale: "confirmed credential compromise: spray success + no-MFA sign-in"
+    text: |
+      ## CASE 1 — alert CM-A-1 — Password spray — OWA/VPN auth failures
+      Between 2026-03-11 14:05Z and 14:25Z, source IP 203.0.113.66 initiated 4625 login failure bursts across 40+ COPPERMINE accounts.
+      At 14:22:31Z, ONE successful 4624 type 3 logon was recorded for account m.reyes on DC01.
+      An accompanying Entra ID sign-in succeeded from the same external IP with no MFA claim present, originating from a geolocation inconsistent with her 13:58Z Duluth VPN session.
+
+  - n: 2
+    alert_id: "CM-A-2"
+    title: "AV quarantine — adware"
+    key: "h"
+    rationale: "AV contained it; no execution, no spread"
+    text: |
+      ## CASE 2 — alert CM-A-2 — AV quarantine — adware
+      At 2026-03-10T16:12Z, Defender on WKS-HD-03 (j.walsh) quarantined commodity adware bundler 'PDFTurbo Setup' immediately upon download.
+      Endpoint telemetry shows no process creation (4688), no network connections (Sysmon 3), and no secondary host activity.
+
+  - n: 3
+    alert_id: "CM-A-3"
+    title: "User-reported phish"
+    key: "h"
+    rationale: "no click evidence; verdict + block ticket is Tier 1 work"
+    text: |
+      ## CASE 3 — alert CM-A-3 — User-reported phish
+      At 2026-03-09T13:30Z, d.okafor forwarded a suspicious email from billing@copperm1ne-billing[.]example (sender IP 198.51.100.71) linking to hxxp://copperm1ne-billing[.]example/invoice.
+      Zeek HTTP and DNS logs confirm zero requests originated from 10.20.31.112 (WKS-ENG-12), and no unusual process execution occurred.
+
+  - n: 4
+    alert_id: "CM-A-4"
+    title: "Remote admin tool on DC"
+    key: "e"
+    rationale: "unauthorized PsExec + new admin on DC01; needs containment authority"
+    text: |
+      ## CASE 4 — alert CM-A-4 — Remote admin tool on DC
+      At 2026-03-12T19:41Z, PSEXESVC service was installed on DC01 authenticated as t.aoki.
+      No change control ticket covers this time window (charter lists only CHG-2143 on 2026-03-10 10:00Z).
+      At 19:44Z, Event 4720 recorded new account creation for 'it_svc_tmp', immediately followed by Event 4732 adding it to Domain Administrators.
+
+  - n: 5
+    alert_id: "CM-A-5"
+    title: "Mass file copy"
+    key: "h"
+    rationale: "documented svc_backup job; BTP, close with tuning note"
+    text: |
+      ## CASE 5 — alert CM-A-5 — Mass file copy
+      At 2026-03-12T02:00:14Z, a large SMB file transfer was detected from SRV-BACKUP to FS01.
+      Process telemetry identifies robocopy.exe running under service account svc_backup, exactly matching the charter's documented nightly 02:00Z backup job.
+
+answer_keys:
+  L0.3:
+    q1: "e"
+    q2: "h"
+    q3: "h"
+    q4: "e"
+    q5: "h"

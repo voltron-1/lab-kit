@@ -1,0 +1,3 @@
+- jq reads JSON logs, tshark reads pcaps, ripgrep searches haystacks, dig and whois profile infrastructure.
+- Graders run offline in a fenced workspace, so network tools verify by version output plus staged mock reports.
+- .example domains and TEST-NET IPs are RFC-reserved — Coppermine evidence looks real but can never route.

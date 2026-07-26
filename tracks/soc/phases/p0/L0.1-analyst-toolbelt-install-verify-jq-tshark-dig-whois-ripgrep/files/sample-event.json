@@ -1,0 +1,23 @@
+{
+  "@timestamp": "2026-03-11T14:22:31Z",
+  "event": {
+    "code": "4624",
+    "id": "CM-0311-0142",
+    "provider": "Microsoft-Windows-Security-Auditing"
+  },
+  "host": {
+    "name": "DC01"
+  },
+  "user": {
+    "name": "m.reyes",
+    "domain": "COPPERMINE"
+  },
+  "source": {
+    "ip": "203.0.113.66"
+  },
+  "winlog": {
+    "logon": {
+      "type": 3
+    }
+  }
+}

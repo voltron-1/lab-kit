@@ -1,0 +1,7 @@
+Domain Name: STONEWICK.EXAMPLE
+Registrar: Nimbus Domains LLC
+Creation Date: 2026-02-27T18:44:09Z
+Updated Date: 2026-02-27T18:44:09Z
+Registrant Organization: REDACTED FOR PRIVACY
+Name Server: ns1.stonewick.example
+Name Server: ns2.stonewick.example
