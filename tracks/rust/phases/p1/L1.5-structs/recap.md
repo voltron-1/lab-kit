@@ -1,0 +1,3 @@
+- struct literals are the constructor — every field named, nothing uninitialized
+- port, is shorthand for port: port; fn make_x(...) -> X is the whole "new" story
+- ..a fills only the fields you didn't write — moves non-Copy ones unless overridden

@@ -1,0 +1,40 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "text",
+      "prompt": "Which derive attribute allows formatting structs with `{:?}` in `println!`?",
+      "answer_b64": "I1tkZXJpdmUoRGVidWcpXQ==",
+      "accept_b64": [
+        "I1tkZXJpdmUoRGVidWcpXQ==",
+        "I1tkZXJpdmUoZGVidWcpXQ==",
+        "ZGVyaXZlKGRlYnVnKQ==",
+        "ZGVyaXZlKERlYnVnKQ==",
+        "ZGVidWc=",
+        "RGVidWc="
+      ]
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "How are struct constructors defined in idiomatic Rust?",
+      "options": {
+        "a": "Via dedicated compiler-provided `constructor` blocks",
+        "b": "Any plain function returning the struct type (by convention named `new`)",
+        "c": "Implicitly generated for every struct definition"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Can a Rust struct literal leave a field uninitialized?",
+      "options": {
+        "a": "Yes, uninitialized fields default to zero",
+        "b": "Yes, when marked with unsafe blocks",
+        "c": "No — every field must be initialized explicitly or provided via struct update syntax (`..`)"
+      },
+      "answer_b64": "Yw=="
+    }
+  ]
+}

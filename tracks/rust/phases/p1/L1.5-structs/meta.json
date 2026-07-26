@@ -1,0 +1,8 @@
+{
+  "id": "L1.5",
+  "title": "Structs — data without constructor magic",
+  "type": "DECODE",
+  "objective": "Read struct literals, field-init shorthand, and update syntax, and explain which fields ..a actually moves.",
+  "gate": false,
+  "est_minutes": 15
+}
