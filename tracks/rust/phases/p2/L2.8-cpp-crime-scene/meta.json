@@ -1,0 +1,8 @@
+{
+  "id": "L2.8",
+  "title": "The C++ crime scene — use-after-free side-by-side",
+  "type": "AUDIT",
+  "objective": "Audit a real CWE-416 use-after-free in C++, then prove the identical shape is a compile error in Rust and name the exact rule that blocks it.",
+  "gate": false,
+  "est_minutes": 20
+}

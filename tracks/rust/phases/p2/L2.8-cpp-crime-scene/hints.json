@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Make sure answers.txt contains all 5 keys (q1, q2, q3, q4, q5) and that rust_error.txt contains the compiler stderr output from compiling equivalent.rs.",
+    "For q2, locate the single line in crime.cpp that reallocates the vector buffer while first still references element 0; for q3, run rustc equivalent.rs 2> rust_error.txt.",
+    "Run rustc equivalent.rs 2> rust_error.txt, then inspect rust_error.txt — the error[E....] tag is E0502, and q4's answer is stated in the compiler's own message: mutable borrow requested while borrowed as immutable."
+  ]
+}
