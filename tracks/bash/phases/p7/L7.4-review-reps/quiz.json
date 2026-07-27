@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "`gen2-fetch-deploy.sh` emits zero ShellCheck findings. What does this prove?",
+      "options": {
+        "a": "It is completely safe to deploy in production",
+        "b": "It only proves there are no syntax errors ShellCheck detects; trust boundaries, checksum validation, and fail-loud error handling are absent",
+        "c": "The ShellCheck tool is broken"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why is running `curl -s` without `--fail` dangerous in an automated deployment script?",
+      "options": {
+        "a": "An HTTP 404 or 500 error page is written to the output file while `curl` still exits 0",
+        "b": "It disables TLS certificate validation",
+        "c": "It causes significant network latency"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why is `for f in $(ls $DIR)` flagged as an ERROR severity finding (SC2045) by ShellCheck?",
+      "options": {
+        "a": "The subshell loop splits filenames on whitespace, breaking on any filename containing a space",
+        "b": "The `ls` command is deprecated",
+        "c": "It executes slower than `find`"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

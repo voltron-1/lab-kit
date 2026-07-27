@@ -1,0 +1,3 @@
+- Three generated scripts, three profiles: one loud with findings, one clean and dangerous, one broken by the oldest bug in the book (a filename with a space).
+- The clean one is the lesson — no --fail, no checksum, a predictable temp path, and an unpack over a live directory, all invisible to a linter.
+- ShellCheck is the floor: a linter pass is necessary and insufficient; human review supplies the rest.

@@ -1,0 +1,36 @@
+# Answer file format for L7.4:
+# s1_worst: Worst flaw in gen1-cleanup.sh? (unsetvar|quoting|retention)
+s1_worst=
+
+# s1_savedby: Which strict mode flag would have prevented gen1-cleanup.sh from executing `rm -rf /*.gz`? (nounset|errexit|pipefail)
+s1_savedby=
+
+# s2_findings: Number of ShellCheck findings reported for gen2-fetch-deploy.sh? (a number, e.g. 0)
+s2_findings=
+
+# s2_fetch: Which missing curl flag allows HTTP 404/500 error pages to save as archives and exit 0? (nofail|noretry|notimeout)
+s2_fetch=
+
+# s2_integrity: Which security check is missing entirely before unpacking gen2-fetch-deploy.sh? (checksum|permissions|logging)
+s2_integrity=
+
+# s2_temppath: What type of temp path risk does `/tmp/agent.tar.gz` create? (predictable|toolong|readonly)
+s2_temppath=
+
+# s2_model: Which previous lab's pattern correctly handles fetch-and-deploy safely? (l6.5|l6.2|l6.3)
+s2_model=
+
+# s3_severity: Which SC code in gen3-report.sh is severity ERROR? (sc2045|sc2086|sc2126)
+s3_severity=
+
+# s3_breaks: What filename character breaks `for f in $(ls $DIR)` in gen3-report.sh? (spaces|symlinks|permissions)
+s3_breaks=
+
+# s3_useless: Which useless command begins the inner pipeline in gen3-report.sh? (cat|grep|sort)
+s3_useless=
+
+# cleanest: Which sample does ShellCheck report as 100% clean? (gen2|gen1|gen3)
+cleanest=
+
+# lesson: What does a 100% ShellCheck-clean report represent? (floor|ceiling|proof)
+lesson=
