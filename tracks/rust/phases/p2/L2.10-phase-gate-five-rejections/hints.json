@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Make sure answers.txt contains all 10 keys (e1 through e5, c1 through c5) and that fixed5.rs compiles to ./fixed5.",
+    "Map each reject file to its lab pattern: moved-into-vec (L2.1/E0382), two &mut (L2.4/E0499), & alive across clear() (L2.5/E0502), returning &local (L2.9/E0515), inner-scope borrow (L2.9/E0597).",
+    "Compile all 5 files (rustc rejectN.rs) to transcribe error tags in order. For fixed5.rs, lift 'let tmp = String::from(\"short-lived\");' out of the inner block braces and build with rustc fixed5.rs -o fixed5."
+  ]
+}
