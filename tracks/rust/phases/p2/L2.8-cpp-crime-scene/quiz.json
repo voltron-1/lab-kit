@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Why can crime.cpp print '22' correctly in a test run and still be a critical security vulnerability?",
+      "options": {
+        "a": "Undefined behavior may appear correct until memory layout changes — attackers manipulate heap allocations to reuse freed memory",
+        "b": "It cannot; printing 22 proves memory safety",
+        "c": "printf masks the memory flaw at runtime"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "When does Rust detect and reject the use-after-free pattern shown in equivalent.rs?",
+      "options": {
+        "a": "At runtime as a panic",
+        "b": "At compile time, before any executable binary is created",
+        "c": "Only when compiled under an AddressSanitizer (ASan) build"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Name the vulnerability class in words (not the CWE number).",
+      "answer_b64": "dXNlLWFmdGVyLWZyZWU=",
+      "accept_b64": [
+        "dXNlLWFmdGVyLWZyZWU=",
+        "dXNlIGFmdGVyIGZyZWU=",
+        "dWFm",
+        "ZGFuZ2xpbmcgcmVmZXJlbmNlIHJlYWQ="
+      ]
+    }
+  ]
+}
