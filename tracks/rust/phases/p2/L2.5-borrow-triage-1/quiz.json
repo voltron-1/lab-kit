@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is the most effective first thing to read in any Rust borrow error message?",
+      "options": {
+        "a": "The error code tag plus the two code spans showing where the borrow started and where it conflicted",
+        "b": "The line count of the file",
+        "c": "Only the final help message"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which type of access does Vec::push require on the target vector?",
+      "options": {
+        "a": "Shared reference (&)",
+        "b": "Mutable reference (&mut)",
+        "c": "Full ownership transfer"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "In C++, a reference into a vector that reallocates becomes a dangling reference at runtime; in safe Rust the same pattern becomes a ___ error.",
+      "answer_b64": "Y29tcGlsZQ==",
+      "accept_b64": [
+        "Y29tcGlsZQ==",
+        "Y29tcGlsZS10aW1l",
+        "Y29tcGlsZXI=",
+        "Ym9ycm93"
+      ]
+    }
+  ]
+}

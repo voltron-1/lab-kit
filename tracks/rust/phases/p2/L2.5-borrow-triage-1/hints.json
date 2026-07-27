@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Make sure answers.txt contains all 6 keys (e1, c1, e2, c2, e3, c3) and that fixed1.rs, fixed2.rs, and fixed3.rs compile cleanly.",
+    "The e-codes come from running rustc on broken1.rs, broken2.rs, and broken3.rs. For fixed1, borrow text: &str instead of taking String by value. For fixed2, use first before taking second. For fixed3, move the print above push.",
+    "Exact fixes: fixed1: fn banner(text: &str) -> String + banner(&title). fixed2: move '*first += 10;' up between the two lets. fixed3: move 'println!(\"last = {last}\");' above 'log.push(...)'. Compile all three binaries with rustc fixedN.rs -o fixedN."
+  ]
+}
