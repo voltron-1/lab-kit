@@ -1,0 +1,3 @@
+- The checklist is the human half of review: strict mode, quoting, input validation, no re-parsed strings, cd guards, temp files, cleanup, lint.
+- Lint goes last and belongs in CI — leading with it anchors you on the flaws a linter can see and hides the ones it cannot.
+- This file is yours to keep; L7.4 and L7.7 grade against it.

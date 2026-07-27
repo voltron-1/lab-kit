@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Why must a human review checklist exist alongside ShellCheck?",
+      "options": {
+        "a": "Critical high-severity flaws (trust boundaries, input validation, intent) are invisible to a static linter",
+        "b": "ShellCheck requires internet connectivity",
+        "c": "Human checklists take less time to execute"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What risk is introduced by running ShellCheck first during a human code review pass?",
+      "options": {
+        "a": "Anchoring the reviewer on linter findings, causing them to overlook invisible logic flaws",
+        "b": "Crashing the reviewer terminal",
+        "c": "Causing ShellCheck to output false positives"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "How does a blocking checklist item differ from an advisory checklist item?",
+      "options": {
+        "a": "A failing blocking item prevents the script from shipping to production",
+        "b": "Advisory items are strictly optional to read",
+        "c": "Blocking items are checked by CI tools while advisory items are not"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

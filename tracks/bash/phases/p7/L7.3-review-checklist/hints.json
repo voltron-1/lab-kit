@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "checklist.md needs 8 token-prefixed lines (c1-strictmode through c8-shellcheck) with non-empty text; check answers.txt keys.",
+    "answers.txt keys: firstcheck=c1-strictmode, lastcheck=c8-shellcheck, invisible=c4-noeval, advisory=c7-cleanup, anchoring=anchoring.",
+    "Write checklist.md with c1-strictmode through c8-shellcheck, populate answers.txt, and re-check."
+  ]
+}
