@@ -1,0 +1,15 @@
+# Answer file format for L7.3:
+# firstcheck: Which item does a human reviewer apply first? (c1-strictmode|c8-shellcheck|c7-cleanup)
+firstcheck=
+
+# lastcheck: Which item is mechanical and belongs in CI rather than a human pass? (c1-strictmode|c8-shellcheck|c7-cleanup)
+lastcheck=
+
+# invisible: Which blocking item is the one ShellCheck can never decide for you? (c4-noeval|c2-quoting|c5-cdguard)
+invisible=
+
+# advisory: Which item is advisory rather than blocking? (c1-strictmode|c7-cleanup|c8-shellcheck)
+advisory=
+
+# anchoring: Leading a human review with the lint output risks... (anchoring|fatigue|drift)
+anchoring=
