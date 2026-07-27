@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is the core guarantee of Rust's Aliasing XOR Mutation rule?",
+      "options": {
+        "a": "Data may have exactly one `&mut` reference OR any number of `&` references, but never both active at the same time",
+        "b": "Mutable references require unsafe code blocks",
+        "c": "Mutation always requires taking ownership of the value"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which C/C++ security vulnerability class does the Aliasing XOR Mutation rule eliminate at compile time?",
+      "options": {
+        "a": "SQL injection attacks",
+        "b": "Reading through stale aliases while another path mutates memory (e.g. iterator invalidation, use-after-realloc)",
+        "c": "Stack frame overflow"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "How many active mutable (`&mut`) references to a single value can exist at the exact same moment?",
+      "answer_b64": "MQ==",
+      "accept_b64": [
+        "MQ==",
+        "b25l"
+      ]
+    }
+  ]
+}

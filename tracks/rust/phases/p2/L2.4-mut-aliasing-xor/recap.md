@@ -1,0 +1,3 @@
+- many readers XOR one writer — never both at once; that is the whole borrow law
+- NLL: a borrow ends at its last USE, not the closing brace — reordering is a real fix
+- E0502 = writer wanted while readers still live; clone() is the dodge, not the fix
