@@ -1,0 +1,3 @@
+- The direct-then-audit loop is one motion: write the spec, then review what comes back against your own checklist — never one without the other.
+- Generated output failed here in exactly the L7.1 ways, plus the one that matters most: a user-supplied filter spliced into a re-parsed string.
+- Fixing every ShellCheck finding in that script would leave the injection fully intact.

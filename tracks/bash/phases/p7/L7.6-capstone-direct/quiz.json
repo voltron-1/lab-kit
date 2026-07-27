@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "If you fix the three ShellCheck findings in `model-output.sh`, what is the security status of the script?",
+      "options": {
+        "a": "It is completely secure",
+        "b": "It remains command-injectable through its user-supplied `$FILTER` argument passed to `eval`",
+        "c": "It will fail to execute under Bash 5"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why is a spec that permits a user-supplied jq filter string dangerous?",
+      "options": {
+        "a": "It designs command injection into the architecture, regardless of how carefully variables are quoted",
+        "b": "JQ expressions cannot process JSON files",
+        "c": "It reduces script execution performance"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What happens when a script repeatedly appends (`>>`) to a fixed temporary file path across runs?",
+      "options": {
+        "a": "Stale output from previous runs accumulates and corrupts subsequent event counts",
+        "b": "The operating system automatically truncates the file",
+        "c": "The script throws a file access error"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
