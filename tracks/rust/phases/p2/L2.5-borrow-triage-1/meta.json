@@ -1,0 +1,8 @@
+{
+  "id": "L2.5",
+  "title": "Borrow-error triage I — E0382, E0499, E0502",
+  "type": "FIX",
+  "objective": "Triage three real borrow-checker rejections — code, cause, minimal fix — one per error family: moved-then-used, two writers, writer-while-readers.",
+  "gate": false,
+  "est_minutes": 20
+}
