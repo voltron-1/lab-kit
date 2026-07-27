@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is the best mental model for reading a Rust lifetime parameter 'a?",
+      "options": {
+        "a": "A region of code during which the reference must remain valid",
+        "b": "A thread identifier",
+        "c": "A heap generation index"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why does the function longer<'a>(a: &'a str, b: &'a str) -> &'a str require explicit lifetime annotations?",
+      "options": {
+        "a": "It is a mandatory style convention for all string functions",
+        "b": "With two input references, the compiler cannot infer which input the output borrows from — the annotation states the contract",
+        "c": "Every function in Rust requires a lifetime parameter"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "A struct with a lifetime parameter can outlive the data it borrows — true or false?",
+      "answer_b64": "ZmFsc2U=",
+      "accept_b64": [
+        "ZmFsc2U="
+      ]
+    }
+  ]
+}
