@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Make sure answers.txt contains all 5 keys (q1, q2, q3, q4, q5) and that sample.rs is compiled to ./sample.",
+    "longer returns the longer string, but 'a binds the result to the shorter-lived input — winner is only usable while secondary is alive; q2 is the longer of the two attack names.",
+    "Do the experiment — move the winner println below the closing brace, rustc sample.rs, read the error[E....] tag (E0597), write it as q5, revert, and recompile with rustc sample.rs -o sample."
+  ]
+}

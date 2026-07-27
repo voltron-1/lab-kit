@@ -1,0 +1,8 @@
+{
+  "id": "L2.7",
+  "title": "Lifetimes — reading 'a without fear",
+  "type": "DECODE",
+  "objective": "Read 'a as a validity region: what a lifetime-annotated function promises, what a lifetime-carrying struct implies, and what E0597 says when the region is too small.",
+  "gate": false,
+  "est_minutes": 15
+}
