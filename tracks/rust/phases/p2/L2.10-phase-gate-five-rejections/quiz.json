@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What core principle connects all five compiler rejections in this phase?",
+      "options": {
+        "a": "Rust discourages reference usage in production code",
+        "b": "Every reference must be provably valid for its entire scope — aliasing and lifetime rules allow the compiler to prove validity statically",
+        "c": "Heap allocations require explicit manual cleanup"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which C/C++ security vulnerability classes do Rust's ownership and borrowing rules eliminate at compile time?",
+      "options": {
+        "a": "SQL injection and cross-site scripting (XSS)",
+        "b": "Use-after-free, double-free, and stale-alias mutation bugs (CWE-416/415 family)",
+        "c": "Integer overflow and path traversal"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Complete the fundamental Aliasing XOR Mutation law: many readers or one writer, but never ___.",
+      "answer_b64": "Ym90aA==",
+      "accept_b64": [
+        "Ym90aA==",
+        "Ym90aCBhdCBvbmNl"
+      ]
+    }
+  ]
+}

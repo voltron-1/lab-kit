@@ -1,0 +1,8 @@
+{
+  "id": "L2.10",
+  "title": "Phase gate: explain 5 rejected programs",
+  "type": "FIX",
+  "objective": "Prove Phase 2: for five rejected programs, predict the error code and name the violated rule from the source alone — then verify against the real compiler and fix one.",
+  "gate": true,
+  "est_minutes": 20
+}
