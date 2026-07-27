@@ -1,0 +1,8 @@
+{
+  "id": "L2.9",
+  "title": "Borrow-error triage II — lifetimes in errors",
+  "type": "FIX",
+  "objective": "Triage the three lifetime-flavored rejections — missing contract (E0106), returning a local (E0515), borrow outliving its value (E0597) — and apply each canonical escape.",
+  "gate": false,
+  "est_minutes": 20
+}

@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Why does fn f(x: &str) -> &str compile without writing explicit lifetime annotations?",
+      "options": {
+        "a": "Lifetimes are optional in Rust functions",
+        "b": "Lifetime elision: with one input reference, the compiler assumes the output borrows from it",
+        "c": "&str is special-cased by the compiler"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why can NO lifetime annotation ever make returning a reference to a local variable (return &local;) legal in Rust?",
+      "options": {
+        "a": "It is restricted by a style lint",
+        "b": "The local variable is destroyed when the stack frame returns — lifetime annotations describe relationships, they cannot extend runtime memory",
+        "c": "It is legal only when using &'static"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "The standard escape from E0515: return an ___ value (String, Vec, …) instead of a reference.",
+      "answer_b64": "b3duZWQ=",
+      "accept_b64": [
+        "b3duZWQ="
+      ]
+    }
+  ]
+}

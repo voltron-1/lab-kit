@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Make sure answers.txt contains all 6 keys (e1, c1, e2, c2, e3, c3) and that fixed1.rs, fixed2.rs, and fixed3.rs compile cleanly.",
+    "The e-codes come off the three compiles; fixed1 adds <'a> to the fn and 'a to all three refs, fixed2 changes the return type to String, fixed3 deletes the inner braces so batch lives to the println.",
+    "Exact edits per file — signature fn first_token<'a>(line: &'a str, fallback: &'a str) -> &'a str; signature fn stamp(prefix: &str) -> String with format!(...) returned directly; remove the inner { } pair around batch."
+  ]
+}
