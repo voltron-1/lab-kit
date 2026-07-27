@@ -377,10 +377,10 @@ printf '%s\n' 'p1=1:' 'p2=2:web01_id' 'p3=3:*.log' 'p4=4:web01 web02' 'p5=5:argc
 bash_check_pass "L1.8" $'b\ndouble\nb\n'
 
 out="$("$LAB" status 2>&1)"
-# denominator is the full bash catalog on disk (P0-P5 = 42), not just the 11
+# denominator is the full bash catalog on disk (P0-P7 = 54), not just the 11
 # passed so far -- every phase's lab directories already exist on disk at
 # this point, regardless of progress state.
-assert_contains "status shows 11 of 47 bash labs passed so far (11/47)" "$out" "(11/47)"
+assert_contains "status shows 11 of 54 bash labs passed so far (11/54)" "$out" "(11/54)"
 
 # --- 7b. bash track P2: fabricated pass + one negative case per lab ---
 note "bash track P2: fabricated pass + negative case per lab"
@@ -624,7 +624,7 @@ SCRIPT
 bash_check_pass "L3.9" $'b\nb\nb\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 28 bash P0-P3 labs passed, P4 still pending (28/47)" "$out" "(28/47)"
+assert_contains "status shows all 28 bash P0-P3 labs passed, P4 still pending (28/54)" "$out" "(28/54)"
 
 # --- 7d. bash track P4 (Untrusted Input & Injection): fabricated pass +
 # negative case per lab. Every AUDIT/TAME lab's negative case matches the
@@ -737,7 +737,7 @@ printf 'verdict=unsafe\nsearch_path=5\npredictable_temp=6\nremote_exec=8\nprivil
 bash_check_pass "L4.8" $'b\nc\na\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 36 bash P0-P4 labs passed (36/47)" "$out" "(36/47)"
+assert_contains "status shows all 36 bash P0-P4 labs passed (36/54)" "$out" "(36/54)"
 
 # --- 7e. bash track P5 (Text Processing & Pipelines): fabricated pass per
 # lab. Nothing in this phase is destructive -- every reference script is
@@ -799,7 +799,7 @@ printf 'stage_grep=filter\nstage_awk=field\nstage_diff=procsub\nstage_sed=herest
 bash_check_pass "L5.6" $'b\nb\nc\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 42 bash P0-P5 labs passed (42/47)" "$out" "(42/47)"
+assert_contains "status shows all 42 bash P0-P5 labs passed (42/54)" "$out" "(42/54)"
 
 # --- 7f. bash track P6 (Reading Real Deploy Scripts): fabricated pass per
 # lab. TOUR labs carry clean reference code; the negative case for every lab is
@@ -850,7 +850,139 @@ printf 'schedule=4\nlock=flock\nlockexit=0\npinpath=cron\ntmphome=atomic\nmustpa
 bash_check_pass "L6.5" $'a\nb\nb\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 47 bash P0-P6 labs passed (47/47)" "$out" "(47/47)"
+assert_contains "status shows all 47 bash P0-P6 labs passed (47/54)" "$out" "(47/54)"
+
+# --- 7g. bash track P7 (Directing & Auditing AI-Generated Bash): fabricated pass per
+# lab. ---
+note "bash track P7: fabricated pass + negative case per lab"
+
+# L7.1 -- Why AI Bash is dangerous by default (AUDIT; phase opener: recall must never gate)
+out="$(printf 'b\na\nb\na\nb\n' | "$LAB" start bash L7.1 2>&1)"; rc=$?
+assert_eq "'lab start bash L7.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L7.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/bash/L7.1"
+bash_check_fail_missing "L7.1" "answers.txt"
+printf 'strictmode=pipefail\ncdrisk=wrongdir\nexecflaw=evalhook\nsc2164=sc2164\nsc2006=sc2006\nblindspot=evalhook\ntell=comments\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L7.1" $'b\nb\na\n'
+
+# L7.2 -- The safe-Bash spec (DIRECT)
+"$LAB" start bash L7.2 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L7.2"
+bash_check_fail_missing "L7.2" "spec.md"
+printf 'whystrict=silentsuccess\nwhyaccept=mechanical\nwhyban=code\n' > "$WS/answers.txt"
+cat > "$WS/spec.md" <<'SPEC'
+# Safe-Bash Spec
+## 1. Non-negotiable preamble
+preamble=set -euo pipefail
+## 2. Quoting rule
+quoting=always
+## 3. Input validation
+validation=reject-unset
+## 4. Forbidden constructs
+forbidden=evalstring
+## 5. Error handling
+errors=fail-loud
+## 6. Acceptance criteria
+acceptance=shellcheck-clean
+SPEC
+bash_check_pass "L7.2" $'a\nb\na\n'
+
+# L7.3 -- The AI-Bash review checklist v1 (AUDIT)
+"$LAB" start bash L7.3 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L7.3"
+bash_check_fail_missing "L7.3" "checklist.md"
+printf 'firstcheck=c1-strictmode\nlastcheck=c8-shellcheck\ninvisible=c4-noeval\nadvisory=c7-cleanup\nanchoring=anchoring\n' \
+  > "$WS/answers.txt"
+cat > "$WS/checklist.md" <<'CHECKLIST'
+c1-strictmode - Does line 1-3 set errexit, nounset, and pipefail?
+c2-quoting - Is every expansion quoted unless splitting is explicitly wanted?
+c3-input - Is every argument and env var validated before use?
+c4-noeval - Is any string re-parsed as code by a shell builtin?
+c5-cdguard - Does every cd have a failure guard, or is the script path-absolute?
+c6-tempfiles - Are temp files created with mktemp, never a predictable path?
+c7-cleanup - Is there a trap that cleans up on every exit path?
+c8-shellcheck - Does shellcheck -x -S style emit zero findings?
+CHECKLIST
+bash_check_pass "L7.3" $'a\na\na\n'
+
+# L7.4 -- Review reps: 3 AI-generated scripts (AUDIT)
+"$LAB" start bash L7.4 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L7.4"
+bash_check_fail_missing "L7.4" "answers.txt"
+printf 's1_worst=unsetvar\ns1_savedby=nounset\ns2_findings=0\ns2_fetch=nofail\ns2_integrity=checksum\ns2_temppath=predictable\ns2_model=l6.5\ns3_severity=sc2045\ns3_breaks=spaces\ns3_useless=cat\ncleanest=gen2\nlesson=floor\n' \
+  > "$WS/answers.txt"
+bash_check_pass "L7.4" $'b\na\na\n'
+
+# L7.5 -- CI guardrails: ShellCheck + shfmt (GUIDED)
+"$LAB" start bash L7.5 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L7.5"
+bash_check_fail_missing "L7.5" "answers.txt"
+printf 'gatefail=sc2086\nwhyexit=exitcode\nfmtflag=-d\nstrictgate=failfast\nsweeptrap=untracked\n' \
+  > "$WS/answers.txt"
+cat > "$WS/scripts/bad.sh" <<'SCRIPT'
+#!/bin/bash
+set -euo pipefail
+msg="hello from the gate demo"
+echo "$msg"
+SCRIPT
+(cd "$WS" && shfmt -w scripts/)
+bash_check_pass "L7.5" $'a\na\na\n'
+
+# L7.6 -- Capstone: direct + audit a SOC-relevant script (DIRECT)
+"$LAB" start bash L7.6 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L7.6"
+bash_check_fail_missing "L7.6" "ingest-spec.md"
+printf 'sc_count=3\nrealflaw=injection\nwhyquiet=quoted\ntempflaw=predictable\nappendbug=double\nchecklist=c4-noeval\n' \
+  > "$WS/answers.txt"
+cat > "$WS/ingest-spec.md" <<'SPEC'
+# Log-Ingest Helper Spec
+input=validate
+temp=mktemp
+filter=no-user-filter
+malformed=skip-and-count
+accept=shellcheck-clean
+SPEC
+bash_check_pass "L7.6" $'b\na\na\n'
+
+# L7.7 -- Capstone gate: ship a hardened, shellcheck-clean script (AUDIT, gate)
+"$LAB" start bash L7.7 > /dev/null 2>&1
+WS="$COPY/workspace/bash/L7.7"
+bash_check_fail_missing "L7.7" "hardened.sh"
+printf 'loopform=redirect\nnotemp=herestring\nstreams=stderr\nnoinject=removing-the-filter\nexitnone=nonzero\n' \
+  > "$WS/answers.txt"
+cat > "$WS/hardened.sh" <<'SCRIPT'
+#!/bin/bash
+set -euo pipefail
+
+usage() { echo "usage: $0 <input.ndjson>" >&2; exit 2; }
+
+[[ $# -eq 1 ]] || usage
+readonly INPUT="$1"
+[[ -r $INPUT ]] || { echo "input not readable: $INPUT" >&2; exit 1; }
+
+valid=0
+skipped=0
+while IFS= read -r line; do
+    [[ -n $line ]] || continue
+    if out=$(jq -ce 'select(.ts and .src and .action)
+                     | {"@timestamp": .ts, "source.ip": .src, "event.action": .action}' \
+                     <<<"$line" 2>/dev/null); then
+        printf '%s\n' "$out"
+        valid=$((valid + 1))
+    else
+        skipped=$((skipped + 1))
+    fi
+done < "$INPUT"
+
+echo "valid=$valid skipped=$skipped" >&2
+[[ $valid -gt 0 ]]
+SCRIPT
+chmod +x "$WS/hardened.sh"
+bash_check_pass "L7.7" $'b\na\na\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 54 bash P0-P7 labs passed (54/54)" "$out" "(54/54)"
 
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
@@ -862,10 +994,10 @@ else
 fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
-  # 32 total track-phase lines; bash p0-p6 are done ([x]), leaving 25
+  # 32 total track-phase lines; bash p0-p7 are done ([x]), leaving 24
   # unstarted -- update this count whenever a phase's marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 25 unstarted track-phase lines" "25" "$line_count"
+  assert_eq "planned_execution.md has 24 unstarted track-phase lines" "24" "$line_count"
 else
   bad "planned_execution.md missing"
 fi
