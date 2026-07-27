@@ -1,25 +1,14 @@
 # LAB-KIT — Planned Execution
 
 ## NEXT UP
-Phase: **bash p6 — Reading Real Deploy Scripts is DONE** (5/5 labs, tag
-`bash-p6`). Next unstarted item: **bash p7 — Directing & Auditing AI
-Bash** (7 labs) — needs a BUILD session (plan `docs/plans/bash-p7-plan.md`
-merged in PR #264).
+Track: **Bash Literacy Lab Track is 100% COMPLETE!** (54/54 labs, tag `bash-p7`). Next unstarted item: **soc p0 — Toolbelt & Kit** (3 labs).
 
 ## LAST SESSION
-2026-07-22 — bash p6 BUILD (all 5 labs) + CLOSE-OUT, single session,
-building straight from the approved `docs/plans/bash-p6-plan.md` (PR #264).
-Phase 6 is the bash track's first TOUR phase: all five reference scripts
-are correct, production-shaped code (`shellcheck`-clean, never executed by
-the kit). Gated one lab at a time per multi-phase execution rule: L6.1
-so-installer (PR #273), L6.2 docker-entrypoint (PR #274), L6.3 systemd-unit
-(PR #275), L6.4 ci-pipeline (PR #276), and L6.5 phase gate (PR #277).
-Extended `tools/shellcheck-all.sh` to sweep `tracks/*/phases/p6/*/files/*.sh`.
-Self-tested each lab end-to-end through the real `lab` CLI (fail path →
-answers + quiz pass path → negative test). CLOSE-OUT: extended
-`tests/acceptance.sh` with a P6 section (5 labs), updated catalog
-denominators to `(47/47)`, updated `planned_execution.md` unstarted count
-to 25. Tagged `bash-p6`.
+2026-07-26 — bash p7 BUILD (all 7 labs) + CLOSE-OUT, single session, building straight from the approved `docs/plans/bash-p7-plan.md`.
+Phase 7 is the bash track's capstone: turns all previous concepts into an AI audit & review practice.
+Gated one lab at a time: L7.1 AI failure patterns (PR #332), L7.2 safe-Bash spec (PR #333), L7.3 review checklist (PR #334), L7.4 review reps (PR #335), L7.5 CI guardrails (PR #336), L7.6 capstone direct (PR #337), L7.7 capstone gate (PR #338).
+CLOSE-OUT: extended `tests/acceptance.sh` with P7 section (7 labs), updated catalog denominators to `(54/54)`, updated `planned_execution.md` unstarted count to 24. Tagged `bash-p7`. FIRST COMPLETE TRACK (54/54 labs)!
+
 
 Earlier, 2026-07-17 — bash p4 PLAN + BUILD (all 8 labs) + CLOSE-OUT, single
 session. PLAN: wrote `docs/plans/bash-p4-plan.md` — every AUDIT/DECODE/TAME
@@ -255,7 +244,7 @@ board: [LAB-KIT: Bash Literacy Lab](https://github.com/users/voltron-1/projects/
 - [x] bash p4 — Untrusted Input & Injection (8 labs) — tag `bash-p4`; plan: `docs/plans/bash-p4-plan.md`; L4.1 command injection (PR #236), L4.2 curl\|bash audit (PR #237), L4.3 argument injection (PR #238), L4.4 env/PATH attacks (PR #239), L4.5 obfuscated shell (PR #240), L4.6 safe patterns (PR #241), L4.7 mktemp/TOCTOU (PR #242), L4.8 phase gate (PR #243)
 - [x] bash p5 — Text Processing & Pipelines (6 labs) — tag `bash-p5`; plan: `docs/plans/bash-p5-plan.md` (PR #245); L5.1 pipelines core tools (PR #246), L5.2 sed reading (PR #247), L5.3 awk reading (PR #248), L5.4 jq pipelines (PR #249), L5.5 process substitution (PR #250), L5.6 phase gate (PR #251)
 - [x] bash p6 — Reading Real Deploy Scripts (5 labs) — tag `bash-p6`; plan: `docs/plans/bash-p6-plan.md` (PR #264); L6.1 so installer (PR #273), L6.2 docker entrypoint (PR #274), L6.3 systemd unit (PR #275), L6.4 CI pipeline (PR #276), L6.5 phase gate (PR #277)
-- [ ] bash p7 — Directing & Auditing AI Bash (7 labs)
+- [x] bash p7 — Directing & Auditing AI Bash (7 labs) — tag `bash-p7`; plan: `docs/plans/bash-p7-plan.md`; L7.1 AI failure patterns (PR #332), L7.2 safe-Bash spec (PR #333), L7.3 review checklist (PR #334), L7.4 review reps (PR #335), L7.5 CI guardrails (PR #336), L7.6 capstone direct (PR #337), L7.7 capstone gate (PR #338)
 
 ### soc — SOC Analyst Lab (52 labs)
 board: [LAB-KIT: SOC Analyst Lab](https://github.com/users/voltron-1/projects/20) — 52 issues, 8 milestones, 232 pts
