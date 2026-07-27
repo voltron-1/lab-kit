@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is the key difference between String and &str in Rust?",
+      "options": {
+        "a": "They are identical types, differing only in mutability keywords",
+        "b": "String owns heap memory and can grow; &str is a borrowed fixed view",
+        "c": "&str lives on the heap, String lives on the stack"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why do idiomatic Rust APIs prefer taking &str parameters instead of &String?",
+      "options": {
+        "a": "It is purely a performance optimization for small strings",
+        "b": "&str accepts strictly more callers (String borrows via deref coercion, string literals, and slices) at zero cost",
+        "c": "&String is deprecated in modern Rust"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "String slice indexes count ___ (bytes/characters).",
+      "answer_b64": "Ynl0ZXM=",
+      "accept_b64": [
+        "Ynl0ZXM=",
+        "Ynl0ZQ=="
+      ]
+    }
+  ]
+}
