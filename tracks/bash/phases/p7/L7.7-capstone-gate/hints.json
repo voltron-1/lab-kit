@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Write hardened.sh with set -euo pipefail, validate $# -eq 1 (exit 2) and [[ -r \"$1\" ]] (exit 1); iterate using while IFS= read -r line; do ... done < \"$INPUT\".",
+    "Use jq over <<<\"$line\" (here-string) to filter valid JSON records to stdout; count valid and skipped; echo summary to >&2; exit 0 if valid > 0, else exit 1.",
+    "answers.txt keys: loopform=redirect, notemp=herestring, streams=stderr, noinject=removing-the-filter, exitnone=nonzero."
+  ]
+}

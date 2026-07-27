@@ -1,0 +1,8 @@
+{
+  "id": "L7.7",
+  "title": "Capstone gate: ship a hardened, shellcheck-clean script",
+  "type": "AUDIT",
+  "objective": "Rewrite the L7.6 output as a hardened log-ingest helper that passes a real ShellCheck sweep, behaves correctly on malformed input, and satisfies every blocking item on your own checklist.",
+  "gate": true,
+  "est_minutes": 20
+}

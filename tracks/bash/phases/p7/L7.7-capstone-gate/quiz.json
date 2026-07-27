@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What does achieving zero findings under `shellcheck -x -S style` mean for your script?",
+      "options": {
+        "a": "It is proven completely flaw-free",
+        "b": "The mechanical quality floor is met; high-severity logic and trust items from your human checklist were verified by hand",
+        "c": "No unit tests are required"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why must summary output (`valid=N skipped=M`) be emitted to stderr rather than stdout?",
+      "options": {
+        "a": "stdout is the data stream — mixing status messages into stdout corrupts downstream pipeline consumers",
+        "b": "stderr writes faster than stdout",
+        "c": "The JQ utility requires stderr logging"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What is the safest architectural fix for a user-supplied jq filter argument?",
+      "options": {
+        "a": "Remove the filter parameter from the interface entirely, closing the injection by design",
+        "b": "Double quote the filter parameter",
+        "c": "Escape shell metacharacters with backslashes"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
