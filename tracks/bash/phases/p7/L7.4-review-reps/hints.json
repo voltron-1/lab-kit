@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Twelve audit keys in answers.txt (s1_worst, s1_savedby, s2_findings, s2_fetch, s2_integrity, s2_temppath, s2_model, s3_severity, s3_breaks, s3_useless, cleanest, lesson); check spelling.",
+    "s1_worst=unsetvar, s1_savedby=nounset, s2_findings=0, s2_fetch=nofail, s2_integrity=checksum, s2_temppath=predictable, s2_model=l6.5, s3_severity=sc2045, s3_breaks=spaces, s3_useless=cat, cleanest=gen2, lesson=floor.",
+    "Populate answers.txt with all 12 key=value pairs listed in hint 2 and re-check."
+  ]
+}
