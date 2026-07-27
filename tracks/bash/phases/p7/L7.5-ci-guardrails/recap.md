@@ -1,0 +1,3 @@
+- A merge gate is a script whose exit code decides the merge — ShellCheck for correctness, shfmt for formatting drift, both non-optional.
+- The gate itself needs strict mode: a gate that fails silently is worse than no gate.
+- Gates lie when their file list is wrong — sweep untracked files too, or a brand-new script ships unchecked.

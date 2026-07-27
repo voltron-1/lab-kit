@@ -1,0 +1,15 @@
+# Answer file format for L7.5:
+# gatefail: Which SC code made the gate fail on the first run? (sc2086|sc2164|sc2006)
+gatefail=
+
+# whyexit: What makes a nonzero exit from the gate script fail the CI job? (exitcode|stderr|logfile)
+whyexit=
+
+# fmtflag: Which shfmt flag reports formatting drift without rewriting files? (-d|-w|-s)
+fmtflag=
+
+# strictgate: Why does gate.sh itself carry `set -euo pipefail`? (failfast|speed|style)
+strictgate=
+
+# sweeptrap: Per tools/shellcheck-all.sh, a bare glob can miss which files? (untracked|binary|hidden)
+sweeptrap=

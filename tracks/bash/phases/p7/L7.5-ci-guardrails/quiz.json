@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Why does a CI merge gate script effectively enforce code quality?",
+      "options": {
+        "a": "The job's exit code determines if the merge is allowed, preventing inattention from bypassing checks",
+        "b": "It sends an email notification to repository maintainers",
+        "c": "It automatically reformats code in production"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What is the difference between `shfmt -d` and `shfmt -w`?",
+      "options": {
+        "a": "`-d` displays a diff and exits nonzero on drift; `-w` rewrites the file in place",
+        "b": "They are identical aliases for formatting code",
+        "c": "`-d` deletes non-compliant files"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why does `tools/shellcheck-all.sh` inspect untracked files in addition to tracked files?",
+      "options": {
+        "a": "A newly created script that was not yet staged would otherwise be skipped and produce a false clean result",
+        "b": "Git strictly mandates checking untracked files",
+        "c": "It reduces script execution time"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
