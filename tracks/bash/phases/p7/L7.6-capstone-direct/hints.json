@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "ingest-spec.md needs 5 commitment tags (input=validate, temp=mktemp, filter=no-user-filter, malformed=skip-and-count, accept=shellcheck-clean); check answers.txt keys.",
+    "answers.txt keys: sc_count=3, realflaw=injection, whyquiet=quoted, tempflaw=predictable, appendbug=double, checklist=c4-noeval.",
+    "Write ingest-spec.md with required tags, populate answers.txt, and re-check."
+  ]
+}

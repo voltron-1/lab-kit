@@ -1,0 +1,18 @@
+# Answer file format for L7.6:
+# sc_count: How many findings does ShellCheck report on the shipped model output? (a number, e.g. 3)
+sc_count=
+
+# realflaw: Which flaw is the most severe, and unreported by ShellCheck? (injection|quoting|useless-cat)
+realflaw=
+
+# whyquiet: ShellCheck stays quiet about it because the argument is... (quoted|short|lowercase)
+whyquiet=
+
+# tempflaw: The temp path is unsafe because it is... (predictable|small|readonly)
+tempflaw=
+
+# appendbug: Because the temp file is appended to, a second run will... (double|truncate|fail)
+appendbug=
+
+# checklist: Which checklist item catches the top flaw? (c4-noeval|c2-quoting|c5-cdguard)
+checklist=

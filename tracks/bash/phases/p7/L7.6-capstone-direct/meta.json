@@ -1,0 +1,8 @@
+{
+  "id": "L7.6",
+  "title": "Capstone: direct + audit a SOC-relevant script",
+  "type": "DIRECT",
+  "objective": "Write the spec for a log-ingest helper, then audit the output you get back against your own checklist — the full direct-then-review loop, on a script you would actually use.",
+  "gate": false,
+  "est_minutes": 20
+}
