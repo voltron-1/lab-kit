@@ -1,0 +1,15 @@
+# Answer file format for L7.7:
+# loopform: Which loop form keeps the counters in the current shell? (redirect|pipe|subshell)
+loopform=
+
+# notemp: How does the hardened version avoid a temp file entirely? (herestring|mktemp|pipe)
+notemp=
+
+# streams: Where do the summary counts go, so stdout stays pipeable? (stderr|stdout|logfile)
+streams=
+
+# noinject: The L7.6 injection is closed by... (removing-the-filter|quoting-it|escaping-it)
+noinject=
+
+# exitnone: With zero valid records the script exits... (nonzero|zero|two)
+exitnone=

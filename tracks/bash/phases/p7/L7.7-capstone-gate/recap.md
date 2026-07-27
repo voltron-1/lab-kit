@@ -1,0 +1,3 @@
+- You shipped it: a hardened, shellcheck-clean, behavior-verified script that closes an injection by design rather than by escaping.
+- The mechanical gate (lint) and the human gate (your checklist) are different instruments — passing one never substitutes for the other.
+- This is the loop for every future script an AI writes for you: spec first, review against the checklist, gate in CI, then ship.

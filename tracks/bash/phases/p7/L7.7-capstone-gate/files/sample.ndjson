@@ -1,0 +1,4 @@
+{"ts":"2026-07-19T04:00:01Z","src":"192.0.2.10","action":"login-failed"}
+{"ts":"2026-07-19T04:00:05Z","src":"192.0.2.11","action":"login-failed"}
+not json at all
+{"ts":"2026-07-19T04:00:09Z","src":"198.51.100.7","action":"login-ok"}
