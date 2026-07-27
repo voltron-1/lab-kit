@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Copy gate.sh and scripts/ into your workspace directory; fix scripts/bad.sh by double-quoting \"$msg\".",
+    "Run shfmt -w scripts/ to format, then run ./gate.sh to confirm gate: clean; populate answers.txt.",
+    "answers.txt keys: gatefail=sc2086, whyexit=exitcode, fmtflag=-d, strictgate=failfast, sweeptrap=untracked."
+  ]
+}

@@ -3,3 +3,5 @@
 # Every "# lint-allow: <reason>" comment in a check.sh must have a
 # matching entry here (double opt-in — a lone inline comment is not
 # enough to suppress the lint).
+
+tracks/bash/phases/p7/L7.5-ci-guardrails/check.sh:24 — redirect output to dev null

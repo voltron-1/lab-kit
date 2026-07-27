@@ -1,0 +1,8 @@
+{
+  "id": "L7.5",
+  "title": "CI guardrails — ShellCheck + shfmt as a merge gate",
+  "type": "GUIDED",
+  "objective": "Wire a working merge gate that fails on any ShellCheck finding or formatting drift, prove it fails, fix the script, and prove it passes.",
+  "gate": false,
+  "est_minutes": 15
+}
