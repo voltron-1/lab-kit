@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Make sure answers.txt contains all 5 keys (q1, q2, q3, q4, q5) and that sample.rs is compiled to ./sample.",
+    "url.find(\"://\") on the first URL returns Some(5), so the slice is the first 5 bytes; proto is the first 3 bytes of 'tcp/443'; q4 counts every byte of 'https://vault:8443'.",
+    "Run sample.rs and transcribe its output: 'rustc sample.rs -o sample; ./sample'. Answers: q1=c, q2=https, q3=tcp, q4=18, q5=b."
+  ]
+}

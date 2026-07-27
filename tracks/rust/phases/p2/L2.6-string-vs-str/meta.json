@@ -1,0 +1,8 @@
+{
+  "id": "L2.6",
+  "title": "String vs &str, and slices",
+  "type": "DECODE",
+  "objective": "Read the owner/view split — String vs &str, deref coercion at call sites, and zero-copy byte-offset slices — off a URL parser.",
+  "gate": false,
+  "est_minutes": 15
+}
