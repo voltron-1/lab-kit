@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "source": "ps L3.1",
+      "type": "choice",
+      "prompt": "Which .NET type does base64 decoding in PowerShell?",
+      "options": {
+        "a": "[System.Convert] (::FromBase64String)",
+        "b": "[System.Text.Base64]",
+        "c": "[System.IO.File]"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "source": "ps L3.5",
+      "type": "choice",
+      "prompt": "What does Invoke-Expression (iex) do?",
+      "options": {
+        "a": "Evaluates a string as live PowerShell code — PS's eval",
+        "b": "Imports a module from disk",
+        "c": "Invokes a remote CIM method"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "source": "ps L3.3",
+      "type": "choice",
+      "prompt": "Is Get-WmiObject available in PowerShell 7?",
+      "options": {
+        "a": "No — it was removed in PS7; use Get-CimInstance instead",
+        "b": "Yes — unchanged from PowerShell 5.1",
+        "c": "Yes, but only with the -Legacy flag"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 4,
+      "source": "ps L3.4",
+      "type": "choice",
+      "prompt": "What's the significance of the registry path ...\\CurrentVersion\\Run?",
+      "options": {
+        "a": "Autostart persistence — values there run automatically at boot/logon (T1547.001)",
+        "b": "It stores the current user's password hash",
+        "c": "It's a read-only diagnostic log"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 5,
+      "source": "ps L2.2",
+      "type": "choice",
+      "prompt": "Does a PowerShell switch statement fall through to the next condition?",
+      "options": {
+        "a": "Yes — no implicit break, unlike C/Java switch",
+        "b": "No — it stops after the first match, like C/Java",
+        "c": "Only when -FallThrough is passed"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

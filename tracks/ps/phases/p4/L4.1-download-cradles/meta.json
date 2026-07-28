@@ -1,0 +1,8 @@
+{
+  "id": "L4.1",
+  "title": "Download cradles — DownloadString|iex, Invoke-WebRequest, BITS",
+  "type": "AUDIT",
+  "objective": "Audit three download-cradle transports (the classic iex+DownloadString from L3.5, an Invoke-WebRequest pivot, and Start-BitsTransfer), distinguish fileless in-memory execution from BITS's disk-dropping background transfer, and name each transport's ATT&CK ID and primary detection artifact.",
+  "gate": false,
+  "est_minutes": 20
+}
