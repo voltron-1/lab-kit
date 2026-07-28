@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "cat creds-sample.ps1 and look for where the plaintext or the decryption key sits alongside the SecureString call.",
+    "Name >=2 exposures (in-script plaintext/-AsPlainText, in-script -Key, or the echoed $env: secret), the vault/secret-store fix, and ATT&CK T1552 in finding.txt.",
+    "Write finding.txt with content:\ncreds-sample.ps1 has two credential exposures: ConvertTo-SecureString built from an in-script plaintext (-AsPlainText -Force), and a second SecureString decrypted with an in-script -Key -- both mean the \"secret\" is fully readable in source. It also echoes $env:AWS_SECRET_ACCESS_KEY via Write-Output, which leaks it into transcripts and 4104 logs.\nFix: secrets belong in a vault/secret store, fetched at runtime, never hardcoded or echoed.\nATT&CK: T1552.001 (Credentials In Files)."
+  ]
+}

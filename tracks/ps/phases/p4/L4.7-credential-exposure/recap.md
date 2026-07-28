@@ -1,0 +1,3 @@
+- a SecureString built from in-script plaintext (or an in-script -Key) is NOT secret — the material is right there
+- $Env: secrets leak into transcripts/4104 when echoed; secrets belong in a vault, never in source
+- audit source + logs for these patterns — ATT&CK T1552.001 (credentials in files)
