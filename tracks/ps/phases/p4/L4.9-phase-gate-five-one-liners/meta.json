@@ -1,0 +1,8 @@
+{
+  "id": "L4.9",
+  "title": "Phase gate: five malicious one-liners",
+  "type": "AUDIT",
+  "objective": "Integrate Phase 4 by reading five malicious one-liners cold and naming each one's technique, ATT&CK ID, and the log evidence it generates -- covering download cradles, encoded commands, LOLBins, registry persistence, and credential exposure.",
+  "gate": true,
+  "est_minutes": 30
+}

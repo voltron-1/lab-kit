@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Re-read step 1's mapping table before writing answers.md -- match each one-liner to its Phase 4 lab (cradles L4.1, encoding L4.2, LOLBins L4.6, credential exposure L4.7) plus registry persistence.",
+    "For each of the 5 one-liners, name: the technique, an ATT&CK ID (T1059/T1027/T1105/T1547/T1552), and the log evidence (4104, process-creation, registry write, or source itself) in answers.md.",
+    "Write answers.md with content:\n# Malicious One-Liner Analysis\n1. Download cradle (iex + DownloadString): fileless fetch-and-eval. ATT&CK T1059.001/T1105. Evidence: a 4104 ScriptBlock event showing the decoded iex+DownloadString text.\n2. Encoded command (-enc): the -nop -w hidden -enc combo is itself a detection signature. ATT&CK T1027/T1059.001. Evidence: the command line plus a 4104 event recording the decoded script.\n3. LOLBin download (certutil): a signed, trusted binary abused to fetch a file. ATT&CK T1105/T1218. Evidence: process-creation telemetry showing powershell.exe spawning certutil.\n4. Registry Run-key persistence: writes an autostart entry pointing at an encoded launcher. ATT&CK T1547.001. Evidence: a registry-write event (or the 4104 event for the PowerShell call itself).\n5. Credential exposure: ConvertTo-SecureString from an in-script plaintext -- not secret at all. ATT&CK T1552.001. Evidence: the source itself, or a 4104 event if it's ever run."
+  ]
+}
