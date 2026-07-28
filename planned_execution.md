@@ -1,13 +1,13 @@
 # LAB-KIT — Planned Execution
 
 ## NEXT UP
-Track: **Bash Literacy Lab Track is 100% COMPLETE!** (54/54 labs, tag `bash-p7`). Next unstarted item: **soc p0 — Toolbelt & Kit** (3 labs).
+Track: **Rust Phase 2 is 100% COMPLETE!** (10/10 labs, tag `rust-p2`). Next unstarted item: **soc p0 — Toolbelt & Kit** (3 labs).
 
 ## LAST SESSION
-2026-07-26 — bash p7 BUILD (all 7 labs) + CLOSE-OUT, single session, building straight from the approved `docs/plans/bash-p7-plan.md`.
-Phase 7 is the bash track's capstone: turns all previous concepts into an AI audit & review practice.
-Gated one lab at a time: L7.1 AI failure patterns (PR #332), L7.2 safe-Bash spec (PR #333), L7.3 review checklist (PR #334), L7.4 review reps (PR #335), L7.5 CI guardrails (PR #336), L7.6 capstone direct (PR #337), L7.7 capstone gate (PR #338).
-CLOSE-OUT: extended `tests/acceptance.sh` with P7 section (7 labs), updated catalog denominators to `(54/54)`, updated `planned_execution.md` unstarted count to 24. Tagged `bash-p7`. FIRST COMPLETE TRACK (54/54 labs)!
+2026-07-27 — rust p2 BUILD (all 10 labs) + CLOSE-OUT, single session, building straight from the approved `docs/plans/rust-p2-plan.md`.
+Phase 2 covers Rust Ownership, Borrowing, and Lifetimes (`L2.1`–`L2.10`).
+Gated one lab at a time: L2.1 move semantics (PR #328), L2.2 copy vs clone (PR #329), L2.3 shared borrows (PR #330), L2.4 mut aliasing XOR (PR #331), L2.5 borrow triage I (PR #340), L2.6 String vs &str (PR #341), L2.7 lifetimes (PR #342), L2.8 C++ crime scene (PR #343), L2.9 borrow triage II (PR #344), L2.10 phase gate five rejections (PR #345).
+CLOSE-OUT: extended `tests/acceptance.sh` with P0, P1, and P2 suites (22 labs), updated catalog status denominators, updated `planned_execution.md` unstarted count to 21. Tagged `rust-p2`.
 
 
 Earlier, 2026-07-17 — bash p4 PLAN + BUILD (all 8 labs) + CLOSE-OUT, single
@@ -226,9 +226,9 @@ this file's history at commits 0e7e647, 6ec3a48, and 0db647e.
 
 ### rust — Rust Literacy Lab (63 labs)
 board: [LAB-KIT: Rust Literacy Lab](https://github.com/users/voltron-1/projects/19) — 63 issues, 8 milestones, 264 pts
-- [ ] rust p0 — Toolchain & Kit (3 labs)
-- [ ] rust p1 — Reading Basic Rust (9 labs)
-- [ ] rust p2 — Ownership, Borrowing, Lifetimes (10 labs)
+- [x] rust p0 — Toolchain & Kit (3 labs) — tag `rust-p0`
+- [x] rust p1 — Reading Basic Rust (9 labs) — tag `rust-p1`
+- [x] rust p2 — Ownership, Borrowing, Lifetimes (10 labs) — tag `rust-p2`; plan: `docs/plans/rust-p2-plan.md`; L2.1 (PR #328), L2.2 (PR #329), L2.3 (PR #330), L2.4 (PR #331), L2.5 (PR #340), L2.6 (PR #341), L2.7 (PR #342), L2.8 (PR #343), L2.9 (PR #344), L2.10 (PR #345)
 - [ ] rust p3 — Types, Traits, Error Handling (10 labs)
 - [ ] rust p4 — Security-Critical Rust (10 labs)
 - [ ] rust p5 — Concurrency & Async (8 labs)
