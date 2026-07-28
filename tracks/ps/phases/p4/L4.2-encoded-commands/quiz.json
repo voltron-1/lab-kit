@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "-EncodedCommand expects base64 of which text encoding?",
+      "options": {
+        "a": "UTF-8",
+        "b": "UTF-16LE (Unicode)",
+        "c": "ASCII"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Does -EncodedCommand defeat ScriptBlock (4104) logging?",
+      "options": {
+        "a": "No — 4104 records the decoded block, not the base64",
+        "b": "Yes — logging only ever sees the base64 form",
+        "c": "Only if -NoProfile is also used"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Name one command-line flag combo that signals a suspicious powershell.exe launch.",
+      "answer_b64": "LWVuYw==",
+      "accept_b64": [
+        "LWVuYw==",
+        "LWVuY29kZWRjb21tYW5k",
+        "LW5vcCAtdyBoaWRkZW4gLWVuYw=="
+      ]
+    }
+  ]
+}

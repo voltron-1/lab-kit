@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -NoProfile -NonInteractive -File decode-enc.ps1 and look at what the blob actually decodes to.",
+    "Mention UTF-16LE (or Unicode), 4104 or ScriptBlock, and ATT&CK T1027 in audit.md — and note that the flag hides intent from a human, not from a decoder or from logging.",
+    "Write audit.md with content:\nThe encoded-command flag takes base64 of UTF-16LE text, not UTF-8.\nEncoding hides intent from a human reading the command line, but a 4104 ScriptBlock event logs the decoded script, and the blob is trivially decoded with [System.Convert] + [System.Text.Encoding].\nATT&CK: T1027."
+  ]
+}
