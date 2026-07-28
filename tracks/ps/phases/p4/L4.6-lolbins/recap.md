@@ -1,0 +1,3 @@
+- LOLBins (certutil/mshta/rundll32/regsvr32) are signed, trusted Windows tools abused to download or proxy-execute
+- the attacker ships no binary — file-identity allow-lists miss the abuse; the tell is the powershell.exe -> LOLBin parent-child process chain
+- ATT&CK T1218.* (system binary proxy execution) + T1105 (ingress tool transfer); Windows-only, read statically

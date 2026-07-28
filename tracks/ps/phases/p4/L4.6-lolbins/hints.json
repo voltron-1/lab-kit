@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Re-read step 1 (the four LOLBin patterns) and step 2 (the parent-child tell) before writing finding.txt.",
+    "Name at least one LOLBin (certutil/mshta/rundll32/regsvr32), mention the parent-child (process) detection tell, and cite T1218 or T1105 in finding.txt.",
+    "Write finding.txt with content:\nLOLBins abused from PowerShell: certutil (download), mshta (remote HTA execution), rundll32 (proxy execution), regsvr32 (scriptlet execution).\nThey're all signed, trusted Windows binaries -- allow-listing by file identity misses the abuse entirely.\nThe real detection tell is the parent-child process chain: powershell.exe spawning one of these tools (Sysmon Event ID 1 / Windows Event ID 4688).\nATT&CK: T1218 (System Binary Proxy Execution), T1105 (Ingress Tool Transfer)."
+  ]
+}
