@@ -11,11 +11,14 @@ assert_file_exists "creds-sample.ps1" \
 assert_file_exists "finding.txt" \
   "finding.txt — name >=2 credential exposures, the fix, and the ATT&CK ID"
 
-assert_file_contains "finding.txt" '[Pp]lain.?text|AsPlainText' \
+assert_file_contains "finding.txt" '[Pp][Ll][Aa][Ii][Nn].?[Tt][Ee][Xx][Tt]|AsPlainText' \
   "finding.txt — must mention plaintext or AsPlainText (the in-script-plaintext exposure)"
 
-assert_file_contains "finding.txt" '[Vv]ault|[Ss]ecret [Ss]tore|[Ee]nv' \
-  "finding.txt — must mention a vault/secret store fix, or the \$Env: exposure"
+assert_file_contains "finding.txt" '[Vv]ault|[Ss]ecret [Ss]tore' \
+  "finding.txt — must name the fix: secrets belong in a vault or secret store"
+
+assert_file_contains "finding.txt" '[Ee]nv' \
+  "finding.txt — must mention the \$Env: exposure (the echoed secret)"
 
 assert_file_contains "finding.txt" 'T1552' \
   "finding.txt — must cite ATT&CK T1552 (Unsecured Credentials)"

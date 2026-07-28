@@ -12,8 +12,9 @@ Audit `creds-sample.ps1` and record ≥2 exposure types, the fix, and the ATT&CK
    ```text
    ConvertTo-SecureString 'Sup3rSecret!' -AsPlainText -Force   -> plaintext IN the script; the SecureString wrapper is theater
    ConvertTo-SecureString $enc -Key $key                        -> $key is ALSO in the script; anyone with the file can decrypt $enc
-   Write-Output $env:AWS_SECRET_ACCESS_KEY                       -> echoes an env-held secret straight into console output/transcripts/4104
+   Write-Output $env:LABKIT_DEMO_SECRET                          -> echoes an env-held secret straight into console output/transcripts/4104
    ```
+   (The sample uses a fictional env var name so the file stays safe to actually run — the same pattern against a real one, e.g. `$env:AWS_SECRET_ACCESS_KEY`, would print a live cloud credential.)
 
 2. **Read why each one fails, and the fix** (static reference):
    ```text
@@ -33,8 +34,9 @@ Audit `creds-sample.ps1` and record ≥2 exposure types, the fix, and the ATT&CK
    ```text
    creds-sample.ps1 has two credential exposures: ConvertTo-SecureString built from an in-script
    plaintext (-AsPlainText -Force), and a second SecureString decrypted with an in-script -Key --
-   both mean the "secret" is fully readable in source. It also echoes $env:AWS_SECRET_ACCESS_KEY
-   via Write-Output, which leaks it into transcripts and 4104 logs.
+   both mean the "secret" is fully readable in source. It also echoes $env:LABKIT_DEMO_SECRET
+   via Write-Output, which leaks it into transcripts and 4104 logs (a real secret env var,
+   e.g. AWS_SECRET_ACCESS_KEY, would leak the same way).
    Fix: secrets belong in a vault/secret store, fetched at runtime, never hardcoded or echoed.
    ATT&CK: T1552.001 (Credentials In Files).
    ```

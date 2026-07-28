@@ -4,8 +4,8 @@
 $p = ConvertTo-SecureString 'Sup3rSecret!' -AsPlainText -Force
 $cred = New-Object PSCredential('svc_admin', $p)
 
-$key = 'hardcoded-32-byte-key-do-not-use-ever!'
-$enc = 'RgB1AGwAbAB5AC0AZgBhAGsAZQA='
+[byte[]]$key = 1..32
+$enc = '76492d1116743f0423413b16050a5345MgB8AEUAagBOAFAASgBOAGgAZgBWAFIANABxAFgAbAA4ADkAdgBQAFMAcQB1AFEAPQA9AHwAZAAxAGUAZQA4AGEAMAA4ADYAMgBiADQAOQBhAGMANwAwAGQAZAA2AGEANgBlAGYANgBkAGMAOQBkADQANwBiADQAMQA2ADgAYgA1ADMANwBiADMANwBkADcAZgAxADIAOABmAGYAYgA1AGMAMwAwADYAZABhAGEAMABjADAAZgA='
 $p2 = ConvertTo-SecureString $enc -Key $key
 
-Write-Output $env:AWS_SECRET_ACCESS_KEY
+Write-Output $env:LABKIT_DEMO_SECRET
