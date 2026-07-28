@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -NoProfile -NonInteractive -File decode.ps1 and look at what the blob actually decodes to.",
+    "plaintext.txt gets the exact decoded text; technique.txt names it a download cradle, mentions UTF-16LE/Unicode, and cites ATT&CK T1140 or T1027.",
+    "Write technique.txt with content:\nThe decoded payload is a download cradle (iex + DownloadString), the same pattern from L4.1.\nEncoding: base64 of UTF-16LE, decoded with [System.Convert]::FromBase64String + [System.Text.Encoding]::Unicode.GetString.\nATT&CK: T1140 (Deobfuscate/Decode Files or Information), T1027 (Obfuscated Files or Information)."
+  ]
+}

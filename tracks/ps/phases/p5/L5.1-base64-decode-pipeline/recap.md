@@ -1,0 +1,3 @@
+- base64/UTF-16LE is the foundational deobfuscation primitive -- the same encoding -EncodedCommand always uses (L4.2)
+- [Convert]::FromBase64String -> [Text.Encoding]::Unicode.GetString decodes it, safely, in one real command
+- every other Phase 5 technique WRAPS this one -- decode is always the first (or last) layer you peel

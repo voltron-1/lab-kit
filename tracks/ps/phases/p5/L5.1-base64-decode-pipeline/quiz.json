@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "-EncodedCommand / a 4104 raw-source blob uses which text encoding?",
+      "options": {
+        "a": "UTF-8",
+        "b": "UTF-16LE (Unicode)"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "After decoding a 4104 blob to plaintext, what must you NOT do?",
+      "options": {
+        "a": "Pipe it to iex to confirm what it does",
+        "b": "Nothing extra — decode to READ it, never to run it"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "The decoded text in this lab is what kind of payload?",
+      "answer_b64": "YSBkb3dubG9hZCBjcmFkbGU=",
+      "accept_b64": [
+        "YSBkb3dubG9hZCBjcmFkbGU=",
+        "ZG93bmxvYWQgY3JhZGxl",
+        "Y3JhZGxl"
+      ]
+    }
+  ]
+}
