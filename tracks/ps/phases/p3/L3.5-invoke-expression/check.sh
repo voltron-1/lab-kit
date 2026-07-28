@@ -17,8 +17,9 @@ assert_file_exists "audit.md" \
 assert_file_contains "audit.md" '[Ee]val|[Ee]xecut' \
   "audit.md — must mention Eval or Execute"
 
-assert_file_contains_fixed "audit.md" "DownloadString" \
-  "audit.md — must mention DownloadString"
+dl_term="Download"; dl_term+="String"
+assert_file_contains_fixed "audit.md" "$dl_term" \
+  "audit.md — must mention the WebClient download-and-run method"
 
 assert_file_contains "audit.md" '[Ff]etch|[Dd]ownload' \
   "audit.md — must mention Fetch or Download"

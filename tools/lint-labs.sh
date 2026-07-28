@@ -80,9 +80,11 @@ check_check_sh() {
   # positives), while a hand-padded ' nc ' still misses "nc" at the very
   # start of a line (false negative). -w fixes both directions.
   local token
-  for token in 'eval' 'sudo' 'curl' 'wget' 'nc' 'ssh' 'sh -c' 'bash -c' 'pushd' 'bin/lab'; do
+  for token in 'eval' 'sudo' 'curl' 'wget' 'nc' 'ssh' 'sh -c' 'bash -c' 'pushd' 'bin/lab' \
+    'iex' 'Invoke-Expression' 'DownloadString' 'Invoke-WebRequest' 'Start-BitsTransfer' \
+    'EncodedCommand' 'certutil' 'mshta' 'rundll32' 'regsvr32'; do
     if grep -qw -- "$token" "$f"; then
-      lint_fail "$f: banned token '$token'"
+      lint_fail "$f: banned token '$token' (attack-content ceiling: check.sh must never execute an attacker primitive — grep/assert against learner text is fine, but route the literal around this scan, e.g. by building it from two concatenated string pieces, per the established eval-ban workaround)"
     fi
   done
   # cd .. / cd ~ are relative escapes with no leading '/', so the absolute-
@@ -121,6 +123,23 @@ check_meta_json() {
     || lint_fail "$f: meta.json missing a required field"
 }
 
+# The ps track's curriculum (docs/plans/ps-p4-plan.md §2c) mandates every IOC
+# be defanged (hxxp/hxxps, bracketed dots) and fictional. Scoped to tracks/ps
+# only: the bash and soc tracks have their own, deliberately DIFFERENT
+# convention (realistic-looking undefanged URLs against RFC-reserved/.test
+# domains — see tracks/bash/phases/p4/L4.2-curl-bash-audit/files/install.sh
+# and PROMPTS.md's soc rule that raw evidence must NOT be defanged), so this
+# check must never run repo-wide.
+check_ps_files_defanged() {
+  local f lineno content
+  while IFS= read -r -d '' f; do
+    while IFS=: read -r lineno content; do
+      [[ -z "$lineno" ]] && continue
+      lint_fail "$f:$lineno: undefanged URL scheme — ps track requires hxxp/hxxps, not http/https: $content"
+    done < <(grep -InE 'https?://' "$f" 2> /dev/null)
+  done < <(find tracks/ps -path '*/files/*' -type f -print0 2> /dev/null)
+}
+
 any=0
 while IFS= read -r -d '' dir; do
   any=1
@@ -133,6 +152,8 @@ done < <(find tracks -mindepth 4 -maxdepth 4 -type d -name 'L*.*-*' -print0 2> /
 if [[ "$any" == "0" ]]; then
   echo "lint-labs: no lab directories found under tracks/" >&2
 fi
+
+check_ps_files_defanged
 
 echo "--- shellcheck sweep ---"
 if ! "$ROOT/tools/shellcheck-all.sh"; then
