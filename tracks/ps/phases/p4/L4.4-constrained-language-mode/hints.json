@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Re-read step 1 (what CLM blocks) and step 2 (why it needs an enforcement engine) before writing notes.txt.",
+    "Mention .NET / Add-Type / COM (what's blocked) and WDAC or AppLocker plus 'enforcement' (why it matters) in notes.txt.",
+    "Write notes.txt with content:\nCLM blocks direct .NET type access, Add-Type, and COM object creation via New-Object -ComObject.\nIt's only a real boundary when WDAC or AppLocker enforces it -- a session-property-only LanguageMode setting with no enforcement engine is bypassable."
+  ]
+}

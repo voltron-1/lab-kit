@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Name something Constrained Language Mode blocks.",
+      "options": {
+        "a": "The Get-* read-only cmdlets",
+        "b": "Direct .NET type access, Add-Type, or New-Object -ComObject",
+        "c": "Pipelines and basic control flow"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "When is CLM a real security boundary?",
+      "options": {
+        "a": "Always, just by setting the language mode",
+        "b": "Only when enforced by WDAC or AppLocker — a session-property-only setting with no enforcement engine is bypassable",
+        "c": "Only on PowerShell 5.1, never on PowerShell 7"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which controls actually enforce CLM (not just set the language mode)?",
+      "answer_b64": "d2RhYyBhbmQgYXBwbG9ja2Vy",
+      "accept_b64": [
+        "d2RhYyBhbmQgYXBwbG9ja2Vy",
+        "d2RhYyBvciBhcHBsb2NrZXI=",
+        "d2RhYy9hcHBsb2NrZXI=",
+        "d2RhYw==",
+        "YXBwbG9ja2Vy"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+- Constrained Language Mode blocks the .NET/COM/Add-Type reach Phase 3 taught — the core of script attacks
+- CLM is a REAL boundary only when WDAC or AppLocker enforces it; session-property-only, it's bypassable (L0.3)
+- Windows-only; you read what it restricts statically — WDAC/AppLocker = Execution Prevention (M1038)
