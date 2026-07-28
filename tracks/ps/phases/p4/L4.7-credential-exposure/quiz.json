@@ -1,0 +1,34 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Is ConvertTo-SecureString 'x' -AsPlainText -Force secure?",
+      "options": {
+        "a": "Yes — SecureString encrypts the value",
+        "b": "No — the plaintext is right in the script; the SecureString wrapper protects nothing"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why is Write-Output $env:SECRET risky?",
+      "options": {
+        "a": "Environment variables are never logged",
+        "b": "It leaks the secret into transcripts / 4104 ScriptBlock logs"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "ATT&CK technique ID for hardcoded credentials in a script?",
+      "answer_b64": "VDE1NTIuMDAx",
+      "accept_b64": [
+        "VDE1NTIuMDAx",
+        "VDE1NTI="
+      ]
+    }
+  ]
+}

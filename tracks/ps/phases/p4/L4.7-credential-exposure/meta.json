@@ -1,0 +1,8 @@
+{
+  "id": "L4.7",
+  "title": "Credential exposure — plaintext SecureString, reversible -Key, $Env: leaks",
+  "type": "AUDIT",
+  "objective": "Audit a shipped PowerShell script for credential-handling flaws: a SecureString built from in-script plaintext or an in-script symmetric -Key (neither is actually secret), and an $Env:-held secret that leaks into transcripts/4104 when echoed. Name the fix and the ATT&CK ID.",
+  "gate": false,
+  "est_minutes": 20
+}
