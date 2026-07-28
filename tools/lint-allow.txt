@@ -1,7 +1,12 @@
-# Justified exceptions to tools/lint-labs.sh's absolute-path-literal ban.
-# One entry per line: <path>:<line> — <reason>
-# Every "# lint-allow: <reason>" comment in a check.sh must have a
-# matching entry here (double opt-in — a lone inline comment is not
-# enough to suppress the lint).
+# Justified exceptions to tools/lint-labs.sh's absolute-path-literal ban
+# and its ps1-attack-content-token ban. One entry per line:
+# <path>:<line> — <reason>
+# Every "# lint-allow: <reason>" comment in a check.sh or shipped .ps1
+# must have a matching entry here (double opt-in — a lone inline
+# comment is not enough to suppress the lint).
 
 tracks/bash/phases/p7/L7.5-ci-guardrails/check.sh:24 — redirect output to dev null
+tracks/ps/phases/p3/L3.5-invoke-expression/files/shadow-iex.ps1:1 — shadows the real cmdlet with a safe logger, never evaluates
+tracks/ps/phases/p3/L3.5-invoke-expression/files/shadow-iex.ps1:2 — redefinition is the logger, not the real cmdlet
+tracks/ps/phases/p3/L3.5-invoke-expression/files/shadow-iex.ps1:4 — logs the string, never evaluates it
+tracks/ps/phases/p3/L3.5-invoke-expression/files/shadow-iex.ps1:7 — aliases the safe logger above, not the real cmdlet
