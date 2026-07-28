@@ -1,13 +1,18 @@
 # LAB-KIT — Planned Execution
 
 ## NEXT UP
-Track: **Rust Phase 2 is 100% COMPLETE!** (10/10 labs, tag `rust-p2`). Next unstarted item: **soc p0 — Toolbelt & Kit** (3 labs).
+Track: **ps p0–p3 are 100% COMPLETE!** (26/26 labs, tags `ps-p0`..`ps-p3`). Next unstarted item: **ps p4 — PowerShell as Attack Surface** (9 labs); build plan already drafted at `docs/plans/ps-p4-plan.md`, status PLAN ONLY, awaiting approval before build.
 
 ## LAST SESSION
-2026-07-27 — rust p2 BUILD (all 10 labs) + CLOSE-OUT, single session, building straight from the approved `docs/plans/rust-p2-plan.md`.
+2026-07-28 — TRACKER RECONCILIATION + soc p0/p1 CLOSE-OUT, single session. planned_execution.md had drifted well behind git's actual completion state (source of truth is git tags/merged PRs, never this file — see footer). Found and fixed:
+- Finished a prior session's unfinished rust p2 CLOSE-OUT that was sitting uncommitted (tests/acceptance.sh P0-P2 sections, doc update, an L1.6 quiz fix) via its own branch+PR (#346, merged). A speculative `CARGO_HOME` PATH addition to the sandboxed check-runner in that diff was reviewed out (`code-reviewer`+`security-auditor`: unneeded, would've weakened the fence's fixed-allowlist invariant). A real fixture bug (L2.5's `fixed2.rs` producing the wrong array value vs. its real check.sh assertion) was found via systematic-debugging and fixed before merge. Also discovered `rust-p0`/`rust-p1`/`rust-p2` had never actually been tagged despite prior session notes claiming so — created and pushed all three for real, at the close-out commit.
+- Discovered `ps-p0` through `ps-p3` (26 labs) were fully built, merged, and tagged upstream but never reflected in this file at all — corrected below.
+- Discovered `soc-p1` (8 labs incl. phase gate, PR #308–315) was fully built and merged but never tagged and had zero `tests/acceptance.sh` coverage (soc-p0 had the same test-coverage gap despite being tagged). CLOSE-OUT: authored a new soc P0+P1 acceptance section (11 labs, fabricated pass + negative case each, mirroring the bash/rust pattern) via a sub-agent, independently verified (427/427 passing), then reviewed by `code-reviewer` + `security-auditor` in parallel. Security review found two real non-determinism gaps in the new test (a `tshark` DNS-resolution call and an `rg` call that could be affected by machine-local config/gitignore state, both running unfenced in the test's own shell) — fixed with `-n`/`--no-ignore`, mirrored into L0.1's `lab.md` so the taught commands match what's graded. Tagged `soc-p1`. Landed via its own branch+PR.
+Net: rust p0-p2, ps p0-p3, and soc p0-p1 all now correctly marked done below; 45 labs' worth of tracker drift corrected in one pass.
+
+Earlier, 2026-07-27 — rust p2 BUILD (all 10 labs), single session, building straight from the approved `docs/plans/rust-p2-plan.md`.
 Phase 2 covers Rust Ownership, Borrowing, and Lifetimes (`L2.1`–`L2.10`).
-Gated one lab at a time: L2.1 move semantics (PR #328), L2.2 copy vs clone (PR #329), L2.3 shared borrows (PR #330), L2.4 mut aliasing XOR (PR #331), L2.5 borrow triage I (PR #340), L2.6 String vs &str (PR #341), L2.7 lifetimes (PR #342), L2.8 C++ crime scene (PR #343), L2.9 borrow triage II (PR #344), L2.10 phase gate five rejections (PR #345).
-CLOSE-OUT: extended `tests/acceptance.sh` with P0, P1, and P2 suites (22 labs), updated catalog status denominators, updated `planned_execution.md` unstarted count to 21. Tagged `rust-p2`.
+Gated one lab at a time: L2.1 move semantics (PR #328), L2.2 copy vs clone (PR #329), L2.3 shared borrows (PR #330), L2.4 mut aliasing XOR (PR #331), L2.5 borrow triage I (PR #340), L2.6 String vs &str (PR #341), L2.7 lifetimes (PR #342), L2.8 C++ crime scene (PR #343), L2.9 borrow triage II (PR #344), L2.10 phase gate five rejections (PR #345). (CLOSE-OUT for this phase completed in the 2026-07-28 session above.)
 
 
 Earlier, 2026-07-17 — bash p4 PLAN + BUILD (all 8 labs) + CLOSE-OUT, single
@@ -248,8 +253,8 @@ board: [LAB-KIT: Bash Literacy Lab](https://github.com/users/voltron-1/projects/
 
 ### soc — SOC Analyst Lab (52 labs)
 board: [LAB-KIT: SOC Analyst Lab](https://github.com/users/voltron-1/projects/20) — 52 issues, 8 milestones, 232 pts
-- [ ] soc p0 — Toolbelt & Kit (3 labs)
-- [ ] soc p1 — How Attacks Become Alerts (8 labs)
+- [x] soc p0 — Toolbelt & Kit (3 labs) — tag `soc-p0`; L0.1 (PR #305), L0.2 (PR #306), L0.3 phase gate (PR #307)
+- [x] soc p1 — How Attacks Become Alerts (8 labs) — tag `soc-p1`; L1.1 (PR #308), L1.2 (PR #309), L1.3 (PR #310), L1.4 (PR #311), L1.5 (PR #312), L1.6 (PR #313), L1.7 (PR #314), L1.8 phase gate (PR #315)
 - [ ] soc p2 — Network Triage Fundamentals (7 labs)
 - [ ] soc p3 — Endpoint Triage Fundamentals (7 labs)
 - [ ] soc p4 — Triage Craft & the Queue (8 labs)
@@ -259,11 +264,11 @@ board: [LAB-KIT: SOC Analyst Lab](https://github.com/users/voltron-1/projects/20
 
 ### ps — PowerShell Literacy Lab (54 labs)
 board: [LAB-KIT: PowerShell Literacy Lab](https://github.com/users/voltron-1/projects/21) — 54 issues, 8 milestones, 237 pts
-- [ ] ps p0 — Toolchain & Kit (3 labs)
-- [ ] ps p1 — The Object Pipeline (8 labs)
-- [ ] ps p2 — Control Flow, Errors & Modules (7 labs)
-- [ ] ps p3 — The Windows Integration Layer (8 labs)
-- [ ] ps p4 — PowerShell as Attack Surface (9 labs)
+- [x] ps p0 — Toolchain & Kit (3 labs) — tag `ps-p0`; L0.1 (PR #279), L0.2 (PR #280), L0.3 (PR #281)
+- [x] ps p1 — The Object Pipeline (8 labs) — tag `ps-p1`; L1.1 (PR #282), L1.2 (PR #283), L1.3 (PR #284), L1.4 (PR #285), L1.5 (PR #286), L1.6 (PR #287), L1.7 (PR #288), L1.8 phase gate (PR #289)
+- [x] ps p2 — Control Flow, Errors & Modules (7 labs) — tag `ps-p2`; L2.1 (PR #290), L2.2 (PR #291), L2.3 (PR #292), L2.4 (PR #293), L2.5 (PR #294), L2.6 (PR #295), L2.7 phase gate (PR #296)
+- [x] ps p3 — The Windows Integration Layer (8 labs) — tag `ps-p3`; L3.1 (PR #297), L3.2 (PR #298), L3.3 (PR #299), L3.4 (PR #300), L3.5 (PR #301), L3.6 (PR #302), L3.7 (PR #303), L3.8 phase gate (PR #304)
+- [ ] ps p4 — PowerShell as Attack Surface (9 labs) — plan drafted: `docs/plans/ps-p4-plan.md` (PLAN ONLY, awaiting approval)
 - [ ] ps p5 — Deobfuscation & Malware Reading (7 labs)
 - [ ] ps p6 — Reading Real Security Tools (5 labs)
 - [ ] ps p7 — Directing & Auditing AI PowerShell (7 labs)

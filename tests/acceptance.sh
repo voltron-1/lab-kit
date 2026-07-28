@@ -1402,6 +1402,118 @@ rust_check_pass "L2.10" $'b\nb\nboth\n'
 out="$("$LAB" status 2>&1)"
 assert_contains "status shows all 22 rust P0-P2 labs passed (22/22)" "$out" "(22/22)"
 
+# --- 7i. soc track P0+P1: fabricated pass + negative case per lab ---
+note "soc track P0+P1: fabricated pass + negative case per lab"
+
+soc_check_fail_missing() {
+  local id="$1" missing="$2" out rc
+  out="$("$LAB" check soc "$id" 2>&1)"; rc=$?
+  assert_eq "soc $id check fails before $missing exists" "1" "$rc"
+  assert_contains "soc $id fail result names FAIL" "$out" "RESULT: FAIL"
+}
+
+soc_check_pass() {
+  local id="$1" quiz="$2" out rc
+  out="$(printf '%s' "$quiz" | "$LAB" check soc "$id" 2>&1)"; rc=$?
+  assert_eq "soc $id check passes" "0" "$rc"
+  assert_contains "soc $id result names PASS" "$out" "RESULT: PASS"
+}
+
+# L0.1 — Analyst toolbelt install/verify (phase opener: recall must never
+# gate; toolbelt is real jq/tshark/dig/whois/rg already on this box, so
+# assert_cmd_ok runs them for real instead of faking version strings)
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start soc L0.1 2>&1)"; rc=$?
+assert_eq "'lab start soc L0.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L0.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/soc/L0.1"
+(cd -- "$WS" && {
+  jq --version
+  tshark --version | head -1
+  dig -v 2>&1
+  whois --version
+  rg --version | head -1
+} > toolcheck.txt
+ jq -r '.user.name' sample-event.json > jq_out.txt
+ tshark -n -r fixtures.pcap -T fields -e dns.qry.name | sort -u > tshark_out.txt)
+soc_check_fail_missing "L0.1" "rg_out.txt"
+(cd -- "$WS" && rg --no-ignore 'escalation-marker' notes/ > rg_out.txt)
+soc_check_pass "L0.1" $'2026-02-27\nb\nb\n'
+
+# L0.2 — Meet the lab CLI and the evidence pack
+"$LAB" start soc L0.2 > /dev/null 2>&1
+WS="$COPY/workspace/soc/L0.2"
+soc_check_fail_missing "L0.2" "answers.txt"
+printf 'q1=cm-r-0112\nq2=cm-0311-0107\nq3=c2.stonewick[.]example\nq4=workspace/soc/l0.2\n' > "$WS/answers.txt"
+soc_check_pass "L0.2" $'b\nc\nb\n'
+
+# L0.3 — Phase gate: verify the analyst toolbelt (gate)
+"$LAB" start soc L0.3 > /dev/null 2>&1
+WS="$COPY/workspace/soc/L0.3"
+soc_check_fail_missing "L0.3" "answers.txt"
+printf 'q1=e\nq2=h\nq3=h\nq4=e\nq5=h\n' > "$WS/answers.txt"
+soc_check_pass "L0.3" $'b\ntp\nd\n'
+
+# L1.1 — Telemetry sources (phase opener: recall must never gate)
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start soc L1.1 2>&1)"; rc=$?
+assert_eq "'lab start soc L1.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L1.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/soc/L1.1"
+soc_check_fail_missing "L1.1" "answers.txt"
+printf 'q1=d\nq2=b\nq3=e\nq4=f\nq5=c\nq6=a\nq7=c\nq8=e\n' > "$WS/answers.txt"
+soc_check_pass "L1.1" $'a\nd\nc\n'
+
+# L1.2 — Anatomy of a log
+"$LAB" start soc L1.2 > /dev/null 2>&1
+WS="$COPY/workspace/soc/L1.2"
+soc_check_fail_missing "L1.2" "answers.txt"
+printf 'q1=2026-03-10t13:59:57z\nq2=e2,e1,e4,e3,e5\nq3=source.ip\nq4=event.code\nq5=-05:00\n' > "$WS/answers.txt"
+soc_check_pass "L1.2" $'a\na\na\n'
+
+# L1.3 — Anatomy of an alert
+"$LAB" start soc L1.3 > /dev/null 2>&1
+WS="$COPY/workspace/soc/L1.3"
+soc_check_fail_missing "L1.3" "answers.txt"
+printf 'q1=cm-r-0117\nq2=rule.severity\nq3=cm-0311-0107,cm-0311-0121,cm-0311-0135\nq4=203.0.113.66\nq5=cm-0311-0142\n' > "$WS/answers.txt"
+soc_check_pass "L1.3" $'b\nb\nc\n'
+
+# L1.4 — Reading a Sigma rule
+"$LAB" start soc L1.4 > /dev/null 2>&1
+WS="$COPY/workspace/soc/L1.4"
+soc_check_fail_missing "L1.4" "answers.txt"
+printf 'q1=y\nq2=n\nq3=n\nq4=n\nq5=filter_backup\nq6=pwsh.exe\n' > "$WS/answers.txt"
+soc_check_pass "L1.4" $'b\nb\nb\n'
+
+# L1.5 — MITRE ATT&CK tactics vs techniques
+"$LAB" start soc L1.5 > /dev/null 2>&1
+WS="$COPY/workspace/soc/L1.5"
+soc_check_fail_missing "L1.5" "answers.txt"
+printf 'q1=t1110.003\nq2=t1059.001\nq3=t1071.004\nq4=credential-access\nq5=t1110\n' > "$WS/answers.txt"
+soc_check_pass "L1.5" $'b\nb\ndetection\n'
+
+# L1.6 — Kill chain & Pyramid of Pain
+"$LAB" start soc L1.6 > /dev/null 2>&1
+WS="$COPY/workspace/soc/L1.6"
+soc_check_fail_missing "L1.6" "answers.txt"
+printf 'q1=weaponization\nq2=exploitation\nq3=installation\nq4=trivial\nq5=simple\nq6=annoying\nq7=i6\n' > "$WS/answers.txt"
+soc_check_pass "L1.6" $'b\ndelivery\nc\n'
+
+# L1.7 — Disposition taxonomy (tp/fp/btp), six mini-cases
+"$LAB" start soc L1.7 > /dev/null 2>&1
+WS="$COPY/workspace/soc/L1.7"
+soc_check_fail_missing "L1.7" "answers.txt"
+printf 'q1=tp\nq1e=cm-0311-0142\nq2=fp\nq2e=cm-0310-0071\nq3=btp\nq3e=cm-0310-0019\nq4=btp\nq4e=cm-0310-0092\nq5=tp\nq5e=cm-0311-0201\nq6=fp\nq6e=cm-0312-0203\n' > "$WS/answers.txt"
+soc_check_pass "L1.7" $'b\nc\nc\n'
+
+# L1.8 — Phase gate: five alerts (source, technique, evidence pull)
+"$LAB" start soc L1.8 > /dev/null 2>&1
+WS="$COPY/workspace/soc/L1.8"
+soc_check_fail_missing "L1.8" "answers.txt"
+printf 'q1a=entra-signin\nq1b=t1110.003\nq1c=b\nq2a=sysmon\nq2b=t1059.001\nq2c=a\nq3a=zeek-dns\nq3b=t1071.004\nq3c=c\nq4a=win-security\nq4b=t1136.001\nq4c=a\nq5a=linux-auth\nq5b=t1053.003\nq5c=b\n' > "$WS/answers.txt"
+soc_check_pass "L1.8" $'a\nb\nc\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 11 soc P0-P1 labs passed (11/11)" "$out" "(11/11)"
+
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
 if [[ -f "$COPY/README.md" ]]; then
@@ -1412,10 +1524,11 @@ else
 fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
-  # 32 total track-phase lines; bash p0-p7 (8) + rust p0-p2 (3) are done ([x]), leaving 21
-  # unstarted -- update this count whenever a phase's marker changes.
+  # 32 total track-phase lines; bash p0-p7 (8) + rust p0-p2 (3) + soc p0-p1 (2) +
+  # ps p0-p3 (4) are done ([x]), leaving 15 unstarted -- update this count whenever
+  # a phase's marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 21 unstarted track-phase lines" "21" "$line_count"
+  assert_eq "planned_execution.md has 15 unstarted track-phase lines" "15" "$line_count"
 else
   bad "planned_execution.md missing"
 fi
