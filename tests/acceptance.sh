@@ -1517,12 +1517,21 @@ assert_contains "status shows all 11 soc P0-P1 labs passed (11/11)" "$out" "(11/
 # --- 7f. ps track P4 (PowerShell as Attack Surface): fabricated pass +
 # negative case per lab. First ps-track coverage in this file -- p0-p3
 # (26 labs) are built, merged, and tagged but have no acceptance.sh
-# coverage yet (a pre-existing gap, not touched here; flagged in
-# planned_execution.md for a future session, mirroring how soc-p0 had the
-# same gap before soc-p1's close-out). Nothing in this phase executes an
-# attacker primitive -- only benign cross-platform decoders (L4.2, L4.5)
+# coverage yet (a pre-existing gap, not touched here; now tracked in
+# planned_execution.md's NEXT UP by this same PR, mirroring how soc-p0 had
+# the same gap before soc-p1's close-out). Nothing in this phase executes
+# an attacker primitive -- only benign cross-platform decoders (L4.2, L4.5)
 # run for real; every other lab is pure static-content grading. ---
 note "ps track P4: fabricated pass + negative case per lab"
+
+# L4.2 and L4.5 each run a real, benign pwsh probe as part of their check.sh
+# (decode-enc.ps1, read4104.ps1) — without this preflight, a missing pwsh
+# would make their fail-path assertions below pass for the wrong reason
+# (interpreter missing, not artifact missing) and their pass-path assertions
+# fail with a misleading diagnostic.
+if ! command -v pwsh > /dev/null 2>&1; then
+  bad "pwsh is not installed — cannot verify the real L4.2/L4.5 decoder probes"
+fi
 
 ps_check_fail_missing() {
   local id="$1" missing="$2" out rc
@@ -1541,7 +1550,9 @@ ps_check_pass() {
 # L4.1 — Download cradles (AUDIT; phase opener: recall must never gate).
 # --force skips ps p0-p3 (26 labs, permanently marked ⏭, never ✓) since this
 # COPY has no prior ps progress and p0-p3 have no acceptance.sh coverage of
-# their own yet (see the note above this section).
+# their own yet (see the note above this section). Skipped is permanent, so
+# when p0-p3 coverage lands, it MUST be inserted above this line and this
+# --force dropped -- labs covered after this point can never render ✓.
 out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L4.1 --force 2>&1)"; rc=$?
 assert_eq "'lab start ps L4.1 --force' exits 0 regardless of recall score" "0" "$rc"
 assert_contains "L4.1 start ran the recall quiz" "$out" "recall"
@@ -1596,7 +1607,7 @@ ps_check_fail_missing "L4.5" "readout.md"
 cat > "$WS/readout.md" << 'MD'
 # 4104 Event Readout
 Event ID: 4104 (ScriptBlock logging).
-ScriptBlockText shows a download cradle: iex (New-Object Net.WebClient).DownloadString(...) fetching from a fake C2 host.
+ScriptBlockText shows a WebClient DownloadString cradle fetching from a fake C2 host.
 ScriptBlock logging is the log source that records de-obfuscated content -- 4103 only logs pipeline/module detail, and Transcription logs the full session, not just the script block.
 MD
 ps_check_pass "L4.5" $'a\na\nTranscription\n'
