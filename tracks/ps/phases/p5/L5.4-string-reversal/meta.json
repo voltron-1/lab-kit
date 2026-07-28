@@ -1,0 +1,8 @@
+{
+  "id": "L5.4",
+  "title": "String reversal — $s[-1..-$s.Length] -join ''",
+  "type": "DEOBFUSCATE",
+  "objective": "Reverse a character-reversed literal back to its plaintext by running the real reversal expression and reading the result -- never running what it spells.",
+  "gate": false,
+  "est_minutes": 15
+}

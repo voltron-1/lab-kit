@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -NoProfile -NonInteractive -File rev.ps1 and read what each reversed literal turns back into.",
+    "-1 is the last character and -$s.Length is the first, so the range walks the string backwards; -join glues that character array back into one string. Read 'xei' and 'gnirtSdaolnwoD' right-to-left yourself and you get the same answer.",
+    "Write plaintext.txt with content:\n'xei' reversed -> iex\n'gnirtSdaolnwoD' reversed -> DownloadString"
+  ]
+}
