@@ -1,0 +1,3 @@
+- download cradles = remote fetch + run: DownloadString|iex and Invoke-WebRequest|iex (fileless), Start-BitsTransfer (BITS — drops a real file)
+- fileless cradles leave no disk artifact — the evidence is in ScriptBlock logging (4104), not on disk; BITS logs separately, blending with Windows Update
+- ATT&CK T1105 (ingress transfer) + T1059.001 — recognize the shape, name the transport, name the log evidence

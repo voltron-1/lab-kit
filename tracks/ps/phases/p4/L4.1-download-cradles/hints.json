@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "View cradle-variants.txt and compare what happens after each transport fetches its remote content.",
+    "Mention DownloadString, BitsTransfer/BITS, Fileless/Memory, and an ATT&CK ID (T1105 or T1059) in audit.md — and note what makes variant 3 different from the other two.",
+    "Write audit.md with content:\nVariant 1 (iex + DownloadString) and Variant 2 (Invoke-WebRequest + iex) are fileless: they run in memory, nothing hits disk.\nVariant 3 (Start-BitsTransfer) drops a real file via a background transfer service that blends with Windows Update traffic.\nDetection: a 4104 ScriptBlock event showing DownloadString + iex together. ATT&CK T1105, T1059.001."
+  ]
+}

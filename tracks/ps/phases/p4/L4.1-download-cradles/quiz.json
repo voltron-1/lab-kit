@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Why is `iex (DownloadString(url))` considered \"fileless\"?",
+      "options": {
+        "a": "The fetched code runs entirely in memory — nothing is ever written to disk",
+        "b": "It deletes itself from disk immediately after running",
+        "c": "It only works when no antivirus is installed"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Name a download-cradle transport other than WebClient/Invoke-WebRequest.",
+      "answer_b64": "c3RhcnQtYml0c3RyYW5zZmVy",
+      "accept_b64": [
+        "c3RhcnQtYml0c3RyYW5zZmVy",
+        "Yml0c3RyYW5zZmVy",
+        "Yml0cw==",
+        "Yml0cyB0cmFuc2Zlcg=="
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "What's the one-line detection tell for the classic (iex + DownloadString) cradle?",
+      "options": {
+        "a": "A single 4104 ScriptBlock event showing DownloadString and iex together",
+        "b": "A firewall deny log entry only",
+        "c": "An antivirus quarantine notification"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
