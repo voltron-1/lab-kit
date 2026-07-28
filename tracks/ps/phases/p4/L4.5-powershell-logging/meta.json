@@ -1,0 +1,8 @@
+{
+  "id": "L4.5",
+  "title": "PowerShell logging — 4104 ScriptBlock, 4103 Module, Transcription",
+  "type": "DECODE",
+  "objective": "Read a shipped, sanitized 4104 ScriptBlock event and extract the de-obfuscated payload it recorded, then explain why ScriptBlock logging beats -EncodedCommand/obfuscation and how it hands off to SOC alert triage (SOC L3.2).",
+  "gate": false,
+  "est_minutes": 25
+}
