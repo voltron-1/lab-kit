@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Re-read step 1 (the stager shape) and step 2 (the function-name tells) before writing tour.md.",
+    "Name the stager/launcher/beacon stages, at least one PowerSploit/PowerView function (Invoke-Mimikatz, Get-NetUser, etc.), and what it does (credential theft, enumeration, C2) in tour.md.",
+    "Write tour.md with content:\n# Empire & PowerSploit Structure Tour\nEmpire stager shape: an encoded launcher, then a staging key exchange, then a beacon/tasking loop back to C2.\nPowerSploit/PowerView families: Invoke-Mimikatz (credential theft), Get-NetUser/PowerView (AD enumeration).\nYou read the STRUCTURE to recognize the framework in telemetry -- never the payload."
+  ]
+}
