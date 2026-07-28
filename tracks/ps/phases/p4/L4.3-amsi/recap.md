@@ -1,0 +1,3 @@
+- AMSI hands de-obfuscated script content to the AV at runtime — it beats -EncodedCommand because it sees the REAL payload
+- bypass attempts (in-memory patching, string-splitting, forcing init errors) are noisy and detectable — ATT&CK T1562.001
+- AMSI is a REAL control and telemetry source (L0.3), Windows-only; you read its behavior statically here

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Re-read the WHERE-it-sits and WHAT-it-scans lines in step 1 — AMSI's timing relative to de-obfuscation is the whole point.",
+    "Mention de-obfuscated/runtime content, 'real control' or 'telemetry' or 'detectable', and ATT&CK T1562 in notes.txt.",
+    "Write notes.txt with content:\nAMSI scans de-obfuscated script content at runtime, right before execution, so it sees the real payload even if it arrived encoded.\nPer L0.3's classification, AMSI is a real control and telemetry source, not a speed bump: bypass attempts are noisy and detectable.\nATT&CK: T1562.001 (Impair Defenses) for an AMSI-bypass attempt."
+  ]
+}
