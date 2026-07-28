@@ -1,0 +1,3 @@
+- you can now read a malicious one-liner and name it: technique + ATT&CK ID + the log evidence it generates
+- cradle -> 4104, -enc -> cmdline + 4104 (decoded), LOLBin -> process-create, Run key -> persistence, plaintext -> cred exposure
+- every attack pattern has a detection artifact — Phase 5 (deobfuscation) is next, then reading real tools
