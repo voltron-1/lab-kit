@@ -4,5 +4,5 @@
   "type": "DEOBFUSCATE",
   "objective": "Reassemble keywords split across concatenated string literals, a -join'd char array, and [char] codes, running the real reconstruction and reading the result -- never running it.",
   "gate": false,
-  "est_minutes": 20
+  "est_minutes": 15
 }

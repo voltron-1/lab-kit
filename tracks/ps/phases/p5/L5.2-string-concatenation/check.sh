@@ -13,10 +13,16 @@ kw_term="i"; kw_term+="ex"
 assert_file_exists "concat.ps1" \
   "concat.ps1 — shipped reference probe must exist"
 
-assert_output_contains "concat.ps1 reassembles the first keyword" "$kw_term" \
+assert_file_contains_fixed "concat.ps1" '[char]105 + [char]101 + [char]120' \
+  "concat.ps1 — the shipped char-code reconstruction must be present and unmodified"
+
+assert_output_contains "concat.ps1 reassembles the keyword via +" "$kw_term" \
   "run: pwsh -File concat.ps1" -- pwsh -NoProfile -NonInteractive -File concat.ps1
 
-assert_output_contains "concat.ps1 reassembles the second keyword" "Download" \
+assert_output_contains "concat.ps1 reassembles the second keyword via -join" "Download" \
+  "run: pwsh -File concat.ps1" -- pwsh -NoProfile -NonInteractive -File concat.ps1
+
+assert_output_contains "concat.ps1 reassembles the keyword via char codes" "char codes:.*${kw_term}" \
   "run: pwsh -File concat.ps1" -- pwsh -NoProfile -NonInteractive -File concat.ps1
 
 assert_file_exists "plaintext.txt" \
