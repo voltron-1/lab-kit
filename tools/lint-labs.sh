@@ -165,6 +165,65 @@ check_ps_files_defanged() {
   done < <(find tracks/ps -type f -print0 2> /dev/null)
 }
 
+# check_check_sh's token/shape bans only cover check.sh's own text. But some
+# labs ship a files/*.ps1 that a check.sh actually EXECUTES (e.g. ps-p4's
+# benign decode probes) — that script is real, runnable content, not a
+# "teaching sample" a learner merely reads, so it needs the same scrutiny.
+#
+# Deliberately scans EVERY shipped .ps1 unconditionally, not just ones a
+# `-File` regex can find referenced from check.sh: an earlier draft derived
+# scope from `-File <name>.ps1` text and was found (by review) to fail open
+# — silently, with no lint output at all — on quoted paths, subdirectories,
+# case variants, the `-f` abbreviation, PowerShell 6+'s bare-positional
+# default parameter, and scripts reached only transitively (a shipped script
+# dot-sourcing or importing another shipped script that no check.sh ever
+# names directly — a live instance of exactly this shape already exists in
+# this repo, tracks/ps/phases/p2/L2.4-functions-and-parameters/files/
+# probe.ps1, benign today, but proof the reachability class is real). A
+# denylist scanning everything shipped fails closed instead: nothing needs
+# to correctly guess how a script is invoked.
+#
+# This remains a token/shape blocklist, not a parser (PSScriptAnalyzer would
+# need pwsh in CI, which this repo doesn't have — docs/plans/ps-p6-plan.md
+# notes pwsh isn't installed in the planning environment either) — so it is
+# a backstop against ACCIDENTAL introduction, not a defense against a
+# determined author deliberately obfuscating past it (e.g. &($var)/.Invoke()/
+# fully-qualified type names/Invoke-Command -ScriptBlock/reflection all
+# evade a literal-token scan and are NOT chased here; the human
+# code-reviewer/security-auditor pass every lab already gets before merge is
+# the actual control for that class of risk, not this script).
+#
+# A deliberately-safe teaching sample that legitimately needs a banned name
+# (e.g. a function that SHADOWS Invoke-Expression with a safe logger) gets
+# the same double-opt-in escape hatch as the absolute-path ban: a trailing
+# "# lint-allow: <reason>" comment plus a matching "<path>:<line>" entry in
+# tools/lint-allow.txt.
+check_ps1_scripts() {
+  local f lineno content allow_file="$ROOT/tools/lint-allow.txt" token
+  while IFS= read -r -d '' f; do
+    for token in 'iex' 'Invoke-Expression' 'DownloadString' 'Invoke-WebRequest' \
+      'Start-BitsTransfer' 'EncodedCommand' 'certutil' 'mshta' 'rundll32' 'regsvr32' \
+      'iwr' 'irm' 'Invoke-RestMethod' 'DownloadFile' 'DownloadData' 'bitsadmin'; do
+      while IFS=: read -r lineno content; do
+        [[ -z "$lineno" ]] && continue
+        if [[ "$content" == *"# lint-allow:"* ]] && _lint_allow_has_entry "$f" "$lineno" "$allow_file"; then
+          continue
+        fi
+        lint_fail "$f:$lineno: banned attack-content token '$token'"
+      done < <(grep -inE -- "$token" "$f" 2> /dev/null)
+    done
+    if grep -qEi -- '\[[[:space:]]*(System\.Management\.Automation\.)?ScriptBlock[[:space:]]*\][[:space:]]*::[[:space:]]*Create' "$f"; then
+      lint_fail "$f: calls [ScriptBlock]::Create — dynamic code construction is banned in shipped scripts"
+    fi
+    if grep -qE -- '&[[:space:]]*\(?[[:space:]]*\$[A-Za-z_]|(^|[[:space:]])\.[[:space:]]*\$[A-Za-z_]' "$f"; then
+      lint_fail "$f: invokes a variable via the call operator (&) or dot-sourcing — must not dynamically execute constructed content"
+    fi
+    if grep -qEi -- '(pwsh|powershell)([[:space:]]+-[A-Za-z]+)*[[:space:]]+-(c|com|comm|command|e|ec|enc|encodedcommand)\b' "$f"; then
+      lint_fail "$f: invokes pwsh/powershell with an inline-code flag (-Command/-EncodedCommand or an abbreviation)"
+    fi
+  done < <(find tracks -path '*/files/*' -name '*.ps1' -type f -print0 2> /dev/null)
+}
+
 any=0
 while IFS= read -r -d '' dir; do
   any=1
@@ -178,6 +237,7 @@ if [[ "$any" == "0" ]]; then
   echo "lint-labs: no lab directories found under tracks/" >&2
 fi
 
+check_ps1_scripts
 check_ps_files_defanged
 
 echo "--- shellcheck sweep ---"
