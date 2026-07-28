@@ -1,0 +1,31 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "text",
+      "prompt": "\"{0}{2}{1}\" -f 'I','x','E' resolves to which keyword?",
+      "answer_b64": "SUV4"
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What does the -f operator do?",
+      "options": {
+        "a": "Formats a number as a float",
+        "b": "Substitutes arguments into {index} placeholders — reordered indices scramble/reassemble the string"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which PowerShell operator is the giveaway tell for this obfuscation technique?",
+      "answer_b64": "LWY=",
+      "accept_b64": [
+        "LWY=",
+        "dGhlIGZvcm1hdCBvcGVyYXRvcg==",
+        "Zm9ybWF0IG9wZXJhdG9y"
+      ]
+    }
+  ]
+}

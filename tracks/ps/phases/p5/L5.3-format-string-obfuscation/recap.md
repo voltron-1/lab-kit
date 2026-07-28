@@ -1,0 +1,3 @@
+- the -f operator fills {index} placeholders; reordered indices scramble a keyword's letters in the source
+- reconstruct by running the real substitution and reading the result
+- "{0}{2}{1}" -f 'I','x','E' -> IEx -- the reordered indices, not the argument order, are the tell

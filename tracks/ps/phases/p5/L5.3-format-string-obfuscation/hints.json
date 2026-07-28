@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -NoProfile -NonInteractive -File fmt.ps1 and look at what each reordered format expression resolves to.",
+    "For {0}{2}{1} with args 'I','x','E': position 0='I', position 2='E', position 1='x' -- read them in THAT order.",
+    "Write plaintext.txt with content:\n\"{0}{2}{1}\" -f 'I','x','E' -> IEx\n\"{1}{0}\" -f 'ex','i' -> iex"
+  ]
+}

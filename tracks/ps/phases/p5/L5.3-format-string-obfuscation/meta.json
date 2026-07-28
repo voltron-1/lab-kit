@@ -1,0 +1,8 @@
+{
+  "id": "L5.3",
+  "title": "Format string obfuscation — \"{0}{2}{1}\" -f 'I','x','E' and similar",
+  "type": "DEOBFUSCATE",
+  "objective": "Resolve the -f format operator's reordered {index} placeholders by running the real substitution and reading the result -- never running what it spells.",
+  "gate": false,
+  "est_minutes": 20
+}
