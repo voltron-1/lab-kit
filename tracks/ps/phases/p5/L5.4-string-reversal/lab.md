@@ -1,6 +1,6 @@
 ## BRIEF
 `$s[-1..-$s.Length] -join ''` walks a string backwards, character by character — same characters, same length, only the order changes. A reversed literal hides a keyword from a forward string scan; reversing it again recovers the original.
-Run the reconstruction for real. Reconstruct to a **string** and **read** it.
+Run the reconstruction for real. Reconstruct to a **string** and **read** it — same reflex as L5.1: decode to read, never to run.
 
 ## GUIDED STEPS
 
