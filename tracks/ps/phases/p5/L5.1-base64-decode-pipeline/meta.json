@@ -1,0 +1,8 @@
+{
+  "id": "L5.1",
+  "title": "Base64 decode pipeline — [System.Convert]::FromBase64String -> [System.Text.Encoding]::Unicode.GetString",
+  "type": "DEOBFUSCATE",
+  "objective": "Decode a real base64/UTF-16LE blob for real, reconstruct the plaintext, and name it as a download cradle with its ATT&CK ID -- the foundational deobfuscation primitive every other Phase 5 technique wraps.",
+  "gate": false,
+  "est_minutes": 20
+}

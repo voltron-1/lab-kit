@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "source": "ps L4.2",
+      "type": "choice",
+      "prompt": "-EncodedCommand is base64 of which text encoding?",
+      "options": {
+        "a": "UTF-16LE (Unicode)",
+        "b": "UTF-8",
+        "c": "ASCII"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "source": "ps L4.5",
+      "type": "choice",
+      "prompt": "Which Event ID logs the decoded ScriptBlock text?",
+      "options": {
+        "a": "4104 (ScriptBlock logging)",
+        "b": "4103 (Module logging)",
+        "c": "1102 (log cleared)"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "source": "ps L4.1",
+      "type": "choice",
+      "prompt": "Why is iex(DownloadString(...)) considered \"fileless\"?",
+      "options": {
+        "a": "It runs entirely in memory -- nothing is ever written to disk",
+        "b": "It deletes itself from disk after running",
+        "c": "It only works when no antivirus is installed"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 4,
+      "source": "ps L3.1",
+      "type": "choice",
+      "prompt": "Which .NET type performs base64 decoding in PowerShell?",
+      "options": {
+        "a": "[System.Convert] (::FromBase64String)",
+        "b": "[System.Text.Base64]",
+        "c": "[System.IO.File]"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 5,
+      "source": "ps L4.3",
+      "type": "choice",
+      "prompt": "Does AMSI see the decoded payload, or only the encoded/obfuscated form?",
+      "options": {
+        "a": "The decoded payload -- AMSI scans at runtime, after de-obfuscation",
+        "b": "Only the encoded form -- decoding happens after AMSI runs",
+        "c": "AMSI never sees PowerShell content"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
