@@ -1,0 +1,3 @@
+- -EncodedCommand (-enc) = base64 of UTF-16LE; decode it with [Convert]+[Text.Encoding] (cross-platform, benign, real)
+- the flag hides intent from the eye, not from decoders or logging — 4104 records the DECODED block
+- the -nop -w hidden -enc command line is itself a detection signature (T1027, obfuscation)

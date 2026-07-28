@@ -1,0 +1,8 @@
+{
+  "id": "L4.2",
+  "title": "Encoded commands — -EncodedCommand, base64 + UTF-16LE",
+  "type": "AUDIT",
+  "objective": "Decode a benign -EncodedCommand blob to prove the flag takes base64 of UTF-16LE (a real, cross-platform skill), then audit why the flag hides intent from casual inspection but not from ScriptBlock logging or a decoder, and name the command-line signature and ATT&CK ID.",
+  "gate": false,
+  "est_minutes": 20
+}
