@@ -1,9 +1,11 @@
 # LAB-KIT — Planned Execution
 
 ## NEXT UP
-Track: **ps p0–p3 are 100% COMPLETE!** (26/26 labs, tags `ps-p0`..`ps-p3`). Next unstarted item: **ps p4 — PowerShell as Attack Surface** (9 labs); build plan already drafted at `docs/plans/ps-p4-plan.md`, status PLAN ONLY, awaiting approval before build.
+Track: **ps p4 — PowerShell as Attack Surface** (9 labs) is IN PROGRESS — 4/9 built and merged (L4.1–L4.4). Next unstarted item: **L4.5 — PowerShell logging: 4104/4103/Transcription** (DECODE, reads a shipped event), per `docs/plans/ps-p4-plan.md:379`.
 
 ## LAST SESSION
+Also 2026-07-28, later the same day — ps p4 BUILD (L4.1–L4.4 of 9), building straight from the approved `docs/plans/ps-p4-plan.md`. One branch+PR+merge per lab: L4.1 download cradles (PR #348), L4.2 encoded commands (PR #350), L4.3 AMSI (PR #352), L4.4 constrained language mode (PR #353). Two supporting lint fixes landed alongside: `ps-p4`'s attack-content ceiling enforced in tooling (PR #349, then a case-sensitivity gap closed, PR #351 scanning all shipped `.ps1` unconditionally rather than a `-File`-derived subset). This file had drifted again immediately after the tracker-reconciliation session below — it still read "PLAN ONLY, awaiting approval" after 4 labs had already shipped; corrected here per the standing rule that this file derives from git tags/merged PRs, never the reverse.
+
 2026-07-28 — TRACKER RECONCILIATION + soc p0/p1 CLOSE-OUT, single session. planned_execution.md had drifted well behind git's actual completion state (source of truth is git tags/merged PRs, never this file — see footer). Found and fixed:
 - Finished a prior session's unfinished rust p2 CLOSE-OUT that was sitting uncommitted (tests/acceptance.sh P0-P2 sections, doc update, an L1.6 quiz fix) via its own branch+PR (#346, merged). A speculative `CARGO_HOME` PATH addition to the sandboxed check-runner in that diff was reviewed out (`code-reviewer`+`security-auditor`: unneeded, would've weakened the fence's fixed-allowlist invariant). A real fixture bug (L2.5's `fixed2.rs` producing the wrong array value vs. its real check.sh assertion) was found via systematic-debugging and fixed before merge. Also discovered `rust-p0`/`rust-p1`/`rust-p2` had never actually been tagged despite prior session notes claiming so — created and pushed all three for real, at the close-out commit.
 - Discovered `ps-p0` through `ps-p3` (26 labs) were fully built, merged, and tagged upstream but never reflected in this file at all — corrected below.
@@ -268,7 +270,7 @@ board: [LAB-KIT: PowerShell Literacy Lab](https://github.com/users/voltron-1/pro
 - [x] ps p1 — The Object Pipeline (8 labs) — tag `ps-p1`; L1.1 (PR #282), L1.2 (PR #283), L1.3 (PR #284), L1.4 (PR #285), L1.5 (PR #286), L1.6 (PR #287), L1.7 (PR #288), L1.8 phase gate (PR #289)
 - [x] ps p2 — Control Flow, Errors & Modules (7 labs) — tag `ps-p2`; L2.1 (PR #290), L2.2 (PR #291), L2.3 (PR #292), L2.4 (PR #293), L2.5 (PR #294), L2.6 (PR #295), L2.7 phase gate (PR #296)
 - [x] ps p3 — The Windows Integration Layer (8 labs) — tag `ps-p3`; L3.1 (PR #297), L3.2 (PR #298), L3.3 (PR #299), L3.4 (PR #300), L3.5 (PR #301), L3.6 (PR #302), L3.7 (PR #303), L3.8 phase gate (PR #304)
-- [ ] ps p4 — PowerShell as Attack Surface (9 labs) — plan drafted: `docs/plans/ps-p4-plan.md` (PLAN ONLY, awaiting approval)
+- [~] ps p4 — PowerShell as Attack Surface (9 labs) — plan: `docs/plans/ps-p4-plan.md`; L4.1 download cradles (PR #348), L4.2 encoded commands (PR #350), L4.3 AMSI (PR #352), L4.4 constrained language mode (PR #353); L4.5–L4.9 remain
 - [ ] ps p5 — Deobfuscation & Malware Reading (7 labs)
 - [ ] ps p6 — Reading Real Security Tools (5 labs)
 - [ ] ps p7 — Directing & Auditing AI PowerShell (7 labs)
