@@ -1,0 +1,9 @@
+{
+  "id": "L4.4",
+  "title": "Constrained Language Mode — what it restricts, its WDAC/AppLocker dependency",
+  "type": "DECODE",
+  "objective": "Decode what Constrained Language Mode blocks (direct .NET type access, Add-Type, COM creation) and why it's only a real boundary when enforced by WDAC or AppLocker — a session-property toggle alone is bypassable, per L0.3's classification.",
+  "gate": false,
+  "windows_variant": true,
+  "est_minutes": 20
+}
