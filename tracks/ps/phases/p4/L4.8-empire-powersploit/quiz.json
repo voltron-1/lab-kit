@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What does reading an Empire stager's structure (not payload) give an analyst?",
+      "options": {
+        "a": "A working copy of the malware",
+        "b": "Recognition of the framework in telemetry — encoded launcher, staging, beacon loop"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Name a PowerSploit/PowerView function family and its purpose.",
+      "answer_b64": "SW52b2tlLU1pbWlrYXR6",
+      "accept_b64": [
+        "SW52b2tlLU1pbWlrYXR6",
+        "R2V0LU5ldFVzZXI=",
+        "UG93ZXJWaWV3",
+        "SW52b2tlLVNoZWxsY29kZQ==",
+        "R2V0LUdQUFBhc3N3b3Jk",
+        "RmluZC1Mb2NhbEFkbWluQWNjZXNz"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why read Empire/PowerSploit structure without the payload?",
+      "options": {
+        "a": "You must run it to understand it",
+        "b": "Recognition is the analyst skill — running or reconstructing the payload is neither needed nor safe"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

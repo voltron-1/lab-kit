@@ -1,0 +1,8 @@
+{
+  "id": "L4.8",
+  "title": "Empire & PowerSploit patterns — reading structure without the payload",
+  "type": "TOUR",
+  "objective": "Read the sanitized structure of the two best-known offensive PowerShell toolkits — Empire's stager shape and PowerSploit/PowerView's function-name tells — to recognize the framework in telemetry, with no working payload anywhere.",
+  "gate": false,
+  "est_minutes": 20
+}

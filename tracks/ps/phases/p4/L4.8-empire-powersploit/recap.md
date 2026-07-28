@@ -1,0 +1,3 @@
+- Empire stager shape: encoded launcher -> staging key exchange -> beacon/tasking loop over C2
+- PowerSploit/PowerView tells are function names: Invoke-Mimikatz, Invoke-Shellcode, Get-Net* (AD enum)
+- you read STRUCTURE to recognize the framework in telemetry — never the payload (-> Phase 6, SOC L5.4)
