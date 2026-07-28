@@ -27,13 +27,13 @@ In this lab, you install or verify these five utilities in your environment and 
 4. **Extract unique DNS query names using `tshark`**:
    Parse DNS queries from `fixtures.pcap` into `tshark_out.txt`:
    ```bash
-   tshark -r fixtures.pcap -T fields -e dns.qry.name | sort -u > tshark_out.txt
+   tshark -n -r fixtures.pcap -T fields -e dns.qry.name | sort -u > tshark_out.txt
    ```
 
 5. **Search escalation marker using `ripgrep`**:
    Search for the escalation marker in `notes/triage-notes.txt` into `rg_out.txt`:
    ```bash
-   rg 'escalation-marker' notes/ > rg_out.txt
+   rg --no-ignore 'escalation-marker' notes/ > rg_out.txt
    ```
 
 6. **Inspect mock WHOIS report**:
