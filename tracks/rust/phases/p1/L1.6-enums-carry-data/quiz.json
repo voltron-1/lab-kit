@@ -25,11 +25,10 @@
     {
       "id": 3,
       "type": "text",
-      "prompt": "In `describe`, what is the exact type of parameter `event` as written in the signature?",
-      "answer_b64": "JkV2ZW50",
+      "prompt": "What output line is printed for the PortScan variant in feed?",
+      "answer_b64": "c2NhbiAxLTEwMjQ=",
       "accept_b64": [
-        "JkV2ZW50",
-        "JmV2ZW50"
+        "c2NhbiAxLTEwMjQ="
       ]
     }
   ]

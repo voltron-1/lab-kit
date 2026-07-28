@@ -7,6 +7,7 @@
 set -uo pipefail
 
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+export PATH="$PATH:$HOME/.cargo/bin"
 WORK="$(mktemp -d)"
 COPY="$WORK/lab-kit"
 LAB="$COPY/bin/lab"
@@ -984,6 +985,423 @@ bash_check_pass "L7.7" $'b\na\na\n'
 out="$("$LAB" status 2>&1)"
 assert_contains "status shows all 54 bash P0-P7 labs passed (54/54)" "$out" "(54/54)"
 
+# --- 7h. rust track P0-P2: fabricated pass + negative case per lab ---
+note "rust track P0-P2: fabricated pass + negative case per lab"
+
+rust_check_fail_missing() {
+  local id="$1" missing="$2" out rc
+  out="$("$LAB" check rust "$id" 2>&1)"; rc=$?
+  assert_eq "rust $id check fails before $missing exists" "1" "$rc"
+  assert_contains "rust $id fail result names FAIL" "$out" "RESULT: FAIL"
+}
+
+rust_check_pass() {
+  local id="$1" quiz="$2" out rc
+  out="$(printf '%s' "$quiz" | "$LAB" check rust "$id" 2>&1)"; rc=$?
+  assert_eq "rust $id check passes" "0" "$rc"
+  assert_contains "rust $id result names PASS" "$out" "RESULT: PASS"
+}
+
+# L0.1 — Toolchain verification
+"$LAB" start rust L0.1 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L0.1"
+cat > "$WS/toolchain.txt" <<'EOF'
+rustc 1.97.0
+cargo 1.97.0
+EOF
+mkdir -p "$WS/hello_lab/src" "$WS/hello_lab/target/debug"
+cat > "$WS/hello_lab/Cargo.toml" <<'EOF'
+[package]
+name = "hello_lab"
+version = "0.1.0"
+EOF
+cat > "$WS/hello_lab/src/main.rs" <<'RS'
+fn main() { println!("Hello, world!"); }
+RS
+cat > "$WS/first_run.txt" <<'EOF'
+Hello, world!
+EOF
+rust_check_fail_missing "L0.1" "hello_lab/target/debug/hello_lab"
+(cd -- "$WS/hello_lab" && rustc src/main.rs -o target/debug/hello_lab)
+rust_check_pass "L0.1" $'b\ntarget/debug\nb\n'
+
+# L0.2 — Meet the lab kit
+"$LAB" start rust L0.2 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L0.2"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=3
+q3=b
+EOF
+rust_check_fail_missing "L0.2" "location.txt"
+(cd -- "$WS" && pwd > location.txt)
+rust_check_pass "L0.2" $'b\nlab status\nb\n'
+
+# L0.3 — Repo anatomy (gate)
+"$LAB" start rust L0.3 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L0.3"
+cat > "$WS/answers.txt" <<'EOF'
+q1=scanport
+q2=src/main.rs
+q3=src/lib.rs
+q4=0
+q5=b
+q6=a
+EOF
+rust_check_fail_missing "L0.3" "run_out.txt"
+cat > "$WS/run_out.txt" <<'EOF'
+22 -> ok (port 22)
+99999 -> INVALID
+EOF
+mkdir -p "$WS/scanport/target/doc/scanport"
+touch "$WS/scanport/target/doc/scanport/index.html"
+rust_check_pass "L0.3" $'b\ncargo doc --no-deps\nb\n'
+
+# L1.1 — Reading rustc output (phase opener)
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start rust L1.1 2>&1)"; rc=$?
+assert_eq "'lab start rust L1.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L1.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/rust/L1.1"
+cat > "$WS/predictions.txt" <<'EOF'
+x=12
+count=15
+label=3
+error=E0384
+EOF
+rust_check_fail_missing "L1.1" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L1.1" $'b\nc\nmut\n'
+
+# L1.2 — Variables, let, mut
+"$LAB" start rust L1.2 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L1.2"
+cat > "$WS/predictions.txt" <<'EOF'
+debug=panic
+release=0
+checked=None
+wrapped=0
+EOF
+rust_check_fail_missing "L1.2" "debug_out.txt"
+cat > "$WS/debug_out.txt" <<'EOF'
+attempt to add with overflow
+EOF
+cat > "$WS/release_out.txt" <<'EOF'
+bumped = 0
+EOF
+rust_check_pass "L1.2" $'b\nchecked_add\nb\n'
+
+# L1.3 — Scalar types & inference
+"$LAB" start rust L1.3 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L1.3"
+cat > "$WS/predictions.txt" <<'EOF'
+x=9
+kind=well-known
+parity=odd
+error=E0308
+EOF
+rust_check_fail_missing "L1.3" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L1.3" $'b\nb\n&str\n'
+
+# L1.4 — Functions & ownership preview
+"$LAB" start rust L1.4 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L1.4"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=b
+q3=E0382
+EOF
+rust_check_fail_missing "L1.4" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L1.4" $'b\nc\n&str\n'
+
+# L1.5 — Structs
+"$LAB" start rust L1.5 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L1.5"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=port,tls
+q3=c
+EOF
+rust_check_fail_missing "L1.5" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L1.5" $'#[derive(Debug)]\nb\nc\n'
+
+# L1.6 — Enums carrying data
+"$LAB" start rust L1.6 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L1.6"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=b
+q3=scan 1-1024
+EOF
+rust_check_fail_missing "L1.6" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L1.6" $'b\nb\nscan 1-1024\n'
+
+# L1.7 — Match exhaustiveness
+"$LAB" start rust L1.7 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L1.7"
+cat > "$WS/answers.txt" <<'EOF'
+error_code=E0004
+EOF
+cat > "$WS/fixed.rs" <<'RS'
+enum Severity { Info, Warning, Critical }
+fn triage(s: Severity) -> &'static str {
+    match s {
+        Severity::Info => "log to file",
+        Severity::Warning => "alert on-call",
+        Severity::Critical => "isolate host",
+    }
+}
+fn main() { println!("{}", triage(Severity::Critical)); }
+RS
+rust_check_fail_missing "L1.7" "fixed"
+(cd -- "$WS" && rustc fixed.rs -o fixed)
+rust_check_pass "L1.7" $'critical\nb\na\n'
+
+# L1.8 — Option: not null
+"$LAB" start rust L1.8 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L1.8"
+cat > "$WS/predictions.txt" <<'EOF'
+p1=Some(22)
+p2=None
+p3=0
+p4=53
+error=E0308
+EOF
+rust_check_fail_missing "L1.8" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L1.8" $'b\nunwrap_or\na\n'
+
+# L1.9 — Phase gate: read cold code (gate)
+"$LAB" start rust L1.9 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L1.9"
+cat > "$WS/answers.txt" <<'EOF'
+q1=Benign
+q2=Suspicious
+q3=Hostile
+q4=1
+q5=18
+q6=3389
+q7=3
+q8=b
+q9=b
+q10=b
+EOF
+rust_check_fail_missing "L1.9" "triage"
+(cd -- "$WS" && rustc triage.rs -o triage)
+rust_check_pass "L1.9" $'b\nb\n&\n'
+
+# L2.1 — Move semantics (phase opener)
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start rust L2.1 2>&1)"; rc=$?
+assert_eq "'lab start rust L2.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L2.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/rust/L2.1"
+cat > "$WS/predictions.txt" <<'EOF'
+beta=intrusion
+size=7
+delta=intrusion
+error=E0382
+EOF
+rust_check_fail_missing "L2.1" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L2.1" $'b\nc\nclone\n'
+
+# L2.2 — Copy vs Clone
+"$LAB" start rust L2.2 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L2.2"
+cat > "$WS/predictions.txt" <<'EOF'
+b=41
+w=5
+first=20
+error=E0204
+EOF
+rust_check_fail_missing "L2.2" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L2.2" $'b\nb\nno\n'
+
+# L2.3 — Shared borrows
+"$LAB" start rust L2.3 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L2.3"
+cat > "$WS/predictions.txt" <<'EOF'
+alias=bastion-01
+max=11
+error=E0596
+EOF
+rust_check_fail_missing "L2.3" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L2.3" $'c\nb\nimmutable\n'
+
+# L2.4 — Mutable borrows & Aliasing XOR Mutation
+"$LAB" start rust L2.4 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L2.4"
+cat > "$WS/answers.txt" <<'EOF'
+error_code=E0502
+q2=b
+q3=b
+EOF
+cat > "$WS/fixed.rs" <<'RS'
+fn main() {
+    let mut queue = String::from("alert-1");
+    let snapshot = &queue[..];
+    println!("snapshot = {snapshot}");
+    queue.push_str(",alert-2");
+    println!("queue = {queue}");
+}
+RS
+rust_check_fail_missing "L2.4" "fixed"
+(cd -- "$WS" && rustc fixed.rs -o fixed)
+rust_check_pass "L2.4" $'a\nb\n1\n'
+
+# L2.5 — Borrow-error triage I
+"$LAB" start rust L2.5 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L2.5"
+cat > "$WS/answers.txt" <<'EOF'
+e1=E0382
+c1=a
+e2=E0499
+c2=b
+e3=E0502
+c3=c
+EOF
+cat > "$WS/fixed1.rs" <<'RS'
+fn banner(text: &str) -> String { format!("== {text} ==") }
+fn main() {
+    let title = String::from("scan report");
+    let framed = banner(&title);
+    println!("{framed}");
+    println!("original: {title}");
+}
+RS
+cat > "$WS/fixed2.rs" <<'RS'
+fn main() {
+    let mut counters = vec![1, 2, 3];
+    let first = &mut counters[0];
+    *first += 10;
+    let second = &mut counters[1];
+    *second += 10;
+    println!("{counters:?}");
+}
+RS
+cat > "$WS/fixed3.rs" <<'RS'
+fn main() {
+    let mut log = vec![String::from("boot")];
+    log.push(String::from("login"));
+    let last = &log[0];
+    println!("last = {last}");
+    println!("entries = {}", log.len());
+}
+RS
+rust_check_fail_missing "L2.5" "fixed1"
+(cd -- "$WS" && rustc fixed1.rs -o fixed1 && rustc fixed2.rs -o fixed2 && rustc fixed3.rs -o fixed3)
+rust_check_pass "L2.5" $'a\nb\ncompile\n'
+
+# L2.6 — String vs &str
+"$LAB" start rust L2.6 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L2.6"
+cat > "$WS/answers.txt" <<'EOF'
+q1=c
+q2=https
+q3=tcp
+q4=18
+q5=b
+EOF
+rust_check_fail_missing "L2.6" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L2.6" $'b\nb\nbytes\n'
+
+# L2.7 — Lifetimes
+"$LAB" start rust L2.7 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L2.7"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=credential-stuffing
+q3=b
+q4=b
+q5=E0597
+EOF
+rust_check_fail_missing "L2.7" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L2.7" $'a\nb\nfalse\n'
+
+# L2.8 — The C++ crime scene
+"$LAB" start rust L2.8 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L2.8"
+cat > "$WS/answers.txt" <<'EOF'
+q1=CWE-416
+q2=b
+q3=E0502
+q4=b
+q5=b
+EOF
+rust_check_fail_missing "L2.8" "rust_error.txt"
+(cd -- "$WS" && rustc equivalent.rs 2> rust_error.txt || true)
+rust_check_pass "L2.8" $'a\nb\nuse-after-free\n'
+
+# L2.9 — Borrow-error triage II
+"$LAB" start rust L2.9 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L2.9"
+cat > "$WS/answers.txt" <<'EOF'
+e1=E0106
+c1=a
+e2=E0515
+c2=b
+e3=E0597
+c3=c
+EOF
+cat > "$WS/fixed1.rs" <<'RS'
+fn first_token<'a>(line: &'a str, fallback: &'a str) -> &'a str {
+    match line.split(',').next() { Some(t) => t, None => fallback }
+}
+fn main() { println!("{}", first_token("alert,high", "none")); }
+RS
+cat > "$WS/fixed2.rs" <<'RS'
+fn stamp(prefix: &str) -> String { format!("{prefix}-4097") }
+fn main() { println!("{}", stamp("sess")); }
+RS
+cat > "$WS/fixed3.rs" <<'RS'
+fn main() {
+    let newest;
+    let batch = String::from("evt-9911");
+    newest = &batch;
+    println!("newest = {newest}");
+}
+RS
+rust_check_fail_missing "L2.9" "fixed1"
+(cd -- "$WS" && rustc fixed1.rs -o fixed1 && rustc fixed2.rs -o fixed2 && rustc fixed3.rs -o fixed3)
+rust_check_pass "L2.9" $'b\nb\nowned\n'
+
+# L2.10 — Phase gate: 5 rejections (gate)
+"$LAB" start rust L2.10 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L2.10"
+cat > "$WS/answers.txt" <<'EOF'
+e1=E0382
+c1=a
+e2=E0499
+c2=b
+e3=E0502
+c3=c
+e4=E0515
+c4=d
+e5=E0597
+c5=e
+EOF
+cat > "$WS/fixed5.rs" <<'RS'
+fn main() {
+    let survivor;
+    let tmp = String::from("short-lived");
+    survivor = &tmp;
+    println!("{survivor}");
+}
+RS
+rust_check_fail_missing "L2.10" "fixed5"
+(cd -- "$WS" && rustc fixed5.rs -o fixed5)
+rust_check_pass "L2.10" $'b\nb\nboth\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 22 rust P0-P2 labs passed (22/22)" "$out" "(22/22)"
+
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
 if [[ -f "$COPY/README.md" ]]; then
@@ -994,10 +1412,10 @@ else
 fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
-  # 32 total track-phase lines; bash p0-p7 are done ([x]), leaving 24
+  # 32 total track-phase lines; bash p0-p7 (8) + rust p0-p2 (3) are done ([x]), leaving 21
   # unstarted -- update this count whenever a phase's marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 24 unstarted track-phase lines" "24" "$line_count"
+  assert_eq "planned_execution.md has 21 unstarted track-phase lines" "21" "$line_count"
 else
   bad "planned_execution.md missing"
 fi
