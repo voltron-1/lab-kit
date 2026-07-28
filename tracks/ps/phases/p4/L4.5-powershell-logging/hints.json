@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -NoProfile -NonInteractive -File read4104.ps1 and look at what ScriptBlockText actually shows.",
+    "readout.md needs the Event ID (4104), the payload text you read (mention DownloadString), and which log source records de-obfuscated content — ScriptBlock (logging), not 4103/Transcription.",
+    "Write readout.md with content:\n# 4104 Event Readout\nEvent ID: 4104 (ScriptBlock logging).\nScriptBlockText shows a download cradle: iex (New-Object Net.WebClient).DownloadString(...) fetching from a fake C2 host.\nScriptBlock logging is the log source that records de-obfuscated content -- 4103 only logs pipeline/module detail, and Transcription logs the full session, not just the script block."
+  ]
+}

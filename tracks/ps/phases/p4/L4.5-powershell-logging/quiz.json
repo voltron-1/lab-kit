@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Which Event ID carries the de-obfuscated ScriptBlock text?",
+      "options": {
+        "a": "4104 (ScriptBlock logging)",
+        "b": "4103 (Module logging)"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why does 4104 defeat -EncodedCommand/obfuscation?",
+      "options": {
+        "a": "it logs the decoded script that actually ran, not the base64/obfuscated form",
+        "b": "it blocks encoded commands from running"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which log source captures the full session's input/output to a file?",
+      "answer_b64": "VHJhbnNjcmlwdGlvbg==",
+      "accept_b64": [
+        "VHJhbnNjcmlwdGlvbg==",
+        "dHJhbnNjcmlwdA==",
+        "VHJhbnNjcmlwdA=="
+      ]
+    }
+  ]
+}

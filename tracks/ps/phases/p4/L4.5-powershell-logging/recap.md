@@ -1,0 +1,3 @@
+- ScriptBlock logging -> 4104 (the DECODED script text — the source), Module logging -> 4103, Transcription -> full session transcript
+- 4104 beats -enc/obfuscation: it records what actually ran, decoded — read ScriptBlockText to see the payload
+- this is the SOC hinge (-> SOC L3.2): a 4104 event is now a readable artifact, not an opaque blob
