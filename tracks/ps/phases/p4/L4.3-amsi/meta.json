@@ -1,0 +1,9 @@
+{
+  "id": "L4.3",
+  "title": "AMSI — what it scans, where it hooks, what bypass attempts look like",
+  "type": "DECODE",
+  "objective": "Decode what AMSI actually scans (de-obfuscated content, at runtime, before execution), classify it as a real control per L0.3's speed-bump framework, and name the ATT&CK ID for a bypass attempt.",
+  "gate": false,
+  "windows_variant": true,
+  "est_minutes": 20
+}

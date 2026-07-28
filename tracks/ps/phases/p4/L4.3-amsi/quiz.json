@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "When does AMSI see PowerShell script content?",
+      "options": {
+        "a": "At runtime, after de-obfuscation, right before execution — so it sees the real payload even if it arrived encoded",
+        "b": "Only the base64/on-disk form, before anything is decoded",
+        "c": "Only when the script is saved to a .ps1 file first"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Per L0.3's control-classification framework, is AMSI a real control or a speed bump?",
+      "options": {
+        "a": "A speed bump — trivially and silently defeated",
+        "b": "A real control and telemetry source — bypassable, but defeating it costs the attacker effort and is detectable",
+        "c": "Neither — AMSI has no security relevance"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "What ATT&CK technique ID covers an AMSI-bypass attempt?",
+      "answer_b64": "VDE1NjIuMDAx",
+      "accept_b64": [
+        "VDE1NjIuMDAx",
+        "VDE1NjI="
+      ]
+    }
+  ]
+}
