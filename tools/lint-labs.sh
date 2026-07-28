@@ -78,13 +78,40 @@ check_check_sh() {
   # Word-boundary matching, not substring: -F/plain substring would flag
   # "evaluate"/"retrieval" for 'eval' and "pushdown" for 'pushd' (false
   # positives), while a hand-padded ' nc ' still misses "nc" at the very
-  # start of a line (false negative). -w fixes both directions.
+  # start of a line (false negative). -w fixes both directions. Case-
+  # sensitive: these are bash/POSIX tokens, not case-insensitive-language
+  # aliases, so -i would risk new false positives (e.g. a stray "Eval" in
+  # prose) for no benefit here.
   local token
   for token in 'eval' 'sudo' 'curl' 'wget' 'nc' 'ssh' 'sh -c' 'bash -c' 'pushd' 'bin/lab'; do
     if grep -qw -- "$token" "$f"; then
       lint_fail "$f: banned token '$token'"
     fi
   done
+  # Attack-content ceiling (ps-p4+): PowerShell is case-insensitive, so
+  # these MUST be -i (a bare 'iex' ban misses 'IEX', the alias everyone
+  # actually types — verified against this exact gap in an earlier draft).
+  # grep/assert against learner text is fine; route a literal around this
+  # scan by building it from concatenated string pieces (same workaround
+  # already established for the eval ban above), never with a bare
+  # '# lint-allow' exemption — these tokens get no exemption of any kind.
+  for token in 'iex' 'Invoke-Expression' 'DownloadString' 'Invoke-WebRequest' \
+    'Start-BitsTransfer' 'EncodedCommand' 'certutil' 'mshta' 'rundll32' 'regsvr32' \
+    'iwr' 'irm' 'Invoke-RestMethod' 'DownloadFile' 'DownloadData' 'bitsadmin'; do
+    if grep -qwi -- "$token" "$f"; then
+      lint_fail "$f: banned attack-content token '$token' (case-insensitive — check.sh must never execute an attacker primitive)"
+    fi
+  done
+  # The invariant that actually matters isn't the primitive's name (PS has
+  # aliases and unambiguous-prefix flag matching, so a name list is always
+  # incomplete) but the SHAPE: pwsh/powershell invoked with an inline-code
+  # flag (-Command/-c/-EncodedCommand/-e/-enc, any unambiguous abbreviation)
+  # rather than -File against a shipped, reviewed .ps1 — the only pattern
+  # every benign probe in this repo uses. Verified zero false positives
+  # against the current repo before adding this.
+  if grep -qEi -- '(pwsh|powershell)([[:space:]]+-[A-Za-z]+)*[[:space:]]+-(c|com|comm|command|e|ec|enc|encodedcommand)\b' "$f"; then
+    lint_fail "$f: banned pattern: pwsh/powershell invoked with an inline-code flag (-Command/-EncodedCommand or an abbreviation) — ship a reviewed .ps1 and invoke it via -File instead"
+  fi
   # cd .. / cd ~ are relative escapes with no leading '/', so the absolute-
   # path check above can't see them; quoting (cd ".." / cd '~') doesn't
   # change what they do, so this matches regardless of quote style.
@@ -121,6 +148,23 @@ check_meta_json() {
     || lint_fail "$f: meta.json missing a required field"
 }
 
+# The ps track's curriculum (docs/plans/ps-p4-plan.md §2c) mandates every IOC
+# be defanged (hxxp/hxxps, bracketed dots) and fictional. Scoped to tracks/ps
+# only: the bash and soc tracks have their own, deliberately DIFFERENT
+# convention (realistic-looking undefanged URLs against RFC-reserved/.test
+# domains — see tracks/bash/phases/p4/L4.2-curl-bash-audit/files/install.sh
+# and PROMPTS.md's soc rule that raw evidence must NOT be defanged), so this
+# check must never run repo-wide.
+check_ps_files_defanged() {
+  local f lineno content
+  while IFS= read -r -d '' f; do
+    while IFS=: read -r lineno content; do
+      [[ -z "$lineno" ]] && continue
+      lint_fail "$f:$lineno: undefanged URL scheme — ps track requires hxxp/hxxps, not http/https"
+    done < <(grep -InEI 'https?://' "$f" 2> /dev/null)
+  done < <(find tracks/ps -type f -print0 2> /dev/null)
+}
+
 any=0
 while IFS= read -r -d '' dir; do
   any=1
@@ -133,6 +177,8 @@ done < <(find tracks -mindepth 4 -maxdepth 4 -type d -name 'L*.*-*' -print0 2> /
 if [[ "$any" == "0" ]]; then
   echo "lint-labs: no lab directories found under tracks/" >&2
 fi
+
+check_ps_files_defanged
 
 echo "--- shellcheck sweep ---"
 if ! "$ROOT/tools/shellcheck-all.sh"; then

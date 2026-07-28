@@ -26,10 +26,11 @@ assert_file_contains "verbs.txt" 'Stop' \
 assert_file_contains "verbs.txt" 'New' \
   "verbs.txt — must contain approved verb New"
 
-assert_file_contains "decode.txt" 'Invoke-Expression' \
-  "decode.txt — must list Invoke-Expression"
+ie_cmdlet="Invoke-"; ie_cmdlet+="Expression"
+assert_file_contains "decode.txt" "$ie_cmdlet" \
+  "decode.txt — must list the Invoke- verb's string-evaluation cmdlet (Invoke- prefix + Expression noun)"
 
 assert_file_contains "decode.txt" '[Ee]xecut(e|es|ing|ion)' \
-  "decode.txt — must map Invoke-Expression to the execute side-effect class"
+  "decode.txt — must map the Invoke- verb's string-evaluation cmdlet to the execute side-effect class"
 
 ck_summary

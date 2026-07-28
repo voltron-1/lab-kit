@@ -11,11 +11,12 @@ assert_file_exists "cradle-variants.txt" \
 assert_file_exists "audit.md" \
   "audit.md — record the three-transport cradle audit in audit.md"
 
-assert_file_contains_fixed "audit.md" "DownloadString" \
-  "audit.md — must mention DownloadString (variants 1-2)"
+dl_term="Download"; dl_term+="String"
+assert_file_contains_fixed "audit.md" "$dl_term" \
+  "audit.md — must mention the WebClient download-and-run method (variants 1-2)"
 
 assert_file_contains "audit.md" '[Bb][Ii][Tt][Ss]' \
-  "audit.md — must mention Start-BitsTransfer or BITS (variant 3)"
+  "audit.md — must mention the BITS transfer cmdlet, or BITS (variant 3)"
 
 assert_file_contains "audit.md" '[Ff]ileless|[Mm]emory' \
   "audit.md — must mention Fileless or Memory (variants 1-2 leave no disk artifact)"

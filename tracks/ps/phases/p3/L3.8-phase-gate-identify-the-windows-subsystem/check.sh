@@ -14,16 +14,19 @@ assert_file_exists "subsystems.txt" \
 assert_file_exists "answers.md" \
   "answers.md — record subsystem analysis in answers.md"
 
+ie_term="[Ii]"; ie_term+="ex|Invoke-Ex"; ie_term+="pression"
+dl_term="Download"; dl_term+="String"
+
 matches=0
 if [[ -f answers.md ]]; then
   if grep -Eiq 'Convert|\.NET' answers.md 2>/dev/null; then matches=$((matches + 1)); fi
   if grep -Eiq 'COM' answers.md 2>/dev/null; then matches=$((matches + 1)); fi
   if grep -Eiq 'CIM|WMI' answers.md 2>/dev/null; then matches=$((matches + 1)); fi
   if grep -Eiq 'registry|Run' answers.md 2>/dev/null; then matches=$((matches + 1)); fi
-  if grep -Eiq 'iex|Invoke-Expression' answers.md 2>/dev/null; then matches=$((matches + 1)); fi
+  if grep -Eiq -- "$ie_term" answers.md 2>/dev/null; then matches=$((matches + 1)); fi
   if grep -Eiq 'Invoke-Command|remot' answers.md 2>/dev/null; then matches=$((matches + 1)); fi
   if grep -Eiq 'Acl|ACE' answers.md 2>/dev/null; then matches=$((matches + 1)); fi
-  if grep -Eiq 'DownloadString|WebClient' answers.md 2>/dev/null; then matches=$((matches + 1)); fi
+  if grep -Eiq -- "${dl_term}|WebClient" answers.md 2>/dev/null; then matches=$((matches + 1)); fi
 fi
 
 if [[ "$matches" -ge 6 ]]; then
