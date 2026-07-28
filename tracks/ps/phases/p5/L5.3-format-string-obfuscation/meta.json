@@ -4,5 +4,5 @@
   "type": "DEOBFUSCATE",
   "objective": "Resolve the -f format operator's reordered {index} placeholders by running the real substitution and reading the result -- never running what it spells.",
   "gate": false,
-  "est_minutes": 20
+  "est_minutes": 15
 }

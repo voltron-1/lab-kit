@@ -14,10 +14,10 @@ kw_mixed="I"; kw_mixed+="Ex"
 assert_file_exists "fmt.ps1" \
   "fmt.ps1 — shipped reference probe must exist"
 
-assert_output_contains "fmt.ps1 resolves the 3-arg reordered format" "$kw_mixed" \
+assert_output_contains "fmt.ps1 resolves the 3-arg reordered format" "reordered 3-arg format: ${kw_mixed}" \
   "run: pwsh -File fmt.ps1" -- pwsh -NoProfile -NonInteractive -File fmt.ps1
 
-assert_output_contains "fmt.ps1 resolves the 2-arg reordered format" "$kw_lower" \
+assert_output_contains "fmt.ps1 resolves the 2-arg reordered format" "reordered 2-arg format: ${kw_lower}" \
   "run: pwsh -File fmt.ps1" -- pwsh -NoProfile -NonInteractive -File fmt.ps1
 
 assert_file_exists "plaintext.txt" \
