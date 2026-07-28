@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Why are LOLBins effective for an attacker?",
+      "options": {
+        "a": "They're undetectable by design",
+        "b": "They're signed, trusted Windows binaries — the attacker ships no malware and evades naive allow-lists"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Name a LOLBin abused to download a file.",
+      "answer_b64": "Y2VydHV0aWw=",
+      "accept_b64": [
+        "Y2VydHV0aWw=",
+        "bXNodGE=",
+        "cnVuZGxsMzI=",
+        "cmVnc3ZyMzI="
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Best detection tell for a PowerShell-launched LOLBin?",
+      "options": {
+        "a": "The file hash of powershell.exe",
+        "b": "The powershell.exe -> LOLBin parent-child process-creation event (Sysmon 1 / 4688)"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

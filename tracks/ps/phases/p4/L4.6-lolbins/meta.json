@@ -1,0 +1,9 @@
+{
+  "id": "L4.6",
+  "title": "LOLBins from PowerShell — signed tools abused to download/execute",
+  "type": "AUDIT",
+  "objective": "Recognize Living-off-the-Land binaries (certutil/mshta/rundll32/regsvr32) invoked from PowerShell for download or proxied execution, and name the powershell.exe -> LOLBin parent-child process-creation tell plus the ATT&CK ID.",
+  "gate": false,
+  "windows_variant": true,
+  "est_minutes": 20
+}
