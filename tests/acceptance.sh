@@ -1514,6 +1514,150 @@ soc_check_pass "L1.8" $'a\nb\nc\n'
 out="$("$LAB" status 2>&1)"
 assert_contains "status shows all 11 soc P0-P1 labs passed (11/11)" "$out" "(11/11)"
 
+# --- 7f. ps track P4 (PowerShell as Attack Surface): fabricated pass +
+# negative case per lab. First ps-track coverage in this file -- p0-p3
+# (26 labs) are built, merged, and tagged but have no acceptance.sh
+# coverage yet (a pre-existing gap, not touched here; flagged in
+# planned_execution.md for a future session, mirroring how soc-p0 had the
+# same gap before soc-p1's close-out). Nothing in this phase executes an
+# attacker primitive -- only benign cross-platform decoders (L4.2, L4.5)
+# run for real; every other lab is pure static-content grading. ---
+note "ps track P4: fabricated pass + negative case per lab"
+
+ps_check_fail_missing() {
+  local id="$1" missing="$2" out rc
+  out="$("$LAB" check ps "$id" 2>&1)"; rc=$?
+  assert_eq "ps $id check fails before $missing exists" "1" "$rc"
+  assert_contains "ps $id fail result names FAIL" "$out" "RESULT: FAIL"
+}
+
+ps_check_pass() {
+  local id="$1" quiz="$2" out rc
+  out="$(printf '%s' "$quiz" | "$LAB" check ps "$id" 2>&1)"; rc=$?
+  assert_eq "ps $id check passes" "0" "$rc"
+  assert_contains "ps $id result names PASS" "$out" "RESULT: PASS"
+}
+
+# L4.1 — Download cradles (AUDIT; phase opener: recall must never gate).
+# --force skips ps p0-p3 (26 labs, permanently marked ⏭, never ✓) since this
+# COPY has no prior ps progress and p0-p3 have no acceptance.sh coverage of
+# their own yet (see the note above this section).
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L4.1 --force 2>&1)"; rc=$?
+assert_eq "'lab start ps L4.1 --force' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L4.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/ps/L4.1"
+ps_check_fail_missing "L4.1" "audit.md"
+cat > "$WS/audit.md" << 'MD'
+# Download Cradle Audit
+Variant 1 (iex + DownloadString) and Variant 2 (Invoke-WebRequest + iex) are both fileless: they fetch remote text and iex evaluates it in memory, so no file ever hits disk.
+Variant 3 (Start-BitsTransfer) is different — it drops a real file via a background transfer service, blending in with legitimate Windows Update traffic.
+Fileless cradles are detected via a 4104 ScriptBlock event showing DownloadString and iex together. ATT&CK: T1059.001, T1105.
+MD
+ps_check_pass "L4.1" $'a\nstart-bitstransfer\na\n'
+
+# L4.2 — Encoded commands (AUDIT; decode-enc.ps1 is real, benign, run for real)
+"$LAB" start ps L4.2 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L4.2"
+ps_check_fail_missing "L4.2" "audit.md"
+cat > "$WS/audit.md" << 'MD'
+# Encoded Command Audit
+The encoded-command flag takes base64 of UTF-16LE text, not UTF-8.
+Encoding hides intent from a human reading the command line, but a 4104 ScriptBlock event logs the decoded script, and the blob is trivially decoded with [System.Convert] + [System.Text.Encoding].
+The command-line combo -nop -w hidden plus the encoded-command flag is itself a detection signature. ATT&CK: T1027.
+MD
+ps_check_pass "L4.2" $'b\na\n-enc\n'
+
+# L4.3 — AMSI (DECODE, WINDOWS-VARIANT: statically graded, no pwsh needed)
+"$LAB" start ps L4.3 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L4.3"
+ps_check_fail_missing "L4.3" "notes.txt"
+cat > "$WS/notes.txt" << 'TXT'
+AMSI scans de-obfuscated script content at runtime, right before execution, so it sees the real payload even if it arrived encoded.
+Per L0.3's classification, AMSI is a real control and telemetry source, not a speed bump: bypass attempts are noisy and detectable.
+ATT&CK: T1562.001 (Impair Defenses) for an AMSI-bypass attempt.
+TXT
+ps_check_pass "L4.3" $'a\nb\nT1562.001\n'
+
+# L4.4 — Constrained Language Mode (DECODE, WINDOWS-VARIANT: statically graded)
+"$LAB" start ps L4.4 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L4.4"
+ps_check_fail_missing "L4.4" "notes.txt"
+cat > "$WS/notes.txt" << 'TXT'
+CLM blocks direct .NET type access, Add-Type, and COM object creation via New-Object -ComObject.
+It's only a real boundary when WDAC or AppLocker enforces it -- a session-property-only LanguageMode setting with no enforcement engine is bypassable.
+TXT
+ps_check_pass "L4.4" $'b\nb\nwdac and applocker\n'
+
+# L4.5 — PowerShell logging: 4104/4103/Transcription (DECODE; read4104.ps1
+# is real, benign, run for real)
+"$LAB" start ps L4.5 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L4.5"
+ps_check_fail_missing "L4.5" "readout.md"
+cat > "$WS/readout.md" << 'MD'
+# 4104 Event Readout
+Event ID: 4104 (ScriptBlock logging).
+ScriptBlockText shows a download cradle: iex (New-Object Net.WebClient).DownloadString(...) fetching from a fake C2 host.
+ScriptBlock logging is the log source that records de-obfuscated content -- 4103 only logs pipeline/module detail, and Transcription logs the full session, not just the script block.
+MD
+ps_check_pass "L4.5" $'a\na\nTranscription\n'
+
+# L4.6 — LOLBins from PowerShell (AUDIT, WINDOWS-VARIANT: statically graded)
+"$LAB" start ps L4.6 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L4.6"
+ps_check_fail_missing "L4.6" "finding.txt"
+cat > "$WS/finding.txt" << 'TXT'
+LOLBins abused from PowerShell: certutil (download), mshta (remote HTA execution), rundll32 (proxy execution), regsvr32 (scriptlet execution).
+They're all signed, trusted Windows binaries -- allow-listing by file identity misses the abuse entirely.
+The real detection tell is the parent-child process chain: powershell.exe spawning one of these tools (Sysmon Event ID 1 / Windows Event ID 4688).
+ATT&CK: T1218 (System Binary Proxy Execution), T1105 (Ingress Tool Transfer).
+TXT
+ps_check_pass "L4.6" $'b\ncertutil\nb\n'
+
+# L4.7 — Credential exposure (AUDIT; creds-sample.ps1 is never executed)
+"$LAB" start ps L4.7 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L4.7"
+ps_check_fail_missing "L4.7" "finding.txt"
+cat > "$WS/finding.txt" << 'TXT'
+creds-sample.ps1 has two credential exposures: ConvertTo-SecureString built from an in-script
+plaintext (-AsPlainText -Force), and a second SecureString decrypted with an in-script -Key --
+both mean the "secret" is fully readable in source. It also echoes $env:LABKIT_DEMO_SECRET
+via Write-Output, which leaks it into transcripts and 4104 logs (a real secret env var,
+e.g. AWS_SECRET_ACCESS_KEY, would leak the same way).
+Fix: secrets belong in a vault/secret store, fetched at runtime, never hardcoded or echoed.
+ATT&CK: T1552.001 (Credentials In Files).
+TXT
+ps_check_pass "L4.7" $'b\nb\nT1552.001\n'
+
+# L4.8 — Empire & PowerSploit patterns (TOUR; strictest read-only lab, nothing executes)
+"$LAB" start ps L4.8 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L4.8"
+ps_check_fail_missing "L4.8" "tour.md"
+cat > "$WS/tour.md" << 'MD'
+# Empire & PowerSploit Structure Tour
+Empire stager shape: an encoded launcher, then a staging key exchange, then a beacon/tasking loop back to C2.
+PowerSploit/PowerView families: Invoke-Mimikatz (credential theft), Get-NetUser/PowerView (AD enumeration).
+You read the STRUCTURE to recognize the framework in telemetry -- never the payload.
+MD
+ps_check_pass "L4.8" $'b\nInvoke-Mimikatz\nb\n'
+
+# L4.9 — Phase gate: five malicious one-liners (AUDIT, gate; N-of-M
+# threshold on answers.md, 3/3 quiz is the real bar)
+"$LAB" start ps L4.9 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L4.9"
+ps_check_fail_missing "L4.9" "answers.md"
+cat > "$WS/answers.md" << 'MD'
+# Malicious One-Liner Analysis
+1. Download cradle (iex + DownloadString): fileless fetch-and-eval. ATT&CK T1059.001/T1105. Evidence: a 4104 ScriptBlock event showing the decoded iex+DownloadString text.
+2. Encoded command (-enc): the -nop -w hidden -enc combo is itself a detection signature. ATT&CK T1027/T1059.001. Evidence: the command line plus a 4104 event recording the decoded script.
+3. LOLBin download (certutil): a signed, trusted binary abused to fetch a file. ATT&CK T1105/T1218. Evidence: process-creation telemetry showing powershell.exe spawning certutil.
+4. Registry Run-key persistence: writes an autostart entry pointing at an encoded launcher. ATT&CK T1547.001. Evidence: a registry-write event (or the 4104 event for the PowerShell call itself).
+5. Credential exposure: ConvertTo-SecureString from an in-script plaintext -- not secret at all. ATT&CK T1552.001. Evidence: the source itself, or a 4104 event if it's ever run.
+MD
+ps_check_pass "L4.9" $'b\nb\nT1547.001\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 9 ps P4 labs passed (9/35)" "$out" "(9/35)"
+
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
 if [[ -f "$COPY/README.md" ]]; then
@@ -1525,10 +1669,11 @@ fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
   # 32 total track-phase lines; bash p0-p7 (8) + rust p0-p2 (3) + soc p0-p1 (2) +
-  # ps p0-p3 (4) are done ([x]), leaving 15 unstarted -- update this count whenever
-  # a phase's marker changes.
+  # ps p0-p3 (4) are done ([x]) and ps p4 is in-progress ([~], 9/9 labs merged,
+  # awaiting this close-out's tag), leaving 14 unstarted -- update this count
+  # whenever a phase's marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 15 unstarted track-phase lines" "15" "$line_count"
+  assert_eq "planned_execution.md has 14 unstarted track-phase lines" "14" "$line_count"
 else
   bad "planned_execution.md missing"
 fi
