@@ -6,21 +6,21 @@ set -euo pipefail
 source "$LAB_CHECKLIB"
 
 assert_file_exists "finding.txt" \
-  "finding.txt — name >=3 LOLBins, the parent-child detection tell, and an ATT&CK ID"
+  "finding.txt — name a LOLBin, the parent-child detection tell, and an ATT&CK ID"
 
-lb1="cert"; lb1+="util"
-lb2="ms"; lb2+="hta"
-lb3="rund"; lb3+="ll32"
-lb4="regsvr"; lb4+="32"
+lb1="[Cc]ert"; lb1+="util"
+lb2="[Mm]s"; lb2+="hta"
+lb3="[Rr]und"; lb3+="ll32"
+lb4="[Rr]egsvr"; lb4+="32"
 lolbin_pattern="$lb1|$lb2|$lb3|$lb4"
 
 assert_file_contains "finding.txt" "$lolbin_pattern" \
   "finding.txt — must name a LOLBin used for download or proxy execution"
 
-assert_file_contains "finding.txt" '[Pp]arent|child|process' \
-  "finding.txt — must mention the parent-child (process) detection tell"
+assert_file_contains "finding.txt" '[Pp]arent.{0,60}[Cc]hild|[Cc]hild.{0,60}[Pp]arent' \
+  "finding.txt — must state the parent-child process-chain detection tell, not just mention 'process' in passing"
 
-assert_file_contains "finding.txt" 'T1218|T1105' \
+assert_file_contains "finding.txt" '[Tt]1218|[Tt]1105' \
   "finding.txt — must cite ATT&CK T1218 (System Binary Proxy Execution) or T1105 (Ingress Tool Transfer)"
 
 ck_summary

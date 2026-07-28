@@ -1,7 +1,7 @@
 ## BRIEF
 LOLBins (Living-off-the-Land Binaries) are **signed, trusted Windows tools** abused to do attacker work — download or proxied code execution — so the attacker ships no additional binary of their own. That's exactly what makes them evade allow-lists built on file identity: the binary really is signed by Microsoft.
 Invoked *from PowerShell*, the tell isn't the LOLBin's signature — it's the **parent→child process chain**: `powershell.exe` spawning one of these tools is the pattern that matters.
-Record ≥3 LOLBins, the parent→child detection tell, and the ATT&CK ID in `finding.txt`.
+Record a LOLBin, the parent→child detection tell, and the ATT&CK ID in `finding.txt`.
 
 ## GUIDED STEPS
 
