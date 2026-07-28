@@ -1,0 +1,3 @@
+- "po"+"wer"+"shell", -join on a char array, and [char] codes all reassemble a keyword split to dodge naive plain-string scans
+- at runtime the pieces are just joined -- the reassembled string is identical to writing it plainly
+- reconstruct by evaluating the concatenation for real and reading the result -- never running it

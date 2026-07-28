@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -NoProfile -NonInteractive -File concat.ps1 and look at what each fragmented piece reassembles to.",
+    "plaintext.txt needs both reassembled keywords -- the concatenated one and the -join'd one.",
+    "Write plaintext.txt with content:\n\"i\"+\"e\"+\"x\" -> iex\n('D','o','w','n','l','o','a','d') -join '' -> Download\n[char]105 + [char]101 + [char]120 -> iex"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "text",
+      "prompt": "\"i\"+\"e\"+\"x\" reconstructs to which keyword?",
+      "answer_b64": "aWV4"
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why concatenate or -join a keyword across several literals?",
+      "options": {
+        "a": "To speed up execution",
+        "b": "To dodge naive plain-string detection — no single piece contains the full keyword"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "[char]105 yields which character?",
+      "answer_b64": "aQ=="
+    }
+  ]
+}

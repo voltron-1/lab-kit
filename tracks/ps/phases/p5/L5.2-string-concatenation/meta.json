@@ -1,0 +1,8 @@
+{
+  "id": "L5.2",
+  "title": "String concatenation obfuscation — \"po\"+\"wer\"+\"shell\", char arrays, -join",
+  "type": "DEOBFUSCATE",
+  "objective": "Reassemble keywords split across concatenated string literals, a -join'd char array, and [char] codes, running the real reconstruction and reading the result -- never running it.",
+  "gate": false,
+  "est_minutes": 20
+}
