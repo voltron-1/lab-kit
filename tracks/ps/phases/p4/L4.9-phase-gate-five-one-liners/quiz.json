@@ -23,7 +23,7 @@
     {
       "id": 3,
       "type": "text",
-      "prompt": "One-liner 4 writes HKCU:\\...\\Run — technique and ATT&CK ID?",
+      "prompt": "One-liner 4 writes HKCU:\\...\\Run — what is the ATT&CK technique ID?",
       "answer_b64": "VDE1NDcuMDAx",
       "accept_b64": [
         "VDE1NDcuMDAx",
