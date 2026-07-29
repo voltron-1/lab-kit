@@ -1,0 +1,9 @@
+{
+  "id": "L6.1",
+  "title": "Tour: PowerView — AD enumeration functions and the data they collect",
+  "type": "TOUR",
+  "objective": "Read a sanitized PowerView function catalog and map function names to the AD objects they collect and the ATT&CK discovery techniques they represent -- recognising the tool in telemetry without ever running it.",
+  "gate": false,
+  "windows_variant": true,
+  "est_minutes": 20
+}

@@ -1682,7 +1682,7 @@ MD
 ps_check_pass "L4.9" $'b\nb\nT1547.001\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 9 ps P4 labs passed (9/42)" "$out" "(9/42)"
+assert_contains "status shows all 9 ps P4 labs passed (9/46)" "$out" "(9/46)"
 
 # --- 7b. ps track P5: Deobfuscation & Malware Reading ---
 note "ps track P5: fabricated pass + negative case per lab"
@@ -1797,9 +1797,10 @@ I did not execute any layer -- the reconstruction exists to be read and reported
 MD
 ps_check_pass "L5.7" $'download cradle\nb\nreversal\n'
 
-# The gate is the last lab in the ps catalog, so passing it completes the track.
+# Passing L5.7 completes ps p5. The catalog denominator also counts p6 lab directories
+# that exist on disk but have no coverage of their own yet -- that lands at p6 close-out.
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 16 ps P4+P5 labs passed (16/42)" "$out" "(16/42)"
+assert_contains "status shows all 16 ps P4+P5 labs passed (16/46)" "$out" "(16/46)"
 
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"

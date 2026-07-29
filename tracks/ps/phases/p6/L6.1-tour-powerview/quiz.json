@@ -1,0 +1,34 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What does Get-NetUser collect?",
+      "options": {
+        "a": "Domain user objects — names, SPNs, lastlogon, descriptions",
+        "b": "Local Linux user accounts from /etc/passwd"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Which PowerView function maps the hosts where the current user is ALREADY a local admin?",
+      "answer_b64": "ZmluZC1sb2NhbGFkbWluYWNjZXNz",
+      "accept_b64": [
+        "ZmluZC1sb2NhbGFkbWluYWNjZXNz",
+        "ZmluZGxvY2FsYWRtaW5hY2Nlc3M="
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why tour PowerView by function name rather than by running it?",
+      "options": {
+        "a": "The name tells you the data collected and the ATT&CK phase, which is what you need to read telemetry",
+        "b": "Because it has to be compiled before it will run"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

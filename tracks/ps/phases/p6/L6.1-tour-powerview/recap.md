@@ -1,0 +1,3 @@
+- PowerView's Get-Net* functions enumerate AD objects — users, groups, computers, GPOs, shares — and the verb-plus-noun name tells you which
+- Find-LocalAdminAccess is the different one: it answers where you can already go, not what exists, which is why it shows up just before lateral movement
+- Windows and domain only, so you tour it statically — the payoff is reading Get-NetUser in a 4104 event and knowing it means T1087 account discovery

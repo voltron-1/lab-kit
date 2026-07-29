@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Which log and event ID does this hunt read?",
+      "options": {
+        "a": "The Security log, event ID 4624",
+        "b": "The PowerShell/Operational log, event ID 4104"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Which Get-WinEvent parameter carries the log name and ID so the event-log service does the filtering?",
+      "answer_b64": "LWZpbHRlcmhhc2h0YWJsZQ==",
+      "accept_b64": [
+        "LWZpbHRlcmhhc2h0YWJsZQ==",
+        "ZmlsdGVyaGFzaHRhYmxl",
+        "Z2V0LXdpbmV2ZW50IC1maWx0ZXJoYXNodGFibGU="
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why does hunting 4104 defeat command-line encoding on its own?",
+      "options": {
+        "a": "4104 records the decoded ScriptBlock text, after PowerShell has parsed it",
+        "b": "4104 records failed logons, which encoding cannot suppress"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

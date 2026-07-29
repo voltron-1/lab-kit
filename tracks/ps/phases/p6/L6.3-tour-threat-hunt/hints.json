@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read hunt.ps1 with less. The hashtable at the top names the log and the event ID; the Where-Object line is the pattern it hunts for.",
+    "The comment block at the end of the script tells you what the hunt does not catch. Tie it back to the phase-5 labs: a payload that builds its keywords at runtime never spells them in the text -match sees.",
+    "readout.md is graded on four topics: the event ID (4104), the cmdlet (Get-WinEvent), what the filter looks for (encoding and cradle tells), and what it would miss (runtime string assembly)."
+  ]
+}

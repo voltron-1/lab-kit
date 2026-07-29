@@ -10,3 +10,4 @@ tracks/ps/phases/p3/L3.5-invoke-expression/files/shadow-iex.ps1:1 — shadows th
 tracks/ps/phases/p3/L3.5-invoke-expression/files/shadow-iex.ps1:2 — redefinition is the logger, not the real cmdlet
 tracks/ps/phases/p3/L3.5-invoke-expression/files/shadow-iex.ps1:4 — logs the string, never evaluates it
 tracks/ps/phases/p3/L3.5-invoke-expression/files/shadow-iex.ps1:7 — aliases the safe logger above, not the real cmdlet
+tracks/ps/phases/p6/L6.3-tour-threat-hunt/files/hunt.ps1:17 — cradle keyword is the hunt's detection pattern, matched against log text, never invoked

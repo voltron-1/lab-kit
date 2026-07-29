@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Which collector section is the one that shows what will run again after a reboot?",
+      "options": {
+        "a": "The running-process list",
+        "b": "The autostart entries"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why does the collector serialize each section to JSON instead of printing it?",
+      "options": {
+        "a": "Structured output an analyst or SIEM can parse and diff",
+        "b": "To hide the results from the user"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Event ID 4624 in the collector's logon section means which kind of event?",
+      "answer_b64": "c3VjY2Vzc2Z1bCBsb2dvbg==",
+      "accept_b64": [
+        "c3VjY2Vzc2Z1bCBsb2dvbg==",
+        "bG9nb24=",
+        "YSBzdWNjZXNzZnVsIGxvZ29u",
+        "c3VjY2Vzc2Z1bCBsb2dvbnM=",
+        "bG9nb24gc3VjY2Vzcw=="
+      ]
+    }
+  ]
+}

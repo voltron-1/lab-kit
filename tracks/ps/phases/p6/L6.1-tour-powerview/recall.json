@@ -1,0 +1,62 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "source": "ps L5.1",
+      "type": "choice",
+      "prompt": "After decoding a 4104 blob to plaintext, what is the correct next step?",
+      "options": {
+        "a": "Pipe it to iex to confirm what it does",
+        "b": "Nothing extra \u2014 decode to READ it, never to run it"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "source": "ps L5.3",
+      "type": "choice",
+      "prompt": "What does the -f operator do in obfuscated PowerShell?",
+      "options": {
+        "a": "Reorders indexed arguments to reassemble a scrambled keyword",
+        "b": "Formats a number to a fixed decimal precision"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "source": "ps L4.5",
+      "type": "text",
+      "prompt": "Which Event ID carries the decoded ScriptBlock text?",
+      "answer_b64": "NDEwNA=="
+    },
+    {
+      "id": 4,
+      "source": "ps L5.4",
+      "type": "choice",
+      "prompt": "What does $s[-1..-$s.Length] -join '' do?",
+      "options": {
+        "a": "Returns the last character of $s",
+        "b": "Reverses the string"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 5,
+      "source": "ps L4.6",
+      "type": "text",
+      "prompt": "Name one LOLBin abused for download or proxy execution.",
+      "answer_b64": "Y2VydHV0aWw=",
+      "accept_b64": [
+        "Y2VydHV0aWw=",
+        "Y2VydHV0aWwuZXhl",
+        "bXNodGE=",
+        "bXNodGEuZXhl",
+        "cnVuZGxsMzI=",
+        "cnVuZGxsMzIuZXhl",
+        "cmVnc3ZyMzI=",
+        "cmVnc3ZyMzIuZXhl",
+        "Yml0c2FkbWlu"
+      ]
+    }
+  ]
+}

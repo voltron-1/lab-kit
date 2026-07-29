@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read powerview-catalog.txt with less. Its section headings already group the functions by what kind of question each answers.",
+    "Six functions are named Get-Net<something> or Invoke-<something>Finder and answer 'what exists in this directory'. The seventh answers 'where can I already go' -- that is the one that turns an inventory into a route.",
+    "tour.md is graded on four things: it names Get-NetUser, it names Find-LocalAdminAccess, it says what these functions are FOR (enumeration/recon/discovery of AD objects), and it ties at least one to its ATT&CK technique -- the catalog gives an ATT&CK line for every function."
+  ]
+}
