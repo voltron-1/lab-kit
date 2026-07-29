@@ -1667,7 +1667,7 @@ MD
 ps_check_pass "L4.9" $'b\nb\nT1547.001\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 9 ps P4 labs passed (9/41)" "$out" "(9/41)"
+assert_contains "status shows all 9 ps P4 labs passed (9/42)" "$out" "(9/42)"
 
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"

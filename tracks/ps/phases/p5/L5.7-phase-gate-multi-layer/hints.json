@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -NoProfile -NonInteractive -File gate-peel.ps1 and read all three printed lines. Each one is a layer coming off.",
+    "Compare layer 2 with layer 3. Layer 2 is already readable PowerShell except for one leftover expression in front; layer 3 is the same line with that expression resolved. Naming that expression's operator is one of the answers.",
+    "plaintext.txt needs the LAST line the probe printed -- the one where the leftover expression is gone and a single keyword stands in its place -- not the layer-2 line above it. answers.md needs you to say what that finished line would have done if it ran, and to name the encodings and the operator you removed to get there. Your own words throughout; there is no phrasing to match."
+  ]
+}
