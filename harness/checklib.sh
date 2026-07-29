@@ -121,6 +121,24 @@ assert_file_contains() {
   fi
 }
 
+# assert_file_contains_i <path> <pattern> [hint] — assert_file_contains, but
+# case-insensitive. Use for free-text learner notes, where IEX / iex / Iex are
+# all the same correct answer: the keyword is what's graded, not the shift key.
+# Keep assert_file_contains for anything where casing is itself the lesson.
+assert_file_contains_i() {
+  local path="$1" pattern="$2" hint="${3:-}"
+  require_in_workspace "$path"
+  if [[ ! -f "$REQ_PATH" ]]; then
+    fail "$(ws_rel "$REQ_PATH") missing" "$hint"
+    return 0
+  fi
+  if grep -Eqi -- "$pattern" "$REQ_PATH"; then
+    pass_msg "$(ws_rel "$REQ_PATH") matches: $pattern"
+  else
+    fail "$(ws_rel "$REQ_PATH") does not match: $pattern" "$hint"
+  fi
+}
+
 assert_file_contains_fixed() {
   local path="$1" literal="$2" hint="${3:-}"
   require_in_workspace "$path"
@@ -132,6 +150,27 @@ assert_file_contains_fixed() {
     pass_msg "$(ws_rel "$REQ_PATH") contains: $literal"
   else
     fail "$(ws_rel "$REQ_PATH") does not contain: $literal" "$hint"
+  fi
+}
+
+# assert_file_unmodified <path> <shipped> [hint] — the learner's copy of a
+# read-only reference artifact must be byte-identical to the file the lab
+# ships. Use this instead of grepping the artifact for fragments of itself:
+# a fragment grep is satisfied by a commented-out copy of the pinned line, so
+# a probe that was gutted and replaced with hardcoded output still passes.
+# Byte identity has no such gap, and it needs no per-technique pattern list.
+assert_file_unmodified() {
+  local path="$1" shipped="$2" hint="${3:-}"
+  require_in_workspace "$path"
+  [[ -f "$shipped" ]] || harness_err "shipped reference missing: $shipped"
+  if [[ ! -f "$REQ_PATH" ]]; then
+    fail "$(ws_rel "$REQ_PATH") missing" "$hint"
+    return 0
+  fi
+  if cmp -s -- "$REQ_PATH" "$shipped"; then
+    pass_msg "$(ws_rel "$REQ_PATH") is unmodified"
+  else
+    fail "$(ws_rel "$REQ_PATH") has been modified" "$hint"
   fi
 }
 

@@ -14,39 +14,23 @@ export POWERSHELL_UPDATECHECK=Off
 # patterns accept any casing (someone who writes the alias in caps is still right);
 # probe-output patterns stay exact, since that output is deterministic.
 kw_lower="i"; kw_lower+="ex"
-kw_pat="[Ii][Ee][Xx]"
 dl_term="Download"; dl_term+="String"
-dl_pat="[Dd]ownload"; dl_pat+="[Ss]tring"
 
-# Bars the one thing this lab exists to teach against. check.sh runs rev.ps1
-# from the learner's writable workspace, so without this a learner who "solves"
-# it by invoking what the string spells would be graded as passing.
-run_pat="[Ii][Ee][Xx]|[Ii]nvoke-[Ee]xpression|\[ScriptBlock\]::Create"
+lab_dir="$(dirname -- "${BASH_SOURCE[0]}")"
 
 assert_file_exists "rev.ps1" \
   "rev.ps1 — shipped reference probe must exist"
 
-assert_file_contains_fixed "rev.ps1" "gnirtSdaolnwoD" \
-  "rev.ps1 — the shipped reversed literal must be present and unmodified"
+# rev.ps1 is read-only reference material, and this grader executes it. Byte
+# identity is the whole integrity check: it rejects a gutted stub that hardcodes
+# the expected output, and it rejects a probe edited to actually invoke what the
+# string spells, without needing to enumerate PowerShell's invocation primitives.
+assert_file_unmodified "rev.ps1" "$lab_dir/files/rev.ps1" \
+  "rev.ps1 — reconstruct and PRINT, never invoke; restore the shipped file"
 
-# Pin the reversal itself, not just its output: without these, a stub that
-# only prints the two expected lines scores full marks having reversed nothing.
-# $s1/$s2 are PowerShell variables in the graded file, so the single quotes
-# are deliberate — these are literals to grep for, not shell expansions.
-# shellcheck disable=SC2016
-assert_file_contains_fixed "rev.ps1" '-join $s1[-1..-$s1.Length]' \
-  "rev.ps1 — the shipped reversal expression must be present and unmodified"
-
-# shellcheck disable=SC2016
-assert_file_contains_fixed "rev.ps1" '-join $s2[-1..-$s2.Length]' \
-  "rev.ps1 — the shipped reversal expression must be present and unmodified"
-
-assert_file_not_contains "rev.ps1" "$run_pat" \
-  "rev.ps1 — reconstruct and PRINT; never invoke what the string spells"
-
-# Execute the probe only if every integrity assertion above passed. A lab whose
-# whole lesson is "read it, never run it" must not have its own grader be the
-# thing that runs a tampered probe -- so a modified rev.ps1 is reported, not run.
+# Execute the probe only once it is proven unmodified. A lab whose whole lesson is
+# "read it, never run it" must not have its own grader be the thing that runs a
+# tampered probe -- so a modified rev.ps1 is reported, never executed.
 if [[ "$CK_FAIL" -eq 0 ]]; then
   assert_output_contains "rev.ps1 reverses the first keyword" "reversed keyword 1: ${kw_lower}" \
     "run: pwsh -File rev.ps1" -- pwsh -NoProfile -NonInteractive -File rev.ps1
@@ -61,10 +45,10 @@ fi
 assert_file_exists "plaintext.txt" \
   "plaintext.txt — record what each reversed literal un-reverses to"
 
-assert_file_contains "plaintext.txt" "$kw_pat" \
+assert_file_contains_i "plaintext.txt" "$kw_lower" \
   "plaintext.txt — must show the first un-reversed keyword"
 
-assert_file_contains "plaintext.txt" "$dl_pat" \
+assert_file_contains_i "plaintext.txt" "$dl_term" \
   "plaintext.txt — must show the second un-reversed keyword"
 
 ck_summary
