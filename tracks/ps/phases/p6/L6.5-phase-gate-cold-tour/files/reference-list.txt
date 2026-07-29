@@ -1,0 +1,13 @@
+# SHA256 values, one per line. Fictional -- invented for this exercise, not drawn
+# from any real sample. Do not load this file into a live detection platform.
+# Anything after # is a comment; blank lines are ignored.
+
+# Attributed to a commodity loader family seen in this environment
+3B1F8C2D9E47A6501C8D4F2B7E93A05C6D8F1B4E27A093C5F6D8E1A4B7C09D2E
+9C4E7A1D6B380F52A94C7E1D8B360F5A2C94E7D1B68035FA2C9E4D71B8630F5A
+
+# Attributed to a credential-dumping tool
+7A2D9F4C1B68E035A72D9F4C1B68E035A72D9F4C1B68E035A72D9F4C1B68E035
+
+# Staged payload observed under a user profile during triage
+F1E2D3C4B5A69788F1E2D3C4B5A69788F1E2D3C4B5A69788F1E2D3C4B5A69788

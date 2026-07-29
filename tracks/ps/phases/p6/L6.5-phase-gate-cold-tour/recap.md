@@ -1,0 +1,3 @@
+- you can now tour an unseen PowerShell tool cold: what it does, what it matches on, which subsystems it reads, and what the output is for
+- this one was an IOC scanner: it hashes running-process images and files on disk with Get-FileHash and compares them against an indicator list
+- tool navigation rather than memorization is the transferable skill — it is what phase 7 asks you to apply to code an AI wrote

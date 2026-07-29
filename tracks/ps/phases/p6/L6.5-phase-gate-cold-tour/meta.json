@@ -1,0 +1,9 @@
+{
+  "id": "L6.5",
+  "title": "Phase gate — a cold solo tour of an unseen PowerShell security tool",
+  "type": "TOUR",
+  "objective": "Tour an unlabelled PowerShell security tool with no introduction: work out what it does, what it matches against, which subsystems it reads, and what its output is for.",
+  "gate": true,
+  "windows_variant": false,
+  "est_minutes": 25
+}
