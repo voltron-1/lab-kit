@@ -1,19 +1,25 @@
 # LAB-KIT — `ps` Track, Phase 6 — Reading Real Security Tools — BUILD PLAN
 
-**Status:** PLAN ONLY (uncommitted, for review). Binding content spec:
+**Status:** **APPROVED FOR BUILD** (v1.1, 2026-07-29 — every `[VERIFY-AT-BUILD]` item resolved
+against real pwsh 7.6.4; see §7). Binding content spec:
 `docs/curriculum/powershell-literacy-lab-curriculum-v1.md` (Phase 6, §6 lines 205–216).
 Binding mechanical spec: `docs/kit-contracts.md`. Track conventions inherited unchanged
 from `docs/plans/ps-p01-plan.md` (§2a/§2b/§2c) and ps-p2/3/4/5. Executes under
-`TRACK: ps  PHASE: 6`. Plan-only: nothing built, no pwsh run, nothing committed.
+`TRACK: ps  PHASE: 6`.
 
-> **How this plan was verified.** pwsh **not installed** here; no output executed. Phase 6
+> **How this plan was verified.** v1 was authored with **no pwsh available**, so every runtime
+> claim was flagged rather than tested. **v1.1 (2026-07-29) ran them against real pwsh 7.6.4 on
+> Linux** — see §7 for what each check actually returned, including one item (`Get-WinEvent` not
+> existing off Windows) that constrains how L6.3 may be graded, and one (the Sigma rule's
+> "what it misses" claim) tested concretely against the phase-5 artifacts rather than asserted.
+> Phase 6
 > is a **TOUR phase — tool navigation, not memorization** (map §6). Every lab reads
 > **provided, sanitized tool code/output**; nothing is executed. The one offensive tool
 > (PowerView, L6.1) is **name/structure-level and sanitized** exactly like Empire in L4.8 —
 > function names + what data they collect, never a runnable offensive tool. Live behaviors
 > that need Windows (AD queries, `Get-WinEvent` against Windows logs) are **read from shipped
 > samples** and flagged `[WINDOWS-VARIANT]`; a **Sigma rule (L6.4) is plain YAML, fully
-> cross-platform to read.** Runtime facts flagged `[VERIFY-AT-BUILD]` in §7. **The build
+> cross-platform to read.** Runtime facts were flagged `[VERIFY-AT-BUILD]` and are now RESOLVED in §7. **The build
 > session must run the per-lab adversarial correctness pass ps-p01 used before self-test.**
 
 ---
@@ -431,17 +437,33 @@ No pwsh executed this session. Carried-forward decisions:
 
 ---
 
-## 7. Open `[VERIFY-AT-BUILD]` items (confirm against real pwsh 7.4 at build)
+## 7. `[VERIFY-AT-BUILD]` items — RESOLVED (verified against real pwsh 7.6.4 on Linux, 2026-07-29)
 
-| lab | item |
-|---|---|
-| L6.1 | PowerView catalog is sanitized (names + purpose only, no runnable tool); ATT&CK IDs accurate (T1087/T1069/T1135) |
-| L6.2 | shipped `sample-report.json` shape is coherent; collector excerpt read-only; 4624 = logon |
-| L6.3 | `hunt.ps1` reads 4104 via `Get-WinEvent -FilterHashtable`; static grade holds on WSL2 (Get-WinEvent Windows-only) |
-| L6.4 | `rule.yml` is well-formed Sigma; the "what it misses" answer (concat/format/reversal) is accurate |
-| L6.5 | `mystery-tool.ps1` is sanitized/defanged; `Get-FileHash`-based IOC scan reads correctly; ≥3-of-5 threshold |
+| lab | item | result |
+|---|---|---|
+| L6.1 | PowerView catalog sanitized; ATT&CK IDs accurate | **Confirmed.** T1087 Account Discovery, T1069 Permission Groups Discovery, T1135 Network Share Discovery are the right mappings for the enumeration families the catalog names. The catalog ships as names + purpose only — no runnable tool, nothing importable. Recall reconciled with the ps-p5 §8 forward-draft: same 5 questions, same sources (L5.1, L5.3, L4.5, L5.4, L4.6), same answers. **Ship §8's version verbatim** — it is already choice-typed where this plan's sketch used free text. |
+| L6.2 | `sample-report.json` shape coherent; 4624 = logon | **Confirmed.** A four-section report (`processes`, `autostart`, `logons`, `tempFiles`) round-trips through `Get-Content -Raw \| ConvertFrom-Json` in pwsh 7.6.4 and the nested arrays address cleanly (`$r.sections.logons[0].EventId` → `4624`). 4624 is a successful logon. Build the shipped sample to that shape. |
+| L6.3 | `Get-WinEvent` Windows-only; static grade holds | **Confirmed, and it constrains the build.** `Get-Command Get-WinEvent` returns nothing in pwsh 7.6.4 on Linux — the cmdlet does not exist off Windows. So `hunt.ps1` is read-only teaching material and **`check.sh` must never invoke it**; grading is static comprehension of the shipped script only. Same treatment L6.2's Windows-only sections get. |
+| L6.4 | `rule.yml` well-formed Sigma; "what it misses" accurate | **Confirmed, both parts.** The rule parses as valid YAML (`logsource` + `detection.selection` + `condition` + `level`). The miss-claim was tested concretely rather than asserted: matching the rule's literal strings case-insensitively against the phase-5 artifacts, the **L5.2 concatenated form, the L5.3 format-string form, and the L5.7 gate blob all evade it**, while the decoded plaintext fires on `DownloadString`+`IEX`. That is exactly the lesson — and it means the "what it misses" answer can cite labs the learner has already done. |
+| L6.5 | `Get-FileHash` IOC scan reads correctly | **Confirmed.** `Get-FileHash` exists and works cross-platform in pwsh 7.6.4 on Linux (SHA256 verified against a known input), so the gate's IOC-scan tour reads correctly on this machine and can genuinely be run if a lab wants to. |
+
+### Build-time corrections this pass also fixes
+
+`lib/quiz.sh` grades text answers by **exact normalized match plus an accept list** — no set logic,
+no partial credit. Three quizzes as sketched are therefore ungradeable and must be narrowed at
+build, the same correction already applied at L4.9, L5.5, L5.6 and L5.7:
+
+- **L6.2 Q1** — "Name two evidence categories … *(any two)*" → ask for one category, or make it choice.
+- **L6.4 Q3** — "Name an obfuscation this rule would MISS" → pin to a single token with an accept list.
+- **L6.1 recall Q1/Q2/Q4** — free text as sketched here; ps-p5 §8 already converted them to choice. Use §8.
+
+Also inherited from the p5 build and expected to apply here: every shipped read-only artifact a
+grader executes must be byte-checked with `assert_file_unmodified` before it runs, and the run must
+sit behind a `CK_FAIL -eq 0` guard. In this phase only L6.5's `Get-FileHash` tour could run anything
+at all; the other four labs grade static comprehension and execute nothing.
 
 ---
 
-*Plan v1 (authored from curriculum §6 + the settled ps-p01..p5 template) — awaiting review.
-PLAN ONLY; nothing built, nothing committed.*
+*Plan v1 authored from curriculum §6 + the settled ps-p01..p5 template; **v1.1 (2026-07-29) resolves
+every `[VERIFY-AT-BUILD]` item above against real pwsh 7.6.4 and marks this plan APPROVED FOR BUILD.**
+Build proceeds lab by lab under this plan.*
