@@ -1,0 +1,8 @@
+{
+  "id": "L5.7",
+  "title": "Phase gate — a three-layer obfuscated payload, reconstructed and named",
+  "type": "DEOBFUSCATE",
+  "objective": "Peel a payload wrapped in three stacked layers (base64, reversal, an unresolved format expression), reconstruct the defanged plaintext, and name every technique plus the payload -- without executing any of it.",
+  "gate": true,
+  "est_minutes": 30
+}

@@ -1,0 +1,3 @@
+- you can now take a multi-layer blob, peel every layer, and reconstruct the plaintext
+- you name the techniques (base64, reversal, format operator) and the payload (a download cradle) — and never run any of it
+- this IS the SOC deobfuscation task: decode the event, name the intent, write the ticket

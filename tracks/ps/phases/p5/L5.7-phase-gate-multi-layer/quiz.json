@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "text",
+      "prompt": "After peeling all three layers, what kind of payload is the plaintext? (two words)",
+      "answer_b64": "ZG93bmxvYWQgY3JhZGxl",
+      "accept_b64": [
+        "ZG93bmxvYWQgY3JhZGxl",
+        "YSBkb3dubG9hZCBjcmFkbGU=",
+        "Y3JhZGxl",
+        "YSBjcmFkbGU="
+      ]
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "You have reconstructed the plaintext. What do you do next?",
+      "options": {
+        "a": "Run it to confirm the C2 is still live",
+        "b": "Name the technique and write the escalation — you do not execute it"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "This sample's outermost layer is base64 and its innermost is a format-operator expression. What was the middle layer? (one word)",
+      "answer_b64": "cmV2ZXJzYWw=",
+      "accept_b64": [
+        "cmV2ZXJzYWw=",
+        "cmV2ZXJzZQ==",
+        "cmV2ZXJzZWQ=",
+        "cmV2ZXJzaW5n",
+        "c3RyaW5nIHJldmVyc2Fs"
+      ]
+    }
+  ]
+}

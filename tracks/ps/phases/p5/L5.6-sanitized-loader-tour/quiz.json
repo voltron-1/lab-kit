@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "text",
+      "prompt": "A loader decodes its config, then establishes C2. What is its third stage called?",
+      "answer_b64": "YmVhY29u",
+      "accept_b64": [
+        "YmVhY29u",
+        "YmVhY29uaW5n",
+        "YmVhY29uIGxvb3A=",
+        "dGFza2luZw==",
+        "YmVhY29uL3Rhc2sgbG9vcA==",
+        "dGFzayBsb29w"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why does the loader assemble its strings at runtime instead of writing them as literals?",
+      "options": {
+        "a": "So static string scans miss the keywords and URLs",
+        "b": "So the script runs faster"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Stage 3 executes whatever the C2 returns. What do you do with that line?",
+      "options": {
+        "a": "Execute it to see what tasking comes back",
+        "b": "Read it to establish intent — never run it"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

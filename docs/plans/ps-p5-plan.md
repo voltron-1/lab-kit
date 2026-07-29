@@ -537,3 +537,82 @@ being built). Every value below is copy-pasted from a real pwsh 7 run.
 *Plan v1 authored from curriculum §6 + the settled ps-p01/2/3/4 template (commit `ba56175`);
 v1.1 this session resolves every `[VERIFY-AT-BUILD]` item against real pwsh 7 (§7) and
 updates status to APPROVED FOR BUILD. Build proceeds lab by lab under this plan.*
+
+---
+
+## 8. Handoff: L6.1 `recall.json` (drafted during the L5.7 build, per §5 step 7)
+
+Phase-6's opener carries the 5-question recall warm-up drawn from Phases 4 + 5. Drafted
+here at the end of the p5 build so the p6 builder inherits it rather than re-deriving it.
+Every question was checked against the lab that actually shipped, not against this plan's
+intentions — sources are the merged L4.5/L4.6 (ps-p4) and L5.1/L5.3/L5.4 (ps-p5).
+
+Q1/Q2/Q4 are choice-type rather than the free text §4 sketched: `lib/quiz.sh` grades text
+by exact normalized match plus an accept list, so open "explain the operator" prompts are
+ungradeable — the same correction applied at L4.9, L5.5 and L5.6. Q3 and Q5 stay text
+because their answers are single pinned tokens.
+
+```json
+{
+  "questions": [
+    {
+      "id": 1,
+      "source": "ps L5.1",
+      "type": "choice",
+      "prompt": "After decoding a 4104 blob to plaintext, what must you never do?",
+      "options": {
+        "a": "Pipe it to iex to confirm what it does",
+        "b": "Nothing extra — decode to READ it, never to run it"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "source": "ps L5.3",
+      "type": "choice",
+      "prompt": "What does the -f operator do in obfuscated PowerShell?",
+      "options": {
+        "a": "Reorders indexed arguments to reassemble a scrambled keyword",
+        "b": "Formats a number to a fixed decimal precision"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "source": "ps L4.5",
+      "type": "text",
+      "prompt": "Which Event ID carries the decoded ScriptBlock text?",
+      "answer_b64": "NDEwNA=="
+    },
+    {
+      "id": 4,
+      "source": "ps L5.4",
+      "type": "choice",
+      "prompt": "What does $s[-1..-$s.Length] -join '' do?",
+      "options": {
+        "a": "Returns the last character of $s",
+        "b": "Reverses the string"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 5,
+      "source": "ps L4.6",
+      "type": "text",
+      "prompt": "Name one LOLBin abused for download or proxy execution.",
+      "answer_b64": "Y2VydHV0aWw=",
+      "accept_b64": [
+        "Y2VydHV0aWw=",
+        "Y2VydHV0aWwuZXhl",
+        "bXNodGE=",
+        "bXNodGEuZXhl",
+        "cnVuZGxsMzI=",
+        "cnVuZGxsMzIuZXhl",
+        "cmVnc3ZyMzI=",
+        "cmVnc3ZyMzIuZXhl",
+        "Yml0c2FkbWlu"
+      ]
+    }
+  ]
+}
+```
