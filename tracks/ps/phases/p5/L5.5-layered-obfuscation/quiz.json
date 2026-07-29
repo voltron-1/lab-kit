@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "How do you approach a payload wrapped in several techniques?",
+      "options": {
+        "a": "Peel one layer at a time, printing each result, until the plaintext is legible",
+        "b": "Run it in a sandbox immediately to see what it does"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "This sample's outer layer is base64. What is the inner layer? (one word)",
+      "answer_b64": "cmV2ZXJzYWw=",
+      "accept_b64": [
+        "cmV2ZXJzYWw=",
+        "cmV2ZXJzZQ==",
+        "cmV2ZXJzZWQ=",
+        "c3RyaW5nIHJldmVyc2Fs",
+        "c3RyaW5nIHJldmVyc2U=",
+        "cmV2ZXJzaW5n"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "At each layer you should:",
+      "options": {
+        "a": "Execute the layer to reveal the next one",
+        "b": "Print the intermediate text and read it — never execute it"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
