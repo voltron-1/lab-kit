@@ -1,0 +1,3 @@
+- real payloads stack techniques (base64 over reversal here) — peel one layer at a time
+- print each intermediate result; each peeled layer tells you what the next layer is
+- the plaintext emerges legible — then NAME it (a download cradle), and never run any layer
