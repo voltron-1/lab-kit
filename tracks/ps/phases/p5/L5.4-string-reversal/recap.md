@@ -1,0 +1,3 @@
+- $s[-1..-$s.Length] -join '' walks a string backwards -- a reversed literal hides the keyword from forward string scans
+- reconstruct by reversing again and PRINTING the result
+- reversal is one more layer to peel; the reflex stays: read it, don't run it

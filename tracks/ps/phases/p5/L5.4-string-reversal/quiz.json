@@ -1,0 +1,34 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "text",
+      "prompt": "-join 'xei'[-1..-3] reconstructs to which keyword?",
+      "answer_b64": "aWV4"
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What does $s[-1..-$s.Length] produce?",
+      "options": {
+        "a": "The characters of $s in reverse order",
+        "b": "The last character of $s only"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "A reversed literal hides its keyword from which kind of string scan? (one word)",
+      "answer_b64": "Zm9yd2FyZA==",
+      "accept_b64": [
+        "Zm9yd2FyZA==",
+        "Zm9yd2FyZCBzY2Fu",
+        "Zm9yd2FyZCBzY2Fucw==",
+        "YSBmb3J3YXJkIHNjYW4=",
+        "Zm9yd2FyZCBzdHJpbmcgc2Nhbg==",
+        "Zm9yd2FyZCBzdHJpbmcgc2NhbnM="
+      ]
+    }
+  ]
+}
