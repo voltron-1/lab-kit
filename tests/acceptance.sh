@@ -1529,9 +1529,24 @@ note "ps track P4: fabricated pass + negative case per lab"
 # would make their fail-path assertions below pass for the wrong reason
 # (interpreter missing, not artifact missing) and their pass-path assertions
 # fail with a misleading diagnostic.
-if ! command -v pwsh > /dev/null 2>&1; then
-  bad "pwsh is not installed — cannot verify the real L4.2/L4.5 decoder probes"
+# Probe for pwsh on the SAME fixed PATH the fenced check-runner uses
+# (lib/workspace.sh's env -i), not the operator's PATH: a pwsh installed via snap,
+# Homebrew or 'dotnet tool' would satisfy a bare 'command -v' here and then be
+# invisible to every grader, which is the exact wrong-reason pass this guards against.
+if ! PATH="/usr/local/bin:/usr/bin:/bin" command -v pwsh > /dev/null 2>&1; then
+  bad "pwsh is not installed on the check-runner PATH — cannot verify the real pwsh probes"
 fi
+
+# Run a lab's shipped probe the way its grader does: same fixed PATH, same telemetry
+# and update opt-outs, and a workspace-local HOME so pwsh's caches never land in the
+# invoking user's home directory. Used to fabricate learner artifacts below.
+ps_pwsh() {
+  local ws="$1" script="$2"
+  env -i PATH="/usr/local/bin:/usr/bin:/bin" LANG="C.UTF-8" \
+    HOME="$ws/.home" TMPDIR="$ws/.tmp" \
+    POWERSHELL_TELEMETRY_OPTOUT=1 POWERSHELL_UPDATECHECK=Off \
+    pwsh -NoProfile -NonInteractive -File "$script"
+}
 
 ps_check_fail_missing() {
   local id="$1" missing="$2" out rc
@@ -1667,7 +1682,124 @@ MD
 ps_check_pass "L4.9" $'b\nb\nT1547.001\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 9 ps P4 labs passed (9/40)" "$out" "(9/40)"
+assert_contains "status shows all 9 ps P4 labs passed (9/42)" "$out" "(9/42)"
+
+# --- 7b. ps track P5: Deobfuscation & Malware Reading ---
+note "ps track P5: fabricated pass + negative case per lab"
+
+# Every P5 lab except L5.6 runs a real pwsh probe from check.sh, and each one
+# byte-checks that probe against the shipped original before running it
+# (assert_file_unmodified), so these fabricated passes also prove the freshly
+# provisioned workspace copy is pristine. The pwsh preflight above covers this
+# section too; it runs before P4, so a missing interpreter has already failed.
+
+# L5.1 — Base64 decode pipeline (phase opener: recall must never gate).
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L5.1 --force 2>&1)"; rc=$?
+assert_eq "'lab start ps L5.1 --force' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L5.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/ps/L5.1"
+ps_check_fail_missing "L5.1" "plaintext.txt"
+# No second 'lab start' here: the workspace is already provisioned, and starting a
+# phase opener again re-runs its recall quiz, which reads stdin with no /dev/tty
+# fallback -- from a terminal that blocks forever with the prompts sent to /dev/null.
+ps_pwsh "$WS" "$WS/decode.ps1" > "$WS/plaintext.txt"
+cat > "$WS/technique.txt" << 'MD'
+The decoded payload is a download cradle, the same pattern as L4.1.
+Encoding: base64 of UTF-16LE (Unicode), decoded with FromBase64String + Unicode.GetString.
+ATT&CK: T1140 (Deobfuscate/Decode Files or Information), T1027.
+MD
+ps_check_pass "L5.1" $'b\nb\na download cradle\n'
+
+# L5.2 — String concatenation.
+"$LAB" start ps L5.2 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L5.2"
+ps_check_fail_missing "L5.2" "plaintext.txt"
+cat > "$WS/plaintext.txt" << 'MD'
+"i"+"e"+"x" -> iex
+('D','o','w','n','l','o','a','d') -join '' -> Download
+[char]105 + [char]101 + [char]120 -> iex
+MD
+ps_check_pass "L5.2" $'iex\nb\ni\n'
+
+# L5.3 — Format-string obfuscation.
+"$LAB" start ps L5.3 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L5.3"
+ps_check_fail_missing "L5.3" "plaintext.txt"
+cat > "$WS/plaintext.txt" << 'MD'
+"{0}{2}{1}" -f 'I','x','E' -> IEx
+"{1}{0}" -f 'ex','i' -> iex
+MD
+ps_check_pass "L5.3" $'IEx\nb\n-f\n'
+
+# L5.4 — String reversal.
+"$LAB" start ps L5.4 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L5.4"
+ps_check_fail_missing "L5.4" "plaintext.txt"
+cat > "$WS/plaintext.txt" << 'MD'
+'xei' reversed -> iex
+'gnirtSdaolnwoD' reversed -> DownloadString
+MD
+ps_check_pass "L5.4" $'iex\na\nforward\n'
+
+# Negative case for the phase's probe-integrity control (PR #369), exercised once
+# here on behalf of all six probe-running p5 labs: a learner-modified probe must be
+# reported AND refused execution. Without this the control has no regression
+# coverage at all -- deleting assert_file_unmodified or the CK_FAIL guard from any
+# p5 check.sh would leave every other assertion in this section green.
+printf '\n# learner edit\n' >> "$WS/rev.ps1"
+out="$("$LAB" check ps L5.4 2>&1)"; rc=$?
+assert_eq "ps L5.4 check fails when the shipped probe is modified" "1" "$rc"
+assert_contains "ps L5.4 names the probe as modified" "$out" "has been modified"
+assert_contains "ps L5.4 refuses to run the modified probe" "$out" "not run"
+cp "$COPY/tracks/ps/phases/p5/L5.4-string-reversal/files/rev.ps1" "$WS/rev.ps1"
+ps_check_pass "L5.4" $'iex\na\nforward\n'
+
+# L5.5 — Layered obfuscation (two layers; needs plaintext.txt AND layers.txt).
+"$LAB" start ps L5.5 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L5.5"
+ps_check_fail_missing "L5.5" "plaintext.txt and layers.txt"
+# Select the layer line by name, not by position: piping through 'tail -n 1' would
+# make the artifact hostage to whatever pwsh happened to print last.
+ps_pwsh "$WS" "$WS/peel.ps1" | grep -F 'layer 2 --' > "$WS/plaintext.txt"
+cat > "$WS/layers.txt" << 'MD'
+base64 (UTF-16LE)
+string reversal
+MD
+ps_check_pass "L5.5" $'a\nreversal\nb\n'
+
+# L5.6 — Sanitized loader TOUR. The only P5 lab that executes nothing.
+"$LAB" start ps L5.6 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L5.6"
+ps_check_fail_missing "L5.6" "tour.md"
+cat > "$WS/tour.md" << 'MD'
+# Loader tour
+Stage 1 decodes an embedded base64 config blob into settings, not payload.
+Stage 2 establishes C2, building the callback URL from that config; it resolves to
+the defanged hxxps://cdn.fake-c2[.]test/gate.
+Stage 3 is the beacon and task loop: sleep with jitter, request the gate URL, then
+execute whatever comes back. That last step is read-only for an analyst -- never run it.
+Evasion: every keyword and the URL are assembled at runtime, so a static scan finds nothing.
+MD
+ps_check_pass "L5.6" $'beacon\na\nb\n'
+
+# L5.7 — Phase gate: three layers, reconstruct + name. Gate requires quiz 3/3.
+"$LAB" start ps L5.7 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L5.7"
+ps_check_fail_missing "L5.7" "plaintext.txt and answers.md"
+ps_pwsh "$WS" "$WS/gate-peel.ps1" | grep -F 'layer 3 --' > "$WS/plaintext.txt"
+cat > "$WS/answers.md" << 'MD'
+# Gate sample analysis
+Layers peeled, outermost first: base64 (UTF-16LE), then string reversal, then a
+format-operator expression left unresolved so the keyword never appears as a literal.
+Payload: a download cradle fetching a remote string from the defanged
+hxxps://cdn.fake-c2[.]test/p7 and running it in memory. ATT&CK T1059.001, T1027/T1140.
+I did not execute any layer -- the reconstruction exists to be read and reported.
+MD
+ps_check_pass "L5.7" $'download cradle\nb\nreversal\n'
+
+# The gate is the last lab in the ps catalog, so passing it completes the track.
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 16 ps P4+P5 labs passed (16/42)" "$out" "(16/42)"
 
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
@@ -1680,8 +1812,8 @@ fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
   # 32 total track-phase lines; bash p0-p7 (8) + rust p0-p2 (3) + soc p0-p1 (2) +
-  # ps p0-p4 (5) are done ([x]) and ps p5 is in-progress ([~], 4/7 labs merged),
-  # leaving 13 unstarted -- update this count whenever a phase's marker changes.
+  # ps p0-p5 (6) are done ([x]), leaving 13 unstarted -- update this count
+  # whenever a phase's marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
   assert_eq "planned_execution.md has 13 unstarted track-phase lines" "13" "$line_count"
 else

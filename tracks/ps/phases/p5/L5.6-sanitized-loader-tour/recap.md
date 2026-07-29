@@ -1,0 +1,3 @@
+- a loader's shape is always the same three stages: decode config, establish C2 (here the defanged hxxps://cdn.fake-c2[.]test/gate), then beacon and task
+- runtime string assembly (the L5.2-L5.4 techniques) hides the keywords and the URL from static scans — deobfuscation is what makes them readable again
+- the tasking line turns the C2's response into code: you read it to name intent, and never run it

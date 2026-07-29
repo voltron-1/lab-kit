@@ -1,0 +1,74 @@
+SANITIZED LOADER STRUCTURE — static reference, defanged, nothing runnable.
+=========================================================================
+This is the SHAPE of a commodity PowerShell loader, with every payload,
+every real indicator, and every executable statement removed. There is no
+code here to run: it is a structural description, written as prose and
+pseudocode and contains no runnable statement. Read it for intent.
+
+Almost every loader you will meet in a queue is these same three stages in
+this same order. Learn the shape once and you can read any of them.
+
+
+STAGE 1 — decode the embedded config
+------------------------------------
+  An opaque base64 blob sits inline near the top of the script. It is not
+  the payload; it is the loader's SETTINGS -- callback host, URI path,
+  sleep interval, jitter percentage, sometimes a campaign ID.
+
+  Decoded the same way you decoded L5.1:
+      base64 -> UTF-16LE text -> a small settings object
+
+  Reading tell: a long base64 literal that decodes to configuration-looking
+  key/value text rather than to PowerShell statements. That distinction --
+  config vs. code -- is what tells you which stage you are looking at.
+
+
+STAGE 2 — establish C2
+----------------------
+  The callback URL is assembled from the decoded config, never written as
+  one literal string:
+
+      <scheme> + <host from config> + <uri path from config>
+      resolves to:  hxxps://cdn.fake-c2[.]test/gate      (FICTIONAL, defanged)
+
+  A web client object is prepared and given a browser-looking User-Agent so
+  the beacon blends into ordinary web traffic.
+
+  Reading tell: a URL that never appears whole in the source. If you cannot
+  grep the host out of the file, that is the point -- see EVASION below.
+
+
+STAGE 3 — beacon and task loop
+------------------------------
+  A loop that, on each pass:
+      1. sleeps for <interval> adjusted by <jitter> so the callback pattern
+         is not a clean fixed heartbeat
+      2. requests the gate URL from stage 2
+      3. TASKING: whatever the C2 returns in response is executed as code
+
+  Line 3 is the dangerous one, and it is the whole reason this file is
+  structural rather than real. In a live sample that line is an execution
+  primitive handed an attacker-controlled string -- the same shape you have
+  been reading all phase, and the same rule applies: you READ it to
+  establish intent, and you never run it. Naming it is the analyst's job;
+  executing it is the attacker's.
+
+
+EVASION — why nothing greps cleanly
+-----------------------------------
+  Every keyword and URL above is assembled at RUNTIME from pieces, using
+  exactly the techniques from L5.2, L5.3 and L5.4: concatenation, the
+  format operator, character reversal, character codes. No single literal
+  in the file contains a whole keyword, so a naive plain-string scan for
+  the host, or for the execution primitive, finds nothing at all.
+
+  This is why the deobfuscation skill matters. The scanner sees noise; you
+  peel the layers and read the intent.
+
+
+WHAT AN ANALYST WRITES DOWN
+---------------------------
+  - the three stages, in order, named
+  - the defanged C2 URL the config resolves to
+  - that tasking executes the C2 response  (read, never run)
+  - that strings are assembled at runtime to defeat static scanning
