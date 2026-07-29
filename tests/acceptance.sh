@@ -1667,7 +1667,7 @@ MD
 ps_check_pass "L4.9" $'b\nb\nT1547.001\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 9 ps P4 labs passed (9/40)" "$out" "(9/40)"
+assert_contains "status shows all 9 ps P4 labs passed (9/41)" "$out" "(9/41)"
 
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
@@ -1680,7 +1680,7 @@ fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
   # 32 total track-phase lines; bash p0-p7 (8) + rust p0-p2 (3) + soc p0-p1 (2) +
-  # ps p0-p4 (5) are done ([x]) and ps p5 is in-progress ([~], 4/7 labs merged),
+  # ps p0-p4 (5) are done ([x]) and ps p5 is in-progress ([~], labs still landing),
   # leaving 13 unstarted -- update this count whenever a phase's marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
   assert_eq "planned_execution.md has 13 unstarted track-phase lines" "13" "$line_count"

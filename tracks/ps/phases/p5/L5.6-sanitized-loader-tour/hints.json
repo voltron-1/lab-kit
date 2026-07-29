@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read loader-structure.txt with less. Each of its three STAGE headings is one stage of the answer, in the order the loader performs them.",
+    "Stage 3's numbered list has three steps; the third one is the only place data coming back from the network becomes code. That is the line the lab keeps calling dangerous.",
+    "tour.md is graded on five topics, in your own words: what stage 1 turns the blob into, what stage 2 establishes, how stage 3 paces itself AND what it does with the response, the reason nothing in the loader can be found by searching for it, and the defanged callback host itself. Each STAGE heading and the EVASION section of loader-structure.txt covers one of them."
+  ]
+}

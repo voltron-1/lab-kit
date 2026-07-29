@@ -1,0 +1,8 @@
+{
+  "id": "L5.6",
+  "title": "Reading a sanitized real-world loader — decode config, establish C2, beacon and task",
+  "type": "TOUR",
+  "objective": "Read a loader's structure rather than its payload: name the three stages, the defanged C2 it resolves to, and the runtime string assembly that hides all of it from static scans.",
+  "gate": false,
+  "est_minutes": 20
+}
