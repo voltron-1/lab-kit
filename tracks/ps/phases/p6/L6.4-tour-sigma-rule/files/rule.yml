@@ -1,0 +1,34 @@
+# rule.yml -- a Sigma rule, shipped read-only. Sigma is provider-agnostic detection
+# YAML: the same rule compiles to a Splunk search, a Sentinel KQL query, an Elastic
+# query. Read logsource, detection and condition to say what it matches -- and what
+# it misses.
+title: Suspicious PowerShell Download Cradle
+id: 8e2f1c34-5a7b-4d19-9f60-2c81ab44de07
+status: experimental
+description: >
+  Detects PowerShell script blocks containing download-cradle and decoder tells.
+  Fires on the decoded ScriptBlock text, so command-line encoding alone does not
+  evade it.
+references:
+  - 'MITRE ATT&CK T1059.001 — see the attack tags below'
+author: lab-kit
+date: 2026/07/29
+logsource:
+  product: windows
+  service: powershell
+  definition: 'Requires Script Block Logging (Event ID 4104)'
+detection:
+  selection:
+    ScriptBlockText|contains:
+      - 'DownloadString'
+      - 'IEX'
+      - 'FromBase64String'
+  condition: selection
+falsepositives:
+  - Administrative scripts that legitimately fetch remote content
+level: high
+tags:
+  - attack.execution
+  - attack.t1059.001
+  - attack.defense_evasion
+  - attack.t1027

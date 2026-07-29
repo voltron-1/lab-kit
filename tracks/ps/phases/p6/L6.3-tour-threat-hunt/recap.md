@@ -1,0 +1,3 @@
+- threat hunts query Windows logs with Get-WinEvent -FilterHashtable, pushing log name and event ID into the service rather than filtering in PowerShell
+- this hunt reads 4104 ScriptBlock events, which carry the DECODED script text — that is why command-line encoding alone does not evade it
+- it matches literal strings, so it misses payloads that assemble those keywords at runtime — the same gap the Sigma rule in the next lab has

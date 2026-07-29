@@ -1,0 +1,78 @@
+POWERVIEW — SANITIZED FUNCTION CATALOG
+======================================
+Names and purpose only. This is not PowerView and contains none of it: there is
+no code here, nothing importable, nothing runnable. It is the reference card a
+defender uses to recognise the tool's fingerprint in telemetry.
+
+PowerView is the standard Active Directory enumeration toolkit. It is read here
+for the same reason Empire was in L4.8: you will meet its function names in
+telemetry and in incident reports long before you ever meet the tool, and the
+name alone tells you what an operator collected.
+
+The pattern to learn: the VERB tells you it is reading, the NOUN tells you which
+AD object, and together they tell you the ATT&CK discovery technique. Almost
+every function below is Get-Net<object>.
+
+
+ENUMERATION — the Get-Net* family
+---------------------------------
+  Get-NetUser
+      Collects: domain user objects — sAMAccountName, SPNs, lastlogon,
+      description, useraccountcontrol flags.
+      SPNs specifically are the input to Kerberoasting (T1558.003).
+      Why an operator wants it: the account inventory. Descriptions in
+      particular are a classic place to find credentials someone typed in years
+      ago. SPNs mark accounts worth requesting tickets for.
+      ATT&CK: T1087 Account Discovery.
+
+  Get-NetGroup
+      Collects: group objects and their membership, including nesting.
+      Why: find Domain Admins and the less obvious groups that nest into it.
+      Answers "who is actually privileged here", which is rarely who you expect.
+      ATT&CK: T1069.002 Permission Groups Discovery — Domain Groups.
+
+  Get-NetComputer
+      Collects: domain computer objects — OS version, when-created, DNS name.
+      Why: targeting. Old operating systems and stale records are where the
+      unpatched, unmonitored hosts live.
+      ATT&CK: T1018 Remote System Discovery.
+
+  Get-NetGPO / Get-NetOU
+      Collects: Group Policy objects and OU structure, including which policies
+      apply where and who may edit them.
+      Why: policy and delegation recon. A GPO an operator can edit is a way to
+      push code to every machine the GPO applies to.
+      ATT&CK: T1615 Group Policy Discovery.
+
+  Invoke-ShareFinder
+      Collects: reachable network shares, and which are readable or writable.
+      Why: data discovery. Open shares are where the backups, the scripts with
+      passwords in them, and the finance spreadsheets live.
+      ATT&CK: T1135 Network Share Discovery.
+
+
+LATERAL-MOVEMENT MAPPING
+------------------------
+  Find-LocalAdminAccess
+      Collects: the set of hosts where the CURRENT user is already a local
+      administrator.
+      Why this one is different: every function above answers "what exists".
+      This one answers "where can I already go". It converts an inventory into
+      a route, which is why it so often appears immediately before the first
+      lateral movement in an intrusion timeline.
+      ATT&CK: T1069.001 Permission Groups Discovery — Local Groups, as
+      lateral-movement preparation. Note the sub-technique differs from
+      Get-NetGroup above: that one reads DOMAIN groups, this one reads LOCAL
+      membership on each host.
+
+
+WHY A DEFENDER READS THE CATALOG
+--------------------------------
+  Runtime: Windows and a domain. None of this resolves anywhere else, which is
+  why you tour it statically here.
+
+  What it buys you: when a 4104 ScriptBlock event carries the text Get-NetUser,
+  you do not need the tool to know what happened — an operator inventoried the
+  directory's accounts, that is T1087, and the next events worth pulling are the
+  other Get-Net* calls and then Find-LocalAdminAccess. Recognising the family
+  turns one alert into a hypothesis about the whole intrusion stage.

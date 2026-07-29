@@ -1,0 +1,3 @@
+- Sigma is provider-agnostic detection YAML: logsource says which telemetry, detection.selection says what must match, condition says how selections combine
+- this rule fires on 4104 ScriptBlock text containing the phase-4 and phase-5 tells, so command-line encoding alone does not evade it
+- it matches literal strings, so runtime string assembly slips past — reading a rule for what it MISSES is the detection-engineering half of the loop

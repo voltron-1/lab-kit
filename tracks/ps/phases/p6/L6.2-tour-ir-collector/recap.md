@@ -1,0 +1,3 @@
+- an IR collector gathers processes, autostart entries, key events (4624 logons) and recently dropped files — the four questions triage always asks
+- it serializes each section into one structured report so an analyst can diff two collections and a SIEM can ingest it without a bespoke parser
+- you tour it to learn what evidence exists and how to read each section; the Windows-only parts are read, never run

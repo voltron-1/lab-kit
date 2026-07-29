@@ -1,0 +1,40 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What do a Sigma rule's logsource and detection.selection specify?",
+      "options": {
+        "a": "Which telemetry to read, and the criteria that must match in it",
+        "b": "The response action to take when the rule fires"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "This rule matches on which telemetry?",
+      "options": {
+        "a": "Network firewall connection logs",
+        "b": "PowerShell ScriptBlock text (the 4104 log)"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "This rule matches literal strings. Which phase-5 technique defeats it by never spelling the keyword? (one word)",
+      "answer_b64": "Y29uY2F0ZW5hdGlvbg==",
+      "accept_b64": [
+        "Y29uY2F0ZW5hdGlvbg==",
+        "Y29uY2F0",
+        "cmV2ZXJzYWw=",
+        "cmV2ZXJzZQ==",
+        "Zm9ybWF0",
+        "Zm9ybWF0LXN0cmluZw==",
+        "Zm9ybWF0IHN0cmluZw==",
+        "b2JmdXNjYXRpb24="
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "L6.3",
+  "title": "Tour: a threat-hunting script — Get-WinEvent pipelines over the PowerShell log",
+  "type": "TOUR",
+  "objective": "Read a threat hunt to name the log and event ID it queries, the idiom it queries with, the obfuscation tells it filters for, and the evasion it cannot catch.",
+  "gate": false,
+  "windows_variant": true,
+  "est_minutes": 20
+}

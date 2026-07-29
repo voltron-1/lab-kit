@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read collector.ps1 with less. Its section comments each name one evidence category, and sample-report.json has one key per section showing what that category actually looks like.",
+    "Open sample-report.json alongside it. The autostart section has two entries -- compare them and notice that one of them is a launcher using the encoded-command flag, which is exactly what that evidence category exists to surface.",
+    "readout.md is graded on four topics: the process evidence, the autostart evidence (say persistence), the logon evidence (4624), and why the output is serialized to JSON rather than printed."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "collected": "2026-07-29T09:14:03.117Z",
+  "host": "WS-FINANCE-04",
+  "sections": {
+    "processes": [
+      { "Name": "explorer", "Id": 2184, "Path": "C:\\Windows\\explorer.exe" },
+      { "Name": "powershell", "Id": 4812, "Path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" },
+      { "Name": "updater", "Id": 5330, "Path": "C:\\Users\\jdoe\\AppData\\Local\\Temp\\updater.exe" }
+    ],
+    "autostart": [
+      { "Name": "OneDrive", "Command": "C:\\Program Files\\Microsoft OneDrive\\OneDrive.exe /background", "Location": "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" },
+      { "Name": "SystemUpdater", "Command": "powershell.exe -nop -w hidden -enc <base64 blob elided>", "Location": "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" }
+    ],
+    "logons": [
+      { "TimeCreated": "2026-07-28T23:41:02Z", "Id": 4624, "LogonType": 3, "Account": "CORP\\svc-backup" },
+      { "TimeCreated": "2026-07-29T02:07:55Z", "Id": 4624, "LogonType": 10, "Account": "CORP\\jdoe" }
+    ],
+    "tempFiles": [
+      { "FullName": "C:\\Users\\jdoe\\AppData\\Local\\Temp\\updater.exe", "Length": 148992, "LastWriteTime": "2026-07-28T23:44:10Z" },
+      { "FullName": "C:\\Users\\jdoe\\AppData\\Local\\Temp\\a1.tmp", "Length": 20480, "LastWriteTime": "2026-07-28T23:44:12Z" }
+    ]
+  }
+}

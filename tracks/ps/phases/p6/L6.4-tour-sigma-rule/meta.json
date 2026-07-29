@@ -1,0 +1,9 @@
+{
+  "id": "L6.4",
+  "title": "Tour: a Sigma rule targeting PowerShell — what it matches and what it misses",
+  "type": "TOUR",
+  "objective": "Read a provider-agnostic Sigma rule to name the telemetry it reads, the criteria it matches on, and the obfuscation it cannot catch -- closing the loop from attack technique to detection.",
+  "gate": false,
+  "windows_variant": false,
+  "est_minutes": 20
+}

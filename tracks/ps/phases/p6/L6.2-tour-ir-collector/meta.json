@@ -1,0 +1,9 @@
+{
+  "id": "L6.2",
+  "title": "Tour: a PowerShell IR collector — what telemetry it pulls and how to read it",
+  "type": "TOUR",
+  "objective": "Read an incident-response collector and its sample report to name the evidence categories it gathers, why each matters, and why the output is serialized rather than printed.",
+  "gate": false,
+  "windows_variant": false,
+  "est_minutes": 20
+}

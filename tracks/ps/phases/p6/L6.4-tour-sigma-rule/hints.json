@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read rule.yml with less. Three keys carry the whole meaning: logsource (which telemetry), detection.selection (what must match), and condition (how the selections combine).",
+    "Look at the match strings, then think back to L5.2 and L5.3. If a script builds the same keyword out of pieces at runtime, does any of those literal strings appear in the ScriptBlock text the rule reads?",
+    "readout.md is graded on three topics: the telemetry the rule reads, at least one string it matches on, and one evasion it misses."
+  ]
+}
