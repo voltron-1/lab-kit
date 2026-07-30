@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What does the toured tool do?",
+      "options": {
+        "a": "Obfuscates a payload so static scanners miss it",
+        "b": "Scans running processes and files on disk against an indicator list and reports matches"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Which cmdlet does the tool use to compute the value it compares against the indicator list?",
+      "answer_b64": "Z2V0LWZpbGVoYXNo",
+      "accept_b64": [
+        "Z2V0LWZpbGVoYXNo",
+        "Z2V0IGZpbGVoYXNo",
+        "ZmlsZWhhc2g="
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Touring an unseen tool, what do you establish first?",
+      "options": {
+        "a": "What it does, what it collects or matches on, and which subsystems it touches",
+        "b": "Its exact line count and function count"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

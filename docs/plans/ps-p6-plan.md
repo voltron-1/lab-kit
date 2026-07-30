@@ -467,3 +467,82 @@ at all; the other four labs grade static comprehension and execute nothing.
 *Plan v1 authored from curriculum §6 + the settled ps-p01..p5 template; **v1.1 (2026-07-29) resolves
 every `[VERIFY-AT-BUILD]` item above against real pwsh 7.6.4 and marks this plan APPROVED FOR BUILD.**
 Build proceeds lab by lab under this plan.*
+
+---
+
+## 8. Handoff: L7.1 `recall.json` (drafted during the L6.5 build, per §5 step 7)
+
+Phase-7's opener carries the 5-question recall warm-up drawn from Phases 5 + 6. Drafted here at
+the end of the p6 build so the p7 builder inherits it rather than re-deriving it. Every question
+was checked against the lab that actually shipped, not against this plan's intentions — sources
+are the merged L5.1/L5.7 (ps-p5) and L6.1/L6.3/L6.4 (ps-p6).
+
+Q1–Q3 are choice-type rather than the free text §4 sketched: `lib/quiz.sh` grades text by exact
+normalized match plus an accept list, so open "explain what X specifies" prompts are ungradeable.
+Q4 and Q5 stay text because their answers are single pinned tokens. Same correction applied at
+L4.9, L5.5, L5.6, L5.7 and throughout p6.
+
+One thing to fix while shipping this: the equivalent L6.1 recall (drafted as ps-p5 §8) had its
+first question ask what you must *never* do while grading the *safe* option correct, which pulls a
+literal reader toward the wrong choice. That was corrected in the shipped `recall.json` but not in
+the ps-p5 plan text. Don't reintroduce the inverted-stem shape here.
+
+```json
+{
+  "questions": [
+    {
+      "id": 1,
+      "source": "ps L6.4",
+      "type": "choice",
+      "prompt": "What does a Sigma rule's detection.selection specify?",
+      "options": {
+        "a": "The criteria that must match within the telemetry named by logsource",
+        "b": "The response action to run when the rule fires"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "source": "ps L6.1",
+      "type": "choice",
+      "prompt": "What does PowerView's Get-NetUser collect?",
+      "options": {
+        "a": "Local accounts on the host it runs from",
+        "b": "Domain user objects — the AD account inventory"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "source": "ps L5.7",
+      "type": "choice",
+      "prompt": "You have reconstructed an obfuscated payload's plaintext. What next?",
+      "options": {
+        "a": "Name the technique and escalate — you do not execute it",
+        "b": "Run it in place to confirm the C2 is live"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 4,
+      "source": "ps L6.3",
+      "type": "text",
+      "prompt": "Which Event ID does the threat hunt read?",
+      "answer_b64": "NDEwNA=="
+    },
+    {
+      "id": 5,
+      "source": "ps L5.1",
+      "type": "text",
+      "prompt": "A base64 blob in a 4104 event decodes with which text encoding?",
+      "answer_b64": "dXRmLTE2bGU=",
+      "accept_b64": [
+        "dXRmLTE2bGU=",
+        "dXRmMTZsZQ==",
+        "dW5pY29kZQ==",
+        "dXRmLTE2"
+      ]
+    }
+  ]
+}
+```

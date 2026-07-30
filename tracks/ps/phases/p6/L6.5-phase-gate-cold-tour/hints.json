@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read reference-list.txt before the script. Every uncommented line is the same length and drawn from the same 16 characters -- work out what kind of value that is, and you know what the tool must compute before it can compare anything.",
+    "The script builds two collections before printing. One starts from Get-Process, the other from Get-ChildItem. Ask what both have to compute on each item before the comparison on the following line could ever succeed.",
+    "answers.md is graded on five topics, in your own words: what the tool compares against, what it walks, how it decides something matches, and what the output would be used for. State each one plainly rather than describing the code line by line."
+  ]
+}
