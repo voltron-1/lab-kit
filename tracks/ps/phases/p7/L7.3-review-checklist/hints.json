@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Turn each L7.1/L7.2 concept into a checkable item: iex, CmdletBinding/params, try/catch, logging, creds/secrets, least privilege, input validation, PSScriptAnalyzer.",
+    "checklist.md needs >=6 items; make sure PSScriptAnalyzer/PSSA appears as its own item -- it's the automated backstop.",
+    "Write checklist.md with content:\n# ai-ps-review-checklist v1\n1. No Invoke-Expression / iex anywhere?                         (grep)\n2. [CmdletBinding()] + validated, typed parameters?\n3. try/catch with -ErrorAction Stop on every risky call?\n4. Logging on (Write-Verbose / transcript / audit line)?\n5. No hardcoded creds / plaintext secrets / echoed $Env: secrets?\n6. Least privilege; no unnecessary admin / broad scope?\n7. External input validated/sanitized (no injection)?\n8. PSScriptAnalyzer clean (no warnings)?"
+  ]
+}

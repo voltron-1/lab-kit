@@ -1,0 +1,8 @@
+{
+  "id": "L7.3",
+  "title": "The AI-PS review checklist v1",
+  "type": "AUDIT",
+  "objective": "Turn the safe-PS spec into a repeatable review checklist -- the lead-analyst artifact used on every AI-generated script, with PSScriptAnalyzer-clean as the automated backstop to the human review.",
+  "gate": false,
+  "est_minutes": 20
+}
