@@ -1,0 +1,3 @@
+- review reps build the reflex: each AI script has a primary flaw (cradle / creds / injection) plus secondaries
+- the L7.3 checklist catches them consistently — grep for iex, scan params, check logging/creds
+- finding every flaw fast IS the lead-analyst review skill

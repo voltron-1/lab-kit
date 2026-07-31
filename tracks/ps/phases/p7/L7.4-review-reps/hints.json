@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read all three scripts. Each has one primary flaw (a download-cradle-shaped eval call / a hardcoded credential / an unvalidated path parameter) plus a secondary (no logging / no error handling / no CmdletBinding).",
+    "review.md needs all three primary flaws named, plus at least 2 of the 3 secondary flaws (no logging, no error handling, no CmdletBinding).",
+    "Write review.md with content:\nai-1.ps1: primary flaw is a bare eval call (iex) piping a remote fetch straight into execution -- a download cradle. Secondary: no logging records that the update ran.\nai-2.ps1: primary flaw is a hardcoded plaintext credential (-AsPlainText -Force) -- the SecureString wrapper protects nothing since the plaintext sits right in source. Secondary: no try/catch around Invoke-Command.\nai-3.ps1: primary flaw is an unvalidated $name parameter used directly in a file path -- injection/path traversal. Secondary: no [CmdletBinding()], so $name isn't even typed."
+  ]
+}
