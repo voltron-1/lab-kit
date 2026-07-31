@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Why turn the spec into a checklist?",
+      "options": {
+        "a": "Consistent, fast, repeatable review — each item a concrete check",
+        "b": "Checklists aren't needed once you have a spec"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Which checklist item is the automated backstop to the human review?",
+      "answer_b64": "cHNzY3JpcHRhbmFseXplcg==",
+      "accept_b64": [
+        "cHNzY3JpcHRhbmFseXplcg==",
+        "cHNzYQ==",
+        "cHNzY3JpcHRhbmFseXplciBjbGVhbg=="
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "The iex/Invoke-Expression check on item 1 is best done how?",
+      "options": {
+        "a": "A grep for iex/Invoke-Expression — fast, unambiguous",
+        "b": "By running the script"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

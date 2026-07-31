@@ -1,0 +1,3 @@
+- the review checklist v1 makes AI-PS review consistent and fast — each item a concrete, greppable check
+- it covers: no iex, validated params, try/catch, logging, no creds, least privilege, input validation, PSSA-clean
+- PSScriptAnalyzer is the automated backstop to the human checklist
