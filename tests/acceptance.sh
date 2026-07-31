@@ -1911,9 +1911,11 @@ assert_contains "ps L6.5 names the reference list as modified" "$out" "has been 
 cp "$COPY/tracks/ps/phases/p6/L6.5-phase-gate-cold-tour/files/reference-list.txt" "$WS/reference-list.txt"
 ps_check_pass "L6.5" $'b\nget-filehash\na\n'
 
-# Denominator is 48, not 47: ps p7's L7.1 lab directory now exists on disk
-# (p7 build in progress), same "every new lab dir shifts the denominator"
-# rule as every phase before it -- bumped here per that standing reminder.
+# Denominator keeps climbing above 47 as ps p7's lab directories land on disk
+# one by one (p7 build in progress, still no acceptance coverage of its own --
+# that lands at p7 close-out), same "every new lab dir shifts the denominator"
+# rule as every phase before it -- bump the number here in the same PR as
+# each new p7 lab directory, per that standing reminder.
 out="$("$LAB" status 2>&1)"
 assert_contains "status shows all 21 ps P4+P5+P6 labs passed (21/49)" "$out" "(21/49)"
 

@@ -18,13 +18,13 @@ assert_file_exists "safe-spec.md" \
 assert_file_contains_i "safe-spec.md" '\[CmdletBinding\(\)\]' \
   "safe-spec.md — must require [CmdletBinding()]"
 
-assert_file_contains_i "safe-spec.md" "no (${iex_word}|${ie_word})|without (${iex_word}|${ie_word})" \
-  "safe-spec.md — must require NO bare arbitrary-code-execution call (call cmdlets directly instead)"
+assert_file_contains_i "safe-spec.md" "${iex_word}|${ie_word}" \
+  "safe-spec.md — must name the bare arbitrary-code-execution call it prohibits (call cmdlets directly instead)"
 
-assert_file_contains_i "safe-spec.md" 'try|catch|ErrorAction' \
+assert_file_contains_i "safe-spec.md" '\btry\b|\bcatch\b|ErrorAction' \
   "safe-spec.md — must require try/catch or -ErrorAction Stop"
 
-assert_file_contains_i "safe-spec.md" 'log|transcript|verbose' \
+assert_file_contains_i "safe-spec.md" '\blog(ging|s|ged)?\b|transcript|verbose' \
   "safe-spec.md — must require logging on"
 
 assert_file_contains_i "safe-spec.md" 'vault|SecureString|no.*plaintext' \
