@@ -1,0 +1,8 @@
+{
+  "id": "L7.1",
+  "title": "Why AI PS is risky by default — recurring failures (iex, no logging, hardcoded creds)",
+  "type": "AUDIT",
+  "objective": "Audit a representative AI-generated PowerShell function for its default failure modes -- a bare iex call on interpolated input, no [CmdletBinding()]/param validation, a hardcoded plaintext credential, no error handling, no logging -- and name at least four of them.",
+  "gate": false,
+  "est_minutes": 20
+}

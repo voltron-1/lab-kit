@@ -1,0 +1,57 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "source": "ps L6.4",
+      "type": "choice",
+      "prompt": "What does a Sigma rule's detection.selection specify?",
+      "options": {
+        "a": "The criteria that must match within the telemetry named by logsource",
+        "b": "The response action to run when the rule fires"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "source": "ps L6.1",
+      "type": "choice",
+      "prompt": "What does PowerView's Get-NetUser collect?",
+      "options": {
+        "a": "Local accounts on the host it runs from",
+        "b": "Domain user objects — the AD account inventory"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "source": "ps L5.7",
+      "type": "choice",
+      "prompt": "You have reconstructed an obfuscated payload's plaintext. What next?",
+      "options": {
+        "a": "Name the technique and escalate — you do not execute it",
+        "b": "Run it in place to confirm the C2 is live"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 4,
+      "source": "ps L6.3",
+      "type": "text",
+      "prompt": "Which Event ID does the threat hunt read?",
+      "answer_b64": "NDEwNA=="
+    },
+    {
+      "id": 5,
+      "source": "ps L5.1",
+      "type": "text",
+      "prompt": "A base64 blob in a 4104 event decodes with which text encoding?",
+      "answer_b64": "dXRmLTE2bGU=",
+      "accept_b64": [
+        "dXRmLTE2bGU=",
+        "dXRmMTZsZQ==",
+        "dW5pY29kZQ==",
+        "dXRmLTE2"
+      ]
+    }
+  ]
+}

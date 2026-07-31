@@ -1,0 +1,3 @@
+- AI PS fails by default: bare iex, no error handling, no logging, hardcoded creds, no param validation
+- iex on interpolated input is eval + injection at once — the highest-signal flaw to catch first
+- treat AI output as untrusted input to review like a lead analyst — not trusted code to run
