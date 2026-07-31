@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "text",
+      "prompt": "Name one of ai-sample.ps1's default AI-PS failure patterns.",
+      "answer_b64": "aWV4",
+      "accept_b64": [
+        "aWV4",
+        "YmFyZSBpZXg=",
+        "bm8gbG9nZ2luZw==",
+        "aGFyZGNvZGVkIGNyZWRz",
+        "aGFyZGNvZGVkIGNyZWRlbnRpYWw=",
+        "bm8gZXJyb3IgaGFuZGxpbmc=",
+        "bm8gdmFsaWRhdGlvbg=="
+      ]
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why is iex \"...$server...\" doubly dangerous?",
+      "options": {
+        "a": "It both evaluates arbitrary code and is injectable via the interpolated input",
+        "b": "It's just slow"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "AI-generated PowerShell should be treated as?",
+      "options": {
+        "a": "Untrusted input to review, not trusted output to run",
+        "b": "Safe because AI wrote it"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

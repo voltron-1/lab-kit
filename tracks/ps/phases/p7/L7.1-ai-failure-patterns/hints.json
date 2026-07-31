@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "cat ai-sample.ps1 and look at the parameter, the call on line 2, the plaintext variable, and what's missing (no try/catch, no logging).",
+    "Name >=4 of: bare iex on interpolated input, no [CmdletBinding()]/param validation, hardcoded plaintext credential, no error handling, no logging in findings.md.",
+    "Write findings.md with content:\nai-sample.ps1 has five default AI-PS failures: a bare iex call on the interpolated $server parameter (eval + injection at once), no [CmdletBinding()] or parameter validation, a hardcoded plaintext credential ($pw), no error handling (no try/catch anywhere), and no logging (nothing records what the function did).\nThe iex call is the highest-signal flaw: it both runs arbitrary code and is attacker-steerable through the same interpolated input.\nTreat AI-generated PowerShell as untrusted input to review -- not trusted code to run."
+  ]
+}
