@@ -1,0 +1,8 @@
+{
+  "id": "L7.2",
+  "title": "The safe-PS spec — error handling, ScriptBlock logging on, no iex, [CmdletBinding()]",
+  "type": "DIRECT",
+  "objective": "Write a spec that inverts each of L7.1's failure patterns into a requirement, so AI output is auditable by construction: [CmdletBinding()] with validated parameters, no Invoke-Expression, try/catch on risky calls, logging on, and no hardcoded credentials.",
+  "gate": false,
+  "est_minutes": 20
+}

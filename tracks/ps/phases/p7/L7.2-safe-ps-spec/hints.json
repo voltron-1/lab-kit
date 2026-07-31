@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Invert each of L7.1's five failures into a requirement: no bare iex, validated params, try/catch, logging on, no hardcoded creds.",
+    "safe-spec.md needs six clauses: [CmdletBinding()], no Invoke-Expression/iex, try/catch or -ErrorAction Stop, logging (Write-Verbose/transcript), no hardcoded/plaintext creds (vault/SecureString), and least-privilege input validation.",
+    "Write safe-spec.md with content:\n# safe-PS spec\n- [CmdletBinding()] + typed [Parameter(Mandatory)] with [ValidateSet]/[ValidateNotNullOrEmpty]\n- NO Invoke-Expression / iex; call cmdlets directly with bound parameters\n- try/catch with -ErrorAction Stop on risky calls; meaningful $_ handling\n- logging ON: structured Write-Verbose / a transcript / an audit line per action\n- NO hardcoded creds: use a vault / SecureString from a store, never plaintext or $Env: echo\n- least privilege; validate/sanitize all external input"
+  ]
+}

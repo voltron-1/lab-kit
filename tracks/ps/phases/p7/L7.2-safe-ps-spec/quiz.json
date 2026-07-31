@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A safe-PS spec should require which of these instead of a bare eval-style call?",
+      "options": {
+        "a": "Direct cmdlet calls with bound parameters",
+        "b": "The same call with a comment explaining it"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Name a validation attribute a spec should require on parameters.",
+      "answer_b64": "W1ZhbGlkYXRlU2V0XQ==",
+      "accept_b64": [
+        "W1ZhbGlkYXRlU2V0XQ==",
+        "W1ZhbGlkYXRlTm90TnVsbE9yRW1wdHld",
+        "W1BhcmFtZXRlcihNYW5kYXRvcnkpXQ=="
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why spec logging on?",
+      "options": {
+        "a": "So every action is auditable — the output can be reviewed and investigated",
+        "b": "To make the script run faster"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
