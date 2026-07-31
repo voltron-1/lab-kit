@@ -1,0 +1,3 @@
+- the safe-PS spec inverts every AI failure into a requirement: [CmdletBinding()], no iex, try/catch, logging, no creds
+- a good spec makes AI output auditable BY CONSTRUCTION — you review output against the spec
+- you direct the AI; the spec is the contract that forces safety
