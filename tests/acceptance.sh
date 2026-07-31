@@ -1802,6 +1802,118 @@ ps_check_pass "L5.7" $'download cradle\nb\nreversal\n'
 out="$("$LAB" status 2>&1)"
 assert_contains "status shows all 16 ps P4+P5 labs passed (16/47)" "$out" "(16/47)"
 
+# --- 7c. ps track P6 (Reading Real Security Tools): fabricated pass +
+# negative case per lab. Every lab here is a TOUR, and unlike P4/P5 not one of
+# them runs pwsh at all -- Get-WinEvent (L6.3's hunt) doesn't exist off Windows
+# (verified against real pwsh 7.6.4 at plan-verify time, PR #374) and every
+# other sample is deliberately never executed, per each lab's own check.sh
+# comment. So this section needs no pwsh preflight and no probe-integrity
+# guard. The one new structural control is the phase gate byte-anchoring its
+# two shipped tour files (L6.5) -- covered by a dedicated negative case below,
+# the P6 analogue of P5's tampered-probe coverage. ---
+note "ps track P6: fabricated pass + negative case per lab"
+
+# L6.1 -- Tour: PowerView (phase opener: recall must never gate).
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L6.1 --force 2>&1)"; rc=$?
+assert_eq "'lab start ps L6.1 --force' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L6.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/ps/L6.1"
+ps_check_fail_missing "L6.1" "tour.md"
+cat > "$WS/tour.md" << 'MD'
+# PowerView Tour
+Get-NetUser pulls domain user objects: names, SPNs, lastlogon, descriptions -- account inventory.
+Find-LocalAdminAccess maps the hosts where the CURRENT user is already a local admin, which is
+how lateral movement gets planned without a single exploit.
+Get-NetGroup adds group membership on top of that inventory.
+All of this is enumeration/recon of AD objects, done to build a map before touching anything.
+ATT&CK: T1069 (Permission Groups Discovery), T1018 (Remote System Discovery) for the admin-access
+mapping.
+MD
+ps_check_pass "L6.1" $'a\nfind-localadminaccess\na\n'
+
+# L6.2 -- Tour: a PowerShell IR collector.
+"$LAB" start ps L6.2 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L6.2"
+ps_check_fail_missing "L6.2" "readout.md"
+cat > "$WS/readout.md" << 'MD'
+# IR Collector Tour
+Section 1 lists running processes -- what is executing right now, with Path as the tell for a
+binary running from a user-writable directory.
+Section 2 lists autostart entries: what will run again after a reboot, which is where persistence
+lives.
+Section 3 pulls logon events (4624, a successful logon), projecting LogonType and Account out of
+the event's Properties array.
+It all serializes to one JSON report, not four piles of console text, so an analyst can diff two
+collections and a SIEM can ingest it without a parser being written.
+MD
+ps_check_pass "L6.2" $'b\na\nsuccessful logon\n'
+
+# L6.3 -- Tour: a threat-hunting script. Get-WinEvent does not exist off
+# Windows (verified against real pwsh 7.6.4), so hunt.ps1 cannot run here even
+# in principle -- the grader itself runs no pwsh for this lab.
+"$LAB" start ps L6.3 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L6.3"
+ps_check_fail_missing "L6.3" "readout.md"
+cat > "$WS/readout.md" << 'MD'
+# Threat Hunt Tour
+Reads the PowerShell/Operational log, event ID 4104 -- the decoded ScriptBlock text, logged after
+PowerShell has already parsed it, which is why it defeats command-line encoding on its own.
+Queries with Get-WinEvent -FilterHashtable so the event-log service does the filtering, not a
+Where-Object pipe over everything.
+The -match filter hunts for the encoded-command flag, a base64 FromBase64String call, and a
+DownloadString cradle -- the phase 4/5 tells.
+What it misses: a payload that assembles those same keywords at runtime out of fragments (string
+concatenation, reversal, format-operator) never spells any of them literally, so -match finds
+nothing.
+MD
+ps_check_pass "L6.3" $'b\n-filterhashtable\na\n'
+
+# L6.4 -- Tour: a Sigma rule targeting PowerShell.
+"$LAB" start ps L6.4 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L6.4"
+ps_check_fail_missing "L6.4" "readout.md"
+cat > "$WS/readout.md" << 'MD'
+# Sigma Rule Tour
+logsource + detection.selection say what to read (the 4104 ScriptBlock log, requires Script Block
+Logging) and what must match in it.
+Matches on PowerShell ScriptBlockText containing DownloadString, IEX, or FromBase64String.
+It's a literal-string rule, so the same evasion as the hunt script beats it: string concatenation
+(or reversal, or the format operator) that assembles a matched keyword at runtime never spells it
+literally, and the rule fires on nothing.
+MD
+ps_check_pass "L6.4" $'a\nb\nconcatenation\n'
+
+# L6.5 -- Phase gate: a cold solo tour of an unlabelled tool. Gate requires
+# quiz 3/3. Both shipped files are byte-anchored (assert_file_unmodified) --
+# the negative case below tampers with one and confirms the gate catches it.
+"$LAB" start ps L6.5 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L6.5"
+ps_check_fail_missing "L6.5" "answers.md"
+cat > "$WS/answers.md" << 'MD'
+# Cold Tour: mystery-tool.ps1
+Scans running processes and files on disk, hashing each with Get-FileHash -Algorithm SHA256 and
+comparing against a known-bad hash list loaded from reference-list.txt -- an indicator-of-compromise
+scan, not an obfuscation or persistence tool.
+Pass 1 walks Get-Process (cross-platform); pass 2 walks a Windows scan root via Get-ChildItem, so
+only pass 1 can actually run here.
+It touches the process table and the filesystem under its scan root -- nothing in the registry, no
+network calls, no logon telemetry.
+MD
+ps_check_pass "L6.5" $'b\nget-filehash\na\n'
+
+# Negative case for the gate's byte-anchoring control: a learner-modified shipped file must be
+# reported and the check must fail, the P6 analogue of P5's tampered-probe coverage above (no
+# probe execution exists in this phase, so the control anchors the tour reference files instead).
+printf '\n# learner edit\n' >> "$WS/reference-list.txt"
+out="$("$LAB" check ps L6.5 2>&1)"; rc=$?
+assert_eq "ps L6.5 check fails when the shipped reference list is modified" "1" "$rc"
+assert_contains "ps L6.5 names the reference list as modified" "$out" "has been modified"
+cp "$COPY/tracks/ps/phases/p6/L6.5-phase-gate-cold-tour/files/reference-list.txt" "$WS/reference-list.txt"
+ps_check_pass "L6.5" $'b\nget-filehash\na\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 21 ps P4+P5+P6 labs passed (21/47)" "$out" "(21/47)"
+
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
 if [[ -f "$COPY/README.md" ]]; then
@@ -1813,10 +1925,10 @@ fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
   # 32 total track-phase lines; bash p0-p7 (8) + rust p0-p2 (3) + soc p0-p1 (2) +
-  # ps p0-p5 (6) are done ([x]), leaving 13 unstarted -- update this count
+  # ps p0-p6 (7) are done ([x]), leaving 12 unstarted -- update this count
   # whenever a phase's marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 13 unstarted track-phase lines" "13" "$line_count"
+  assert_eq "planned_execution.md has 12 unstarted track-phase lines" "12" "$line_count"
 else
   bad "planned_execution.md missing"
 fi
