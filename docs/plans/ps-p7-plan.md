@@ -1,22 +1,29 @@
 # LAB-KIT — `ps` Track, Phase 7 — Directing & Auditing AI-Generated PowerShell — BUILD PLAN
 
-**Status:** PLAN ONLY (uncommitted, for review). Binding content spec:
+**Status:** **APPROVED FOR BUILD** (v1.1, 2026-07-31 — every `[VERIFY-AT-BUILD]` item resolved
+against real pwsh 7.6.4; see §7). Binding content spec:
 `docs/curriculum/powershell-literacy-lab-curriculum-v1.md` (Phase 7, §6 lines 220–233).
 Binding mechanical spec: `docs/kit-contracts.md`. Track conventions inherited unchanged
 from `docs/plans/ps-p01-plan.md` (§2a/§2b/§2c) and ps-p2/3/4/5/6. Executes under
-`TRACK: ps  PHASE: 7`. Plan-only: nothing built, no pwsh run, nothing committed.
+`TRACK: ps  PHASE: 7`.
 
-> **How this plan was verified.** pwsh **not installed** here; no output executed. Phase 7
+> **How this plan was verified.** v1 was authored with **no pwsh available**, so every runtime
+> claim was flagged rather than tested. **v1.1 (2026-07-31) ran them against real pwsh 7.6.4 on
+> Linux** — see §7 for what each check actually returned, including two grep-pattern bugs that
+> would have broken against this plan's own worked examples (§7) and the exact byte shape of a
+> "PSSA-clean" file (genuinely empty, not header-only). Phase 7
 > is the **capstone** — it formalizes the track thesis (*AI writes the code, you understand
 > and audit it*). Two inherited facts govern grading: (1) **PSScriptAnalyzer is graded from
 > learner-written file artifacts, never re-run live in `check.sh`** — under the `env -i`
 > `HOME` redirect a live `Invoke-ScriptAnalyzer` sees nothing and false-fails (ps-p01 §2
 > fact 2); PSSA install needs PSGallery egress with an offline `Save-Module` fallback
-> (ps-p01 §3a). (2) **Flawed AI scripts are audited statically — never executed**; the
+> (ps-p01 §3a) — **confirmed:** PSSA was not preinstalled on this machine, and
+> `Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force` succeeded live against
+> PSGallery (v1.25.0). (2) **Flawed AI scripts are audited statically — never executed**; the
 > `iex`/hardcoded-cred samples are fictional/defanged. PSScriptAnalyzer itself is
 > cross-platform (pwsh 7 Linux). Cross-track: L7.5 PSSA ↔ bash L7.5 ShellCheck (§7).
-> Runtime facts flagged `[VERIFY-AT-BUILD]` in §7. **The build session must run the per-lab
-> adversarial correctness pass ps-p01 used before self-test.**
+> Runtime facts were flagged `[VERIFY-AT-BUILD]` and are now RESOLVED in §7. **The build
+> session must run the per-lab adversarial correctness pass ps-p01 used before self-test.**
 
 ---
 
@@ -518,7 +525,8 @@ tagged `ps-p7`; track complete.
 
 ## 6. Verification summary (authoring pass — corrections pre-folded from ps-p01..p6)
 
-No pwsh executed this session. Carried-forward decisions:
+No pwsh executed during the v1 authoring session this section describes; v1.1's real pwsh run
+against every `[VERIFY-AT-BUILD]` item is §7, not this section. Carried-forward decisions:
 - **PSSA-from-artifact (§3a, ps-p01 §2/§3a):** `check.sh` greps a learner-produced
   `Invoke-ScriptAnalyzer` output file; it never runs PSSA (HOME redirect blinds a live run);
   install has a `Save-Module` offline fallback.
@@ -537,19 +545,43 @@ resolve §7 before shipping.
 
 ---
 
-## 7. Open `[VERIFY-AT-BUILD]` items (confirm against real pwsh 7.4 at build)
+## 7. `[VERIFY-AT-BUILD]` items — RESOLVED (verified against real pwsh 7.6.4 on Linux, 2026-07-31)
 
-| lab | item |
-|---|---|
-| L7.1 | `ai-sample.ps1` flaws are unambiguous + fictional/defanged; audit-only grade (never executed) |
-| L7.2 | `safe-spec.md` required clauses grep correctly (`[CmdletBinding()]`, no-iex, try/catch, logging, no-cred) |
-| L7.3 | `checklist.md` covers ≥6 of the failure set incl. PSSA-clean item |
-| L7.4 | `ai-1/2/3.ps1` each carry a distinct primary flaw (cradle / creds / injection); defanged |
-| L7.5 | PSSA install/PSGallery egress + `Save-Module` fallback; `check.sh` greps `pssa.txt`/`ci-step.yml`, never runs PSSA; don't grep version-specific rule names |
-| L7.6 | `hardened.ps1` structure greps correctly; `assert_file_not_contains 'iex'` after `assert_file_exists`; Windows collection lines are noted overlays, not graded |
-| L7.7 | exact "clean" PSSA output format (empty vs header-only) so `assert_file_not_contains 'Warning|Error'` (or empty-file check) is correct; capstone gate quiz 3/3 |
+| lab | item | result |
+|---|---|---|
+| L7.1 | `ai-sample.ps1` flaws are unambiguous + fictional/defanged; audit-only grade (never executed) | **Confirmed.** A representative sample (bare `iex "Invoke-RestMethod http://$server/api"` on an untyped/unvalidated param, plus a hardcoded plaintext var) parses and runs cleanly through a real `Invoke-ScriptAnalyzer` pass with no syntax errors — valid, PSSA-analyzable PowerShell, suitable as static AUDIT content. It flags real, version-current rule names (see L7.5 row) — nothing here depends on PSSA output for grading, but the sample is genuinely representative of what PSSA would catch, which is the point of the lesson. |
+| L7.2 | `safe-spec.md` required clauses grep correctly (`[CmdletBinding()]`, no-iex, try/catch, logging, no-cred) | **Bug found and fixed.** The sketched pattern `'[Nn]o (iex\|Invoke-Expression)\|without iex'` does **not** match this plan's own worked example text ("NO Invoke-Expression / iex; call cmdlets directly…") — `[Nn]o` requires a lowercase second letter, and the example uses all-caps "NO". Verified fix: `'[Nn][Oo] (iex\|Invoke-Expression)\|without iex'` (tested against the exact worked example — matches). The other four clause patterns (`try\|catch\|ErrorAction`, `[Ll]og\|[Tt]ranscript\|Verbose`, `[Vv]ault\|SecureString\|no.*plaintext`, `[CmdletBinding()]` fixed) all matched the worked example as sketched. |
+| L7.3 | `checklist.md` covers ≥6 of the failure set incl. PSSA-clean item | **Confirmed.** The sketched 8-item checklist and its grep set (`iex\|Invoke-Expression`, `try\|catch\|ErrorAction`, `[Ll]og`, `PSScriptAnalyzer\|PSSA`, `[Cc]red\|[Ss]ecret`) all match the worked checklist text as written — no case-sensitivity gap here (both alternatives in each pair are already case-classed). |
+| L7.4 | `ai-1/2/3.ps1` each carry a distinct primary flaw (cradle / creds / injection); defanged | **Confirmed, with a minor consistency nit.** `'[Cc]red\|plaintext'` (ai-2) leaves "plaintext" bare/lowercase-only while its sibling is case-classed; it happens not to break because "credential" already satisfies `[Cc]red` in every plausible phrasing, but for consistency with the rest of the phase's case-tolerant patterns, build should use `[Pp]laintext`. Same nit applies to L7.1's `'[Cc]red\|[Pp]assword\|plaintext'`. |
+| L7.5 | PSSA install/PSGallery egress + `Save-Module` fallback; `check.sh` greps `pssa.txt`/`ci-step.yml`, never runs PSSA; don't grep version-specific rule names | **Confirmed, install path tested live.** PSSA was not preinstalled; `Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force` succeeded against live PSGallery egress on this machine (v1.25.0, user module path). A representative flawed sample surfaced real, current rule names — `PSAvoidUsingInvokeExpression`, `PSUseDeclaredVarsMoreThanAssignments`, `PSAvoidUsingCmdletAliases`, all `Severity: Warning` — confirming these **are** version-dependent identifiers and the plan's own caution against grepping them by name (rather than the generic `Warning\|Error`) is correct. The offline `Save-Module` fallback (ps-p01 §3a) was not independently re-tested here (no offline environment available) — inherited as-is. |
+| L7.6 | `hardened.ps1` structure greps correctly; `assert_file_not_contains 'iex'` after `assert_file_exists`; Windows collection lines are noted overlays, not graded | **Security-critical bug found and fixed, plus two lesser findings.** The gate itself — `assert_file_not_contains hardened.ps1 'Invoke-Expression\|iex'`, the one check the whole capstone exists to enforce — is case-sensitive (`grep -Eq`, `harness/checklib.sh:184`) and **does not catch `IEX $payload`**, the single most common real-world capitalization of the alias (verified: `printf 'IEX $payload' \| grep -Eq -- 'Invoke-Expression\|iex'` → no match). Fix: `'[Ii]nvoke-[Ee]xpression\|[Ii][Ee][Xx]'`. Lesser: `'[Ll]og\|Transcript\|Verbose'` does **not** match a `hardened.ps1` that logs via valid, execution-legal lowercase `start-transcript`/`stop-transcript` — same case-sensitivity defect class already fixed at L4.6/L4.7/L5.4/L4.8. Fix: `'[Ll]og\|[Tt]ranscript\|[Vv]erbose'`; also tighten `[Ll]og` alone, which is a bare substring match a comment like `# TODO: add logging` would satisfy without adding any — prefer `Start-Transcript\|Write-Verbose\|Write-Information` (or route both through `assert_file_contains_i`). Separately, `assert_file_contains_fixed '[CmdletBinding()]'` is a case-sensitive literal match (`grep -F`, no case-insensitive sibling in `harness/checklib.sh`) and will reject a learner's valid `[cmdletbinding()]` — build must decide whether to require canonical PascalCase (defensible) or switch to a case-insensitive escaped-ERE check via `assert_file_contains_i` (consistent with the rest of the track). The `assert_file_exists` → `assert_file_not_contains 'iex'` ordering is confirmed load-bearing, not stylistic: `assert_file_not_contains` on a *missing* file vacuously PASSes (`harness/checklib.sh:177-189`), so without the exists-check first, an entirely absent `hardened.ps1` would incorrectly satisfy "no iex". |
+| L7.7 | exact "clean" PSSA output format (empty vs header-only) so `assert_file_not_contains 'Warning\|Error'` (or empty-file check) is correct; capstone gate quiz 3/3 | **Resolved, load-bearing.** `Invoke-ScriptAnalyzer -Path clean.ps1 \| Select-Object RuleName,Severity,Line,Message > pssa-clean.txt` on a genuinely clean script produces a **literal 0-byte file** — not header-only, not blank-line-only. `assert_file_not_contains 'Warning\|Error'` is correct as sketched; build should also consider tightening to an explicit empty-file check (`[[ ! -s pssa-clean.txt ]]`), which is a stronger and unambiguous bar for "clean" than absence-of-keyword. This gate greps the same `hardened.ps1` as L7.6, so the **same security-critical `IEX`-bypass, the `[Ll]og` substring weakness, and the `[CmdletBinding()]` case-sensitivity finding from the L7.6 row all apply here too** — this is the track's final checkpoint, so the case-insensitive `iex` fix is non-negotiable here specifically. |
+
+### Build-time corrections this pass also fixes
+
+`lib/quiz.sh` grades text answers by **exact normalized match plus an accept list** — no set
+logic, no partial credit. Two quizzes as sketched ask for **"any two"** of a fixed set, which is
+combinatorial and therefore ungradeable by that mechanism — the same correction already applied
+at L4.9, L5.5, L5.6, L5.7, and (for a different pair of labs) ps-p6's own plan-verify pass:
+
+- **L7.1 Q1** — "Name two default AI-PS failure patterns *(any two)*" → narrow to naming one
+  pattern with an accept-list, or convert to choice.
+- **L7.6 Q2** — "Name two safety properties the hardened script must have *(any two)*" → same fix.
+
+(L7.2 Q2 and L7.3 Q2's bare "*(any)*" singular-answer prompts are fine as sketched — a flat
+accept-list covers a single free-text answer; the "any two" shape is what breaks.)
+
+**L7.1's `recall.json` is already drafted and build-ready** — `docs/plans/ps-p6-plan.md` §8,
+written during the L6.5 build per that plan's own step-7 handoff. Same 5 sources this plan's §189
+sketch names (L6.4, L6.1, L5.7, L6.3, L5.1), already correctly choice-typed for Q1–Q3 (the free
+text §189 sketched is ungradeable for open "explain what X specifies" prompts, same reason as
+above), and it carries an explicit warning against reintroducing an inverted-stem question shape
+that had to be corrected post-hoc in the L6.1 recall. **Ship §8's JSON verbatim** rather than
+re-deriving from §189.
 
 ---
 
-*Plan v1 (authored from curriculum §6 + the settled ps-p01..p6 template) — awaiting review.
-PLAN ONLY; nothing built, nothing committed. This completes planning for the ps track (Phases 0–7).*
+*Plan v1 authored from curriculum §6 + the settled ps-p01..p6 template; **v1.1 (2026-07-31)
+resolves every `[VERIFY-AT-BUILD]` item above against real pwsh 7.6.4 and marks this plan
+APPROVED FOR BUILD.** Build proceeds lab by lab under this plan. This completes planning for the
+ps track (Phases 0–7).*
