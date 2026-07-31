@@ -21,13 +21,13 @@ assert_file_contains_i "checklist.md" "${iex_word}|${ie_word}" \
 assert_file_contains_i "checklist.md" '\btry\b|\bcatch\b|ErrorAction' \
   "checklist.md — must have an item checking for try/catch or -ErrorAction Stop"
 
-assert_file_contains_i "checklist.md" '\blog(ging|s|ged)?\b' \
+assert_file_contains_i "checklist.md" '\blogging\b|\blogs\b|\blogged\b|transcript|verbose' \
   "checklist.md — must have an item checking that logging is on"
 
 assert_file_contains_i "checklist.md" 'PSScriptAnalyzer|PSSA' \
   "checklist.md — must name PSScriptAnalyzer/PSSA as the automated backstop item"
 
-assert_file_contains_i "checklist.md" 'cred|secret' \
+assert_file_contains_i "checklist.md" '\bcred(ential)?s?\b|\bsecrets?\b|plaintext' \
   "checklist.md — must have an item checking for hardcoded creds/secrets"
 
 ck_summary
