@@ -24,13 +24,13 @@ assert_file_exists "findings.md" \
 assert_file_contains_i "findings.md" "${ie_word}|${iex_word}" \
   "findings.md — must name the bare ${iex_word}/${ie_word} call (arbitrary-code execution + injection)"
 
-assert_file_contains_i "findings.md" '[Cc]red|[Pp]assword|[Pp]laintext' \
+assert_file_contains_i "findings.md" 'cred|password|plaintext' \
   "findings.md — must name the hardcoded plaintext credential"
 
-assert_file_contains_i "findings.md" '[Ll]og' \
+assert_file_contains_i "findings.md" '\blog(ging|s|ged)?\b' \
   "findings.md — must name the missing logging"
 
-assert_file_contains_i "findings.md" '[Ee]rror|try|catch|validat' \
+assert_file_contains_i "findings.md" '\berror\b|\btry\b|\bcatch\b|validat' \
   "findings.md — must name the missing error handling or param validation"
 
 ck_summary
