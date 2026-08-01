@@ -1,0 +1,8 @@
+{
+  "id": "L7.5",
+  "title": "CI guardrails — PSScriptAnalyzer as a merge gate (PS ShellCheck)",
+  "type": "GUIDED",
+  "objective": "Run PSScriptAnalyzer on a shipped sample, capture the output to a file, and draft a CI step that fails the build on any Error/Warning finding -- wiring PSSA as the automated backstop the L7.3 checklist named, the same merge-gate posture bash L7.5 gives ShellCheck.",
+  "gate": false,
+  "est_minutes": 20
+}
