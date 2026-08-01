@@ -1682,7 +1682,7 @@ MD
 ps_check_pass "L4.9" $'b\nb\nT1547.001\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 9 ps P4 labs passed (9/53)" "$out" "(9/53)"
+assert_contains "status shows all 9 ps P4 labs passed (9/54)" "$out" "(9/54)"
 
 # --- 7b. ps track P5: Deobfuscation & Malware Reading ---
 note "ps track P5: fabricated pass + negative case per lab"
@@ -1800,7 +1800,7 @@ ps_check_pass "L5.7" $'download cradle\nb\nreversal\n'
 # Passing L5.7 completes ps p5. The catalog denominator also counts p6 lab directories
 # that exist on disk but have no coverage of their own yet -- that lands at p6 close-out.
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 16 ps P4+P5 labs passed (16/53)" "$out" "(16/53)"
+assert_contains "status shows all 16 ps P4+P5 labs passed (16/54)" "$out" "(16/54)"
 
 # --- 7c. ps track P6 (Reading Real Security Tools): fabricated pass +
 # negative case per lab. Every lab here is a TOUR, and unlike P4/P5 not one of
@@ -1911,13 +1911,207 @@ assert_contains "ps L6.5 names the reference list as modified" "$out" "has been 
 cp "$COPY/tracks/ps/phases/p6/L6.5-phase-gate-cold-tour/files/reference-list.txt" "$WS/reference-list.txt"
 ps_check_pass "L6.5" $'b\nget-filehash\na\n'
 
-# Denominator keeps climbing above 47 as ps p7's lab directories land on disk
-# one by one (p7 build in progress, still no acceptance coverage of its own --
-# that lands at p7 close-out), same "every new lab dir shifts the denominator"
-# rule as every phase before it -- bump the number here in the same PR as
-# each new p7 lab directory, per that standing reminder.
+# Denominator is 54 from here on: all 7 ps p7 lab directories landed on disk
+# across PRs #383-389, completing the ps catalog. P7's own acceptance
+# coverage follows immediately below.
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 21 ps P4+P5+P6 labs passed (21/53)" "$out" "(21/53)"
+assert_contains "status shows all 21 ps P4+P5+P6 labs passed (21/54)" "$out" "(21/54)"
+
+# --- 7d. ps track P7 (Directing & Auditing AI PowerShell): fabricated pass +
+# negative case per lab. Every check.sh in this phase is pure static grading
+# of learner prose/scripts (findings.md, safe-spec.md, checklist.md,
+# review.md) or a learner-produced file grepped for shape (pssa.txt,
+# pssa-clean.txt, pssa-version.txt) -- ps-p01 §2/§3a's PSSA-from-artifact
+# rule means check.sh never runs PSSA or pwsh live anywhere in this phase, so
+# this section needs no pwsh preflight (unlike P4/P5) and no probe-integrity
+# guard. The one dedicated negative case covers the capstone's
+# security-critical control: the case-insensitive ban on a bare
+# code-execution alias call in hardened.ps1 (L7.6/L7.7) must catch every
+# capitalization, not just the first letter of each word -- the exact bug
+# PR #388 found and fixed in this phase's own build, hardened further at
+# this close-out. ---
+note "ps track P7: fabricated pass + negative case per lab"
+
+# L7.1 -- AI failure patterns (AUDIT; phase opener: recall must never gate).
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L7.1 --force 2>&1)"; rc=$?
+assert_eq "'lab start ps L7.1 --force' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L7.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/ps/L7.1"
+ps_check_fail_missing "L7.1" "findings.md"
+cat > "$WS/findings.md" << 'MD'
+# ai-sample.ps1 findings
+1. A bare iex/Invoke-Expression call evaluates arbitrary code fetched from the network.
+2. A hardcoded plaintext credential sits directly in source.
+3. No logging anywhere -- nothing to review after the fact.
+4. No try/catch and no parameter validation -- errors and bad input both fall straight through.
+MD
+ps_check_pass "L7.1" $'iex\na\na\n'
+
+# L7.2 -- The safe-PS spec.
+"$LAB" start ps L7.2 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L7.2"
+ps_check_fail_missing "L7.2" "safe-spec.md"
+cat > "$WS/safe-spec.md" << 'MD'
+# Safe-PS spec v1
+- [CmdletBinding()] with validated, typed parameters required.
+- NO Invoke-Expression / iex anywhere; call cmdlets directly.
+- try/catch with -ErrorAction Stop on every risky call.
+- Logging on: Write-Verbose / transcript / audit line.
+- No hardcoded creds; use a vault or SecureString, never plaintext.
+MD
+ps_check_pass "L7.2" $'a\n[ValidateSet]\na\n'
+
+# L7.3 -- The AI-PS review checklist v1.
+"$LAB" start ps L7.3 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L7.3"
+ps_check_fail_missing "L7.3" "checklist.md"
+cat > "$WS/checklist.md" << 'MD'
+# ai-ps-review-checklist v1
+1. No Invoke-Expression / iex anywhere?
+2. try/catch with -ErrorAction Stop on every risky call?
+3. Logging on (transcript/verbose)?
+4. No hardcoded creds / plaintext secrets?
+5. PSScriptAnalyzer clean (no warnings) -- the automated backstop?
+MD
+ps_check_pass "L7.3" $'a\npsscriptanalyzer\na\n'
+
+# L7.4 -- Review reps: 3 AI-generated scripts, find every flaw.
+"$LAB" start ps L7.4 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L7.4"
+ps_check_fail_missing "L7.4" "review.md"
+cat > "$WS/review.md" << 'MD'
+# Review: ai-1/2/3.ps1
+ai-1.ps1: a bare iex call pipes a remote fetch straight into execution -- a download cradle. Also no logging.
+ai-2.ps1: a hardcoded plaintext credential in source. Also no try/catch.
+ai-3.ps1: an unvalidated parameter reaches a file path -- injection risk. Also no [CmdletBinding()].
+MD
+ps_check_pass "L7.4" $'a\nvault\na\n'
+
+# L7.5 -- CI guardrails: PSScriptAnalyzer as a merge gate. check.sh never runs
+# PSSA live (ps-p01 §2/§3a) -- it greps a learner-produced file, so a
+# hand-typed stub with the right column headers is graded identically to a
+# real run (documented, accepted trust boundary -- same as every other
+# learner-artifact grading in this track).
+"$LAB" start ps L7.5 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L7.5"
+ps_check_fail_missing "L7.5" "pssa.txt"
+cat > "$WS/pssa.txt" << 'MD'
+RuleName                       Severity
+--------                       --------
+PSAvoidUsingInvokeExpression   Warning
+PSAvoidUsingCmdletAliases      Warning
+MD
+cat > "$WS/ci-step.yml" << 'YML'
+- name: PSScriptAnalyzer gate
+  run: |
+    $r = Invoke-ScriptAnalyzer -Path . -Recurse
+    if ($r | Where-Object Severity -in 'Warning','Error') { exit 1 }
+YML
+cat > "$WS/notes.md" << 'MD'
+Cross-track equivalent: bash's ShellCheck.
+MD
+ps_check_pass "L7.5" $'a\na\naliases\n'
+
+# L7.6 -- Capstone: direct + audit a PS IR triage / log-collection script.
+"$LAB" start ps L7.6 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L7.6"
+ps_check_fail_missing "L7.6" "spec.md and hardened.ps1"
+cat > "$WS/spec.md" << 'MD'
+Directed: a PowerShell IR triage script collecting running processes to a CSV, under the
+safe-PS spec from L7.2 -- CmdletBinding with a validated OutputPath parameter, logging on,
+try/catch/finally, no bare eval-style calls, no hardcoded credentials.
+MD
+cat > "$WS/hardened.ps1" << 'PS1'
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory)][ValidateNotNullOrEmpty()][string]$OutputPath
+)
+Start-Transcript -Path (Join-Path $OutputPath 'triage.log')
+try {
+    Get-Process | Select-Object Name, Id, Path |
+        Export-Csv (Join-Path $OutputPath 'proc.csv') -NoTypeInformation -ErrorAction Stop
+}
+catch {
+    Write-Error "collection failed: $($_.Exception.Message)"
+}
+finally {
+    Stop-Transcript
+}
+PS1
+ps_check_pass "L7.6" $'a\ncmdletbinding\na\n'
+
+# L7.7 -- Phase gate: capstone gate, ship a hardened, PSScriptAnalyzer-clean
+# script. Gate requires quiz 3/3. pssa-clean.txt is graded as a strict
+# empty-file test (a genuinely clean PSSA run on hardened.ps1 produces a
+# literal 0-byte file, verified against real pwsh 7.6.4 + PSScriptAnalyzer
+# 1.25.0 at build time) -- fabricated as a truly empty file here, not a stub
+# with header text, or this fabricated pass would prove nothing about the
+# real assertion. pssa-version.txt is the proof-of-run artifact added at this
+# close-out's review pass (a 0-byte pssa-clean.txt alone can't tell "clean"
+# from "PSSA never ran").
+"$LAB" start ps L7.7 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L7.7"
+ps_check_fail_missing "L7.7" "hardened.ps1"
+cat > "$WS/hardened.ps1" << 'PS1'
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory)][ValidateNotNullOrEmpty()][string]$OutputPath
+)
+Start-Transcript -Path (Join-Path $OutputPath 'triage.log')
+try {
+    Get-Process | Select-Object Name, Id, Path |
+        Export-Csv (Join-Path $OutputPath 'proc.csv') -NoTypeInformation -ErrorAction Stop
+}
+catch {
+    Write-Error "collection failed: $($_.Exception.Message)"
+}
+finally {
+    Stop-Transcript
+}
+PS1
+printf 'Name             Version\n----             -------\nPSScriptAnalyzer 1.25.0\n' > "$WS/pssa-version.txt"
+: > "$WS/pssa-clean.txt"
+cat > "$WS/answers.md" << 'MD'
+# L7.3 checklist self-audit
+1. No Invoke-Expression / iex anywhere? -> yes, no bare Invoke-Expression / iex call.
+2. [CmdletBinding()] + validated params? -> yes.
+3. try/catch with -ErrorAction Stop? -> yes.
+4. Logging on? -> yes, Start-Transcript / Stop-Transcript.
+5. PSScriptAnalyzer clean? -> yes, pssa-clean.txt is empty.
+MD
+ps_check_pass "L7.7" $'a\na\na\n'
+
+# Negative case for the capstone's security-critical control: the ban on a bare
+# code-execution alias call must catch every capitalization, not just the first
+# letter of each word (PR #388 found and fixed exactly this bug -- an
+# ALLCAPS/mixed-case spelling walked past a first-letter-only pattern). Proves
+# the fix holds under regression, not just at build time.
+printf '\nIEX $payload\n' >> "$WS/hardened.ps1"
+out="$("$LAB" check ps L7.7 2>&1)"; rc=$?
+assert_eq "ps L7.7 check fails on an ALLCAPS bare code-execution alias call" "1" "$rc"
+assert_contains "ps L7.7 names the bare code-execution alias call" "$out" "must not contain a bare code-execution alias call"
+cat > "$WS/hardened.ps1" << 'PS1'
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory)][ValidateNotNullOrEmpty()][string]$OutputPath
+)
+Start-Transcript -Path (Join-Path $OutputPath 'triage.log')
+try {
+    Get-Process | Select-Object Name, Id, Path |
+        Export-Csv (Join-Path $OutputPath 'proc.csv') -NoTypeInformation -ErrorAction Stop
+}
+catch {
+    Write-Error "collection failed: $($_.Exception.Message)"
+}
+finally {
+    Stop-Transcript
+}
+PS1
+ps_check_pass "L7.7" $'a\na\na\n'
+
+# Passing L7.7 completes ps p7 -- and the entire 54-lab ps track (p0-p7).
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 28 ps P4-P7 labs passed (28/54)" "$out" "(28/54)"
 
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
@@ -1930,10 +2124,10 @@ fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
   # 32 total track-phase lines; bash p0-p7 (8) + rust p0-p2 (3) + soc p0-p1 (2) +
-  # ps p0-p6 (7) are done ([x]), leaving 12 unstarted -- update this count
+  # ps p0-p7 (8) are done ([x]), leaving 11 unstarted -- update this count
   # whenever a phase's marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 12 unstarted track-phase lines" "12" "$line_count"
+  assert_eq "planned_execution.md has 11 unstarted track-phase lines" "11" "$line_count"
 else
   bad "planned_execution.md missing"
 fi
