@@ -1,0 +1,8 @@
+{
+  "id": "L7.6",
+  "title": "Capstone: direct + audit a PS IR triage / log-collection script",
+  "type": "DIRECT",
+  "objective": "Direct AI to produce a PowerShell IR triage / log-collection script using the L7.2 spec, then audit the output against the L7.3 checklist and harden it -- a real SOC deliverable, produced by directing AI and auditing the result.",
+  "gate": false,
+  "est_minutes": 30
+}

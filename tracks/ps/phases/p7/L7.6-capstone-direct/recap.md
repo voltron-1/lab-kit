@@ -1,0 +1,3 @@
+- the capstone: DIRECT a PS IR triage/log-collection script from the safe-PS spec, then AUDIT + harden it
+- the hardened artifact has [CmdletBinding()], validated params, try/catch/finally, logging, and NO bare eval call
+- a real SOC deliverable, produced by directing AI and auditing the output — the whole track in one script

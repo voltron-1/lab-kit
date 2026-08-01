@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "spec.md is the direction you gave; hardened.ps1 is the audited result -- CmdletBinding, a validated param, try/catch/finally, logging on (transcript), and no bare code-execution call.",
+    "hardened.ps1 needs: [CmdletBinding()], a try block, a catch block, a logging call (Start-Transcript/Write-Verbose), and it must NOT contain the bare code-execution alias this whole track has been auditing for.",
+    "Write hardened.ps1 with content:\n[CmdletBinding()]\nparam(\n    [Parameter(Mandatory)][ValidateNotNullOrEmpty()][string]$OutputPath\n)\nStart-Transcript -Path (Join-Path $OutputPath 'triage.log')\ntry {\n    Get-Process | Select-Object Name, Id, Path |\n        Export-Csv (Join-Path $OutputPath 'proc.csv') -NoTypeInformation -ErrorAction Stop\n}\ncatch {\n    Write-Error \"collection failed: $($_.Exception.Message)\"\n}\nfinally {\n    Stop-Transcript\n}\nAnd spec.md: a short paragraph naming what you directed the AI to build and under which spec."
+  ]
+}
