@@ -1682,7 +1682,7 @@ MD
 ps_check_pass "L4.9" $'b\nb\nT1547.001\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 9 ps P4 labs passed (9/51)" "$out" "(9/51)"
+assert_contains "status shows all 9 ps P4 labs passed (9/52)" "$out" "(9/52)"
 
 # --- 7b. ps track P5: Deobfuscation & Malware Reading ---
 note "ps track P5: fabricated pass + negative case per lab"
@@ -1800,7 +1800,7 @@ ps_check_pass "L5.7" $'download cradle\nb\nreversal\n'
 # Passing L5.7 completes ps p5. The catalog denominator also counts p6 lab directories
 # that exist on disk but have no coverage of their own yet -- that lands at p6 close-out.
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 16 ps P4+P5 labs passed (16/51)" "$out" "(16/51)"
+assert_contains "status shows all 16 ps P4+P5 labs passed (16/52)" "$out" "(16/52)"
 
 # --- 7c. ps track P6 (Reading Real Security Tools): fabricated pass +
 # negative case per lab. Every lab here is a TOUR, and unlike P4/P5 not one of
@@ -1917,7 +1917,7 @@ ps_check_pass "L6.5" $'b\nget-filehash\na\n'
 # rule as every phase before it -- bump the number here in the same PR as
 # each new p7 lab directory, per that standing reminder.
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 21 ps P4+P5+P6 labs passed (21/51)" "$out" "(21/51)"
+assert_contains "status shows all 21 ps P4+P5+P6 labs passed (21/52)" "$out" "(21/52)"
 
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"

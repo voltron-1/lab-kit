@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run: Invoke-ScriptAnalyzer -Path ./candidate.ps1 | Select-Object RuleName, Severity, Line, Message > pssa.txt -- then draft ci-step.yml and notes.md.",
+    "ci-step.yml needs to name PSScriptAnalyzer and fail/exit the build on Error/Warning; notes.md needs to name ShellCheck as the bash equivalent.",
+    "If PSScriptAnalyzer isn't installed: Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force (needs PSGallery egress; offline fallback is Save-Module from a machine that has it). ci-step.yml example:\n- name: PSScriptAnalyzer\n  run: |\n    $results = Invoke-ScriptAnalyzer -Path . -Recurse\n    if ($results | Where-Object { $_.Severity -in 'Error', 'Warning' }) {\n      Write-Error \"PSScriptAnalyzer found findings -- failing the build\"\n      exit 1\n    }\nnotes.md: \"PSScriptAnalyzer is the PowerShell equivalent of ShellCheck.\""
+  ]
+}

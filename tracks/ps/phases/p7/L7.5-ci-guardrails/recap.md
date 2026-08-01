@@ -1,0 +1,3 @@
+- PSScriptAnalyzer is the PS ShellCheck — a static analyzer you wire as a merge gate (bash L7.5 posture)
+- as a CI gate it fails the build on any Error/Warning, blocking non-conforming PS from landing
+- run PSSA, capture the output to a file, gate on it — the automated backstop to the human checklist

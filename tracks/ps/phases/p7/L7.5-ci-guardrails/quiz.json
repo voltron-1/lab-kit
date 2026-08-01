@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "PSScriptAnalyzer is the PS equivalent of which bash tool?",
+      "options": {
+        "a": "ShellCheck",
+        "b": "bash -n"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "As a merge gate, PSSA should?",
+      "options": {
+        "a": "Fail the build if it returns any Error/Warning — blocking non-conforming PS",
+        "b": "Log warnings but always pass"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Name one thing PSScriptAnalyzer flags.",
+      "answer_b64": "YWxpYXNlcw==",
+      "accept_b64": [
+        "YWxpYXNlcw==",
+        "YWxpYXM=",
+        "dW5pbml0aWFsaXplZCB2YXJz",
+        "cGxhaW50ZXh0IGNyZWRz",
+        "aW52b2tlLWV4cHJlc3Npb24=",
+        "Y21kbGV0IGFsaWFzZXM="
+      ]
+    }
+  ]
+}
