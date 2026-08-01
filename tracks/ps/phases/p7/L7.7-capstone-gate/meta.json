@@ -1,0 +1,8 @@
+{
+  "id": "L7.7",
+  "title": "Capstone gate: ship a hardened, PSScriptAnalyzer-clean script",
+  "type": "AUDIT",
+  "objective": "Ship the L7.6 hardened.ps1 verified clean: run PSScriptAnalyzer for real, capture a clean result, and self-audit the script against the L7.3 checklist -- the track's final checkpoint proving the capstone artifact is genuinely safe to run.",
+  "gate": true,
+  "est_minutes": 30
+}
