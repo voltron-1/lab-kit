@@ -10,15 +10,23 @@ source "$LAB_CHECKLIB"
 # Invoke-ScriptAnalyzer sees an empty module path and finds nothing, which would
 # report a flawed script as clean -- the exact wrong-reason pass this avoids.
 
+lab_dir="$(dirname -- "${BASH_SOURCE[0]}")"
+
 assert_file_exists "candidate.ps1" \
   "candidate.ps1 — shipped PSScriptAnalyzer sample must exist"
+
+assert_file_unmodified "candidate.ps1" "$lab_dir/files/candidate.ps1" \
+  "candidate.ps1 — analyze it as shipped; restore the original if you edited it"
 
 assert_file_exists "pssa.txt" \
   "pssa.txt — run Invoke-ScriptAnalyzer on candidate.ps1 and capture the output"
 
 # Column-header check, not a specific rule name (exact rule identifiers are
-# version-dependent -- ps-p7-plan.md sec7). RuleName+Severity together are only
-# present in genuine Select-Object-shaped PSSA output, not a hand-typed stub.
+# version-dependent -- ps-p7-plan.md sec7). This is a SHAPE hint, not proof of
+# a real run -- check.sh can't independently verify PSSA actually executed
+# (the same inherent limit noted above for why it can't re-run PSSA itself),
+# so a hand-typed stub containing both column names would also pass. Accepted
+# trust boundary, same as every other learner-artifact grading in this track.
 assert_file_contains_i "pssa.txt" 'RuleName' \
   "pssa.txt — must contain real Invoke-ScriptAnalyzer output (a RuleName column)"
 

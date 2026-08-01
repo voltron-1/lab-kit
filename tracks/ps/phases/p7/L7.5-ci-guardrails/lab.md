@@ -8,11 +8,15 @@ The L7.3 checklist's last item is PSScriptAnalyzer — the **automated backstop*
    Invoke-ScriptAnalyzer -Path ./candidate.ps1 | Select-Object RuleName, Severity, Line, Message > pssa.txt
    cat pssa.txt
    ```
-   Real output on this machine (pwsh 7.6.4, PSScriptAnalyzer 1.25.0):
+   Real output on this machine (pwsh 7.6.4, PSScriptAnalyzer 1.25.0), captured against the
+   shipped `candidate.ps1` (the two-line file header pushes the flagged line to 4):
    ```text
    RuleName                  Severity Line Message
    --------                  -------- ---- -------
-   PSAvoidUsingCmdletAliases  Warning    2 'gci' is an alias of 'Get-ChildItem'. Alias can introduce possible readability problems...
+   PSAvoidUsingCmdletAliases  Warning    4 'gci' is an alias of 'Get-ChildItem'. Alias can
+                                           introduce possible problems and make scripts hard
+                                           to maintain. Please consider changing alias to its
+                                           full content.
    ```
    (If PSScriptAnalyzer isn't installed: `Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force`, needs PSGallery egress. No egress? `Save-Module -Name PSScriptAnalyzer -Path <dir>` on a machine that has it, then `Import-Module <dir>/PSScriptAnalyzer` — the offline fallback from L0.1.)
 
