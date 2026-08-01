@@ -1,0 +1,41 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The capstone artifact is directed then?",
+      "options": {
+        "a": "Audited against the review checklist and hardened",
+        "b": "Shipped exactly as the AI wrote it"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Name one safety property the hardened script must have.",
+      "answer_b64": "Y21kbGV0YmluZGluZw==",
+      "accept_b64": [
+        "Y21kbGV0YmluZGluZw==",
+        "dmFsaWRhdGVkIHBhcmFtcw==",
+        "dmFsaWRhdGVkIHBhcmFtZXRlcnM=",
+        "dHJ5L2NhdGNo",
+        "dHJ5",
+        "Y2F0Y2g=",
+        "bG9nZ2luZw==",
+        "bm8gaWV4",
+        "bm8gaW52b2tlLWV4cHJlc3Npb24="
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why is an IR triage/log-collection script a fitting capstone?",
+      "options": {
+        "a": "It's a real SOC artifact a Tier-1 analyst runs — building it safely closes the loop",
+        "b": "It's the shortest script to write"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
