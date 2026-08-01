@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "ai-1.ps1's primary flaw?",
+      "options": {
+        "a": "A bare eval call piping a remote fetch straight into execution — a download cradle",
+        "b": "A missing semicolon"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "ai-2.ps1 hardcodes a plaintext credential — what's the fix?",
+      "answer_b64": "dXNlIGEgdmF1bHQgb3Igc2VjcmV0IHN0b3JlOyBuZXZlciBwbGFpbnRleHQgaW4gc291cmNl",
+      "accept_b64": [
+        "dXNlIGEgdmF1bHQgb3Igc2VjcmV0IHN0b3JlOyBuZXZlciBwbGFpbnRleHQgaW4gc291cmNl",
+        "dmF1bHQ=",
+        "c2VjdXJlc3RyaW5n"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "ai-3.ps1 uses an unvalidated parameter in a file path — the risk?",
+      "options": {
+        "a": "Injection/path traversal — fix with parameter validation, not string building",
+        "b": "None — parameters are always safe"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
