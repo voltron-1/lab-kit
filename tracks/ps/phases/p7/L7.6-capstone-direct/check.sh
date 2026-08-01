@@ -11,7 +11,7 @@ assert_file_exists "spec.md" \
 assert_file_exists "hardened.ps1" \
   "hardened.ps1 — write the audited, hardened script"
 
-assert_file_contains_i "hardened.ps1" '\[CmdletBinding\(\)\]' \
+assert_file_contains_i "hardened.ps1" '\[CmdletBinding[[:space:]]*\(' \
   "hardened.ps1 — must have [CmdletBinding()]"
 
 assert_file_contains_i "hardened.ps1" '\btry\b' \
@@ -20,8 +20,8 @@ assert_file_contains_i "hardened.ps1" '\btry\b' \
 assert_file_contains_i "hardened.ps1" '\bcatch\b' \
   "hardened.ps1 — must have a catch block"
 
-assert_file_contains_i "hardened.ps1" '\blogging\b|\blogs\b|\blogged\b|transcript|verbose' \
-  "hardened.ps1 — must turn logging on (Start-Transcript or Write-Verbose)"
+assert_file_contains_i "hardened.ps1" 'Start-Transcript|Write-Verbose|Write-Information' \
+  "hardened.ps1 — must turn logging on (Start-Transcript, Write-Verbose, or Write-Information)"
 
 # Security-critical: the capstone's whole point is proving the shipped script
 # never contains a bare code-execution alias call. EVERY letter is its own
@@ -43,5 +43,20 @@ assert_file_exists "hardened.ps1" \
 assert_file_not_contains "hardened.ps1" \
   '\b[Ii][Nn][Vv][Oo][Kk][Ee]-[Ee][Xx][Pp][Rr][Ee][Ss][Ss][Ii][Oo][Nn]\b|\b[Ii][Ee][Xx]\b' \
   "hardened.ps1 — must not contain a bare code-execution alias call"
+
+# The L5.2 lesson in this same track is that a bare-string ban like the one
+# above misses the two mechanical ways PowerShell constructs and invokes code
+# without ever spelling out the alias name: [ScriptBlock]::Create(...) builds
+# a scriptblock from an arbitrary string, and the call operator (&) or
+# dot-sourcing (.) on a variable/expression invokes whatever it evaluates to.
+# tools/lint-labs.sh already bans both shapes in every shipped .ps1 for the
+# same reason; same regexes, reused here as the single source of truth.
+assert_file_not_contains "hardened.ps1" \
+  '\[[[:space:]]*(System\.Management\.Automation\.)?ScriptBlock[[:space:]]*\][[:space:]]*::[[:space:]]*Create' \
+  "hardened.ps1 — must not construct code dynamically ([ScriptBlock]::Create)"
+
+assert_file_not_contains "hardened.ps1" \
+  '&[[:space:]]*\(?[[:space:]]*\$[A-Za-z_]|(^|[[:space:]])\.[[:space:]]*\$[A-Za-z_]' \
+  "hardened.ps1 — must not invoke a variable or expression via the call operator (&) or dot-sourcing"
 
 ck_summary

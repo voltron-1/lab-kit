@@ -1,0 +1,34 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "\"PSScriptAnalyzer-clean\" means?",
+      "options": {
+        "a": "PSSA returns no Error/Warning findings on the script",
+        "b": "The script has comments explaining what it does"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The shipped hardened.ps1 must have which safety properties?",
+      "options": {
+        "a": "[CmdletBinding()], validated params, try/catch, logging, and no bare code-execution call",
+        "b": "Just no syntax errors -- style doesn't matter"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "You directed AI to write the capstone script, then audited and hardened it. What's the track's core lesson?",
+      "options": {
+        "a": "AI writes the code; you understand, audit, and harden it before it runs -- never trust it unread",
+        "b": "If AI wrote it, it's already safe to run"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

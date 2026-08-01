@@ -1,0 +1,3 @@
+- the capstone gate: hardened.ps1 shipped, PSSA-clean for real, self-audited against the L7.3 checklist
+- the mechanical gate (PSSA) and the human gate (your checklist) are different instruments -- passing one never substitutes for the other
+- the track's thesis, proven: AI writes the code -- you direct it, audit it, and harden it into something safe to run

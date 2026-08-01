@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "hardened.ps1 is the same audited script from L7.6 -- CmdletBinding, a validated param, try/catch/finally, logging on, and no bare code-execution call. If your L7.6 workspace is still on disk, bring it forward: cp ../L7.6/hardened.ps1 .",
+    "pssa-clean.txt is the real Invoke-ScriptAnalyzer output on hardened.ps1, redirected to a file: Invoke-ScriptAnalyzer -Path ./hardened.ps1 | Select-Object RuleName, Severity > pssa-clean.txt -- a genuinely clean script produces a 0-byte file. Also capture pssa-version.txt: Get-Module -ListAvailable PSScriptAnalyzer | Select-Object Name, Version > pssa-version.txt -- this proves PSSA actually ran, since a 0-byte pssa-clean.txt alone can't tell 'clean' from 'never ran'.",
+    "Write hardened.ps1 with content:\n[CmdletBinding()]\nparam(\n    [Parameter(Mandatory)][ValidateNotNullOrEmpty()][string]$OutputPath\n)\nStart-Transcript -Path (Join-Path $OutputPath 'triage.log')\ntry {\n    Get-Process | Select-Object Name, Id, Path |\n        Export-Csv (Join-Path $OutputPath 'proc.csv') -NoTypeInformation -ErrorAction Stop\n}\ncatch {\n    Write-Error \"collection failed: $($_.Exception.Message)\"\n}\nfinally {\n    Stop-Transcript\n}\nRun PSSA into pssa-clean.txt (should come back empty) and Get-Module into pssa-version.txt. Then write answers.md walking the L7.3 checklist -- name the bare code-execution alias explicitly (item 1 is graded, not optional), then [CmdletBinding()], try/catch, logging on, PSScriptAnalyzer clean."
+  ]
+}
