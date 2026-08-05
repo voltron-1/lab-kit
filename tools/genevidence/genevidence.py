@@ -634,6 +634,81 @@ def generate_s1_gate_five_alerts(scen: dict):
     if "answer_keys" in scen and "L1.8" in scen["answer_keys"]:
         sync_key_block(l18_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L1.8"])
 
+_CONN_STATE_LEGEND_MD = """# Zeek `conn_state` legend
+
+| Code | Meaning |
+|---|---|
+| `SF` | Normal establishment and teardown — both sides opened and closed cleanly. |
+| `S0` | Connection attempt seen, no reply — the originator's SYN got no answer. |
+| `REJ` | Connection attempt rejected — a RST came back instead of a SYN-ACK. |
+| `RSTO` | Connection established, then reset by the **originator**. |
+| `RSTR` | Connection established, then reset by the **responder**. |
+| `OTH` | No SYN seen (mid-stream capture) — neither a clean open nor a clean close. |
+
+Every row is a 5-tuple sentence: `id.orig_h:id.orig_p -> id.resp_h:id.resp_p`, over
+`proto`/`service`, lasting `duration` seconds. `orig_bytes` is what the **originator**
+(the host that opened the connection) sent; `resp_bytes` is what it received back.
+"""
+
+def generate_s2_conn_reading(scen: dict):
+    l21_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p2" / "L2.1-conn-reading"
+    if not (l21_dir / "check.sh").exists():
+        return
+    files_dir = l21_dir / "files"
+
+    conn_rows = []
+    for row in scen["conn_rows"]:
+        conn_rows.append({
+            "ts": row["ts"], "uid": row["uid"],
+            "id.orig_h": row["orig_h"], "id.orig_p": row["orig_p"],
+            "id.resp_h": row["resp_h"], "id.resp_p": row["resp_p"],
+            "proto": row["proto"], "service": row["service"],
+            "duration": row["duration"], "orig_bytes": row["orig_bytes"],
+            "resp_bytes": row["resp_bytes"], "conn_state": row["conn_state"],
+            "history": row["history"], "event_id": row["event_id"],
+        })
+    write_zeek_tsv(files_dir / "conn.log", "conn", conn_rows)
+
+    write_file(files_dir / "conn-state-legend.md", _CONN_STATE_LEGEND_MD)
+
+    # Comment lines sit ABOVE their bare 'qN=' field (matches every other lab's
+    # answers.template.txt) rather than trailing on the same line: check.sh's
+    # normalization strips '#.*' but not the whitespace that preceded it, so a
+    # same-line comment left in place by a learner would break the anchored
+    # ^qN=value$ match on every field except the one graded unanchored.
+    answers_template = """# Read conn.log (with conn-state-legend.md as reference) and answer.
+
+# uid of the row where the scanner's connection was REJECTED
+q1=
+
+# conn_state of the svc_backup 445/tcp copy (one token, e.g. sf)
+q2=
+
+# service label of row 5 (the short external 443 conversation)
+q3=
+
+# resp bytes the beacon's first hit received
+q4=
+
+# the ONE external dst IP a workstation opened a 443 session to that is
+# NOT saas webmail - DEFANGED (e.g. 198.51.100[.]23)
+q5=
+
+# how many rows use conn_state S0 (no reply seen)
+q6=
+"""
+    write_file(files_dir / "answers.template.txt", answers_template)
+
+    if "answer_keys" in scen and "L2.1" in scen["answer_keys"]:
+        keys = scen["answer_keys"]["L2.1"]
+        s0_count = sum(1 for row in conn_rows if row["conn_state"] == "S0")
+        if str(s0_count) != str(keys["q6"]):
+            raise ValueError(
+                f"q6 answer key is {keys['q6']!r} but conn_rows actually has "
+                f"{s0_count} S0 rows - the key was hand-typed and drifted"
+            )
+        sync_key_block(l21_dir / "check.sh", scen["scenario"], keys)
+
 def main():
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
@@ -663,6 +738,8 @@ def main():
             generate_s1_dispositions(scen)
         elif scen_id == "s1-gate-five-alerts":
             generate_s1_gate_five_alerts(scen)
+        elif scen_id == "s2-conn-reading":
+            generate_s2_conn_reading(scen)
 
 if __name__ == "__main__":
     main()

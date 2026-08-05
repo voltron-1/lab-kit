@@ -1,0 +1,40 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "`orig_bytes` and `resp_bytes` are counted from whose point of view?",
+      "options": {
+        "a": "the responder",
+        "b": "the originator (the host that opened the connection)",
+        "c": "the sensor",
+        "d": "always the server"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A row shows `conn_state S0`. What happened?",
+      "options": {
+        "a": "normal close",
+        "b": "the originator sent but no reply was ever seen",
+        "c": "the responder reset it",
+        "d": "a full file transfer"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Two 443/tcp `ssl` rows: one is 42s / 4KB<->8KB, the other 0.3s / 517B<->1.2KB and repeats 5 minutes later. Which smells like automation, not a human?",
+      "options": {
+        "a": "the 42s session",
+        "b": "the short repeating one",
+        "c": "neither - both are TLS",
+        "d": "can't tell from conn.log"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
