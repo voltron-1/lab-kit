@@ -1,0 +1,20 @@
+# Read conn.log (with conn-state-legend.md as reference) and answer.
+
+# uid of the row where the scanner's connection was REJECTED
+q1=
+
+# conn_state of the svc_backup 445/tcp copy (one token, e.g. sf)
+q2=
+
+# service label of row 5 (the short external 443 conversation)
+q3=
+
+# resp bytes the beacon's first hit received
+q4=
+
+# the ONE external dst IP a workstation opened a 443 session to that is
+# NOT saas webmail - DEFANGED (e.g. 198.51.100[.]23)
+q5=
+
+# how many rows use conn_state S0 (no reply seen)
+q6=

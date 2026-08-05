@@ -1,0 +1,8 @@
+{
+  "id": "L2.1",
+  "title": "Ports, protocols, and conversations - reading a connection log like a sentence",
+  "type": "DECODE",
+  "objective": "Read a zeek conn.log row as a sentence - 5-tuple, service, duration, byte direction, and conn_state - and pick the odd conversation out.",
+  "gate": false,
+  "est_minutes": 15
+}

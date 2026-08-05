@@ -1,0 +1,46 @@
+{
+  "questions": [
+    {
+      "id": "R1",
+      "prompt": "In L1.7's taxonomy, a rule that correctly fires on real activity that turns out to be authorized (like an approved PsExec change) is disposed as tp, fp, or ___?",
+      "accept_b64": [
+        "YnRw"
+      ],
+      "source": "L1.7"
+    },
+    {
+      "id": "R2",
+      "prompt": "Which top-level Sigma rule section combines the named selections into the actual firing logic?",
+      "accept_b64": [
+        "Y29uZGl0aW9u"
+      ],
+      "source": "L1.4"
+    },
+    {
+      "id": "R3",
+      "prompt": "ATT&CK technique id for a Word document (WINWORD.EXE) spawning a hidden, encoded powershell.exe?",
+      "accept_b64": [
+        "dDEwNTkuMDAx"
+      ],
+      "source": "L1.5"
+    },
+    {
+      "id": "R4",
+      "prompt": "Which alert JSON field lists the raw event ids you'd pull to verify the alert against evidence?",
+      "accept_b64": [
+        "ZXZpZGVuY2UuZXZlbnRfaWRz"
+      ],
+      "source": "L1.3"
+    },
+    {
+      "id": "R5",
+      "prompt": "A workstation holds a long encrypted TLS session - bytes and duration are visible, but never this:",
+      "accept_b64": [
+        "cGF5bG9hZA==",
+        "Y29udGVudA==",
+        "Ym9keQ=="
+      ],
+      "source": "L1.1"
+    }
+  ]
+}

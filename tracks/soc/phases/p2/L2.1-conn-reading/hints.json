@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Read the `#fields` header first; every answer is one column of one row. Line the file up with `column -t conn.log`.",
+    "`conn_state` is the last-but-two column; conn-state-legend.md decodes SF/S0/REJ/RSTO. `orig_bytes` is what the *opener* sent. For q5, a workstation opening 443 to an external IP that isn't 192.0.2.60 is the tell - and your answer must be defanged.",
+    "q1: the REJ row is the scanner->WEB01:22; copy its uid. q2: the 445 copy is SF. q3: row 5's service is ssl. q4: resp_bytes of row 5 is 1203. q5: 203.0.113[.]66. q6: count S0 rows - there are two."
+  ]
+}

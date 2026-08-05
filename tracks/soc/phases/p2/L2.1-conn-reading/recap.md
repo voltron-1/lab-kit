@@ -1,0 +1,3 @@
+- A conn.log row is a full sentence: who -> whom, port/service, duration, bytes each way, and how it ended.
+- conn_state is the verb - SF normal, S0 no reply, REJ rejected, RSTO/RSTR reset - and it often carries the verdict.
+- Short, tiny, repeating external TLS sessions read as automation; long human sessions move real bytes.

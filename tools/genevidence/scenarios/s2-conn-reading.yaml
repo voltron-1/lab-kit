@@ -1,0 +1,53 @@
+scenario: s2-conn-reading
+lab: L2.1
+window: {start: "2026-03-11T02:00:14Z", end: "2026-03-11T15:51:02Z"}
+
+# Row order is the teaching order (soc-p2-plan.md §4 L2.1), not strict
+# chronological order — row 8 (02:00Z) sits after 15:10Z rows deliberately,
+# "shown for contrast" against the tiny/short beacon rows.
+conn_rows:
+  - {ts: "2026-03-11T13:58:00Z", uid: "CRD00001", orig_h: "10.20.30.107", orig_p: 49152,
+     resp_h: "192.0.2.60", resp_p: 443, proto: tcp, service: ssl, duration: "42.30",
+     orig_bytes: 4201, resp_bytes: 8830, conn_state: SF, history: "ShADadFf",
+     event_id: "CM-0311-0510"}
+  - {ts: "2026-03-11T13:58:05Z", uid: "CRD00002", orig_h: "10.20.30.107", orig_p: 49153,
+     resp_h: "10.20.10.5", resp_p: 53, proto: udp, service: dns, duration: "0.01",
+     orig_bytes: 76, resp_bytes: 142, conn_state: SF, history: "Dd",
+     event_id: "CM-0311-0511"}
+  - {ts: "2026-03-11T14:30:00Z", uid: "CRD00003", orig_h: "10.20.30.103", orig_p: 49154,
+     resp_h: "192.0.2.10", resp_p: 123, proto: udp, service: "-", duration: "0.00",
+     orig_bytes: 76, resp_bytes: 76, conn_state: S0, history: "D",
+     event_id: "CM-0311-0512"}
+  - {ts: "2026-03-11T14:45:00Z", uid: "CRD00004", orig_h: "10.20.31.112", orig_p: 49155,
+     resp_h: "10.20.10.5", resp_p: 53, proto: udp, service: dns, duration: "0.01",
+     orig_bytes: 88, resp_bytes: 0, conn_state: S0, history: "D",
+     event_id: "CM-0311-0513"}
+  - {ts: "2026-03-11T15:46:02Z", uid: "CRD00005", orig_h: "10.20.30.107", orig_p: 49156,
+     resp_h: "203.0.113.66", resp_p: 443, proto: tcp, service: ssl, duration: "0.31",
+     orig_bytes: 517, resp_bytes: 1203, conn_state: SF, history: "ShADadFf",
+     event_id: "CM-0311-0501"}
+  - {ts: "2026-03-11T15:10:00Z", uid: "CRD00006", orig_h: "192.0.2.199", orig_p: 51000,
+     resp_h: "10.20.10.20", resp_p: 22, proto: tcp, service: "-", duration: "0.00",
+     orig_bytes: 0, resp_bytes: 0, conn_state: REJ, history: "Sr",
+     event_id: "CM-0311-0514"}
+  - {ts: "2026-03-11T15:10:05Z", uid: "CRD00007", orig_h: "192.0.2.199", orig_p: 51001,
+     resp_h: "10.20.10.20", resp_p: 80, proto: tcp, service: http, duration: "0.05",
+     orig_bytes: 88, resp_bytes: 240, conn_state: RSTO, history: "ShADadR",
+     event_id: "CM-0311-0515"}
+  - {ts: "2026-03-11T02:00:14Z", uid: "CRD00008", orig_h: "10.20.10.9", orig_p: 49157,
+     resp_h: "10.20.10.8", resp_p: 445, proto: tcp, service: "-", duration: "3.10",
+     orig_bytes: 1200000, resp_bytes: 9000, conn_state: SF, history: "ShADadFf",
+     event_id: "CM-0311-0516"}
+  - {ts: "2026-03-11T15:51:02Z", uid: "CRD00009", orig_h: "10.20.30.107", orig_p: 49158,
+     resp_h: "203.0.113.66", resp_p: 443, proto: tcp, service: ssl, duration: "0.29",
+     orig_bytes: 511, resp_bytes: 1198, conn_state: SF, history: "ShADadFf",
+     event_id: "CM-0311-0517"}
+
+answer_keys:
+  L2.1:
+    q1: crd00006          # uid of the REJ scanner row (row 6), lowercase per grading convention
+    q2: sf                # conn_state of the svc_backup 445/tcp copy (row 8)
+    q3: ssl                # service label of row 5 (the short external 443 conversation)
+    q4: "1203"             # resp bytes the beacon's first hit received (row 5)
+    q5: "203.0.113[.]66"   # DEFANGED — the beacon's external dst IP
+    q6: "2"                # count of conn_state S0 rows (rows 3, 4)
