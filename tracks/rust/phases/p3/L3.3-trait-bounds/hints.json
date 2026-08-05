@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Five answer keys (q1-q5); options for q1, q2, q5 are in step 4.",
+    "For q2, consider what let mut best = items[0] does to a slice element when T cannot Copy; q3 compares numbers in sample.rs; q4 comes from compiling broken.rs.",
+    "Run and transcribe: rustc sample.rs -o sample; ./sample; rustc broken.rs."
+  ]
+}

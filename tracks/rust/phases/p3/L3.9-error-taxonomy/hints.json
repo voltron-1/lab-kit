@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check your answers.txt for required keys q1..q5.",
+    "q1/q2/q3/q5 test understanding of thiserror and anyhow semantics described in lab.md and files/excerpt.rs.",
+    "q4 requires interpolating byte offset 12 into #[error(\"malformed header at byte {0}\")]: 'malformed header at byte 12'."
+  ]
+}

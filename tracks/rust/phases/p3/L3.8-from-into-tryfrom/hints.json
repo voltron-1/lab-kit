@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check your answers.txt for required keys q1..q5 and ensure files/sample.rs was compiled to ./sample.",
+    "q1/q5 review conversion contracts stated in lab.md. q2..q4 ask for exact numbers printed by sample.rs.",
+    "Compile sample.rs with `rustc files/sample.rs -o sample`, run `./sample`, and transcribe the output lines."
+  ]
+}

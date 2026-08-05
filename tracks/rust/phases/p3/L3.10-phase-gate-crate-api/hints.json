@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check your answers.txt for all 10 required keys q1..q10.",
+    "Inspect regex-api.txt signatures: constructor return types, lookup Option types, Index panic contracts, and 'h lifetime bounds.",
+    "Transcribe exact answer letters/strings: q4=None, q6=get, q9=start."
+  ]
+}

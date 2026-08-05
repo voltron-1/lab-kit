@@ -1,0 +1,3 @@
+- impl separates behavior from data; method calls are sugar for Type::method(recv)
+- the receiver is the contract: &self reads, &mut self writes, self consumes
+- consuming methods are moves — Phase 2's ownership rules apply unchanged here

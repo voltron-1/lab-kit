@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Adapter chains execute...",
+      "options": {
+        "a": "Eagerly, performing one full array pass per adapter",
+        "b": "Lazily — nothing runs until a terminal operation (collect/sum/count) pulls items through",
+        "c": "Asynchronously on background worker threads"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "`.iter()` over a `Vec<u32>` yields...",
+      "options": {
+        "a": "Owned `u32` values",
+        "b": "`&u32` borrows — `.copied()` is what converts them back to plain `u32`",
+        "c": "`Box<u32>` heap allocations"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Name one terminal (consuming) iterator method used in this lab.",
+      "answer_b64": "Y29sbGVjdA==",
+      "accept_b64": [
+        "Y29sbGVjdA==",
+        "c3Vt",
+        "Y291bnQ="
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "L3.1",
+  "title": "Result and the ? operator",
+  "type": "DECODE",
+  "objective": "Read Result as an ordinary enum and ? as a visible early return, and prove ? refuses to run in a function whose return type cannot absorb the error.",
+  "gate": false,
+  "est_minutes": 15
+}

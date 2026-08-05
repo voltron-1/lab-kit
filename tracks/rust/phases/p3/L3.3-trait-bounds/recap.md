@@ -1,0 +1,3 @@
+- bounds are capability lists: T: Display + Copy is everything the body may do with T
+- read signatures bounds-first — they predict which call sites can even compile
+- E0277 names the missing trait at the call site; the fix is the caller's type, not luck

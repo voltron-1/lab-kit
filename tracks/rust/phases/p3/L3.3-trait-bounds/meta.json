@@ -1,0 +1,8 @@
+{
+  "id": "L3.3",
+  "title": "Reading trait bounds and generics in signatures",
+  "type": "DECODE",
+  "objective": "Read <T: Bound + Bound> as a capability list that predicts which call sites compile, and read E0277 when a concrete type misses a bound.",
+  "gate": false,
+  "est_minutes": 15
+}

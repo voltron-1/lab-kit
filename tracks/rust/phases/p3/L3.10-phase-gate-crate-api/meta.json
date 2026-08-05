@@ -1,0 +1,7 @@
+{
+  "id": "L3.10",
+  "title": "Phase gate: read a real crate's public API and answer questions",
+  "type": "DECODE",
+  "gate": true,
+  "est_minutes": 20
+}

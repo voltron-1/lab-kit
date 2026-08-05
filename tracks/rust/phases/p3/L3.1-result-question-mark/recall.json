@@ -1,0 +1,59 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "After `let b = a;` where `a` is a String, `a` is...",
+      "options": {
+        "a": "still usable",
+        "b": "compile-time dead — it moved",
+        "c": "null"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The borrow law allows...",
+      "options": {
+        "a": "many readers XOR one writer",
+        "b": "one reader and one writer together",
+        "c": "any mix of readers and writers"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "C++'s use-after-free (CWE-416) becomes what in safe Rust?",
+      "options": {
+        "a": "a runtime panic",
+        "b": "a compile error",
+        "c": "undefined behavior"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "prompt": "A match expression missing one enum variant...",
+      "options": {
+        "a": "fails to compile (E0004)",
+        "b": "runs the first arm",
+        "c": "panics at runtime"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "prompt": "u8 overflow in a release build...",
+      "options": {
+        "a": "panics at runtime",
+        "b": "wraps silently",
+        "c": "refuses to compile"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

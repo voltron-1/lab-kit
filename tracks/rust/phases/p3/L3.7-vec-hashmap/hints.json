@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check your answers.txt for required keys q1..q5 and ensure files/sample.rs was compiled to ./sample.",
+    "q1/q3/q4 examine Entry API and HashMap iteration semantics explained in lab.md. q2 counts occurrences of 'login' in events.",
+    "Compile sample.rs with `rustc files/sample.rs -o sample`, run `./sample`, and transcribe output values."
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A trait bound is best read as...",
+      "options": {
+        "a": "An object inheritance hierarchy",
+        "b": "A capability contract: the body may use exactly what the bounds grant, nothing more",
+        "c": "A performance optimization hint"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Where does a trait bound violation surface?",
+      "options": {
+        "a": "At the offending call site, at compile time, naming the missing trait (E0277)",
+        "b": "At runtime during execution",
+        "c": "At link time"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which symbol stacks multiple trait bounds on a single generic type parameter?",
+      "answer_b64": "Kw==",
+      "accept_b64": [
+        "Kw==",
+        "cGx1cw==",
+        "cGx1cyBzaWdu"
+      ]
+    }
+  ]
+}

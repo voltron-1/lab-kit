@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Four prediction keys (high, threshold, streak, error) — listed in step 2 of lab.md.",
+    "is_high only reads threshold so threshold survives; streak counts bump() calls; broken.rs moves tag into the closure causing a use-after-move error.",
+    "Run and transcribe: rustc sample.rs -o sample; ./sample; rustc broken.rs."
+  ]
+}

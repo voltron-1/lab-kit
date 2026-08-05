@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What are the first three things to inspect when reading an unknown API signature?",
+      "options": {
+        "a": "README badges and star counts",
+        "b": "Constructor Result-ness, lookup Option-ness, and lifetimes tying output borrows to inputs",
+        "c": "License and author list"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A lifetime parameter in a public API signature (e.g. `Match<'h>`) tells consumers...",
+      "options": {
+        "a": "It is an internal implementation detail",
+        "b": "The output borrows from input `'h` — keep that input alive while holding the output",
+        "c": "The operation is slow"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "In API reading, a Result return type tells you the operation can ___.",
+      "answer_b64": "ZmFpbA==",
+      "accept_b64": [
+        "ZmFpbA==",
+        "ZmFpbC4=",
+        "ZXJy"
+      ]
+    }
+  ]
+}

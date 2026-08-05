@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Five answer keys (q1, q2, q3, q4, error) — the grader names each miss; options are listed in lab.md.",
+    "q1 and q2 describe the two halves of the ? contract; q3 traces \"443\" through parse_port; the error code comes from running rustc broken.rs.",
+    "Run and transcribe: rustc sample.rs -o sample; ./sample; rustc broken.rs."
+  ]
+}

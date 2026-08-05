@@ -1,0 +1,3 @@
+- unwrap/expect/panic are crash-on-purpose: fine in tests, red flags on input paths
+- the review question is reachability: can attacker-shaped data arrive at this site?
+- fixes make failure a value with a policy — match, ?, unwrap_or; never catch-and-hope

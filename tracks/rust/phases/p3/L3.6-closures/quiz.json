@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Default closure capture mode in Rust is...",
+      "options": {
+        "a": "Always by move",
+        "b": "The lightest borrow that works — shared if reading, mutable if writing, move only with the explicit keyword",
+        "c": "Always by value copy"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The `move` keyword on a closure exists because...",
+      "options": {
+        "a": "It makes closure invocation faster",
+        "b": "A closure that outlives its enclosing scope (e.g. spawned thread) cannot hold borrows into that scope — it must take ownership",
+        "c": "Borrows in closures are deprecated"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which closure trait represents a closure that can be called at most once because invocation consumes its captured state?",
+      "answer_b64": "Zm5vbmNl",
+      "accept_b64": [
+        "Zm5vbmNl",
+        "Zm4gb25jZQ==",
+        "Zm5vbmNlKCk="
+      ]
+    }
+  ]
+}

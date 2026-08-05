@@ -1,0 +1,8 @@
+{
+  "id": "L3.5",
+  "title": "Iterators — reading the chains AI loves to generate",
+  "type": "PREDICT",
+  "objective": "Predict the output of adapter chains — filter/map/collect and friends — and read the extra & that closure parameters stack on.",
+  "gate": false,
+  "est_minutes": 15
+}

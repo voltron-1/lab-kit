@@ -1,0 +1,50 @@
+// regex crate public API surface (pinned version: regex 1.10.6)
+// Reference excerpt of key type definitions, signatures, and contracts.
+
+pub struct Regex { ... }
+pub struct Match<'h> { ... }
+pub struct Captures<'h> { ... }
+pub struct Error { ... }
+
+impl Regex {
+    /// Compiles a regular expression. Returns an Error if the input is not a valid regex syntax.
+    pub fn new(re: &str) -> Result<Regex, Error>;
+
+    /// Returns true if and only if the regex matches anywhere in haystack.
+    pub fn is_match(&self, haystack: &str) -> bool;
+
+    /// Returns the start and end byte offsets of the leftmost first match in haystack.
+    /// Returns None if no match is found.
+    pub fn find<'h>(&self, haystack: &'h str) -> Option<Match<'h>>;
+
+    /// Returns the capture groups corresponding to the leftmost first match in haystack.
+    /// Returns None if no match is found.
+    pub fn captures<'h>(&self, haystack: &'h str) -> Option<Captures<'h>>;
+}
+
+impl<'h> Match<'h> {
+    /// Returns the matched text as a substring slice of haystack.
+    pub fn as_str(&self) -> &'h str;
+
+    /// Returns the starting byte offset of the match in haystack.
+    pub fn start(&self) -> usize;
+
+    /// Returns the ending byte offset of the match in haystack.
+    pub fn end(&self) -> usize;
+}
+
+impl<'h> Captures<'h> {
+    /// Returns the match for the capture group at index i, or None if the group
+    /// did not participate in the match.
+    pub fn get(&self, i: usize) -> Option<Match<'h>>;
+}
+
+impl<'h> std::ops::Index<usize> for Captures<'h> {
+    type Output = str;
+    /// Returns the matched substring for capture group i.
+    /// Panics if the capture group index i does not exist or did not participate.
+    fn index(&self, i: usize) -> &str;
+}
+
+// Guaranteed linear time matching: search time is linear in the length of haystack,
+// eliminating catastrophic backtracking vulnerability by design.

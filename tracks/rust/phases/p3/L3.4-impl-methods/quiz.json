@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The receiver spectrum, in order &self / &mut self / self:",
+      "options": {
+        "a": "read / write / consume",
+        "b": "fast / slow / unsafe",
+        "c": "public / private / internal"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "`new` in Rust is...",
+      "options": {
+        "a": "A special built-in language keyword",
+        "b": "A standard naming convention — any associated function returning Self is a constructor",
+        "c": "Automatically synthesized by the compiler"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "To call a &mut self method, the variable binding must be declared with which keyword?",
+      "answer_b64": "bXV0",
+      "accept_b64": [
+        "bXV0"
+      ]
+    }
+  ]
+}

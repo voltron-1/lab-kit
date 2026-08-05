@@ -1,0 +1,8 @@
+{
+  "id": "L3.4",
+  "title": "impl blocks and method syntax",
+  "type": "DECODE",
+  "objective": "Read an impl block through its receivers — &self reads, &mut self writes, self consumes — and recognize method calls as sugar over Phase-2 ownership rules.",
+  "gate": false,
+  "est_minutes": 15
+}

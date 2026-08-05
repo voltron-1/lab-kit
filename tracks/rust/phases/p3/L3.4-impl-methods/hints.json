@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Five answer keys (q1-q5); q4 requires doing the experiment step in step 3.",
+    "The receiver signature of each method answers q1 and q2; q3 is three record() calls formatted by report(); q4 is the move error code.",
+    "Add the marked call in sample.rs, run rustc sample.rs, note error code E0382, remove the line, recompile with -o sample."
+  ]
+}

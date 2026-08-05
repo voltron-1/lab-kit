@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Implementing `From<A>` for `B` automatically provides...",
+      "options": {
+        "a": "Nothing else",
+        "b": "`a.into()` — Into is the mirror trait, one impl serves both spellings",
+        "c": "TryFrom automatically"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "`70000_u32 as u16` evaluates to...",
+      "options": {
+        "a": "65535 — clamped",
+        "b": "4464 — truncation modulo 65536, silently",
+        "c": "A compile error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which conversion trait returns a Result?",
+      "answer_b64": "dHJ5ZnJvbQ==",
+      "accept_b64": [
+        "dHJ5ZnJvbQ==",
+        "dHJ5X2Zyb20=",
+        "dHJ5aW50bw==",
+        "dHJ5X2ludG8="
+      ]
+    }
+  ]
+}

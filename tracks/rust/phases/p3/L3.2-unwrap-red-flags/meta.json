@@ -1,0 +1,8 @@
+{
+  "id": "L3.2",
+  "title": "unwrap / expect / panic! — red flags in review",
+  "type": "AUDIT",
+  "objective": "Count the panic paths in a working tool, judge which ones untrusted input can reach, and detonate one for real — the unwrap-is-DoS review reflex.",
+  "gate": false,
+  "est_minutes": 15
+}
