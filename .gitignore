@@ -5,3 +5,7 @@
 
 # session scratch
 /logs/
+
+# python bytecode cache (tools/genevidence/)
+__pycache__/
+*.pyc
