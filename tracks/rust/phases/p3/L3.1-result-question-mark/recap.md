@@ -1,0 +1,3 @@
+- Result is just an enum — errors are values that travel through return types
+- ? reads as: on Err return it to my caller now; on Ok hand me the inner value
+- fallibility lives in signatures — every risky call is marked where it happens

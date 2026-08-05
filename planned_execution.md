@@ -1,7 +1,8 @@
 # LAB-KIT — Planned Execution
 
 ## NEXT UP
-Track: **ps p7 — Directing & Auditing AI PowerShell** is **fully closed out** (7/7 labs, `tests/acceptance.sh` P7 section, tag `ps-p7`) — **this completes the ps track end to end (p0–p7, 54 labs)**. bash is also fully done (p0–p7). Next unstarted items, one per remaining track: **rust p3 — Types, Traits, Error Handling** (10 labs) and **soc p2 — Network Triage Fundamentals** (7 labs). Neither has a build plan yet — write one first and get it approved, the way every prior phase's plan was, before building. Per PROMPTS.md's suggested build order, phases can be picked in any order ("alternate phases by mood") — listing rust before soc implies no priority.
+Track: **rust p3 — Types, Traits, Error Handling** is **fully built and verified** (10/10 labs, `tests/acceptance.sh` P3 section, tag `rust-p3`). Next unstarted items: **soc p2 — Network Triage Fundamentals** (7 labs) and **rust p4 — Security-Critical Rust** (10 labs).
+
 
 Known gap (not blocking, no build required): **ps p0–p3 (26 labs) have zero `tests/acceptance.sh` coverage** — built, merged, and tagged, but never given the fabricated-pass-+-negative-case section every other closed-out phase in every other track has. Same shape as the soc-p0 gap that existed before soc-p1's close-out. Whoever picks this up: it must land as its own section inserted *before* the `ps track P4` section in `tests/acceptance.sh` (that section's `--force` skip-ahead permanently marks p0–p3 unpassed, so p0–p3 coverage added after it could never show ✓ — drop the `--force` once this lands).
 
@@ -266,7 +267,7 @@ board: [LAB-KIT: Rust Literacy Lab](https://github.com/users/voltron-1/projects/
 - [x] rust p0 — Toolchain & Kit (3 labs) — tag `rust-p0`
 - [x] rust p1 — Reading Basic Rust (9 labs) — tag `rust-p1`
 - [x] rust p2 — Ownership, Borrowing, Lifetimes (10 labs) — tag `rust-p2`; plan: `docs/plans/rust-p2-plan.md`; L2.1 (PR #328), L2.2 (PR #329), L2.3 (PR #330), L2.4 (PR #331), L2.5 (PR #340), L2.6 (PR #341), L2.7 (PR #342), L2.8 (PR #343), L2.9 (PR #344), L2.10 (PR #345)
-- [ ] rust p3 — Types, Traits, Error Handling (10 labs)
+- [x] rust p3 — Types, Traits, Error Handling (10 labs) — tag `rust-p3`; plan: `docs/plans/rust-p3-plan.md`
 - [ ] rust p4 — Security-Critical Rust (10 labs)
 - [ ] rust p5 — Concurrency & Async (8 labs)
 - [ ] rust p6 — Reading Real Security Tools (6 labs)

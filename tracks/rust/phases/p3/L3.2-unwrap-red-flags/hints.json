@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Five answer keys (q1-q5), panic1.txt, and a working ./ingest binary are required.",
+    "Count all unwrap AND expect calls for q1; for q2 exclude the missing-arg site; detonate with an argument missing a colon.",
+    "Exact commands: rustc ingest.rs -o ingest; ./ingest \"scan:512\"; ./ingest \"scan-512\" 2> panic1.txt."
+  ]
+}

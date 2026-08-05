@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A first review sweep for panic paths inspects code for...",
+      "options": {
+        "a": "unwrap, expect, panic!, and array indexing/slicing — then judges input reachability",
+        "b": "TODO comments only",
+        "c": "unsafe blocks only"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A panic in a request handler of a service results in...",
+      "options": {
+        "a": "Undefined behavior and memory corruption",
+        "b": "The worker/process dying — an availability loss (DoS), not memory corruption",
+        "c": "Nothing, panics are silently caught by default"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "In a #[test] function, is unwrap() acceptable? (yes/no)",
+      "answer_b64": "eWVz",
+      "accept_b64": [
+        "eWVz",
+        "WWVz"
+      ]
+    }
+  ]
+}

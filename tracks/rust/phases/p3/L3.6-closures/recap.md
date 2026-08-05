@@ -1,0 +1,3 @@
+- closures capture the environment by the lightest borrow that works — or own it with move
+- a closure that mutates a capture needs mut on ITS OWN binding — the &mut lives in it
+- Fn / FnMut / FnOnce describe what calling does to captures: read / write / consume

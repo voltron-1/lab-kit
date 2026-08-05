@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Four prediction keys (total, hi, low_count, first) — keys are listed in step 2 of lab.md.",
+    "total is 21+22+443+8080+9200; hi is the first element > 1000; low_count is count of elements < 100; first is 21 * 10.",
+    "Run and transcribe: rustc sample.rs -o sample; ./sample."
+  ]
+}

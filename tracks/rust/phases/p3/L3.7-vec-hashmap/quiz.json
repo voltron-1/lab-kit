@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What happens when using `map[key]` indexing on a HashMap when key is missing?",
+      "options": {
+        "a": "Returns a default value",
+        "b": "Panics — indexing is assertive access",
+        "c": "Inserts key with default value"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why is `counts[user_supplied_key]` a security/reliability review flag in network services?",
+      "options": {
+        "a": "It causes memory corruption",
+        "b": "An absent key supplied by an attacker panics the process (Denial of Service)",
+        "c": "It results in a compile-time type error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which HashMap method returns an Option<&V> instead of panicking on a missing key?",
+      "answer_b64": "Z2V0",
+      "accept_b64": [
+        "Z2V0",
+        "LmdldA==",
+        "Z2V0KCk="
+      ]
+    }
+  ]
+}

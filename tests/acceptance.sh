@@ -1400,7 +1400,160 @@ rust_check_fail_missing "L2.10" "fixed5"
 rust_check_pass "L2.10" $'b\nb\nboth\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 22 rust P0-P2 labs passed (22/22)" "$out" "(22/22)"
+assert_contains "status shows all 22 rust P0-P2 labs passed (22/32)" "$out" "(22/32)"
+
+# --- 7h2. rust track P3: fabricated pass + negative case per lab ---
+note "rust track P3: fabricated pass + negative case per lab"
+
+# L3.1 — Result and the ? operator (phase opener)
+out="$(printf 'b\na\nb\na\nb\n' | "$LAB" start rust L3.1 2>&1)"; rc=$?
+assert_eq "'lab start rust L3.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L3.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/rust/L3.1"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=a
+q3=443
+q4=b
+error=E0277
+EOF
+rust_check_fail_missing "L3.1" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L3.1" $'b\nb\nok err\n'
+
+# L3.2 — unwrap / expect / panic!
+"$LAB" start rust L3.2 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L3.2"
+cat > "$WS/answers.txt" <<'EOF'
+q1=4
+q2=3
+q3=b
+q4=a
+q5=b
+EOF
+cat > "$WS/panic1.txt" <<'EOF'
+panicked at 'called Option::unwrap() on a None value'
+EOF
+rust_check_fail_missing "L3.2" "ingest"
+(cd -- "$WS" && rustc ingest.rs -o ingest)
+rust_check_pass "L3.2" $'a\nb\nyes\n'
+
+# L3.3 — Trait bounds
+"$LAB" start rust L3.3 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L3.3"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=b
+q3=8443
+q4=E0277
+q5=b
+EOF
+rust_check_fail_missing "L3.3" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L3.3" $'b\na\n+\n'
+
+# L3.4 — impl methods
+"$LAB" start rust L3.4 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L3.4"
+cat > "$WS/answers.txt" <<'EOF'
+q1=a
+q2=b
+q3=failed-auth: 3 hits
+q4=E0382
+q5=a
+EOF
+rust_check_fail_missing "L3.4" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L3.4" $'a\nb\nmut\n'
+
+# L3.5 — Iterator chains
+"$LAB" start rust L3.5 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L3.5"
+cat > "$WS/predictions.txt" <<'EOF'
+total=17766
+hi=8080
+low_count=2
+first=210
+EOF
+rust_check_fail_missing "L3.5" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L3.5" $'b\nb\ncollect\n'
+
+# L3.6 — Closures
+"$LAB" start rust L3.6 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L3.6"
+cat > "$WS/predictions.txt" <<'EOF'
+high=true
+threshold=100
+streak=3
+error=E0382
+EOF
+rust_check_fail_missing "L3.6" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L3.6" $'b\nb\nfnonce\n'
+
+# L3.7 — Vec and HashMap patterns
+"$LAB" start rust L3.7 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L3.7"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=3
+q3=b
+q4=a
+q5=0
+EOF
+rust_check_fail_missing "L3.7" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L3.7" $'b\nb\nget\n'
+
+# L3.8 — From / Into / TryFrom
+"$LAB" start rust L3.8 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L3.8"
+cat > "$WS/answers.txt" <<'EOF'
+q1=a
+q2=8443
+q3=65535
+q4=4464
+q5=b
+EOF
+rust_check_fail_missing "L3.8" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L3.8" $'b\nb\ntryfrom\n'
+
+# L3.9 — Error taxonomy
+"$LAB" start rust L3.9 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L3.9"
+rust_check_fail_missing "L3.9" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+q1=a
+q2=a
+q3=b
+q4=malformed header at byte 12
+q5=a
+EOF
+rust_check_pass "L3.9" $'b\nb\nthiserror\n'
+
+# L3.10 — Phase gate: API reading (gate)
+"$LAB" start rust L3.10 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L3.10"
+rust_check_fail_missing "L3.10" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=b
+q3=b
+q4=None
+q5=b
+q6=get
+q7=b
+q8=b
+q9=start
+q10=b
+EOF
+rust_check_pass "L3.10" $'b\nb\nfail\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 32 rust P0-P3 labs passed (32/32)" "$out" "(32/32)"
+
 
 # --- 7i. soc track P0+P1: fabricated pass + negative case per lab ---
 note "soc track P0+P1: fabricated pass + negative case per lab"
@@ -1512,7 +1665,7 @@ printf 'q1a=entra-signin\nq1b=t1110.003\nq1c=b\nq2a=sysmon\nq2b=t1059.001\nq2c=a
 soc_check_pass "L1.8" $'a\nb\nc\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 11 soc P0-P1 labs passed, L2.1 still pending (11/12)" "$out" "(11/12)"
+assert_contains "status shows all 11 soc P0-P1 labs passed, L2.1 still pending (11/13)" "$out" "(11/13)"
 
 # --- 7f. ps track P4 (PowerShell as Attack Surface): fabricated pass +
 # negative case per lab. First ps-track coverage in this file -- p0-p3

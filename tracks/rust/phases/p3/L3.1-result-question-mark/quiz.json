@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Result<T, E> is...",
+      "options": {
+        "a": "A compiler intrinsic",
+        "b": "An ordinary enum: Ok(T) | Err(E) — nothing magic",
+        "c": "A wrapper around C++ exceptions"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What is the primary audit advantage of ? over hidden exception handling?",
+      "options": {
+        "a": "It makes functions execute faster",
+        "b": "Every fallible call site is visibly marked with ? and declared in the return signature — no invisible control flow",
+        "c": "It automatically catches panics at runtime"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Name the two variants of the Result enum (separated by a space).",
+      "answer_b64": "b2sgZXJy",
+      "accept_b64": [
+        "b2sgZXJy",
+        "T2sgRXJy",
+        "b2ssIGVycg==",
+        "b2svZXJy"
+      ]
+    }
+  ]
+}

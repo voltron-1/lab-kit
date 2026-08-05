@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "You see `-> Result<Config, ConfigError>` vs `-> anyhow::Result<Config>` — what do they tell you?",
+      "options": {
+        "a": "Nothing",
+        "b": "The first is library-style (callers match variants); the second is app-style (callers report)",
+        "c": "The second is faster"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What is LOST when an error is converted into `anyhow::Result`?",
+      "options": {
+        "a": "Nothing",
+        "b": "Callers can no longer pattern match on specific error variants — fine for apps, wrong for libraries",
+        "c": "The error message"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which crate derives Display from #[error(...)] attribute templates?",
+      "answer_b64": "dGhpc2Vycm9y",
+      "accept_b64": [
+        "dGhpc2Vycm9y"
+      ]
+    }
+  ]
+}
