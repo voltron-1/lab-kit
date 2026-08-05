@@ -1,0 +1,94 @@
+# Canonical event/rule id registry for the SOC Analyst Lab (Coppermine universe).
+#
+# Binding source: docs/plans/soc-p01-plan.md §2.2, docs/plans/soc-p2-plan.md §2.1.
+# Every scenario yaml under tools/genevidence/scenarios/ MUST import an id from
+# here when it touches an event or rule another lab already pinned, rather than
+# minting a new CM-<MMDD>-<seq> / CM-R-<nnnn> for the same underlying event —
+# that's the cross-scenario collision the p0/p1 review panel caught and this
+# registry exists to prevent from regressing.
+#
+# id_bands records which <MMDD>-<seq> ranges a phase has already claimed, so the
+# next phase picks an unused band instead of colliding.
+
+id_bands:
+  phase1: "0002-0245, 0301-0460"
+  phase2: "0500-0522"
+
+events:
+  # --- Phase 0/1 canon (soc-p01-plan.md §2.2) ---
+  CM-0311-0142:
+    event: "M1 success — 4624 type 3, m.reyes, DC01"
+    ts: "2026-03-11T14:22:31Z"
+    used_by: [L0.1, L0.2, L1.3, L1.5, L1.7]
+  CM-0311-0143:
+    event: "M1 success — Entra sign-in, m.reyes/OWA, MFA absent"
+    ts: "2026-03-11T14:22:31Z"
+    used_by: [L1.7, L1.8]
+  CM-0311-0107:
+    event: "M1 failure — 4625, m.reyes, DC01"
+    ts: "2026-03-11T14:07:12Z"
+    used_by: [L0.2, L1.3]
+  CM-0310-0019:
+    event: "CHG-2143 — 4624 type 3, t.aoki -> DC01"
+    ts: "2026-03-10T10:00:12Z"
+    used_by: [L1.1, L1.7]
+  CM-0311-0201:
+    event: "M2 spawn — Sysmon 1, WINWORD.EXE -> powershell.exe -enc, WKS-ACCT-07"
+    ts: "2026-03-11T15:41:07Z"
+    used_by: [L1.4, L1.5, L1.7, L1.8]
+  CM-0311-0179:
+    event: "M2 beacon, endpoint view (Sysmon 3, powershell -> 203.0.113.66:443)"
+    ts: "2026-03-11T15:46:02Z"
+    used_by: [L1.7, L2.5, L2.7]  # network-plane twin is CM-0311-0501/0502, not a re-emit
+  CM-0312-0310:
+    event: "M3 zeek-dns tunnel burst #1, WKS-ENG-12 -> tun.stonewick.example, NXDOMAIN"
+    ts: "2026-03-12T09:00:00Z"
+    used_by: [L1.8, L2.2, L2.7]
+  CM-0312-0311:
+    event: "M3 zeek-dns tunnel burst #2, WKS-ENG-12 -> tun.stonewick.example, NXDOMAIN"
+    ts: "2026-03-12T09:00:00Z"
+    used_by: [L1.8, L2.2, L2.7]
+  CM-0312-0312:
+    event: "M3 zeek-dns tunnel burst #3, WKS-ENG-12 -> tun.stonewick.example, NXDOMAIN"
+    ts: "2026-03-12T09:00:00Z"
+    used_by: [L1.8, L2.2, L2.7]
+
+  # --- Phase 2 new canon (soc-p2-plan.md §2.1, 05xx band) ---
+  CM-0311-0500:
+    event: "M2 pre-beacon DNS: zeek dns A c2.stonewick.example from 10.20.30.107 -> 203.0.113.66"
+    ts: "2026-03-11T15:45:58Z"
+    used_by: [L2.5, L2.7]
+  CM-0311-0501:
+    event: "M2 beacon, network view: zeek conn row 10.20.30.107 -> 203.0.113.66:443/tcp ssl (first beacon; SF)"
+    ts: "2026-03-11T15:46:02Z"
+    used_by: [L2.1, L2.5, L2.6, L2.7]
+  CM-0311-0502:
+    event: "M2 beacon TLS: zeek ssl row for the same uid, server_name=c2.stonewick.example"
+    ts: "2026-03-11T15:46:02Z"
+    used_by: [L2.3, L2.5, L2.7]
+  CM-0312-0520:
+    event: "WEB01 -> cdn.stonewick.example HTTP GET /u.sh pull #1 (600s cron), zeek http/conn"
+    ts: "2026-03-12T20:16:00Z"
+    used_by: [L2.3, L2.4, L2.5, L2.7]
+  CM-0312-0521:
+    event: "WEB01 -> cdn.stonewick.example HTTP GET /u.sh pull #2 (600s cron), zeek http/conn"
+    ts: "2026-03-12T20:26:00Z"
+    used_by: [L2.3]
+  CM-0312-0522:
+    event: "WEB01 -> cdn.stonewick.example HTTP GET /u.sh pull #3 (600s cron), zeek http/conn"
+    ts: "2026-03-12T20:36:00Z"
+    used_by: [L2.3]
+
+rules:
+  CM-R-0117:
+    rule: "password spray"
+    used_by: [L1.3, L1.7]
+  CM-R-0159:
+    rule: "Office -> encoded PowerShell"
+    used_by: [L1.7, L1.8]
+  CM-R-0171:
+    rule: "high-entropy subdomain burst (reused from L1.8 CM-A-53)"
+    used_by: [L1.8, L2.2]
+  CM-R-0155:
+    rule: "fixed/near-fixed interval C2 — beaconing (reused from L1.7 c6)"
+    used_by: [L1.7, L2.6]
