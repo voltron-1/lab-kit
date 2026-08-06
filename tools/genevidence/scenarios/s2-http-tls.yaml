@@ -1,0 +1,56 @@
+scenario: s2-http-tls
+lab: L2.3
+window: {start: "2026-03-11T15:45:00Z", end: "2026-03-12T20:20:00Z"}
+
+http_rows:
+  - {ts: "2026-03-11T09:10:00Z", uid: "CHT00001", orig_h: "10.20.30.103", orig_p: 49300,
+     resp_h: "192.0.2.61", resp_p: 80, method: GET, host: "updates.example",
+     uri: "/patch/index.html", user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+     status_code: 200, request_body_len: 0, response_body_len: 4820, event_id: "CM-0312-0590"}
+  - {ts: "2026-03-11T09:10:05Z", uid: "CHT00002", orig_h: "10.20.30.103", orig_p: 49301,
+     resp_h: "192.0.2.61", resp_p: 80, method: GET, host: "updates.example",
+     uri: "/download", user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+     status_code: 301, request_body_len: 0, response_body_len: 178, event_id: "CM-0312-0591"}
+  - {ts: "2026-03-11T09:10:10Z", uid: "CHT00003", orig_h: "10.20.30.103", orig_p: 49302,
+     resp_h: "192.0.2.61", resp_p: 80, method: GET, host: "updates.example",
+     uri: "/favicon.ico", user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+     status_code: 404, request_body_len: 0, response_body_len: 0, event_id: "CM-0312-0592"}
+  - {ts: "2026-03-12T20:16:00Z", uid: "CXush1", orig_h: "10.20.10.20", orig_p: 44601,
+     resp_h: "198.51.100.23", resp_p: 80, method: GET, host: "cdn.stonewick.example",
+     uri: "/u.sh", user_agent: "curl/7.81.0",
+     status_code: 200, request_body_len: 0, response_body_len: 30, event_id: "CM-0312-0520"}
+  - {ts: "2026-03-11T15:46:05Z", uid: "CHT00005", orig_h: "10.20.30.107", orig_p: 49157,
+     resp_h: "192.0.2.61", resp_p: 80, method: POST, host: "updates.example",
+     uri: "/telemetry", user_agent: "Mozilla/5.0 (WindowsPowerShell/5.1)",
+     status_code: 200, request_body_len: 212, response_body_len: 45, event_id: "CM-0312-0593"}
+  - {ts: "2026-03-11T09:12:00Z", uid: "CHT00006", orig_h: "10.20.30.103", orig_p: 49303,
+     resp_h: "192.0.2.61", resp_p: 80, method: GET, host: "updates.example",
+     uri: "/assets/app.js", user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+     status_code: 200, request_body_len: 0, response_body_len: 15400, event_id: "CM-0312-0594"}
+  - {ts: "2026-03-11T09:12:05Z", uid: "CHT00007", orig_h: "10.20.31.112", orig_p: 49304,
+     resp_h: "192.0.2.61", resp_p: 80, method: GET, host: "updates.example",
+     uri: "/assets/style.css", user_agent: "Mozilla/5.0 (X11; Linux x86_64)",
+     status_code: 200, request_body_len: 0, response_body_len: 3200, event_id: "CM-0312-0595"}
+
+ssl_rows:
+  - {ts: "2026-03-11T09:00:00Z", uid: "CST00001", orig_h: "10.20.30.107", orig_p: 49150,
+     resp_h: "192.0.2.60", resp_p: 443, version: "TLSv13", cipher: "TLS_AES_128_GCM_SHA256",
+     server_name: "saas.mail.example", resumed: false, established: true, event_id: "CM-0311-0590"}
+  - {ts: "2026-03-11T15:46:02Z", uid: "CXbeac1", orig_h: "10.20.30.107", orig_p: 49156,
+     resp_h: "203.0.113.66", resp_p: 443, version: "TLSv12", cipher: "ECDHE-RSA-AES128-GCM-SHA256",
+     server_name: "c2.stonewick.example", resumed: false, established: true, event_id: "CM-0311-0502"}
+  - {ts: "2026-03-11T15:51:02Z", uid: "CXbeac2", orig_h: "10.20.30.107", orig_p: 49158,
+     resp_h: "203.0.113.66", resp_p: 443, version: "TLSv12", cipher: "ECDHE-RSA-AES128-GCM-SHA256",
+     server_name: null, resumed: true, established: true, event_id: "CM-0311-0591"}
+  - {ts: "2026-03-11T09:15:00Z", uid: "CST00004", orig_h: "10.20.30.103", orig_p: 49305,
+     resp_h: "192.0.2.61", resp_p: 443, version: "TLSv13", cipher: "TLS_AES_128_GCM_SHA256",
+     server_name: "updates.example", resumed: false, established: true, event_id: "CM-0311-0592"}
+
+answer_keys:
+  L2.3:
+    q1: "200"                              # status code of the /u.sh payload pull
+    q2: "c2.stonewick[.]example"           # DEFANGED - SNI of the beacon's first TLS handshake
+    q3: "mozilla/5.0 (windowspowershell/5.1)"   # the scripting-engine UA, verbatim lowercased
+    q4: post                               # HTTP method that sent data TO the server
+    q5: "-"                                # server_name of the resumed TLS row
+    q6: ssl                                # which log carries the HTTPS destination hostname

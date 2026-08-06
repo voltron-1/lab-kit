@@ -12,7 +12,13 @@
 
 id_bands:
   phase1: "0002-0245, 0301-0460"
-  phase2: "0500-0522"
+  # Only the ids with cross-lab significance are individually registered below
+  # (§2.1's canonical table); most flavor/filler ids a scenario mints for its
+  # own non-reused rows are NOT listed here, only banded, so the ranges below
+  # are wider than the literal `events:` entries — check for a literal
+  # collision with a listed id, not just band overlap, before reusing a range.
+  phase2: "0500-0522 (L2.5/L2.6/L2.7 canon), 0510-0517 (L2.1), 0530-0566 (L2.2 tunnel burst),
+    0570-0584 (L2.2 benign), 0590-0595 (L2.3, both 0311- and 0312-dated)"
 
 events:
   # --- Phase 0/1 canon (soc-p01-plan.md §2.2) ---
