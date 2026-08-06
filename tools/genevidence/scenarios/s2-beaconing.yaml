@@ -1,0 +1,73 @@
+scenario: s2-beaconing
+lab: L2.6
+window: {start: "2026-03-11T15:46:00Z", end: "2026-03-11T17:16:00Z"}
+
+# The hostile beacon: near-fixed 300s period with seeded (never random) +/-10%
+# jitter - automation's fingerprint. First row reuses the canonical CM-0311-0501
+# first-hit event (same uid CXbeac1 as L2.5's conn.log row for the same event;
+# L2.1 shows this same event too but under its own local uid CRD00005), so
+# this lab's series is the same real beacon those labs sampled from - source
+# port (49156) and history (ShADadFf) are pinned explicitly in the generator
+# call to match, since beacon_conn_series's defaults differ.
+beacon_burst:
+  host: "10.20.30.107"
+  dst: "203.0.113.66"
+  dst_port: 443
+  service: ssl
+  start: "2026-03-11T15:46:02Z"
+  base_period_s: 300
+  jitter_offsets_s: [0, -12, 18, -25, 9, -30, 14, -8, 22, -19, 5, -27, 11, -3, 16, -21, 8, -14]
+  orig_bytes: 517
+  resp_bytes: 1203
+  event_ids: ["CM-0311-0501", "CM-0311-0600", "CM-0311-0601", "CM-0311-0602", "CM-0311-0603",
+              "CM-0311-0604", "CM-0311-0605", "CM-0311-0606", "CM-0311-0607", "CM-0311-0608",
+              "CM-0311-0609", "CM-0311-0610", "CM-0311-0611", "CM-0311-0612", "CM-0311-0613",
+              "CM-0311-0614", "CM-0311-0615", "CM-0311-0616"]
+  uid_prefix: "CXbeac"
+
+# The "too-regular, known-port" false beacon: perfectly fixed 64s cadence,
+# zero jitter - benign precisely BECAUSE it's a known service on a known port,
+# not because it's less periodic than the hostile signal.
+ntp_burst:
+  host: "10.20.30.103"
+  dst: "192.0.2.10"
+  dst_port: 123
+  service: ntp
+  start: "2026-03-11T15:46:10Z"
+  base_period_s: 64
+  jitter_offsets_s: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  orig_bytes: 76
+  resp_bytes: 76
+  event_ids: ["CM-0311-0617", "CM-0311-0618", "CM-0311-0619", "CM-0311-0620", "CM-0311-0621",
+              "CM-0311-0622", "CM-0311-0623", "CM-0311-0624", "CM-0311-0625", "CM-0311-0626",
+              "CM-0311-0627", "CM-0311-0628", "CM-0311-0629", "CM-0311-0630", "CM-0311-0631",
+              "CM-0311-0632", "CM-0311-0633", "CM-0311-0634", "CM-0311-0635", "CM-0311-0636"]
+  uid_prefix: "CNTP"
+
+# The webmail poll: periodic (900s) but human-ish - bytes and duration vary
+# each hit, unlike the beacon's near-identical heartbeats.
+webmail_rows:
+  - {ts: "2026-03-11T15:46:30Z", uid: "CWEB0001", duration: "12.40", orig_bytes: 4200, resp_bytes: 8800, event_id: "CM-0311-0637"}
+  - {ts: "2026-03-11T16:01:30Z", uid: "CWEB0002", duration: "45.80", orig_bytes: 3100, resp_bytes: 15200, event_id: "CM-0311-0638"}
+  - {ts: "2026-03-11T16:16:30Z", uid: "CWEB0003", duration: "8.20", orig_bytes: 5600, resp_bytes: 9400, event_id: "CM-0311-0639"}
+  - {ts: "2026-03-11T16:31:30Z", uid: "CWEB0004", duration: "33.10", orig_bytes: 2800, resp_bytes: 6100, event_id: "CM-0311-0640"}
+  - {ts: "2026-03-11T16:46:30Z", uid: "CWEB0005", duration: "67.50", orig_bytes: 7200, resp_bytes: 18900, event_id: "CM-0311-0641"}
+  - {ts: "2026-03-11T17:01:30Z", uid: "CWEB0006", duration: "15.90", orig_bytes: 3900, resp_bytes: 7300, event_id: "CM-0311-0642"}
+
+# A little non-periodic noise for realism - none of it graded.
+noise_rows:
+  - {ts: "2026-03-11T15:50:00Z", uid: "CNOI0001", orig_h: "192.0.2.199", orig_p: 51100, resp_h: "10.20.10.20", resp_p: 443, proto: tcp, service: "-", duration: "0.00", orig_bytes: 0, resp_bytes: 0, conn_state: REJ, history: "Sr", event_id: "CM-0311-0643"}
+  - {ts: "2026-03-11T16:05:00Z", uid: "CNOI0002", orig_h: "10.20.31.112", orig_p: 51200, resp_h: "10.20.10.5", resp_p: 53, proto: udp, service: dns, duration: "0.01", orig_bytes: 78, resp_bytes: 130, conn_state: SF, history: "Dd", event_id: "CM-0311-0644"}
+  - {ts: "2026-03-11T16:20:00Z", uid: "CNOI0003", orig_h: "10.20.30.103", orig_p: 51300, resp_h: "192.0.2.61", resp_p: 80, proto: tcp, service: http, duration: "1.20", orig_bytes: 210, resp_bytes: 5400, conn_state: SF, history: "ShADadFf", event_id: "CM-0311-0645"}
+  - {ts: "2026-03-11T16:35:00Z", uid: "CNOI0004", orig_h: "10.20.10.9", orig_p: 51400, resp_h: "10.20.10.8", resp_p: 445, proto: tcp, service: "-", duration: "2.80", orig_bytes: 980000, resp_bytes: 7200, conn_state: SF, history: "ShADadFf", event_id: "CM-0311-0646"}
+  - {ts: "2026-03-11T16:50:00Z", uid: "CNOI0005", orig_h: "10.20.30.107", orig_p: 51500, resp_h: "10.20.10.5", resp_p: 53, proto: udp, service: dns, duration: "0.01", orig_bytes: 74, resp_bytes: 140, conn_state: SF, history: "Dd", event_id: "CM-0311-0647"}
+  - {ts: "2026-03-11T17:05:00Z", uid: "CNOI0006", orig_h: "10.20.31.112", orig_p: 51600, resp_h: "192.0.2.61", resp_p: 80, proto: tcp, service: http, duration: "0.90", orig_bytes: 195, resp_bytes: 3800, conn_state: SF, history: "ShADadFf", event_id: "CM-0311-0648"}
+
+answer_keys:
+  L2.6:
+    q1: "10.20.30[.]107"    # DEFANGED - the beaconing host
+    q2: "203.0.113[.]66"    # DEFANGED - the hostile beacon's destination IP
+    q3: "300"                # approximate base period of the hostile beacon, seconds
+    q4: "18"                 # number of hostile beacon connections - generator asserts this
+    q5: "192.0.2[.]10"       # DEFANGED - the ALSO-periodic but benign destination
+    q6: ntp                  # one word: why q5 is benign despite being periodic

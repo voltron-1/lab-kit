@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Group connections by destination IP, sort by ts, and look at the gaps between successive connections to the same dst.",
+    "One external dst repeats every ~300s with small variation and tiny transfers - that's the beacon. NTP (123/udp) also repeats but is a known service; the webmail poll is periodic but moves real, varying bytes.",
+    "q1 10.20.30[.]107; q2 203.0.113[.]66; q3 300; q4 = count the beacon rows (18); q5 192.0.2[.]10; q6 ntp."
+  ]
+}

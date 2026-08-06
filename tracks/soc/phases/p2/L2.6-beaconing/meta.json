@@ -1,0 +1,8 @@
+{
+  "id": "L2.6",
+  "title": "Beaconing - periodicity, jitter, and C2 shapes in connection logs",
+  "type": "HUNT",
+  "objective": "Find a jittered C2 beacon by computing inter-arrival deltas per destination and separate it from benign periodic traffic (NTP, polls).",
+  "gate": false,
+  "est_minutes": 20
+}

@@ -1,0 +1,3 @@
+- Beaconing is automation's fingerprint: near-fixed callback intervals with small jitter, tiny near-identical transfers every hit, to one external destination.
+- Compute the deltas yourself - group by destination, diff successive timestamps - because periodic is not the same as hostile.
+- NTP and app polls are periodic and benign; the machine surfaces the shape, but the human confirms destination, port, and byte pattern before the verdict.

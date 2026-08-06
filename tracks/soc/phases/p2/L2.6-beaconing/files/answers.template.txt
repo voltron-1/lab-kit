@@ -1,0 +1,19 @@
+# Group conn.log by destination, compute deltas, and answer.
+
+# the beaconing host - DEFANGED
+q1=
+
+# the hostile beacon's destination IP - DEFANGED
+q2=
+
+# approximate base period of the hostile beacon, seconds (integer)
+q3=
+
+# number of hostile beacon connections in the log
+q4=
+
+# the destination IP that is ALSO periodic but BENIGN - DEFANGED
+q5=
+
+# one word: why q5 is benign despite being periodic (port|service)
+q6=

@@ -964,6 +964,101 @@ q5=
     if "answer_keys" in scen and "L2.5" in scen["answer_keys"]:
         sync_key_block(l25_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L2.5"])
 
+_BEACON_METHOD_MD = """# Beacon math - the delta method
+
+1. Group connections by destination (`awk` on `id.resp_h`, or `id.resp_h:id.resp_p`).
+2. Sort each destination's rows by `ts`.
+3. Compute the delta (seconds) between each row and the one before it, per destination.
+4. A near-fixed delta with small variation ("jitter") — same magnitude every time, give or
+   take a small percentage — is automation's fingerprint: a program calling home on a timer.
+5. Periodic is not the same as hostile. Before calling a periodic destination malicious, check:
+   - **Port/service**: a well-known port (123/udp NTP, a mail sync port) argues for legitimate
+     background traffic, not C2.
+   - **Byte pattern**: tiny, near-identical bytes each hit reads as a heartbeat; larger,
+     *varying* byte counts read as a human or an app doing real work on each poll.
+   - **Destination**: is it a known-good service, or an external IP with no other footprint?
+
+The platform can surface "this destination is periodic" automatically. Deciding whether that
+periodicity is hostile — port, bytes, destination — is the Tier 1 analyst's job.
+"""
+
+def generate_s2_beaconing(scen: dict):
+    l26_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p2" / "L2.6-beaconing"
+    if not (l26_dir / "check.sh").exists():
+        return
+    files_dir = l26_dir / "files"
+
+    bb = scen["beacon_burst"]
+    beacon_rows, beacon_count = beacon_conn_series(
+        bb["host"], bb["dst"], bb["dst_port"], bb["service"], bb["start"],
+        bb["base_period_s"], bb["jitter_offsets_s"], bb["orig_bytes"], bb["resp_bytes"],
+        bb["event_ids"], bb["uid_prefix"],
+        src_port_base=49156, history="ShADadFf",
+    )
+    # Row 0 IS the exact same connection L2.1/L2.5 already show for CM-0311-0501
+    # (uid CXbeac1) - src_port_base/history above match its 5-tuple, and its
+    # duration is pinned here too since beacon_conn_series derives duration
+    # from a formula, not a parameter.
+    beacon_rows[0]["duration"] = "0.31"
+
+    nb = scen["ntp_burst"]
+    ntp_rows, _ = beacon_conn_series(
+        nb["host"], nb["dst"], nb["dst_port"], nb["service"], nb["start"],
+        nb["base_period_s"], nb["jitter_offsets_s"], nb["orig_bytes"], nb["resp_bytes"],
+        nb["event_ids"], nb["uid_prefix"],
+    )
+
+    webmail_rows = [{
+        "ts": r["ts"], "uid": r["uid"], "id.orig_h": "10.20.30.107", "id.orig_p": 49200 + i,
+        "id.resp_h": "192.0.2.60", "id.resp_p": 443, "proto": "tcp", "service": "ssl",
+        "duration": r["duration"], "orig_bytes": r["orig_bytes"], "resp_bytes": r["resp_bytes"],
+        "conn_state": "SF", "history": "ShADadFf", "event_id": r["event_id"],
+    } for i, r in enumerate(scen["webmail_rows"])]
+
+    noise_rows = [{
+        "ts": r["ts"], "uid": r["uid"], "id.orig_h": r["orig_h"], "id.orig_p": r["orig_p"],
+        "id.resp_h": r["resp_h"], "id.resp_p": r["resp_p"], "proto": r["proto"],
+        "service": r["service"], "duration": r["duration"], "orig_bytes": r["orig_bytes"],
+        "resp_bytes": r["resp_bytes"], "conn_state": r["conn_state"], "history": r["history"],
+        "event_id": r["event_id"],
+    } for r in scen["noise_rows"]]
+
+    all_rows = sorted(beacon_rows + ntp_rows + webmail_rows + noise_rows, key=lambda r: r["ts"])
+    write_zeek_tsv(files_dir / "conn.log", "conn", all_rows)
+
+    write_file(files_dir / "beacon-method.md", _BEACON_METHOD_MD)
+
+    answers_template = """# Group conn.log by destination, compute deltas, and answer.
+
+# the beaconing host - DEFANGED
+q1=
+
+# the hostile beacon's destination IP - DEFANGED
+q2=
+
+# approximate base period of the hostile beacon, seconds (integer)
+q3=
+
+# number of hostile beacon connections in the log
+q4=
+
+# the destination IP that is ALSO periodic but BENIGN - DEFANGED
+q5=
+
+# one word: why q5 is benign despite being periodic (port|service)
+q6=
+"""
+    write_file(files_dir / "answers.template.txt", answers_template)
+
+    if "answer_keys" in scen and "L2.6" in scen["answer_keys"]:
+        keys = scen["answer_keys"]["L2.6"]
+        if str(beacon_count) != str(keys["q4"]):
+            raise ValueError(
+                f"q4 answer key is {keys['q4']!r} but beacon_burst actually emitted "
+                f"{beacon_count} rows - the key was hand-typed and drifted"
+            )
+        sync_key_block(l26_dir / "check.sh", scen["scenario"], keys)
+
 def main():
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
@@ -1003,6 +1098,8 @@ def main():
             generate_s2_tshark_pcap(scen)
         elif scen_id == "s2-zeek-verdict":
             generate_s2_zeek_verdict(scen)
+        elif scen_id == "s2-beaconing":
+            generate_s2_beaconing(scen)
 
 if __name__ == "__main__":
     main()

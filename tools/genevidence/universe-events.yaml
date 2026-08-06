@@ -19,7 +19,8 @@ id_bands:
   # collision with a listed id, not just band overlap, before reusing a range.
   phase2: "0500-0522 (L2.5/L2.6/L2.7 canon), 0510-0517 (L2.1), 0530-0566 (L2.2 tunnel burst),
     0570-0584 (L2.2 benign), 0590-0595 (L2.3, both 0311- and 0312-dated),
-    0596-0599 (L2.5 filler, both 0311- and 0312-dated)"
+    0596-0599 (L2.5 filler, both 0311- and 0312-dated),
+    0600-0648 (L2.6, 0311-dated: beacon/NTP/webmail/noise fill)"
 
 events:
   # --- Phase 0/1 canon (soc-p01-plan.md §2.2) ---
