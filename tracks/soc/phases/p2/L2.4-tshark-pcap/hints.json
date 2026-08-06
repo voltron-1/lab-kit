@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Every answer is one `tshark -r capture.pcap -T fields -e <field>` away; add `-Y <filter>` to pick the right packets (e.g. `-Y http.request`).",
+    "DNS: `dns.qry.name` for the question, `dns.a` for the answer. HTTP: `http.request.method`, `http.host`, `http.request.uri`, `http.user_agent`, `http.response.code`. Your answers.txt IOCs must be defanged even though the tool output isn't.",
+    "q1 cdn.stonewick[.]example; q2 198.51.100[.]23; q3 get /u.sh; q4 curl/7.81.0; q5 200."
+  ]
+}

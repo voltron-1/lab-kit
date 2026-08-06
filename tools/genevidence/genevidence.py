@@ -853,6 +853,42 @@ q6=
     if "answer_keys" in scen and "L2.3" in scen["answer_keys"]:
         sync_key_block(l23_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L2.3"])
 
+def generate_s2_tshark_pcap(scen: dict):
+    l24_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p2" / "L2.4-tshark-pcap"
+    if not (l24_dir / "check.sh").exists():
+        return
+    files_dir = l24_dir / "files"
+
+    c = scen["capture"]
+    pcap = build_pcap_http_get(
+        client_ip=c["client_ip"], server_ip=c["server_ip"], dns_server_ip=c["dns_server_ip"],
+        qname=c["qname"], answer_ip=c["answer_ip"], uri=c["uri"], host_header=c["host_header"],
+        user_agent=c["user_agent"], status_line=c["status_line"], body=c["body"], t0=c["t0"],
+    )
+    write_binary(files_dir / "capture.pcap", pcap)
+
+    answers_template = """# Carve these facts from capture.pcap with tshark, then answer.
+
+# qname the client resolved - DEFANGED
+q1=
+
+# IP it resolved to - DEFANGED
+q2=
+
+# HTTP method + URI, space-joined, lowercased (e.g. get /path)
+q3=
+
+# user-agent of the request (lowercased)
+q4=
+
+# HTTP status code returned
+q5=
+"""
+    write_file(files_dir / "answers.template.txt", answers_template)
+
+    if "answer_keys" in scen and "L2.4" in scen["answer_keys"]:
+        sync_key_block(l24_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L2.4"])
+
 def main():
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
@@ -888,6 +924,8 @@ def main():
             generate_s2_dns_hunt(scen)
         elif scen_id == "s2-http-tls":
             generate_s2_http_tls(scen)
+        elif scen_id == "s2-tshark-pcap":
+            generate_s2_tshark_pcap(scen)
 
 if __name__ == "__main__":
     main()
