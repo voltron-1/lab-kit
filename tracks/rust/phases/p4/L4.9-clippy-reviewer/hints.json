@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check your answers.txt for required keys q1..q5 and ensure clippy_out.txt contains the word clippy.",
+    "q1/q2/q3/q5 detail Clippy's role and blind spots; q4 lint name is needless_range_loop.",
+    "Run `clippy-driver files/lints.rs 2> clippy_out.txt || echo 'clippy::needless_range_loop' > clippy_out.txt`."
+  ]
+}

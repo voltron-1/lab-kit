@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What happens when `Path::new(base).join(\"../../etc/shadow\")` is executed?",
+      "options": {
+        "a": "Rust blocks the traversal automatically",
+        "b": "The path escapes `base` — join does no containment check (CWE-22)",
+        "c": "It panics at runtime"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which vulnerability class is NOT prevented by Rust's memory safety?",
+      "options": {
+        "a": "Use-after-free",
+        "b": "Path traversal, command injection, and logic bugs",
+        "c": "Data races in safe code"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "To avoid shell injection, pass an argument ___ to `Command::new` instead of building a shell string.",
+      "answer_b64": "dmVjdG9y",
+      "accept_b64": [
+        "dmVjdG9y",
+        "YXJyYXk=",
+        "bGlzdA==",
+        "YXJnIHZlY3Rvcg==",
+        "YXJncw=="
+      ]
+    }
+  ]
+}

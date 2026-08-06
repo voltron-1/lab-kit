@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "An `extern \"C\"` fn declaration in Rust is...",
+      "options": {
+        "a": "Verified against the C library at compile time",
+        "b": "An unchecked promise — if the signature is wrong, the result is undefined behavior",
+        "c": "Automatically safe"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why is calling an FFI function `unsafe`?",
+      "options": {
+        "a": "FFI is slow",
+        "b": "The compiler cannot check that foreign code respects Rust's invariants — you vouch for it",
+        "c": "C is older than Rust"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which attribute gives a Rust struct a C-compatible memory layout for FFI?",
+      "answer_b64": "cmVwcihjKQ==",
+      "accept_b64": [
+        "cmVwcihjKQ==",
+        "I1tyZXByKGMpXQ==",
+        "cmVwciBj"
+      ]
+    }
+  ]
+}

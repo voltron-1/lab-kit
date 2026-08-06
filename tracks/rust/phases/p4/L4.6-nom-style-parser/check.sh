@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+: "${LAB_WORKSPACE:?run this via: lab check rust L4.6}"
+: "${LAB_CHECKLIB:?run this via: lab check rust L4.6}"
+# shellcheck source=/dev/null
+source "$LAB_CHECKLIB"
+
+assert_file_exists "answers.txt"
+assert_file_contains "answers.txt" '^q1=b$'
+assert_file_contains "answers.txt" '^q2=3$'
+assert_file_contains "answers.txt" '^q3=1$'
+assert_file_contains "answers.txt" '^q4=b$'
+assert_file_contains "answers.txt" '^q5=b$'
+
+assert_file_exists "sample"
+assert_output_contains 'parser rejects the hostile length' 'rejected: declared length exceeds input' 'step 2 — rustc sample.rs -o sample' -- ./sample
+
+ck_summary

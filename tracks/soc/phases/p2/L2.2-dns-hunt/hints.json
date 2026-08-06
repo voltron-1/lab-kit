@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Count queries per source host (`awk -F'\\t' '!/^#/{print $3}' dns.log | sort | uniq -c`). One host dwarfs the rest - start there.",
+    "Strip each qname to its last three labels to find the shared parent zone; the tunnel's labels are long and random, its qtype and rcode both repeat. Your IOC answers must be defanged.",
+    "Host 10.20.31[.]112, zone tun.stonewick[.]example, qtype txt, rcode nxdomain; q5 is that host's tunnel-zone query count (40); any tunnel row's event_id works for q6 (cm-0312-0310, -0311, or -0312)."
+  ]
+}

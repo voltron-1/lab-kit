@@ -1,0 +1,7 @@
+{
+  "id": "L4.8",
+  "title": "Supply chain — cargo audit, cargo deny, RUSTSEC advisories",
+  "type": "GUIDED",
+  "gate": false,
+  "est_minutes": 15
+}

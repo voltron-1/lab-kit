@@ -1,0 +1,7 @@
+{
+  "id": "L4.6",
+  "title": "Parsing untrusted bytes — reading a nom-style parser",
+  "type": "DECODE",
+  "gate": false,
+  "est_minutes": 20
+}

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check your answers.txt for required keys q1..q5 and compile files/sample.rs to ./sample.",
+    "q2 is 65636 - 65536 = 100; q3 is CWE-197; q1/q4/q5 detail narrowing truncation vulnerabilities.",
+    "Run `rustc files/sample.rs -o sample; ./sample` and check output."
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check your answers.txt for required keys q1..q5.",
+    "q1/q3/q4 examine exhibit.rs for unchecked length, unearned 'static lifetime, and unfulfilled SAFETY comment.",
+    "q2 asks for the canonical out-of-bounds read identifier: CWE-125."
+  ]
+}

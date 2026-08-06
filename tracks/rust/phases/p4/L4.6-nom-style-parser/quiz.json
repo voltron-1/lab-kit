@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A parser combinator function like `take` returns...",
+      "options": {
+        "a": "Just the parsed value",
+        "b": "The parsed value plus the remaining unconsumed slice",
+        "c": "A copied vector of bytes"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The primary security rule when parsing binary formats is...",
+      "options": {
+        "a": "To optimize for throughput",
+        "b": "To bounds-check every slice BEFORE reading it",
+        "c": "To use raw pointers for speed"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which Rust operator propagates a None or Err out of a parser helper function?",
+      "answer_b64": "Pw==",
+      "accept_b64": [
+        "Pw==",
+        "cXVlc3Rpb24gbWFyaw==",
+        "dGhlID8gb3BlcmF0b3I="
+      ]
+    }
+  ]
+}

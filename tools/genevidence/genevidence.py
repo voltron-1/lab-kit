@@ -9,6 +9,7 @@ import sys
 import json
 import base64
 import struct
+import hashlib
 import ipaddress
 import yaml
 from pathlib import Path
@@ -709,6 +710,95 @@ q6=
             )
         sync_key_block(l21_dir / "check.sh", scen["scenario"], keys)
 
+def _tunnel_label(i: int, length: int) -> str:
+    """Deterministic stand-in for a random/high-entropy DNS-tunnel subdomain
+    label: a fixed hash of the row index, truncated to `length` hex chars.
+    Never uses Python's `random` — re-running the generator is byte-identical."""
+    return hashlib.sha256(f"tun-stonewick-{i}".encode()).hexdigest()[:length]
+
+def generate_s2_dns_hunt(scen: dict):
+    l22_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p2" / "L2.2-dns-hunt"
+    if not (l22_dir / "check.sh").exists():
+        return
+    files_dir = l22_dir / "files"
+
+    tb = scen["tunnel_burst"]
+    start = datetime.fromisoformat(tb.get("start", scen["window"]["start"]).replace("Z", "+00:00"))
+    end = datetime.fromisoformat(scen["window"]["end"].replace("Z", "+00:00"))
+    if start.tzinfo is None or end.tzinfo is None:
+        raise ValueError("tunnel_burst start/window end has no UTC offset")
+    step = timedelta(seconds=(end - start).total_seconds() // tb["count"])
+
+    a_indices = set(tb["a_indices"])
+    noerror_indices = set(tb["noerror_indices"])
+    if a_indices & noerror_indices:
+        raise ValueError(
+            f"a_indices and noerror_indices overlap at {a_indices & noerror_indices} - "
+            "a row can't silently be both an A-qtype override and a NOERROR override "
+            "without changing what q3/q4's majority actually is"
+        )
+    seed_ids = tb["seed_event_ids"]
+
+    dns_rows = []
+    for i in range(tb["count"]):
+        ts = start + i * step
+        length = 24 + (i % 9)
+        label = _tunnel_label(i, length)
+        qtype = "A" if i in a_indices else "TXT"
+        rcode = "NOERROR" if i in noerror_indices else "NXDOMAIN"
+        answers = _tunnel_label(1000 + i, 16) if rcode == "NOERROR" else "-"
+        event_id = seed_ids[i] if i < len(seed_ids) else f"CM-0312-{tb['bulk_event_id_start'] + i - len(seed_ids):04d}"
+        dns_rows.append({
+            "ts": ts.strftime("%Y-%m-%dT%H:%M:%SZ"), "uid": f"CTUN{i + 1:05d}",
+            "id.orig_h": tb["host"], "id.orig_p": 52000 + i,
+            "id.resp_h": tb["resolver"], "id.resp_p": 53, "proto": "udp",
+            "query": f"{label}.{tb['zone']}", "qtype_name": qtype, "rcode_name": rcode,
+            "answers": answers, "event_id": event_id,
+        })
+
+    for row in scen["benign_rows"]:
+        dns_rows.append({
+            "ts": row["ts"], "uid": row["uid"],
+            "id.orig_h": row["orig_h"], "id.orig_p": 52500 + len(dns_rows),
+            "id.resp_h": "10.20.10.5", "id.resp_p": 53, "proto": "udp",
+            "query": row["query"], "qtype_name": row["qtype"], "rcode_name": row["rcode"],
+            "answers": row["answers"], "event_id": row["event_id"],
+        })
+
+    dns_rows.sort(key=lambda r: r["ts"])
+    write_zeek_tsv(files_dir / "dns.log", "dns", dns_rows)
+
+    answers_template = """# Hunt dns.log with awk/sort/uniq -c/rg and answer.
+
+# source IP doing the tunneling - DEFANGED (e.g. 10.20.31[.]112)
+q1=
+
+# the tunnel zone (parent domain shared by the random labels) - DEFANGED
+q2=
+
+# dominant qtype of the tunnel traffic (one token)
+q3=
+
+# dominant rcode of the tunnel traffic (one token)
+q4=
+
+# count of tunnel-zone queries from that host
+q5=
+
+# one event_id of a tunnel query (cm-mmdd-nnnn)
+q6=
+"""
+    write_file(files_dir / "answers.template.txt", answers_template)
+
+    if "answer_keys" in scen and "L2.2" in scen["answer_keys"]:
+        keys = scen["answer_keys"]["L2.2"]
+        if str(tb["count"]) != str(keys["q5"]):
+            raise ValueError(
+                f"q5 answer key is {keys['q5']!r} but tunnel_burst.count is "
+                f"{tb['count']} - the key was hand-typed and drifted"
+            )
+        sync_key_block(l22_dir / "check.sh", scen["scenario"], keys)
+
 def main():
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
@@ -740,6 +830,8 @@ def main():
             generate_s1_gate_five_alerts(scen)
         elif scen_id == "s2-conn-reading":
             generate_s2_conn_reading(scen)
+        elif scen_id == "s2-dns-hunt":
+            generate_s2_dns_hunt(scen)
 
 if __name__ == "__main__":
     main()

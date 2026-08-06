@@ -1,0 +1,7 @@
+{
+  "id": "L4.4",
+  "title": "as casts vs TryFrom — truncation bugs",
+  "type": "AUDIT",
+  "gate": false,
+  "est_minutes": 15
+}

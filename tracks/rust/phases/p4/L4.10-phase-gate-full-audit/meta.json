@@ -1,0 +1,7 @@
+{
+  "id": "L4.10",
+  "title": "Phase gate: full audit of a 150-line intentionally flawed tool",
+  "type": "AUDIT",
+  "gate": true,
+  "est_minutes": 25
+}

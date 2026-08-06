@@ -1,0 +1,3 @@
+- DNS abuse has a shape: one host, one zone, long high-entropy labels, TXT and NXDOMAIN at volume - that is a tunnel, a covert channel over port 53.
+- Benign NXDOMAIN storms (wpad, typos) come from many hosts with short, meaningful names - count per source before you conclude anything.
+- The authoritative server for the tunnel zone is the attacker's C2 endpoint; the zone itself is the durable indicator.

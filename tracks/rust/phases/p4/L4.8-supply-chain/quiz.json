@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "`cargo audit` protects a Rust project against...",
+      "options": {
+        "a": "Logic bugs in your main function",
+        "b": "Pulling in dependency versions with published RUSTSEC security advisories",
+        "c": "Slow build times"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why is supply-chain risk invisible to `rustc`?",
+      "options": {
+        "a": "rustc scans crates.io",
+        "b": "A dependency can compile perfectly while harboring a known published security vulnerability",
+        "c": "Dependencies are not compiled"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "What prefix begins every RustSec advisory ID (e.g. ____-2023-0001)?",
+      "answer_b64": "cnVzdHNlYw==",
+      "accept_b64": [
+        "cnVzdHNlYw==",
+        "UlVTVFNFQw=="
+      ]
+    }
+  ]
+}

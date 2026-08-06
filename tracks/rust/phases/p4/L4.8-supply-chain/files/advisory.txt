@@ -1,0 +1,11 @@
+RUSTSEC-2023-0001: Unsoundness in example-crate before 1.2.0
+
+ID: RUSTSEC-2023-0001
+Crate: example-crate
+Affected Versions: < 1.2.0
+Patched Version: 1.2.0
+Category: memory-corruption
+
+Description:
+A missing bounds check in example-crate allows an out-of-bounds memory write when
+processing untrusted input slices.

@@ -1,0 +1,7 @@
+{
+  "id": "L4.2",
+  "title": "Auditing an unsafe block — the checklist",
+  "type": "AUDIT",
+  "gate": false,
+  "est_minutes": 20
+}
