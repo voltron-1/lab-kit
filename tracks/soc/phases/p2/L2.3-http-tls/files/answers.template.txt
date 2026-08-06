@@ -1,0 +1,21 @@
+# Read http.log and ssl.log and answer.
+
+# status code of the /u.sh payload pull
+q1=
+
+# the SNI (server_name) of the beacon's first TLS handshake - DEFANGED
+q2=
+
+# the user-agent string that is a scripting engine, not a browser
+# (verbatim, lowercased)
+q3=
+
+# HTTP method used to send data TO the server in the suspicious row
+q4=
+
+# in the resumed TLS row, what is server_name? (one token)
+q5=
+
+# which log would you use to find the destination hostname of an
+# HTTPS session: http or ssl
+q6=

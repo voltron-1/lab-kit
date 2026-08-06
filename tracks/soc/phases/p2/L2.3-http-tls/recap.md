@@ -1,0 +1,3 @@
+- HTTP is readable: method, host, uri, user-agent, and status code are all in the clear - status 3xx redirects and 4xx not-founds are routine, not verdicts.
+- HTTPS hides the uri and body; the SNI (server_name in ssl.log) is the destination hostname you still get - until a resumed session drops it.
+- User-agents lie easily, but one advertising a scripting engine (curl, WindowsPowerShell) on outbound traffic is a cheap, useful tell.

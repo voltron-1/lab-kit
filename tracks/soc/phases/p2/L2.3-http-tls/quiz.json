@@ -1,0 +1,40 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A host makes an HTTPS connection to a C2. Which field still tells you the destination hostname?",
+      "options": {
+        "a": "http.uri",
+        "b": "ssl server_name (SNI)",
+        "c": "the response body",
+        "d": "none - TLS hides everything"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A `404` in http.log means:",
+      "options": {
+        "a": "the request was blocked",
+        "b": "the server had no such resource - common and usually benign",
+        "c": "malware",
+        "d": "a redirect"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "`user_agent: Mozilla/5.0 (WindowsPowerShell/5.1)` on an outbound request is worth a look because:",
+      "options": {
+        "a": "it's a browser",
+        "b": "it advertises a scripting engine making web requests - not a person browsing",
+        "c": "all Mozilla UAs are malicious",
+        "d": "it's a 404"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

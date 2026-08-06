@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "http.log shows method/host/uri/user_agent/status - read it like a request line. ssl.log shows server_name, the SNI.",
+    "The /u.sh pull is plaintext HTTP so you see the URI; the C2 session is TLS so you only get SNI. The odd user-agent names a scripting engine, not a browser.",
+    "q1 200; q2 c2.stonewick[.]example (defanged, first ssl row); q3 the WindowsPowerShell user-agent, lowercased; q4 post; q5 the resumed row's server_name is -; q6 ssl."
+  ]
+}

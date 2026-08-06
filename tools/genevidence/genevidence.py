@@ -799,6 +799,60 @@ q6=
             )
         sync_key_block(l22_dir / "check.sh", scen["scenario"], keys)
 
+def generate_s2_http_tls(scen: dict):
+    l23_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p2" / "L2.3-http-tls"
+    if not (l23_dir / "check.sh").exists():
+        return
+    files_dir = l23_dir / "files"
+
+    http_rows = [{
+        "ts": row["ts"], "uid": row["uid"],
+        "id.orig_h": row["orig_h"], "id.orig_p": row["orig_p"],
+        "id.resp_h": row["resp_h"], "id.resp_p": row["resp_p"],
+        "method": row["method"], "host": row["host"], "uri": row["uri"],
+        "user_agent": row["user_agent"], "status_code": row["status_code"],
+        "request_body_len": row["request_body_len"], "response_body_len": row["response_body_len"],
+        "event_id": row["event_id"],
+    } for row in scen["http_rows"]]
+    write_zeek_tsv(files_dir / "http.log", "http", http_rows)
+
+    ssl_rows = [{
+        "ts": row["ts"], "uid": row["uid"],
+        "id.orig_h": row["orig_h"], "id.orig_p": row["orig_p"],
+        "id.resp_h": row["resp_h"], "id.resp_p": row["resp_p"],
+        "version": row["version"], "cipher": row["cipher"],
+        "server_name": row["server_name"], "resumed": row["resumed"],
+        "established": row["established"], "event_id": row["event_id"],
+    } for row in scen["ssl_rows"]]
+    write_zeek_tsv(files_dir / "ssl.log", "ssl", ssl_rows)
+
+    answers_template = """# Read http.log and ssl.log and answer.
+
+# status code of the /u.sh payload pull
+q1=
+
+# the SNI (server_name) of the beacon's first TLS handshake - DEFANGED
+q2=
+
+# the user-agent string that is a scripting engine, not a browser
+# (verbatim, lowercased)
+q3=
+
+# HTTP method used to send data TO the server in the suspicious row
+q4=
+
+# in the resumed TLS row, what is server_name? (one token)
+q5=
+
+# which log would you use to find the destination hostname of an
+# HTTPS session: http or ssl
+q6=
+"""
+    write_file(files_dir / "answers.template.txt", answers_template)
+
+    if "answer_keys" in scen and "L2.3" in scen["answer_keys"]:
+        sync_key_block(l23_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L2.3"])
+
 def main():
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
@@ -832,6 +886,8 @@ def main():
             generate_s2_conn_reading(scen)
         elif scen_id == "s2-dns-hunt":
             generate_s2_dns_hunt(scen)
+        elif scen_id == "s2-http-tls":
+            generate_s2_http_tls(scen)
 
 if __name__ == "__main__":
     main()

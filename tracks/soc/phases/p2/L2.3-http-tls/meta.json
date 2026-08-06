@@ -1,0 +1,8 @@
+{
+  "id": "L2.3",
+  "title": "HTTP and TLS in logs - methods, status codes, user-agents, SNI",
+  "type": "DECODE",
+  "objective": "Read HTTP request lines and TLS SNI from zeek http.log/ssl.log; know which fields encryption hides and which survive.",
+  "gate": false,
+  "est_minutes": 15
+}
