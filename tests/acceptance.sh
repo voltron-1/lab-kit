@@ -2445,11 +2445,12 @@ else
 fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
-  # 32 total track-phase lines; bash p0-p7 (8) + rust p0-p3 (4) + soc p0-p1 (2) +
-  # ps p0-p7 (8) are done ([x]), leaving 10 unstarted -- update this count
-  # whenever a phase's marker changes.
+  # 32 total track-phase lines; bash p0-p7 (8) + rust p0-p4 (5) + soc p0-p1 (2) +
+  # ps p0-p7 (8) are done ([x]) = 23; soc p2 is in-progress ([~], counts as
+  # neither), leaving 8 unstarted -- update this count whenever a phase's
+  # marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 10 unstarted track-phase lines" "10" "$line_count"
+  assert_eq "planned_execution.md has 8 unstarted track-phase lines" "8" "$line_count"
 else
   bad "planned_execution.md missing"
 fi
