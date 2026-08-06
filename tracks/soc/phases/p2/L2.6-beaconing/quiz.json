@@ -1,0 +1,40 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is jitter in a beacon?",
+      "options": {
+        "a": "packet loss",
+        "b": "deliberate small random variation around a base callback interval to evade fixed-interval detection",
+        "c": "a port number",
+        "d": "a TLS version"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Traffic to `192.0.2.10:123/udp` every 64s is periodic. Why is it usually NOT C2?",
+      "options": {
+        "a": "64s is too fast",
+        "b": "UDP can't carry C2",
+        "c": "123/udp is NTP - a known, expected periodic service",
+        "d": "it isn't encrypted"
+      },
+      "answer_b64": "Yw=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Your platform flags a 300s +/-10% callback to an external IP. As the Tier 1 human, you confirm it by:",
+      "options": {
+        "a": "trusting the flag and escalating blind",
+        "b": "computing the deltas yourself and checking the destination, port, and byte pattern before you write the verdict",
+        "c": "closing it as FP because it's automated",
+        "d": "ignoring jitter"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
