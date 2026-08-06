@@ -1,0 +1,8 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	ssl
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	version	cipher	server_name	resumed	established	event_id
+#types	time	string	addr	port	addr	port	string	string	string	bool	bool	string
+2026-03-11T15:46:02Z	CXbeac1	10.20.30.107	49156	203.0.113.66	443	TLSv12	ECDHE-RSA-AES128-GCM-SHA256	c2.stonewick.example	F	T	CM-0311-0502

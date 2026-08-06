@@ -1,0 +1,12 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	conn
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	service	duration	orig_bytes	resp_bytes	conn_state	history	event_id
+#types	time	string	addr	port	addr	port	enum	string	interval	count	count	string	string	string
+2026-03-11T15:46:02Z	CXbeac1	10.20.30.107	49156	203.0.113.66	443	tcp	ssl	0.31	517	1203	SF	ShADadFf	CM-0311-0501
+2026-03-12T20:16:00Z	CXush1	10.20.10.20	44601	198.51.100.23	80	tcp	http	0.05	88	122	SF	ShADadFf	CM-0312-0520
+2026-03-11T14:00:00Z	CZV00003	10.20.30.107	49140	192.0.2.60	443	tcp	ssl	42.30	4201	8830	SF	ShADadFf	CM-0311-0596
+2026-03-11T14:01:00Z	CZV00004	10.20.30.107	49141	10.20.10.5	53	udp	dns	0.01	76	142	SF	Dd	CM-0311-0597
+2026-03-11T14:02:00Z	CZV00005	10.20.30.103	49142	192.0.2.10	123	udp	-	0.00	76	76	S0	D	CM-0311-0598

@@ -1,0 +1,3 @@
+- Zeek splits one conversation across logs - conn, dns, http, ssl - and the uid is the key that joins them back into a single story.
+- Each log carries a different verdict field: conn has conn_state and bytes, dns has query/answers, http has uri/UA, ssl has server_name.
+- When a uid isn't shared (dns is its own connection), pivot on the value instead - a resolved IP links the lookup to the session that used it.

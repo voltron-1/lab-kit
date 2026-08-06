@@ -1,0 +1,60 @@
+scenario: s2-zeek-verdict
+lab: L2.5
+window: {start: "2026-03-11T14:00:00Z", end: "2026-03-12T20:16:00Z"}
+
+# uid is the join key across logs. CXush1 must be byte-identical (same
+# 5-tuple) in both conn.log and http.log; CXbeac1 the same across conn.log
+# and ssl.log - the generator asserts this for real via verify.py, it's not
+# just eyeballed.
+conn_rows:
+  - {ts: "2026-03-11T15:46:02Z", uid: "CXbeac1", orig_h: "10.20.30.107", orig_p: 49156,
+     resp_h: "203.0.113.66", resp_p: 443, proto: tcp, service: ssl, duration: "0.31",
+     orig_bytes: 517, resp_bytes: 1203, conn_state: SF, history: "ShADadFf",
+     event_id: "CM-0311-0501"}
+  - {ts: "2026-03-12T20:16:00Z", uid: "CXush1", orig_h: "10.20.10.20", orig_p: 44601,
+     resp_h: "198.51.100.23", resp_p: 80, proto: tcp, service: http, duration: "0.05",
+     orig_bytes: 88, resp_bytes: 122, conn_state: SF, history: "ShADadFf",
+     event_id: "CM-0312-0520"}
+  - {ts: "2026-03-11T14:00:00Z", uid: "CZV00003", orig_h: "10.20.30.107", orig_p: 49140,
+     resp_h: "192.0.2.60", resp_p: 443, proto: tcp, service: ssl, duration: "42.30",
+     orig_bytes: 4201, resp_bytes: 8830, conn_state: SF, history: "ShADadFf",
+     event_id: "CM-0311-0596"}
+  - {ts: "2026-03-11T14:01:00Z", uid: "CZV00004", orig_h: "10.20.30.107", orig_p: 49141,
+     resp_h: "10.20.10.5", resp_p: 53, proto: udp, service: dns, duration: "0.01",
+     orig_bytes: 76, resp_bytes: 142, conn_state: SF, history: "Dd",
+     event_id: "CM-0311-0597"}
+  - {ts: "2026-03-11T14:02:00Z", uid: "CZV00005", orig_h: "10.20.30.103", orig_p: 49142,
+     resp_h: "192.0.2.10", resp_p: 123, proto: udp, service: "-", duration: "0.00",
+     orig_bytes: 76, resp_bytes: 76, conn_state: S0, history: "D",
+     event_id: "CM-0311-0598"}
+
+dns_rows:
+  - {ts: "2026-03-11T15:45:58Z", uid: "CXdns1", orig_h: "10.20.30.107", orig_p: 49155,
+     resp_h: "10.20.10.5", resp_p: 53, query: "c2.stonewick.example", qtype_name: A,
+     rcode_name: NOERROR, answers: "203.0.113.66", event_id: "CM-0311-0500"}
+  - {ts: "2026-03-11T14:00:30Z", uid: "CZV00006", orig_h: "10.20.30.107", orig_p: 49143,
+     resp_h: "10.20.10.5", resp_p: 53, query: "saas.mail.example", qtype_name: A,
+     rcode_name: NOERROR, answers: "192.0.2.60", event_id: "CM-0311-0599"}
+  - {ts: "2026-03-11T14:01:30Z", uid: "CZV00007", orig_h: "10.20.30.107", orig_p: 49144,
+     resp_h: "10.20.10.5", resp_p: 53, query: "coppermine.example", qtype_name: SOA,
+     rcode_name: NOERROR, answers: "ns1.coppermine.example", event_id: "CM-0312-0596"}
+
+http_rows:
+  - {ts: "2026-03-12T20:16:00Z", uid: "CXush1", orig_h: "10.20.10.20", orig_p: 44601,
+     resp_h: "198.51.100.23", resp_p: 80, method: GET, host: "cdn.stonewick.example",
+     uri: "/u.sh", user_agent: "curl/7.81.0", status_code: 200, request_body_len: 0,
+     response_body_len: 92, event_id: "CM-0312-0520"}
+
+ssl_rows:
+  - {ts: "2026-03-11T15:46:02Z", uid: "CXbeac1", orig_h: "10.20.30.107", orig_p: 49156,
+     resp_h: "203.0.113.66", resp_p: 443, version: "TLSv12", cipher: "ECDHE-RSA-AES128-GCM-SHA256",
+     server_name: "c2.stonewick.example", resumed: false, established: true,
+     event_id: "CM-0311-0502"}
+
+answer_keys:
+  L2.5:
+    q1: cxush1                          # uid shared by the /u.sh conn row and its http row
+    q2: server_name                     # ssl.log field carrying the C2 destination hostname
+    q3: "203.0.113[.]66"                # DEFANGED - dns answers value the beacon's id.resp_h matches
+    q4: conn                            # which log tells you how a connection ended
+    q5: cm-0311-0502                    # event_id of the ssl row for the beacon

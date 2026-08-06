@@ -1,0 +1,40 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is a zeek `uid`?",
+      "options": {
+        "a": "a user id",
+        "b": "a per-connection identifier shared across every zeek log for that connection",
+        "c": "an event severity",
+        "d": "a rule id"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "You have a beacon's conn row but want the destination hostname. Which log + field?",
+      "options": {
+        "a": "conn `service`",
+        "b": "ssl `server_name` via the shared uid",
+        "c": "dns `query` always",
+        "d": "http `host`"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "conn.log gives duration and conn_state; dns.log gives query/answers; http.log gives method/uri/UA. Why keep them separate then join by uid?",
+      "options": {
+        "a": "disk space",
+        "b": "each log carries a different slice of one conversation - uid stitches them back together",
+        "c": "they're redundant",
+        "d": "zeek requires it"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

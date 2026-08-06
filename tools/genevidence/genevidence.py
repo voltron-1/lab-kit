@@ -15,6 +15,9 @@ import yaml
 from pathlib import Path
 from datetime import datetime, timedelta, timezone
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import verify  # noqa: E402 - sibling module, path set immediately above
+
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
 def write_file(filepath: Path, content: str):
@@ -889,6 +892,78 @@ q5=
     if "answer_keys" in scen and "L2.4" in scen["answer_keys"]:
         sync_key_block(l24_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L2.4"])
 
+def generate_s2_zeek_verdict(scen: dict):
+    l25_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p2" / "L2.5-zeek-verdict"
+    if not (l25_dir / "check.sh").exists():
+        return
+    files_dir = l25_dir / "files"
+
+    conn_rows = [{
+        "ts": r["ts"], "uid": r["uid"], "id.orig_h": r["orig_h"], "id.orig_p": r["orig_p"],
+        "id.resp_h": r["resp_h"], "id.resp_p": r["resp_p"], "proto": r["proto"],
+        "service": r["service"], "duration": r["duration"], "orig_bytes": r["orig_bytes"],
+        "resp_bytes": r["resp_bytes"], "conn_state": r["conn_state"], "history": r["history"],
+        "event_id": r["event_id"],
+    } for r in scen["conn_rows"]]
+    write_zeek_tsv(files_dir / "conn.log", "conn", conn_rows)
+
+    dns_rows = [{
+        "ts": r["ts"], "uid": r["uid"], "id.orig_h": r["orig_h"], "id.orig_p": r["orig_p"],
+        "id.resp_h": r["resp_h"], "id.resp_p": r["resp_p"], "proto": "udp",
+        "query": r["query"], "qtype_name": r["qtype_name"], "rcode_name": r["rcode_name"],
+        "answers": r["answers"], "event_id": r["event_id"],
+    } for r in scen["dns_rows"]]
+    write_zeek_tsv(files_dir / "dns.log", "dns", dns_rows)
+
+    http_rows = [{
+        "ts": r["ts"], "uid": r["uid"], "id.orig_h": r["orig_h"], "id.orig_p": r["orig_p"],
+        "id.resp_h": r["resp_h"], "id.resp_p": r["resp_p"], "method": r["method"],
+        "host": r["host"], "uri": r["uri"], "user_agent": r["user_agent"],
+        "status_code": r["status_code"], "request_body_len": r["request_body_len"],
+        "response_body_len": r["response_body_len"], "event_id": r["event_id"],
+    } for r in scen["http_rows"]]
+    write_zeek_tsv(files_dir / "http.log", "http", http_rows)
+
+    ssl_rows = [{
+        "ts": r["ts"], "uid": r["uid"], "id.orig_h": r["orig_h"], "id.orig_p": r["orig_p"],
+        "id.resp_h": r["resp_h"], "id.resp_p": r["resp_p"], "version": r["version"],
+        "cipher": r["cipher"], "server_name": r["server_name"], "resumed": r["resumed"],
+        "established": r["established"], "event_id": r["event_id"],
+    } for r in scen["ssl_rows"]]
+    write_zeek_tsv(files_dir / "ssl.log", "ssl", ssl_rows)
+
+    # L2.5's whole teaching point IS uid-consistency - enforce it for real at
+    # generation time rather than trusting the hand-authored rows above.
+    violations = verify.check_uid_consistency({
+        "conn": files_dir / "conn.log", "dns": files_dir / "dns.log",
+        "http": files_dir / "http.log", "ssl": files_dir / "ssl.log",
+    })
+    if violations:
+        raise ValueError(f"s2-zeek-verdict uid consistency violated: {violations}")
+
+    answers_template = """# Join zeek conn/dns/http/ssl by uid and by resolved IP, then answer.
+
+# the uid shared by the /u.sh conn row and its http row
+q1=
+
+# in ssl.log, the field name that carries the C2 destination hostname
+q2=
+
+# the dns answers value that the beacon conn row's id.resp_h matches
+# (DEFANGED)
+q3=
+
+# which log tells you HOW a connection ended (conn_state lives there)
+q4=
+
+# the event_id of the ssl row for the beacon (cm-mmdd-nnnn)
+q5=
+"""
+    write_file(files_dir / "answers.template.txt", answers_template)
+
+    if "answer_keys" in scen and "L2.5" in scen["answer_keys"]:
+        sync_key_block(l25_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L2.5"])
+
 def main():
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
@@ -926,6 +1001,8 @@ def main():
             generate_s2_http_tls(scen)
         elif scen_id == "s2-tshark-pcap":
             generate_s2_tshark_pcap(scen)
+        elif scen_id == "s2-zeek-verdict":
+            generate_s2_zeek_verdict(scen)
 
 if __name__ == "__main__":
     main()

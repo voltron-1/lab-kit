@@ -1,0 +1,8 @@
+{
+  "id": "L2.5",
+  "title": "Zeek logs - conn, dns, http, and the fields that carry the verdict",
+  "type": "DECODE",
+  "objective": "Join zeek conn/dns/http/ssl by uid and by resolved IP to reconstruct one conversation, and name the field in each log that carries the verdict.",
+  "gate": false,
+  "est_minutes": 15
+}

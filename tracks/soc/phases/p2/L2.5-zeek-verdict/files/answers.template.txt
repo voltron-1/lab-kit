@@ -1,0 +1,17 @@
+# Join zeek conn/dns/http/ssl by uid and by resolved IP, then answer.
+
+# the uid shared by the /u.sh conn row and its http row
+q1=
+
+# in ssl.log, the field name that carries the C2 destination hostname
+q2=
+
+# the dns answers value that the beacon conn row's id.resp_h matches
+# (DEFANGED)
+q3=
+
+# which log tells you HOW a connection ended (conn_state lives there)
+q4=
+
+# the event_id of the ssl row for the beacon (cm-mmdd-nnnn)
+q5=

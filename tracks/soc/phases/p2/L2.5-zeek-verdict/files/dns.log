@@ -1,0 +1,10 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	dns
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	query	qtype_name	rcode_name	answers	event_id
+#types	time	string	addr	port	addr	port	enum	string	string	string	string	string
+2026-03-11T15:45:58Z	CXdns1	10.20.30.107	49155	10.20.10.5	53	udp	c2.stonewick.example	A	NOERROR	203.0.113.66	CM-0311-0500
+2026-03-11T14:00:30Z	CZV00006	10.20.30.107	49143	10.20.10.5	53	udp	saas.mail.example	A	NOERROR	192.0.2.60	CM-0311-0599
+2026-03-11T14:01:30Z	CZV00007	10.20.30.107	49144	10.20.10.5	53	udp	coppermine.example	SOA	NOERROR	ns1.coppermine.example	CM-0312-0596
