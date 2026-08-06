@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Find the same uid in two logs - that's one conversation seen twice. `grep` the uid across files.",
+    "The /u.sh conn row and its http row share a uid; the beacon conn row and its ssl row share a different uid. dns.log doesn't share those uids, but its `answers` IP matches the beacon's `id.resp_h`.",
+    "q1 cxush1; q2 server_name; q3 203.0.113[.]66; q4 conn; q5 the beacon ssl row's event_id cm-0311-0502."
+  ]
+}
