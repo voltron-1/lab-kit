@@ -1,0 +1,3 @@
+- A pcap is queryable from the shell: `tshark -r file -Y <filter> -T fields -e <field>` pulls exactly one fact per column.
+- Plaintext HTTP exposes method, host, uri, and user-agent; TLS would leave you only the SNI - the same lesson as the logs.
+- `-z follow,tcp` reassembles a whole conversation, turning scattered packets back into the request and response you can read.

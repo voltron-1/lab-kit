@@ -1,0 +1,8 @@
+{
+  "id": "L2.4",
+  "title": "tshark first contact - carving answers out of a PCAP from the command line",
+  "type": "GUIDED",
+  "objective": "Carve DNS, HTTP request, user-agent, and status facts out of a pcap with tshark field extraction, and follow a TCP stream.",
+  "gate": false,
+  "est_minutes": 15
+}

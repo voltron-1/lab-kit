@@ -18,7 +18,7 @@ http_rows:
   - {ts: "2026-03-12T20:16:00Z", uid: "CXush1", orig_h: "10.20.10.20", orig_p: 44601,
      resp_h: "198.51.100.23", resp_p: 80, method: GET, host: "cdn.stonewick.example",
      uri: "/u.sh", user_agent: "curl/7.81.0",
-     status_code: 200, request_body_len: 0, response_body_len: 30, event_id: "CM-0312-0520"}
+     status_code: 200, request_body_len: 0, response_body_len: 92, event_id: "CM-0312-0520"}
   - {ts: "2026-03-11T15:46:05Z", uid: "CHT00005", orig_h: "10.20.30.107", orig_p: 49157,
      resp_h: "192.0.2.61", resp_p: 80, method: POST, host: "updates.example",
      uri: "/telemetry", user_agent: "Mozilla/5.0 (WindowsPowerShell/5.1)",

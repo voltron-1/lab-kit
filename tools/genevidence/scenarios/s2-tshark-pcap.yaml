@@ -1,0 +1,27 @@
+scenario: s2-tshark-pcap
+lab: L2.4
+window: {start: "2026-03-12T20:16:00Z", end: "2026-03-12T20:16:30Z"}
+
+# Same event as L2.3's http.log row CM-0312-0520 (uid CXush1) - the network
+# analog of "one instant, many spellings": this lab reads it as raw packets
+# instead of a zeek log line.
+capture:
+  client_ip: "10.20.10.20"       # WEB01
+  server_ip: "198.51.100.23"     # payload host
+  dns_server_ip: "10.20.10.5"    # DC01 resolver
+  qname: "cdn.stonewick.example"
+  answer_ip: "198.51.100.23"
+  uri: "/u.sh"
+  host_header: "cdn.stonewick.example"
+  user_agent: "curl/7.81.0"
+  status_line: "200 OK"
+  body: "#!/bin/sh\n# inert simulacrum - a comment, not a working payload; nothing here runs anything\n"
+  t0: 1773346560                 # 2026-03-12T20:16:00Z
+
+answer_keys:
+  L2.4:
+    q1: "cdn.stonewick[.]example"   # DEFANGED - qname the client resolved
+    q2: "198.51.100[.]23"           # DEFANGED - IP it resolved to
+    q3: "get /u.sh"                 # HTTP method + URI, space-joined, lowercased
+    q4: "curl/7.81.0"               # user-agent of the request, lowercased
+    q5: "200"                       # HTTP status code returned

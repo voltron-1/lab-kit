@@ -1834,7 +1834,7 @@ printf 'q1a=entra-signin\nq1b=t1110.003\nq1c=b\nq2a=sysmon\nq2b=t1059.001\nq2c=a
 soc_check_pass "L1.8" $'a\nb\nc\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 11 soc P0-P1 labs passed, L2.1-L2.3 still pending (11/14)" "$out" "(11/14)"
+assert_contains "status shows all 11 soc P0-P1 labs passed, L2.1-L2.4 still pending (11/15)" "$out" "(11/15)"
 
 # --- 7f. ps track P4 (PowerShell as Attack Surface): fabricated pass +
 # negative case per lab. First ps-track coverage in this file -- p0-p3

@@ -1,0 +1,16 @@
+# Carve these facts from capture.pcap with tshark, then answer.
+
+# qname the client resolved - DEFANGED
+q1=
+
+# IP it resolved to - DEFANGED
+q2=
+
+# HTTP method + URI, space-joined, lowercased (e.g. get /path)
+q3=
+
+# user-agent of the request (lowercased)
+q4=
+
+# HTTP status code returned
+q5=

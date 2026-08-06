@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "`tshark -r f.pcap -T fields -e http.host` does what?",
+      "options": {
+        "a": "captures live traffic",
+        "b": "reads a saved pcap and prints the http.host field of matching packets",
+        "c": "needs root",
+        "d": "decrypts TLS"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why can tshark show you `GET /u.sh` here but not the URI of the C2 session in L2.3?",
+      "options": {
+        "a": "tshark can't read GET",
+        "b": "the /u.sh fetch is plaintext HTTP; the C2 session is TLS-encrypted",
+        "c": "the pcap is corrupt",
+        "d": "URIs are always hidden"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which tshark option reassembles and prints a full TCP conversation as text? (the `-z follow,tcp,ascii,<n>` form - answer just the flag, e.g. -z)",
+      "answer_b64": "LXo=",
+      "accept_b64": [
+        "LXo=",
+        "eg=="
+      ]
+    }
+  ]
+}

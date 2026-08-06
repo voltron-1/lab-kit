@@ -13,3 +13,4 @@ tracks/ps/phases/p3/L3.5-invoke-expression/files/shadow-iex.ps1:7 — aliases th
 tracks/ps/phases/p6/L6.3-tour-threat-hunt/files/hunt.ps1:17 — cradle keyword is the hunt's detection pattern, matched against log text, never invoked
 tracks/ps/phases/p7/L7.1-ai-failure-patterns/files/ai-sample.ps1:4 — fictional flawed-AI sample, never executed by check.sh
 tracks/ps/phases/p7/L7.4-review-reps/files/ai-1.ps1:4 — fictional flawed-AI sample, never executed by check.sh
+tracks/soc/phases/p2/L2.4-tshark-pcap/check.sh:37 — URI fragment matched against tshark output, not a filesystem path
