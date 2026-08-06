@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Dozens of NXDOMAIN for `wpad.coppermine.example` from many hosts is usually:",
+      "options": {
+        "a": "a tunnel",
+        "b": "benign browser proxy-autoconfig lookups",
+        "c": "a DGA",
+        "d": "exfiltration"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What most distinguishes tunneling from a broken-app NXDOMAIN storm?",
+      "options": {
+        "a": "tunneling uses long high-entropy labels under one zone from one host, carrying data",
+        "b": "tunneling always uses port 53",
+        "c": "storms only happen at night",
+        "d": "tunneling never returns NOERROR"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "A single host sends hundreds of TXT queries for random labels under one domain and mostly gets NXDOMAIN. One word for what that domain's authoritative server is being used as?",
+      "answer_b64": "dHVubmVs",
+      "accept_b64": [
+        "dHVubmVs"
+      ]
+    }
+  ]
+}

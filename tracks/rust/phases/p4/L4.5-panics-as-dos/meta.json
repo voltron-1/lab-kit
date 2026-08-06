@@ -1,0 +1,7 @@
+{
+  "id": "L4.5",
+  "title": "Panics as DoS — untrusted input meets unwrap",
+  "type": "AUDIT",
+  "gate": false,
+  "est_minutes": 15
+}

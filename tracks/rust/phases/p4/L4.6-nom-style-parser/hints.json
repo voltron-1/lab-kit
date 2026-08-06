@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check your answers.txt for required keys q1..q5 and compile files/sample.rs to ./sample.",
+    "q2 payload len is 3 ('abc'); q3 trailing bytes count is 1 (0xFF); 0xC8 is 200.",
+    "Run `rustc files/sample.rs -o sample; ./sample` and transcribe printed values."
+  ]
+}

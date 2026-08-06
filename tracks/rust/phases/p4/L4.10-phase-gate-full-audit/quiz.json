@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Five of the six flaws in `iocscan.rs` have CWE IDs; one is labeled `logic`. Why?",
+      "options": {
+        "a": "Truncation is too small to classify",
+        "b": "The inverted severity comparison is a pure logic bug — no linter or compiler sees human intent",
+        "c": "Panics are not tracked in security auditing"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Every flaw in `iocscan.rs` coexists with...",
+      "options": {
+        "a": "An unsafe block",
+        "b": "Complete Rust memory safety — the borrow checker is satisfied by all six",
+        "c": "A compile error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Complete the Phase 4 thesis: Memory safety is not ___.",
+      "answer_b64": "c2VjdXJpdHk=",
+      "accept_b64": [
+        "c2VjdXJpdHk=",
+        "dGhlIHNhbWUgYXMgc2VjdXJpdHk="
+      ]
+    }
+  ]
+}

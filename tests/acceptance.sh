@@ -1400,7 +1400,7 @@ rust_check_fail_missing "L2.10" "fixed5"
 rust_check_pass "L2.10" $'b\nb\nboth\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 22 rust P0-P2 labs passed (22/32)" "$out" "(22/32)"
+assert_contains "status shows all 22 rust P0-P2 labs passed (22/42)" "$out" "(22/42)"
 
 # --- 7h2. rust track P3: fabricated pass + negative case per lab ---
 note "rust track P3: fabricated pass + negative case per lab"
@@ -1552,7 +1552,176 @@ EOF
 rust_check_pass "L3.10" $'b\nb\nfail\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 32 rust P0-P3 labs passed (32/32)" "$out" "(32/32)"
+assert_contains "status shows all 32 rust P0-P3 labs passed (32/42)" "$out" "(32/42)"
+
+# L4.1 — What unsafe actually unlocks — the five superpowers
+out="$(printf 'b\na\nb\na\nb\n' | "$LAB" start rust L4.1 2>&1)"; rc=$?
+assert_eq "'lab start rust L4.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L4.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/rust/L4.1"
+cat > "$WS/answers.txt" <<'EOF'
+q1=5
+q2=b
+q3=30
+q4=b
+q5=E0133
+EOF
+rust_check_fail_missing "L4.1" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L4.1" $'b\nb\nsafety\n'
+
+# L4.2 — Auditing an unsafe block — the checklist
+"$LAB" start rust L4.2 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L4.2"
+rust_check_fail_missing "L4.2" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=CWE-125
+q3=b
+q4=b
+q5=b
+EOF
+rust_check_pass "L4.2" $'b\nb\nnothing\n'
+
+# L4.3 — FFI — where the guarantees end
+"$LAB" start rust L4.3 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L4.3"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=9
+q3=b
+q4=b
+q5=E0133
+EOF
+rust_check_fail_missing "L4.3" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L4.3" $'b\nb\nrepr(c)\n'
+
+# L4.4 — as casts vs TryFrom — truncation bugs
+"$LAB" start rust L4.4 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L4.4"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=100
+q3=CWE-197
+q4=b
+q5=b
+EOF
+rust_check_fail_missing "L4.4" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L4.4" $'b\nb\ntryfrom\n'
+
+# L4.5 — Panics as DoS — untrusted input meets unwrap
+"$LAB" start rust L4.5 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L4.5"
+cat > "$WS/answers.txt" <<'EOF'
+q1=4
+q2=b
+q3=b
+q4=b
+q5=b
+EOF
+cat > "$WS/panic1.txt" <<'EOF'
+thread 'main' panicked at 'called `Option::unwrap()` on a `None` value', parse.rs:5:45
+EOF
+rust_check_fail_missing "L4.5" "parse"
+(cd -- "$WS" && rustc parse.rs -o parse)
+rust_check_pass "L4.5" $'b\nb\nget\n'
+
+# L4.6 — Parsing untrusted bytes — reading a nom-style parser
+"$LAB" start rust L4.6 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L4.6"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=3
+q3=1
+q4=b
+q5=b
+EOF
+rust_check_fail_missing "L4.6" "sample"
+(cd -- "$WS" && rustc sample.rs -o sample)
+rust_check_pass "L4.6" $'b\nb\n?\n'
+
+# L4.7 — What Rust does NOT stop — path traversal, injection, logic bugs
+"$LAB" start rust L4.7 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L4.7"
+cat > "$WS/answers.txt" <<'EOF'
+q1=CWE-22
+q2=b
+q3=CWE-78
+q4=b
+q5=b
+q6=b
+EOF
+rust_check_fail_missing "L4.7" "fetch"
+(cd -- "$WS" && rustc fetch.rs -o fetch)
+rust_check_pass "L4.7" $'b\nb\nvector\n'
+
+# L4.8 — Supply chain — cargo audit, cargo deny, RUSTSEC advisories
+"$LAB" start rust L4.8 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L4.8"
+rust_check_fail_missing "L4.8" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=b
+q3=RUSTSEC
+q4=b
+q5=b
+EOF
+cat > "$WS/audit_out.txt" <<'EOF'
+Crate:     example-crate
+Version:   1.0.0
+Title:     Unsoundness in example-crate
+ID:        RUSTSEC-2023-0001
+EOF
+rust_check_pass "L4.8" $'b\nb\nrustsec\n'
+
+# L4.9 — Clippy as a code reviewer
+"$LAB" start rust L4.9 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L4.9"
+rust_check_fail_missing "L4.9" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=b
+q3=b
+q4=needless_range_loop
+q5=b
+EOF
+cat > "$WS/clippy_out.txt" <<'EOF'
+warning: for loop over a range
+ --> lints.rs:4:5
+  |
+4 |     for i in 0..events.len() {
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using an iterator: `for event in events`
+  |
+  = note: `clippy::needless_range_loop` is enabled by default
+EOF
+rust_check_pass "L4.9" $'b\nb\nclippy\n'
+
+# L4.10 — Phase gate: full audit of a 150-line intentionally flawed tool (gate)
+"$LAB" start rust L4.10 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L4.10"
+cat > "$WS/answers.txt" <<'EOF'
+a=CWE-197
+whyA=b
+b=CWE-22
+whyB=b
+c=CWE-78
+whyC=b
+d=CWE-248
+whyD=b
+e=logic
+whyE=b
+f=CWE-190
+whyF=b
+EOF
+rust_check_fail_missing "L4.10" "iocscan"
+(cd -- "$WS" && rustc iocscan.rs -o iocscan)
+rust_check_pass "L4.10" $'b\nb\nsecurity\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 42 rust P0-P4 labs passed (42/42)" "$out" "(42/42)"
+
 
 
 # --- 7i. soc track P0+P1: fabricated pass + negative case per lab ---
@@ -2276,11 +2445,11 @@ else
 fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
-  # 32 total track-phase lines; bash p0-p7 (8) + rust p0-p2 (3) + soc p0-p1 (2) +
-  # ps p0-p7 (8) are done ([x]), leaving 11 unstarted -- update this count
+  # 32 total track-phase lines; bash p0-p7 (8) + rust p0-p3 (4) + soc p0-p1 (2) +
+  # ps p0-p7 (8) are done ([x]), leaving 10 unstarted -- update this count
   # whenever a phase's marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 11 unstarted track-phase lines" "11" "$line_count"
+  assert_eq "planned_execution.md has 10 unstarted track-phase lines" "10" "$line_count"
 else
   bad "planned_execution.md missing"
 fi

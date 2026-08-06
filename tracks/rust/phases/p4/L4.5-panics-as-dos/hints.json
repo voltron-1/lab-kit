@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check your answers.txt, compile parse.rs, and capture stderr into panic1.txt.",
+    "q1 count is 4 (two unwraps, slice indexing, integer addition overflow); q2 panics at split_once on nodelim.",
+    "Run `rustc files/parse.rs -o parse; ./parse scan=5 auth=3; ./parse nodelim 2> panic1.txt`."
+  ]
+}

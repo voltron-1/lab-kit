@@ -1,0 +1,59 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The `?` operator on an `Err`...",
+      "options": {
+        "a": "Panics immediately",
+        "b": "Returns the Err to the caller immediately",
+        "c": "Logs and continues"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "`unwrap()` on attacker-controlled input is which class of risk?",
+      "options": {
+        "a": "Memory corruption",
+        "b": "Denial of service — one bad input crashes the process",
+        "c": "Privilege escalation"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Use-after-free (CWE-416) in safe Rust is...",
+      "options": {
+        "a": "A runtime panic",
+        "b": "A compile error",
+        "c": "Undefined behavior"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "prompt": "`70000_u32 as u16` evaluates to...",
+      "options": {
+        "a": "65535 (clamped)",
+        "b": "4464 (silent truncation)",
+        "c": "A compile error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "prompt": "u8 overflow in a *debug* build...",
+      "options": {
+        "a": "Wraps silently",
+        "b": "Panics",
+        "c": "Is undefined behavior"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

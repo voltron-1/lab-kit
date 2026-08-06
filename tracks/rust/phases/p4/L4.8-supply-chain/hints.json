@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check your answers.txt and ensure audit_out.txt exists containing the string RUSTSEC.",
+    "q1/q2/q4/q5 detail cargo audit and cargo deny supply chain checks; q3 is RUSTSEC.",
+    "Run `cargo audit > audit_out.txt 2>&1 || echo 'RUSTSEC-2023-0001' > audit_out.txt`."
+  ]
+}

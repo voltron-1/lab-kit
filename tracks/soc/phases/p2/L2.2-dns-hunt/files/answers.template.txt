@@ -1,0 +1,19 @@
+# Hunt dns.log with awk/sort/uniq -c/rg and answer.
+
+# source IP doing the tunneling - DEFANGED (e.g. 10.20.31[.]112)
+q1=
+
+# the tunnel zone (parent domain shared by the random labels) - DEFANGED
+q2=
+
+# dominant qtype of the tunnel traffic (one token)
+q3=
+
+# dominant rcode of the tunnel traffic (one token)
+q4=
+
+# count of tunnel-zone queries from that host
+q5=
+
+# one event_id of a tunnel query (cm-mmdd-nnnn)
+q6=

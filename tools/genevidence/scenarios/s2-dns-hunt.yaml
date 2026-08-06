@@ -1,0 +1,43 @@
+scenario: s2-dns-hunt
+lab: L2.2
+window: {start: "2026-03-12T09:00:00Z", end: "2026-03-12T09:20:00Z"}
+
+# ~40 tunnel rows from one host under one zone, seeded by the L1.8-pinned
+# canonical ids (universe-events.yaml), then extending the 05xx band for the
+# rest. Labels are derived deterministically (sha256 of a fixed per-row
+# string, never Python `random`) so regenerating is byte-identical.
+tunnel_burst:
+  host: "10.20.31.112"
+  resolver: "10.20.10.5"
+  zone: "tun.stonewick.example"
+  count: 40
+  seed_event_ids: ["CM-0312-0310", "CM-0312-0311", "CM-0312-0312"]
+  bulk_event_id_start: 530          # rows after the 3 seeds: CM-0312-0530..0566
+  a_indices: [5, 11, 17, 23, 29, 35]           # qtype A instead of TXT (mostly TXT, some A)
+  noerror_indices: [7, 15, 21, 27, 39]         # rcode NOERROR w/ a short TXT answer (mostly NXDOMAIN)
+
+benign_rows:
+  - {ts: "2026-03-12T09:00:30Z", uid: "CBEN0001", orig_h: "10.20.30.107", query: "wpad.coppermine.example", qtype: A, rcode: NXDOMAIN, answers: "-", event_id: "CM-0312-0570"}
+  - {ts: "2026-03-12T09:02:10Z", uid: "CBEN0002", orig_h: "10.20.30.107", query: "wpad.coppermine.example", qtype: A, rcode: NXDOMAIN, answers: "-", event_id: "CM-0312-0571"}
+  - {ts: "2026-03-12T09:05:45Z", uid: "CBEN0003", orig_h: "10.20.30.103", query: "wpad.coppermine.example", qtype: A, rcode: NXDOMAIN, answers: "-", event_id: "CM-0312-0572"}
+  - {ts: "2026-03-12T09:09:20Z", uid: "CBEN0004", orig_h: "10.20.31.112", query: "wpad.coppermine.example", qtype: A, rcode: NXDOMAIN, answers: "-", event_id: "CM-0312-0573"}
+  - {ts: "2026-03-12T09:03:00Z", uid: "CBEN0005", orig_h: "10.20.30.103", query: "fs10.coppermine.example", qtype: A, rcode: NXDOMAIN, answers: "-", event_id: "CM-0312-0574"}
+  - {ts: "2026-03-12T09:07:30Z", uid: "CBEN0006", orig_h: "10.20.30.107", query: "dc10.coppermine.example", qtype: A, rcode: NXDOMAIN, answers: "-", event_id: "CM-0312-0575"}
+  - {ts: "2026-03-12T09:01:00Z", uid: "CBEN0007", orig_h: "10.20.30.107", query: "saas.mail.example", qtype: A, rcode: NOERROR, answers: "192.0.2.60", event_id: "CM-0312-0576"}
+  - {ts: "2026-03-12T09:06:00Z", uid: "CBEN0008", orig_h: "10.20.30.103", query: "saas.mail.example", qtype: A, rcode: NOERROR, answers: "192.0.2.60", event_id: "CM-0312-0577"}
+  - {ts: "2026-03-12T09:12:00Z", uid: "CBEN0009", orig_h: "10.20.31.112", query: "saas.mail.example", qtype: A, rcode: NOERROR, answers: "192.0.2.60", event_id: "CM-0312-0578"}
+  - {ts: "2026-03-12T09:02:30Z", uid: "CBEN0010", orig_h: "10.20.10.9",  query: "coppermine.example",  qtype: SOA, rcode: NOERROR, answers: "ns1.coppermine.example", event_id: "CM-0312-0579"}
+  - {ts: "2026-03-12T09:08:00Z", uid: "CBEN0011", orig_h: "10.20.10.20", query: "coppermine.example",  qtype: SOA, rcode: NOERROR, answers: "ns1.coppermine.example", event_id: "CM-0312-0580"}
+  - {ts: "2026-03-12T09:04:00Z", uid: "CBEN0012", orig_h: "10.20.30.103", query: "updates.example", qtype: A, rcode: NOERROR, answers: "192.0.2.61", event_id: "CM-0312-0581"}
+  - {ts: "2026-03-12T09:10:00Z", uid: "CBEN0013", orig_h: "10.20.30.107", query: "updates.example", qtype: A, rcode: NOERROR, answers: "192.0.2.61", event_id: "CM-0312-0582"}
+  - {ts: "2026-03-12T09:00:45Z", uid: "CBEN0014", orig_h: "10.20.30.103", query: "fs01.coppermine.example", qtype: A, rcode: NOERROR, answers: "10.20.10.8", event_id: "CM-0312-0583"}
+  - {ts: "2026-03-12T09:11:15Z", uid: "CBEN0015", orig_h: "10.20.30.107", query: "dc01.coppermine.example", qtype: A, rcode: NOERROR, answers: "10.20.10.5", event_id: "CM-0312-0584"}
+
+answer_keys:
+  L2.2:
+    q1: "10.20.31[.]112"           # DEFANGED - source IP doing the tunneling
+    q2: "tun.stonewick[.]example"  # DEFANGED - the tunnel zone
+    q3: txt                        # dominant qtype of the tunnel traffic
+    q4: nxdomain                   # dominant rcode of the tunnel traffic
+    q5: "40"                       # tunnel_burst.count - generator asserts this matches
+    q6: "cm-0312-0310|cm-0312-0311|cm-0312-0312"   # ERE alternation - any of the 3 seed ids

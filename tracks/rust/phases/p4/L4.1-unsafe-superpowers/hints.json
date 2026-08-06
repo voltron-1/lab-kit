@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check your answers.txt for required keys q1..q5 and compile files/sample.rs to ./sample.",
+    "q1 asks for the count of superpowers (5); q3 is bytes[2] (30); q5 comes from compiling files/broken.rs.",
+    "Run `rustc files/sample.rs -o sample; ./sample; rustc files/broken.rs` and transcribe values."
+  ]
+}

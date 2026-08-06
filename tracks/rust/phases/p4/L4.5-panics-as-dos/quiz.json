@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Which operations can panic on malformed input in Rust?",
+      "options": {
+        "a": "Only unwrap() and expect()",
+        "b": "Indexing/slicing out of range, integer overflow in debug mode, and divide-by-zero as well as unwrap/expect",
+        "c": "None — safe Rust code never panics"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A panic in a network request handler is...",
+      "options": {
+        "a": "Memory corruption",
+        "b": "An availability failure (DoS) — the worker thread/process terminates",
+        "c": "Automatically retried by the compiler"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which panic-free slice method returns Option<&str> instead of panicking on out-of-bounds indexing?",
+      "answer_b64": "Z2V0",
+      "accept_b64": [
+        "Z2V0",
+        "LmdldA==",
+        "Z2V0KCk="
+      ]
+    }
+  ]
+}

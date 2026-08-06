@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Clippy is best used in a security review pipeline as...",
+      "options": {
+        "a": "The final security sign-off tool",
+        "b": "A fast automated first-pass reviewer for idiom and correctness smells before human review",
+        "c": "A unit test framework"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A clean Clippy run guarantees...",
+      "options": {
+        "a": "The program is free of security vulnerabilities",
+        "b": "The code is idiomatic — high-level logic, traversal, and injection flaws remain unverified",
+        "c": "Memory safety"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which prefix precedes every Clippy lint name (e.g. _____::needless_return)?",
+      "answer_b64": "Y2xpcHB5",
+      "accept_b64": [
+        "Y2xpcHB5",
+        "Y2xpcHB5Ojo="
+      ]
+    }
+  ]
+}

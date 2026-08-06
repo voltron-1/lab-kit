@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What does the `unsafe` keyword signify in Rust?",
+      "options": {
+        "a": "This code is dangerous and untested",
+        "b": "The developer takes responsibility for invariants the compiler cannot verify",
+        "c": "The borrow checker is turned off"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which of the following is NOT one of the five unsafe superpowers?",
+      "options": {
+        "a": "Dereference a raw pointer",
+        "b": "Ignore a lifetime error",
+        "c": "Access a mutable static"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which comment tag convention documents the safety invariant of an unsafe block?",
+      "answer_b64": "c2FmZXR5",
+      "accept_b64": [
+        "c2FmZXR5",
+        "Ly8gc2FmZXR5",
+        "c2FmZXR5IGNvbW1lbnQ="
+      ]
+    }
+  ]
+}

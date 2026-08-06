@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check your answers.txt for required keys q1..q6 and compile files/fetch.rs to ./fetch.",
+    "q1 is CWE-22; q3 is CWE-78; q5 is FLAW 3 (logic bug); q6 is option b.",
+    "Run `rustc files/fetch.rs -o fetch; ./fetch` and examine the output."
+  ]
+}

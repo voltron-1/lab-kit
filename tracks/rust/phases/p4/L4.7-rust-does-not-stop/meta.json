@@ -1,0 +1,7 @@
+{
+  "id": "L4.7",
+  "title": "What Rust does NOT stop — path traversal, injection, logic bugs",
+  "type": "AUDIT",
+  "gate": false,
+  "est_minutes": 20
+}

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check your answers.txt for required keys q1..q5 and compile files/sample.rs to ./sample.",
+    "q2 is |−9| = 9; q1/q3/q4 restate FFI trust boundaries; q5 is E0133.",
+    "Run `rustc files/sample.rs -o sample; ./sample; rustc files/broken.rs` to verify."
+  ]
+}

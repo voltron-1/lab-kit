@@ -1,0 +1,8 @@
+{
+  "id": "L2.2",
+  "title": "DNS, the analyst's favorite log - queries, NXDOMAIN storms, tunneling signs, DGA smell",
+  "type": "HUNT",
+  "objective": "Find a DNS tunnel in a query log by its shape - one host, one zone, long random labels, TXT + NXDOMAIN at high rate - and separate it from benign NXDOMAIN noise.",
+  "gate": false,
+  "est_minutes": 20
+}

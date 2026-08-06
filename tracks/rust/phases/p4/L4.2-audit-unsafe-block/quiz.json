@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What does the unsafe-audit checklist verify for every unsafe block?",
+      "options": {
+        "a": "That the code compiles quickly",
+        "b": "That pointer validity, bounds/lengths, lifetimes, and SAFETY invariants are all upheld",
+        "c": "That the block is short"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Calling `slice::from_raw_parts(ptr, len)` with an unchecked `len` from user input causes...",
+      "options": {
+        "a": "A compile error",
+        "b": "An out-of-bounds read (CWE-125)",
+        "c": "Automatic length truncation"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "A SAFETY comment that claims an invariant the code never establishes is worth ___ (how much)?",
+      "answer_b64": "bm90aGluZw==",
+      "accept_b64": [
+        "bm90aGluZw==",
+        "emVybw==",
+        "d29ydGhsZXNz"
+      ]
+    }
+  ]
+}

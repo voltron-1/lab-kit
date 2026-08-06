@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "An integer `as` cast that narrows (e.g. `u32 as u16`)...",
+      "options": {
+        "a": "Returns an error on overflow",
+        "b": "Silently keeps the lower bits (truncation) with no error signal",
+        "c": "Clamps to u16::MAX"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A narrowing `as` cast placed before a bounds check...",
+      "options": {
+        "a": "Is harmless",
+        "b": "Can defeat the check because comparison runs on the truncated value",
+        "c": "Is a compile error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Which conversion trait should be used instead of `as` when a value might not fit?",
+      "answer_b64": "dHJ5ZnJvbQ==",
+      "accept_b64": [
+        "dHJ5ZnJvbQ==",
+        "dHJ5X2Zyb20=",
+        "dHJ5aW50bw==",
+        "dHJ5X2ludG8="
+      ]
+    }
+  ]
+}

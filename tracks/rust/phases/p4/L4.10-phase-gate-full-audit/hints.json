@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check your answers.txt matrix for slots a..f and whyA..whyF, and compile iocscan.rs to ./iocscan.",
+    "a=CWE-197, b=CWE-22, c=CWE-78, d=CWE-248, e=logic, f=CWE-190; all why options are b.",
+    "Run `rustc files/iocscan.rs -o iocscan; ./iocscan` and fill answers.txt."
+  ]
+}
