@@ -1,0 +1,4 @@
+{"event":{"id":"cm-0311-0142","code":4624},"user":{"name":"m.reyes"},"winlog":{"logon":{"type":3}},"source":{"ip":"203.0.113.66"}}
+{"event":{"id":"cm-0311-0244","code":4720},"winlog":{"event_data":{"TargetUserName":"supportadmin"}}}
+{"event":{"id":"cm-0311-0245","code":4732},"winlog":{"event_data":{"MemberSid":"S-1-5-21-34567-1002"}}}
+{"event":{"id":"cm-0310-0019","code":4624},"user":{"name":"t.aoki"},"winlog":{"logon":{"type":3}},"source":{"ip":"10.20.31.112"}}

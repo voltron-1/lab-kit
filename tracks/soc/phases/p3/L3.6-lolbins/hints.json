@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Classify q1..q4 as y/n for abuse.",
+    "q1=y, q2=y, q3=y, q4=n.",
+    "q5=certutil.exe, q6=t1059.001."
+  ]
+}

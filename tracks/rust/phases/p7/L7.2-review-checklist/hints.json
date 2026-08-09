@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for rf1..rf8 and checklist.md.",
+    "Categories: availability (1,5), memory-safety (2,8), input-validation (3,4,7), supply-chain (6).",
+    "Create answers.txt with rf1=availability..rf8=memory-safety and checklist.md mentioning all four."
+  ]
+}

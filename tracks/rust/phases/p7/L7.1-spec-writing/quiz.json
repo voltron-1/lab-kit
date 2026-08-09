@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A good spec for safe Rust constrains:",
+      "options": {
+        "a": "Only the happy path",
+        "b": "The failure behavior \u2014 what happens on bad input, where errors go, what cannot panic",
+        "c": "Only performance"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which candidate is an anti-pattern to EXCLUDE from the spec?",
+      "options": {
+        "a": "Return a Result",
+        "b": "Convert with as u16 (silent truncation)",
+        "c": "Reject out-of-range ports"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "The single most important thing a safe-Rust spec adds beyond the happy path: how the function ___ on bad input.",
+      "answer_b64": "ZmFpbHM=",
+      "accept_b64": [
+        "ZmFpbHM=",
+        "ZXJyb3Jz",
+        "aGFuZGxlcyBlcnJvcnM=",
+        "YmVoYXZlcw=="
+      ]
+    }
+  ]
+}

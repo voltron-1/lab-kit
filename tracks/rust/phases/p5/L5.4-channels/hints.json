@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check predictions.txt for required keys count and total.",
+    "Producers send 100, 200, 300; count is 3 and total is 600.",
+    "Run rustc files/sample.rs -o sample; ./sample to confirm outputs."
+  ]
+}

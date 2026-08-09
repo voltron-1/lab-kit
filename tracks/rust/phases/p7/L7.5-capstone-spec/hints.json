@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for essential=a,b,d,f,g and create spec.md.",
+    "essential set is a,b,d,f,g.",
+    "Write essential=a,b,d,f,g in answers.txt and mention @timestamp, event.outcome, panic/unwrap in spec.md."
+  ]
+}

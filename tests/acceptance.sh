@@ -1400,7 +1400,7 @@ rust_check_fail_missing "L2.10" "fixed5"
 rust_check_pass "L2.10" $'b\nb\nboth\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 22 rust P0-P2 labs passed (22/42)" "$out" "(22/42)"
+assert_contains "status shows all 22 rust P0-P2 labs passed (22/63)" "$out" "(22/63)"
 
 # --- 7h2. rust track P3: fabricated pass + negative case per lab ---
 note "rust track P3: fabricated pass + negative case per lab"
@@ -1552,7 +1552,7 @@ EOF
 rust_check_pass "L3.10" $'b\nb\nfail\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 32 rust P0-P3 labs passed (32/42)" "$out" "(32/42)"
+assert_contains "status shows all 32 rust P0-P3 labs passed (32/63)" "$out" "(32/63)"
 
 # L4.1 — What unsafe actually unlocks — the five superpowers
 out="$(printf 'b\na\nb\na\nb\n' | "$LAB" start rust L4.1 2>&1)"; rc=$?
@@ -1720,7 +1720,370 @@ rust_check_fail_missing "L4.10" "iocscan"
 rust_check_pass "L4.10" $'b\nb\nsecurity\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 42 rust P0-P4 labs passed (42/42)" "$out" "(42/42)"
+assert_contains "status shows all 42 rust P0-P4 labs passed (42/63)" "$out" "(42/63)"
+
+# --- 7h3. rust track P5: fabricated pass + negative case per lab ---
+note "rust track P5: fabricated pass + negative case per lab"
+
+# L5.1 — Threads — why data races don't compile (phase opener)
+out="$(printf 'b\na\nb\nb\nb\n' | "$LAB" start rust L5.1 2>&1)"; rc=$?
+assert_eq "'lab start rust L5.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L5.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/rust/L5.1"
+cat > "$WS/predictions.txt" <<'EOF'
+total=60
+error=E0373
+EOF
+rust_check_fail_missing "L5.1" "sample"
+cat > "$WS/sample" <<'EOF'
+#!/bin/sh
+echo "total = 60"
+EOF
+chmod +x "$WS/sample"
+cat > "$WS/rust_error.txt" <<'EOF'
+error[E0373]: closure may outlive the current function
+EOF
+rust_check_pass "L5.1" $'b\nb\ncwe-362\n'
+
+# L5.2 — Send / Sync, conceptually
+"$LAB" start rust L5.2 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L5.2"
+cat > "$WS/answers.txt" <<'EOF'
+q1=a
+q2=b
+q3=60
+q4=b
+q5=E0277
+EOF
+rust_check_fail_missing "L5.2" "sample"
+cat > "$WS/sample" <<'EOF'
+#!/bin/sh
+echo "from_thread = 60"
+EOF
+chmod +x "$WS/sample"
+cat > "$WS/rust_error.txt" <<'EOF'
+error[E0277]: `Rc<i32>` cannot be sent between threads safely
+EOF
+rust_check_pass "L5.2" $'a\nb\nauto\n'
+
+# L5.3 — Arc / Mutex reading patterns
+"$LAB" start rust L5.3 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L5.3"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=b
+q3=100
+q4=b
+q5=b
+EOF
+rust_check_fail_missing "L5.3" "sample"
+cat > "$WS/sample" <<'EOF'
+#!/bin/sh
+echo "count = 100"
+EOF
+chmod +x "$WS/sample"
+rust_check_pass "L5.3" $'b\nb\npoisoned\n'
+
+# L5.4 — Channels
+"$LAB" start rust L5.4 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L5.4"
+cat > "$WS/predictions.txt" <<'EOF'
+count=3
+total=600
+EOF
+rust_check_fail_missing "L5.4" "sample"
+cat > "$WS/sample" <<'EOF'
+#!/bin/sh
+echo "total = 600"
+EOF
+chmod +x "$WS/sample"
+rust_check_pass "L5.4" $'a\nb\nhang\n'
+
+# L5.5 — async/await — the mental model
+"$LAB" start rust L5.5 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L5.5"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=b
+q3=42
+q4=b
+q5=b
+EOF
+rust_check_fail_missing "L5.5" "async_out.txt"
+cat > "$WS/async_out.txt" <<'EOF'
+result = 42
+a = 2, b = 4
+EOF
+rust_check_pass "L5.5" $'b\nb\nlazy\n'
+
+# L5.6 — Reading a tokio main loop
+"$LAB" start rust L5.6 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L5.6"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=b
+q3=4
+q4=8625
+q5=b
+EOF
+rust_check_fail_missing "L5.6" "loop_out.txt"
+cat > "$WS/loop_out.txt" <<'EOF'
+port sum = 8625
+EOF
+rust_check_pass "L5.6" $'b\nb\ncancels\n'
+
+# L5.7 — Timeouts, cancellation, resource exhaustion
+"$LAB" start rust L5.7 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L5.7"
+rust_check_fail_missing "L5.7" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=b
+q3=b
+q4=b
+q5=CWE-400
+q6=b
+EOF
+rust_check_pass "L5.7" $'b\nb\ncwe-400\n'
+
+# L5.8 — Phase gate: trace a concurrent port scanner's data flow (gate)
+"$LAB" start rust L5.8 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L5.8"
+rust_check_fail_missing "L5.8" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+q1=MAX_IN_FLIGHT
+q2=100
+q3=b
+q4=b
+q5=b
+q6=b
+q7=b
+q8=b
+q9=b
+q10=b
+EOF
+rust_check_pass "L5.8" $'b\nb\nsemaphore\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 50 rust P0-P5 labs passed (50/63)" "$out" "(50/63)"
+
+# --- 7h4. rust track P6: fabricated pass + negative case per lab ---
+note "rust track P6: fabricated pass + negative case per lab"
+
+# L6.1 — Tour: RustScan I — CLI args to scan loop (phase opener)
+out="$(printf 'b\na\nb\nb\nb\n' | "$LAB" start rust L6.1 2>&1)"; rc=$?
+assert_eq "'lab start rust L6.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L6.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/rust/L6.1"
+rust_check_fail_missing "L6.1" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=b
+q3=Opts
+q4=b
+q5=b
+EOF
+rust_check_pass "L6.1" $'b\nb\ninput\n'
+
+# L6.2 — Tour: RustScan II — results and output
+"$LAB" start rust L6.2 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L6.2"
+rust_check_fail_missing "L6.2" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=b
+q3=b
+q4=run_nmap
+q5=b
+EOF
+rust_check_pass "L6.2" $'b\nb\nsorted\n'
+
+# L6.3 — Tour: Vector I — source → transform → sink
+"$LAB" start rust L6.3 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L6.3"
+rust_check_fail_missing "L6.3" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+q1=source,transform,sink
+q2=b
+q3=b
+q4=Event
+q5=b
+EOF
+rust_check_pass "L6.3" $'b\nb\nconfig\n'
+
+# L6.4 — Tour: Vector II — inside a codec/parser path
+"$LAB" start rust L6.4 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L6.4"
+rust_check_fail_missing "L6.4" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=b
+q3=b
+q4=decode
+q5=b
+EOF
+rust_check_pass "L6.4" $'b\nb\nunwrap\n'
+
+# L6.5 — Tour: a nom-based protocol parser
+"$LAB" start rust L6.5 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L6.5"
+rust_check_fail_missing "L6.5" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+q1=b
+q2=take
+q3=b
+q4=b
+q5=Record
+EOF
+rust_check_pass "L6.5" $'b\nb\nbuilt-in\n'
+
+# L6.6 — Phase gate: solo tour of an unseen repo (gate)
+"$LAB" start rust L6.6 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L6.6"
+rust_check_fail_missing "L6.6" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+q1=a
+q2=hexyl
+q3=src/main.rs
+q4=b
+q5=a
+q6=format_hex
+q7=b
+q8=b
+EOF
+rust_check_pass "L6.6" $'b\nb\ncold\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 56 rust P0-P6 labs passed (56/63)" "$out" "(56/63)"
+
+# --- 7h5. rust track P7: fabricated pass + negative case per lab ---
+note "rust track P7: fabricated pass + negative case per lab"
+
+# L7.1 — Spec-writing for safe Rust — constraints that actually matter (phase opener)
+out="$(printf 'b\na\nb\nb\nb\n' | "$LAB" start rust L7.1 2>&1)"; rc=$?
+assert_eq "'lab start rust L7.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L7.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/rust/L7.1"
+rust_check_fail_missing "L7.1" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+essential=a,c,d,f
+EOF
+cat > "$WS/spec.md" <<'EOF'
+returns a Result or Option, valid range 1..=65535, never unwrap or panic on input
+EOF
+rust_check_pass "L7.1" $'b\nb\nfails\n'
+
+# L7.2 — The AI-Rust review checklist v1
+"$LAB" start rust L7.2 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L7.2"
+rust_check_fail_missing "L7.2" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+rf1=availability
+rf2=memory-safety
+rf3=input-validation
+rf4=input-validation
+rf5=availability
+rf6=supply-chain
+rf7=input-validation
+rf8=memory-safety
+EOF
+cat > "$WS/checklist.md" <<'EOF'
+memory-safety: unsafe blocks
+availability: panic unwrap
+input-validation: traversal injection
+supply-chain: audit RUSTSEC
+EOF
+rust_check_pass "L7.2" $'b\nb\nmemory-safety\n'
+
+# L7.3 — Review reps — 3 AI-generated snippets, find every flaw
+"$LAB" start rust L7.3 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L7.3"
+rust_check_fail_missing "L7.3" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+s1a=availability
+s1cwe=CWE-248
+s1b=input-validation
+s1trunc=CWE-197
+s2a=input-validation
+s2trav=CWE-22
+s2b=input-validation
+s2inj=CWE-78
+s3a=availability
+s3panic=CWE-248
+s3b=availability
+s3exh=CWE-400
+EOF
+rust_check_pass "L7.3" $'b\nb\ncwe-400\n'
+
+# L7.4 — CI guardrails — clippy pedantic + audit + deny + tests as spec
+"$LAB" start rust L7.4 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L7.4"
+rust_check_fail_missing "L7.4" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+g1=b
+g2=b
+g3=a
+g4=b
+g5=b
+EOF
+cat > "$WS/guardrails.sh" <<'EOF'
+cargo clippy -- -W clippy::pedantic -D warnings
+cargo audit
+cargo deny check
+cargo test
+EOF
+rust_check_pass "L7.4" $'b\nb\nwarnings\n'
+
+# L7.5 — Capstone spec — an IOC/log parser emitting ECS-formatted JSON
+"$LAB" start rust L7.5 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L7.5"
+rust_check_fail_missing "L7.5" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+essential=a,b,d,f,g
+EOF
+cat > "$WS/spec.md" <<'EOF'
+@timestamp event.outcome panic unwrap malformed skip invalid
+EOF
+rust_check_pass "L7.5" $'b\nb\necs\n'
+
+# L7.6 — Capstone build — direct the AI, review each iteration
+"$LAB" start rust L7.6 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L7.6"
+rust_check_fail_missing "L7.6" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+f1=availability
+f1cwe=CWE-248
+f2=availability
+f2cwe=CWE-248
+f3=correctness
+f4=availability
+f4cwe=CWE-248
+escaping=ok
+EOF
+cat > "$WS/direction.md" <<'EOF'
+check parts.len bounds before indexing, map outcome OK to success and FAILED to failure
+EOF
+rust_check_pass "L7.6" $'b\nb\nlength\n'
+
+# L7.7 — Capstone gate: final audit and ship (gate)
+"$LAB" start rust L7.7 > /dev/null 2>&1
+WS="$COPY/workspace/rust/L7.7"
+rust_check_fail_missing "L7.7" "answers.txt"
+cat > "$WS/answers.txt" <<'EOF'
+a1=b
+a2=b
+a3=b
+a4=b
+a5=b
+a6=3
+EOF
+cat > "$WS/ecs_out.txt" <<'EOF'
+{"@timestamp":"2026-07-20T10:15:00Z","event.action":"login-attempt","event.dataset":"sshd","event.outcome":"failure","message":"2026-07-20T10:15:00Z sshd FAILED user=root src=203.0.113.9","source.ip":"203.0.113.9","user.name":"root"}
+EOF
+rust_check_pass "L7.7" $'b\nb\necs\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 63 rust P0-P7 labs passed (63/63)" "$out" "(63/63)"
 
 
 
@@ -1834,7 +2197,125 @@ printf 'q1a=entra-signin\nq1b=t1110.003\nq1c=b\nq2a=sysmon\nq2b=t1059.001\nq2c=a
 soc_check_pass "L1.8" $'a\nb\nc\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 11 soc P0-P1 labs passed, L2.1-L2.6 still pending (11/17)" "$out" "(11/17)"
+assert_contains "status shows all 11 soc P0-P1 labs passed (11/25)" "$out" "(11/25)"
+
+# --- 7i2. soc track P2: fabricated pass + negative case per lab ---
+note "soc track P2: fabricated pass + negative case per lab"
+
+# L2.1 — Ports, protocols, and conversations
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start soc L2.1 2>&1)"; rc=$?
+assert_eq "'lab start soc L2.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L2.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/soc/L2.1"
+soc_check_fail_missing "L2.1" "answers.txt"
+printf 'q1=crd00006\nq2=sf\nq3=ssl\nq4=1203\nq5=203.0.113[.]66\nq6=2\n' > "$WS/answers.txt"
+soc_check_pass "L2.1" $'b\nb\nb\n'
+
+# L2.2 — DNS, the analyst's favorite log
+"$LAB" start soc L2.2 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L2.2"
+soc_check_fail_missing "L2.2" "answers.txt"
+printf 'q1=10.20.31[.]112\nq2=tun.stonewick[.]example\nq3=txt\nq4=nxdomain\nq5=40\nq6=cm-0312-0310\n' > "$WS/answers.txt"
+soc_check_pass "L2.2" $'b\na\ntunnel\n'
+
+# L2.3 — HTTP and TLS in logs
+"$LAB" start soc L2.3 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L2.3"
+soc_check_fail_missing "L2.3" "answers.txt"
+printf 'q1=200\nq2=c2.stonewick[.]example\nq3=mozilla/5.0 (windowspowershell/5.1)\nq4=post\nq5=-\nq6=ssl\n' > "$WS/answers.txt"
+soc_check_pass "L2.3" $'b\nb\nb\n'
+
+# L2.4 — tshark first contact
+"$LAB" start soc L2.4 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L2.4"
+soc_check_fail_missing "L2.4" "answers.txt"
+printf 'cdn.stonewick.example\n' > "$WS/dns_q.txt"
+printf '198.51.100.23\n' > "$WS/dns_a.txt"
+printf 'GET\tcdn.stonewick.example\t/u.sh\n' > "$WS/http_req.txt"
+printf '200\n' > "$WS/http_status.txt"
+printf 'q1=cdn.stonewick[.]example\nq2=198.51.100[.]23\nq3=get /u.sh\nq4=curl/7.81.0\nq5=200\n' > "$WS/answers.txt"
+soc_check_pass "L2.4" $'b\nb\n-z\n'
+
+# L2.5 — Zeek logs
+"$LAB" start soc L2.5 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L2.5"
+soc_check_fail_missing "L2.5" "answers.txt"
+printf 'q1=cxush1\nq2=server_name\nq3=203.0.113[.]66\nq4=conn\nq5=cm-0311-0502\n' > "$WS/answers.txt"
+soc_check_pass "L2.5" $'b\nb\nb\n'
+
+# L2.6 — Beaconing
+"$LAB" start soc L2.6 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L2.6"
+soc_check_fail_missing "L2.6" "answers.txt"
+printf 'q1=10.20.30[.]107\nq2=203.0.113[.]66\nq3=300\nq4=18\nq5=192.0.2[.]10\nq6=ntp\n' > "$WS/answers.txt"
+soc_check_pass "L2.6" $'b\nc\nb\n'
+
+# L2.7 — Phase gate: one PCAP + Zeek bundle (gate)
+"$LAB" start soc L2.7 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L2.7"
+soc_check_fail_missing "L2.7" "answers.txt"
+printf 'q1=c2.stonewick[.]example\nq2=203.0.113[.]66\nq3=c2.stonewick[.]example\nq4=300\nq5=10.20.30[.]107\nq6=10.20.31[.]112\nq7=/u.sh\nq8=cm-0311-0500\n' > "$WS/answers.txt"
+soc_check_pass "L2.7" $'b\nb\nb\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 18 soc P0-P2 labs passed (18/25)" "$out" "(18/25)"
+
+# --- 7i3. soc track P3: fabricated pass + negative case per lab ---
+note "soc track P3: fabricated pass + negative case per lab"
+
+# L3.1 — Windows events that matter (phase opener)
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start soc L3.1 2>&1)"; rc=$?
+assert_eq "'lab start soc L3.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L3.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/soc/L3.1"
+soc_check_fail_missing "L3.1" "answers.txt"
+printf 'q1=4624\nq2=4625\nq3=3\nq4=4720\nq5=4688\nq6=cm-0311-0142\n' > "$WS/answers.txt"
+soc_check_pass "L3.1" $'b\nb\nb\n'
+
+# L3.2 — Sysmon — process trees, parent-child relationships, command lines
+"$LAB" start soc L3.2 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L3.2"
+soc_check_fail_missing "L3.2" "answers.txt"
+printf 'q1=pg-ps1\nq2=winword.exe\nq3=cmd.exe\nq4=whoami /all\nq5=3\nq6=cm-0311-0201\n' > "$WS/answers.txt"
+soc_check_pass "L3.2" $'b\nb\nb\n'
+
+# L3.3 — The wrong child — spotting anomalous process ancestry
+"$LAB" start soc L3.3 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L3.3"
+soc_check_fail_missing "L3.3" "answers.txt"
+printf 'q1=powershell.exe\nq2=pg-ps1\nq3=outlook.exe\nq4=3\nq5=execution\nq6=cm-0311-0201\n' > "$WS/answers.txt"
+soc_check_pass "L3.3" $'b\nb\nb\n'
+
+# L3.4 — Persistence spots — run keys, scheduled tasks, services, cron
+"$LAB" start soc L3.4 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L3.4"
+soc_check_fail_missing "L3.4" "answers.txt"
+printf 'q1=runkey\nq2=scheduledtask\nq3=service\nq4=cron\nq5=hxxp://cdn.stonewick[.]example/u.sh\nq6=cm-0311-0181\n' > "$WS/answers.txt"
+soc_check_pass "L3.4" $'b\nb\nb\n'
+
+# L3.5 — Linux auth and audit logs — SSH brute force, sudo abuse, new users
+"$LAB" start soc L3.5 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L3.5"
+soc_check_fail_missing "L3.5" "answers.txt"
+printf 'q1=203.0.113[.]66\nq2=25\nq3=root\nq4=websvc\nq5=0\nq6=hxxp://cdn.stonewick[.]example/u.sh\n' > "$WS/answers.txt"
+soc_check_pass "L3.5" $'b\na\nb\n'
+
+# L3.6 — LOLBins
+"$LAB" start soc L3.6 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L3.6"
+soc_check_fail_missing "L3.6" "answers.txt"
+printf 'q1=y\nq2=y\nq3=y\nq4=n\nq5=certutil.exe\nq6=t1059.001\n' > "$WS/answers.txt"
+soc_check_pass "L3.6" $'b\nb\nb\n'
+
+# L3.7 — Phase gate: endpoint log bundle — find the full compromise chain (gate)
+"$LAB" start soc L3.7 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L3.7"
+soc_check_fail_missing "L3.7" "answers.txt"
+printf 'q1=m.reyes\nq2=cm-0311-0142\nq3=powershell.exe\nq4=runkey\nq5=supportadmin\nq6=root\nq7=203.0.113[.]66\nq8=cm-0311-0244\n' > "$WS/answers.txt"
+soc_check_pass "L3.7" $'b\nb\nb\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 25 soc P0-P3 labs passed (25/25)" "$out" "(25/25)"
 
 # --- 7f. ps track P4 (PowerShell as Attack Surface): fabricated pass +
 # negative case per lab. First ps-track coverage in this file -- p0-p3
@@ -2450,7 +2931,7 @@ if [[ -f "$COPY/planned_execution.md" ]]; then
   # neither), leaving 8 unstarted -- update this count whenever a phase's
   # marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 8 unstarted track-phase lines" "8" "$line_count"
+  assert_eq "planned_execution.md has 4 unstarted track-phase lines" "4" "$line_count"
 else
   bad "planned_execution.md missing"
 fi

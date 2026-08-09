@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for g1..g5 and create guardrails.sh.",
+    "g1=b, g2=b (audit), g3=a (deny), g4=b (-D warnings), g5=b (logic bugs).",
+    "Create guardrails.sh with clippy, audit, deny, test commands and answers.txt with g1=b..g5=b."
+  ]
+}

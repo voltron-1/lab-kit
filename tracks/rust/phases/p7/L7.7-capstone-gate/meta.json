@@ -1,0 +1,7 @@
+{
+  "id": "L7.7",
+  "title": "Capstone gate: final audit and ship",
+  "type": "AUDIT",
+  "gate": true,
+  "est_minutes": 25
+}

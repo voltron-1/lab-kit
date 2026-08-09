@@ -1,0 +1,12 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	dns
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	query	qtype_name	rcode_name	answers	event_id
+#types	time	string	addr	port	addr	port	enum	string	string	string	string	string
+2026-03-11T15:45:58Z	CXdns1	10.20.30.107	49155	10.20.10.5	53	udp	c2.stonewick.example	A	NOERROR	203.0.113.66	CM-0311-0500
+2026-03-12T09:00:00Z	CTUN00001	10.20.31.112	52000	10.20.10.5	53	udp	9d313c2f04e2f2699784f1c4.tun.stonewick.example	TXT	NXDOMAIN	-	CM-0312-0310
+2026-03-12T09:00:30Z	CTUN00002	10.20.31.112	52001	10.20.10.5	53	udp	fd48d9ea7d7448d3dc809d880.tun.stonewick.example	TXT	NXDOMAIN	-	CM-0312-0311
+2026-03-12T09:01:00Z	CTUN00003	10.20.31.112	52002	10.20.10.5	53	udp	d8a57bf281abe60590ee606c1c.tun.stonewick.example	TXT	NXDOMAIN	-	CM-0312-0312
+2026-03-11T13:00:30Z	CGT00004	10.20.30.107	49102	10.20.10.5	53	udp	saas.mail.example	A	NOERROR	192.0.2.60	CM-0311-0652

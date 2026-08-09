@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "draft_v1 got ONE thing right; a good reviewer notes it. What?",
+      "options": {
+        "a": "Nothing",
+        "b": "It uses serde_json \u2014 JSON escaping is correct",
+        "c": "It is fast"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Three of the four flaws are the same class. Which?",
+      "options": {
+        "a": "Truncation",
+        "b": "Uncaught panic on malformed input (CWE-248)",
+        "c": "Injection"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Directing a fix for indexing means telling the AI to check the ___ before indexing.",
+      "answer_b64": "bGVuZ3Ro",
+      "accept_b64": [
+        "bGVuZ3Ro",
+        "bGVu",
+        "Ym91bmRz",
+        "Y291bnQ="
+      ]
+    }
+  ]
+}

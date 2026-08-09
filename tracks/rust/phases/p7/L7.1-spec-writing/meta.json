@@ -1,0 +1,7 @@
+{
+  "id": "L7.1",
+  "title": "Spec-writing for safe Rust \u2014 constraints that actually matter",
+  "type": "DIRECT",
+  "gate": false,
+  "est_minutes": 15
+}

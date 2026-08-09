@@ -1,0 +1,59 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The primitive that caps how many async probes run at once is a:",
+      "options": {
+        "a": "Mutex",
+        "b": "Semaphore",
+        "c": "Channel"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Calling an async fn without .await:",
+      "options": {
+        "a": "Runs it immediately",
+        "b": "Returns a lazy Future that does nothing yet",
+        "c": "Spawns a thread"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "The ? operator on an Err:",
+      "options": {
+        "a": "Panics",
+        "b": "Returns the Err to the caller immediately",
+        "c": "Ignores it"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "prompt": "An unwrap() reachable by untrusted input is a:",
+      "options": {
+        "a": "Memory corruption bug",
+        "b": "Denial of service risk",
+        "c": "Type error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "prompt": "To learn what an unknown crate does and where it starts, you read:",
+      "options": {
+        "a": "The test output",
+        "b": "Cargo.toml plus the binary entry point (src/main.rs)",
+        "c": "The git log"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

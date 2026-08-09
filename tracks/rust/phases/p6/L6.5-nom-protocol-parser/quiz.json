@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A nom IResult<&[u8], T> carries:",
+      "options": {
+        "a": "Just the value",
+        "b": "Remaining unparsed input and parsed value (or error)",
+        "c": "A file handle"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "nom's take(n) on input shorter than n:",
+      "options": {
+        "a": "Reads out of bounds",
+        "b": "Refuses (Incomplete/Err) \u2014 never an OOB read",
+        "c": "Panics"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Security-critical protocol parsers use combinators like nom because bounds-checking is ___.",
+      "answer_b64": "YnVpbHQtaW4=",
+      "accept_b64": [
+        "YnVpbHQtaW4=",
+        "YnVpbHRpbg==",
+        "c3RydWN0dXJhbA==",
+        "YXV0b21hdGlj"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What links a Sysmon child process to its parent?",
+      "options": {
+        "a": "The timestamp",
+        "b": "ParentProcessGuid = the parent's ProcessGuid",
+        "c": "The username"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why is the command line the analyst's best field on a Sysmon 1 event?",
+      "options": {
+        "a": "It is short",
+        "b": "It shows exactly what was run, including flags like -enc that reveal intent",
+        "c": "It is always clean"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "explorer.exe -> WINWORD.EXE -> powershell.exe. Which link is suspicious?",
+      "options": {
+        "a": "explorer -> WINWORD",
+        "b": "WINWORD -> powershell (a document spawning a shell)",
+        "c": "Both"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

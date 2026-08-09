@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check your predictions.txt for required keys total and error.",
+    "total sums 0..3 then multiplies by 10; broken.rs fails with error code E0373.",
+    "Run rustc files/sample.rs -o sample; ./sample; rustc files/broken.rs 2> rust_error.txt and transcribe results."
+  ]
+}

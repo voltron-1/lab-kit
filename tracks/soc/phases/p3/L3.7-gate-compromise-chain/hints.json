@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Inspect security.json, sysmon.json, and auth.log.",
+    "q1=m.reyes, q2=cm-0311-0142, q3=powershell.exe, q4=runkey.",
+    "q5=supportadmin, q6=root, q7=203.0.113[.]66, q8=cm-0311-0244."
+  ]
+}

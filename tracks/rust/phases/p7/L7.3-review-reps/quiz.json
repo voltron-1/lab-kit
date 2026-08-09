@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "snippet2 builds a shell string from name. The fix is:",
+      "options": {
+        "a": "Escape quotes",
+        "b": "Never build a shell line \u2014 pass an argument vector (Command::new)",
+        "c": "Validate length"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Two snippets share CWE-248 (uncaught panic). That tells you:",
+      "options": {
+        "a": "They are identical",
+        "b": "The same flaw class recurs across codebases \u2014 why it is a checklist item",
+        "c": "Nothing"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "snippet3's unbounded tokio::spawn is which CWE (format CWE-###)?",
+      "answer_b64": "Y3dlLTQwMA==",
+      "accept_b64": [
+        "Y3dlLTQwMA==",
+        "NDAw",
+        "Y3dlIDQwMA=="
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for essential=a,c,d,f and create spec.md.",
+    "essential set is a,c,d,f; as u16 (e) is the L4.4 truncation anti-pattern.",
+    "Write essential=a,c,d,f in answers.txt and mention Result, 1..=65535, and panic/unwrap in spec.md."
+  ]
+}

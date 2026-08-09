@@ -1,0 +1,7 @@
+{
+  "id": "L3.4",
+  "title": "Persistence spots \u2014 run keys, scheduled tasks, services, cron",
+  "type": "DECODE",
+  "gate": false,
+  "est_minutes": 15
+}

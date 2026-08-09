@@ -1,0 +1,7 @@
+{
+  "id": "L3.7",
+  "title": "Phase gate: endpoint log bundle \u2014 find the full compromise chain",
+  "type": "HUNT",
+  "gate": true,
+  "est_minutes": 20
+}

@@ -1,0 +1,7 @@
+{
+  "id": "L3.3",
+  "title": "The wrong child \u2014 spotting anomalous process ancestry (Office spawning a shell)",
+  "type": "HUNT",
+  "gate": false,
+  "est_minutes": 20
+}

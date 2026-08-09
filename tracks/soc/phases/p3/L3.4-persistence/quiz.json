@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A value under HKCU\\...\\CurrentVersion\\Run runs when:",
+      "options": {
+        "a": "Never",
+        "b": "The user logs on (classic autostart)",
+        "c": "System shuts down"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Windows event 4698 records:",
+      "options": {
+        "a": "A logon",
+        "b": "A scheduled task creation",
+        "c": "A new user"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "A cron line */10 * * * * curl ... | bash is persistence because:",
+      "options": {
+        "a": "cron is malware",
+        "b": "It re-fetches and runs attacker code every 10 minutes, surviving reboots",
+        "c": "curl is banned"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for required keys q1..q5.",
+    "q1=source,transform,sink, q2=b, q3=b, q4=Event, q5=b.",
+    "Read files/vector-src/topology.rs to verify q1 and q4."
+  ]
+}

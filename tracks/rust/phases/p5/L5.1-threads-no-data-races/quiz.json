@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Why does the closure in files/broken.rs fail to compile?",
+      "options": {
+        "a": "Threads are inherently unsafe in Rust",
+        "b": "It borrows log by reference, but the thread could outlive that borrow \u2014 a data race the compiler refuses",
+        "c": "Vec is not thread-safe"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "What are the two safe ways to provide data to a spawned thread?",
+      "options": {
+        "a": "Use global mutable statics",
+        "b": "Move ownership into the thread, or share it behind Arc/Mutex \u2014 never a bare reference borrow",
+        "c": "Use raw pointers"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Data races belong to which CWE vulnerability class (format CWE-###)?",
+      "answer_b64": "Y3dlLTM2Mg==",
+      "accept_b64": [
+        "Y3dlLTM2Mg==",
+        "MzYy",
+        "Y3dlIDM2Mg=="
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is the standard architecture for Tokio-based concurrent tools?",
+      "options": {
+        "a": "Unbounded threads per task",
+        "b": "A Semaphore-capped spawn loop reporting results through an mpsc channel to a collector",
+        "c": "A single blocking loop"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why is the scanner design inherently race-free?",
+      "options": {
+        "a": "It uses Mutex everywhere",
+        "b": "Tasks share nothing mutably; they own local state and communicate via channel messages",
+        "c": "Tokio forces single-thread execution"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "What concurrency primitive is used in scanner.rs to limit in-flight probe tasks?",
+      "answer_b64": "c2VtYXBob3Jl",
+      "accept_b64": [
+        "c2VtYXBob3Jl"
+      ]
+    }
+  ]
+}

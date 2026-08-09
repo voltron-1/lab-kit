@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for f1..f4 keys and escaping=ok.",
+    "f1, f2, f4 are availability / CWE-248; f3 is correctness.",
+    "Write direction.md mentioning len/bounds check and outcome mapping."
+  ]
+}

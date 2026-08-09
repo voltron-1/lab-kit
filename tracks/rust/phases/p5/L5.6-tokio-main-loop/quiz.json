@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is the common structure of a Tokio task pool loop?",
+      "options": {
+        "a": "Single thread blocking loop",
+        "b": "A spawn loop to launch concurrent tasks, followed by a join_next drain loop",
+        "c": "Fork-join process pool"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "In what order does JoinSet::join_next().await yield task results?",
+      "options": {
+        "a": "In spawn order",
+        "b": "In completion order as tasks finish",
+        "c": "Sorted by task ID"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "When a JoinSet is dropped, it automatically ___ any tasks still running.",
+      "answer_b64": "Y2FuY2Vscw==",
+      "accept_b64": [
+        "Y2FuY2Vscw==",
+        "YWJvcnRz",
+        "Y2FuY2Vs",
+        "YWJvcnQ="
+      ]
+    }
+  ]
+}

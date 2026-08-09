@@ -1,0 +1,26 @@
+# Reconstruct the C2 session from the zeek bundle + capture.pcap together.
+# IOC answers DEFANGED; timestamps not required.
+
+# the C2 domain the victim resolved - DEFANGED
+q1=
+
+# the C2 IP it resolved to - DEFANGED
+q2=
+
+# the SNI seen in the first TLS handshake - DEFANGED
+q3=
+
+# the beacon base period in seconds (integer)
+q4=
+
+# the beaconing host - DEFANGED
+q5=
+
+# the tunneling host (a different host) - DEFANGED
+q6=
+
+# the plaintext payload URI pulled by WEB01
+q7=
+
+# event_id of the pre-beacon C2 DNS resolve (cm-mmdd-nnnn)
+q8=

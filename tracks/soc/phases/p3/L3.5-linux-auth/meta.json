@@ -1,0 +1,7 @@
+{
+  "id": "L3.5",
+  "title": "Linux auth and audit logs \u2014 SSH brute force, sudo abuse, new users",
+  "type": "HUNT",
+  "gate": false,
+  "est_minutes": 20
+}

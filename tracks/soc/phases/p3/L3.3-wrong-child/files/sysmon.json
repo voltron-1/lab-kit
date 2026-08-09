@@ -1,0 +1,5 @@
+{"event":{"id":"cm-0311-0610","code":1},"process":{"entity_id":"pg-winword","name":"WINWORD.EXE","parent":{"entity_id":"pg-expl","name":"explorer.exe"}}}
+{"event":{"id":"cm-0311-0201","code":1},"process":{"entity_id":"pg-ps1","name":"powershell.exe","parent":{"entity_id":"pg-winword","name":"WINWORD.EXE"}}}
+{"event":{"id":"cm-0311-0640","code":1},"process":{"entity_id":"pg-mshta","name":"mshta.exe","parent":{"entity_id":"pg-outl","name":"outlook.exe"}}}
+{"event":{"id":"cm-0311-0641","code":1},"process":{"entity_id":"pg-cmd2","name":"cmd.exe","parent":{"entity_id":"pg-w3wp","name":"w3wp.exe"}}}
+{"event":{"id":"cm-0311-0642","code":1},"process":{"entity_id":"pg-chrome","name":"chrome.exe","parent":{"entity_id":"pg-expl","name":"explorer.exe"}}}

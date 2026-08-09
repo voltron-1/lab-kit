@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for required keys q1..q8.",
+    "q1=a, q2=hexyl, q3=src/main.rs, q4=b, q5=a, q6=format_hex, q7=b, q8=b.",
+    "Read files/mystery-src/Cargo.toml, src/main.rs, and src/hex.rs to transcribe values."
+  ]
+}

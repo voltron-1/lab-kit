@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A 4624 with logon.type 3 is:",
+      "options": {
+        "a": "An interactive desktop logon",
+        "b": "A network logon (SMB/auth over the network)",
+        "c": "An RDP session"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "You see 4720 immediately followed by 4732 on the same host. The story is:",
+      "options": {
+        "a": "A logon failure",
+        "b": "A new account was created and then added to a group",
+        "c": "A service started"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why memorize these event codes instead of looking them up each time?",
+      "options": {
+        "a": "They change often",
+        "b": "They are the analyst's multiplication tables \u2014 fast recognition is essential at Tier 1",
+        "c": "Lookups are banned"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

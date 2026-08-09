@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The four auditor questions for ANY unfamiliar repo are:",
+      "options": {
+        "a": "Stars, forks, license, age",
+        "b": "What it does, where it starts, where untrusted input enters, how it handles failure",
+        "c": "Lines of code, test count, CI status"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "You answer \"where does untrusted input enter\" by:",
+      "options": {
+        "a": "Running it",
+        "b": "Reading for the CLI/file/socket boundary where external bytes first arrive",
+        "c": "Checking git log"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "The gate skill: navigating an unfamiliar repo ___ \u2014 without a guided route.",
+      "answer_b64": "Y29sZA==",
+      "accept_b64": [
+        "Y29sZA==",
+        "c29sbw==",
+        "dW5haWRlZA==",
+        "YWxvbmU="
+      ]
+    }
+  ]
+}

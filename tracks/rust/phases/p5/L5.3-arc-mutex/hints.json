@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for keys q1..q5.",
+    "Arc handles ownership (q1=b), Mutex handles synchronization (q2=b), count is 100 (4x25), guard drops to unlock.",
+    "Run rustc files/sample.rs -o sample; ./sample to verify count = 100."
+  ]
+}

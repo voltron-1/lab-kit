@@ -1,0 +1,7 @@
+{
+  "id": "L7.2",
+  "title": "The AI-Rust review checklist v1",
+  "type": "AUDIT",
+  "gate": false,
+  "est_minutes": 15
+}

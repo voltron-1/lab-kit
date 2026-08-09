@@ -1,0 +1,8 @@
+q1=   # user whose credential the spray compromised
+q2=   # event.id of the successful spray logon (initial access)
+q3=   # interpreter WINWORD.EXE spawned (execution)
+q4=   # persistence mechanism on WKS-ACCT-07 (runkey|scheduledtask|service|cron)
+q5=   # rogue local admin account created on FS01
+q6=   # account attacker brute-forced on WEB01 (Linux foothold)
+q7=   # C2 IP endpoint beaconed to — DEFANGED
+q8=   # event.id of rogue-admin creation (4720)

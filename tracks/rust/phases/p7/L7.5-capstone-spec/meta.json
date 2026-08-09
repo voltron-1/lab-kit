@@ -1,0 +1,7 @@
+{
+  "id": "L7.5",
+  "title": "Capstone spec \u2014 an IOC/log parser emitting ECS-formatted JSON",
+  "type": "DIRECT",
+  "gate": false,
+  "est_minutes": 20
+}

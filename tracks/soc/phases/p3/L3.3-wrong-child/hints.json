@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Inspect sysmon.json for anomalous parent->child pairs.",
+    "q1=powershell.exe, q2=pg-ps1, q3=outlook.exe.",
+    "q4=3, q5=execution, q6=cm-0311-0201."
+  ]
+}

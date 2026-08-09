@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for keys q1..q5 and ensure loop_out.txt exists.",
+    "spawn launches tasks (q1=b), join_next yields in completion order (q2=b), tasks=4, port sum=8625.",
+    "Run cd files/tokio_loop && cargo run > ../../loop_out.txt && cd ../.. to generate loop_out.txt."
+  ]
+}

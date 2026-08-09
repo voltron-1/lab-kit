@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for keys q1..q6.",
+    "FLAW 1 is unbounded await (q1=b, fix q2=b); FLAW 2 is unbounded spawn (q3=b, fix q4=b); CWE is CWE-400.",
+    "Read the FLAW comments in files/server.rs and transcribe answers to answers.txt."
+  ]
+}

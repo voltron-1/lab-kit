@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for required keys q1..q5.",
+    "Send means move ownership (q1=a), Sync means share references (q2=b), from_thread is 60, error is E0277.",
+    "Run rustc files/sample.rs -o sample; ./sample; rustc files/broken.rs 2> rust_error.txt to transcribe values."
+  ]
+}

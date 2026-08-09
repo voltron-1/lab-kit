@@ -1,0 +1,6 @@
+q1=   # process.name of the interpreter WINWORD.EXE spawned
+q2=   # ProcessGuid of that anomalous powershell.exe
+q3=   # the Office/mail process that spawned mshta.exe
+q4=   # count of anomalous Office-or-mail-spawns-interpreter/shell pairs
+q5=   # one word: what class of activity a document spawning a shell indicates
+q6=   # event.id of the WINWORD->powershell spawn

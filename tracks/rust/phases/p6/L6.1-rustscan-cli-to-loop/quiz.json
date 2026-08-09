@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The first two files to open in any unfamiliar Rust tool are:",
+      "options": {
+        "a": "The tests and the CI config",
+        "b": "Cargo.toml (deps + bin/lib) and the entry point (main.rs)",
+        "c": "The changelog and license"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "RustScan bounds its scan concurrency using:",
+      "options": {
+        "a": "An unbounded spawn",
+        "b": "A batch size tuned to FD ulimits (real-world L5.8 pattern)",
+        "c": "A global mutex"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Reading a tool CLI-first means starting from where user ___ is parsed into config.",
+      "answer_b64": "aW5wdXQ=",
+      "accept_b64": [
+        "aW5wdXQ=",
+        "YXJndW1lbnRz",
+        "YXJncw=="
+      ]
+    }
+  ]
+}

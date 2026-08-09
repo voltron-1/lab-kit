@@ -1,0 +1,7 @@
+{
+  "id": "L3.6",
+  "title": "LOLBins \u2014 when the attack is a legitimate tool (encoded PowerShell, certutil, curl | bash from the other side)",
+  "type": "DECODE",
+  "gate": false,
+  "est_minutes": 15
+}

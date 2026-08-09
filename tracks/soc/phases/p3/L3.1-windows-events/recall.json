@@ -1,0 +1,55 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "In a zeek conn.log row, conn_state SF means?",
+      "options": {
+        "a": "No reply seen",
+        "b": "Normal establishment and teardown",
+        "c": "Rejected"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "A host firing hundreds of long random subdomains under one zone with heavy NXDOMAIN is doing what? (one word)",
+      "answer_b64": "dHVubmVsaW5n",
+      "accept_b64": [
+        "dHVubmVsaW5n",
+        "dHVubmVs",
+        "ZXhmaWx0cmF0aW9u"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Regular ~300s callbacks with small jitter to one external IP are called ___ (one word).",
+      "answer_b64": "YmVhY29uaW5n",
+      "accept_b64": [
+        "YmVhY29uaW5n",
+        "YmVhY29u"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "text",
+      "prompt": "HTTPS hides the URI; which TLS field still reveals the destination hostname? (one word)",
+      "answer_b64": "c25p",
+      "accept_b64": [
+        "c25p",
+        "c2VydmVyX25hbWU="
+      ]
+    },
+    {
+      "id": 5,
+      "type": "text",
+      "prompt": "Which zeek field joins one connection across conn.log, dns.log, http.log, and ssl.log?",
+      "answer_b64": "dWlk",
+      "accept_b64": [
+        "dWlk"
+      ]
+    }
+  ]
+}

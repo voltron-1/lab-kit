@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for keys q1..q5 and ensure async_out.txt exists.",
+    "Calling async fn returns inert Future (q1=b), .await yields to runtime (q2=b), result is 42.",
+    "Run cd files/async_demo && cargo run > ../../async_out.txt && cd ../.. to generate async_out.txt."
+  ]
+}

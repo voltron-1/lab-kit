@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What security risk arises from an awaited read operation lacking a timeout?",
+      "options": {
+        "a": "Buffer overflow",
+        "b": "Unbounded-await DoS \u2014 slowloris attack holding task and socket resources",
+        "c": "Use-after-free"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Which Tokio control caps the maximum number of concurrent async tasks?",
+      "options": {
+        "a": "Larger read buffers",
+        "b": "A Semaphore (or bounded channel pool) requiring permits before spawning",
+        "c": "Using unwrap()"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Uncontrolled resource consumption belongs to which CWE class (format CWE-###)?",
+      "answer_b64": "Y3dlLTQwMA==",
+      "accept_b64": [
+        "Y3dlLTQwMA==",
+        "NDAw",
+        "Y3dlIDQwMA=="
+      ]
+    }
+  ]
+}

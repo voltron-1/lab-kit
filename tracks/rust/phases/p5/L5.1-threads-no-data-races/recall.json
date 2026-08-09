@@ -1,0 +1,59 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Memory-safe Rust can still contain which class of vulnerability?",
+      "options": {
+        "a": "Use-after-free",
+        "b": "Path traversal, injection, and logic bugs \u2014 memory safety is not security",
+        "c": "Data races"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The fundamental Rust borrow law for aliasing XOR mutation states:",
+      "options": {
+        "a": "Many readers XOR one writer, never both at once",
+        "b": "One reader and one writer together",
+        "c": "Unlimited writers"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Calling unwrap() on untrusted input belongs to which risk class?",
+      "options": {
+        "a": "Memory corruption",
+        "b": "Denial of service \u2014 a crash on bad input",
+        "c": "Privilege escalation"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "prompt": "Casting 70000_u32 as u16 results in:",
+      "options": {
+        "a": "65535",
+        "b": "4464 (silent truncation)",
+        "c": "A compile error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "prompt": "Using ? on an Err value in a function returning Result:",
+      "options": {
+        "a": "Panics immediately",
+        "b": "Returns the Err to the caller immediately",
+        "c": "Ignores the error"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

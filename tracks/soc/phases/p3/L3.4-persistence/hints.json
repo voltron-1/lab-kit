@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Match artifacts to mechanism vocabulary: runkey, scheduledtask, service, cron.",
+    "q1=runkey, q2=scheduledtask, q3=service, q4=cron.",
+    "q5=hxxp://cdn.stonewick[.]example/u.sh, q6=cm-0311-0181."
+  ]
+}

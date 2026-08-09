@@ -1,0 +1,3 @@
+- A full network story reads across logs and packets: DNS resolve -> TLS beacon with SNI -> payload pull -> separate DNS tunnel, each grounded in a uid and an event id.
+- Two evidence forms that agree - pcap SNI and ssl.log server_name - raise confidence; one without the other leaves room for doubt.
+- Phase 2 complete: you can read a conn.log like a sentence, hunt a DNS tunnel, tell HTTP from TLS visibility, carve a pcap, join zeek by uid, and confirm a beacon by hand - Phase 3 turns to the endpoint.

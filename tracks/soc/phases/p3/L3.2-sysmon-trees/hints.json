@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Inspect sysmon.json to trace ParentProcessGuid to ProcessGuid.",
+    "q1=pg-ps1, q2=winword.exe, q3=cmd.exe, q4=whoami /all.",
+    "q5=3 (powershell, cmd, whoami), q6=cm-0311-0201."
+  ]
+}

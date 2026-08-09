@@ -1,0 +1,7 @@
+{
+  "id": "L7.4",
+  "title": "CI guardrails \u2014 clippy pedantic + audit + deny + tests as spec",
+  "type": "GUIDED",
+  "gate": false,
+  "est_minutes": 15
+}

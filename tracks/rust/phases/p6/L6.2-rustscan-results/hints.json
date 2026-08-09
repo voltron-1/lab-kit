@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for required keys q1..q5.",
+    "q1=b, q2=b, q3=b, q4=run_nmap, q5=b.",
+    "Read files/rustscan-src/output.rs to transcribe function name run_nmap."
+  ]
+}

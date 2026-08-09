@@ -1,0 +1,8 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	http
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	method	host	uri	user_agent	status_code	request_body_len	response_body_len	event_id
+#types	time	string	addr	port	addr	port	string	string	string	string	count	count	count	string
+2026-03-12T20:16:00Z	CXush1	10.20.10.20	44601	198.51.100.23	80	GET	cdn.stonewick.example	/u.sh	curl/7.81.0	200	0	92	CM-0312-0520

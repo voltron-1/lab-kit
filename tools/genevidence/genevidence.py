@@ -1059,6 +1059,103 @@ q6=
             )
         sync_key_block(l26_dir / "check.sh", scen["scenario"], keys)
 
+def generate_s2_gate_session(scen: dict):
+    l27_dir = REPO_ROOT / "tracks" / "soc" / "phases" / "p2" / "L2.7-gate-session-story"
+    if not (l27_dir / "check.sh").exists():
+        return
+    files_dir = l27_dir / "files"
+    zeek_dir = files_dir / "zeek"
+
+    conn_rows = [{
+        "ts": r["ts"], "uid": r["uid"], "id.orig_h": r["orig_h"], "id.orig_p": r["orig_p"],
+        "id.resp_h": r["resp_h"], "id.resp_p": r["resp_p"], "proto": r["proto"],
+        "service": r["service"], "duration": r["duration"], "orig_bytes": r["orig_bytes"],
+        "resp_bytes": r["resp_bytes"], "conn_state": r["conn_state"], "history": r["history"],
+        "event_id": r["event_id"],
+    } for r in scen["conn_rows"]]
+    write_zeek_tsv(zeek_dir / "conn.log", "conn", conn_rows)
+
+    dns_rows = [{
+        "ts": r["ts"], "uid": r["uid"], "id.orig_h": r["orig_h"], "id.orig_p": r["orig_p"],
+        "id.resp_h": r["resp_h"], "id.resp_p": r["resp_p"], "proto": "udp",
+        "query": r["query"], "qtype_name": r["qtype_name"], "rcode_name": r["rcode_name"],
+        "answers": r["answers"], "event_id": r["event_id"],
+    } for r in scen["dns_rows"]]
+    write_zeek_tsv(zeek_dir / "dns.log", "dns", dns_rows)
+
+    http_rows = [{
+        "ts": r["ts"], "uid": r["uid"], "id.orig_h": r["orig_h"], "id.orig_p": r["orig_p"],
+        "id.resp_h": r["resp_h"], "id.resp_p": r["resp_p"], "method": r["method"],
+        "host": r["host"], "uri": r["uri"], "user_agent": r["user_agent"],
+        "status_code": r["status_code"], "request_body_len": r["request_body_len"],
+        "response_body_len": r["response_body_len"], "event_id": r["event_id"],
+    } for r in scen["http_rows"]]
+    write_zeek_tsv(zeek_dir / "http.log", "http", http_rows)
+
+    ssl_rows = [{
+        "ts": r["ts"], "uid": r["uid"], "id.orig_h": r["orig_h"], "id.orig_p": r["orig_p"],
+        "id.resp_h": r["resp_h"], "id.resp_p": r["resp_p"], "version": r["version"],
+        "cipher": r["cipher"], "server_name": r["server_name"], "resumed": r["resumed"],
+        "established": r["established"], "event_id": r["event_id"],
+    } for r in scen["ssl_rows"]]
+    write_zeek_tsv(zeek_dir / "ssl.log", "ssl", ssl_rows)
+
+    p = scen["pcap"]
+    pcap = build_pcap_tls_beacon(
+        client_ip=p["client_ip"], server_ip=p["server_ip"], dns_server_ip=p["dns_server_ip"],
+        sni_hostname=p["sni_hostname"], answer_ip=p["answer_ip"], t0=p["t0"],
+    )
+    write_binary(files_dir / "capture.pcap", pcap)
+
+    # The gate's two hard invariants, enforced for real at generation time:
+    # every uid must join consistently across the zeek bundle, and every fact
+    # tshark can pull from capture.pcap must be corroborated somewhere in that
+    # same bundle - the pcap and the logs must tell one story, not two.
+    zeek_logs = {
+        "conn": zeek_dir / "conn.log", "dns": zeek_dir / "dns.log",
+        "http": zeek_dir / "http.log", "ssl": zeek_dir / "ssl.log",
+    }
+    uid_violations = verify.check_uid_consistency(zeek_logs)
+    if uid_violations:
+        raise ValueError(f"s2-gate-session uid consistency violated: {uid_violations}")
+    agreement_violations = verify.check_pcap_zeek_agreement(
+        files_dir / "capture.pcap", list(zeek_logs.values())
+    )
+    if agreement_violations:
+        raise ValueError(f"s2-gate-session pcap<->zeek agreement violated: {agreement_violations}")
+
+    answers_template = """# Reconstruct the C2 session from the zeek bundle + capture.pcap together.
+# IOC answers DEFANGED; timestamps not required.
+
+# the C2 domain the victim resolved - DEFANGED
+q1=
+
+# the C2 IP it resolved to - DEFANGED
+q2=
+
+# the SNI seen in the first TLS handshake - DEFANGED
+q3=
+
+# the beacon base period in seconds (integer)
+q4=
+
+# the beaconing host - DEFANGED
+q5=
+
+# the tunneling host (a different host) - DEFANGED
+q6=
+
+# the plaintext payload URI pulled by WEB01
+q7=
+
+# event_id of the pre-beacon C2 DNS resolve (cm-mmdd-nnnn)
+q8=
+"""
+    write_file(files_dir / "answers.template.txt", answers_template)
+
+    if "answer_keys" in scen and "L2.7" in scen["answer_keys"]:
+        sync_key_block(l27_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L2.7"])
+
 def main():
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
@@ -1100,6 +1197,8 @@ def main():
             generate_s2_zeek_verdict(scen)
         elif scen_id == "s2-beaconing":
             generate_s2_beaconing(scen)
+        elif scen_id == "s2-gate-session":
+            generate_s2_gate_session(scen)
 
 if __name__ == "__main__":
     main()

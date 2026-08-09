@@ -1,0 +1,6 @@
+q1=   # source IP of the SSH brute force — DEFANGED
+q2=   # count of Failed password lines from that IP
+q3=   # the account the attacker successfully logged in as
+q4=   # the new user created during the session
+q5=   # the UID of that new user (integer) — the tell it's an admin backdoor
+q6=   # the payload URL websvc's sudo curl fetched — DEFANGED

@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Twenty Failed password then one Accepted password for root from one IP means:",
+      "options": {
+        "a": "A typo",
+        "b": "A brute force that succeeded \u2014 treat root as compromised",
+        "c": "Normal admin"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A new user with UID=0 is dangerous because:",
+      "options": {
+        "a": "UID 0 is root \u2014 it's a hidden admin account",
+        "b": "It cannot log in",
+        "c": "UIDs don't matter"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Accepted publickey for d.okafor from 10.20.31.112 next to the brute force is:",
+      "options": {
+        "a": "Also an attack",
+        "b": "A benign key-based login from an internal host (control)",
+        "c": "Suspicious"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "id": "L3.2",
+  "title": "Sysmon \u2014 process trees, parent-child relationships, command lines",
+  "type": "DECODE",
+  "gate": false,
+  "est_minutes": 15
+}

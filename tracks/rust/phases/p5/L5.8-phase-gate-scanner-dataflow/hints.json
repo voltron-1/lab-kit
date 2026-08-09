@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for keys q1..q10.",
+    "q1 is MAX_IN_FLIGHT, q2 is 100, q3 is timeout (b), q4 is mpsc (b), q6 releases slot, q7 drops tx, q8 sorts.",
+    "Trace scanner.rs step-by-step from imports down to open_ports.sort() to complete answers.txt."
+  ]
+}

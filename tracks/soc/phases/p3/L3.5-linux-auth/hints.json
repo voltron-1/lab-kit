@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Inspect auth.log for Failed password count, Accepted user, useradd UID.",
+    "q1=203.0.113[.]66, q2=25, q3=root.",
+    "q4=websvc, q5=0, q6=hxxp://cdn.stonewick[.]example/u.sh."
+  ]
+}

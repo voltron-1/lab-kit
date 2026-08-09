@@ -1,0 +1,40 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The pcap's ClientHello SNI and ssl.log's server_name both read `c2.stonewick.example`. What has corroborating two evidence forms bought you?",
+      "options": {
+        "a": "nothing",
+        "b": "higher confidence the destination is real and not a log artifact",
+        "c": "it decrypts the session",
+        "d": "it proves malware"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Two different hosts are involved: one beacons over TLS, one tunnels over DNS. Are they the same incident?",
+      "options": {
+        "a": "always",
+        "b": "not necessarily - reconstruct each host's story before merging them; the gate keys them separately",
+        "c": "never",
+        "d": "can't tell"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "The WEB01 `/u.sh` pull is plaintext HTTP but the C2 callback is TLS. Which URI can you read directly, and which needs SNI?",
+      "options": {
+        "a": "both plaintext",
+        "b": "/u.sh is readable in http.log/pcap; the C2 session gives only SNI",
+        "c": "neither",
+        "d": "both need SNI"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for required keys q1..q5.",
+    "q1=b, q2=take, q3=b, q4=b, q5=Record.",
+    "Read files/nom-parser-src/parser.rs to transcribe take and Record."
+  ]
+}

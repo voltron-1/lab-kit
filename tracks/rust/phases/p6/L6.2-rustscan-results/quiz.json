@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "RustScan's design philosophy is:",
+      "options": {
+        "a": "Replace nmap entirely",
+        "b": "Fast open-port discovery, then hand results to nmap for deep detection",
+        "c": "Sequential single-threaded scanning"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "One tool's output feeding another's input is a place to check:",
+      "options": {
+        "a": "Nothing",
+        "b": "How the hand-off is built \u2014 argument vector (safe) vs shell string (injection risk)",
+        "c": "Color formatting"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Results are ___ before output because async completion order is nondeterministic.",
+      "answer_b64": "c29ydGVk",
+      "accept_b64": [
+        "c29ydGVk",
+        "c29ydA==",
+        "b3JkZXJlZA=="
+      ]
+    }
+  ]
+}

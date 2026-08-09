@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "In the pattern Arc<Mutex<T>>, what are the separate responsibilities of Arc and Mutex?",
+      "options": {
+        "a": "Both perform reference counting",
+        "b": "Arc handles shared ownership across threads; Mutex handles exclusive synchronized access",
+        "c": "Arc handles locking; Mutex handles memory cleanup"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "How is a Mutex unlocked in Rust?",
+      "options": {
+        "a": "By calling an explicit unlock() method",
+        "b": "Automatically when the MutexGuard drops at the end of its scope (RAII)",
+        "c": "After a hardcoded 1 second timer"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "A Mutex whose holding thread panicked while locked is described as ___.",
+      "answer_b64": "cG9pc29uZWQ=",
+      "accept_b64": [
+        "cG9pc29uZWQ="
+      ]
+    }
+  ]
+}

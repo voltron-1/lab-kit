@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The four categories of an AI-Rust review checklist are:",
+      "options": {
+        "a": "Speed, size, style, syntax",
+        "b": "Memory-safety, availability, input-validation, supply-chain",
+        "c": "Tests, docs, CI, license"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "unwrap() on input and an unbounded tokio::spawn loop are both:",
+      "options": {
+        "a": "Memory-safety issues",
+        "b": "Availability issues (process stops serving / crashes)",
+        "c": "Supply-chain issues"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "A raw-pointer deref with an unchecked length belongs in which category?",
+      "answer_b64": "bWVtb3J5LXNhZmV0eQ==",
+      "accept_b64": [
+        "bWVtb3J5LXNhZmV0eQ==",
+        "bWVtb3J5IHNhZmV0eQ==",
+        "bWVtb3J5"
+      ]
+    }
+  ]
+}

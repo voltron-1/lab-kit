@@ -1,0 +1,8 @@
+{
+  "id": "L2.7",
+  "title": "Phase gate: one PCAP + Zeek bundle - reconstruct the full session story",
+  "type": "HUNT",
+  "objective": "Reconstruct a C2 session's full story from a pcap and a zeek bundle together - resolve, beacon, tunnel, payload pull - corroborated across both evidence forms.",
+  "gate": true,
+  "est_minutes": 20
+}

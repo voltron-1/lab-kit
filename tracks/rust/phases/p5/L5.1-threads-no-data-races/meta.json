@@ -1,0 +1,7 @@
+{
+  "id": "L5.1",
+  "title": "Threads \u2014 why data races don't compile",
+  "type": "PREDICT",
+  "gate": false,
+  "est_minutes": 15
+}

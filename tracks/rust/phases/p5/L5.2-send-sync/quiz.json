@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What is the core distinction between Send and Sync?",
+      "options": {
+        "a": "Send allows moving ownership to another thread; Sync allows sharing references across threads",
+        "b": "They are identical traits",
+        "c": "Send is for channels only"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why can Arc cross thread boundaries while Rc cannot?",
+      "options": {
+        "a": "Both can cross thread boundaries",
+        "b": "Arc uses atomic reference counting; Rc uses non-atomic operations and is marked !Send",
+        "c": "Rc is for async only"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Send and Sync are ___ traits automatically derived by the compiler based on struct contents.",
+      "answer_b64": "YXV0bw==",
+      "accept_b64": [
+        "YXV0bw==",
+        "bWFya2Vy",
+        "YXV0b21hdGlj"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Memory-safe Rust can still contain which vulnerability class?",
+      "options": {
+        "a": "Use-after-free",
+        "b": "Path traversal, injection, and logic bugs",
+        "c": "Data races"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "unwrap() on untrusted input belongs to which risk category?",
+      "options": {
+        "a": "Style nit",
+        "b": "Denial of service risk",
+        "c": "Memory corruption bug"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "After let b = a; on a String, a is:",
+      "options": {
+        "a": "Still usable",
+        "b": "Moved \u2014 compile-time dead",
+        "c": "Null"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 4,
+      "type": "choice",
+      "prompt": "An awaited read with no timeout is:",
+      "options": {
+        "a": "Fine",
+        "b": "An unbounded-await DoS (CWE-400)",
+        "c": "A compile error"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "prompt": "A narrowing as cast before a size check:",
+      "options": {
+        "a": "Is safe",
+        "b": "Can defeat the check by truncating the value first",
+        "c": "Is rejected by the compiler"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

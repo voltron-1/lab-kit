@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The four AI-Rust CI gates are:",
+      "options": {
+        "a": "fmt, build, run, deploy",
+        "b": "clippy (pedantic, -D warnings), cargo audit, cargo deny, cargo test",
+        "c": "lint, docs, bench, publish"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "\"Tests as spec\" captures the idea that:",
+      "options": {
+        "a": "Tests are documentation",
+        "b": "The spec's invariants become executable assertions in CI",
+        "c": "Tests are for coverage numbers"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "The gate that turns clippy warnings into build-failing errors uses the -D flag on which word?",
+      "answer_b64": "d2FybmluZ3M=",
+      "accept_b64": [
+        "d2FybmluZ3M="
+      ]
+    }
+  ]
+}

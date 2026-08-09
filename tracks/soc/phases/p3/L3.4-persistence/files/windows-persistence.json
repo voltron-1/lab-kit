@@ -1,0 +1,3 @@
+{"event":{"id":"cm-0311-0181","code":13},"registry":{"path":"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\OneDriveUpd","value":"powershell -enc JABz..."}}
+{"event":{"id":"cm-0311-0620","code":4698},"task":{"name":"\\Microsoft\\Windows\\UpdateOrchestrator\\OneDriveSync"}}
+{"event":{"id":"cm-0311-0621","code":7045},"service":{"name":"PSEXESVC"}}

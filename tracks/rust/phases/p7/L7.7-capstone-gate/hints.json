@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for a1..a6 and create ecs_out.txt.",
+    "a1..a5 are b, a6 is 3.",
+    "Create answers.txt with a1=b..a6=3 and ecs_out.txt with output JSON."
+  ]
+}

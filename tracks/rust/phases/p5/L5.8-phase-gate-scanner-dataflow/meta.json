@@ -1,0 +1,7 @@
+{
+  "id": "L5.8",
+  "title": "Phase gate: trace a concurrent port scanner's data flow",
+  "type": "DECODE",
+  "gate": true,
+  "est_minutes": 20
+}

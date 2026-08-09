@@ -1,0 +1,4 @@
+{"event":{"id":"cm-0311-0610","code":1},"process":{"entity_id":"pg-winword","name":"WINWORD.EXE","parent":{"entity_id":"pg-expl","name":"explorer.exe"},"command_line":"WINWORD.EXE invoice_2026-03.docm"}}
+{"event":{"id":"cm-0311-0201","code":1},"process":{"entity_id":"pg-ps1","name":"powershell.exe","parent":{"entity_id":"pg-winword","name":"WINWORD.EXE"},"command_line":"powershell.exe -nop -w hidden -enc JABzAD0..."}}
+{"event":{"id":"cm-0311-0611","code":1},"process":{"entity_id":"pg-cmd1","name":"cmd.exe","parent":{"entity_id":"pg-ps1","name":"powershell.exe"},"command_line":"cmd.exe /c whoami /all"}}
+{"event":{"id":"cm-0311-0612","code":1},"process":{"entity_id":"pg-whoami","name":"whoami.exe","parent":{"entity_id":"pg-cmd1","name":"cmd.exe"},"command_line":"whoami /all"}}

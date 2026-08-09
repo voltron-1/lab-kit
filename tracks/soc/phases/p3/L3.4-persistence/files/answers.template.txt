@@ -1,0 +1,6 @@
+q1=   # mechanism of the HKCU\...\Run\OneDriveUpd artifact
+q2=   # mechanism recorded by Windows event.code 4698
+q3=   # mechanism recorded by event.code 7045
+q4=   # mechanism of the */10 * * * * root entry on WEB01
+q5=   # the URL the cron job pulls and pipes to bash — DEFANGED
+q6=   # event.id of the malicious Run-key set

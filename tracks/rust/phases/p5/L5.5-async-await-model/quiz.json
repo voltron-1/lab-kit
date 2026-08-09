@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "How do Rust futures behave when created by calling an async fn?",
+      "options": {
+        "a": "They execute immediately on a background thread",
+        "b": "They are lazy \u2014 they make no progress until polled or awaited",
+        "c": "They block until finished"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Why is an async runtime (like Tokio) necessary for .await?",
+      "options": {
+        "a": "It is optional and used for logging",
+        "b": "Futures must be polled to make progress; the runtime manages and polls them when ready",
+        "c": "To convert async code into C bindings"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Rust futures are described as ___ because they make no progress until polled.",
+      "answer_b64": "bGF6eQ==",
+      "accept_b64": [
+        "bGF6eQ==",
+        "aW5lcnQ=",
+        "Y29sZA=="
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Build a timeline per host: what did WKS-ACCT-07 do, what did WKS-ENG-12 do, what did WEB01 do? Each has one thread of the story.",
+    "Start from the C2 DNS resolve (dns.log answers), follow the uid into conn/ssl for the beacon, carve the same SNI from the pcap with tshark to confirm; the tunnel is a separate host's DNS burst; the payload pull is WEB01's plaintext http row.",
+    "q1/q3 c2.stonewick[.]example; q2 203.0.113[.]66; q4 300; q5 10.20.30[.]107; q6 10.20.31[.]112; q7 /u.sh; q8 cm-0311-0500."
+  ]
+}

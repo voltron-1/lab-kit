@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for required s1..s3 keys.",
+    "s1: CWE-248 & CWE-197; s2: CWE-22 & CWE-78; s3: CWE-248 & CWE-400.",
+    "Read files/snippet1.rs, snippet2.rs, snippet3.rs comments to fill answers.txt."
+  ]
+}

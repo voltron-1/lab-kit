@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The spec's rule for a malformed log line should be:",
+      "options": {
+        "a": "unwrap and crash",
+        "b": "Skip it (and count it), never panic",
+        "c": "Guess fields"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Emit JSON with a library (serde_json) rather than string concatenation because:",
+      "options": {
+        "a": "Shorter",
+        "b": "The library escapes correctly, preventing malformed JSON and injection",
+        "c": "Required by Rust"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "The schema the capstone emits (three letters).",
+      "answer_b64": "ZWNz",
+      "accept_b64": [
+        "ZWNz"
+      ]
+    }
+  ]
+}

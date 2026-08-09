@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Why is WINWORD.EXE -> powershell.exe suspicious but explorer.exe -> WINWORD.EXE is not?",
+      "options": {
+        "a": "powershell is malware",
+        "b": "Documents don't legitimately launch shells; desktop launching an app is normal",
+        "c": "explorer is trusted"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "w3wp.exe -> cmd.exe on a web server suggests:",
+      "options": {
+        "a": "Scheduled task",
+        "b": "Possible webshell (IIS worker process spawning a shell)",
+        "c": "Normal patching"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "You hunt by ancestry, not process name, because:",
+      "options": {
+        "a": "Names are unique",
+        "b": "The same binary (powershell) is benign under one parent and malicious under another",
+        "c": "Ancestry is faster"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

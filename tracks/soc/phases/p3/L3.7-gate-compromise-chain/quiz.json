@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The chain crosses Windows and Linux hosts. How do you keep it straight?",
+      "options": {
+        "a": "Ignore Linux",
+        "b": "Build a per-host timeline, then link them by shared indicators (C2 IP, payload host)",
+        "c": "Assume unrelated"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "CHG-2143's PsExec logon sits in the same bundle. Why is it NOT part of the chain?",
+      "options": {
+        "a": "It is",
+        "b": "It is authorized admin activity under a change ticket (benign control)",
+        "c": "PsExec is always benign"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "The rogue admin on FS01 and root foothold on WEB01 both matter because:",
+      "options": {
+        "a": "They are the same host",
+        "b": "Each is a separate persistence/access foothold the responder must contain",
+        "c": "Only FS01 matters"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

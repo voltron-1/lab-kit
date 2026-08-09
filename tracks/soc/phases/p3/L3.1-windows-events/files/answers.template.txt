@@ -1,0 +1,6 @@
+q1=   # event.code for a SUCCESSFUL logon
+q2=   # event.code for a FAILED logon
+q3=   # logon type meaning "network" (integer)
+q4=   # event.code that means "a new user account was created"
+q5=   # event.code for process creation in the Windows Security log
+q6=   # event.id of the ONE successful network logon from the C2 IP

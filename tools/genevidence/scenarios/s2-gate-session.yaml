@@ -1,0 +1,92 @@
+scenario: s2-gate-session
+lab: L2.7
+window: {start: "2026-03-11T15:45:58Z", end: "2026-03-12T20:16:00Z"}
+
+# Every row that carries a canonical id below is byte-identical to the same
+# row in the lab that first showed it (L2.1/L2.2/L2.3/L2.5/L2.6) - this gate
+# is the SAME real intrusion, corroborated across two evidence forms, not a
+# fresh retelling. Only the benign filler rows (fresh event_ids) are new.
+conn_rows:
+  # M2 beacon, two hits so the base period is computable from THIS lab's own
+  # evidence (not just asserted) - both byte-identical to L2.6's full series.
+  - {ts: "2026-03-11T15:46:02Z", uid: "CXbeac1", orig_h: "10.20.30.107", orig_p: 49156,
+     resp_h: "203.0.113.66", resp_p: 443, proto: tcp, service: ssl, duration: "0.31",
+     orig_bytes: 517, resp_bytes: 1203, conn_state: SF, history: "ShADadFf",
+     event_id: "CM-0311-0501"}
+  - {ts: "2026-03-11T15:50:50Z", uid: "CXbeac2", orig_h: "10.20.30.107", orig_p: 49157,
+     resp_h: "203.0.113.66", resp_p: 443, proto: tcp, service: ssl, duration: "0.29",
+     orig_bytes: 517, resp_bytes: 1203, conn_state: SF, history: "ShADadFf",
+     event_id: "CM-0311-0600"}
+  # WEB01 /u.sh pull - byte-identical to L2.3/L2.4/L2.5's row for this event
+  - {ts: "2026-03-12T20:16:00Z", uid: "CXush1", orig_h: "10.20.10.20", orig_p: 44601,
+     resp_h: "198.51.100.23", resp_p: 80, proto: tcp, service: http, duration: "0.05",
+     orig_bytes: 88, resp_bytes: 122, conn_state: SF, history: "ShADadFf",
+     event_id: "CM-0312-0520"}
+  # benign filler
+  - {ts: "2026-03-11T13:00:00Z", uid: "CGT00001", orig_h: "10.20.30.107", orig_p: 49100,
+     resp_h: "192.0.2.60", resp_p: 443, proto: tcp, service: ssl, duration: "38.20",
+     orig_bytes: 3900, resp_bytes: 8100, conn_state: SF, history: "ShADadFf",
+     event_id: "CM-0311-0649"}
+  - {ts: "2026-03-11T13:01:00Z", uid: "CGT00002", orig_h: "10.20.30.103", orig_p: 49101,
+     resp_h: "192.0.2.10", resp_p: 123, proto: udp, service: "-", duration: "0.00",
+     orig_bytes: 76, resp_bytes: 76, conn_state: S0, history: "D",
+     event_id: "CM-0311-0650"}
+  - {ts: "2026-03-11T13:02:00Z", uid: "CGT00003", orig_h: "192.0.2.199", orig_p: 51000,
+     resp_h: "10.20.10.20", resp_p: 22, proto: tcp, service: "-", duration: "0.00",
+     orig_bytes: 0, resp_bytes: 0, conn_state: REJ, history: "Sr",
+     event_id: "CM-0311-0651"}
+
+dns_rows:
+  # M2 pre-beacon C2 resolve - byte-identical to L2.5's row for this event
+  - {ts: "2026-03-11T15:45:58Z", uid: "CXdns1", orig_h: "10.20.30.107", orig_p: 49155,
+     resp_h: "10.20.10.5", resp_p: 53, query: "c2.stonewick.example", qtype_name: A,
+     rcode_name: NOERROR, answers: "203.0.113.66", event_id: "CM-0311-0500"}
+  # M3 tunnel burst seed rows - byte-identical to L2.2's first 3 tunnel rows
+  - {ts: "2026-03-12T09:00:00Z", uid: "CTUN00001", orig_h: "10.20.31.112", orig_p: 52000,
+     resp_h: "10.20.10.5", resp_p: 53, query: "9d313c2f04e2f2699784f1c4.tun.stonewick.example",
+     qtype_name: TXT, rcode_name: NXDOMAIN, answers: "-", event_id: "CM-0312-0310"}
+  - {ts: "2026-03-12T09:00:30Z", uid: "CTUN00002", orig_h: "10.20.31.112", orig_p: 52001,
+     resp_h: "10.20.10.5", resp_p: 53, query: "fd48d9ea7d7448d3dc809d880.tun.stonewick.example",
+     qtype_name: TXT, rcode_name: NXDOMAIN, answers: "-", event_id: "CM-0312-0311"}
+  - {ts: "2026-03-12T09:01:00Z", uid: "CTUN00003", orig_h: "10.20.31.112", orig_p: 52002,
+     resp_h: "10.20.10.5", resp_p: 53, query: "d8a57bf281abe60590ee606c1c.tun.stonewick.example",
+     qtype_name: TXT, rcode_name: NXDOMAIN, answers: "-", event_id: "CM-0312-0312"}
+  # benign filler
+  - {ts: "2026-03-11T13:00:30Z", uid: "CGT00004", orig_h: "10.20.30.107", orig_p: 49102,
+     resp_h: "10.20.10.5", resp_p: 53, query: "saas.mail.example", qtype_name: A,
+     rcode_name: NOERROR, answers: "192.0.2.60", event_id: "CM-0311-0652"}
+
+http_rows:
+  # WEB01 /u.sh pull - byte-identical to L2.3/L2.5's http.log row for this event
+  - {ts: "2026-03-12T20:16:00Z", uid: "CXush1", orig_h: "10.20.10.20", orig_p: 44601,
+     resp_h: "198.51.100.23", resp_p: 80, method: GET, host: "cdn.stonewick.example",
+     uri: "/u.sh", user_agent: "curl/7.81.0", status_code: 200, request_body_len: 0,
+     response_body_len: 92, event_id: "CM-0312-0520"}
+
+ssl_rows:
+  # M2 beacon TLS - byte-identical to L2.3/L2.5's ssl.log row for this event
+  - {ts: "2026-03-11T15:46:02Z", uid: "CXbeac1", orig_h: "10.20.30.107", orig_p: 49156,
+     resp_h: "203.0.113.66", resp_p: 443, version: "TLSv12", cipher: "ECDHE-RSA-AES128-GCM-SHA256",
+     server_name: "c2.stonewick.example", resumed: false, established: true,
+     event_id: "CM-0311-0502"}
+
+# DNS resolve + the first TLS beacon's ClientHello (SNI visible) - the pcap
+# slice of the SAME beacon the zeek bundle shows via conn.log/ssl.log.
+pcap:
+  client_ip: "10.20.30.107"
+  server_ip: "203.0.113.66"
+  dns_server_ip: "10.20.10.5"
+  sni_hostname: "c2.stonewick.example"
+  answer_ip: "203.0.113.66"
+  t0: 1773243958   # 2026-03-11T15:45:58Z - the pre-beacon DNS resolve
+
+answer_keys:
+  L2.7:
+    q1: "c2.stonewick[.]example"   # DEFANGED - C2 domain the victim resolved
+    q2: "203.0.113[.]66"           # DEFANGED - C2 IP it resolved to
+    q3: "c2.stonewick[.]example"   # DEFANGED - SNI in the first TLS handshake
+    q4: "300"                      # beacon base period, seconds
+    q5: "10.20.30[.]107"           # DEFANGED - the beaconing host
+    q6: "10.20.31[.]112"           # DEFANGED - the tunneling host (different host)
+    q7: "/u.sh"                    # plaintext payload URI pulled by WEB01
+    q8: "cm-0311-0500"             # event_id of the pre-beacon C2 DNS resolve

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check answers.txt for required keys q1..q5.",
+    "q1=b, q2=b, q3=Opts, q4=b, q5=b.",
+    "Read files/rustscan-src/opts.rs and files/rustscan-src/scanner.rs to transcribe answers.txt."
+  ]
+}

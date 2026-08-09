@@ -1,0 +1,7 @@
+{
+  "id": "L5.7",
+  "title": "Timeouts, cancellation, resource exhaustion",
+  "type": "AUDIT",
+  "gate": false,
+  "est_minutes": 20
+}

@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Framing before decoding exists to:",
+      "options": {
+        "a": "Compress data",
+        "b": "Cut a byte stream into discrete records before each is parsed",
+        "c": "Encrypt"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A production codec returns Result on decode because:",
+      "options": {
+        "a": "Style",
+        "b": "Input is untrusted \u2014 failure must be a value, not a panic",
+        "c": "Faster performance"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "One malformed record must not crash ingest \u2014 the decoder returns an Err instead of calling ___.",
+      "answer_b64": "dW53cmFw",
+      "accept_b64": [
+        "dW53cmFw",
+        "cGFuaWM=",
+        "cGFuaWMh"
+      ]
+    }
+  ]
+}

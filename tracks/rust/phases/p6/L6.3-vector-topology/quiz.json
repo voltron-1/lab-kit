@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Vector's source -> transform -> sink is the same shape as:",
+      "options": {
+        "a": "MVC",
+        "b": "Logstash's input -> filter -> output",
+        "c": "REST API"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The only pipeline stage that emits events to the outside world is:",
+      "options": {
+        "a": "Source",
+        "b": "Sink",
+        "c": "Transform"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Vector wires its pipeline together using a ___ file (TOML/YAML).",
+      "answer_b64": "Y29uZmln",
+      "accept_b64": [
+        "Y29uZmln",
+        "Y29uZmlndXJhdGlvbg==",
+        "dG9tbA==",
+        "eWFtbA=="
+      ]
+    }
+  ]
+}

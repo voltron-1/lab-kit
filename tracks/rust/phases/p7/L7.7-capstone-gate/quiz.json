@@ -1,0 +1,35 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "\"Ship\" at the end of an audit means:",
+      "options": {
+        "a": "The code is perfect",
+        "b": "Every checklist lane passed against this artifact with evidence",
+        "c": "The tests are green"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The finished parser survives a malformed line by:",
+      "options": {
+        "a": "Panicking",
+        "b": "Returning None \u2014 skipping and counting it so ingest continues",
+        "c": "Guessing"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "The course's final artifact emits logs in which schema (three letters)?",
+      "answer_b64": "ZWNz",
+      "accept_b64": [
+        "ZWNz"
+      ]
+    }
+  ]
+}

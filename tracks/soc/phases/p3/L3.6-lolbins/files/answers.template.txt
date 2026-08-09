@@ -1,0 +1,6 @@
+q1=   # powershell -nop -w hidden -enc -> abuse? (y/n)
+q2=   # certutil -urlcache -split -f -> abuse? (y/n)
+q3=   # curl | bash -> abuse? (y/n)
+q4=   # powershell -File signed script -> abuse? (y/n)
+q5=   # the LOLBin used to DOWNLOAD a file via urlcache
+q6=   # ATT&CK technique id for encoded-powershell abuse (format tXXXX.XXX)

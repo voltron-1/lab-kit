@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "What does mpsc stand for in std::sync::mpsc?",
+      "options": {
+        "a": "Multi-Producer, Single-Consumer \u2014 multiple senders, one receiver",
+        "b": "Multi-Process Shared Channel",
+        "c": "Mutex-Protected Sender Channel"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "When does iterating over a channel receiver (for v in rx) terminate?",
+      "options": {
+        "a": "Immediately after receiving the first message",
+        "b": "When all sender handles (the original and all clones) have been dropped",
+        "c": "After a fixed 10-second timeout"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Forgetting to drop the original tx causes the receive loop to ___ forever.",
+      "answer_b64": "aGFuZw==",
+      "accept_b64": [
+        "aGFuZw==",
+        "YmxvY2s=",
+        "d2FpdA==",
+        "ZGVhZGxvY2s="
+      ]
+    }
+  ]
+}

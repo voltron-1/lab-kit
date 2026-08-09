@@ -1,0 +1,6 @@
+q1=   # ProcessGuid of powershell.exe launched by WINWORD.EXE
+q2=   # process.name that is the PARENT of powershell.exe
+q3=   # the child process powershell.exe spawned next
+q4=   # the full command line whoami.exe ran (lowercased)
+q5=   # how many processes descend from WINWORD.EXE (its subtree, excl. itself)
+q6=   # event.id of the WINWORD->powershell spawn
