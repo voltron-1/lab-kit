@@ -1,0 +1,63 @@
+name: CI Quality Gates
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  shellcheck-and-lint:
+    name: ShellCheck & Lab Structural Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq shellcheck
+
+      - name: Run ShellCheck
+        run: ./tools/shellcheck-all.sh
+
+      - name: Run Lab Structural Lint
+        run: ./tools/lint-labs.sh
+
+      - name: Run Acceptance Test Suite
+        run: bash tests/acceptance.sh
+
+  powershell-lint:
+    name: PSScriptAnalyzer (PowerShell)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
+          $results = Invoke-ScriptAnalyzer -Path ./tracks/ps -Recurse -Severity Error,Warning
+          if ($results.Count -gt 0) {
+              $results | Format-Table -AutoSize
+              throw "PSScriptAnalyzer found $($results.Count) error(s)/warning(s) in PowerShell lab scripts."
+          }
+
+  rust-clippy:
+    name: Clippy & Cargo Check (Rust)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - name: Cargo Check & Clippy across Rust Projects
+        run: |
+          find tracks/rust -name "Cargo.toml" -execdir cargo check \;
+          find tracks/rust -name "Cargo.toml" -execdir cargo clippy -- -D warnings \;

@@ -77,7 +77,9 @@ touches your real `.progress.json` or `workspace/`):
 
 ## Framework & Quality Gates
 
-- **CI & Script Linting**: Automated linting (`./tools/lint-labs.sh`, `./tools/shellcheck-all.sh`) enforces strict code quality and structural standards across all lab scripts and check harnesses.
+- **CI & Script Linting**: Automated linting (`./tools/lint-labs.sh`, `./tools/shellcheck-all.sh`, GitHub Actions) enforces strict code quality and structural standards across all lab scripts and check harnesses.
 - **MITRE ATT&CK® Mapping**: Security-relevant lessons across the PowerShell and SOC Analyst tracks are mapped to MITRE ATT&CK techniques in [`docs/ATTACK_MAPPING.md`](docs/ATTACK_MAPPING.md).
 - **Content Review Framework**: Offense-adjacent lessons follow strict defensive framing, payload sanitization, and static evaluation rules as documented in [`docs/CONTENT_REVIEW_CHECKLIST.md`](docs/CONTENT_REVIEW_CHECKLIST.md).
+- **Contributor Guidelines**: Full guidelines on CI gates, ATT&CK tagging, and content safety can be found in [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
 
