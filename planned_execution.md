@@ -1,13 +1,18 @@
 # LAB-KIT — Planned Execution
 
 ## NEXT UP
-Track: **soc p7 — The AI-Assisted Analyst** is next for the SOC track (7 labs, L7.1–L7.7). Plan: `docs/plans/soc-p7-plan.md`.
+**All 4 tracks (rust, bash, ps, soc) are 100% built, tested, tagged, and complete (223 total labs)!**
 
 Known gap (not blocking, no build required): **ps p0–p3 (26 labs) have zero `tests/acceptance.sh` coverage** — built, merged, and tagged, but never given the fabricated-pass-+-negative-case section every other closed-out phase in every other track has. Same shape as the soc-p0 gap that existed before soc-p1's close-out. Whoever picks this up: it must land as its own section inserted *before* the `ps track P4` section in `tests/acceptance.sh` (that section's `--force` skip-ahead permanently marks p0–p3 unpassed, so p0–p3 coverage added after it could never show ✓ — drop the `--force` once this lands).
 
 Known gap (not blocking, no build required): **`tools/genevidence/verify.py`'s baseline invariants were never actually built.** `docs/plans/soc-p01-plan.md`'s own close-out claimed `verify.py` enforces "timestamps in-window, IPs/hosts resolve to universe entities, answer-key event ids present in evidence, raw artifacts carry no defanged forms, prose carries no un-defanged IOCs" — in reality `verify.py` was (until the soc-p2 generator-extensions session) a one-line stub that only checked `universe.yaml` parses. That session added real `check_uid_consistency`/`check_pcap_zeek_agreement` invariants for soc-p2's own new requirements, but deliberately did not backfill the baseline p0/p1 invariants the earlier plan promised — that's a separate, pre-existing gap, not soc-p2's to absorb mid-build.
 
 ## LAST SESSION
+2026-08-09 — soc p7 BUILD + CLOSE-OUT (all 7 labs, L7.1–L7.7 complete). Built straight from `docs/plans/soc-p7-plan.md`. Terminal phase of the SOC Analyst Lab track!
+- **Scaffolded and verified all 7 labs**: L7.1 Automation bias (failure modes: commission, omission, complacency, deskilling, anchoring), L7.2 VERIFY reps I (grounding cross-checks, contradicted Run key), L7.3 Directing AI (evidence-first prompts vs weak prompts, task classification), L7.4 VERIFY reps II (grounding contract, hallucinated event ID `cm-9999-9999`, wrongpivot host, ungrounded exfiltration claim), L7.5 Override discipline (accept vs override, tuning feedback loop), L7.6 Capstone shift (segmented 3-sitting shift: 6-alert queue, phish + AI flaw override, incident), L7.7 Capstone gate (REPORT gate, cited event IDs, defanged IOCs, `field:value` tuning recommendation).
+- **Linting & Acceptance**: `./tools/lint-labs.sh` and `./tools/shellcheck-all.sh` clean. Added SOC P7 acceptance section to `tests/acceptance.sh` (7 labs, fabricated pass + negative cases, denominator updated to 52).
+- **Tagged `soc-p7`**. **SOC Analyst Lab Track Complete (52/52 labs)!**
+
 2026-08-09 — soc p6 BUILD + CLOSE-OUT (all 6 labs, L6.1–L6.6 complete). Built straight from `docs/plans/soc-p6-plan.md`.
 - **Scaffolded and verified all 6 labs**: L6.1 Pivoting (user->host->process->network->lateral chain, phase opener recall), L6.2 Timeline building (UTC normalization, CDT conversion, @timestamp ordering over event.ingested), L6.3 Scoping (distinct host queries, indicator vs intrusion scope), L6.4 Writing the ticket (escalation package, required structure, defanged IOCs), L6.5 Incident comms (audience & timing matching, shift handoff watch items), L6.6 Phase Gate Full investigation (REPORT gate, cited event IDs, defanged IOCs).
 - **Linting & Acceptance**: `./tools/lint-labs.sh` and `./tools/shellcheck-all.sh` clean. Added SOC P6 acceptance section to `tests/acceptance.sh` (6 labs, fabricated pass + negative cases, denominator updated to 45).
@@ -318,8 +323,10 @@ board: [LAB-KIT: SOC Analyst Lab](https://github.com/users/voltron-1/projects/20
 - [x] soc p3 — Endpoint Triage Fundamentals (7 labs) — tag `soc-p3`; plan: `docs/plans/soc-p3-plan.md`; L3.1–L3.7 built, evidence generated & verified, acceptance suite green (809/809 tests)
 - [x] soc p4 — Triage Craft & the Queue (8 labs) — tag `soc-p4`; plan: `docs/plans/soc-p4-plan.md`; L4.1–L4.8 built, acceptance suite green (840/840 tests)
 - [x] soc p5 — Phishing & Malware Triage (6 labs) — tag `soc-p5`; plan: `docs/plans/soc-p5-plan.md`; L5.1–L5.6 built, acceptance suite green (869/869 tests)
-- [x] soc p6 — Investigation & Escalation (6 labs) — tag `soc-p6`; plan: `docs/plans/soc-p6-plan.md`; L6.1–L6.6 built, acceptance suite green (898/898 tests)
-- [ ] soc p7 — The AI-Assisted Analyst (7 labs)
+- [x] soc p7 — The AI-Assisted Analyst (7 labs) — tag `soc-p7`; plan: `docs/plans/soc-p7-plan.md`; L7.1–L7.7 built, acceptance suite green (931/931 tests)
+
+**soc track complete: p0–p7, 52 labs, all built and verified.**
+
 
 ### ps — PowerShell Literacy Lab (54 labs)
 board: [LAB-KIT: PowerShell Literacy Lab](https://github.com/users/voltron-1/projects/21) — 54 issues, 8 milestones, 237 pts

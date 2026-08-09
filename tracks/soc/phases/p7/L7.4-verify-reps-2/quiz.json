@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The grounding contract is:",
+      "options": {
+        "a": "AI must be polite",
+        "b": "every AI claim must cite an event ID that exists in evidence \u2014 no real ID, no claim",
+        "c": "AI must be fast"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A claim citing CM-9999-9999, which is not in evidence, is:",
+      "options": {
+        "a": "grounded",
+        "b": "a hallucination \u2014 a fabricated citation; reject claim",
+        "c": "wrong pivot"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "This grading rule matters because:",
+      "options": {
+        "a": "it's arbitrary",
+        "b": "it's the same grounding your platform imposes on agents \u2014 training the human half of the loop",
+        "c": "MITRE says so"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

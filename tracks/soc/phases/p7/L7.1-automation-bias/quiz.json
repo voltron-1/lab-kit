@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Automation bias is:",
+      "options": {
+        "a": "a software bug",
+        "b": "the human tendency to over-trust automated output and under-verify it",
+        "c": "a SIEM setting"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "\"The AI said benign, so I closed it\" is:",
+      "options": {
+        "a": "efficient",
+        "b": "commission bias \u2014 acting on a wrong automated verdict without checking evidence",
+        "c": "fine"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why does this course end on verifying AI instead of using it?",
+      "options": {
+        "a": "AI is bad",
+        "b": "you can only supervise AI triage if you can do triage without it \u2014 automation bias is the Tier-1 failure mode",
+        "c": "tradition"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

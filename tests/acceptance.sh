@@ -2197,7 +2197,7 @@ printf 'q1a=entra-signin\nq1b=t1110.003\nq1c=b\nq2a=sysmon\nq2b=t1059.001\nq2c=a
 soc_check_pass "L1.8" $'a\nb\nc\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 11 soc P0-P1 labs passed (11/45)" "$out" "(11/45)"
+assert_contains "status shows all 11 soc P0-P1 labs passed (11/52)" "$out" "(11/52)"
 
 # --- 7i2. soc track P2: fabricated pass + negative case per lab ---
 note "soc track P2: fabricated pass + negative case per lab"
@@ -2258,7 +2258,7 @@ printf 'q1=c2.stonewick[.]example\nq2=203.0.113[.]66\nq3=c2.stonewick[.]example\
 soc_check_pass "L2.7" $'b\nb\nb\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 18 soc P0-P2 labs passed (18/45)" "$out" "(18/45)"
+assert_contains "status shows all 18 soc P0-P2 labs passed (18/52)" "$out" "(18/52)"
 
 # --- 7i3. soc track P3: fabricated pass + negative case per lab ---
 note "soc track P3: fabricated pass + negative case per lab"
@@ -2315,7 +2315,7 @@ printf 'q1=m.reyes\nq2=cm-0311-0142\nq3=powershell.exe\nq4=runkey\nq5=supportadm
 soc_check_pass "L3.7" $'b\nb\nb\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 25 soc P0-P3 labs passed (25/45)" "$out" "(25/45)"
+assert_contains "status shows all 25 soc P0-P3 labs passed (25/52)" "$out" "(25/52)"
 
 # --- 7i4. soc track P4: fabricated pass + negative case per lab ---
 note "soc track P4: fabricated pass + negative case per lab"
@@ -2381,7 +2381,7 @@ printf 'q1=tp\nq1e=cm-0311-0142\nq1esc=n\nq2=btp\nq2esc=n\nq3=tp\nq3e=cm-0312-03
 soc_check_pass "L4.8" $'b\nb\nb\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 33 soc P0-P4 labs passed (33/45)" "$out" "(33/45)"
+assert_contains "status shows all 33 soc P0-P4 labs passed (33/52)" "$out" "(33/52)"
 
 # --- 7i5. soc track P5: fabricated pass + negative case per lab ---
 note "soc track P5: fabricated pass + negative case per lab"
@@ -2439,7 +2439,7 @@ cp "$WS/report-template.md" "$WS/report.md"
 soc_check_pass "L5.6" $'b\nb\na\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 39 soc P0-P5 labs passed (39/45)" "$out" "(39/45)"
+assert_contains "status shows all 39 soc P0-P5 labs passed (39/52)" "$out" "(39/52)"
 
 # --- 7i6. soc track P6: fabricated pass + negative case per lab ---
 note "soc track P6: fabricated pass + negative case per lab"
@@ -2501,7 +2501,72 @@ cp "$WS/escalation-template.md" "$WS/report.md"
 soc_check_pass "L6.6" $'b\nb\nb\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 45 soc P0-P6 labs passed (45/45)" "$out" "(45/45)"
+assert_contains "status shows all 45 soc P0-P6 labs passed (45/52)" "$out" "(45/52)"
+
+# --- 7i7. soc track P7: fabricated pass + negative case per lab ---
+note "soc track P7: fabricated pass + negative case per lab"
+
+# L7.1 — Automation bias (phase opener)
+out="$(printf 'network\nutc\na\ntier 2\na\n' | "$LAB" start soc L7.1 2>&1)"; rc=$?
+assert_eq "'lab start soc L7.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L7.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/soc/L7.1"
+soc_check_fail_missing "L7.1" "answers.txt"
+printf 'q1=commission\nq2=omission\nq3=complacency\nq4=deskilling\nq5=anchoring\n' > "$WS/answers.txt"
+soc_check_pass "L7.1" $'b\nb\nb\n'
+
+# L7.2 — VERIFY reps I
+"$LAB" start soc L7.2 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L7.2"
+soc_check_fail_missing "L7.2" "answers.txt"
+printf 'q1=grounded\nq2=flawed\nq2f=contradicted\nq2e=cm-0311-0181\nq3=grounded\n' > "$WS/answers.txt"
+soc_check_pass "L7.2" $'b\nb\nb\n'
+
+# L7.3 — Directing AI in an investigation
+"$LAB" start soc L7.3 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L7.3"
+soc_check_fail_missing "L7.3" "answers.txt"
+printf 'q1=b\nq2=b\nq3=b\nq4=b\nq5=good\nq6=bad\nq7=good\nq8=bad\nq9=good\n' > "$WS/answers.txt"
+soc_check_pass "L7.3" $'b\nb\nb\n'
+
+# L7.4 — VERIFY reps II
+"$LAB" start soc L7.4 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L7.4"
+soc_check_fail_missing "L7.4" "answers.txt"
+printf 'q1=grounded\nq2=flawed\nq2f=hallucinated\nq3=grounded\nq4=flawed\nq4f=wrongpivot\nq5=flawed\nq5f=ungrounded\nq_hall=cm-9999-9999\n' > "$WS/answers.txt"
+soc_check_pass "L7.4" $'b\nb\nb\n'
+
+# L7.5 — Override discipline
+"$LAB" start soc L7.5 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L7.5"
+soc_check_fail_missing "L7.5" "answers.txt"
+printf 'q1=accept\nq2=override\nq3=override\nq4=accept\nq5=override\nq6=tuning\n' > "$WS/answers.txt"
+soc_check_pass "L7.5" $'b\nb\nb\n'
+
+# L7.6 — Capstone shift
+"$LAB" start soc L7.6 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L7.6"
+soc_check_fail_missing "L7.6" "queue.answers"
+printf 'q1=tp\nq2=btp\nq3=tp\nq4=fp\nq5=btp\nq6=tp\n' > "$WS/queue.answers"
+printf 'verdict=phish\nq_flaw=contradicted\n' > "$WS/phish.answers"
+printf 'disposition=tp\nescalate=y\ncite=cm-0311-0201\n' > "$WS/incident.answers"
+soc_check_pass "L7.6" $'b\nb\nb\n'
+
+# L7.7 — Capstone gate (gate)
+"$LAB" start soc L7.7 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L7.7"
+soc_check_fail_missing "L7.7" "report.md"
+cp "$WS/report-template.md" "$WS/report.md"
+# Verify negative case: raw IOC fails the check
+printf '\nhttp://c2.stonewick.example\n' >> "$WS/report.md"
+out="$(printf 'b\nb\nb\n' | "$LAB" check soc L7.7 2>&1)"; rc=$?
+assert_eq "soc L7.7 check fails when report.md contains a raw IOC" "1" "$rc"
+assert_contains "soc L7.7 fail result names FAIL" "$out" "FAIL"
+cp "$WS/report-template.md" "$WS/report.md"
+soc_check_pass "L7.7" $'b\nb\nb\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 52 soc P0-P7 labs passed (52/52)" "$out" "(52/52)"
 
 # --- 7f. ps track P4 (PowerShell as Attack Surface): fabricated pass +
 # negative case per lab. First ps-track coverage in this file -- p0-p3
@@ -3114,7 +3179,7 @@ fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 1 unstarted track-phase line" "1" "$line_count"
+  assert_eq "planned_execution.md has 0 unstarted track-phase lines" "0" "$line_count"
 else
   bad "planned_execution.md missing"
 fi

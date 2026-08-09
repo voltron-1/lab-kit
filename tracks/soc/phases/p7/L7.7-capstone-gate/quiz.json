@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The capstone deliverable adds, beyond the escalation report, a:",
+      "options": {
+        "a": "screenshot",
+        "b": "tuning recommendation \u2014 specific detection change your investigation justifies",
+        "c": "longer summary"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A good tuning recommendation is:",
+      "options": {
+        "a": "\"fix the rule\"",
+        "b": "a specific exclusion or selector change (e.g. exclude host X on pattern Y)",
+        "c": "\"disable it\""
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "This handoff completes the loop because:",
+      "options": {
+        "a": "it's the last lab",
+        "b": "analyst findings become a concrete detection improvement \u2014 Tier 1 feeding rule lifecycle",
+        "c": "it's graded"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Summary 2 claims no persistence, but cm-0311-0181 is a Run key event.",
+    "q1=grounded, q2=flawed, q2f=contradicted, q2e=cm-0311-0181, q3=grounded.",
+    "Ensure answers.txt contains q1..q3."
+  ]
+}

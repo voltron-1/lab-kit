@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Copy files/report-template.md to report.md.",
+    "Ensure report.md includes ## Scope, ## Timeline (citing cm-0311-0201), ## ATT&CK (T1059.001), ## Verdict (malicious), ## Recommendation, ## Tuning Recommendation (cmdline:winword->powershell), and defanged IOCs.",
+    "Verify no raw http://, IP, or domain appears in report.md."
+  ]
+}

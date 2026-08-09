@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "q1=accept, q2=override, q3=override, q4=accept, q5=override, q6=tuning.",
+    "Accept supported verdicts; override unsupported ones.",
+    "Overrides feed tuning back to detection engineering."
+  ]
+}

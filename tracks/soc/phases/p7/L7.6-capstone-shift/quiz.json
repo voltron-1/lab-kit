@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The phish segment ships an AI summary. Your job is to:",
+      "options": {
+        "a": "obey it",
+        "b": "verify it against evidence and override it if it's wrong",
+        "c": "ignore it"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The shift is segmented and independently saved so that:",
+      "options": {
+        "a": "it's harder",
+        "b": "a real shift can span three sittings without losing progress",
+        "c": "it's faster"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Everything is graded because the capstone proves you can:",
+      "options": {
+        "a": "use AI",
+        "b": "do the whole Tier-1 job \u2014 triage, phish, investigate, and verify machine",
+        "c": "write reports"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

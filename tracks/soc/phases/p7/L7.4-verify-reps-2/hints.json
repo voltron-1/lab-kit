@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "c2 cites cm-9999-9999 (hallucinated); c4 cites right ID but wrong host (wrongpivot); c5 cites nothing (ungrounded).",
+    "q1=grounded, q2=flawed/hallucinated, q3=grounded, q4=flawed/wrongpivot, q5=flawed/ungrounded, q_hall=cm-9999-9999.",
+    "Check answers.txt for all required keys."
+  ]
+}

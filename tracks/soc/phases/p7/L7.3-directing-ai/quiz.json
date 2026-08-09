@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "An evidence-first prompt:",
+      "options": {
+        "a": "asks \"is this bad?\"",
+        "b": "supplies specific events/IDs and asks AI to summarize/correlate and flag ungrounded claims",
+        "c": "trusts memory"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "AI is reliable mid-incident for:",
+      "options": {
+        "a": "inventing the verdict",
+        "b": "summarizing, correlating, and drafting from evidence YOU provide",
+        "c": "real-time ground truth"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "AI is unreliable for:",
+      "options": {
+        "a": "formatting",
+        "b": "claims of fact you did not give it and verdicts without attached evidence",
+        "c": "summarizing"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

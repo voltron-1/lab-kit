@@ -18,3 +18,4 @@ tracks/soc/phases/p3/L3.2-sysmon-trees/check.sh:20 — command line argument che
 tracks/soc/phases/p5/L5.6-gate-phish-report/check.sh:25 — URI scheme matched in defang gate
 tracks/soc/phases/p6/L6.4-writing-the-ticket/check.sh:26 — URI scheme matched in defang gate
 tracks/soc/phases/p6/L6.6-gate-full-investigation/check.sh:27 — URI scheme matched in defang gate
+tracks/soc/phases/p7/L7.7-capstone-gate/check.sh:29 — URI scheme matched in defang gate

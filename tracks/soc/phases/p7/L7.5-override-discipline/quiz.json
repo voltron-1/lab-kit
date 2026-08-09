@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "You override an AI verdict when:",
+      "options": {
+        "a": "never",
+        "b": "the evidence does not support it \u2014 missing citation, contradiction, or hallucinated ID",
+        "c": "always"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "\"The AI said benign\" is:",
+      "options": {
+        "a": "a verdict",
+        "b": "not a verdict \u2014 you own the call, backed by evidence",
+        "c": "sufficient"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "A good override does more than fix one alert; it:",
+      "options": {
+        "a": "closes faster",
+        "b": "feeds tuning/labels back so detection or model improves \u2014 closing the loop",
+        "c": "escalates"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

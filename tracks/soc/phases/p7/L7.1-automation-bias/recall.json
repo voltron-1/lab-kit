@@ -1,0 +1,55 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "text",
+      "prompt": "Pivoting follows join keys from user \u2192 host \u2192 process \u2192 ___ (one word).",
+      "answer_b64": "bmV0d29yaw==",
+      "accept_b64": [
+        "bmV0d29yaw=="
+      ]
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Before ordering events across hosts, normalize every timestamp to ___.",
+      "answer_b64": "dXRj",
+      "accept_b64": [
+        "dXRj"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "The C2 beacon is on 1 host but the intrusion spans 4. Scope depends on:",
+      "options": {
+        "a": "the question asked",
+        "b": "severity",
+        "c": "the rule"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 4,
+      "type": "text",
+      "prompt": "An escalation's required-elements list IS the checklist ___ triages it by (who?).",
+      "answer_b64": "dGllciAy",
+      "accept_b64": [
+        "dGllciAy",
+        "dGllcjI=",
+        "dDI="
+      ]
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "prompt": "A confirmed DC compromise at 2am is communicated:",
+      "options": {
+        "a": "immediately to Tier 2",
+        "b": "in the end-of-shift handoff",
+        "c": "to the user"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
