@@ -1,0 +1,7 @@
+{
+  "id": "L6.1",
+  "title": "Pivoting \u2014 one indicator to the full story: user \u2192 host \u2192 process \u2192 network",
+  "type": "PIVOT",
+  "gate": false,
+  "est_minutes": 20
+}

@@ -1,0 +1,1 @@
+Mar 12 15:15:33 web01 sshd[9012]: Accepted password for root from 203.0.113.66 port 44210 ssh2

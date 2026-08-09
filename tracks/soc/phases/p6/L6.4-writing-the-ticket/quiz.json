@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "L6.4's required-elements list is:",
+      "options": {
+        "a": "a suggestion",
+        "b": "literally the checklist Tier 2 triages your ticket by \u2014 a great investigation with a bad writeup is operationally bad",
+        "c": "optional"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The Scope line in an escalation tells Tier 2:",
+      "options": {
+        "a": "the severity",
+        "b": "how many hosts/accounts are affected \u2014 what to contain",
+        "c": "the rule name"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "A recommendation section should:",
+      "options": {
+        "a": "be omitted",
+        "b": "state concrete next actions (isolate host X, reset account Y, block IOC Z)",
+        "c": "restate the alert"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

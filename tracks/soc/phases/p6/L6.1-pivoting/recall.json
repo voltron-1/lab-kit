@@ -1,0 +1,58 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The Received chain reads which way to find the origin?",
+      "options": {
+        "a": "bottom-up \u2014 earliest relay at the bottom is the source",
+        "b": "top-down",
+        "c": "by date"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "`xn--\u2026` domains are encoded in ___ (one word).",
+      "answer_b64": "cHVueWNvZGU=",
+      "accept_b64": [
+        "cHVueWNvZGU="
+      ]
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "Extensions lie; what gives an attachment's true type? (two words)",
+      "answer_b64": "bWFnaWMgYnl0ZXM=",
+      "accept_b64": [
+        "bWFnaWMgYnl0ZXM=",
+        "bWFnaWM=",
+        "ZmlsZQ=="
+      ]
+    },
+    {
+      "id": 4,
+      "type": "text",
+      "prompt": "You verdict a sample from a sandbox report without ___ it (one word).",
+      "answer_b64": "cnVubmluZw==",
+      "accept_b64": [
+        "cnVubmluZw==",
+        "ZXhlY3V0aW5n",
+        "dG91Y2hpbmc=",
+        "b3BlbmluZw=="
+      ]
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "prompt": "A reported email that passes auth from an allowlisted vendor is ___.",
+      "options": {
+        "a": "legit",
+        "b": "phish",
+        "c": "spam"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

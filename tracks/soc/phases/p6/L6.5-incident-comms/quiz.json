@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A confirmed DC compromise at 2am goes to:",
+      "options": {
+        "a": "shift handoff",
+        "b": "Tier 2 / IR immediately \u2014 meets escalation trigger and cannot wait",
+        "c": "the user"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A shift handoff exists to:",
+      "options": {
+        "a": "fill time",
+        "b": "let next analyst resume open investigations and watch-items without losing context",
+        "c": "log hours"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Telling a user their file was quarantined is:",
+      "options": {
+        "a": "an escalation",
+        "b": "routine communication \u2014 reassure and close",
+        "c": "confidential"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

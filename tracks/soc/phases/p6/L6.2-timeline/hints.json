@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "CDT is UTC-05:00; add 5 hours to convert 15:15:33 to 20:15:33Z.",
+    "q1=2026-03-12t20:15:33z, q_order=e4,e1,e2,e3,e5,e6,e7, q2=cm-0311-0142, q3=event.ingested, q4=-05:00.",
+    "Ensure q_order is comma-joined with no spaces."
+  ]
+}

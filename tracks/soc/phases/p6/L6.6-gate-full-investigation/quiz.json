@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A full investigation starts from one alert and produces:",
+      "options": {
+        "a": "a verdict only",
+        "b": "a scoped, timelined escalation with defanged IOCs, ATT&CK, verdict, and recommendation",
+        "c": "a closed alert"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Your escalation cites event ids in the timeline because:",
+      "options": {
+        "a": "length",
+        "b": "grounding \u2014 a cited timeline is verifiable; an uncited one is a story",
+        "c": "MITRE requires it"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Phase 6 turned you from alert-handler into:",
+      "options": {
+        "a": "a manager",
+        "b": "an investigator who pivots, timelines, scopes, and writes the escalation Tier 2 respects",
+        "c": "Tier 3"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "How do you answer \"one host or ten\"?",
+      "options": {
+        "a": "intuition",
+        "b": "count distinct hosts carrying the indicator with a query \u2014 sort | uniq source hosts",
+        "c": "ask Tier 2"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The C2 beacon is on one host but intrusion spans four. Scope is:",
+      "options": {
+        "a": "one number",
+        "b": "relative to the question \u2014 beacon scope is 1, incident scope is 4",
+        "c": "always 10"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Getting scope wrong (calling a 4-host intrusion \"one host\") causes:",
+      "options": {
+        "a": "nothing",
+        "b": "under-scoped containment \u2014 attacker keeps other footholds",
+        "c": "over-escalation"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

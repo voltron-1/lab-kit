@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Two events: @timestamp 14:00Z, event.ingested 14:04Z. It happened at:",
+      "options": {
+        "a": "@timestamp \u2014 occurrence",
+        "b": "event.ingested \u2014 arrival",
+        "c": "later of the two"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Classic syslog Mar 12 15:15:33 (CDT) converts to UTC by:",
+      "options": {
+        "a": "doing nothing",
+        "b": "adding 5 hours (CDT is UTC-05:00) -> 20:15:33Z",
+        "c": "subtracting 5 hours"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why UTC everywhere in the timeline?",
+      "options": {
+        "a": "style",
+        "b": "one clock orders events from hosts in any timezone without conversion errors",
+        "c": "SIEM requires it"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

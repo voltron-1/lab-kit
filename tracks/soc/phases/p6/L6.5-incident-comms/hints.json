@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check charter-comms.md for audience and timing rules.",
+    "q1a=tier2, q1t=immediate, q2a=handoff, q2t=eos, q3a=user, q3t=routine, q4a=handoff, q4t=eos, q5=watch.",
+    "Ensure answers.txt includes q1a..q5."
+  ]
+}

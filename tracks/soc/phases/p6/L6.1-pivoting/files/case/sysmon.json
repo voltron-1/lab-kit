@@ -1,0 +1,4 @@
+[
+  {"event.id": "cm-0311-0201", "host": "wks-acct-07", "user": "m.reyes", "image": "powershell.exe", "parent.image": "winword.exe"},
+  {"event.id": "cm-0311-0181", "host": "wks-acct-07", "event.code": 13, "target.object": "HKCU\\...\\Run\\OneDriveUpd"}
+]

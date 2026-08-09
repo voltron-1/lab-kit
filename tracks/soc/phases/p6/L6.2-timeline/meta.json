@@ -1,0 +1,7 @@
+{
+  "id": "L6.2",
+  "title": "Timeline building \u2014 normalize timestamps, order events, UTC everywhere",
+  "type": "PIVOT",
+  "gate": false,
+  "est_minutes": 20
+}

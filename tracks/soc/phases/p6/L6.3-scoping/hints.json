@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Beacon indicator touches 1 host (WKS-ACCT-07); intrusion touches 4 hosts (WKS-ACCT-07, FS01, WKS-ENG-12, WEB01).",
+    "q1=1, q2=wks-acct-07, q3=4, q4=fs01,web01,wks-acct-07,wks-eng-12, q5=contained.",
+    "q4 accepts comma-separated hostnames in any order."
+  ]
+}

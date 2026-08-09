@@ -15,4 +15,6 @@ tracks/ps/phases/p7/L7.1-ai-failure-patterns/files/ai-sample.ps1:4 — fictional
 tracks/ps/phases/p7/L7.4-review-reps/files/ai-1.ps1:4 — fictional flawed-AI sample, never executed by check.sh
 tracks/soc/phases/p2/L2.4-tshark-pcap/check.sh:37 — URI fragment matched against tshark output, not a filesystem path
 tracks/soc/phases/p3/L3.2-sysmon-trees/check.sh:20 — command line argument check
-tracks/soc/phases/p5/L5.6-gate-phish-report/check.sh:24 — URI scheme matched in defang gate
+tracks/soc/phases/p5/L5.6-gate-phish-report/check.sh:25 — URI scheme matched in defang gate
+tracks/soc/phases/p6/L6.4-writing-the-ticket/check.sh:26 — URI scheme matched in defang gate
+tracks/soc/phases/p6/L6.6-gate-full-investigation/check.sh:27 — URI scheme matched in defang gate

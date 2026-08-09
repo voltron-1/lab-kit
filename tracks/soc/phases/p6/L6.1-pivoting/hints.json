@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Pivot from m.reyes: check security.json for logon host and 4720 creation event.",
+    "q1=wks-acct-07, q2=cm-0311-0201, q3=c2.stonewick[.]example, q4=onedriveupd, q5=fs01, q6=cm-0311-0244.",
+    "Defang the C2 domain in q3."
+  ]
+}

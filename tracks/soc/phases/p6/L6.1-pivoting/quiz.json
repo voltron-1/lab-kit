@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Pivoting means:",
+      "options": {
+        "a": "guessing",
+        "b": "following join keys (user, host, ProcessGuid, uid, IP) to connected evidence",
+        "c": "closing the alert"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "From a compromised USER, your first pivot is usually to:",
+      "options": {
+        "a": "the internet",
+        "b": "the host(s) and session(s) that credential touched",
+        "c": "the CFO"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why reconstruct the whole chain instead of verdicting the first alert?",
+      "options": {
+        "a": "you shouldn't",
+        "b": "one alert is one beat; scope, persistence, and lateral movement change response entirely",
+        "c": "it's faster"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
