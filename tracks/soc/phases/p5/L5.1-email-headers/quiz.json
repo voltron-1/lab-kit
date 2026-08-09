@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The originating server is found in the Received chain:",
+      "options": {
+        "a": "top hop",
+        "b": "bottom hop \u2014 chains build top-down as mail is relayed, so the earliest is the source",
+        "c": "the From header"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "dmarc=fail means:",
+      "options": {
+        "a": "the email is definitely malware",
+        "b": "the message failed SPF/DKIM alignment with the From domain \u2014 a strong spoofing signal",
+        "c": "DKIM is disabled"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "From says Coppermine Billing but auth fails and Return-Path is a different domain. This is:",
+      "options": {
+        "a": "normal",
+        "b": "classic display-name spoofing \u2014 friendly name lies, headers don't",
+        "c": "a mail loop"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "id": "L5.5",
+  "title": "The phish queue \u2014 six reported emails, verdict each (including the legitimate one)",
+  "type": "TRIAGE",
+  "gate": false,
+  "est_minutes": 20
+}

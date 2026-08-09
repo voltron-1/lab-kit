@@ -1,0 +1,4 @@
+From: security@coppermine-portal.example
+Authentication-Results: spf=fail dkim=fail dmarc=fail
+Subject: Password Reset Required
+Link: http://login-coppermine.example/reset

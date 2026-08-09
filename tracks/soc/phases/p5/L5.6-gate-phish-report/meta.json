@@ -1,0 +1,7 @@
+{
+  "id": "L5.6",
+  "title": "Phase gate: full phish investigation \u2014 email \u2192 indicators \u2192 enrichment \u2192 verdict \u2192 report",
+  "type": "REPORT",
+  "gate": true,
+  "est_minutes": 20
+}

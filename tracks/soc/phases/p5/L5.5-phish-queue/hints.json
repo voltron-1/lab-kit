@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check auth results, sender reputation, and intent for each email.",
+    "p1=phish, p2=phish, p3=legit, p4=spam, p5=legit, p6=phish.",
+    "Ensure answers.txt has q1..q6 filled."
+  ]
+}

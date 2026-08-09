@@ -1,0 +1,4 @@
+From: deals@shopnwin.example
+Authentication-Results: spf=pass dkim=pass dmarc=pass
+Subject: 50% Off Office Supplies
+Unsubscribe: http://shopnwin.example/unsub

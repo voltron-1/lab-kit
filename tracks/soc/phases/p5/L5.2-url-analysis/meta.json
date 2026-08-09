@@ -1,0 +1,7 @@
+{
+  "id": "L5.2",
+  "title": "URL analysis \u2014 redirect chains, lookalike domains, punycode, defang discipline",
+  "type": "DECODE",
+  "gate": false,
+  "est_minutes": 15
+}

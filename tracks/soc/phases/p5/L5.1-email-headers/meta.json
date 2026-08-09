@@ -1,0 +1,7 @@
+{
+  "id": "L5.1",
+  "title": "Email headers \u2014 reading the Received chain; SPF, DKIM, DMARC results",
+  "type": "DECODE",
+  "gate": false,
+  "est_minutes": 15
+}

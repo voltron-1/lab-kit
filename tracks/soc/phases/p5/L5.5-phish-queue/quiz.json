@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Calling a legitimate vendor invoice a phish is:",
+      "options": {
+        "a": "safe",
+        "b": "a false positive that erodes helpdesk/user trust and buries real reports",
+        "c": "impossible"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Marketing spam that passes auth and has an unsubscribe link is:",
+      "options": {
+        "a": "phish",
+        "b": "spam \u2014 annoying, not malicious; not an incident",
+        "c": "legit business mail"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "A CFO \"wire request\" from an external reply-to with a spoofed display name is:",
+      "options": {
+        "a": "legit",
+        "b": "BEC phishing \u2014 no malware needed, the ask is the attack",
+        "c": "spam"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

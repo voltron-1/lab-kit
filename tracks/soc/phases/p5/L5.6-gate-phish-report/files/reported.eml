@@ -1,0 +1,4 @@
+From: "Coppermine Billing" <billing@copperm1ne-billing.example>
+Authentication-Results: spf=fail dkim=fail dmarc=fail
+Subject: Invoice 2026-03 — Payment Overdue
+Attachment: invoice_2026-03.docm

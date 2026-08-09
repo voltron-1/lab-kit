@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A link displays coppermine.example but href is copperm1ne.example. This is:",
+      "options": {
+        "a": "a typo",
+        "b": "a homoglyph/digit lookalike domain \u2014 the \"1\" replaces the \"i\"",
+        "c": "the same domain"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A xn-- domain is:",
+      "options": {
+        "a": "invalid",
+        "b": "punycode \u2014 an ASCII encoding of a Unicode (often homoglyph) domain",
+        "c": "always malicious"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why defang IOCs (hxxp://, [.]) in your notes and tickets?",
+      "options": {
+        "a": "style",
+        "b": "so a reader or tool cannot accidentally click or resolve a live-malicious indicator",
+        "c": "encryption"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

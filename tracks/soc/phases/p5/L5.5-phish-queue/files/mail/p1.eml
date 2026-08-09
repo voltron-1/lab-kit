@@ -1,0 +1,3 @@
+From: billing@copperm1ne-billing.example
+Authentication-Results: spf=fail dkim=fail dmarc=fail
+Subject: Invoice 2026-03 Overdue

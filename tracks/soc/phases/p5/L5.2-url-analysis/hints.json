@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Count hops in the redirect chain (lnk.example -> copperm1ne-billing.example -> cdn.stonewick.example).",
+    "q1=cdn.stonewick[.]example, q2=copperm1ne-billing[.]example, q3=copperm\u00efne[.]example, q4=coppermine[.]example, q5=3.",
+    "Defang all domains in answers.txt."
+  ]
+}

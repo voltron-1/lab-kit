@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A sandbox report is useful because:",
+      "options": {
+        "a": "it's faster than reading",
+        "b": "it detonated the sample in isolation so you get behavior without risking your host",
+        "c": "it's always right"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The report shows WINWORD.EXE -> powershell.exe -enc -> C2 beacon. Verdict:",
+      "options": {
+        "a": "clean",
+        "b": "malicious \u2014 document-spawned encoded shell beaconing out is textbook malware",
+        "c": "suspicious only"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "You should still ground each claim in the report because:",
+      "options": {
+        "a": "reports are decoration",
+        "b": "an ungrounded verdict with no cited behavior is a guess",
+        "c": "it's faster"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

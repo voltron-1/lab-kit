@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Received headers stack newest-on-top; the bottom-most Received line holds the source IP.",
+    "q1=198.51.100[.]71, q2..q4 are fail, q5=copperm1ne-billing[.]example, q6=n.",
+    "Defang IP and domain in answers.txt."
+  ]
+}

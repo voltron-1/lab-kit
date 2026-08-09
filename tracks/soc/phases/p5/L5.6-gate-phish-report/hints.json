@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Copy files/report-template.md to report.md.",
+    "Ensure report.md includes ## Timeline, ## ATT&CK (T1566.001), ## Verdict (malicious), ## Recommendation, and defanged IOCs ([.]).",
+    "Verify no raw http://, IP, or domain appears in report.md."
+  ]
+}

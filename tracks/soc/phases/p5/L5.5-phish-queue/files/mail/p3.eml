@@ -1,0 +1,3 @@
+From: ar@northshore-freight.com
+Authentication-Results: spf=pass dkim=pass dmarc=pass
+Subject: Freight Delivery Receipt #8820

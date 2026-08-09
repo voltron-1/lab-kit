@@ -1,0 +1,3 @@
+From: helpdesk@coppermine.example
+Authentication-Results: spf=pass dkim=pass dmarc=pass
+Subject: Scheduled Maintenance Tonight

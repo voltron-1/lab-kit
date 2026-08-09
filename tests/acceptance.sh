@@ -2197,7 +2197,7 @@ printf 'q1a=entra-signin\nq1b=t1110.003\nq1c=b\nq2a=sysmon\nq2b=t1059.001\nq2c=a
 soc_check_pass "L1.8" $'a\nb\nc\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 11 soc P0-P1 labs passed (11/33)" "$out" "(11/33)"
+assert_contains "status shows all 11 soc P0-P1 labs passed (11/39)" "$out" "(11/39)"
 
 # --- 7i2. soc track P2: fabricated pass + negative case per lab ---
 note "soc track P2: fabricated pass + negative case per lab"
@@ -2258,7 +2258,7 @@ printf 'q1=c2.stonewick[.]example\nq2=203.0.113[.]66\nq3=c2.stonewick[.]example\
 soc_check_pass "L2.7" $'b\nb\nb\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 18 soc P0-P2 labs passed (18/33)" "$out" "(18/33)"
+assert_contains "status shows all 18 soc P0-P2 labs passed (18/39)" "$out" "(18/39)"
 
 # --- 7i3. soc track P3: fabricated pass + negative case per lab ---
 note "soc track P3: fabricated pass + negative case per lab"
@@ -2315,7 +2315,7 @@ printf 'q1=m.reyes\nq2=cm-0311-0142\nq3=powershell.exe\nq4=runkey\nq5=supportadm
 soc_check_pass "L3.7" $'b\nb\nb\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 25 soc P0-P3 labs passed (25/33)" "$out" "(25/33)"
+assert_contains "status shows all 25 soc P0-P3 labs passed (25/39)" "$out" "(25/39)"
 
 # --- 7i4. soc track P4: fabricated pass + negative case per lab ---
 note "soc track P4: fabricated pass + negative case per lab"
@@ -2381,7 +2381,65 @@ printf 'q1=tp\nq1e=cm-0311-0142\nq1esc=n\nq2=btp\nq2esc=n\nq3=tp\nq3e=cm-0312-03
 soc_check_pass "L4.8" $'b\nb\nb\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 33 soc P0-P4 labs passed (33/33)" "$out" "(33/33)"
+assert_contains "status shows all 33 soc P0-P4 labs passed (33/39)" "$out" "(33/39)"
+
+# --- 7i5. soc track P5: fabricated pass + negative case per lab ---
+note "soc track P5: fabricated pass + negative case per lab"
+
+# L5.1 — Email headers (phase opener)
+out="$(printf 'verdict\na\nspray\ntuning\na\n' | "$LAB" start soc L5.1 2>&1)"; rc=$?
+assert_eq "'lab start soc L5.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L5.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/soc/L5.1"
+soc_check_fail_missing "L5.1" "answers.txt"
+printf 'q1=198.51.100[.]71\nq2=fail\nq3=fail\nq4=fail\nq5=copperm1ne-billing[.]example\nq6=n\n' > "$WS/answers.txt"
+soc_check_pass "L5.1" $'b\nb\nb\n'
+
+# L5.2 — URL analysis
+"$LAB" start soc L5.2 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L5.2"
+soc_check_fail_missing "L5.2" "answers.txt"
+printf 'q1=cdn.stonewick[.]example\nq2=copperm1ne-billing[.]example\nq3=coppermïne[.]example\nq4=coppermine[.]example\nq5=3\n' > "$WS/answers.txt"
+soc_check_pass "L5.2" $'b\nb\nb\n'
+
+# L5.3 — Attachment triage
+"$LAB" start soc L5.3 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L5.3"
+soc_check_fail_missing "L5.3" "answers.txt"
+sha256sum "$WS/invoice_2026-03.docm" > "$WS/hash.txt"
+hash_prefix="$(cut -c1-12 < "$WS/hash.txt")"
+printf 'q1=zip\nq2=y\nq3=receipt.pdf.exe\nq4=%s\nq5=hash\n' "$hash_prefix" > "$WS/answers.txt"
+soc_check_pass "L5.3" $'b\nb\nb\n'
+
+# L5.4 — Reading a sandbox report
+"$LAB" start soc L5.4 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L5.4"
+soc_check_fail_missing "L5.4" "answers.txt"
+printf 'q1=malicious\nq2=c2.stonewick[.]example\nq3=t1566.001\nq4=onedriveupd\nq5=y\n' > "$WS/answers.txt"
+soc_check_pass "L5.4" $'b\nb\nb\n'
+
+# L5.5 — The phish queue
+"$LAB" start soc L5.5 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L5.5"
+soc_check_fail_missing "L5.5" "answers.txt"
+printf 'q1=phish\nq2=phish\nq3=legit\nq4=spam\nq5=legit\nq6=phish\n' > "$WS/answers.txt"
+soc_check_pass "L5.5" $'b\nb\nb\n'
+
+# L5.6 — Phase gate: full phish investigation (gate)
+"$LAB" start soc L5.6 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L5.6"
+soc_check_fail_missing "L5.6" "report.md"
+cp "$WS/report-template.md" "$WS/report.md"
+# Verify negative case: raw IOC fails the check
+printf '\nhttp://cdn.stonewick.example/pay\n' >> "$WS/report.md"
+out="$(printf 'b\nb\na\n' | "$LAB" check soc L5.6 2>&1)"; rc=$?
+assert_eq "soc L5.6 check fails when report.md contains a raw IOC" "1" "$rc"
+assert_contains "soc L5.6 fail result names FAIL" "$out" "FAIL"
+cp "$WS/report-template.md" "$WS/report.md"
+soc_check_pass "L5.6" $'b\nb\na\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 39 soc P0-P5 labs passed (39/39)" "$out" "(39/39)"
 
 # --- 7f. ps track P4 (PowerShell as Attack Surface): fabricated pass +
 # negative case per lab. First ps-track coverage in this file -- p0-p3
@@ -2404,6 +2462,7 @@ note "ps track P4: fabricated pass + negative case per lab"
 # invisible to every grader, which is the exact wrong-reason pass this guards against.
 if ! PATH="/usr/local/bin:/usr/bin:/bin" command -v pwsh > /dev/null 2>&1; then
   bad "pwsh is not installed on the check-runner PATH — cannot verify the real pwsh probes"
+  exit 1
 fi
 
 # Run a lab's shipped probe the way its grader does: same fixed PATH, same telemetry
@@ -2992,12 +3051,8 @@ else
 fi
 
 if [[ -f "$COPY/planned_execution.md" ]]; then
-  # 32 total track-phase lines; bash p0-p7 (8) + rust p0-p4 (5) + soc p0-p1 (2) +
-  # ps p0-p7 (8) are done ([x]) = 23; soc p2 is in-progress ([~], counts as
-  # neither), leaving 8 unstarted -- update this count whenever a phase's
-  # marker changes.
   line_count="$(grep -cE '^- \[ \] (rust|bash|soc|ps) p[0-7] ' "$COPY/planned_execution.md")"
-  assert_eq "planned_execution.md has 4 unstarted track-phase lines" "4" "$line_count"
+  assert_eq "planned_execution.md has 2 unstarted track-phase lines" "2" "$line_count"
 else
   bad "planned_execution.md missing"
 fi

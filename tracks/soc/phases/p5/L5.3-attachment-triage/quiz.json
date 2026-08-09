@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A file named receipt.pdf.exe is:",
+      "options": {
+        "a": "a PDF",
+        "b": "an executable using a double extension to look like a PDF",
+        "c": "safe"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "file reports an OOXML/ZIP for a .docm. The macro risk lives in:",
+      "options": {
+        "a": "the extension",
+        "b": "the embedded vbaProject (VBA macros) inside the container",
+        "c": "the filename"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Your first move on a suspicious attachment is to:",
+      "options": {
+        "a": "open it to see",
+        "b": "hash it and enrich/sandbox \u2014 never execute it",
+        "c": "forward it"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

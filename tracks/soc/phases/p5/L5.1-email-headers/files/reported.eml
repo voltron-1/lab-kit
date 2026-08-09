@@ -1,0 +1,28 @@
+Received: from mail.coppermine.example (mail.coppermine.example [10.20.10.5])
+	by mx.coppermine.example (Postfix) with ESMTP id A1B2C3D4
+	for <m.reyes@coppermine.example>; Wed, 11 Mar 2026 15:02:05 +0000
+Received: from relay.stonewick-isp.example (relay.stonewick-isp.example [198.51.100.1])
+	by mail.coppermine.example with ESMTP id E5F6G7H8
+	for <m.reyes@coppermine.example>; Wed, 11 Mar 2026 15:02:03 +0000
+Received: from mail.copperm1ne-billing.example (mail.copperm1ne-billing.example [198.51.100.71])
+	by relay.stonewick-isp.example with ESMTP id I9J0K1L2
+	for <m.reyes@coppermine.example>; Wed, 11 Mar 2026 15:02:00 +0000
+From: "Coppermine Billing" <billing@copperm1ne-billing.example>
+To: m.reyes@coppermine.example
+Subject: Invoice 2026-03 — Payment Overdue
+Date: Wed, 11 Mar 2026 15:02:00 +0000
+Return-Path: <bounce@stonewick.example>
+Authentication-Results: mx.coppermine.example;
+	spf=fail (sender IP 198.51.100.71 is not authorized);
+	dkim=fail header.d=copperm1ne-billing.example;
+	dmarc=fail (p=reject) header.from=copperm1ne-billing.example
+Message-ID: <202603111502.m2@copperm1ne-billing.example>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="BOUNDARY_M2"
+
+--BOUNDARY_M2
+Content-Type: text/plain; charset=UTF-8
+
+Dear Customer, your invoice is attached.
+
+--BOUNDARY_M2--

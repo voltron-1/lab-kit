@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A phishing escalation report must contain, at minimum:",
+      "options": {
+        "a": "just a verdict",
+        "b": "timeline, defanged IOCs, ATT&CK technique, verdict, and recommendation",
+        "c": "the raw email only"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Every IOC in the report must be:",
+      "options": {
+        "a": "raw so it's clickable",
+        "b": "defanged (hxxp://, [.]) so no one resolves a live-malicious indicator by accident",
+        "c": "hashed"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "The report grades on structure and defang, and ships a model report because:",
+      "options": {
+        "a": "format and safety can be verified automatically while writing quality calibrates against a worked example",
+        "b": "grading is impossible",
+        "c": "reports don't matter"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}

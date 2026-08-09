@@ -1,0 +1,33 @@
+{
+  "sample": "invoice_2026-03.docm",
+  "sha256": "55e9d81f361e14ec8998781f8ccdc3a0b160affa974681f31dd4a6d7537fc0f4",
+  "verdict": "malicious",
+  "score": 88,
+  "process_tree": [
+    "WINWORD.EXE",
+    "powershell.exe -enc",
+    "cmd.exe"
+  ],
+  "network": [
+    {
+      "dst": "c2.stonewick.example:443",
+      "proto": "tls",
+      "beacon_s": 300
+    }
+  ],
+  "dropped": [
+    {
+      "registry": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\OneDriveUpd"
+    }
+  ],
+  "mitre": [
+    "T1566.001",
+    "T1059.001",
+    "T1547.001"
+  ],
+  "signatures": [
+    "office_spawns_shell",
+    "encoded_powershell",
+    "autorun_persistence"
+  ]
+}

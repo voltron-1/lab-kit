@@ -1,0 +1,3 @@
+Redirect Chain: http://lnk.example/x9f2 -> http://copperm1ne-billing.example/invoice -> http://cdn.stonewick.example/pay
+Punycode Link: http://xn--coppermne-9zb.example/verify
+Benign Real Link: https://coppermine.example/portal

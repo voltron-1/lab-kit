@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Run sha256sum files/invoice_2026-03.docm > hash.txt to generate hash.txt.",
+    "q1=zip, q2=y, q3=receipt.pdf.exe, q4=55e9d81f361e, q5=hash.",
+    "Fill q4 with the first 12 characters of the sha256 hash."
+  ]
+}

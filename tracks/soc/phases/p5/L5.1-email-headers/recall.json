@@ -1,0 +1,53 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "text",
+      "prompt": "The five triage questions end by producing a ___ (one word).",
+      "answer_b64": "dmVyZGljdA==",
+      "accept_b64": [
+        "dmVyZGljdA=="
+      ]
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A high VT score on an IP hosting 400 domains is likely a ___ trap.",
+      "options": {
+        "a": "shared-hosting",
+        "b": "dedicated c2",
+        "c": "stale"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 3,
+      "type": "text",
+      "prompt": "One password against many accounts is a password ___ (one word).",
+      "answer_b64": "c3ByYXk=",
+      "accept_b64": [
+        "c3ByYXk="
+      ]
+    },
+    {
+      "id": 4,
+      "type": "text",
+      "prompt": "Closing a noisy-rule false positive should produce ___ feedback.",
+      "answer_b64": "dHVuaW5n",
+      "accept_b64": [
+        "dHVuaW5n"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "choice",
+      "prompt": "Severity is the rule's estimate; ___ is what you work first.",
+      "options": {
+        "a": "priority",
+        "b": "risk_score",
+        "c": "confidence"
+      },
+      "answer_b64": "YQ=="
+    }
+  ]
+}
