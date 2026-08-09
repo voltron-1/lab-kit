@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Working a queue, you hit an alert identical to one you closed FP yesterday. You:",
+      "options": {
+        "a": "auto-close it",
+        "b": "re-verify against THIS alert's evidence \u2014 yesterday's verdict isn't this alert's",
+        "c": "escalate"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Half your queue is BTP/FP. That means:",
+      "options": {
+        "a": "you're doing it wrong",
+        "b": "normal Tier 1 \u2014 most alerts aren't incidents; the skill is fast, defensible dispositions",
+        "c": "the SIEM is broken"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "A 12-alert shift with two real TPs among BTP/FP noise trains:",
+      "options": {
+        "a": "speed only",
+        "b": "the core loop \u2014 triage fast, don't miss the real ones, don't over-escalate",
+        "c": "reporting"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

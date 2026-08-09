@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Severity and priority differ because:",
+      "options": {
+        "a": "they're the same",
+        "b": "severity is static rule estimate; priority is what YOU work first, factoring asset and confidence",
+        "c": "priority is set by SIEM"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A critical alert on a decommissioned test box vs a medium on a domain controller \u2014 work first:",
+      "options": {
+        "a": "always the critical",
+        "b": "the medium \u2014 asset criticality lifts its priority",
+        "c": "both equally"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "A high-severity alert you're 90% sure is a false positive gets:",
+      "options": {
+        "a": "p1 always",
+        "b": "a lower priority \u2014 confidence it's benign pulls it down the queue",
+        "c": "escalated"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

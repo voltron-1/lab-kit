@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "One source, 40 accounts, one failed attempt each. This is:",
+      "options": {
+        "a": "brute force",
+        "b": "password spray \u2014 low-and-slow across accounts to dodge lockout",
+        "c": "credential stuffing"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "One source hammering ONE account with 30 passwords is:",
+      "options": {
+        "a": "spray",
+        "b": "brute force",
+        "c": "a typo"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why does spray dodge account-lockout policies?",
+      "options": {
+        "a": "it doesn't",
+        "b": "one attempt per account stays under the per-account lockout threshold",
+        "c": "it's encrypted"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

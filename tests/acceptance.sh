@@ -2197,7 +2197,7 @@ printf 'q1a=entra-signin\nq1b=t1110.003\nq1c=b\nq2a=sysmon\nq2b=t1059.001\nq2c=a
 soc_check_pass "L1.8" $'a\nb\nc\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 11 soc P0-P1 labs passed (11/25)" "$out" "(11/25)"
+assert_contains "status shows all 11 soc P0-P1 labs passed (11/33)" "$out" "(11/33)"
 
 # --- 7i2. soc track P2: fabricated pass + negative case per lab ---
 note "soc track P2: fabricated pass + negative case per lab"
@@ -2258,7 +2258,7 @@ printf 'q1=c2.stonewick[.]example\nq2=203.0.113[.]66\nq3=c2.stonewick[.]example\
 soc_check_pass "L2.7" $'b\nb\nb\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 18 soc P0-P2 labs passed (18/25)" "$out" "(18/25)"
+assert_contains "status shows all 18 soc P0-P2 labs passed (18/33)" "$out" "(18/33)"
 
 # --- 7i3. soc track P3: fabricated pass + negative case per lab ---
 note "soc track P3: fabricated pass + negative case per lab"
@@ -2315,7 +2315,73 @@ printf 'q1=m.reyes\nq2=cm-0311-0142\nq3=powershell.exe\nq4=runkey\nq5=supportadm
 soc_check_pass "L3.7" $'b\nb\nb\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 25 soc P0-P3 labs passed (25/25)" "$out" "(25/25)"
+assert_contains "status shows all 25 soc P0-P3 labs passed (25/33)" "$out" "(25/33)"
+
+# --- 7i4. soc track P4: fabricated pass + negative case per lab ---
+note "soc track P4: fabricated pass + negative case per lab"
+
+# L4.1 — The triage method — the five questions, applied to one alert slowly (phase opener)
+out="$(printf '4624\nparentprocessguid\na\nbrute-force\nlolbin\n' | "$LAB" start soc L4.1 2>&1)"; rc=$?
+assert_eq "'lab start soc L4.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L4.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/soc/L4.1"
+soc_check_fail_missing "L4.1" "answers.txt"
+printf 'q1=cm-r-0159\nq2=cm-0311-0201\nq3=n\nq4=1\nq5=tp\n' > "$WS/answers.txt"
+soc_check_pass "L4.1" $'b\nb\nb\n'
+
+# L4.2 — Indicator enrichment — hash, IP, domain lookups
+"$LAB" start soc L4.2 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L4.2"
+soc_check_fail_missing "L4.2" "answers.txt"
+printf '31\n' > "$WS/vt_mal.txt"
+printf 'c2.stonewick.example\n' > "$WS/pdns_domains.txt"
+printf 'q1=31\nq2=c2.stonewick[.]example\nq3=2026-02-27\nq4=52\nq5=passive-dns\n' > "$WS/answers.txt"
+soc_check_pass "L4.2" $'b\nb\nb\n'
+
+# L4.3 — Reputation is not a verdict — enrichment traps
+"$LAB" start soc L4.3 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L4.3"
+soc_check_fail_missing "L4.3" "answers.txt"
+printf 'q1=fp\nq1t=sharedhosting\nq2=fp\nq2t=cdn\nq3=fp\nq3t=stale\n' > "$WS/answers.txt"
+soc_check_pass "L4.3" $'b\nb\nb\n'
+
+# L4.4 — Brute force vs password spray — the auth-log classics
+"$LAB" start soc L4.4 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L4.4"
+soc_check_fail_missing "L4.4" "answers.txt"
+printf 'q1=spray\nq2=brute\nq3=svc_web\nq4=40\nq5=tp\nq6=203.0.113[.]66\n' > "$WS/answers.txt"
+soc_check_pass "L4.4" $'b\nb\nb\n'
+
+# L4.5 — Severity and priority — ten alerts, which first, and why
+"$LAB" start soc L4.5 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L4.5"
+soc_check_fail_missing "L4.5" "answers.txt"
+printf 'q1=p1\nq2=p1\nq3=p1\nq4=p3\nq5=p3\nq6=p2\nq7=p2\nq8=p3\nq9=p2\nq10=p3\n' > "$WS/answers.txt"
+soc_check_pass "L4.5" $'b\nb\nb\n'
+
+# L4.6 — The false-positive mines — noisy rules, admin behavior, and writing tuning feedback
+"$LAB" start soc L4.6 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L4.6"
+soc_check_fail_missing "L4.6" "answers.txt"
+printf 'q1=btp\nq1t=host:srv-backup\nq2=btp\nq2t=user:t.aoki\nq3=fp\nq3t=path:securityawareness\nq4=tp\nq4t=none\n' > "$WS/answers.txt"
+soc_check_pass "L4.6" $'b\nb\nb\n'
+
+# L4.7 — Queue shift I — twelve mixed alerts, full dispositions with evidence
+"$LAB" start soc L4.7 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L4.7"
+soc_check_fail_missing "L4.7" "answers.txt"
+printf 'q1=tp\nq1e=cm-0311-0142\nq2=btp\nq3=tp\nq3e=cm-0312-0310\nq4=fp\nq5=tp\nq5e=cm-0311-0201\nq6=btp\nq7=fp\nq8=fp\nq9=btp\nq10=tp\nq10e=cm-0311-0181\nq11=fp\nq12=tp\n' > "$WS/answers.txt"
+soc_check_pass "L4.7" $'b\nb\nb\n'
+
+# L4.8 — Phase gate: Queue shift II — new queue, tighter grading, includes escalation
+"$LAB" start soc L4.8 < /dev/null > /dev/null 2>&1
+WS="$COPY/workspace/soc/L4.8"
+soc_check_fail_missing "L4.8" "answers.txt"
+printf 'q1=tp\nq1e=cm-0311-0142\nq1esc=n\nq2=btp\nq2esc=n\nq3=tp\nq3e=cm-0312-0310\nq3esc=n\nq4=fp\nq4esc=n\nq5=tp\nq5e=cm-0311-0715\nq5esc=y\nq6=btp\nq6esc=n\nq7=fp\nq7esc=n\nq8=tp\nq8e=cm-0311-0201\nq8esc=n\nq9=fp\nq9esc=n\nq10=tp\nq10e=cm-0311-0181\nq10esc=n\n' > "$WS/answers.txt"
+soc_check_pass "L4.8" $'b\nb\nb\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 33 soc P0-P4 labs passed (33/33)" "$out" "(33/33)"
 
 # --- 7f. ps track P4 (PowerShell as Attack Surface): fabricated pass +
 # negative case per lab. First ps-track coverage in this file -- p0-p3

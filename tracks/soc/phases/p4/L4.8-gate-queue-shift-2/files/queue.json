@@ -1,0 +1,67 @@
+[
+  {
+    "id": "CM-A-421",
+    "rule": "Spray success",
+    "verdict": "tp",
+    "cite": "cm-0311-0142",
+    "escalate": "n"
+  },
+  {
+    "id": "CM-A-422",
+    "rule": "Backup job copy",
+    "verdict": "btp",
+    "escalate": "n"
+  },
+  {
+    "id": "CM-A-423",
+    "rule": "DNS TXT tunnel",
+    "verdict": "tp",
+    "cite": "cm-0312-0310",
+    "escalate": "n"
+  },
+  {
+    "id": "CM-A-424",
+    "rule": "Mimikatz string",
+    "verdict": "fp",
+    "escalate": "n"
+  },
+  {
+    "id": "CM-A-425",
+    "rule": "Brute force success on WEB01",
+    "verdict": "tp",
+    "cite": "cm-0311-0715",
+    "escalate": "y"
+  },
+  {
+    "id": "CM-A-426",
+    "rule": "Chg PsExec",
+    "verdict": "btp",
+    "escalate": "n"
+  },
+  {
+    "id": "CM-A-427",
+    "rule": "Shared host IP",
+    "verdict": "fp",
+    "escalate": "n"
+  },
+  {
+    "id": "CM-A-428",
+    "rule": "Office powershell spawn",
+    "verdict": "tp",
+    "cite": "cm-0311-0201",
+    "escalate": "n"
+  },
+  {
+    "id": "CM-A-429",
+    "rule": "Stale score IP",
+    "verdict": "fp",
+    "escalate": "n"
+  },
+  {
+    "id": "CM-A-430",
+    "rule": "Runkey persist",
+    "verdict": "tp",
+    "cite": "cm-0311-0181",
+    "escalate": "n"
+  }
+]

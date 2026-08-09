@@ -1,0 +1,66 @@
+[
+  {
+    "id": "CM-A-401",
+    "rule": "Spray success",
+    "verdict": "tp",
+    "cite": "cm-0311-0142"
+  },
+  {
+    "id": "CM-A-402",
+    "rule": "Backup job copy",
+    "verdict": "btp"
+  },
+  {
+    "id": "CM-A-403",
+    "rule": "DNS TXT tunnel",
+    "verdict": "tp",
+    "cite": "cm-0312-0310"
+  },
+  {
+    "id": "CM-A-404",
+    "rule": "Mimikatz string",
+    "verdict": "fp"
+  },
+  {
+    "id": "CM-A-405",
+    "rule": "Office powershell spawn",
+    "verdict": "tp",
+    "cite": "cm-0311-0201"
+  },
+  {
+    "id": "CM-A-406",
+    "rule": "Chg PsExec",
+    "verdict": "btp"
+  },
+  {
+    "id": "CM-A-407",
+    "rule": "NTP periodic",
+    "verdict": "fp"
+  },
+  {
+    "id": "CM-A-408",
+    "rule": "Shared host IP",
+    "verdict": "fp"
+  },
+  {
+    "id": "CM-A-409",
+    "rule": "Adware quarantine",
+    "verdict": "btp"
+  },
+  {
+    "id": "CM-A-410",
+    "rule": "Runkey persist",
+    "verdict": "tp",
+    "cite": "cm-0311-0181"
+  },
+  {
+    "id": "CM-A-411",
+    "rule": "Stale score IP",
+    "verdict": "fp"
+  },
+  {
+    "id": "CM-A-412",
+    "rule": "Brute force success",
+    "verdict": "tp"
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "indicator": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "last_analysis_stats": {
+    "malicious": 52,
+    "suspicious": 2,
+    "harmless": 1,
+    "undetected": 17
+  },
+  "first_submission_date": "2026-03-10"
+}

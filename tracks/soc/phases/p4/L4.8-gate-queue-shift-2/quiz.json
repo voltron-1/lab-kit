@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Which alert in a Tier-1 queue escalates to Tier 2?",
+      "options": {
+        "a": "any high-severity one",
+        "b": "a confirmed compromise, multi-host scope, credential compromise, or one needing containment authority",
+        "c": "every TP"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A brute force that SUCCEEDED against a service account on a server is:",
+      "options": {
+        "a": "fp",
+        "b": "a confirmed credential compromise \u2014 tp AND escalate",
+        "c": "btp"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Escalating every TP instead of only those meeting the triggers:",
+      "options": {
+        "a": "is correct",
+        "b": "floods Tier 2 and devalues real escalations",
+        "c": "is required"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

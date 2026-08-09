@@ -1,0 +1,5 @@
+{
+  "id": "CM-A-401",
+  "rule": "Office app spawned encoded PowerShell",
+  "host": "WKS-ACCT-07"
+}

@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Examine passive DNS and analysis dates for each case.",
+    "case1 is sharedhosting, case2 is cdn, case3 is stale.",
+    "q1=fp, q1t=sharedhosting, q2=fp, q2t=cdn, q3=fp, q3t=stale."
+  ]
+}

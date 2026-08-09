@@ -1,0 +1,6 @@
+{
+  "id": "CM-A-408",
+  "rule": "Mimikatz string in filename",
+  "host": "WKS-HD-03",
+  "file": "mimikatz.pptx"
+}

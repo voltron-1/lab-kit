@@ -1,0 +1,8 @@
+host,role,criticality,owner
+DC01,domain_controller,high,admin
+FS01,file_server,high,admin
+WEB01,web_server,med,svc_web
+WEB02,web_server,med,svc_web
+WKS-DEV-01,workstation,low,d.chen
+WKS-ACCT-07,workstation,low,m.reyes
+WKS-HD-03,workstation,low,t.aoki

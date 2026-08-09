@@ -1,0 +1,6 @@
+{
+  "id": "CM-A-402",
+  "rule": "Mass file copy job",
+  "actor": "svc_backup",
+  "host": "SRV-BACKUP"
+}

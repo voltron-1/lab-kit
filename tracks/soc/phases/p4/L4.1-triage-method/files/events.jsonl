@@ -1,0 +1,4 @@
+{"id":"CM-0311-0200","timestamp":"2026-03-11T15:40:00Z","event_code":4624,"logon_type":2,"user":"m.reyes","host":"WKS-ACCT-07"}
+{"id":"CM-0311-0201","timestamp":"2026-03-11T15:42:10Z","event_code":1,"image":"powershell.exe","command_line":"powershell.exe -enc SQBFAFgA...","parent_image":"WINWORD.EXE","parent_guid":"pg-ps1","guid":"ch-ps1","host":"WKS-ACCT-07"}
+{"id":"CM-0311-0179","timestamp":"2026-03-11T15:42:15Z","event_code":3,"image":"powershell.exe","dest_ip":"203.0.113.66","dest_port":443,"host":"WKS-ACCT-07"}
+{"id":"CM-0311-0181","timestamp":"2026-03-11T15:43:00Z","event_code":13,"target_object":"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Updater","host":"WKS-ACCT-07"}

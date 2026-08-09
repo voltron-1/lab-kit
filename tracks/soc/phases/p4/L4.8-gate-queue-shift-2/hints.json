@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Check escalation criteria: only confirmed server credential compromise qualifies for y.",
+    "q5 is the brute force success on WEB01 (q5esc=y). All other qNesc are n.",
+    "Verify verdicts and citations for q1, q3, q5, q8, q10."
+  ]
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "CM-A-401",
+    "rule": "Office app spawned encoded PowerShell",
+    "host": "WKS-ACCT-07",
+    "severity": "critical",
+    "confidence": "confirmed"
+  },
+  {
+    "id": "CM-A-402",
+    "rule": "Brute force auth success on server",
+    "host": "WEB01",
+    "severity": "high",
+    "confidence": "confirmed"
+  },
+  {
+    "id": "CM-A-403",
+    "rule": "Password spray success on DC",
+    "host": "DC01",
+    "severity": "high",
+    "confidence": "likely"
+  },
+  {
+    "id": "CM-A-404",
+    "rule": "Known-bad IP connection",
+    "host": "WKS-HD-03",
+    "severity": "high",
+    "confidence": "likely-fp"
+  },
+  {
+    "id": "CM-A-405",
+    "rule": "Mass file copy job",
+    "host": "FS01",
+    "severity": "medium",
+    "confidence": "likely-fp"
+  },
+  {
+    "id": "CM-A-406",
+    "rule": "DNS TXT tunneling pattern",
+    "host": "WKS-DEV-01",
+    "severity": "medium",
+    "confidence": "likely"
+  },
+  {
+    "id": "CM-A-407",
+    "rule": "PsExec remote invocation",
+    "host": "WEB02",
+    "severity": "medium",
+    "confidence": "btp"
+  },
+  {
+    "id": "CM-A-408",
+    "rule": "Mimikatz string in filename",
+    "host": "WKS-HD-03",
+    "severity": "low",
+    "confidence": "fp"
+  },
+  {
+    "id": "CM-A-409",
+    "rule": "Run key persistence modified",
+    "host": "WKS-ACCT-07",
+    "severity": "medium",
+    "confidence": "likely"
+  },
+  {
+    "id": "CM-A-410",
+    "rule": "Periodic UDP connection",
+    "host": "WEB01",
+    "severity": "low",
+    "confidence": "fp"
+  }
+]

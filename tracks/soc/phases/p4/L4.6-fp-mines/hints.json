@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Determine if behavior was authorized (btp) or false alarm (fp), then specify field:value exclusion.",
+    "q1=btp/host:srv-backup, q2=btp/user:t.aoki, q3=fp/path:securityawareness, q4=tp/none.",
+    "Ensure answers.txt has both verdict and tuning fields filled."
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "The triage method is valuable because it is:",
+      "options": {
+        "a": "intuition, honed by experience",
+        "b": "a fixed question sequence anyone can apply fast and defend",
+        "c": "a SIEM feature"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Question 3 (\"is this expected for this user/host?\") exists to catch:",
+      "options": {
+        "a": "malware",
+        "b": "authorized/benign activity that a rule flagged \u2014 the BTP category",
+        "c": "network errors"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why is \"verdict\" the LAST question, not the first?",
+      "options": {
+        "a": "it isn't",
+        "b": "a verdict without evidence, expectation, and scope behind it is a guess",
+        "c": "verdicts are slow"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

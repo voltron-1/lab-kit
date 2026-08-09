@@ -1,0 +1,7 @@
+{
+  "id": "L4.2",
+  "title": "Indicator enrichment \u2014 hash, IP, domain lookups; reading VT-style and WHOIS-style reports",
+  "type": "GUIDED",
+  "gate": false,
+  "est_minutes": 15
+}

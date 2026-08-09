@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "A VT malicious: 31/94 means:",
+      "options": {
+        "a": "the file is 31% malware",
+        "b": "31 of 94 engines flagged it \u2014 a signal, not a verdict",
+        "c": "it was seen 31 times"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "Passive DNS showing an IP resolves ONE domain suggests:",
+      "options": {
+        "a": "shared hosting",
+        "b": "dedicated infrastructure \u2014 the IP and domain move together",
+        "c": "a CDN"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Why does this lab grade against staged reports, not live VT?",
+      "options": {
+        "a": "VT is down",
+        "b": "the graded path is offline and deterministic",
+        "c": "live lookups are illegal"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

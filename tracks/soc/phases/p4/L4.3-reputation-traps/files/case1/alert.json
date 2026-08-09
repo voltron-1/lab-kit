@@ -1,0 +1,6 @@
+{
+  "id": "CM-A-403",
+  "rule": "Known-bad IP connection",
+  "dest_ip": "192.0.2.61",
+  "host": "WKS-ACCT-07"
+}

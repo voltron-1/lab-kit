@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Count distinct accounts vs attempts per account for each source IP.",
+    "203.0.113.66 hit 40 accounts (spray); 198.51.100.71 hit 1 account 30 times (brute).",
+    "q1=spray, q2=brute, q3=svc_web, q4=40, q5=tp, q6=203.0.113[.]66."
+  ]
+}

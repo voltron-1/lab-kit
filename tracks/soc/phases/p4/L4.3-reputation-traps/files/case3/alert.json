@@ -1,0 +1,6 @@
+{
+  "id": "CM-A-405",
+  "rule": "Historical malware IP",
+  "dest_ip": "192.0.2.70",
+  "host": "WKS-HD-03"
+}

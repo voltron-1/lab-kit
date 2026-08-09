@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Apply priority-formula.md to each alert based on severity, host criticality, and confidence.",
+    "DC01/WEB01 confirmed/likely threats are p1; FPs are p3; others p2.",
+    "q1=p1, q2=p1, q3=p1, q4=p3, q5=p3, q6=p2, q7=p2, q8=p3, q9=p2, q10=p3."
+  ]
+}

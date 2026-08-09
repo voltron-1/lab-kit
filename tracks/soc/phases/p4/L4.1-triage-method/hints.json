@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Answer the five questions in order; each has one source \u2014 alert (q1), events (q2), context (q3/q4), verdict (q5).",
+    "q2 is the Sysmon 1 spawn event cm-0311-0201. q4 counts distinct hosts.",
+    "q1=cm-r-0159, q2=cm-0311-0201, q3=n, q4=1, q5=tp."
+  ]
+}

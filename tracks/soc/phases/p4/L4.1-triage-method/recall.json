@@ -1,0 +1,55 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "text",
+      "prompt": "Windows Security event.code for a successful logon?",
+      "answer_b64": "NDYyNA==",
+      "accept_b64": [
+        "NDYyNA=="
+      ]
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "prompt": "Which Sysmon field joins a child process to its parent?",
+      "answer_b64": "cGFyZW50cHJvY2Vzc2d1aWQ=",
+      "accept_b64": [
+        "cGFyZW50cHJvY2Vzc2d1aWQ=",
+        "cHJvY2Vzc2d1aWQ="
+      ]
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Office spawning powershell is an example of anomalous ___.",
+      "options": {
+        "a": "process ancestry",
+        "b": "logon type",
+        "c": "service"
+      },
+      "answer_b64": "YQ=="
+    },
+    {
+      "id": 4,
+      "type": "text",
+      "prompt": "Many SSH Failed then one Accepted from one IP is a ___ that succeeded.",
+      "answer_b64": "YnJ1dGUtZm9yY2U=",
+      "accept_b64": [
+        "YnJ1dGUtZm9yY2U=",
+        "YnJ1dGVmb3JjZQ==",
+        "YnJ1dGUgZm9yY2U="
+      ]
+    },
+    {
+      "id": 5,
+      "type": "text",
+      "prompt": "A trusted built-in tool used to attack (certutil, powershell -enc) is a ___.",
+      "answer_b64": "bG9sYmlu",
+      "accept_b64": [
+        "bG9sYmlu",
+        "bG9sYmlucw=="
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "ip": "192.0.2.61",
+  "resolutions_count": 412,
+  "sample_domains": [
+    "updates.example",
+    "blog.example",
+    "shop.example"
+  ]
+}

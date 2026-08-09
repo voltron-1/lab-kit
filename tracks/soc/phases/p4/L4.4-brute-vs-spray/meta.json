@@ -1,0 +1,7 @@
+{
+  "id": "L4.4",
+  "title": "Brute force vs password spray \u2014 the auth-log classics, told apart by shape",
+  "type": "TRIAGE",
+  "gate": false,
+  "est_minutes": 20
+}

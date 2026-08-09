@@ -1,13 +1,18 @@
 # LAB-KIT — Planned Execution
 
 ## NEXT UP
-Track: **soc p4 — Triage Craft & the Queue** is next for the SOC track (8 labs, L4.1–L4.8).
+Track: **soc p5 — Phishing & Malware Triage** is next for the SOC track (6 labs, L5.1–L5.6). Plan: `docs/plans/soc-p5-plan.md`.
 
 Known gap (not blocking, no build required): **ps p0–p3 (26 labs) have zero `tests/acceptance.sh` coverage** — built, merged, and tagged, but never given the fabricated-pass-+-negative-case section every other closed-out phase in every other track has. Same shape as the soc-p0 gap that existed before soc-p1's close-out. Whoever picks this up: it must land as its own section inserted *before* the `ps track P4` section in `tests/acceptance.sh` (that section's `--force` skip-ahead permanently marks p0–p3 unpassed, so p0–p3 coverage added after it could never show ✓ — drop the `--force` once this lands).
 
 Known gap (not blocking, no build required): **`tools/genevidence/verify.py`'s baseline invariants were never actually built.** `docs/plans/soc-p01-plan.md`'s own close-out claimed `verify.py` enforces "timestamps in-window, IPs/hosts resolve to universe entities, answer-key event ids present in evidence, raw artifacts carry no defanged forms, prose carries no un-defanged IOCs" — in reality `verify.py` was (until the soc-p2 generator-extensions session) a one-line stub that only checked `universe.yaml` parses. That session added real `check_uid_consistency`/`check_pcap_zeek_agreement` invariants for soc-p2's own new requirements, but deliberately did not backfill the baseline p0/p1 invariants the earlier plan promised — that's a separate, pre-existing gap, not soc-p2's to absorb mid-build.
 
 ## LAST SESSION
+2026-08-09 — soc p4 BUILD + CLOSE-OUT (all 8 labs, L4.1–L4.8 complete). Built straight from `docs/plans/soc-p4-plan.md`.
+- **Scaffolded and verified all 8 labs**: L4.1 The triage method five questions, L4.2 Indicator enrichment (VT/WHOIS/passive-DNS lookups), L4.3 Reputation traps (shared hosting, CDN, stale scores), L4.4 Brute force vs password spray (shape distinction), L4.5 Severity and priority (formula tiering p1/p2/p3), L4.6 False-positive mines (admin behavior, tuning exclusions), L4.7 Queue shift I (12 mixed alerts with evidence citations), L4.8 Phase Gate Queue shift II (10 fresh alerts, escalation criteria).
+- **Linting & Acceptance**: `./tools/lint-labs.sh` and `./tools/shellcheck-all.sh` clean. Added SOC P4 acceptance section to `tests/acceptance.sh` (8 labs, fabricated pass + negative cases, denominator updated to 33). Full test suite green: 840/840 passing.
+- **Tagged `soc-p4`**.
+
 2026-08-08 — soc p3 BUILD + CLOSE-OUT (all 7 labs, L3.1–L3.7 complete). Built straight from `docs/plans/soc-p3-plan.md`.
 - **Scaffolded and verified all 7 labs**: L3.1 Windows Security Events (4624/4625, logon types, 4688, 4720/4732), L3.2 Sysmon Process Trees (`ProcessGuid`/`ParentProcessGuid`), L3.3 Anomalous Process Ancestry (Office/browser spawning shells), L3.4 Persistence Spots (Run keys, scheduled tasks, services, cron), L3.5 Linux Auth & Audit (`auth.log`, SSH brute force, sudo abuse, UID 0), L3.6 LOLBins (encoded PowerShell, certutil urlcache download, curl | bash), L3.7 Phase Gate Endpoint Compromise Chain.
 - **Linting & Acceptance**: `./tools/lint-labs.sh` and `./tools/shellcheck-all.sh` clean. Added SOC P3 acceptance section to `tests/acceptance.sh` (7 labs, fabricated pass + negative cases, denominator updated to 25). Full test suite green: 805/805 passing.
@@ -301,7 +306,7 @@ board: [LAB-KIT: SOC Analyst Lab](https://github.com/users/voltron-1/projects/20
 - [x] soc p1 — How Attacks Become Alerts (8 labs) — tag `soc-p1`; L1.1 (PR #308), L1.2 (PR #309), L1.3 (PR #310), L1.4 (PR #311), L1.5 (PR #312), L1.6 (PR #313), L1.7 (PR #314), L1.8 phase gate (PR #315)
 - [x] soc p2 — Network Triage Fundamentals (7 labs) — tag `soc-p2`; plan: `docs/plans/soc-p2-plan.md`; L2.1–L2.7 built, evidence generated & verified, acceptance suite green (782/782 tests)
 - [x] soc p3 — Endpoint Triage Fundamentals (7 labs) — tag `soc-p3`; plan: `docs/plans/soc-p3-plan.md`; L3.1–L3.7 built, evidence generated & verified, acceptance suite green (809/809 tests)
-- [ ] soc p4 — Triage Craft & the Queue (8 labs)
+- [x] soc p4 — Triage Craft & the Queue (8 labs) — tag `soc-p4`; plan: `docs/plans/soc-p4-plan.md`; L4.1–L4.8 built, acceptance suite green (840/840 tests)
 - [ ] soc p5 — Phishing & Malware Triage (6 labs)
 - [ ] soc p6 — Investigation & Escalation (6 labs)
 - [ ] soc p7 — The AI-Assisted Analyst (7 labs)

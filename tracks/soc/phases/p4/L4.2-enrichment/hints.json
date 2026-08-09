@@ -1,0 +1,7 @@
+{
+  "hints": [
+    "Extract vt_mal.txt and pdns_domains.txt using jq as shown in GUIDED STEPS.",
+    "q1=31, q2=c2.stonewick[.]example, q3=2026-02-27, q4=52, q5=passive-dns.",
+    "Ensure answers.txt has q1..q5 filled accurately."
+  ]
+}

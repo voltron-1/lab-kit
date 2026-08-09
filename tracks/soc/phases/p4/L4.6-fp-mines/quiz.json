@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "Good tuning feedback is:",
+      "options": {
+        "a": "this rule is noisy",
+        "b": "a specific exclusion \u2014 host, user, path, or command pattern \u2014 that suppresses the benign case",
+        "c": "disable the rule"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "The mimikatz-filename FP happened because the rule matched:",
+      "options": {
+        "a": "a real mimikatz binary",
+        "b": "the substring \"mimikatz\" in a training-deck filename \u2014 a brittle selector",
+        "c": "a hash"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Closing svc_backup's 02:00Z copy as BTP should produce:",
+      "options": {
+        "a": "an incident ticket",
+        "b": "a tuning note to suppress the scheduled backup job, and no ticket",
+        "c": "nothing"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}

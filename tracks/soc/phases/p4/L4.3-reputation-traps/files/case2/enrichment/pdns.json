@@ -1,0 +1,8 @@
+{
+  "ip": "192.0.2.62",
+  "resolutions_count": 350,
+  "sample_domains": [
+    "cdn.example",
+    "static.example"
+  ]
+}

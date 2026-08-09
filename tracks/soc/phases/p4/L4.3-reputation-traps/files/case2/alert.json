@@ -1,0 +1,6 @@
+{
+  "id": "CM-A-404",
+  "rule": "Flagged IP connection",
+  "dest_ip": "192.0.2.62",
+  "host": "WKS-DEV-01"
+}

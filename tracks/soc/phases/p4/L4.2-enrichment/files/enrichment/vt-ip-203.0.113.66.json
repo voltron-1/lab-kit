@@ -1,0 +1,13 @@
+{
+  "indicator": "203.0.113.66",
+  "last_analysis_stats": {
+    "malicious": 31,
+    "suspicious": 4,
+    "harmless": 2,
+    "undetected": 57
+  },
+  "first_submission_date": "2026-03-01",
+  "as_owner": "Stonewick Hosting",
+  "country": "XX",
+  "reputation": -44
+}

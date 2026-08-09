@@ -1,0 +1,18 @@
+{
+  "id": "CM-A-401",
+  "rule_id": "CM-R-0159",
+  "rule_name": "Office app spawned encoded PowerShell",
+  "severity": "critical",
+  "risk_score": 90,
+  "technique_id": "T1059.001",
+  "entities": {
+    "host": "WKS-ACCT-07",
+    "user": "m.reyes",
+    "parent_process": "WINWORD.EXE"
+  },
+  "evidence_event_ids": [
+    "CM-0311-0201",
+    "CM-0311-0179",
+    "CM-0311-0181"
+  ]
+}

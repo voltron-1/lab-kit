@@ -1,0 +1,6 @@
+{
+  "id": "CM-A-406",
+  "rule": "Remote admin tool PsExec",
+  "actor": "t.aoki",
+  "ticket": "CHG-2143"
+}

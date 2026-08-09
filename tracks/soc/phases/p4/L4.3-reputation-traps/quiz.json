@@ -1,0 +1,37 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "choice",
+      "prompt": "An IP with a high VT score that passive DNS shows hosting 400 domains is probably:",
+      "options": {
+        "a": "dedicated C2",
+        "b": "shared hosting \u2014 the score may reflect a different tenant",
+        "c": "a CDN only"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 2,
+      "type": "choice",
+      "prompt": "A VT verdict last updated 14 months ago is:",
+      "options": {
+        "a": "authoritative",
+        "b": "stale \u2014 re-scan and weigh current evidence before trusting it",
+        "c": "always wrong"
+      },
+      "answer_b64": "Yg=="
+    },
+    {
+      "id": 3,
+      "type": "choice",
+      "prompt": "Reputation is not a verdict because:",
+      "options": {
+        "a": "VT is unreliable",
+        "b": "the score describes an indicator's history, not what happened in YOUR evidence",
+        "c": "scores are random"
+      },
+      "answer_b64": "Yg=="
+    }
+  ]
+}
