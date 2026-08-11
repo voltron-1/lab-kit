@@ -35,7 +35,20 @@ In this lab, you copy `gate.sh` and `scripts/`, test gate failure, fix `scripts/
    ```
    Confirm output prints `gate: clean` and exits 0.
 
-5. **Record your answers in `answers.txt`**:
+5. **See the production version**: `gate.sh` is a teaching stand-in — this
+   repo's actual CI gate is `tools/shellcheck-all.sh`. Read it:
+   ```bash
+   cat ../../../tools/shellcheck-all.sh
+   ```
+   Its file-discovery line uses
+   `git ls-files -z --cached --others --exclude-standard` instead of a
+   plain glob like `gate.sh`'s: `--cached` lists tracked files,
+   `--others --exclude-standard` adds untracked-but-not-gitignored ones.
+   A plain `git ls-files` alone only sees files `git add`-ed at least
+   once, so a brand-new script nobody staged yet would be silently
+   skipped from the sweep — a false "0 warnings" clean bill.
+
+6. **Record your answers in `answers.txt`**:
    Copy `answers.template.txt` to `answers.txt`:
    ```bash
    cp answers.template.txt answers.txt
@@ -47,7 +60,7 @@ In this lab, you copy `gate.sh` and `scripts/`, test gate failure, fix `scripts/
    - `strictgate=failfast`
    - `sweeptrap=untracked`
 
-6. **Verify your work**:
+7. **Verify your work**:
    ```bash
    lab check bash L7.5
    ```

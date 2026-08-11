@@ -3,9 +3,11 @@ One concept: `$name` is replaced by its text BEFORE anything runs. After
 `$` the shell takes the LONGEST run of identifier characters (letters,
 digits, underscore) as the name; `${…}` draws the boundary yourself.
 Assignment is `name=value` with NO spaces — add spaces and it stops
-being an assignment at all. Honor line (once, verbatim): "the check
-can't tell whether you predicted first — you're only cheating your own
-reps."
+being an assignment at all. One preview, fully covered in L1.4: single
+quotes suppress expansion entirely, so `'$v'` stays the literal text
+`$v` — nothing, ever, no matter what `$v` would otherwise expand to.
+Honor line (once, verbatim): "the check can't tell whether you
+predicted first — you're only cheating your own reps."
 
 ## GUIDED STEPS
 

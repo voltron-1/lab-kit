@@ -9,3 +9,4 @@ files=`ls`                     # SC2006 (cosmetic: backticks) + SC2010/SC2012 (l
 echo "found: $files"           # SC2086 on $files (context-dependent)
 if [ $# -gt 0 -a -n "$1" ]; then :; fi   # SC2166 (style: -a is legacy) + SC2086 on $#
 unused=42                      # SC2034 (cosmetic: unused variable)
+. ./site-config.sh              # SC1091 (informational: source target is missing/dynamic)

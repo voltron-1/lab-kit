@@ -4,8 +4,12 @@ newlines stripped — then the normal expansion rules resume: unquoted,
 the result word-splits (L1.3's bug wearing a new mask); double-quoted,
 it stays one word. Nested substitutions read inside-out, innermost
 first. Only stdout is captured — stderr goes to your terminal and `$?`
-carries the exit code. Honor line verbatim: "the check can't tell
-whether you predicted first — you're only cheating your own reps."
+carries the exit code. Backticks (`` `cmd` ``) are the older syntax for
+this exact same feature — same capture, same current-shell execution,
+not a subshell — but nesting them requires escaping the inner
+backticks, where `$(cmd)` nests plainly; prefer `$(cmd)`. Honor line
+verbatim: "the check can't tell whether you predicted first — you're
+only cheating your own reps."
 
 ## GUIDED STEPS
 
