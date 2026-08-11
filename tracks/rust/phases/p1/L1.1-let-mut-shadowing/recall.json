@@ -9,7 +9,8 @@
         "b": "cargo run",
         "c": "cargo check"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L0.1"
     },
     {
       "id": 2,
@@ -19,7 +20,8 @@
       "accept_b64": [
         "Y2FyZ28udG9tbA==",
         "Q2FyZ28udG9tbA=="
-      ]
+      ],
+      "source": "L0.3"
     },
     {
       "id": 3,
@@ -29,7 +31,8 @@
       "accept_b64": [
         "dGFyZ2V0L2RlYnVnL2hlbGxvX2xhYg==",
         "Li90YXJnZXQvZGVidWcvaGVsbG9fbGFi"
-      ]
+      ],
+      "source": "L0.1"
     },
     {
       "id": 4,
@@ -40,7 +43,8 @@
         "b": "src/main.rs",
         "c": "Whichever file Cargo.toml lists first"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L0.3"
     },
     {
       "id": 5,
@@ -51,7 +55,8 @@
         "b": "Passing check.sh AND achieving a 3/3 score on the lab quiz",
         "c": "Achieving at least a 2/3 score on the lab quiz"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L0.2"
     }
   ]
 }

@@ -9,7 +9,8 @@
         "b": "Path traversal, injection, and logic bugs",
         "c": "Data races"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L4.7"
     },
     {
       "id": 2,
@@ -20,7 +21,8 @@
         "b": "Denial of service risk",
         "c": "Memory corruption bug"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L4.5"
     },
     {
       "id": 3,
@@ -28,10 +30,11 @@
       "prompt": "After let b = a; on a String, a is:",
       "options": {
         "a": "Still usable",
-        "b": "Moved \u2014 compile-time dead",
+        "b": "Moved — compile-time dead",
         "c": "Null"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L2.1"
     },
     {
       "id": 4,
@@ -42,7 +45,8 @@
         "b": "An unbounded-await DoS (CWE-400)",
         "c": "A compile error"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L5.7"
     },
     {
       "id": 5,
@@ -53,7 +57,8 @@
         "b": "Can defeat the check by truncating the value first",
         "c": "Is rejected by the compiler"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L4.4"
     }
   ]
 }

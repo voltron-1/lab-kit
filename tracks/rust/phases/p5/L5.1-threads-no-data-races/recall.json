@@ -6,10 +6,11 @@
       "prompt": "Memory-safe Rust can still contain which class of vulnerability?",
       "options": {
         "a": "Use-after-free",
-        "b": "Path traversal, injection, and logic bugs \u2014 memory safety is not security",
+        "b": "Path traversal, injection, and logic bugs — memory safety is not security",
         "c": "Data races"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L4.7"
     },
     {
       "id": 2,
@@ -20,7 +21,8 @@
         "b": "One reader and one writer together",
         "c": "Unlimited writers"
       },
-      "answer_b64": "YQ=="
+      "answer_b64": "YQ==",
+      "source": "L2.4"
     },
     {
       "id": 3,
@@ -28,10 +30,11 @@
       "prompt": "Calling unwrap() on untrusted input belongs to which risk class?",
       "options": {
         "a": "Memory corruption",
-        "b": "Denial of service \u2014 a crash on bad input",
+        "b": "Denial of service — a crash on bad input",
         "c": "Privilege escalation"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L4.5"
     },
     {
       "id": 4,
@@ -42,7 +45,8 @@
         "b": "4464 (silent truncation)",
         "c": "A compile error"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L4.4"
     },
     {
       "id": 5,
@@ -53,7 +57,8 @@
         "b": "Returns the Err to the caller immediately",
         "c": "Ignores the error"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L3.1"
     }
   ]
 }

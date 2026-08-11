@@ -9,7 +9,8 @@
         "b": "Immutable",
         "c": "Uninitialized"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L1.1"
     },
     {
       "id": 2,
@@ -20,7 +21,8 @@
         "b": "Panics at runtime because overflow checks are enabled",
         "c": "Triggers undefined behavior"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L1.2"
     },
     {
       "id": 3,
@@ -31,7 +33,8 @@
         "b": "Produces a compile error (`E0004`: non-exhaustive patterns)",
         "c": "Silently executes the first arm"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L1.7"
     },
     {
       "id": 4,
@@ -42,7 +45,8 @@
         "b": "`Option<T>` (`Some` or `None` values)",
         "c": "Exceptions"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L1.8"
     },
     {
       "id": 5,
@@ -53,7 +57,8 @@
         "b": "src/main.rs",
         "c": "Whichever Cargo.toml names first"
       },
-      "answer_b64": "Yg=="
+      "answer_b64": "Yg==",
+      "source": "L0.3"
     }
   ]
 }
