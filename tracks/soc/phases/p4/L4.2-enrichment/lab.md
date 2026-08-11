@@ -1,5 +1,6 @@
 ## BRIEF
 Enrichment adds context to an indicator (IP, domain, hash) by reading mock VirusTotal, WHOIS, and Passive DNS reports.
+`lab check` always grades against these staged reports, never a live lookup — the graded path is offline and deterministic by design, so no lab ever depends on a real WHOIS/dig/VT service being reachable.
 
 ## GUIDED STEPS
 

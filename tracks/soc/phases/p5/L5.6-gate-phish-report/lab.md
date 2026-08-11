@@ -6,6 +6,7 @@ All IOCs in `report.md` MUST be defanged (`hxxp://`, `[.]`). Any raw IOC (`http:
 ## GUIDED STEPS
 
 1. Inspect `files/reported.eml`, `files/sandbox-report.md`, and `files/report-template.md`.
+   `files/model-report.md` is a fully worked example of a passing report — check it if you want to calibrate what "good" looks like beyond what `lab check` grades (structure, ATT&CK ID, verdict, and defanging).
 2. Create `report.md` by copying `files/report-template.md`:
    ```bash
    cp files/report-template.md report.md

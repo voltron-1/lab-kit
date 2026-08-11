@@ -5,20 +5,22 @@
       "type": "choice",
       "prompt": "The Received chain reads which way to find the origin?",
       "options": {
-        "a": "bottom-up \u2014 earliest relay at the bottom is the source",
+        "a": "bottom-up — earliest relay at the bottom is the source",
         "b": "top-down",
         "c": "by date"
       },
-      "answer_b64": "YQ=="
+      "answer_b64": "YQ==",
+      "source": "L5.1"
     },
     {
       "id": 2,
       "type": "text",
-      "prompt": "`xn--\u2026` domains are encoded in ___ (one word).",
+      "prompt": "`xn--…` domains are encoded in ___ (one word).",
       "answer_b64": "cHVueWNvZGU=",
       "accept_b64": [
         "cHVueWNvZGU="
-      ]
+      ],
+      "source": "L5.2"
     },
     {
       "id": 3,
@@ -29,7 +31,8 @@
         "bWFnaWMgYnl0ZXM=",
         "bWFnaWM=",
         "ZmlsZQ=="
-      ]
+      ],
+      "source": "L5.3"
     },
     {
       "id": 4,
@@ -41,7 +44,8 @@
         "ZXhlY3V0aW5n",
         "dG91Y2hpbmc=",
         "b3BlbmluZw=="
-      ]
+      ],
+      "source": "L5.4"
     },
     {
       "id": 5,
@@ -52,7 +56,8 @@
         "b": "phish",
         "c": "spam"
       },
-      "answer_b64": "YQ=="
+      "answer_b64": "YQ==",
+      "source": "L5.5"
     }
   ]
 }

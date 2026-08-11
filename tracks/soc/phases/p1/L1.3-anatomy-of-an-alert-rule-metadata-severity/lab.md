@@ -1,6 +1,7 @@
 ## BRIEF
 A SIEM alert is a structured claim about underlying evidence.
 Rule metadata (`rule.id`, `rule.severity`) specifies the detection logic pattern, while `evidence.event_ids` cites the specific raw log events that triggered the rule.
+`rule.severity` and `rule.risk_score` live next to each other but aren't the same kind of field: `severity` is fixed by whoever authored the rule and only changes if the rule definition is edited, while `risk_score` is computed per-alert from that instance's own signal (here, how many accounts `user.names_total` the spray touched) — so it moves alert-to-alert even when the rule and its severity never change.
 However, detection rules are narrow: an alert cites only the events that matched its trigger condition, not the complete incident. In this lab, you inspect SIEM alert `alert-CM-A-1024.json`, examine its cited evidence events, and pivot into `events/raw.jsonl` to discover critical uncited context.
 
 ## GUIDED STEPS
