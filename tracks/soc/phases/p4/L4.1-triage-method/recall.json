@@ -7,7 +7,8 @@
       "answer_b64": "NDYyNA==",
       "accept_b64": [
         "NDYyNA=="
-      ]
+      ],
+      "source": "L3.1"
     },
     {
       "id": 2,
@@ -17,7 +18,8 @@
       "accept_b64": [
         "cGFyZW50cHJvY2Vzc2d1aWQ=",
         "cHJvY2Vzc2d1aWQ="
-      ]
+      ],
+      "source": "L3.2"
     },
     {
       "id": 3,
@@ -28,7 +30,8 @@
         "b": "logon type",
         "c": "service"
       },
-      "answer_b64": "YQ=="
+      "answer_b64": "YQ==",
+      "source": "L3.3"
     },
     {
       "id": 4,
@@ -39,7 +42,8 @@
         "YnJ1dGUtZm9yY2U=",
         "YnJ1dGVmb3JjZQ==",
         "YnJ1dGUgZm9yY2U="
-      ]
+      ],
+      "source": "L3.5"
     },
     {
       "id": 5,
@@ -49,7 +53,8 @@
       "accept_b64": [
         "bG9sYmlu",
         "bG9sYmlucw=="
-      ]
+      ],
+      "source": "L3.6"
     }
   ]
 }

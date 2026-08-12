@@ -6,6 +6,11 @@ Nothing in this kit executes these artifacts — they require systemd and Linux 
 ## GUIDED STEPS
 
 1. **Audit the systemd unit (`files/log-relay.service`)**:
+   - `Type=simple` (the default, spelled out here) means systemd considers
+     the service started the instant the `ExecStart` process forks — there
+     is no readiness protocol. Contrast: `Type=notify` waits for the
+     process to signal readiness itself; `Type=forking` waits for the
+     initial process to exit and a child to take over.
    - `User=logrelay` and `Group=logrelay` pin service identity to a unprivileged user.
    - `After=network-online.target` orders startup after the network is up; `Wants=network-online.target` actively pulls the target into the startup transaction.
    - `EnvironmentFile=-/etc/default/log-relay` loads environment variables, where the leading `-` makes the file optional.

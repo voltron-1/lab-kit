@@ -3,11 +3,12 @@
     {
       "id": 1,
       "type": "text",
-      "prompt": "Pivoting follows join keys from user \u2192 host \u2192 process \u2192 ___ (one word).",
+      "prompt": "Pivoting follows join keys from user → host → process → ___ (one word).",
       "answer_b64": "bmV0d29yaw==",
       "accept_b64": [
         "bmV0d29yaw=="
-      ]
+      ],
+      "source": "L6.1"
     },
     {
       "id": 2,
@@ -16,7 +17,8 @@
       "answer_b64": "dXRj",
       "accept_b64": [
         "dXRj"
-      ]
+      ],
+      "source": "L6.2"
     },
     {
       "id": 3,
@@ -27,7 +29,8 @@
         "b": "severity",
         "c": "the rule"
       },
-      "answer_b64": "YQ=="
+      "answer_b64": "YQ==",
+      "source": "L6.3"
     },
     {
       "id": 4,
@@ -38,7 +41,8 @@
         "dGllciAy",
         "dGllcjI=",
         "dDI="
-      ]
+      ],
+      "source": "L6.4"
     },
     {
       "id": 5,
@@ -49,7 +53,8 @@
         "b": "in the end-of-shift handoff",
         "c": "to the user"
       },
-      "answer_b64": "YQ=="
+      "answer_b64": "YQ==",
+      "source": "L6.5"
     }
   ]
 }

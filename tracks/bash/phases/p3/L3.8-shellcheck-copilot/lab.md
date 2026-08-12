@@ -25,6 +25,7 @@ real injection classes are invisible to it entirely.
    echo "found: $files"           # SC2086 on $files (context-dependent)
    if [ $# -gt 0 -a -n "$1" ]; then :; fi   # SC2166 (style: -a is legacy) + SC2086 on $#
    unused=42                      # SC2034 (cosmetic: unused variable)
+   . ./site-config.sh              # SC1091 (informational: source target is missing/dynamic)
    ```
 
 2. Run ShellCheck and read every line of its output:
@@ -57,7 +58,11 @@ real injection classes are invisible to it entirely.
        unused=42                      # SC2034 (cosmetic: unused variable)
        ^----^ SC2034 (warning): unused appears unused. Verify use (or export if used externally).
 
-   Six codes, six lines. Notice what did *not* fire: `$files` on line 9 is
+       In sample.sh line 12:
+       . ./site-config.sh              # SC1091 (informational: source target is missing/dynamic)
+         ^--------------^ SC1091 (info): Not following: ./site-config.sh: openBinaryFile: does not exist (No such file or directory)
+
+   Seven codes, seven lines. Notice what did *not* fire: `$files` on line 9 is
    already double-quoted, so no SC2086 there; `$#` on line 10 is a special
    parameter ShellCheck doesn't flag the same way. Read output precisely —
    don't assume every `$var` on a flagged line is itself the problem.
@@ -81,6 +86,14 @@ real injection classes are invisible to it entirely.
      this lab, but worth reading).
    - **SC2034** (line 11) — an unused variable. Dead code, not a
      vulnerability. **Cosmetic.**
+   - **SC1090/SC1091** (line 12) — "can't follow source." `./site-config.sh`
+     doesn't exist in this fixture, and more generally ShellCheck can't
+     statically resolve a `source`/`.` target that's a variable or decided
+     at runtime — that's normal, not a defect. This very lab's own
+     `check.sh` sources a path from `$LAB_CHECKLIB` and silences the exact
+     same warning with a `# shellcheck source=/dev/null` comment right
+     above it (`cat check.sh` if you want to see it). **Informational, not
+     a defect.**
 
 4. Name a blind spot. ShellCheck emitted *zero* warnings on two of this
    phase's most dangerous scripts — L3.5's arithmetic command-substitution

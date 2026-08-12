@@ -2,7 +2,8 @@
   "questions": [
     {
       "id": 1,
-      "source_lab": "ps L1.2",
+      "type": "choice",
+      "source": "ps L1.2",
       "prompt": "Does a PowerShell pipeline pass plain text strings or live .NET objects?",
       "options": {
         "a": "Live .NET objects",
@@ -13,7 +14,8 @@
     },
     {
       "id": 2,
-      "source_lab": "ps L1.3",
+      "type": "choice",
+      "source": "ps L1.3",
       "prompt": "Which cmdlet reveals an object's TypeName, properties, and methods in PowerShell?",
       "options": {
         "a": "Get-Member",
@@ -24,7 +26,8 @@
     },
     {
       "id": 3,
-      "source_lab": "ps L1.5",
+      "type": "choice",
+      "source": "ps L1.5",
       "prompt": "What is the output of `1..10 | Where-Object { $_ % 2 -eq 0 }`?",
       "options": {
         "a": "2 4 6 8 10",
@@ -35,7 +38,8 @@
     },
     {
       "id": 4,
-      "source_lab": "ps L0.3",
+      "type": "choice",
+      "source": "ps L0.3",
       "prompt": "Is PowerShell Execution Policy a security boundary or a safety speed bump?",
       "options": {
         "a": "Safety speed bump (easily bypassed by design)",
@@ -46,7 +50,8 @@
     },
     {
       "id": 5,
-      "source_lab": "ps L1.4",
+      "type": "choice",
+      "source": "ps L1.4",
       "prompt": "What does `Select-Object -ExpandProperty` do?",
       "options": {
         "a": "Unwraps and returns the bare underlying property value",

@@ -2104,12 +2104,12 @@ soc_check_pass() {
   assert_contains "soc $id result names PASS" "$out" "RESULT: PASS"
 }
 
-# L0.1 — Analyst toolbelt install/verify (phase opener: recall must never
-# gate; toolbelt is real jq/tshark/dig/whois/rg already on this box, so
-# assert_cmd_ok runs them for real instead of faking version strings)
-out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start soc L0.1 2>&1)"; rc=$?
-assert_eq "'lab start soc L0.1' exits 0 regardless of recall score" "0" "$rc"
-assert_contains "L0.1 start ran the recall quiz" "$out" "recall"
+# L0.1 — Analyst toolbelt install/verify (track's own phase-0 opener, so —
+# like every other track's p0 opener — it ships no recall.json: there is no
+# earlier same-track lab yet to recall; toolbelt is real jq/tshark/dig/
+# whois/rg already on this box, so assert_cmd_ok runs them for real instead
+# of faking version strings)
+"$LAB" start soc L0.1 > /dev/null 2>&1
 WS="$COPY/workspace/soc/L0.1"
 (cd -- "$WS" && {
   jq --version

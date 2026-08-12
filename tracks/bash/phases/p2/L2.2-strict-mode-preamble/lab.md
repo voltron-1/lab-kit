@@ -159,7 +159,21 @@ on ANY stage's death, not just the last.
    still prints grep's error and keeps going. `-e` guards statements,
    not conditions. (This is why L2.4's `cmd || true` idiom exists.)
 
-7. Write `answers.txt` — one `key=value` per line, no spaces around
+7. One more boundary: this exact preamble line doesn't survive a shell
+   swap. Run it under dash (L0.3's other shell):
+
+       dash -c 'set -euo pipefail'; echo "exit=$?"
+
+   expect:
+
+       dash: 1: set: Illegal option -o pipefail
+       exit=2
+
+   `-e` and `-u` are POSIX and dash accepts them; `-o pipefail` is a
+   bash-only extension — dash doesn't even recognize the option and
+   aborts immediately, before your script's first real line runs.
+
+8. Write `answers.txt` — one `key=value` per line, no spaces around
    `=`:
 
    q1 (choice). In `set -euo pipefail`, what is the `o`?
@@ -186,4 +200,4 @@ on ANY stage's death, not just the last.
       exempt from -e
    c) prints a warning and continues
 
-8. `lab check bash L2.2`
+9. `lab check bash L2.2`

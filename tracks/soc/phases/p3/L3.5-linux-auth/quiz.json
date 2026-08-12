@@ -3,7 +3,7 @@
     {
       "id": 1,
       "type": "choice",
-      "prompt": "Twenty Failed password then one Accepted password for root from one IP means:",
+      "prompt": "Twenty-five Failed password then one Accepted password for root from one IP means:",
       "options": {
         "a": "A typo",
         "b": "A brute force that succeeded \u2014 treat root as compromised",
