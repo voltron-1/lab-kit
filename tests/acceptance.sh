@@ -2568,15 +2568,14 @@ soc_check_pass "L7.7" $'b\nb\nb\n'
 out="$("$LAB" status 2>&1)"
 assert_contains "status shows all 52 soc P0-P7 labs passed (52/52)" "$out" "(52/52)"
 
-# --- 7f. ps track P4 (PowerShell as Attack Surface): fabricated pass +
-# negative case per lab. First ps-track coverage in this file -- p0-p3
-# (26 labs) are built, merged, and tagged but have no acceptance.sh
-# coverage yet (a pre-existing gap, not touched here; now tracked in
-# planned_execution.md's NEXT UP by this same PR, mirroring how soc-p0 had
-# the same gap before soc-p1's close-out). Nothing in this phase executes
-# an attacker primitive -- only benign cross-platform decoders (L4.2, L4.5)
-# run for real; every other lab is pure static-content grading. ---
-note "ps track P4: fabricated pass + negative case per lab"
+# --- 7f. ps track: shared pwsh preflight + helper functions, used by every
+# P0-P7 section below. (Originally written as the P4 intro -- P4 was the
+# first ps-track coverage this file had, back when p0-p3 had none; this
+# same change adds P0-P3 ahead of it, so that gap is closed as of here.)
+# Nothing in the P4 phase specifically executes an attacker primitive --
+# only benign cross-platform decoders (L4.2, L4.5) run for real; every
+# other lab in that phase is pure static-content grading. ---
+note "ps track: pwsh preflight + shared helpers"
 
 # L4.2 and L4.5 each run a real, benign pwsh probe as part of their check.sh
 # (decode-enc.ps1, read4104.ps1) — without this preflight, a missing pwsh
