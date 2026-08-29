@@ -40,7 +40,38 @@ jobs:
         shell: pwsh
         run: |
           Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
-          $results = Invoke-ScriptAnalyzer -Path ./tracks/ps -Recurse -Severity Error,Warning
+
+          # These files are lesson content whose PSSA findings ARE the lesson,
+          # not bugs -- do not "fix" them to silence this gate:
+          #   - candidate.ps1 (ps L7.5): its PSSA output is pinned verbatim
+          #     into lab.md as the expected audit result, and check.sh
+          #     byte-verifies the file is unmodified. Editing it breaks the lab.
+          #   - creds-sample.ps1 (L4.7), null-trap.ps1 (L1.7), shadow-iex.ps1
+          #     (L3.5), ai-sample.ps1 (L7.1), ai-1/2/3.ps1 (L7.4): AUDIT-type
+          #     samples the learner is graded on catching the planted flaw in.
+          #   - tool.ps1 (L2.4): the unused $OnFound parameter demonstrates
+          #     the lab's own point that decorator scaffolding is a
+          #     "legitimacy costume", not full implementation.
+          #   - AdminTools.psm1 (L2.6): a 2-line stub module for teaching
+          #     manifest structure, never executed for real effect; adding
+          #     ShouldProcess ceremony would be noise unrelated to the lesson.
+          $excludedPaths = @(
+            'tracks/ps/phases/p1/L1.7-variables-typing-and-null/files/null-trap.ps1',
+            'tracks/ps/phases/p2/L2.4-functions-and-parameters/files/tool.ps1',
+            'tracks/ps/phases/p2/L2.6-modules-and-manifests/files/AdminTools.psm1',
+            'tracks/ps/phases/p3/L3.5-invoke-expression/files/shadow-iex.ps1',
+            'tracks/ps/phases/p4/L4.7-credential-exposure/files/creds-sample.ps1',
+            'tracks/ps/phases/p7/L7.1-ai-failure-patterns/files/ai-sample.ps1',
+            'tracks/ps/phases/p7/L7.4-review-reps/files/ai-1.ps1',
+            'tracks/ps/phases/p7/L7.4-review-reps/files/ai-2.ps1',
+            'tracks/ps/phases/p7/L7.4-review-reps/files/ai-3.ps1',
+            'tracks/ps/phases/p7/L7.5-ci-guardrails/files/candidate.ps1'
+          )
+          $files = Get-ChildItem -Path ./tracks/ps -Recurse -Include *.ps1,*.psm1 | Where-Object {
+            $rel = ($_.FullName -replace '\\','/') -replace '^.*(tracks/ps/)', '$1'
+            $excludedPaths -notcontains $rel
+          }
+          $results = $files | ForEach-Object { Invoke-ScriptAnalyzer -Path $_.FullName -Severity Error,Warning }
           if ($results.Count -gt 0) {
               $results | Format-Table -AutoSize
               throw "PSScriptAnalyzer found $($results.Count) error(s)/warning(s) in PowerShell lab scripts."
