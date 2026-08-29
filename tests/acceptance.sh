@@ -2569,12 +2569,10 @@ out="$("$LAB" status 2>&1)"
 assert_contains "status shows all 52 soc P0-P7 labs passed (52/52)" "$out" "(52/52)"
 
 # --- 7f. ps track: shared pwsh preflight + helper functions, used by every
-# P0-P7 section below. (Originally written as the P4 intro -- P4 was the
-# first ps-track coverage this file had, back when p0-p3 had none; this
-# same change adds P0-P3 ahead of it, so that gap is closed as of here.)
-# Nothing in the P4 phase specifically executes an attacker primitive --
-# only benign cross-platform decoders (L4.2, L4.5) run for real; every
-# other lab in that phase is pure static-content grading. ---
+# P0-P7 section below. Placed here, before P0, because P0's own L0.1
+# (`pwsh --version`) and several P1-P3 labs run real shipped .ps1 probes
+# live through pwsh -- this preflight has to cover the very first ps check
+# in the file, not just P4 onward. ---
 note "ps track: pwsh preflight + shared helpers"
 
 # L4.2 and L4.5 each run a real, benign pwsh probe as part of their check.sh
@@ -2616,14 +2614,478 @@ ps_check_pass() {
   assert_contains "ps $id result names PASS" "$out" "RESULT: PASS"
 }
 
+# --- 7f0. ps track P0: fabricated pass + negative case per lab ---
+# Closes the ps p0-p3 acceptance-test gap tracked in planned_execution.md
+# (26 labs across P0-P3, never covered since ps-track coverage was first
+# added at P4). Every P4-P7 phase-opener start call below used to need
+# --force here, since a fresh COPY has no ps progress and p0-p3 had no
+# coverage of their own -- once these four sections pass for real, L4.1
+# becomes the ordinary frontier and every one of those --force flags (and
+# their now-stale comments) is removed below, at each site.
+note "ps track P0: fabricated pass + negative case per lab"
+
+# L0.1 — Install pwsh; verify version; first command (track's own phase-0
+# opener, so — like every other track's p0 opener — it ships no
+# recall.json: there is no earlier same-track lab yet to recall). pwsh
+# --version runs for real via the preflight above. PSScriptAnalyzer
+# install/run is graded only as a filename grep on pssa.txt/findings.txt —
+# check.sh never actually invokes Install-Module or Invoke-ScriptAnalyzer —
+# so those two are fabricated directly rather than round-tripped through a
+# real (slow, network-dependent) module install.
+"$LAB" start ps L0.1 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L0.1"
+ps_check_fail_missing "L0.1" "psversion.txt"
+printf '7.4.6 Core Unix\n' > "$WS/psversion.txt"
+printf 'PSScriptAnalyzer\n' > "$WS/pssa.txt"
+printf 'PSAvoidUsingCmdletAliases\n' > "$WS/findings.txt"
+ps_check_pass "L0.1" $'a\na\nb\n'
+
+# Negative case: psversion.txt claiming Desktop edition (Windows PowerShell
+# 5.1, not PS7 Core) must fail — the one thing this lab actually verifies
+# is that the learner is really on pwsh 7 Core, not just typing that they
+# are.
+cp "$WS/psversion.txt" "$WS/psversion.txt.bak"
+printf '5.1.19041 Desktop Win32NT\n' > "$WS/psversion.txt"
+out="$("$LAB" check ps L0.1 2>&1)"; rc=$?
+assert_eq "ps L0.1 check fails when psversion.txt claims Desktop edition" "1" "$rc"
+assert_contains "ps L0.1 fail result names FAIL" "$out" "RESULT: FAIL"
+cp "$WS/psversion.txt.bak" "$WS/psversion.txt"
+ps_check_pass "L0.1" $'a\na\nb\n'
+
+# L0.2 — Meet the lab CLI and the workspace fence
+"$LAB" start ps L0.2 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L0.2"
+ps_check_fail_missing "L0.2" "fixed.ps1"
+cat > "$WS/fixed.ps1" << 'PS1'
+$name = "analyst"
+Write-Output "Hello, $name"
+PS1
+(cd -- "$WS" && pwd > location.txt)
+ps_check_pass "L0.2" $'a\nb\nb\n'
+
+# L0.3 — Phase gate: PS 5.1 vs PS 7, Execution Policy as a speed bump (gate)
+"$LAB" start ps L0.3 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L0.3"
+ps_check_fail_missing "L0.3" "bypasses.txt"
+cat > "$WS/bypasses.txt" << 'TXT'
+ExecutionPolicy Bypass flag overrides it on invocation
+-EncodedCommand base64 payload sidesteps policy entirely
+IEX (Get-Content x.ps1 -Raw) reads and evals, policy never consulted
+Get-Content piped to powershell -Command - streams source to stdin
+TXT
+cat > "$WS/verdict.md" << 'MD'
+Execution Policy is a speed bump, not a security boundary.
+MD
+ps_check_pass "L0.3" $'a\nb\nb\n'
+
+# Negative case: the N-of-4 threshold (>= 3 distinct bypass techniques) is
+# the real grading-integrity control here, not just "the file exists" —
+# two techniques alone must fail.
+cat > "$WS/bypasses.txt" << 'TXT'
+ExecutionPolicy Bypass flag overrides it on invocation
+-EncodedCommand base64 payload sidesteps policy entirely
+TXT
+out="$("$LAB" check ps L0.3 2>&1)"; rc=$?
+assert_eq "ps L0.3 check fails with only 2 of 4 bypass techniques listed" "1" "$rc"
+assert_contains "ps L0.3 fail result names FAIL" "$out" "RESULT: FAIL"
+cat > "$WS/bypasses.txt" << 'TXT'
+ExecutionPolicy Bypass flag overrides it on invocation
+-EncodedCommand base64 payload sidesteps policy entirely
+IEX (Get-Content x.ps1 -Raw) reads and evals, policy never consulted
+Get-Content piped to powershell -Command - streams source to stdin
+TXT
+ps_check_pass "L0.3" $'a\nb\nb\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 3 ps P0 labs passed (3/54)" "$out" "(3/54)"
+
+# --- 7f1. ps track P1: fabricated pass + negative case per lab ---
+# The Object Pipeline. Most labs here ship a reference .ps1 probe in
+# files/ that check.sh re-executes live via pwsh (Get-Process/Get-Date
+# against the real, running check process) — those need no fabrication
+# beyond the learner's own prediction/notes file. ---
+note "ps track P1: fabricated pass + negative case per lab"
+
+# L1.1 — Cmdlets: Verb-Noun (phase opener: recall must never gate)
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L1.1 2>&1)"; rc=$?
+assert_eq "'lab start ps L1.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L1.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/ps/L1.1"
+ps_check_fail_missing "L1.1" "verbs.txt"
+printf 'Get\nSet\nNew\nRemove\nStart\nStop\nInvoke\nWrite\n' > "$WS/verbs.txt"
+ps_check_pass "L1.1" $'a\na\nb\n'
+
+# L1.2 — Objects, not text
+"$LAB" start ps L1.2 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L1.2"
+ps_check_fail_missing "L1.2" "prediction.txt"
+printf 'System.Diagnostics.Process\n' > "$WS/prediction.txt"
+ps_check_pass "L1.2" $'a\na\na\n'
+
+# Negative case: type.ps1 is a real, re-executed probe, not a static text
+# check — tampering it to claim a different .NET type must fail, proving
+# check.sh actually reruns it live via pwsh rather than trusting its mere
+# presence on disk.
+cp "$WS/type.ps1" "$WS/type.ps1.bak"
+printf "'System.String'\n" > "$WS/type.ps1"
+out="$("$LAB" check ps L1.2 2>&1)"; rc=$?
+assert_eq "ps L1.2 check fails when type.ps1 is tampered to claim the wrong .NET type" "1" "$rc"
+assert_contains "ps L1.2 fail result names FAIL" "$out" "RESULT: FAIL"
+cp "$WS/type.ps1.bak" "$WS/type.ps1"
+ps_check_pass "L1.2" $'a\na\na\n'
+
+# L1.3 — Get-Member
+"$LAB" start ps L1.3 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L1.3"
+ps_check_fail_missing "L1.3" "members.txt"
+cat > "$WS/members.txt" << 'TXT'
+   TypeName: System.Diagnostics.Process
+
+Name                      MemberType     Definition
+----                      ----------     ----------
+Handles                   Property       int Handles {get;}
+Kill                      Method         void Kill()
+TXT
+cat > "$WS/decode.txt" << 'TXT'
+   TypeName: System.DateTime
+
+Name                      MemberType     Definition
+----                      ----------     ----------
+Add                       Method         datetime Add(timespan value)
+Year                      Property       int Year {get;}
+TXT
+ps_check_pass "L1.3" $'a\na\na\n'
+
+# L1.4 — Select-Object and properties
+"$LAB" start ps L1.4 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L1.4"
+ps_check_fail_missing "L1.4" "predictions.txt"
+cat > "$WS/predictions.txt" << 'TXT'
+expand_type=Int32
+select_type=PSCustomObject
+calc_column=MB
+TXT
+ps_check_pass "L1.4" $'a\na\na\n'
+
+# L1.5 — Where-Object
+"$LAB" start ps L1.5 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L1.5"
+ps_check_fail_missing "L1.5" "predictions.txt"
+cat > "$WS/predictions.txt" << 'TXT'
+numbers=2 4 6 8 10
+type_preserved=yes
+TXT
+ps_check_pass "L1.5" $'a\na\na\n'
+
+# L1.6 — ForEach-Object
+"$LAB" start ps L1.6 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L1.6"
+ps_check_fail_missing "L1.6" "predictions.txt"
+cat > "$WS/predictions.txt" << 'TXT'
+squares=1 4 9
+lengths=1 2 3
+TXT
+ps_check_pass "L1.6" $'a\na\na\n'
+
+# L1.7 — Variables, typing, and $null
+"$LAB" start ps L1.7 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L1.7"
+ps_check_fail_missing "L1.7" "decode.txt"
+cat > "$WS/decode.txt" << 'TXT'
+Unassigned variables evaluate to $null and interpolate as empty strings.
+TXT
+ps_check_pass "L1.7" $'a\na\na\n'
+
+# L1.8 — Phase gate: five pipelines (gate)
+"$LAB" start ps L1.8 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L1.8"
+ps_check_fail_missing "L1.8" "answers.md"
+cat > "$WS/answers.md" << 'MD'
+# Phase 1 Pipeline Analysis
+- Pipeline 1 Input Type: System.Diagnostics.Process
+- Pipeline 2 Output: 10 20 30 40 50
+- Pipeline 4 Output: CHROME PWSH SSHD
+MD
+ps_check_pass "L1.8" $'a\na\na\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 11 ps P0-P1 labs passed (11/54)" "$out" "(11/54)"
+
+# --- 7f2. ps track P2: fabricated pass + negative case per lab ---
+# Control Flow & Functions. Every lab here also ships a live-executed .ps1
+# probe except the two gates. ---
+note "ps track P2: fabricated pass + negative case per lab"
+
+# L2.1 — If/ElseIf/Else and comparison operators (phase opener: recall must
+# never gate)
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L2.1 2>&1)"; rc=$?
+assert_eq "'lab start ps L2.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L2.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/ps/L2.1"
+ps_check_fail_missing "L2.1" "verdict.txt"
+cat > "$WS/verdict.txt" << 'TXT'
+When -eq is applied to an array, PowerShell filters the array and returns matching elements instead of a boolean scalar.
+TXT
+ps_check_pass "L2.1" $'a\na\na\n'
+
+# L2.2 — switch fall-through
+"$LAB" start ps L2.2 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L2.2"
+ps_check_fail_missing "L2.2" "notes.txt"
+cat > "$WS/notes.txt" << 'TXT'
+PowerShell switch statements do not automatically break after a match and fall through to test subsequent cases unless break is used.
+TXT
+ps_check_pass "L2.2" $'a\na\na\n'
+
+# L2.3 — Loops (for, foreach statement, do-while)
+"$LAB" start ps L2.3 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L2.3"
+ps_check_fail_missing "L2.3" "prediction.txt"
+cat > "$WS/prediction.txt" << 'TXT'
+forloop=1 2 3
+foreachstmt=3 5 7
+dowhile=5
+TXT
+ps_check_pass "L2.3" $'a\na\na\n'
+
+# L2.4 — Functions and parameters
+"$LAB" start ps L2.4 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L2.4"
+ps_check_fail_missing "L2.4" "answers.txt"
+cat > "$WS/answers.txt" << 'TXT'
+The mandatory parameter is Name.
+[CmdletBinding()] adds common parameters like Verbose and ErrorAction to the function.
+TXT
+ps_check_pass "L2.4" $'a\na\na\n'
+
+# Negative case: this lab's real lesson is that advanced-function
+# decorators are a "legitimacy costume", not a safety guarantee — probe.ps1
+# re-derives -Verbose from tool.ps1 by reflection
+# ((Get-Command ...).Parameters.ContainsKey('Verbose')), so stripping every
+# [CmdletBinding()]/[Parameter(...)] decorator from tool.ps1 must make the
+# probe report False and the check fail, proving the assertion tracks the
+# real .NET reflection outcome rather than grepping a learner file for the
+# word "Verbose". (Empirically confirmed: dropping just [CmdletBinding()]
+# while leaving the [Parameter(...)] attributes in place is NOT enough —
+# PowerShell auto-promotes a function to "advanced" the moment any
+# parameter carries a [Parameter(...)] attribute, so every decorator has to
+# go to actually flip this probe to False.)
+cp "$WS/tool.ps1" "$WS/tool.ps1.bak"
+cat > "$WS/tool.ps1" << 'PS1'
+function Get-SuspiciousProcess {
+    param(
+        $Name,
+        $MinWorkingSetMB = 100,
+        $OnFound = 'Continue'
+    )
+    process {
+        Get-Process -Name $Name |
+            Where-Object { $_.WS -gt ($MinWorkingSetMB * 1MB) }
+    }
+}
+PS1
+out="$("$LAB" check ps L2.4 2>&1)"; rc=$?
+assert_eq "ps L2.4 check fails when tool.ps1's advanced-function decorators are stripped" "1" "$rc"
+assert_contains "ps L2.4 fail result names FAIL" "$out" "RESULT: FAIL"
+cp "$WS/tool.ps1.bak" "$WS/tool.ps1"
+ps_check_pass "L2.4" $'a\na\na\n'
+
+# L2.5 — Error handling: terminating vs non-terminating
+"$LAB" start ps L2.5 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L2.5"
+ps_check_fail_missing "L2.5" "why.txt"
+cat > "$WS/why.txt" << 'TXT'
+Cmdlet errors are non-terminating by default and slip past try/catch unless elevated with -ErrorAction Stop.
+TXT
+ps_check_pass "L2.5" $'a\na\na\n'
+
+# L2.6 — Modules and manifests
+"$LAB" start ps L2.6 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L2.6"
+ps_check_fail_missing "L2.6" "notes.txt"
+cat > "$WS/notes.txt" << 'TXT'
+A .psd1 file is a module manifest containing metadata, while a .psm1 file contains script code. The RootModule key specifies the script code entry point.
+TXT
+ps_check_pass "L2.6" $'a\na\na\n'
+
+# L2.7 — Phase gate: read an admin script cold (gate)
+"$LAB" start ps L2.7 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L2.7"
+ps_check_fail_missing "L2.7" "answers.md"
+cat > "$WS/answers.md" << 'MD'
+1. Quick and Full
+2. 500 MB
+3. WARN
+4. Advanced function common parameters like Verbose and ErrorAction
+5. ValidateSet rejects invalid Mode parameters during parameter binding before the body runs
+6. No, because Out-File lacks -ErrorAction Stop
+7. Guarantees array type so .Count returns integer 0 or 1 safely
+8. In-memory foreach statement
+9. pscustomobject
+10. The top N processes sorted descending by working set memory
+MD
+ps_check_pass "L2.7" $'a\na\na\n'
+
+# Negative case: the phase-gate N-of-6 threshold (>= 4) is the real bar —
+# answering only 3 of 6 key comprehension checks must fail.
+cat > "$WS/answers.md" << 'MD'
+1. Quick and Full
+2. 500 MB
+3. some tag
+MD
+out="$("$LAB" check ps L2.7 2>&1)"; rc=$?
+assert_eq "ps L2.7 check fails with only 3 of 6 key comprehension checks answered" "1" "$rc"
+assert_contains "ps L2.7 fail result names FAIL" "$out" "RESULT: FAIL"
+cat > "$WS/answers.md" << 'MD'
+1. Quick and Full
+2. 500 MB
+3. WARN
+4. Advanced function common parameters like Verbose and ErrorAction
+5. ValidateSet rejects invalid Mode parameters during parameter binding before the body runs
+6. No, because Out-File lacks -ErrorAction Stop
+7. Guarantees array type so .Count returns integer 0 or 1 safely
+8. In-memory foreach statement
+9. pscustomobject
+10. The top N processes sorted descending by working set memory
+MD
+ps_check_pass "L2.7" $'a\na\na\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 18 ps P0-P2 labs passed (18/54)" "$out" "(18/54)"
+
+# --- 7f3. ps track P3: fabricated pass + negative case per lab ---
+# Windows Subsystems for Attackers (.NET, COM, WMI/CIM, Registry, iex,
+# Remoting, ACLs). COM/WMI/Registry/ACL/Remoting are Windows-only at
+# runtime, so those labs are graded statically (no live pwsh call in
+# check.sh); .NET (L3.1) and the two version-tell/reflection probes (L3.3,
+# L3.6) still run a real shipped .ps1 through the preflight above. ---
+note "ps track P3: fabricated pass + negative case per lab"
+
+# L3.1 — .NET types and static methods (phase opener: recall must never gate)
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L3.1 2>&1)"; rc=$?
+assert_eq "'lab start ps L3.1' exits 0 regardless of recall score" "0" "$rc"
+assert_contains "L3.1 start ran the recall quiz" "$out" "recall"
+WS="$COPY/workspace/ps/L3.1"
+ps_check_fail_missing "L3.1" "notes.txt"
+cat > "$WS/notes.txt" << 'TXT'
+System.Convert handles Base64 encoding and decoding.
+System.Text.Encoding handles byte-to-text string conversions.
+System.Net.WebClient performs network fetch and download operations.
+TXT
+ps_check_pass "L3.1" $'a\na\na\n'
+
+# L3.2 — COM objects (WScript.Shell, Shell.Application; Windows-only, static)
+"$LAB" start ps L3.2 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L3.2"
+ps_check_fail_missing "L3.2" "classify.txt"
+cat > "$WS/classify.txt" << 'TXT'
+WScript.Shell provides capabilities for program execution via Run and registry persistence via RegWrite.
+Shell.Application provides capabilities for hidden program execution via ShellExecute.
+TXT
+ps_check_pass "L3.2" $'a\na\na\n'
+
+# L3.3 — WMI/CIM (Get-WmiObject removed in PS7 — a real, live version tell)
+"$LAB" start ps L3.3 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L3.3"
+ps_check_fail_missing "L3.3" "notes.txt"
+cat > "$WS/notes.txt" << 'TXT'
+Attackers favor WMI for reconnaissance, process execution, and fileless persistence.
+Get-WmiObject was removed in PS7 and replaced by Get-CimInstance.
+TXT
+ps_check_pass "L3.3" $'a\na\na\n'
+
+# L3.4 — The registry (autostart persistence, T1547.001; Windows-only, static)
+"$LAB" start ps L3.4 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L3.4"
+ps_check_fail_missing "L3.4" "persistence.txt"
+cat > "$WS/persistence.txt" << 'TXT'
+The registry key CurrentVersion\Run is used for autostart persistence (T1547.001) to run payloads automatically at logon.
+TXT
+ps_check_pass "L3.4" $'a\na\na\n'
+
+# L3.5 — Invoke-Expression download cradles
+"$LAB" start ps L3.5 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L3.5"
+ps_check_fail_missing "L3.5" "audit.md"
+cat > "$WS/audit.md" << 'MD'
+# Download Cradle Audit
+The download cradle uses WebClient DownloadString to fetch a remote payload and Invoke-Expression (iex) to eval the string in memory.
+This executes code directly in RAM without writing files to disk, bypassing file-based antivirus scanners.
+MD
+ps_check_pass "L3.5" $'a\na\na\n'
+
+# L3.6 — Remoting and WinRM (Invoke-Command -ComputerName really has that
+# parameter — a real, live reflection probe, cross-platform even though the
+# transport itself is Windows-only)
+"$LAB" start ps L3.6 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L3.6"
+ps_check_fail_missing "L3.6" "lateral.txt"
+cat > "$WS/lateral.txt" << 'TXT'
+Invoke-Command and Enter-PSSession perform remote execution and lateral movement via WinRM (T1021.006).
+TXT
+ps_check_pass "L3.6" $'a\na\na\n'
+
+# L3.7 — ACLs (weak DACLs, privilege escalation; Windows-only, static)
+"$LAB" start ps L3.7 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L3.7"
+ps_check_fail_missing "L3.7" "finding.txt"
+cat > "$WS/finding.txt" << 'TXT'
+The ACE grants BUILTIN\Users FullControl rights over the service binary, creating a privilege escalation path.
+TXT
+ps_check_pass "L3.7" $'a\na\na\n'
+
+# L3.8 — Phase gate: identify the Windows subsystem, ten one-liners (gate)
+"$LAB" start ps L3.8 > /dev/null 2>&1
+WS="$COPY/workspace/ps/L3.8"
+ps_check_fail_missing "L3.8" "answers.md"
+cat > "$WS/answers.md" << 'MD'
+1. .NET - Base64 decoding (System.Convert)
+2. COM - Object instantiation (WScript.Shell)
+3. WMI/CIM - Modern system query (Get-CimInstance)
+4. Registry - Autostart persistence via Run key (T1547.001)
+5. iex - In-memory string evaluation
+6. Remoting - WinRM lateral movement (T1021.006)
+7. ACL - Security descriptor ACE enumeration
+8. .NET - WebClient DownloadString cradle fetch half
+9. WMI - Legacy query and PS5.1 version tell
+10. COM - Registry persistence write
+MD
+ps_check_pass "L3.8" $'a\na\na\n'
+
+# Negative case: the phase-gate N-of-8 threshold (>= 6) is the real bar —
+# only 5 of 8 key subsystem checks answered must fail.
+cat > "$WS/answers.md" << 'MD'
+1. .NET decoding
+2. COM object
+3. WMI/CIM query
+4. Registry autostart
+5. iex eval
+MD
+out="$("$LAB" check ps L3.8 2>&1)"; rc=$?
+assert_eq "ps L3.8 check fails with only 5 of 8 key subsystem checks answered" "1" "$rc"
+assert_contains "ps L3.8 fail result names FAIL" "$out" "RESULT: FAIL"
+cat > "$WS/answers.md" << 'MD'
+1. .NET - Base64 decoding (System.Convert)
+2. COM - Object instantiation (WScript.Shell)
+3. WMI/CIM - Modern system query (Get-CimInstance)
+4. Registry - Autostart persistence via Run key (T1547.001)
+5. iex - In-memory string evaluation
+6. Remoting - WinRM lateral movement (T1021.006)
+7. ACL - Security descriptor ACE enumeration
+8. .NET - WebClient DownloadString cradle fetch half
+9. WMI - Legacy query and PS5.1 version tell
+10. COM - Registry persistence write
+MD
+ps_check_pass "L3.8" $'a\na\na\n'
+
+out="$("$LAB" status 2>&1)"
+assert_contains "status shows all 26 ps P0-P3 labs passed (26/54)" "$out" "(26/54)"
+
 # L4.1 — Download cradles (AUDIT; phase opener: recall must never gate).
-# --force skips ps p0-p3 (26 labs, permanently marked ⏭, never ✓) since this
-# COPY has no prior ps progress and p0-p3 have no acceptance.sh coverage of
-# their own yet (see the note above this section). Skipped is permanent, so
-# when p0-p3 coverage lands, it MUST be inserted above this line and this
-# --force dropped -- labs covered after this point can never render ✓.
-out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L4.1 --force 2>&1)"; rc=$?
-assert_eq "'lab start ps L4.1 --force' exits 0 regardless of recall score" "0" "$rc"
+# ps p0-p3 now have real coverage above, so L4.1 is the ordinary frontier
+# here -- no --force needed.
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L4.1 2>&1)"; rc=$?
+assert_eq "'lab start ps L4.1' exits 0 regardless of recall score" "0" "$rc"
 assert_contains "L4.1 start ran the recall quiz" "$out" "recall"
 WS="$COPY/workspace/ps/L4.1"
 ps_check_fail_missing "L4.1" "audit.md"
@@ -2736,7 +3198,7 @@ MD
 ps_check_pass "L4.9" $'b\nb\nT1547.001\n'
 
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 9 ps P4 labs passed (9/54)" "$out" "(9/54)"
+assert_contains "status shows all 35 ps P0-P4 labs passed (35/54)" "$out" "(35/54)"
 
 # --- 7b. ps track P5: Deobfuscation & Malware Reading ---
 note "ps track P5: fabricated pass + negative case per lab"
@@ -2748,8 +3210,8 @@ note "ps track P5: fabricated pass + negative case per lab"
 # section too; it runs before P4, so a missing interpreter has already failed.
 
 # L5.1 — Base64 decode pipeline (phase opener: recall must never gate).
-out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L5.1 --force 2>&1)"; rc=$?
-assert_eq "'lab start ps L5.1 --force' exits 0 regardless of recall score" "0" "$rc"
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L5.1 2>&1)"; rc=$?
+assert_eq "'lab start ps L5.1' exits 0 regardless of recall score" "0" "$rc"
 assert_contains "L5.1 start ran the recall quiz" "$out" "recall"
 WS="$COPY/workspace/ps/L5.1"
 ps_check_fail_missing "L5.1" "plaintext.txt"
@@ -2854,7 +3316,7 @@ ps_check_pass "L5.7" $'download cradle\nb\nreversal\n'
 # Passing L5.7 completes ps p5. The catalog denominator also counts p6 lab directories
 # that exist on disk but have no coverage of their own yet -- that lands at p6 close-out.
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 16 ps P4+P5 labs passed (16/54)" "$out" "(16/54)"
+assert_contains "status shows all 42 ps P0-P5 labs passed (42/54)" "$out" "(42/54)"
 
 # --- 7c. ps track P6 (Reading Real Security Tools): fabricated pass +
 # negative case per lab. Every lab here is a TOUR, and unlike P4/P5 not one of
@@ -2868,8 +3330,8 @@ assert_contains "status shows all 16 ps P4+P5 labs passed (16/54)" "$out" "(16/5
 note "ps track P6: fabricated pass + negative case per lab"
 
 # L6.1 -- Tour: PowerView (phase opener: recall must never gate).
-out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L6.1 --force 2>&1)"; rc=$?
-assert_eq "'lab start ps L6.1 --force' exits 0 regardless of recall score" "0" "$rc"
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L6.1 2>&1)"; rc=$?
+assert_eq "'lab start ps L6.1' exits 0 regardless of recall score" "0" "$rc"
 assert_contains "L6.1 start ran the recall quiz" "$out" "recall"
 WS="$COPY/workspace/ps/L6.1"
 ps_check_fail_missing "L6.1" "tour.md"
@@ -2969,7 +3431,7 @@ ps_check_pass "L6.5" $'b\nget-filehash\na\n'
 # across PRs #383-389, completing the ps catalog. P7's own acceptance
 # coverage follows immediately below.
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 21 ps P4+P5+P6 labs passed (21/54)" "$out" "(21/54)"
+assert_contains "status shows all 47 ps P0-P6 labs passed (47/54)" "$out" "(47/54)"
 
 # --- 7d. ps track P7 (Directing & Auditing AI PowerShell): fabricated pass +
 # negative case per lab. Every check.sh in this phase is pure static grading
@@ -2987,8 +3449,8 @@ assert_contains "status shows all 21 ps P4+P5+P6 labs passed (21/54)" "$out" "(2
 note "ps track P7: fabricated pass + negative case per lab"
 
 # L7.1 -- AI failure patterns (AUDIT; phase opener: recall must never gate).
-out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L7.1 --force 2>&1)"; rc=$?
-assert_eq "'lab start ps L7.1 --force' exits 0 regardless of recall score" "0" "$rc"
+out="$(printf 'b\nb\nb\nb\nb\n' | "$LAB" start ps L7.1 2>&1)"; rc=$?
+assert_eq "'lab start ps L7.1' exits 0 regardless of recall score" "0" "$rc"
 assert_contains "L7.1 start ran the recall quiz" "$out" "recall"
 WS="$COPY/workspace/ps/L7.1"
 ps_check_fail_missing "L7.1" "findings.md"
@@ -3164,8 +3626,12 @@ PS1
 ps_check_pass "L7.7" $'a\na\na\n'
 
 # Passing L7.7 completes ps p7 -- and the entire 54-lab ps track (p0-p7).
+# Match only the "ps ·" summary line, not a bare "(54/54)" substring: the
+# bash track also totals 54 labs and its own line has read "(54/54)" since
+# bash's own P0-P7 close-out early in this run, so a bare substring check
+# here would trivially pass off bash's line even if ps itself regressed.
 out="$("$LAB" status 2>&1)"
-assert_contains "status shows all 28 ps P4-P7 labs passed (28/54)" "$out" "(28/54)"
+assert_contains "status shows all 54 ps P0-P7 labs passed (54/54)" "$(grep '^ps ·' <<< "$out")" "(54/54)"
 
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
