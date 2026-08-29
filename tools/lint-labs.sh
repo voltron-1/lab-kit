@@ -165,6 +165,21 @@ check_ps_files_defanged() {
   done < <(find tracks/ps -type f -print0 2> /dev/null)
 }
 
+# The soc track's own "raw evidence never defangs; learner-facing answer text
+# always defangs" rule (PROMPTS.md, check_ps_files_defanged's comment above)
+# used to be asserted only in prose. tools/genevidence/verify.py now actually
+# enforces it — plus timestamp-in-window, universe-entity resolution,
+# answer-key event-id existence, and alert evidence.event_ids containment —
+# against every soc lab's already-committed, already-generated evidence. Runs
+# python3 rather than duplicating any of that logic here in bash.
+check_soc_evidence_verified() {
+  local out
+  if ! out="$(python3 "$ROOT/tools/genevidence/verify.py" 2>&1)"; then
+    lint_fail "tools/genevidence/verify.py reported soc evidence-consistency violations:"
+    printf '%s\n' "$out" >&2
+  fi
+}
+
 # check_check_sh's token/shape bans only cover check.sh's own text. But some
 # labs ship a files/*.ps1 that a check.sh actually EXECUTES (e.g. ps-p4's
 # benign decode probes) — that script is real, runnable content, not a
@@ -239,6 +254,7 @@ fi
 
 check_ps1_scripts
 check_ps_files_defanged
+check_soc_evidence_verified
 
 echo "--- shellcheck sweep ---"
 if ! "$ROOT/tools/shellcheck-all.sh"; then

@@ -8,6 +8,7 @@ q2=
 q3=
 
 # the one entity value unchanged across all 3 cited events (an IPv4 address)
+# - DEFANGED (e.g. 198.51.100[.]23)
 q4=
 
 # event.id of the auth SUCCESS the alert did NOT cite (e.g. cm-0311-0000)

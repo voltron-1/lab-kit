@@ -19,7 +19,7 @@ However, detection rules are narrow: an alert cites only the events that matched
    ```bash
    grep -E 'CM-0311-0107|CM-0311-0121|CM-0311-0135' events/raw.jsonl | jq -c '{id: .["event.id"], code: .["event.code"], user: .["user.name"], ip: .["source.ip"]}'
    ```
-   Notice that while the username (`user.name`) varies across each cited failed logon event, the originating IP address (`source.ip`) remains constant (`203.0.113.66`).
+   Notice that while the username (`user.name`) varies across each cited failed logon event, the originating IP address (`source.ip`) remains constant (`203.0.113.66`, DEFANGED: `203.0.113[.]66`).
 
 3. **Pivot into `events/raw.jsonl` to find uncited activity**:
    Search `events/raw.jsonl` for any successful logon events (Event ID `4624`):
@@ -38,7 +38,7 @@ However, detection rules are narrow: an alert cites only the events that matched
    - `q1`: Rule ID of the alert (`cm-r-0117`)
    - `q2`: Dotted JSON path of the static rule severity field (`rule.severity`)
    - `q3`: The 3 cited event IDs in array order (`cm-0311-0107,cm-0311-0121,cm-0311-0135`)
-   - `q4`: Originating IP entity value unchanged across cited events (`203.0.113.66`)
+   - `q4`: Originating IP entity value unchanged across cited events, DEFANGED (`203.0.113[.]66`)
    - `q5`: Event ID of the uncited logon success (`cm-0311-0142`)
 
 5. **Check your work**:

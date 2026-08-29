@@ -2158,7 +2158,7 @@ soc_check_pass "L1.2" $'a\na\na\n'
 "$LAB" start soc L1.3 > /dev/null 2>&1
 WS="$COPY/workspace/soc/L1.3"
 soc_check_fail_missing "L1.3" "answers.txt"
-printf 'q1=cm-r-0117\nq2=rule.severity\nq3=cm-0311-0107,cm-0311-0121,cm-0311-0135\nq4=203.0.113.66\nq5=cm-0311-0142\n' > "$WS/answers.txt"
+printf 'q1=cm-r-0117\nq2=rule.severity\nq3=cm-0311-0107,cm-0311-0121,cm-0311-0135\nq4=203.0.113[.]66\nq5=cm-0311-0142\n' > "$WS/answers.txt"
 soc_check_pass "L1.3" $'b\nb\nc\n'
 
 # L1.4 — Reading a Sigma rule
