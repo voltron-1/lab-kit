@@ -1,7 +1,7 @@
 === Shift Handoff Notes — 2026-03-09 ===
 Author: j.walsh (Helpdesk / T1)
 
-1. WEB01 (192.0.2.44) saw external port scan activity from research scanner 192.0.2[.]199.
+1. WEB01 (192.0.2.44) saw external port scan activity from research scanner 192.0.2.199.
    No open management ports exposed beyond 80/443; benign research noise.
 2. SRV-BACKUP nightly robocopy job running normally at 02:00Z under svc_backup.
 3. Helpdesk ticket queue clean; 3 password reset requests resolved.

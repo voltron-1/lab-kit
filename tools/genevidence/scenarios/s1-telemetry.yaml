@@ -1,6 +1,9 @@
 scenario: s1-telemetry
 window:
-  start: "2026-03-10T09:00:00Z"
+  # start covers zeek_dns rows D10001/D10002 (08:58:20Z/08:59:10Z) - the
+  # window previously started at 09:00:00Z, after those two rows actually
+  # happened; caught by verify.py's timestamps_in_window check.
+  start: "2026-03-10T08:58:00Z"
   end: "2026-03-10T17:00:00Z"
 actors: [m.reyes, d.okafor, j.walsh, t.aoki]
 hosts:
