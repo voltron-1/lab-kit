@@ -1,5 +1,5 @@
-q1=
-q2=
-q3=
-q4=
-q5=
+q1=   # true container type of invoice_2026-03.docm (by magic): zip|ole|pe|jpeg
+q2=   # does the .docm carry a macro project (vbaProject present)? y|n
+q3=   # the file whose REAL type is an executable despite its name
+q4=   # sha256 of invoice_2026-03.docm (first 12 hex chars)
+q5=   # safe first step with a suspicious attachment: open|hash|reply

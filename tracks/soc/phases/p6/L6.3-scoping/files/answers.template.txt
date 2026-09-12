@@ -1,5 +1,5 @@
-q1=
-q2=
-q3=
-q4=
-q5=
+q1=   # how many hosts beaconed to the C2 IP? (indicator scope, integer)
+q2=   # the one beaconing host
+q3=   # how many DISTINCT hosts are involved in the whole intrusion? (integer)
+q4=   # comma-joined lowercase host list of the intrusion (any order accepted
+q5=   # is the C2 beacon CONTAINED to one host or SPREAD? (contained|spread)

@@ -1,1 +1,1 @@
-AI Summary: Email passes SPF/DKIM so it is legitimate. (Contradicted: display name spoofing copperm1ne-billing.example).
+AI Summary: Sender authentication passes (SPF/DKIM/DMARC all aligned), the sending domain is a known Coppermine billing domain, and the attachment is a standard invoice. Assessment: legitimate, no action required.

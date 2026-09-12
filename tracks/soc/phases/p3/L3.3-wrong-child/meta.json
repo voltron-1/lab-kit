@@ -1,6 +1,7 @@
 {
   "id": "L3.3",
   "title": "The wrong child \u2014 spotting anomalous process ancestry (Office spawning a shell)",
+  "objective": "Find anomalous process ancestry (Office/mail spawning a shell or interpreter) among benign process trees",
   "type": "HUNT",
   "gate": false,
   "est_minutes": 20

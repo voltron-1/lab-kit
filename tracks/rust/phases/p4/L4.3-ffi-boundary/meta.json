@@ -1,6 +1,7 @@
 {
   "id": "L4.3",
-  "title": "FFI — where the guarantees end",
+  "title": "FFI \u2014 where the guarantees end",
+  "objective": "Read an `extern \"C\"` declaration as a promise YOU make, run a real libc call across the boundary, and read E0133 when the call escapes its unsafe block.",
   "type": "DECODE",
   "gate": false,
   "est_minutes": 15

@@ -1,5 +1,4 @@
-q1=
-q_order=
-q2=
-q3=
-q4=
+q1=   # UTC instant of the WEB01 syslog "Accepted password for root" (ISO lower)
+q2=   # the event.id of the EARLIEST attacker action in the window
+q3=   # which field must you NEVER order by (arrival, not occurrence)?
+q4=   # UTC offset of the WEB01 syslog collector during the scenario week

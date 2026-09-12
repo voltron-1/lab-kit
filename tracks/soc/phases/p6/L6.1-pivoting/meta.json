@@ -1,6 +1,7 @@
 {
   "id": "L6.1",
   "title": "Pivoting \u2014 one indicator to the full story: user \u2192 host \u2192 process \u2192 network",
+  "objective": "Pivot from one indicator through user\u2192host\u2192 process\u2192network\u2192persistence\u2192lateral to reconstruct the incident",
   "type": "PIVOT",
   "gate": false,
   "est_minutes": 20

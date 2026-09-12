@@ -1,6 +1,7 @@
 {
   "id": "L6.2",
   "title": "Timeline building \u2014 normalize timestamps, order events, UTC everywhere",
+  "objective": "Normalize mixed-format timestamps to UTC and order incident events by true occurrence, not arrival",
   "type": "PIVOT",
   "gate": false,
   "est_minutes": 20

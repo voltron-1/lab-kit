@@ -1,6 +1,7 @@
 {
   "id": "L5.5",
   "title": "async/await \u2014 the mental model",
+  "objective": "Read async/await correctly: an async fn returns an inert Future that does nothing until awaited, and the runtime is what drives it to completion.",
   "type": "DECODE",
   "gate": false,
   "est_minutes": 15

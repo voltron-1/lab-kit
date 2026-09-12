@@ -19,10 +19,8 @@ Reading the manifest with `Import-PowerShellDataFile` allows inspecting the modu
    - `RootModule`: Specifies the `.psm1` code file loaded by the manifest.
 
 3. **Record your notes**:
-   Create `notes.txt` explaining the difference between `.psd1` and `.psm1` and naming the `RootModule` key:
-   ```text
-   A .psd1 file is a module manifest containing metadata, while a .psm1 file contains script code. The RootModule key specifies the script code entry point.
-   ```
+   Create `notes.txt` in your own words: what a `.psd1` holds versus a `.psm1`, and
+   which manifest key names the code file the manifest loads.
 
 4. **Check your work**:
    ```bash

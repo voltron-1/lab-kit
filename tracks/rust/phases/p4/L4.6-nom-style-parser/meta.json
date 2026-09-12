@@ -1,6 +1,7 @@
 {
   "id": "L4.6",
-  "title": "Parsing untrusted bytes — reading a nom-style parser",
+  "title": "Parsing untrusted bytes \u2014 reading a nom-style parser",
+  "objective": "Read a length-prefixed byte parser the way nom is written \u2014 take/verify/bounds-check \u2014 and see how safe Rust turns a malicious length field into a handled error, not corruption.",
   "type": "DECODE",
   "gate": false,
   "est_minutes": 20

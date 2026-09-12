@@ -1,6 +1,7 @@
 {
   "id": "L4.6",
   "title": "The false-positive mines \u2014 noisy rules, admin behavior, and writing tuning feedback",
+  "objective": "Verdict noisy-rule and admin-behavior false positives and write a specific tuning exclusion that feeds detection engineering",
   "type": "TRIAGE",
   "gate": false,
   "est_minutes": 20

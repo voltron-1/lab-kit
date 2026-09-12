@@ -22,7 +22,21 @@ Before submitting a pull request, run locally:
 ./tools/shellcheck-all.sh
 ./tools/lint-labs.sh
 bash tests/acceptance.sh
+bash tests/session.sh
 ```
+
+**If you touched SOC evidence** (anything under `tracks/soc/**/files/` or
+`tools/genevidence/`), also run the evidence verifier:
+```bash
+python3 tools/genevidence/verify.py
+```
+It needs `python3` with **PyYAML** (`sudo apt-get install -y python3-yaml`) and
+**tshark** (`sudo apt-get install -y tshark`) for the pcap/zeek cross-check.
+Neither is required to run the labs themselves — only to author or regenerate
+evidence. The verifier enforces: universe entities in `universe.yaml` (every host
+has a unique ip, every assigned user exists), the `cm-` event-id format across
+every SOC lab, zeek `uid` 5-tuple consistency within a bundle, and agreement
+between each pcap and the zeek logs shipped beside it.
 
 ---
 

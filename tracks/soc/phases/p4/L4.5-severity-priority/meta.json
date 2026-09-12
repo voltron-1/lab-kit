@@ -1,6 +1,7 @@
 {
   "id": "L4.5",
   "title": "Severity and priority \u2014 ten alerts, which first, and why",
+  "objective": "Assign a priority tier to ten alerts from the severity \u00d7 asset-criticality \u00d7 confidence formula \u2014 distinguishing severity from priority",
   "type": "TRIAGE",
   "gate": false,
   "est_minutes": 20

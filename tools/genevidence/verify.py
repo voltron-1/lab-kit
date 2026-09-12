@@ -677,6 +677,24 @@ def check_answer_keys_defang_iocs(check_sh_path: Path, iocs: set) -> list:
 
 # --- Driver: run every applicable invariant across every soc lab on disk. ---
 
+def _zeek_logs(lab_dir: Path) -> dict:
+    """The lab's shipped zeek logs, keyed by path relative to the lab.
+
+    Only classic zeek TSVs count - a `#fields` header is what read_zeek_tsv
+    parses, and several labs ship hand-written `key: value` evidence under the
+    same .log name that these invariants cannot (and must not) speak to.
+    """
+    logs = {}
+    for p in sorted(lab_dir.glob("files/**/*.log")):
+        try:
+            with open(p, "r", encoding="utf-8", errors="replace") as f:
+                head = f.read(4096)
+        except OSError:
+            continue
+        if "#fields" in head:
+            logs[str(p.relative_to(lab_dir))] = p
+    return logs
+
 def run_all_checks(universe: dict = None) -> dict:
     """Returns {check_name: [violation, ...]}. A check_name with an empty list
     holds cleanly; run_all_checks itself makes no pass/fail judgement (main()
@@ -688,6 +706,8 @@ def run_all_checks(universe: dict = None) -> dict:
     iocs = external_iocs(universe)
 
     results = {
+        "uid_consistency": [],
+        "pcap_zeek_agreement": [],
         "timestamps_in_window": [],
         "ips_hosts_resolve": [],
         "answer_key_event_ids_exist": [],
@@ -702,6 +722,23 @@ def run_all_checks(universe: dict = None) -> dict:
 
         results["raw_evidence_not_defanged"].extend(check_raw_evidence_not_defanged(files_dir))
         results["alert_evidence_containment"].extend(check_alert_evidence_containment(lab_dir))
+
+        # The p2 pair ran only inside genevidence.py, on one scenario's fresh
+        # output at generation time - so nothing re-checked a bundle once it was
+        # committed, and a corrupted one passed `verify.py` cleanly. Run them
+        # post hoc here too, over whatever each lab actually ships.
+        lab = lab_dir.name.split("-")[0]
+        zeek = _zeek_logs(lab_dir)
+        if zeek:
+            results["uid_consistency"].extend(
+                f"{lab}: {v}" for v in check_uid_consistency(zeek)
+            )
+            # A pcap can only be cross-checked against zeek logs beside it; a
+            # lone capture has nothing to corroborate and is skipped, not failed.
+            for pcap in sorted(lab_dir.glob("files/**/*.pcap")):
+                results["pcap_zeek_agreement"].extend(
+                    f"{lab}: {v}" for v in check_pcap_zeek_agreement(pcap, list(zeek.values()))
+                )
 
         scen_id = _scenario_id_for_lab(check_sh)
         if scen_id is None:

@@ -3,7 +3,58 @@
 ## NEXT UP
 **All 4 tracks (rust, bash, ps, soc) are 100% built, tested, tagged, and complete (223 total labs)!**
 
+Next unstarted item: **nothing queued.** The two gaps this file has tracked for
+weeks both closed: ps p0–p3 acceptance coverage and `verify.py`'s baseline
+invariants (2026-08-29, PR #402), and the 2026-09-11 end-to-end test closed
+every defect it found (PR #403, `findings/20260911-e2e-kit-test.md`).
+
+[ ] `genevidence.py` has no `--help`: `python3 tools/genevidence/genevidence.py --help`
+    silently performs a full evidence write pass instead of printing usage. Found during
+    the 2026-09-11 end-to-end test, which closed `verify.py`'s half of the same gap.
+
 ## LAST SESSION
+2026-09-11 — **FULL END-TO-END TEST + REPAIR** of the whole kit (PR #403). No new labs;
+this was a "does it actually work for a learner" pass over all 224 lab directories, every
+CLI command, a real `git clone`, the error paths, and the Python tooling. Report:
+`findings/20260911-e2e-kit-test.md`.
+- **Baseline**: shellcheck + `lint-labs` clean, `tests/acceptance.sh` 1045/1045, and a new
+  per-lab sweep (start → 3 hints → check on a virgin workspace, 224/224) found zero
+  harness bugs, zero timeouts and zero labs that pass without work. Graders mutate nothing:
+  `git status` is clean after running all 224.
+- **Fixed — `bin/lab` broke when symlinked** (`ln -s .../bin/lab ~/.local/bin/lab` →
+  `lib/common.sh: No such file or directory`). `LAB_ROOT` now canonicalizes via `readlink -f`.
+- **Fixed — three SOC labs pointed at evidence that was never built**: L6.6 `files/case/`,
+  L7.4 `files/evidence/`, L7.6 `files/queue/` + `files/incident/` (all four spec'd in the
+  p6/p7 plans). Authored to each grader's key and the universe; L7.6's phish segment also
+  gained the `reported.eml` it had been summarizing without shipping.
+- **Fixed — the briefs were the answer key.** 27 soc briefs printed every graded value
+  (the P3, P4 and capstone gates included); the questions now live in each lab's
+  `answers.template.txt` and the briefs name the artifact and format only. L4.7/L4.8's
+  `queue.json` shipped `verdict`/`cite`/`escalate` per alert and were rebuilt as evidence.
+  All four `model-*.md` files passed their own graders verbatim (`cp model-report.md
+  report.md` → 11/11 on the P5 gate); each is now a worked example of a different case and
+  fails on submission. 8 ps briefs stopped handing over the graded file's contents.
+- **Fixed — `verify.py` never ran the invariants it documents.** `check_uid_consistency`
+  and `check_pcap_zeek_agreement` were unreachable from `main()`, and
+  `check_universe_entities` looked for a `hosts:` list that `universe.yaml` does not have.
+  All wired up and proved against five injected corruptions. PyYAML/tshark documented.
+- **New — the interactive session** (`lab` with no arguments): pick a track → resume from
+  the last checkpoint or start from the beginning → work the labs with `check`/`hint`/
+  `brief`/`skip`/`quit`, no lab ids typed. Start-over moves the pointer only; the frontier
+  still gates; no TTY still prints usage. `tests/session.sh` — 44 assertions on a pty.
+- **Fixed — two display defects the live run exposed**: 69 labs printed `objective  null`
+  (backfilled from the build plans) and 107 `recap.md` files carried their own bullet,
+  rendering as `· - text`.
+- **Process note**: `lab start soc L5.5 --force` was run against the real checkout while
+  testing, which marked 16 soc labs `⏭`. Repaired the same session; `.progress.json` is
+  back to its pre-session bytes. Do lab-CLI experiments in a copy, never the live tree.
+- **Merged `main` (PR #402) mid-flight.** That session rebuilt `verify.py` around a
+  `run_all_checks()` covering the six baseline invariants — but still without calling
+  `check_uid_consistency`/`check_pcap_zeek_agreement`, the exact gap this session had
+  fixed on the older file. Resolved by keeping their richer version and re-applying only
+  the p2 wiring on top, so both halves now run post hoc: re-proved by injecting a uid
+  5-tuple mismatch and watching `uid_consistency` catch it. Their `tests/acceptance.sh`
+  and `universe.yaml` work was taken as-is.
 2026-08-29 — VERIFY.PY BASELINE INVARIANTS: closed the "`verify.py`'s baseline invariants were never actually built" gap flagged above (and originally in `docs/plans/soc-p01-plan.md`'s own over-claimed close-out). `verify.py` was a one-line `universe.yaml`-parses stub apart from the soc-p2 session's `check_uid_consistency`/`check_pcap_zeek_agreement` (generation-time only, called from `genevidence.py`, never wired anywhere post-hoc). Built the missing five as real, standalone functions — `check_timestamps_in_window`, `check_ips_hosts_resolve`, `check_answer_key_event_ids_exist`, `check_alert_evidence_containment`, `check_raw_evidence_not_defanged`, plus a sixth, `check_answer_keys_defang_iocs`, covering the plan's "prose carries no un-defanged IOCs" invariant against the actual learner-facing text genevidence generates (the KEY block, not a blanket lab.md scan — see below) — wired into a new `run_all_checks()`/`main()` in `verify.py` that runs all six against every soc lab already on disk, and called from a new `check_soc_evidence_verified` in `tools/lint-labs.sh`'s existing run path (sits next to `check_ps_files_defanged`, whose comment already pointed at this exact gap).
 
 `check_alert_evidence_containment` (invariant 4, "alert evidence.event_ids ⊆ emitted events") turned out to need real judgment, not blind wiring: only L0.2/L1.3/L1.7 actually re-emit a local raw-events corpus (`events.jsonl`/`events/raw.jsonl`) alongside their alert JSON for citations to be checked against; L1.5/L1.8 cite canonical cross-lab event ids narratively (via `alerts.jsonl`/`evidence-menu.md`) with no local corpus to verify against at all — checked, and correctly skipped as not-applicable rather than false-flagged.

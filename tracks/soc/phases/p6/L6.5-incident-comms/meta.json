@@ -1,6 +1,7 @@
 {
   "id": "L6.5",
   "title": "Incident communication \u2014 what you say, to whom, when; the shift handoff",
+  "objective": "Match incident communications to audience and timing, and identify shift-handoff essentials",
   "type": "DECODE",
   "gate": false,
   "est_minutes": 15

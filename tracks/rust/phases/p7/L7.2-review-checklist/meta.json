@@ -1,6 +1,7 @@
 {
   "id": "L7.2",
   "title": "The AI-Rust review checklist v1",
+  "objective": "Assemble your reusable AI-Rust review checklist by sorting every course red flag into its category \u2014 the artifact you apply for the rest of the phase.",
   "type": "AUDIT",
   "gate": false,
   "est_minutes": 15

@@ -1,6 +1,7 @@
 {
   "id": "L4.2",
   "title": "Indicator enrichment \u2014 hash, IP, domain lookups; reading VT-style and WHOIS-style reports",
+  "objective": "Read mock VT/WHOIS/passive-DNS reports and extract detections, first-seen, registrar, and resolutions",
   "type": "GUIDED",
   "gate": false,
   "est_minutes": 15

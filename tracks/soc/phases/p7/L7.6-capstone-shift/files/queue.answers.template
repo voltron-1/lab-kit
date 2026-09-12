@@ -1,6 +1,6 @@
-q1=
-q2=
-q3=
-q4=
-q5=
-q6=
+q1=   # CM-A-761 verdict (tp|fp|btp) — decide from files/queue/alerts.json + files/queue/events.json
+q2=   # CM-A-762 verdict (tp|fp|btp)
+q3=   # CM-A-763 verdict (tp|fp|btp)
+q4=   # CM-A-764 verdict (tp|fp|btp)
+q5=   # CM-A-765 verdict (tp|fp|btp)
+q6=   # CM-A-766 verdict (tp|fp|btp)

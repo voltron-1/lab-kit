@@ -1,6 +1,7 @@
 {
   "id": "L4.9",
   "title": "Clippy as a code reviewer",
+  "objective": "Run clippy on a lint-rich file, read the emitted lint names, and sort them into security-relevant vs cosmetic \u2014 clippy as a first-pass reviewer, and its blind spots.",
   "type": "GUIDED",
   "gate": false,
   "est_minutes": 15

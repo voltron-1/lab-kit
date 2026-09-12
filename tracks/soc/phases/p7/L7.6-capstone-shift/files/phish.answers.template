@@ -1,2 +1,2 @@
-verdict=
-q_flaw=
+verdict=   # the reported email in files/phish/ (phish|legit|spam)
+q_flaw=   # the flaw in files/phish/ai-summary.md (hallucinated|wrongpivot|ungrounded|contradicted)

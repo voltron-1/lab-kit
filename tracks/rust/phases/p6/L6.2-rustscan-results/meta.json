@@ -1,6 +1,7 @@
 {
   "id": "L6.2",
   "title": "Tour: RustScan II \u2014 results and output",
+  "objective": "Follow RustScan's open-port results from the scan loop to output \u2014 collection, dedup/sort, and the nmap hand-off \u2014 and see where a tool's output becomes another tool's input.",
   "type": "TOUR",
   "gate": false,
   "est_minutes": 15

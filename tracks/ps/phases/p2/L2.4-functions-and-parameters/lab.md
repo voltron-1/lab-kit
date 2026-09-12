@@ -20,11 +20,8 @@ During code triage and security analysis, remember that parameter scaffolding is
    - `$OnFound` restricts arguments with `[ValidateSet('Stop','Continue','Ignore')]`
 
 3. **Record your answers**:
-   Create `answers.txt` explaining what parameter is mandatory and what `[CmdletBinding()]` adds:
-   ```text
-   The mandatory parameter is Name.
-   [CmdletBinding()] adds common parameters like Verbose and ErrorAction to the function.
-   ```
+   Create `answers.txt` naming the parameter `tool.ps1` marks mandatory, and stating
+   what `[CmdletBinding()]` adds to a function.
 
 4. **Check your work**:
    ```bash

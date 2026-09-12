@@ -1,6 +1,7 @@
 {
   "id": "L4.1",
   "title": "The triage method \u2014 the five questions, applied to one alert slowly",
+  "objective": "Apply the five triage questions \u2014 what fired, evidence, expected, scope, verdict \u2014 to one alert",
   "type": "DECODE",
   "gate": false,
   "est_minutes": 15

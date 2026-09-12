@@ -1,6 +1,7 @@
 {
   "id": "L4.1",
-  "title": "What unsafe actually unlocks — the five superpowers",
+  "title": "What unsafe actually unlocks \u2014 the five superpowers",
+  "objective": "Name the five things `unsafe` permits (and the many it does NOT), read a minimal sound unsafe block, and read E0133 when an unsafe call escapes its block.",
   "type": "DECODE",
   "gate": false,
   "est_minutes": 15

@@ -1,5 +1,5 @@
-q1=
-q2=
-q3=
-q4=
-q5=
+q1=   # VT malicious count for the C2 IP
+q2=   # the one domain the C2 IP resolves to (DEFANGED)
+q3=   # WHOIS creation date of stonewick.example (YYYY-MM-DD)
+q4=   # VT malicious count for the M2 attachment hash
+q5=   # one word: registrar/hosting/passive-dns — which source proved the IP

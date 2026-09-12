@@ -1,6 +1,7 @@
 {
   "id": "L6.5",
   "title": "Tour: a nom-based protocol parser",
+  "objective": "Read a REAL nom parser-combinator protocol parser \u2014 the production form of L4.6's hand-rolled version \u2014 and identify the combinators, the IResult flow, and the bounds that make it safe on hostile bytes.",
   "type": "TOUR",
   "gate": false,
   "est_minutes": 20

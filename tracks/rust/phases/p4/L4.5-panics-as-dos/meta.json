@@ -1,6 +1,7 @@
 {
   "id": "L4.5",
-  "title": "Panics as DoS — untrusted input meets unwrap",
+  "title": "Panics as DoS \u2014 untrusted input meets unwrap",
+  "objective": "Inventory the panic paths in a working parser, rank them by input reachability, and detonate one for real \u2014 the availability audit L3.2 started.",
   "type": "AUDIT",
   "gate": false,
   "est_minutes": 15

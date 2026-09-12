@@ -1,0 +1,7 @@
+[
+  {"event.id": "cm-0311-0138", "@timestamp": "2026-03-11T14:19:52Z", "host": "wks-acct-07", "user": "m.reyes", "event.code": 4625, "logon.type": 3, "source.ip": "198.51.100.71"},
+  {"event.id": "cm-0311-0142", "@timestamp": "2026-03-11T14:22:31Z", "host": "wks-acct-07", "user": "m.reyes", "event.code": 4624, "logon.type": 3, "source.ip": "198.51.100.71"},
+  {"event.id": "cm-0311-0233", "@timestamp": "2026-03-11T15:58:44Z", "host": "wks-eng-12", "user": "m.reyes", "event.code": 4624, "logon.type": 3, "source.ip": "10.20.30.107"},
+  {"event.id": "cm-0311-0244", "@timestamp": "2026-03-11T16:12:07Z", "host": "fs01", "user": "m.reyes", "event.code": 4720, "target.user": "supportadmin"},
+  {"event.id": "cm-0311-0251", "@timestamp": "2026-03-11T16:14:02Z", "host": "fs01", "user": "supportadmin", "event.code": 4732, "group": "Administrators"}
+]

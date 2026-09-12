@@ -1,5 +1,5 @@
-q1=
-q2=
-q3=
-q4=
-q5=
+q1=   # analyst closes an alert because the AI said benign, without reading evidence
+q2=   # analyst misses a real event the AI summary never mentioned
+q3=   # analyst stops spot-checking a tool that's "always right"
+q4=   # analyst can no longer triage when the AI assistant is down
+q5=   # analyst's verdict matches the AI's first guess before opening the logs

@@ -1,6 +1,6 @@
-q1=
-q2=
-q3=
-q4=
-q5=
-q6=
+q1=   # the 203.0.113.66 burst: brute or spray?
+q2=   # the 198.51.100.71 burst: brute or spray?
+q3=   # the single account targeted by the brute force
+q4=   # distinct accounts hit by the spray (integer, from the events)
+q5=   # verdict for the brute-force burst that SUCCEEDED (tp|fp|btp)
+q6=   # source IP of the spray — DEFANGED

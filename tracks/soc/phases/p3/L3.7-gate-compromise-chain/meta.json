@@ -1,6 +1,7 @@
 {
   "id": "L3.7",
   "title": "Phase gate: endpoint log bundle \u2014 find the full compromise chain",
+  "objective": "Reconstruct a full endpoint compromise chain \u2014 initial access, execution, persistence, lateral movement, Linux foothold \u2014 from Windows Security, Sysmon, and Linux auth logs together",
   "type": "HUNT",
   "gate": true,
   "est_minutes": 20

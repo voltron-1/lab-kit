@@ -1,6 +1,7 @@
 {
   "id": "L7.6",
   "title": "Capstone build \u2014 direct the AI, review each iteration",
+  "objective": "Direct the build like a lead: audit the AI's first-draft ECS parser against your checklist, then write the exact corrections that turn draft v1 into a shippable v2.",
   "type": "DIRECT",
   "gate": false,
   "est_minutes": 25

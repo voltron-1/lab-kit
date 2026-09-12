@@ -129,6 +129,10 @@ render_brief() {
 render_recap_lines() {
   local lines_json="$1" line
   while IFS= read -r line; do
+    # The renderer owns the bullet (kit-contracts.md: recap.md carries none).
+    # Passes recorded before that was enforced sit in the events log with a
+    # leading "- " baked in, so strip one here rather than print "· - text".
+    line="${line#[-*] }"
     printf '  · %s\n' "$line"
   done < <(jq -r '.[]' <<< "$lines_json")
 }

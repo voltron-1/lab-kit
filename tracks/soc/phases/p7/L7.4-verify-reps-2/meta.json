@@ -1,6 +1,7 @@
 {
   "id": "L7.4",
   "title": "VERIFY reps II \u2014 the hallucinated indicator, the wrong pivot, the ungrounded claim",
+  "objective": "Apply the grounding contract \u2014 every AI claim must cite a real event id \u2014 and catch the hallucinated id, the wrong pivot, and the ungrounded claim",
   "type": "VERIFY",
   "gate": false,
   "est_minutes": 20

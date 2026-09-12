@@ -1,6 +1,7 @@
 {
   "id": "L3.7",
   "title": "Vec and HashMap patterns",
+  "objective": "Read the entry/or_insert counting idiom, the panic-vs-Option split between indexing and .get, and why HashMap output must be sorted before asserting.",
   "type": "DECODE",
   "gate": false,
   "est_minutes": 15

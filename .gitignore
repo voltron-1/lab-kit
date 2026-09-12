@@ -9,3 +9,7 @@
 # python bytecode cache (tools/genevidence/)
 __pycache__/
 *.pyc
+
+# Windows/Outlook alternate-data-stream droppings left behind when .eml
+# lab payloads are opened in Outlook — never part of a lab payload
+*:OECustomProperty

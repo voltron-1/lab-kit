@@ -1,5 +1,5 @@
-q1=
-q2=
-q3=
-q4=
-q5=
+q1=   # what FIRED: the rule id (lowercase)
+q2=   # the single event.id that is the strongest EVIDENCE of execution
+q3=   # is a document spawning encoded powershell EXPECTED for this user? y|n
+q4=   # SCOPE: how many hosts show this activity (integer)
+q5=   # VERDICT (tp|fp|btp)

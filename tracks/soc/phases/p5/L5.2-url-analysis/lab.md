@@ -5,10 +5,6 @@ Analyze `files/urls.txt` to follow redirect chains, spot lookalikes/punycode, an
 
 1. Inspect `files/urls.txt` and `files/url-legend.md`.
 2. Copy `files/answers.template.txt` to `answers.txt`.
-3. Fill `answers.txt`:
-   - `q1`: Final landing domain of redirect chain (DEFANGED) -> `cdn.stonewick[.]example`
-   - `q2`: Digit-homoglyph lookalike domain (DEFANGED) -> `copperm1ne-billing[.]example`
-   - `q3`: Decoded punycode domain label (DEFANGED) -> `coppermïne[.]example`
-   - `q4`: Real benign Coppermine domain (DEFANGED) -> `coppermine[.]example`
-   - `q5`: Number of hops in redirect chain (integer) -> `3`
+3. Fill `answers.txt`. Every line in the template names exactly what it wants —
+   answer each one from the evidence above.
 4. Run `lab check soc L5.2`.

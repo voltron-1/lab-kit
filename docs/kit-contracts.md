@@ -59,6 +59,28 @@ Progression then continues linearly from there — no repeated forcing
 needed for subsequent labs, only for the ones you actually skipped.
 `--force` on a lab that wasn't locked is a no-op (no lock was bypassed).
 
+## The interactive session (`lab` with no arguments)
+
+`lab` with no arguments (or `lab session`) runs one fixed flow: select a track →
+a checkpoint decision (1 resume / 2 start from the beginning) → the labs. It is
+a driver, not a second grading path: it shells out to the same `cmd_start` /
+`cmd_check` / `cmd_hint` in a subshell, so every state write still goes through
+`state_apply` exactly as the five commands do.
+
+Two guarantees it must keep:
+
+- **"Start from the beginning" moves the pointer only.** It opens the track's
+  first lab and writes nothing else. `status: passed`, `skipped: true` and the
+  `events[]` log are never cleared — skip marks are permanent by the rule above,
+  and a menu choice is not an exception to it.
+- **The frontier still gates.** The session chooses the next lab so the learner
+  never types an id, but it only ever opens a lab at or before the frontier.
+  Moving past an unpassed lab requires the explicit `skip` command, which
+  confirms first and then marks `⏭` through the same `--force` path.
+
+With no terminal on stdin the session prints usage instead, so scripted and CI
+invocations of bare `lab` behave as they did before it existed.
+
 ## Check execution (the fence)
 
 `lab check` runs `check.sh` as a **separate process** (never sourced),

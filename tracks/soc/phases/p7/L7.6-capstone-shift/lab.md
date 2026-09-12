@@ -4,10 +4,14 @@ Complete the capstone shift across three answer files: `queue.answers`, `phish.a
 ## GUIDED STEPS
 
 1. Inspect `files/shift-brief.md`, `files/queue/`, `files/phish/`, and `files/incident/`.
-2. Fill `queue.answers`:
-   - `q1=tp`, `q2=btp`, `q3=tp`, `q4=fp`, `q5=btp`, `q6=tp`
-3. Fill `phish.answers`:
-   - `verdict=phish`, `q_flaw=contradicted`
-4. Fill `incident.answers`:
-   - `disposition=tp`, `escalate=y`, `cite=cm-0311-0201`
-5. Run `lab check soc L7.6`.
+2. Copy each segment's template next to it and work them in any order across any
+   number of sittings — `lab resume` keeps the workspace:
+   ```bash
+   cp files/queue.answers.template queue.answers
+   cp files/phish.answers.template phish.answers
+   cp files/incident.answers.template incident.answers
+   ```
+3. Answer every line in each file from that segment's evidence. The phish segment
+   ships an AI summary: verify it against `files/phish/reported.eml` rather than
+   trusting it.
+4. Run `lab check soc L7.6`.

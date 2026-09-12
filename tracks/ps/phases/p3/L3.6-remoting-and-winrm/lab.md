@@ -20,10 +20,8 @@ Classic Windows PowerShell remoting uses the **WinRM** transport protocol (ports
    - Triage Signal: Scripting with `-ComputerName` / `-Session` is a primary indicator of remote execution / lateral movement (T1021.006).
 
 3. **Record your lateral movement analysis**:
-   Create `lateral.txt` identifying remoting cmdlets and threat techniques:
-   ```text
-   Invoke-Command and Enter-PSSession perform remote execution and lateral movement via WinRM (T1021.006).
-   ```
+   Create `lateral.txt` naming the remoting cmdlets from step 2, the transport they
+   ride on, and the ATT&CK technique remote execution maps to.
 
 4. **Check your work**:
    ```bash

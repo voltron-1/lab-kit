@@ -1,6 +1,7 @@
 {
   "id": "L3.1",
   "title": "Windows events that matter \u2014 4624/4625 and logon types, 4688 process creation, 4720 new account",
+  "objective": "Recognize the core Windows Security event codes (4624/4625/4688/4720/4732) and read winlog.logon.type",
   "type": "DECODE",
   "gate": false,
   "est_minutes": 15

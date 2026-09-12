@@ -1,6 +1,7 @@
 {
   "id": "L7.1",
   "title": "Spec-writing for safe Rust \u2014 constraints that actually matter",
+  "objective": "Given a task, identify the constraints that actually matter for safe Rust \u2014 failure behavior, not just the happy path \u2014 and write a spec that names them.",
   "type": "DIRECT",
   "gate": false,
   "est_minutes": 15

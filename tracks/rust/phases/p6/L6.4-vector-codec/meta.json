@@ -1,6 +1,7 @@
 {
   "id": "L6.4",
   "title": "Tour: Vector II \u2014 inside a codec/parser path",
+  "objective": "Follow one concrete decode path inside Vector \u2014 raw bytes \u2192 framed \u2192 decoded Event \u2014 and see where untrusted input is parsed and how a decode failure is handled (not panicked).",
   "type": "TOUR",
   "gate": false,
   "est_minutes": 20

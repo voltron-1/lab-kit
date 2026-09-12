@@ -1,0 +1,7 @@
+From: "Coppermine Billing" <billing@copperm1ne-billing.example>
+Reply-To: ap-verify@copperm1ne-billing.example
+Received: from mail.copperm1ne-billing.example (198.51.100.71)
+Date: Wed, 11 Mar 2026 15:38:00 +0000
+Authentication-Results: spf=fail dkim=fail dmarc=fail
+Subject: Invoice 2026-03 — banking details updated
+Attachment: invoice_2026-03.docm

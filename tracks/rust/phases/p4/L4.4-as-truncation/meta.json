@@ -1,6 +1,7 @@
 {
   "id": "L4.4",
-  "title": "as casts vs TryFrom — truncation bugs",
+  "title": "as casts vs TryFrom \u2014 truncation bugs",
+  "objective": "Audit a size computation for silent `as` truncation, watch a bounds check get defeated by a narrowing cast, and give the TryFrom fix (CWE-197).",
   "type": "AUDIT",
   "gate": false,
   "est_minutes": 15

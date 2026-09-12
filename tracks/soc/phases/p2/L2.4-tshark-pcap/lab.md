@@ -42,11 +42,11 @@ GUIDED lab — run every command for real; the files they produce are what gets 
    cp answers.template.txt answers.txt
    ```
    Fill in each field from what you just carved:
-   - `q1`: qname the client resolved, defanged (`cdn.stonewick[.]example`)
-   - `q2`: IP it resolved to, defanged (`198.51.100[.]23`)
-   - `q3`: HTTP method + URI, space-joined, lowercased (`get /u.sh`)
-   - `q4`: user-agent of the request, lowercased (`curl/7.81.0`)
-   - `q5`: HTTP status code returned (`200`)
+   - `q1`: qname the client resolved — defanged
+   - `q2`: IP it resolved to — defanged
+   - `q3`: HTTP method + URI, space-joined, lowercased
+   - `q4`: user-agent of the request, lowercased
+   - `q5`: HTTP status code returned
 
    (`dns_q.txt`/`dns_a.txt`/`http_req.txt`/`http_status.txt` are tool output, not learner prose — leave
    them exactly as tshark produced them, fanged. Only your `answers.txt` IOCs get defanged.)

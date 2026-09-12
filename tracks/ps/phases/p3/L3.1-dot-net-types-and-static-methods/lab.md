@@ -19,12 +19,8 @@ Understanding `[System.Convert]` and `[System.Text.Encoding]` allows you to deco
    - `[System.Net.WebClient]`: Provides network methods like `DownloadString` (used in stager download cradles).
 
 3. **Record your notes**:
-   Create `notes.txt` mapping each .NET type to its security analysis role:
-   ```text
-   System.Convert handles Base64 encoding and decoding.
-   System.Text.Encoding handles byte-to-text string conversions.
-   System.Net.WebClient performs network fetch and download operations.
-   ```
+   Create `notes.txt` with one line per .NET type from step 2, naming what each one
+   does when you are reading an obfuscated script.
 
 4. **Check your work**:
    ```bash

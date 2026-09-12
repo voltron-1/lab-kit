@@ -1,6 +1,7 @@
 {
   "id": "L4.8",
-  "title": "Supply chain — cargo audit, cargo deny, RUSTSEC advisories",
+  "title": "Supply chain \u2014 cargo audit, cargo deny, RUSTSEC advisories",
+  "objective": "Run the supply-chain toolchain (cargo audit / cargo deny) against a project, read a RUSTSEC advisory, and record what each tool is FOR \u2014 dependency risk the compiler never sees.",
   "type": "GUIDED",
   "gate": false,
   "est_minutes": 15

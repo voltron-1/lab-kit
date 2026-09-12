@@ -1,6 +1,7 @@
 {
   "id": "L5.6",
   "title": "Reading a tokio main loop",
+  "objective": "Read a real tokio task-spawning main loop: spawn concurrent tasks, await them as they finish, and accumulate a deterministic result.",
   "type": "DECODE",
   "gate": false,
   "est_minutes": 15

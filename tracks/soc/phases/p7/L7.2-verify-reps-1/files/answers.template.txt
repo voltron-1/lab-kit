@@ -1,5 +1,5 @@
-q1=
-q2=
-q2f=
-q2e=
-q3=
+q1=   # summary1 verdict: grounded | flawed
+q2=   # summary2 verdict
+q2f=   # summary2 flaw type (hallucinated|wrongpivot|ungrounded|contradicted)
+q2e=   # the event.id that CONTRADICTS summary2's false claim
+q3=   # summary3 verdict

@@ -1,26 +1,26 @@
-# Full Escalation Report (Model)
+# Full Escalation Report (Worked Example — a DIFFERENT case than the one you are graded on)
+This example works the 2026-03-12 DNS-tunnel case end to end so you can see the
+shape of a complete report. The case you are graded on is in `files/case/` — its
+hosts, events, techniques and verdict are yours to establish.
 
 ## Scope
-- 4 hosts affected: wks-acct-07, fs01, wks-eng-12, web01
+- 1 host affected: wks-acct-07
 
 ## Timeline
-- 2026-03-11 14:22:31Z: Event cm-0311-0142 spray success for m.reyes
-- 2026-03-11 15:41:07Z: Event cm-0311-0201 macro exec spawning powershell.exe on wks-acct-07
-- 2026-03-11 16:12:07Z: Event cm-0311-0244 rogue admin supportadmin creation on fs01
+- 2026-03-12 03:10:44Z: Event cm-0312-0310 — 2217 TXT queries to `tun.stonewick[.]example`, mean label length 48.
+- 2026-03-12 03:51:10Z: queries stop; no second host reproduces the pattern.
 
 ## Indicators
-- C2 Host: c2.stonewick[.]example
-- C2 IP: 203.0.113[.]66
-- Source IP: 198.51.100[.]71
+- Tunnel zone: `tun.stonewick[.]example`
+- Pattern: TXT record type, 2217 queries in 40 minutes
 
 ## ATT&CK
-- T1059.001: PowerShell
-- T1547.001: Registry Run Keys
-- T1136.001: Create Account
+- T1071.004: Application Layer Protocol — DNS
+- T1048.003: Exfiltration Over Unencrypted Non-C2 Protocol
 
 ## Verdict
-- True Positive / Malicious Intrusion
+- True Positive / Malicious — tunnelled data, not name resolution.
 
 ## Recommendation
-- Isolate hosts wks-acct-07, fs01, wks-eng-12, and web01.
-- Block IP 203.0.113[.]66, domain c2.stonewick[.]example, and source IP 198.51.100[.]71.
+- Sinkhole `tun.stonewick[.]example` and isolate wks-acct-07.
+- Hunt the same query shape across the workstation subnets for scope.

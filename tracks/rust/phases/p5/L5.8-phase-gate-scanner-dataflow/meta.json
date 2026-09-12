@@ -1,6 +1,7 @@
 {
   "id": "L5.8",
   "title": "Phase gate: trace a concurrent port scanner's data flow",
+  "objective": "Prove Phase 5: trace a concurrent scanner's data flow cold \u2014 where concurrency is bounded, how results flow back, why it is race-free, and the one control that keeps it from exhausting itself.",
   "type": "DECODE",
   "gate": true,
   "est_minutes": 20

@@ -1,6 +1,7 @@
 {
   "id": "L6.1",
   "title": "Tour: RustScan I \u2014 CLI args to scan loop",
+  "objective": "Navigate RustScan from CLI-argument parsing to the batched async scan loop, and answer where user input becomes a bounded set of concurrent connect attempts.",
   "type": "TOUR",
   "gate": false,
   "est_minutes": 20
