@@ -2,65 +2,112 @@
   {
     "id": "CM-A-401",
     "rule": "Spray success",
-    "verdict": "tp",
-    "cite": "cm-0311-0142"
+    "@timestamp": "2026-03-11T14:22:31Z",
+    "related.events": [
+      "cm-0311-0139",
+      "cm-0311-0142"
+    ],
+    "context": "61 x 4625 for 61 distinct users from 198.51.100.71 in 4 minutes, then one 4624 type 3 for m.reyes from the same source"
   },
   {
     "id": "CM-A-402",
     "rule": "Backup job copy",
-    "verdict": "btp"
+    "@timestamp": "2026-03-11T02:10:00Z",
+    "related.events": [
+      "cm-0311-0021"
+    ],
+    "context": "svc_backup read 12840 files on FS01 inside the 02:00-04:00 window; matches scheduled job BKP-NIGHTLY"
   },
   {
     "id": "CM-A-403",
     "rule": "DNS TXT tunnel",
-    "verdict": "tp",
-    "cite": "cm-0312-0310"
+    "@timestamp": "2026-03-12T03:10:44Z",
+    "related.events": [
+      "cm-0312-0310"
+    ],
+    "context": "2217 TXT queries to tun.stonewick.example in 40 minutes, mean label length 48"
   },
   {
     "id": "CM-A-404",
     "rule": "Mimikatz string",
-    "verdict": "fp"
+    "@timestamp": "2026-03-12T09:05:11Z",
+    "related.events": [
+      "cm-0312-0405"
+    ],
+    "context": "string matched inside C:\\ProgramData\\EDR\\signatures\\sig-defs-2026-03.db, the EDR product's own signature database"
   },
   {
     "id": "CM-A-405",
     "rule": "Office powershell spawn",
-    "verdict": "tp",
-    "cite": "cm-0311-0201"
+    "@timestamp": "2026-03-11T15:41:07Z",
+    "related.events": [
+      "cm-0311-0198",
+      "cm-0311-0201"
+    ],
+    "context": "winword.exe spawned powershell.exe -w hidden -enc on wks-acct-07; no document-automation policy exists for this user"
   },
   {
     "id": "CM-A-406",
     "rule": "Chg PsExec",
-    "verdict": "btp"
+    "@timestamp": "2026-03-12T13:20:05Z",
+    "related.events": [
+      "cm-0312-0512"
+    ],
+    "context": "PSEXESVC installed on FS01 by t.aoki (IT admin) during change ticket CHG-4471, 13:00-15:00"
   },
   {
     "id": "CM-A-407",
     "rule": "NTP periodic",
-    "verdict": "fp"
+    "@timestamp": "2026-03-12T00:00:07Z",
+    "related.events": [
+      "cm-0312-0002"
+    ],
+    "context": "beacon-like 60s interval to 192.0.2.10, the org's configured NTP server, from every host in the fleet"
   },
   {
     "id": "CM-A-408",
     "rule": "Shared host IP",
-    "verdict": "fp"
+    "@timestamp": "2026-03-12T10:14:20Z",
+    "related.events": [
+      "cm-0312-0421"
+    ],
+    "context": "destination 192.0.2.199 hosts 1400+ unrelated domains; the flagged domain is a marketing CDN customer on the same IP"
   },
   {
     "id": "CM-A-409",
     "rule": "Adware quarantine",
-    "verdict": "btp"
+    "@timestamp": "2026-03-12T11:02:33Z",
+    "related.events": [
+      "cm-0312-0455"
+    ],
+    "context": "EDR quarantined a browser toolbar installer on wks-hd-03; the detection is accurate and the file was blocked before execution"
   },
   {
     "id": "CM-A-410",
     "rule": "Runkey persist",
-    "verdict": "tp",
-    "cite": "cm-0311-0181"
+    "@timestamp": "2026-03-11T15:43:19Z",
+    "related.events": [
+      "cm-0311-0181"
+    ],
+    "context": "HKCU Run value OneDriveUpd added on wks-acct-07 two minutes after the macro execution; no software install ticket"
   },
   {
     "id": "CM-A-411",
     "rule": "Stale score IP",
-    "verdict": "fp"
+    "@timestamp": "2026-03-12T14:40:02Z",
+    "related.events": [
+      "cm-0312-0610"
+    ],
+    "context": "reputation hit is from a 2023 feed entry; passive DNS shows the IP re-allocated to a university in 2025 with no current malicious sightings"
   },
   {
     "id": "CM-A-412",
     "rule": "Brute force success",
-    "verdict": "tp"
+    "@timestamp": "2026-03-11T16:31:40Z",
+    "related.events": [
+      "cm-0311-0702",
+      "cm-0311-0715"
+    ],
+    "context": "412 failed SSH passwords for it_svc_tmp on WEB01 from 198.51.100.71, then one accepted password from the same source"
   }
 ]

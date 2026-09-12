@@ -17,13 +17,8 @@ In this lab, you analyze five representative pipelines and record your predictio
    Observe that `Get-Process | Where-Object { $_.WS -gt 100MB } | Select-Object Name, Id` operates on `System.Diagnostics.Process` input objects, where `Name` is a `String` and `Id` is an `Int32`.
 
 3. **Record your predictions**:
-   Create `answers.md` containing your pipeline analysis and predictions:
-   ```markdown
-   # Phase 1 Pipeline Analysis
-   - Pipeline 1 Input Type: System.Diagnostics.Process
-   - Pipeline 2 Output: 10 20 30 40 50
-   - Pipeline 4 Output: CHROME PWSH SSHD
-   ```
+   Create `answers.md` with one line each for: the input object type pipeline 1
+   operates on, pipeline 2's output values, and pipeline 4's output values.
 
 4. **Check your work**:
    ```bash

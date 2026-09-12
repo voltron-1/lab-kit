@@ -1,5 +1,5 @@
-q1=
-q2=
-q3=
-q4=
-q5=
+q1=   # the report's verdict (malicious|suspicious|clean)
+q2=   # the C2 destination host the sample beaconed to — DEFANGED
+q3=   # the ATT&CK technique id for the initial delivery (spearphishing attach)
+q4=   # the persistence artifact the sample dropped (registry key leaf)
+q5=   # can you verdict this WITHOUT running the sample yourself? y|n

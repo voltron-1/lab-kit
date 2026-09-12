@@ -20,11 +20,8 @@ In PowerShell 7, `Get-CimInstance` replaces `Get-WmiObject`. Both WMI and CIM re
    - WMI Event Subscriptions (`__EventFilter`, `__EventConsumer`): Provide fileless persistence.
 
 3. **Record your notes**:
-   Create `notes.txt` explaining why attackers favor WMI and noting the shift to `Get-CimInstance`:
-   ```text
-   Attackers favor WMI for reconnaissance, process execution, and fileless persistence.
-   Get-WmiObject was removed in PS7 and replaced by Get-CimInstance.
-   ```
+   Create `notes.txt` covering why attackers reach for WMI, and which cmdlet replaced
+   the one PS7 removed.
 
 4. **Check your work**:
    ```bash

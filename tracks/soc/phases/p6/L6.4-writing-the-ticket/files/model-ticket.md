@@ -1,27 +1,25 @@
-# Escalation Ticket (Model)
+# Escalation Ticket (Worked Example — a DIFFERENT case than the one you are graded on)
+This example works the 2026-03-12 DNS-tunnel case. Your ticket covers the case in
+`files/`. Copy the SHAPE, not the content.
 
 ## Scope
-- 2 hosts affected: wks-acct-07 (initial execution), fs01 (lateral admin creation)
+- 1 host affected: wks-acct-07
 
 ## Timeline
-- 2026-03-11 15:41:07Z: Macro executed WINWORD.EXE spawning powershell.exe on wks-acct-07
-- 2026-03-11 15:46:02Z: C2 beacon initiated to c2.stonewick[.]example
-- 2026-03-11 16:12:07Z: Rogue admin supportadmin created on fs01
+- 2026-03-12 03:10:44Z: Event cm-0312-0310 — 2217 TXT queries to `tun.stonewick[.]example` in 40 minutes, mean label length 48.
+- 2026-03-12 03:51:10Z: query volume stops; no other host shows the pattern.
 
 ## Indicators
-- C2 Domain: c2.stonewick[.]example
-- C2 IP: 203.0.113[.]66
-- Persistence Run Key: OneDriveUpd
+- Tunnel zone: `tun.stonewick[.]example`
+- Query type: TXT, 2217 queries / 40 minutes
 
 ## ATT&CK
-- T1059.001: PowerShell
-- T1547.001: Registry Run Keys
-- T1136.001: Create Account
+- T1071.004: Application Layer Protocol — DNS
+- T1048.003: Exfiltration Over Unencrypted Non-C2 Protocol
 
 ## Verdict
-- True Positive / Malicious Incident
+- Malicious. The volume, record type and label length are consistent with tunnelled data, not resolution.
 
 ## Recommendation
-- Isolate hosts wks-acct-07 and fs01 immediately.
-- Reset credentials for m.reyes and remove supportadmin account.
-- Block IP 203.0.113[.]66 and domain c2.stonewick[.]example.
+- Sinkhole the tunnel zone and isolate wks-acct-07 pending review.
+- Pull the 40-minute query capture for Tier 2.

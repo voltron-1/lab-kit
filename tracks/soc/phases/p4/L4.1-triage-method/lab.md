@@ -15,10 +15,6 @@ Run these five questions in order on `files/alert.json` and `files/events.jsonl`
    ```bash
    cp files/answers.template.txt answers.txt
    ```
-3. Fill `answers.txt`:
-   - `q1`: Rule ID -> `cm-r-0159`
-   - `q2`: Event ID for process creation -> `cm-0311-0201`
-   - `q3`: Expected for m.reyes on workstation? -> `n`
-   - `q4`: Scope count -> `1`
-   - `q5`: Verdict -> `tp`
+3. Fill `answers.txt`. Every line in the template names exactly what it wants —
+   answer each one from the evidence above.
 4. Run `lab check soc L4.1`.

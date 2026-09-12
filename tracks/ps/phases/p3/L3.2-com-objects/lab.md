@@ -20,11 +20,8 @@ COM objects are **Windows-only**; running `New-Object -ComObject` on Linux pwsh 
    Notice the error: `COM objects are not supported on this platform.` This confirms that COM automation is Windows-only and must be analyzed statically on non-Windows hosts.
 
 3. **Record your classification**:
-   Create `classify.txt` mapping each ProgID to its capabilities:
-   ```text
-   WScript.Shell provides capabilities for program execution via Run and registry persistence via RegWrite.
-   Shell.Application provides capabilities for hidden program execution via ShellExecute.
-   ```
+   Create `classify.txt` with one line per ProgID in `com-oneliners.txt`, naming the
+   capabilities each one exposes to an attacker.
 
 4. **Check your work**:
    ```bash

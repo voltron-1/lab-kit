@@ -29,10 +29,10 @@ In this lab, you explore the Coppermine evidence pack layout, inspect a SIEM ale
    cp answers.template.txt answers.txt
    ```
    Fill in each field in `answers.txt`:
-   - `q1`: Rule ID of the staged alert (`cm-r-0112`)
-   - `q2`: Event ID of the FIRST cited evidence event (`cm-0311-0107`)
-   - `q3`: Defanged form of `c2.stonewick.example` (`c2.stonewick[.]example`)
-   - `q4`: Staged workspace destination path (`workspace/soc/l0.2`)
+   - `q1`: rule id of the staged alert
+   - `q2`: event id of the FIRST cited evidence event
+   - `q3`: the defanged form of the C2 domain the alert names
+   - `q4`: the workspace path this lab staged into
 
 5. **Check your work**:
    ```bash

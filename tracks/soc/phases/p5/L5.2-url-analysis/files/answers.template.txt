@@ -1,5 +1,5 @@
-q1=
-q2=
-q3=
-q4=
-q5=
+q1=   # final landing domain of the redirect chain — DEFANGED
+q2=   # the digit-homoglyph lookalike of coppermine.example — DEFANGED
+q3=   # decode the punycode xn--coppermne-9zb.example (the real unicode label,
+q4=   # which link is the REAL Coppermine domain (benign)? — DEFANGED
+q5=   # number of hops in the redirect chain

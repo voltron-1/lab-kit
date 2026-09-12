@@ -1,6 +1,6 @@
-q1=
-q2=
-q3=
-q4=
-q5=
-q6=
+q1=   # the host m.reyes's compromised session landed on (from the exec)
+q2=   # event.id of the malicious process spawn on that host
+q3=   # the C2 destination the process beaconed to — DEFANGED
+q4=   # the persistence artifact registry leaf set on that host
+q5=   # the NEXT host reached via the compromised account (lateral)
+q6=   # event.id of the rogue admin account creation on that next host

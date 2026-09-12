@@ -14,10 +14,6 @@ Enrichment adds context to an indicator (IP, domain, hash) by reading mock Virus
    ```bash
    cp files/answers.template.txt answers.txt
    ```
-4. Fill `answers.txt`:
-   - `q1`: VT malicious count for 203.0.113.66 -> `31`
-   - `q2`: Defanged domain for 203.0.113.66 -> `c2.stonewick[.]example`
-   - `q3`: Creation Date of domain from WHOIS -> `2026-02-27`
-   - `q4`: VT malicious count for hash -> `52`
-   - `q5`: Which source proved dedicated single-domain hosting? (one word) -> `passive-dns`
+4. Fill `answers.txt`. Every line in the template names exactly what it wants —
+   answer each one from the evidence above.
 5. Verify with `lab check soc L4.2`.

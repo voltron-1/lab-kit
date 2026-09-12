@@ -1,6 +1,6 @@
-q1=
-q2=
-q3=
-q4=
-q5=
-q6=
+q1=   # originating IP (bottom Received hop) — DEFANGED
+q2=   # SPF result (pass|fail|softfail|none)
+q3=   # DKIM result
+q4=   # DMARC result
+q5=   # the From-header domain — DEFANGED
+q6=   # does Return-Path align with the From domain? y|n

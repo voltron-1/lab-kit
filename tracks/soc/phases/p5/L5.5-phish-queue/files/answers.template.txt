@@ -1,6 +1,6 @@
-q1=
-q2=
-q3=
-q4=
-q5=
-q6=
+q1=   # files/mail/p1.eml verdict (phish|legit|spam) — work it with files/triage-checklist.md
+q2=   # files/mail/p2.eml verdict (phish|legit|spam)
+q3=   # files/mail/p3.eml verdict (phish|legit|spam)
+q4=   # files/mail/p4.eml verdict (phish|legit|spam)
+q5=   # files/mail/p5.eml verdict (phish|legit|spam)
+q6=   # files/mail/p6.eml verdict (phish|legit|spam)

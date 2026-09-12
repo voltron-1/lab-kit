@@ -1,3 +1,3 @@
-disposition=
-escalate=
-cite=
+disposition=   # files/incident/ disposition (tp|fp|btp)
+escalate=   # escalate to Tier 2? (y|n) — judge against files/incident/escalation-criteria.md
+cite=   # the event.id you would cite as the strongest evidence

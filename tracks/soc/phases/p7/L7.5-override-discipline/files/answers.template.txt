@@ -1,6 +1,6 @@
-q1=
-q2=
-q3=
-q4=
-q5=
-q6=
+q1=   # case 1 of files/override-cases.md: (accept|override) the AI's call
+q2=   # case 2: (accept|override)
+q3=   # case 3: (accept|override)
+q4=   # case 4: (accept|override)
+q5=   # case 5: (accept|override)
+q6=   # one word: what a sustained override pattern should feed back into

@@ -9,10 +9,6 @@ File extensions can be deceptive. Inspect true container types with magic bytes 
    sha256sum files/invoice_2026-03.docm > hash.txt
    ```
 3. Copy `files/answers.template.txt` to `answers.txt`.
-4. Fill `answers.txt`:
-   - `q1`: True container type of invoice_2026-03.docm by magic (zip|ole|pe|jpeg) -> `zip`
-   - `q2`: Does invoice_2026-03.docm carry a macro project? (y|n) -> `y`
-   - `q3`: Filename whose REAL type is an executable -> `receipt.pdf.exe`
-   - `q4`: First 12 hex chars of invoice_2026-03.docm sha256 hash -> `55e9d81f361e`
-   - `q5`: Safe first step with a suspicious attachment (open|hash|reply) -> `hash`
+4. Fill `answers.txt`. Every line in the template names exactly what it wants —
+   answer each one from the evidence above.
 5. Run `lab check soc L5.3`.

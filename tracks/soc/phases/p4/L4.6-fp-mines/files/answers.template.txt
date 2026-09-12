@@ -1,8 +1,8 @@
-q1=
-q1t=
-q2=
-q2t=
-q3=
-q3t=
-q4=
-q4t=
+q1=   # case1 verdict (tp|fp|btp)
+q1t=   # case1 tuning exclusion as field:value (use none if the alert should keep firing)
+q2=   # case2 verdict (tp|fp|btp)
+q2t=   # case2 tuning exclusion as field:value, or none
+q3=   # case3 verdict (tp|fp|btp)
+q3t=   # case3 tuning exclusion as field:value, or none
+q4=   # case4 verdict (tp|fp|btp)
+q4t=   # case4 tuning exclusion as field:value, or none

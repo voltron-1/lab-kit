@@ -4,13 +4,6 @@ Hunt an SSH brute-force to root compromise chain in Linux `auth.log` and `auditd
 ## GUIDED STEPS
 
 1. Inspect `files/auth.log` and `files/auditd.log`.
-2. Fill out `answers.txt`:
-   ```text
-   q1=203.0.113[.]66
-   q2=25
-   q3=root
-   q4=websvc
-   q5=0
-   q6=hxxp://cdn.stonewick[.]example/u.sh
-   ```
+2. Fill `answers.txt`. Every line in the template names exactly what it wants —
+   answer each one from the evidence above.
 3. Verify with `lab check soc L3.5`.

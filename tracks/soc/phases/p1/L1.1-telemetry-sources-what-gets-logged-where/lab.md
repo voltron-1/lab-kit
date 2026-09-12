@@ -15,14 +15,14 @@ In this lab, you inspect six staged Coppermine telemetry files (`telemetry/a` th
 
 2. **Map the eight observation statements**:
    Match each statement to its single source letter (`a` through `f`):
-   1. The exact command line `whoami /all` was typed on an Accounts Payable workstation. → `d`
-   2. A workstation asked DNS for `c2.stonewick[.]example` and got an answer. → `b`
-   3. An SSH login to WEB01 failed for an invalid username. → `e`
-   4. `m.reyes` signed in to OWA and satisfied an MFA prompt. → `f`
-   5. A domain logon to DC01 failed with a bad password. → `c`
-   6. A workstation held a ~40-minute encrypted TLS session; only bytes and duration are visible. → `a`
-   7. `t.aoki` authenticated to DC01 over the network (logon type 3). → `c`
-   8. A user logged in to WEB01 via SSH publickey. → `e`
+   1. The exact command line `whoami /all` was typed on an Accounts Payable workstation.
+   2. A workstation asked DNS for `c2.stonewick[.]example` and got an answer.
+   3. An SSH login to WEB01 failed for an invalid username.
+   4. `m.reyes` signed in to OWA and satisfied an MFA prompt.
+   5. A domain logon to DC01 failed with a bad password.
+   6. A workstation held a ~40-minute encrypted TLS session; only bytes and duration are visible.
+   7. `t.aoki` authenticated to DC01 over the network (logon type 3).
+   8. A user logged in to WEB01 via SSH publickey.
 
 3. **Record your answers**:
    Copy `answers.template.txt` to `answers.txt`:

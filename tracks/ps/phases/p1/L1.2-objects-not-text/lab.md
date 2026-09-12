@@ -18,13 +18,11 @@ Filtering with `Where-Object` operates on object properties, whereas piping to `
    ```bash
    pwsh -File type.ps1
    ```
-   *(Expected output: `System.Diagnostics.Process`)*
+   Read what it prints — that is the type the pipeline is really carrying.
 
 3. **Record your prediction**:
-   Write the exact .NET type emitted by `Get-Process` into `prediction.txt`:
-   ```text
-   System.Diagnostics.Process
-   ```
+   Write the exact .NET type `Get-Process` emits into `prediction.txt` — one line,
+   fully qualified, spelled as the probe reported it.
 
 4. **Check your work**:
    ```bash

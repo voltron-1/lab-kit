@@ -1,6 +1,6 @@
-q1=
-q1t=
-q2=
-q2t=
-q3=
-q3t=
+q1=   # case1 verdict (tp|fp|btp)
+q1t=   # case1 trap
+q2=   # case2 verdict
+q2t=   # case2 trap
+q3=   # case3 verdict
+q3t=   # case3 trap

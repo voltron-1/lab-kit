@@ -11,5 +11,8 @@ Your timeline section MUST cite at least one event ID starting with `cm-`.
    ```bash
    cp files/escalation-template.md report.md
    ```
-3. Edit `report.md` to ensure all required sections, ATT&CK ID `T1059.001`, verdict `malicious`, cited event ID (`cm-0311-0142`), and defanged IOCs are included.
+3. Investigate `files/case/`, then write `report.md` so it carries every section the
+   template defines — scope, timeline, indicators, ATT&CK, verdict, recommendation —
+   with the ATT&CK technique ids your evidence supports, at least one cited `cm-`
+   event id, and every IOC defanged.
 4. Run `lab check soc L6.6`.

@@ -1,25 +1,28 @@
-# Terminal Capstone Report (Model)
+# Capstone Report (Worked Example — a DIFFERENT case than the one you are graded on)
+This example works the 2026-03-12 DNS-tunnel case. Your capstone covers the case
+in `files/` — its scope, events, techniques, verdict and tuning recommendation
+are yours to establish.
 
 ## Scope
-- 4 hosts affected: wks-acct-07, fs01, wks-eng-12, web01
+- 1 host affected: wks-acct-07
 
 ## Timeline
-- 2026-03-11 14:22:31Z: Event cm-0311-0142 spray success for m.reyes
-- 2026-03-11 15:41:07Z: Event cm-0311-0201 macro execution spawning powershell.exe
+- 2026-03-12 03:10:44Z: Event cm-0312-0310 — 2217 TXT queries to `tun.stonewick[.]example`, mean label length 48.
+- 2026-03-12 03:51:10Z: queries stop; no other host reproduces the pattern.
 
 ## Indicators
-- C2 Host: c2.stonewick[.]example
-- C2 IP: 203.0.113[.]66
+- Tunnel zone: `tun.stonewick[.]example`
+- Pattern: TXT, 2217 queries in 40 minutes
 
 ## ATT&CK
-- T1059.001: PowerShell
-- T1547.001: Registry Run Keys
+- T1071.004: Application Layer Protocol — DNS
+- T1048.003: Exfiltration Over Unencrypted Non-C2 Protocol
 
 ## Verdict
-- True Positive / Malicious Intrusion
+- True Positive / Malicious — tunnelled data, not name resolution.
 
 ## Recommendation
-- Isolate affected hosts and reset compromised credentials.
+- Sinkhole the tunnel zone, isolate the host, and hand the capture to Tier 2.
 
 ## Tuning Recommendation
-- Add rule selector tuning: cmdline:winword->powershell to alert on Office child execution specifically.
+- `query.zone:tun.stonewick[.]example` — alert on TXT volume per host per hour rather than per query, so one tunnelling session raises one alert instead of 2217.
