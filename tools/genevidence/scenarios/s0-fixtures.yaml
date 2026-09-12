@@ -42,6 +42,14 @@ l01_emits:
         - "www.coppermine.example"
         - "fs01.coppermine.example"
         - "dc01.coppermine.example"
+      # One real universe IP per qname above, in order (never index-derived -
+      # a prior "10.20.10.5 + idx" formula silently answered fs01/dc01 with
+      # the WRONG host's IP; verify.py's ips_hosts_resolve check caught it).
+      answers:
+        - "10.20.10.5"     # coppermine.example -> DC01 (AD DS/DNS)
+        - "192.0.2.44"     # www.coppermine.example -> WEB01's public IP
+        - "10.20.10.8"     # fs01.coppermine.example -> FS01's real IP
+        - "10.20.10.5"     # dc01.coppermine.example -> DC01's real IP
 
   handoff_notes:
     author: "j.walsh"
@@ -50,7 +58,7 @@ l01_emits:
       - "=== Shift Handoff Notes — 2026-03-09 ==="
       - "Author: j.walsh (Helpdesk / T1)"
       - ""
-      - "1. WEB01 (192.0.2.44) saw external port scan activity from research scanner 192.0.2[.]199."
+      - "1. WEB01 (192.0.2.44) saw external port scan activity from research scanner 192.0.2.199."
       - "   No open management ports exposed beyond 80/443; benign research noise."
       - "2. SRV-BACKUP nightly robocopy job running normally at 02:00Z under svc_backup."
       - "3. Helpdesk ticket queue clean; 3 password reset requests resolved."

@@ -40,7 +40,18 @@ def build_pcap_dns(queries) -> bytes:
         client_ip = [int(x) for x in q_item["client"].split(".")]
         server_ip = [int(x) for x in q_item["server"].split(".")]
         qnames = q_item["qnames"]
-        
+        # One real universe IP per qname, in order - never guessed. An earlier
+        # index-based formula ("10.20.10.5 + idx") coincidentally matched the
+        # first qname's real answer and was silently WRONG for the others
+        # (e.g. fs01.coppermine.example resolving to .7 instead of FS01's
+        # real 10.20.10.8) - verify.py's ips_hosts_resolve check caught it.
+        answer_ips = q_item.get("answers")
+        if answer_ips is not None and len(answer_ips) != len(qnames):
+            raise ValueError(
+                f"dns_pcap_queries answers has {len(answer_ips)} entries "
+                f"for {len(qnames)} qnames - must be one answer per qname"
+            )
+
         t0 = 1773061500  # 2026-03-09T13:05:00Z approx
         step = q_item.get("step_seconds", 2)
         
@@ -81,7 +92,10 @@ def build_pcap_dns(queries) -> bytes:
             flags_resp = 0x8180
             ancount_resp = 1
             dns_resp_hdr = struct.pack(">HHHHHH", txn_id_resp, flags_resp, qdcount, ancount_resp, nscount, arcount)
-            ans_ip = bytes([192, 0, 2, 44]) if "www" in qname else bytes([10, 20, 10, 5 + idx])
+            if answer_ips is not None:
+                ans_ip = bytes(int(x) for x in answer_ips[idx].split("."))
+            else:
+                ans_ip = bytes([192, 0, 2, 44]) if "www" in qname else bytes([10, 20, 10, 5 + idx])
             answer_bin = struct.pack(">HHHIH", 0xc00c, 1, 1, 300, 4) + ans_ip
             dns_resp_payload = dns_resp_hdr + qname_bin + qtype_qclass + answer_bin
             

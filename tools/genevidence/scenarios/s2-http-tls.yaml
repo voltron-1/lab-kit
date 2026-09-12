@@ -1,6 +1,10 @@
 scenario: s2-http-tls
 lab: L2.3
-window: {start: "2026-03-11T15:45:00Z", end: "2026-03-12T20:20:00Z"}
+# start covers the benign updates.example/saas.mail.example filler rows
+# (earliest at 2026-03-11T09:00:00Z) - the window previously started at
+# 15:45:00Z, hours after those rows' own timestamps; caught by verify.py's
+# timestamps_in_window check.
+window: {start: "2026-03-11T09:00:00Z", end: "2026-03-12T20:20:00Z"}
 
 http_rows:
   - {ts: "2026-03-11T09:10:00Z", uid: "CHT00001", orig_h: "10.20.30.103", orig_p: 49300,

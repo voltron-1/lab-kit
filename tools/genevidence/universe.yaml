@@ -68,3 +68,7 @@ externals:
   ntp_server: 192.0.2.10
   pentest_ip: 192.0.2.150
   vpn_gateway: 192.0.2.45
+  saas_mail_ip: 192.0.2.60
+  saas_mail_domain: saas.mail.example
+  software_update_ip: 192.0.2.61
+  software_update_domain: updates.example

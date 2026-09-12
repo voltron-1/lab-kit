@@ -10,7 +10,7 @@ At 2026-03-10T16:12Z, Defender on WKS-HD-03 (j.walsh) quarantined commodity adwa
 Endpoint telemetry shows no process creation (4688), no network connections (Sysmon 3), and no secondary host activity.
 
 ## CASE 3 — alert CM-A-3 — User-reported phish
-At 2026-03-09T13:30Z, d.okafor forwarded a suspicious email from billing@copperm1ne-billing[.]example (sender IP 198.51.100.71) linking to hxxp://copperm1ne-billing[.]example/invoice.
+At 2026-03-09T13:30Z, d.okafor forwarded a suspicious email from billing@copperm1ne-billing.example (sender IP 198.51.100.71) linking to http://copperm1ne-billing.example/invoice.
 Zeek HTTP and DNS logs confirm zero requests originated from 10.20.31.112 (WKS-ENG-12), and no unusual process execution occurred.
 
 ## CASE 4 — alert CM-A-4 — Remote admin tool on DC

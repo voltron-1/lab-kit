@@ -1,6 +1,9 @@
 scenario: s2-gate-session
 lab: L2.7
-window: {start: "2026-03-11T15:45:58Z", end: "2026-03-12T20:16:00Z"}
+# start covers the benign filler rows (earliest at 2026-03-11T13:00:00Z) -
+# the window previously started at 15:45:58Z, ~2h45m after those rows' own
+# timestamps; caught by verify.py's timestamps_in_window check.
+window: {start: "2026-03-11T13:00:00Z", end: "2026-03-12T20:16:00Z"}
 
 # Every row that carries a canonical id below is byte-identical to the same
 # row in the lab that first showed it (L2.1/L2.2/L2.3/L2.5/L2.6) - this gate
