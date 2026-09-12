@@ -1,0 +1,8 @@
+[
+  {"id": "CM-A-761", "rule": "Password spray success", "@timestamp": "2026-03-11T14:22:31Z", "user": "m.reyes", "host": "wks-acct-07", "event.id": "cm-0311-0142"},
+  {"id": "CM-A-762", "rule": "Bulk file read by service account", "@timestamp": "2026-03-11T02:10:00Z", "user": "svc_backup", "host": "srv-backup", "event.id": "cm-0311-0021"},
+  {"id": "CM-A-763", "rule": "DNS TXT tunnel suspected", "@timestamp": "2026-03-12T03:10:44Z", "host": "wks-acct-07", "event.id": "cm-0312-0310"},
+  {"id": "CM-A-764", "rule": "Credential-dumper string on disk", "@timestamp": "2026-03-12T09:05:11Z", "host": "wks-hd-03", "event.id": "cm-0312-0405"},
+  {"id": "CM-A-765", "rule": "Remote service install (PsExec)", "@timestamp": "2026-03-12T13:20:05Z", "user": "t.aoki", "host": "fs01", "event.id": "cm-0312-0512"},
+  {"id": "CM-A-766", "rule": "Office application spawned PowerShell", "@timestamp": "2026-03-11T15:41:07Z", "user": "m.reyes", "host": "wks-acct-07", "event.id": "cm-0311-0201"}
+]

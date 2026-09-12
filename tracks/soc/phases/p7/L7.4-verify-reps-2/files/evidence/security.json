@@ -1,0 +1,5 @@
+[
+  {"event.id": "cm-0311-0142", "@timestamp": "2026-03-11T14:22:31Z", "host": "wks-acct-07", "user": "m.reyes", "event.code": 4624, "logon.type": 3, "source.ip": "198.51.100.71"},
+  {"event.id": "cm-0311-0233", "@timestamp": "2026-03-11T15:58:44Z", "host": "wks-eng-12", "user": "m.reyes", "event.code": 4624, "logon.type": 3, "source.ip": "10.20.30.107"},
+  {"event.id": "cm-0311-0310", "@timestamp": "2026-03-11T08:02:11Z", "host": "dc01", "user": "t.aoki", "event.code": 4624, "logon.type": 10, "source.ip": "10.20.30.103", "note": "scheduled admin maintenance window"}
+]

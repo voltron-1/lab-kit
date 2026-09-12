@@ -1,0 +1,5 @@
+[
+  {"event.id": "cm-0311-0201", "@timestamp": "2026-03-11T15:41:07Z", "host": "wks-acct-07", "user": "m.reyes", "event.code": 1, "image": "powershell.exe", "parent.image": "winword.exe", "command.line": "powershell.exe -w hidden -enc SQBFAFgA"},
+  {"event.id": "cm-0311-0181", "@timestamp": "2026-03-11T15:43:19Z", "host": "wks-acct-07", "user": "m.reyes", "event.code": 13, "target.object": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\OneDriveUpd"},
+  {"event.id": "cm-0311-0179", "@timestamp": "2026-03-11T15:44:55Z", "host": "wks-acct-07", "user": "m.reyes", "event.code": 3, "image": "powershell.exe", "destination.ip": "203.0.113.66", "destination.port": 443}
+]
