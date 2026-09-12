@@ -3,11 +3,61 @@
 ## NEXT UP
 **All 4 tracks (rust, bash, ps, soc) are 100% built, tested, tagged, and complete (223 total labs)!**
 
-Known gap (not blocking, no build required): **ps p0–p3 (26 labs) have zero `tests/acceptance.sh` coverage** — built, merged, and tagged, but never given the fabricated-pass-+-negative-case section every other closed-out phase in every other track has. Same shape as the soc-p0 gap that existed before soc-p1's close-out. Whoever picks this up: it must land as its own section inserted *before* the `ps track P4` section in `tests/acceptance.sh` (that section's `--force` skip-ahead permanently marks p0–p3 unpassed, so p0–p3 coverage added after it could never show ✓ — drop the `--force` once this lands).
+Next unstarted item: **nothing queued** — the 2026-09-11 end-to-end test closed every
+defect it found (see `findings/20260911-e2e-kit-test.md`). Open follow-ups below.
 
-Known gap (not blocking, no build required): **`tools/genevidence/verify.py`'s baseline invariants were never actually built.** `docs/plans/soc-p01-plan.md`'s own close-out claimed `verify.py` enforces "timestamps in-window, IPs/hosts resolve to universe entities, answer-key event ids present in evidence, raw artifacts carry no defanged forms, prose carries no un-defanged IOCs" — in reality `verify.py` was (until the soc-p2 generator-extensions session) a one-line stub that only checked `universe.yaml` parses. That session added real `check_uid_consistency`/`check_pcap_zeek_agreement` invariants for soc-p2's own new requirements, but deliberately did not backfill the baseline p0/p1 invariants the earlier plan promised — that's a separate, pre-existing gap, not soc-p2's to absorb mid-build.
+[ ] `genevidence.py` has no `--help`: `python3 tools/genevidence/genevidence.py --help`
+    silently performs a full evidence write pass instead of printing usage. Found during
+    the 2026-09-11 end-to-end test; `verify.py`'s half of that gap is closed, this half
+    is not.
+
+[ ] The baseline invariants `docs/plans/soc-p01-plan.md` promised are still only
+    partly built. `verify.py` now really enforces universe-entity coherence, `cm-`
+    event-id format, zeek `uid` 5-tuple consistency and pcap/zeek agreement (2026-09-11).
+    Still unbuilt: timestamps-in-window, answer-key event ids present in evidence, and
+    the defang-direction checks (raw artifacts carry no defanged forms; prose carries no
+    un-defanged IOCs) — those were verified by hand for the new soc p6/p7 bundles, not
+    by the tool.
+
+Known gap (not blocking, no build required): **ps p0–p3 (26 labs) have zero `tests/acceptance.sh` coverage** — built, merged, and tagged, but never given the fabricated-pass-+-negative-case section every other closed-out phase in every other track has. Same shape as the soc-p0 gap that existed before soc-p1's close-out. Whoever picks this up: it must land as its own section inserted *before* the `ps track P4` section in `tests/acceptance.sh` (that section's `--force` skip-ahead permanently marks p0–p3 unpassed, so p0–p3 coverage added after it could never show ✓ — drop the `--force` once this lands). **In progress in a parallel session** — a +276-line P0–P3 section sits uncommitted in the working tree and was deliberately left unstaged by the 2026-09-11 test session.
 
 ## LAST SESSION
+2026-09-11 — **FULL END-TO-END TEST + REPAIR** of the whole kit (PR #402). No new labs;
+this was a "does it actually work for a learner" pass over all 224 lab directories, every
+CLI command, a real `git clone`, the error paths, and the Python tooling. Report:
+`findings/20260911-e2e-kit-test.md`.
+- **Baseline**: shellcheck + `lint-labs` clean, `tests/acceptance.sh` 1045/1045, and a new
+  per-lab sweep (start → 3 hints → check on a virgin workspace, 224/224) found zero
+  harness bugs, zero timeouts and zero labs that pass without work. Graders mutate nothing:
+  `git status` is clean after running all 224.
+- **Fixed — `bin/lab` broke when symlinked** (`ln -s .../bin/lab ~/.local/bin/lab` →
+  `lib/common.sh: No such file or directory`). `LAB_ROOT` now canonicalizes via `readlink -f`.
+- **Fixed — three SOC labs pointed at evidence that was never built**: L6.6 `files/case/`,
+  L7.4 `files/evidence/`, L7.6 `files/queue/` + `files/incident/` (all four spec'd in the
+  p6/p7 plans). Authored to each grader's key and the universe; L7.6's phish segment also
+  gained the `reported.eml` it had been summarizing without shipping.
+- **Fixed — the briefs were the answer key.** 27 soc briefs printed every graded value
+  (the P3, P4 and capstone gates included); the questions now live in each lab's
+  `answers.template.txt` and the briefs name the artifact and format only. L4.7/L4.8's
+  `queue.json` shipped `verdict`/`cite`/`escalate` per alert and were rebuilt as evidence.
+  All four `model-*.md` files passed their own graders verbatim (`cp model-report.md
+  report.md` → 11/11 on the P5 gate); each is now a worked example of a different case and
+  fails on submission. 8 ps briefs stopped handing over the graded file's contents.
+- **Fixed — `verify.py` never ran the invariants it documents.** `check_uid_consistency`
+  and `check_pcap_zeek_agreement` were unreachable from `main()`, and
+  `check_universe_entities` looked for a `hosts:` list that `universe.yaml` does not have.
+  All wired up and proved against five injected corruptions. PyYAML/tshark documented.
+- **New — the interactive session** (`lab` with no arguments): pick a track → resume from
+  the last checkpoint or start from the beginning → work the labs with `check`/`hint`/
+  `brief`/`skip`/`quit`, no lab ids typed. Start-over moves the pointer only; the frontier
+  still gates; no TTY still prints usage. `tests/session.sh` — 44 assertions on a pty.
+- **Fixed — two display defects the live run exposed**: 69 labs printed `objective  null`
+  (backfilled from the build plans) and 107 `recap.md` files carried their own bullet,
+  rendering as `· - text`.
+- **Process note**: `lab start soc L5.5 --force` was run against the real checkout while
+  testing, which marked 16 soc labs `⏭`. Repaired the same session; `.progress.json` is
+  back to its pre-session bytes. Do lab-CLI experiments in a copy, never the live tree.
+
 2026-08-09 — soc p7 BUILD + CLOSE-OUT (all 7 labs, L7.1–L7.7 complete). Built straight from `docs/plans/soc-p7-plan.md`. Terminal phase of the SOC Analyst Lab track!
 - **Scaffolded and verified all 7 labs**: L7.1 Automation bias (failure modes: commission, omission, complacency, deskilling, anchoring), L7.2 VERIFY reps I (grounding cross-checks, contradicted Run key), L7.3 Directing AI (evidence-first prompts vs weak prompts, task classification), L7.4 VERIFY reps II (grounding contract, hallucinated event ID `cm-9999-9999`, wrongpivot host, ungrounded exfiltration claim), L7.5 Override discipline (accept vs override, tuning feedback loop), L7.6 Capstone shift (segmented 3-sitting shift: 6-alert queue, phish + AI flaw override, incident), L7.7 Capstone gate (REPORT gate, cited event IDs, defanged IOCs, `field:value` tuning recommendation).
 - **Linting & Acceptance**: `./tools/lint-labs.sh` and `./tools/shellcheck-all.sh` clean. Added SOC P7 acceptance section to `tests/acceptance.sh` (7 labs, fabricated pass + negative cases, denominator updated to 52).
