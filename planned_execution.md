@@ -3,16 +3,18 @@
 ## NEXT UP
 **All 4 tracks (rust, bash, ps, soc) are 100% built, tested, tagged, and complete (223 total labs)!**
 
-Next unstarted item: **nothing queued.** The two gaps this file has tracked for
-weeks both closed: ps p0–p3 acceptance coverage and `verify.py`'s baseline
-invariants (2026-08-29, PR #402), and the 2026-09-11 end-to-end test closed
-every defect it found (PR #403, `findings/20260911-e2e-kit-test.md`).
+Next unstarted item: **nothing queued, and nothing open.** Every gap this file
+has tracked is closed: ps p0–p3 acceptance coverage and `verify.py`'s baseline
+invariants (2026-08-29, PR #402), every defect the 2026-09-11 end-to-end test
+found (PR #403, `findings/20260911-e2e-kit-test.md`), and that test's one
+follow-up (PR #406).
 
-[ ] `genevidence.py` has no `--help`: `python3 tools/genevidence/genevidence.py --help`
-    silently performs a full evidence write pass instead of printing usage. Found during
-    the 2026-09-11 end-to-end test, which closed `verify.py`'s half of the same gap.
-    Tracked as [#405](https://github.com/voltron-1/lab-kit/issues/405), milestone
-    "Framework Foundations", on the SOC Analyst Lab board.
+[x] `genevidence.py` had no `--help`: it performed a full evidence write pass instead
+    of printing usage. Closed 2026-09-12 by [PR #406](https://github.com/voltron-1/lab-kit/pull/406)
+    ([#405](https://github.com/voltron-1/lab-kit/issues/405)) — argparse with
+    `--help`/`--list`/`--dry-run` and a scenario filter, all three write paths gated behind
+    one DRY_RUN flag, plus 17 acceptance assertions that sha256-fingerprint the generated
+    trees before and after each invocation. Suite 1069 → 1086.
 
 ## LAST SESSION
 2026-09-11 — **FULL END-TO-END TEST + REPAIR** of the whole kit (PR #403). No new labs;
