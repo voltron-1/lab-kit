@@ -11,6 +11,8 @@ every defect it found (PR #403, `findings/20260911-e2e-kit-test.md`).
 [ ] `genevidence.py` has no `--help`: `python3 tools/genevidence/genevidence.py --help`
     silently performs a full evidence write pass instead of printing usage. Found during
     the 2026-09-11 end-to-end test, which closed `verify.py`'s half of the same gap.
+    Tracked as [#405](https://github.com/voltron-1/lab-kit/issues/405), milestone
+    "Framework Foundations", on the SOC Analyst Lab board.
 
 ## LAST SESSION
 2026-09-11 — **FULL END-TO-END TEST + REPAIR** of the whole kit (PR #403). No new labs;
