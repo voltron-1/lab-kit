@@ -3633,6 +3633,49 @@ ps_check_pass "L7.7" $'a\na\na\n'
 out="$("$LAB" status 2>&1)"
 assert_contains "status shows all 54 ps P0-P7 labs passed (54/54)" "$(grep '^ps ·' <<< "$out")" "(54/54)"
 
+# --- 7z. genevidence CLI: reading it must never write ---
+note "genevidence.py CLI (help/list/dry-run never write)"
+
+GEN="$COPY/tools/genevidence/genevidence.py"
+if ! command -v python3 > /dev/null 2>&1 || ! python3 -c 'import yaml' > /dev/null 2>&1; then
+  bad "python3 with PyYAML is required to exercise the evidence generator CLI"
+else
+  # fingerprint of every generated tree the tool can touch, before anything runs
+  gen_fingerprint() {
+    find "$COPY/tracks/soc" -path '*/files/*' -type f -exec sha256sum {} + 2> /dev/null \
+      | sort | sha256sum | cut -d' ' -f1
+  }
+  before="$(gen_fingerprint)"
+
+  out="$(python3 "$GEN" --help 2>&1)"; rc=$?
+  assert_eq "'genevidence.py --help' exits 0" "0" "$rc"
+  assert_contains "--help prints a usage line" "$out" "usage: genevidence.py"
+  assert_contains "--help warns that the tool writes" "$out" "WRITES"
+  assert_eq "--help wrote nothing" "$before" "$(gen_fingerprint)"
+
+  out="$(python3 "$GEN" --list 2>&1)"; rc=$?
+  assert_eq "'genevidence.py --list' exits 0" "0" "$rc"
+  assert_contains "--list names a known scenario" "$out" "s2-dns-hunt"
+  assert_not_contains "--list flags no missing generators" "$out" "(no generator!)"
+  assert_eq "--list wrote nothing" "$before" "$(gen_fingerprint)"
+
+  out="$(python3 "$GEN" --dry-run 2>&1)"; rc=$?
+  assert_eq "'genevidence.py --dry-run' exits 0" "0" "$rc"
+  assert_contains "--dry-run says nothing was written" "$out" "Nothing was written"
+  assert_contains "--dry-run reports the committed tree as already matching" "$out" "0 of them differing"
+  assert_eq "--dry-run wrote nothing" "$before" "$(gen_fingerprint)"
+
+  out="$(python3 "$GEN" s9-does-not-exist 2>&1)"; rc=$?
+  assert_eq "an unknown scenario id exits 2" "2" "$rc"
+  assert_contains "an unknown scenario id names it" "$out" "s9-does-not-exist"
+  assert_eq "a rejected run wrote nothing" "$before" "$(gen_fingerprint)"
+
+  # a real run of one scenario must be idempotent against the committed tree
+  out="$(python3 "$GEN" s2-dns-hunt 2>&1)"; rc=$?
+  assert_eq "regenerating one scenario exits 0" "0" "$rc"
+  assert_eq "regenerating one scenario changes nothing already committed" "$before" "$(gen_fingerprint)"
+fi
+
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
 if [[ -f "$COPY/README.md" ]]; then

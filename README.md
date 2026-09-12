@@ -129,7 +129,10 @@ All check scripts, CLI internals, and lab metadata undergo strict quality contro
   emitted events, raw artifacts carrying no defanged forms while answer keys do,
   a zeek `uid` describing one connection everywhere it appears in a bundle, and
   each pcap agreeing with the zeek logs shipped beside it. `./tools/lint-labs.sh`
-  calls it too, so a broken evidence bundle fails the normal lint gate.
+  calls it too, so a broken evidence bundle fails the normal lint gate. To
+  regenerate evidence rather than check it, `tools/genevidence/genevidence.py`
+  takes `--list`, `--dry-run`, and one or more scenario ids; with no arguments it
+  regenerates everything.
 
 ---
 

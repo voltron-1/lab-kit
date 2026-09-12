@@ -7,6 +7,7 @@ Generates evidence files and syncs base64 key blocks inside lab check.sh files.
 import os
 import sys
 import json
+import argparse
 import base64
 import struct
 import hashlib
@@ -20,12 +21,38 @@ import verify  # noqa: E402 - sibling module, path set immediately above
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
+# Set by --dry-run. Every write in this module goes through write_file,
+# write_binary or sync_key_block, so gating those three is enough to make the
+# whole generator read-only.
+DRY_RUN = False
+_PLANNED = []
+
+def _plan(filepath: Path, new: bytes) -> bool:
+    """Record what a write WOULD do under --dry-run. Returns True if the caller
+    should skip the real write."""
+    if not DRY_RUN:
+        return False
+    try:
+        rel = filepath.relative_to(REPO_ROOT)
+    except ValueError:
+        rel = filepath
+    if not filepath.exists():
+        verdict = "create"
+    else:
+        verdict = "unchanged" if filepath.read_bytes() == new else "CHANGE"
+    _PLANNED.append((verdict, str(rel)))
+    return True
+
 def write_file(filepath: Path, content: str):
+    if _plan(filepath, content.encode("utf-8")):
+        return
     filepath.parent.mkdir(parents=True, exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(content)
 
 def write_binary(filepath: Path, content: bytes):
+    if _plan(filepath, content):
+        return
     filepath.parent.mkdir(parents=True, exist_ok=True)
     with open(filepath, "wb") as f:
         f.write(content)
@@ -418,6 +445,8 @@ def sync_key_block(check_sh_path: Path, scenario_id: str, keys: dict):
         before = content.split(start_marker)[0]
         after = content.split(end_marker)[1]
         updated = before + new_block + after
+        if _plan(check_sh_path, updated.encode("utf-8")):
+            return
         with open(check_sh_path, "w", encoding="utf-8") as f:
             f.write(updated)
         print(f"Synced key block in {check_sh_path.relative_to(REPO_ROOT)}")
@@ -1170,49 +1199,109 @@ q8=
     if "answer_keys" in scen and "L2.7" in scen["answer_keys"]:
         sync_key_block(l27_dir / "check.sh", scen["scenario"], scen["answer_keys"]["L2.7"])
 
-def main():
+# scenario id -> generator. Explicit on purpose: a scenario yaml with no entry
+# here is an error, not a silent skip (the old if/elif chain ignored it).
+GENERATORS = {
+    "s0-fixtures": lambda s: generate_s0_fixtures(s),
+    "s0-tier-cases": lambda s: generate_s0_tier_cases(s),
+    "s1-telemetry": lambda s: generate_s1_telemetry(s),
+    "s1-log-anatomy": lambda s: generate_s1_log_anatomy(s),
+    "s1-alert-anatomy": lambda s: generate_s1_alert_anatomy(s),
+    "s1-sigma-read": lambda s: generate_s1_sigma_read(s),
+    "s1-attack-map": lambda s: generate_s1_attack_map(s),
+    "s1-killchain": lambda s: generate_s1_killchain(s),
+    "s1-dispositions": lambda s: generate_s1_dispositions(s),
+    "s1-gate-five-alerts": lambda s: generate_s1_gate_five_alerts(s),
+    "s2-conn-reading": lambda s: generate_s2_conn_reading(s),
+    "s2-dns-hunt": lambda s: generate_s2_dns_hunt(s),
+    "s2-http-tls": lambda s: generate_s2_http_tls(s),
+    "s2-tshark-pcap": lambda s: generate_s2_tshark_pcap(s),
+    "s2-zeek-verdict": lambda s: generate_s2_zeek_verdict(s),
+    "s2-beaconing": lambda s: generate_s2_beaconing(s),
+    "s2-gate-session": lambda s: generate_s2_gate_session(s),
+}
+
+def _scenario_files(scenarios_dir: Path) -> dict:
+    """{scenario id: yaml path} for every scenario on disk."""
+    found = {}
+    for scen_file in sorted(scenarios_dir.glob("*.yaml")):
+        with open(scen_file, "r", encoding="utf-8") as f:
+            scen = yaml.safe_load(f) or {}
+        sid = scen.get("scenario")
+        if sid:
+            found[sid] = scen_file
+    return found
+
+def main(argv=None):
+    global DRY_RUN
+
+    parser = argparse.ArgumentParser(
+        prog="genevidence.py",
+        description=(
+            "Regenerate SOC Analyst Lab evidence from tools/genevidence/scenarios/*.yaml "
+            "and resync the base64 KEY blocks inside each lab's check.sh."
+        ),
+        epilog=(
+            "This tool WRITES into tracks/soc/**/files/ and check.sh. Run it with "
+            "--dry-run first to see what it would touch, and use "
+            "tools/genevidence/verify.py afterwards to check the result."
+        ),
+    )
+    parser.add_argument(
+        "scenario", nargs="*",
+        help="scenario id(s) to regenerate, e.g. s2-dns-hunt. Default: all of them.",
+    )
+    parser.add_argument(
+        "-l", "--list", action="store_true",
+        help="list the scenario ids available and exit, writing nothing",
+    )
+    parser.add_argument(
+        "-n", "--dry-run", action="store_true",
+        help="report what each scenario would write and exit, writing nothing",
+    )
+    args = parser.parse_args(argv)
+
     genevidence_dir = Path(__file__).resolve().parent
     scenarios_dir = genevidence_dir / "scenarios"
-    
-    for scen_file in scenarios_dir.glob("*.yaml"):
-        with open(scen_file, "r", encoding="utf-8") as f:
+    available = _scenario_files(scenarios_dir)
+
+    if args.list:
+        print(f"{len(available)} scenario(s) in {scenarios_dir.relative_to(REPO_ROOT)}:")
+        for sid in sorted(available):
+            mark = " " if sid in GENERATORS else "  (no generator!)"
+            print(f"  {sid}{mark}")
+        return 0
+
+    unknown = [s for s in args.scenario if s not in available]
+    if unknown:
+        parser.error(
+            "unknown scenario(s): " + ", ".join(unknown)
+            + "\nrun with --list to see what is available"
+        )
+
+    selected = args.scenario or sorted(available)
+    DRY_RUN = args.dry_run
+
+    missing = [s for s in selected if s not in GENERATORS]
+    if missing:
+        print("ERROR: no generator registered for: " + ", ".join(missing), file=sys.stderr)
+        return 1
+
+    for sid in selected:
+        with open(available[sid], "r", encoding="utf-8") as f:
             scen = yaml.safe_load(f)
-        scen_id = scen.get("scenario")
-        print(f"Processing scenario {scen_id}...")
-        if scen_id == "s0-fixtures":
-            generate_s0_fixtures(scen)
-        elif scen_id == "s0-tier-cases":
-            generate_s0_tier_cases(scen)
-        elif scen_id == "s1-telemetry":
-            generate_s1_telemetry(scen)
-        elif scen_id == "s1-log-anatomy":
-            generate_s1_log_anatomy(scen)
-        elif scen_id == "s1-alert-anatomy":
-            generate_s1_alert_anatomy(scen)
-        elif scen_id == "s1-sigma-read":
-            generate_s1_sigma_read(scen)
-        elif scen_id == "s1-attack-map":
-            generate_s1_attack_map(scen)
-        elif scen_id == "s1-killchain":
-            generate_s1_killchain(scen)
-        elif scen_id == "s1-dispositions":
-            generate_s1_dispositions(scen)
-        elif scen_id == "s1-gate-five-alerts":
-            generate_s1_gate_five_alerts(scen)
-        elif scen_id == "s2-conn-reading":
-            generate_s2_conn_reading(scen)
-        elif scen_id == "s2-dns-hunt":
-            generate_s2_dns_hunt(scen)
-        elif scen_id == "s2-http-tls":
-            generate_s2_http_tls(scen)
-        elif scen_id == "s2-tshark-pcap":
-            generate_s2_tshark_pcap(scen)
-        elif scen_id == "s2-zeek-verdict":
-            generate_s2_zeek_verdict(scen)
-        elif scen_id == "s2-beaconing":
-            generate_s2_beaconing(scen)
-        elif scen_id == "s2-gate-session":
-            generate_s2_gate_session(scen)
+        print(f"Processing scenario {sid}...")
+        GENERATORS[sid](scen)
+
+    if DRY_RUN:
+        changed = [row for row in _PLANNED if row[0] != "unchanged"]
+        print(f"\n--dry-run: {len(_PLANNED)} file(s) would be written, "
+              f"{len(changed)} of them differing from what is on disk. Nothing was written.")
+        for verdict, rel in changed:
+            print(f"  {verdict:9} {rel}")
+        if not changed:
+            print("  (every generated file already matches the tree)")
+    return 0
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

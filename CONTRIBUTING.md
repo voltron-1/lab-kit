@@ -30,8 +30,16 @@ bash tests/session.sh
 ```bash
 python3 tools/genevidence/verify.py
 ```
-It needs `python3` with **PyYAML** (`sudo apt-get install -y python3-yaml`) and
-**tshark** (`sudo apt-get install -y tshark`) for the pcap/zeek cross-check.
+To regenerate evidence rather than just check it, use the generator — and look
+before you leap, because it writes into `tracks/soc/**/files/` and into each
+lab's `check.sh` KEY block:
+```bash
+python3 tools/genevidence/genevidence.py --list        # what scenarios exist
+python3 tools/genevidence/genevidence.py --dry-run     # what a full run would touch
+python3 tools/genevidence/genevidence.py s2-dns-hunt   # regenerate one scenario
+```
+Both tools need `python3` with **PyYAML** (`sudo apt-get install -y python3-yaml`)
+and **tshark** (`sudo apt-get install -y tshark`) for the pcap/zeek cross-check.
 Neither is required to run the labs themselves — only to author or regenerate
 evidence. The verifier enforces: universe entities in `universe.yaml` (every host
 has a unique ip, every assigned user exists), the `cm-` event-id format across
