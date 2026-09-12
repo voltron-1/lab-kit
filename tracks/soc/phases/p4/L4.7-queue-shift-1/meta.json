@@ -1,6 +1,7 @@
 {
   "id": "L4.7",
   "title": "Queue shift I \u2014 twelve mixed alerts, full dispositions with evidence, graded",
+  "objective": "Work a 12-alert queue: verdict each and cite deciding evidence for the ones that need it",
   "type": "TRIAGE",
   "gate": false,
   "est_minutes": 20

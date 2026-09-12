@@ -1,6 +1,7 @@
 {
   "id": "L4.7",
-  "title": "What Rust does NOT stop — path traversal, injection, logic bugs",
+  "title": "What Rust does NOT stop \u2014 path traversal, injection, logic bugs",
+  "objective": "Audit memory-safe Rust that is still exploitable \u2014 spot path traversal, the command-injection pattern, and a logic bug the borrow checker will never catch. The phase's central lesson.",
   "type": "AUDIT",
   "gate": false,
   "est_minutes": 20

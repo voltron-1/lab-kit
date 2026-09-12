@@ -1,6 +1,7 @@
 {
   "id": "L5.7",
   "title": "Timeouts, cancellation, resource exhaustion",
+  "objective": "Audit an async service for the DoS patterns memory safety never prevents \u2014 an unbounded await and unbounded task spawning \u2014 and name the controls that fix them (CWE-400).",
   "type": "AUDIT",
   "gate": false,
   "est_minutes": 20

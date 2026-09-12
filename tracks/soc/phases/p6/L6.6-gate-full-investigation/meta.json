@@ -1,6 +1,7 @@
 {
   "id": "L6.6",
   "title": "Phase gate: full investigation \u2014 from one alert to a graded escalation report",
+  "objective": "Investigate one alert end to end \u2014 pivot, timeline, scope \u2014 and write the graded escalation report",
   "type": "REPORT",
   "gate": true,
   "est_minutes": 20

@@ -1,6 +1,7 @@
 {
   "id": "L4.8",
   "title": "Phase gate: Queue shift II \u2014 new queue, tighter grading, includes one alert that deserves escalation",
+  "objective": "Work a fresh queue with verdicts and evidence, and correctly escalate the one confirmed compromise",
   "type": "TRIAGE",
   "gate": true,
   "est_minutes": 20

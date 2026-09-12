@@ -1,6 +1,7 @@
 {
   "id": "L5.4",
   "title": "Reading a sandbox report \u2014 verdicting from a detonation summary without touching the sample",
+  "objective": "Verdict a sample from a mock sandbox detonation report \u2014 process tree, network IOCs, MITRE, score \u2014 without executing it",
   "type": "DECODE",
   "gate": false,
   "est_minutes": 15

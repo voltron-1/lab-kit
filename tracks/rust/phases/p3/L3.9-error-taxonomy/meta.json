@@ -1,6 +1,7 @@
 {
   "id": "L3.9",
-  "title": "Error taxonomy in real crates — thiserror/anyhow at reading level",
+  "title": "Error taxonomy in real crates \u2014 thiserror/anyhow at reading level",
+  "objective": "Read the two-layer error idiom of real crates cold: thiserror's typed library enums and anyhow's application-level context chains.",
   "type": "DECODE",
   "gate": false,
   "est_minutes": 15

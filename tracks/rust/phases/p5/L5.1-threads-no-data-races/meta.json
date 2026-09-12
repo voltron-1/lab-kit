@@ -1,6 +1,7 @@
 {
   "id": "L5.1",
   "title": "Threads \u2014 why data races don't compile",
+  "objective": "Predict the deterministic result of joined worker threads, and read the compile error that stops a shared-borrow data race before it can run (CWE-362).",
   "type": "PREDICT",
   "gate": false,
   "est_minutes": 15

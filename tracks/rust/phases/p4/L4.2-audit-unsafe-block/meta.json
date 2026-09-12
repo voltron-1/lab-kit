@@ -1,6 +1,7 @@
 {
   "id": "L4.2",
-  "title": "Auditing an unsafe block — the checklist",
+  "title": "Auditing an unsafe block \u2014 the checklist",
+  "objective": "Audit a flawed unsafe block against the four-point checklist, find the violated invariant, and name the memory-safety class it would cause \u2014 by reading alone.",
   "type": "AUDIT",
   "gate": false,
   "est_minutes": 20

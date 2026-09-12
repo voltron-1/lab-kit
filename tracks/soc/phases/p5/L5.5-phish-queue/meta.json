@@ -1,6 +1,7 @@
 {
   "id": "L5.5",
   "title": "The phish queue \u2014 six reported emails, verdict each (including the legitimate one)",
+  "objective": "Verdict six reported emails as phish, legit, or spam \u2014 including recognizing the legitimate one",
   "type": "TRIAGE",
   "gate": false,
   "est_minutes": 20

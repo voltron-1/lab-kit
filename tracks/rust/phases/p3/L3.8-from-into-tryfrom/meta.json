@@ -1,6 +1,7 @@
 {
   "id": "L3.8",
-  "title": "From / Into / TryFrom — conversion literacy",
+  "title": "From / Into / TryFrom \u2014 conversion literacy",
+  "objective": "Read the three conversion spellings \u2014 infallible From/Into, fallible TryFrom, and silently-truncating `as` \u2014 and compute what each does to 70000.",
   "type": "DECODE",
   "gate": false,
   "est_minutes": 15

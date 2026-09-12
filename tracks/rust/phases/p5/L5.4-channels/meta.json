@@ -1,6 +1,7 @@
 {
   "id": "L5.4",
   "title": "Channels",
+  "objective": "Predict the deterministic total and count a receiver collects from producer threads, and explain when the receiving loop ends (all senders dropped).",
   "type": "PREDICT",
   "gate": false,
   "est_minutes": 15

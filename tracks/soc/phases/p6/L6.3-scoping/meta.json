@@ -1,6 +1,7 @@
 {
   "id": "L6.3",
   "title": "Scoping \u2014 one host or ten? The queries that answer it",
+  "objective": "Answer scope with queries \u2014 count distinct hosts per indicator, and distinguish an indicator's scope from the incident's scope",
   "type": "HUNT",
   "gate": false,
   "est_minutes": 20

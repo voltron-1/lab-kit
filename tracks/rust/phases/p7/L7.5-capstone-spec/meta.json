@@ -1,6 +1,7 @@
 {
   "id": "L7.5",
   "title": "Capstone spec \u2014 an IOC/log parser emitting ECS-formatted JSON",
+  "objective": "Write the full spec for the capstone: an IOC/log parser that turns raw log lines into ECS-formatted JSON, with the failure and safety constraints named.",
   "type": "DIRECT",
   "gate": false,
   "est_minutes": 20

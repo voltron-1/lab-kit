@@ -1,6 +1,7 @@
 {
   "id": "L5.3",
   "title": "Attachment triage \u2014 true file types vs extensions, hashes, macro risk, safe-handling rules",
+  "objective": "Determine an attachment's true type by magic bytes, hash it, judge macro risk, and apply safe-handling \u2014 never open the sample",
   "type": "DECODE",
   "gate": false,
   "est_minutes": 15

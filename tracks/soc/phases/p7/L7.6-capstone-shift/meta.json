@@ -1,6 +1,7 @@
 {
   "id": "L7.6",
   "title": "Capstone shift \u2014 a full segmented shift: alert queue + phish + one real incident, AI assist available, everything graded",
+  "objective": "Work a full segmented shift \u2014 queue, phish, incident \u2014 with an AI assistant you verify rather than obey, everything graded",
   "type": "TRIAGE",
   "gate": false,
   "est_minutes": 20

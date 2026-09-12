@@ -1,6 +1,7 @@
 {
   "id": "L7.7",
   "title": "Capstone gate: final audit and ship",
+  "objective": "Ship the course: audit the corrected ECS parser against your full checklist, confirm every item passes, run it to produce real ECS JSON, and record the clean bill of health.",
   "type": "AUDIT",
   "gate": true,
   "est_minutes": 25

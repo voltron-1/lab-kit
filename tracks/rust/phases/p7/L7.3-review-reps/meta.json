@@ -1,6 +1,7 @@
 {
   "id": "L7.3",
   "title": "Review reps \u2014 3 AI-generated snippets, find every flaw",
+  "objective": "Apply the checklist for real: audit three AI-generated snippets cold and name every planted flaw by category and CWE.",
   "type": "AUDIT",
   "gate": false,
   "est_minutes": 20

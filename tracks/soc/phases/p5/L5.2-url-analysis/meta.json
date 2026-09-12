@@ -1,6 +1,7 @@
 {
   "id": "L5.2",
   "title": "URL analysis \u2014 redirect chains, lookalike domains, punycode, defang discipline",
+  "objective": "Follow a redirect chain to its true destination, spot lookalike and punycode domains, and defang every IOC",
   "type": "DECODE",
   "gate": false,
   "est_minutes": 15

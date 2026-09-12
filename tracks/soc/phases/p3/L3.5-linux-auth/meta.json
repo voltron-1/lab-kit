@@ -1,6 +1,7 @@
 {
   "id": "L3.5",
   "title": "Linux auth and audit logs \u2014 SSH brute force, sudo abuse, new users",
+  "objective": "Find an SSH brute-force-to-compromise chain in auth.log \u2014 failures, success, new UID-0 user, malicious sudo \u2014 and separate it from benign logins",
   "type": "HUNT",
   "gate": false,
   "est_minutes": 20

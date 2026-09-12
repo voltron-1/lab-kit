@@ -1,3 +1,3 @@
-- read chains left to right: source → lazy adapters (filter/map) → one terminal op
-- .iter() lends &T and filter adds another & — count the ampersands, then the stars
-- nothing computes until collect/sum/count pulls; laziness is why chains compose free
+read chains left to right: source → lazy adapters (filter/map) → one terminal op
+.iter() lends &T and filter adds another & — count the ampersands, then the stars
+nothing computes until collect/sum/count pulls; laziness is why chains compose free

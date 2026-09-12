@@ -1,6 +1,7 @@
 {
   "id": "L3.10",
   "title": "Phase gate: read a real crate's public API and answer questions",
+  "objective": "Prove Phase 3: read the regex crate's real public API cold and answer 10 questions from the signatures alone \u2014 Result constructors, Option lookups, lifetimes, and panic paths.",
   "type": "DECODE",
   "gate": true,
   "est_minutes": 20

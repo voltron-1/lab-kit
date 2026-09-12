@@ -1,6 +1,7 @@
 {
   "id": "L7.1",
   "title": "Automation bias \u2014 the documented failure modes of analysts supervising machines",
+  "objective": "Name the documented failure modes of humans supervising automation \u2014 commission, omission, complacency, de-skilling, anchoring",
   "type": "DECODE",
   "gate": false,
   "est_minutes": 15

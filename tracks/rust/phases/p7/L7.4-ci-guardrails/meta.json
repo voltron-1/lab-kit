@@ -1,6 +1,7 @@
 {
   "id": "L7.4",
   "title": "CI guardrails \u2014 clippy pedantic + audit + deny + tests as spec",
+  "objective": "Stand up the four automated gates that catch AI-Rust regressions \u2014 clippy pedantic, cargo audit, cargo deny, cargo test \u2014 and understand what each does and does NOT catch.",
   "type": "GUIDED",
   "gate": false,
   "est_minutes": 15
