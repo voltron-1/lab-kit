@@ -20,6 +20,9 @@ Terminal training tracks — **rust, bash, soc, ps** — driven by one shared `l
 
 Optional: `export PATH="$PWD/bin:$PATH"` to drop the `./bin/` prefix from here on.
 
+New here? [`docs/LEARNERS_GUIDE.md`](docs/LEARNERS_GUIDE.md) walks through
+sessions, hints, quizzes, and progress in more depth than this README does.
+
 ---
 
 ## Starting a session
