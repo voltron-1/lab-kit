@@ -3,7 +3,10 @@
 # cmd_* orchestrators. All domain logic lives in lib/*.sh.
 set -euo pipefail
 
-LAB_ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+# canonicalize first: ${BASH_SOURCE[0]} is the symlink's own path when `lab` is
+# installed the usual way (ln -s .../bin/lab ~/.local/bin/lab), and resolving
+# ".." from there points LAB_ROOT at the symlink's parent, not the kit.
+LAB_ROOT=$(cd -- "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")/.." && pwd)
 readonly LAB_ROOT
 
 # shellcheck source=lib/common.sh
