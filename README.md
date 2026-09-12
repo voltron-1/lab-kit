@@ -22,6 +22,36 @@ Optional: `export PATH="$PWD/bin:$PATH"` to drop the `./bin/` prefix from here o
 
 ---
 
+## Starting a session
+
+Run `lab` with no arguments and it walks you in:
+
+    $ lab
+    Select a track
+      1) demo   Demo Lab                 (0/1)
+      2) rust   Rust Literacy Lab        (0/63)
+      ...
+    track (number or name, q to quit) > 4
+
+    soc · SOC Analyst Lab   4/52
+      last checkpoint  L3.3 — Anomalous process ancestry   (2026-08-08T22:46:53Z)
+
+      1) Resume from last saved checkpoint   → L3.4 Persistence spots
+      2) Start from the beginning            → L0.1 Analyst toolbelt
+         (moves where you start; your ✓ passes and ⏭ marks are kept)
+
+From there the session opens the lab and you drive it with `check`, `hint`,
+`brief`, `skip` and `quit` — it picks the next lab for you, so you never type a
+lab id. **Start from the beginning moves the pointer only**: nothing in
+`.progress.json` is erased, and the linear unlock rule still applies (the
+session never hands you a lab past the frontier — `skip` is the only way past
+one, and it marks `⏭` permanently, exactly like `lab start --force`).
+
+`lab session` does the same thing explicitly. With no terminal on stdin (a
+script, a pipe, CI) bare `lab` prints usage instead, as it always did.
+
+---
+
 ## The Five Commands
 
 | Command | Description |
@@ -77,6 +107,21 @@ All check scripts, CLI internals, and lab metadata undergo strict quality contro
   ```bash
   bash tests/acceptance.sh
   ```
+- **Interactive Session Suite** (drives the menus on a pty via `script`):
+  ```bash
+  bash tests/session.sh
+  ```
+- **SOC Evidence Verification** (only needed when authoring or regenerating SOC
+  evidence — requires `python3` with `PyYAML`, plus `tshark` for the pcap/zeek
+  cross-check):
+  ```bash
+  sudo apt-get install -y python3-yaml tshark
+  python3 tools/genevidence/verify.py
+  ```
+  It validates the universe entities in `tools/genevidence/universe.yaml`, the
+  `cm-` event-id format across every SOC lab, that a zeek `uid` describes the
+  same connection everywhere it appears in a bundle, and that each pcap agrees
+  with the zeek logs shipped beside it.
 
 ---
 
