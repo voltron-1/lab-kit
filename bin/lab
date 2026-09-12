@@ -21,6 +21,8 @@ source "$LAB_ROOT/lib/workspace.sh"
 source "$LAB_ROOT/lib/quiz.sh"
 # shellcheck source=lib/hints.sh
 source "$LAB_ROOT/lib/hints.sh"
+# shellcheck source=lib/session.sh
+source "$LAB_ROOT/lib/session.sh"
 # shellcheck source=lib/render.sh
 source "$LAB_ROOT/lib/render.sh"
 
@@ -34,7 +36,10 @@ trap 'state_cleanup_tmp; exit 143' TERM
 
 usage() {
   cat <<'EOF'
-usage: lab status
+usage: lab                       interactive session: pick a track, resume or
+                                 start over, then work the labs
+       lab session               the same thing, named explicitly
+       lab status
        lab start [track] <id> [--force]
        lab check [track] <id>
        lab resume
@@ -189,7 +194,9 @@ cmd_hint() {
 main() {
   require_deps
   state_gc_tmp
-  local cmd="${1:-help}"
+  # Bare `lab` opens the interactive session; with no terminal on stdin
+  # session_run falls back to printing usage, so scripts see the old behaviour.
+  local cmd="${1:-session}"
   if [[ "$#" -ge 1 ]]; then
     shift
   fi
@@ -198,6 +205,7 @@ main() {
     start)  cmd_start "$@" ;;
     check)  cmd_check "$@" ;;
     resume) cmd_resume "$@" ;;
+    session) session_run "$@" ;;
     hint)   cmd_hint "$@" ;;
     help|-h|--help) usage ;;
     *) die "unknown command '$cmd' — run: lab help" ;;
