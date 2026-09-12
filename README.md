@@ -54,6 +54,9 @@ script, a pipe, CI) bare `lab` prints usage instead, as it always did.
 
 ## The Five Commands
 
+The session above drives these five; they remain the direct interface, and
+everything the session does goes through them.
+
 | Command | Description |
 |---|---|
 | `lab status` | Displays progress across all tracks and phase maps (`✓` passed · `○` not done · `⏭` forced). |
@@ -77,11 +80,13 @@ script, a pipe, CI) bare `lab` prints usage instead, as it always did.
 ## Repository Layout
 
     bin/                  CLI entrypoint
-    lib/                   CLI internals (state, catalog, workspace, quiz, hints, render)
+    lib/                   CLI internals (state, catalog, workspace, quiz, hints, render, session)
     harness/checklib.sh     helpers every lab's check.sh sources
     tracks/<track>/phases/  lab content across phases (p0-p7)
     workspace/               user working directory (gitignored, rebuilt by `lab start`)
     docs/curriculum/          curriculum maps and specifications
+    tests/                     acceptance.sh (every lab) and session.sh (the interactive menus)
+    tools/genevidence/          SOC evidence generator and its verify.py invariants
 
 ---
 
@@ -118,10 +123,13 @@ All check scripts, CLI internals, and lab metadata undergo strict quality contro
   sudo apt-get install -y python3-yaml tshark
   python3 tools/genevidence/verify.py
   ```
-  It validates the universe entities in `tools/genevidence/universe.yaml`, the
-  `cm-` event-id format across every SOC lab, that a zeek `uid` describes the
-  same connection everywhere it appears in a bundle, and that each pcap agrees
-  with the zeek logs shipped beside it.
+  It runs eight invariants over every SOC lab already on disk: timestamps inside
+  each scenario's window, IPs and hosts resolving to universe entities,
+  answer-key event ids existing in the evidence, alert citations contained by the
+  emitted events, raw artifacts carrying no defanged forms while answer keys do,
+  a zeek `uid` describing one connection everywhere it appears in a bundle, and
+  each pcap agreeing with the zeek logs shipped beside it. `./tools/lint-labs.sh`
+  calls it too, so a broken evidence bundle fails the normal lint gate.
 
 ---
 
