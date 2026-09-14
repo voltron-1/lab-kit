@@ -7,7 +7,7 @@ Next unstarted item: **nothing queued, and nothing open.** Every gap this file
 has tracked is closed: ps p0–p3 acceptance coverage and `verify.py`'s baseline
 invariants (2026-08-29, PR #402), every defect the 2026-09-11 end-to-end test
 found (PR #403, `findings/20260911-e2e-kit-test.md`), and that test's one
-follow-up (PR #406).
+follow-up (PR #406). Docs are current with the code as of 2026-09-14.
 
 [x] `genevidence.py` had no `--help`: it performed a full evidence write pass instead
     of printing usage. Closed 2026-09-12 by [PR #406](https://github.com/voltron-1/lab-kit/pull/406)
@@ -17,6 +17,33 @@ follow-up (PR #406).
     trees before and after each invocation. Suite 1069 → 1086.
 
 ## LAST SESSION
+2026-09-14 — **DOCS REFRESH: README + wiki reconciled against the code.** No code
+changes. An audit of the README and all six wiki pages against the repo, after
+PRs #403/#406/#407 landed faster than the docs tracked them.
+- **README** — the Quickstart now documents `ln -s .../bin/lab ~/.local/bin/lab`
+  as a supported install (PR #403's `readlink -f` fix made it work, but the e2e
+  report noted the docs only ever showed `export PATH`, which dodged the bug);
+  `genevidence.py`'s flag list gained `--help` and the warning that it writes
+  into `tracks/soc/**/files/` and each `check.sh` KEY block.
+- **Wiki `Home.md`** — added the genevidence regeneration block (`--help`,
+  `--list`, `--dry-run`, scenario ids) the wiki missed because its last edit
+  landed three hours before PR #406; added the 8th `verify.py` invariant (alert
+  citations contained by the emitted events); linked PR #407's
+  `docs/LEARNERS_GUIDE.md`; corrected `docs/plans/` (28 files, p0+p1 share one
+  per track) and `lib/` (was missing `common.sh`).
+- **Fixed a wrong cross-reference in two pages** — `Cross-Track-Connections.md`
+  and `PowerShell-Literacy-Lab.md` both pointed PowerShell's deobfuscation phase
+  at "SOC L4.5 — reading obfuscated shell". SOC L4.5 is "Severity and priority";
+  the obfuscated-shell lab is **Bash** L4.5. Right lab number, wrong track — and
+  the row's own "Windows side first, then the Unix side" wording confirms Bash
+  was always meant.
+- **Verified clean**: all 223 lab ids and titles across the four track pages,
+  every phase count, tags `<track>-p0`…`p7`, the five-command and in-session
+  command tables against real `lab` usage, `_Sidebar.md` links, and the PS page's
+  ATT&CK ids. The wiki has no CI, so nothing but a manual audit catches a stale
+  lab id on those pages — which is how the L4.5 error survived in two of them.
+
+## 2026-09-11 SESSION
 2026-09-11 — **FULL END-TO-END TEST + REPAIR** of the whole kit (PR #403). No new labs;
 this was a "does it actually work for a learner" pass over all 224 lab directories, every
 CLI command, a real `git clone`, the error paths, and the Python tooling. Report:

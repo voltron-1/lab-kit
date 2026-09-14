@@ -18,7 +18,13 @@ Terminal training tracks — **rust, bash, soc, ps** — driven by one shared `l
     ./bin/lab start demo L0.0             # 4
     ./bin/lab check demo L0.0             # 5
 
-Optional: `export PATH="$PWD/bin:$PATH"` to drop the `./bin/` prefix from here on.
+Optional — put `lab` on your `PATH`, either way works:
+
+    export PATH="$PWD/bin:$PATH"             # this shell only
+    ln -s "$PWD/bin/lab" ~/.local/bin/lab    # permanent
+
+The CLI canonicalizes its own path, so installing it as a symlink finds `lib/`
+and the tracks correctly.
 
 New here? [`docs/LEARNERS_GUIDE.md`](docs/LEARNERS_GUIDE.md) walks through
 sessions, hints, quizzes, and progress in more depth than this README does.
@@ -134,8 +140,9 @@ All check scripts, CLI internals, and lab metadata undergo strict quality contro
   each pcap agreeing with the zeek logs shipped beside it. `./tools/lint-labs.sh`
   calls it too, so a broken evidence bundle fails the normal lint gate. To
   regenerate evidence rather than check it, `tools/genevidence/genevidence.py`
-  takes `--list`, `--dry-run`, and one or more scenario ids; with no arguments it
-  regenerates everything.
+  takes `--help`, `--list`, `--dry-run`, and one or more scenario ids; with no
+  arguments it regenerates everything. It writes into `tracks/soc/**/files/` and
+  into each lab's `check.sh` KEY block, so run `--dry-run` first.
 
 ---
 
