@@ -69,6 +69,30 @@ From there you're in the lab loop: read the brief, do the work, run `check`,
 reach for `hint` if you're stuck, and the session picks the next lab for
 you — you never type a lab id yourself in session mode.
 
+**Everything happens in this one terminal — you never need a second window.**
+`files` (or `ls`) lists what's in `workspace/<track>/<id>/`; `show <file>`
+prints one of those files right there; `edit <file>` opens it in `$EDITOR`
+(or `vi` if you haven't set one) and hands control back to the session the
+moment you save and quit. All three are confined to the current lab's
+workspace, so a typo'd path is refused rather than reaching outside it.
+
+    > files
+
+    workspace/soc/L3.4/
+      answers.template.txt
+      persistence-legend.md
+      root-crontab.txt
+      web01-cron.log
+      windows-persistence.json
+
+    > show persistence-legend.md
+    # Persistence Mechanisms
+    - Run Key: Sysmon Event 13 ... -> runkey
+    ...
+
+    > edit answers.txt
+    [your editor opens on that file; back at the prompt when you exit it]
+
 `lab session` runs the exact same flow if you want to type it explicitly.
 Bare `lab` in a script or CI (no terminal on stdin) just prints usage — it
 won't hang waiting for input.

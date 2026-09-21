@@ -102,7 +102,7 @@ note "step 3 — resume"
 out="$(session_keys $'soc\n1\nquit\n')"
 assert_contains "resume opens the frontier lab" "$out" "soc L0.1"
 assert_contains "resume prints the lab brief" "$out" "BRIEF"
-assert_contains "the session names its own commands" "$out" "check · hint · brief · skip · quit"
+assert_contains "the session names its own commands" "$out" "check · hint · brief · files · show · edit · skip · quit"
 assert_contains "quit says progress is saved" "$out" "progress saved"
 
 # --- 5. step 3: start from the beginning is non-destructive ------------------
@@ -154,6 +154,42 @@ assert_contains "brief reprints the lab brief" "$out" "BRIEF"
 
 out="$(session_keys $'soc\n1\nnonsense\nquit\n')"
 assert_contains "an unknown command lists the real ones" "$out" "commands: check"
+
+# --- 6b. workspace files without leaving the session --------------------------
+note "workspace files without leaving the session"
+
+out="$(session_keys $'soc\n1\nfiles\nquit\n')"
+assert_contains "files lists a known fixture" "$out" "whois-stonewick.txt"
+assert_contains "files lists a nested fixture with its subpath" "$out" "notes/triage-notes.txt"
+
+out="$(session_keys $'soc\n1\nshow whois-stonewick.txt\nquit\n')"
+assert_contains "show prints a fixture's contents" "$out" "Domain Name: STONEWICK.EXAMPLE"
+
+out="$(session_keys $'soc\n1\nshow files/whois-stonewick.txt\nquit\n')"
+assert_contains "show accepts a files/ prefix, same as without it" "$out" "Domain Name: STONEWICK.EXAMPLE"
+
+out="$(session_keys $'soc\n1\nshow ../../../etc/passwd\nquit\n')"
+assert_contains "show refuses a path that escapes the workspace" "$out" "no such file in this lab's workspace"
+assert_not_contains "show never prints real /etc/passwd" "$out" "root:"
+
+out="$(session_keys $'soc\n1\nshow nope.txt\nquit\n')"
+assert_contains "show on a missing file names it, not a crash" "$out" "no such file: nope.txt"
+
+# edit: EDITOR=cat turns the command into a non-interactive pass-through the
+# pty harness can assert against (a real interactive editor would hang the
+# 30s timeout, per session_keys' own comment above).
+export EDITOR=cat
+out="$(session_keys $'soc\n1\nedit whois-stonewick.txt\nquit\n')"
+assert_contains "edit opens the confined file in \$EDITOR" "$out" "Domain Name: STONEWICK.EXAMPLE"
+
+# edit must never even invoke $EDITOR on a path that escapes the workspace —
+# EDITOR=false would exit non-zero if called, but confinement rejects the
+# path before that, so no "editor exited non-zero" warning should appear.
+out="$(session_keys $'soc\n1\nedit ../outside\nstatus\nquit\n')"
+assert_contains "edit refuses a path that escapes the workspace" "$out" "no such file in this lab's workspace"
+assert_not_contains "edit never launches \$EDITOR on a rejected path" "$out" "editor exited non-zero"
+assert_contains "the session survives a rejected edit and keeps taking commands" "$out" "══════"
+unset EDITOR
 
 # skip: confirmed, and it marks the lab permanently
 before_skipped="$(jq '[.labs | to_entries[] | select(.value.skipped == true)] | length' "$COPY/.progress.json")"

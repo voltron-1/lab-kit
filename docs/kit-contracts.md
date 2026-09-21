@@ -81,6 +81,17 @@ Two guarantees it must keep:
 With no terminal on stdin the session prints usage instead, so scripted and CI
 invocations of bare `lab` behave as they did before it existed.
 
+Inside a lab, three more commands work the workspace without leaving the
+session: `files`/`ls` lists `workspace/<track>/<id>/`, `show <file>` prints
+one of those files inline, and `edit <file>` opens it in `$EDITOR` (falling
+back to `vi`). All three are confined to that lab's workspace by the same
+`realpath -m` + prefix-match idiom `harness/checklib.sh`'s
+`require_in_workspace` uses for `check.sh` — a path that resolves outside
+the workspace is refused, never opened. `show`/`edit` also accept a leading
+`files/` on the argument (stripped transparently) since GUIDED STEPS text
+names files that way, even though `ws_provision` copies them into the
+workspace root without that prefix.
+
 ## Check execution (the fence)
 
 `lab check` runs `check.sh` as a **separate process** (never sourced),
