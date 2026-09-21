@@ -105,6 +105,16 @@ _extract_brief() {
   awk '/^## BRIEF$/{flag=1; next} /^## GUIDED STEPS$/{flag=0} flag' "$1"
 }
 
+# GUIDED STEPS runs to the next "## " heading (some labs append an optional
+# section after it, e.g. SECURITY ONION (OPTIONAL)) or to EOF otherwise.
+_extract_guided_steps() {
+  awk '
+    /^## GUIDED STEPS$/{flag=1; next}
+    flag && /^## /{flag=0}
+    flag
+  ' "$1"
+}
+
 render_brief() {
   local track="$1" id="$2" dir title type gate est objective ws_path tag
   dir="$(catalog_lab_dir "$track" "$id")"
@@ -122,7 +132,9 @@ render_brief() {
   printf 'workspace  %s\n' "$ws_path"
   printf '\nBRIEF\n'
   _extract_brief "$dir/lab.md"
-  printf '\nsteps  less %s\n' "$dir/lab.md"
+  printf '\nGUIDED STEPS\n'
+  _extract_guided_steps "$dir/lab.md"
+  printf 'full lab file (optional)  %s\n' "$dir/lab.md"
   printf 'next   lab check %s %s   (after finishing the GUIDED STEPS)\n' "$track" "$id"
 }
 
