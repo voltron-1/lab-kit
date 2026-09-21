@@ -17,6 +17,7 @@
 
 SESSION_TRACK=""
 SESSION_ID=""
+SESSION_REQ_PATH=""
 
 # Read one line into SESSION_REPLY. Returns 1 on EOF so callers can stop
 # instead of spinning forever against a closed stdin.
@@ -146,9 +147,37 @@ _session_next_lab() {
   catalog_labs "$track" | cut -f3 | awk -v cur="$id" 'found {print; exit} $0==cur {found=1}'
 }
 
+# _session_confine_path <track> <id> <name> — sets SESSION_REQ_PATH to the
+# canonicalized path inside the lab's workspace, or warns and returns 1 if
+# <name> resolves outside it. Mirrors harness/checklib.sh's
+# require_in_workspace (same realpath -m + prefix-match idiom); reimplemented
+# locally since that one is checklib/$LAB_WORKSPACE-scoped and this runs in
+# the session process, not inside a fenced check.sh.
+#
+# Transparently strips a leading "files/" — GUIDED STEPS text says
+# "files/x.json" but ws_provision() copies files/. flat into the workspace
+# root, so the on-disk path never actually has that prefix. Stripping it
+# means `show files/persistence-legend.md` (pasted straight from the brief)
+# and `show persistence-legend.md` both just work.
+_session_confine_path() {
+  local track="$1" id="$2" name="${3#files/}" ws canon
+  ws="$(ws_path "$track" "$id")"
+  canon="$(realpath -m -- "$ws/$name" 2> /dev/null)" || { warn "no such file: $3"; return 1; }
+  case "$canon" in
+    "$ws" | "$ws"/*)
+      SESSION_REQ_PATH="$canon"
+      return 0
+      ;;
+    *)
+      warn "no such file in this lab's workspace: $3"
+      return 1
+      ;;
+  esac
+}
+
 # Step 4 — hand control to the labs. The learner drives from here.
 session_lab_loop() {
-  local track="$1" id="$2" rc next in_order started=""
+  local track="$1" id="$2" rc next in_order started="" cmd arg ws
 
   while [[ -n "$id" ]]; do
     if [[ "$started" != "$id" ]]; then
@@ -159,10 +188,18 @@ session_lab_loop() {
       started="$id"
     fi
 
-    printf '\n%s%s %s%s — check · hint · brief · skip · quit\n' "$C_BOLD" "$track" "$id" "$C_RST"
+    printf '\n%s%s %s%s — check · hint · brief · files · show · edit · skip · quit\n' \
+      "$C_BOLD" "$track" "$id" "$C_RST"
     session_read "> " || { printf '\nsession closed — progress saved.\n'; return 0; }
 
-    case "${SESSION_REPLY// /}" in
+    # Split into a command word and its (optional) argument. `show`/`edit`
+    # need the argument verbatim; every other command ignores it, same as
+    # before this split existed (extra trailing text was simply part of a
+    # non-matching token and fell to the unknown-command case).
+    cmd="" arg=""
+    read -r cmd arg <<< "$SESSION_REPLY" || true
+
+    case "$cmd" in
       check | c)
         rc=0
         (cmd_check "$track" "$id") || rc=$?
@@ -186,6 +223,30 @@ session_lab_loop() {
         ;;
       hint | h) (cmd_hint "$track" "$id") || true ;;
       brief | b) render_brief "$track" "$id" ;;
+      files | ls) render_ws_listing "$track" "$id" ;;
+      show)
+        if [[ -z "$arg" ]]; then
+          warn "usage: show <file>   (try: files)"
+        elif _session_confine_path "$track" "$id" "$arg"; then
+          if [[ -f "$SESSION_REQ_PATH" ]]; then
+            printf '\n'
+            cat -- "$SESSION_REQ_PATH" || warn "could not read $arg"
+          else
+            warn "no such file: $arg"
+          fi
+        fi
+        ;;
+      edit)
+        if [[ -z "$arg" ]]; then
+          warn "usage: edit <file>   (try: files)"
+        elif _session_confine_path "$track" "$id" "$arg"; then
+          ws="$(ws_path "$track" "$id")"
+          # `|| true`: a nonzero editor exit (unset $EDITOR falling through
+          # to a missing `vi`, or the learner just :cq-ing out) must not
+          # trip the session's own `set -e` and kill the whole loop.
+          ( cd -- "$ws" && "${EDITOR:-vi}" -- "$SESSION_REQ_PATH" ) || warn "editor exited non-zero"
+        fi
+        ;;
       skip | s)
         next="$(_session_next_lab "$track" "$id")"
         if [[ -z "$next" ]]; then
@@ -209,7 +270,7 @@ session_lab_loop() {
         printf 'session closed — progress saved. Pick up with: lab\n'
         return 0
         ;;
-      *) warn "commands: check · hint · brief · skip · status · quit" ;;
+      *) warn "commands: check · hint · brief · files · show <file> · edit <file> · skip · status · quit" ;;
     esac
   done
   return 0

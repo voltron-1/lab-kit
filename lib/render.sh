@@ -138,6 +138,29 @@ render_brief() {
   printf 'next   lab check %s %s   (after finishing the GUIDED STEPS)\n' "$track" "$id"
 }
 
+render_ws_listing() {
+  local track="$1" id="$2" ws listing rel
+  ws="$(ws_path "$track" "$id")"
+  if [[ ! -d "$ws" ]]; then
+    printf 'no workspace yet for %s %s — run check once to provision it.\n' "$track" "$id"
+    return 0
+  fi
+  printf '\nworkspace/%s/%s/\n' "$track" "$id"
+  # Prune the fence dirs (.home, .tmp) and the provisioning marker; %P prints
+  # each remaining path relative to $ws, so the listing matches exactly what
+  # `show <name>`/`edit <name>` expect as their argument.
+  listing="$(find "$ws" -mindepth 1 \( -name .home -o -name .tmp \) -prune \
+    -o -type f ! -name '.lab-provisioned' -printf '%P\n' | sort)"
+  if [[ -z "$listing" ]]; then
+    printf '  (empty)\n'
+  else
+    while IFS= read -r rel; do
+      printf '  %s\n' "$rel"
+    done <<< "$listing"
+  fi
+  printf '\nshow <file>   print one of these   ·   edit <file>   open it in $EDITOR\n'
+}
+
 render_recap_lines() {
   local lines_json="$1" line
   while IFS= read -r line; do
