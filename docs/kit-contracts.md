@@ -92,6 +92,18 @@ the workspace is refused, never opened. `show`/`edit` also accept a leading
 names files that way, even though `ws_provision` copies them into the
 workspace root without that prefix.
 
+A fourth command, `!<command>`, is a raw shell escape for the things a
+single confined file can't cover — installing a package, running a
+tool the lab wants you to try, anything GUIDED STEPS asks for that
+`show`/`edit` has no path argument for. It runs `bash -c "<command>"`
+cwd'd into the workspace, exactly as typed. **It is not confined** —
+`files`/`show`/`edit` guard one path argument each; there is no
+equivalent guard for arbitrary shell syntax, so `!` carries the same
+trust as typing directly into your own terminal, because that is
+exactly what it replaces. A non-zero exit (a mistyped command, `sudo`
+declining, anything) is caught and warned, never allowed to trip the
+session's own `set -e` and kill the loop.
+
 ## Check execution (the fence)
 
 `lab check` runs `check.sh` as a **separate process** (never sourced),

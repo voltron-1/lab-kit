@@ -102,7 +102,7 @@ note "step 3 — resume"
 out="$(session_keys $'soc\n1\nquit\n')"
 assert_contains "resume opens the frontier lab" "$out" "soc L0.1"
 assert_contains "resume prints the lab brief" "$out" "BRIEF"
-assert_contains "the session names its own commands" "$out" "check · hint · brief · files · show · edit · skip · quit"
+assert_contains "the session names its own commands" "$out" "check · hint · brief · files · show · edit · !cmd · skip · quit"
 assert_contains "quit says progress is saved" "$out" "progress saved"
 
 # --- 5. step 3: start from the beginning is non-destructive ------------------
@@ -190,6 +190,23 @@ assert_contains "edit refuses a path that escapes the workspace" "$out" "no such
 assert_not_contains "edit never launches \$EDITOR on a rejected path" "$out" "editor exited non-zero"
 assert_contains "the session survives a rejected edit and keeps taking commands" "$out" "══════"
 unset EDITOR
+
+# --- 6c. the "!" raw shell escape ---------------------------------------------
+note "the ! shell escape"
+
+out="$(session_keys $'soc\n1\n!echo hello-from-shell\nquit\n')"
+assert_contains "! runs a real shell command" "$out" "hello-from-shell"
+
+out="$(session_keys $'soc\n1\n!pwd\nquit\n')"
+assert_contains "! runs cwd'd into the lab's workspace" "$out" "workspace/soc/L0.1"
+
+out="$(session_keys $'soc\n1\n!false\nstatus\nquit\n')"
+assert_contains "a non-zero ! command warns, not crashes" "$out" "command exited non-zero"
+assert_contains "the session survives a failed ! and keeps taking commands" "$out" "══════"
+
+out="$(session_keys $'soc\n1\n!nosuchcommand12345\nstatus\nquit\n')"
+assert_contains "an unknown ! command warns, not crashes" "$out" "command exited non-zero"
+assert_contains "the session survives a bad ! command and keeps taking commands" "$out" "══════"
 
 # skip: confirmed, and it marks the lab permanently
 before_skipped="$(jq '[.labs | to_entries[] | select(.value.skipped == true)] | length' "$COPY/.progress.json")"

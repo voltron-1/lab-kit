@@ -93,6 +93,18 @@ workspace, so a typo'd path is refused rather than reaching outside it.
     > edit answers.txt
     [your editor opens on that file; back at the prompt when you exit it]
 
+Need to do something `show`/`edit` can't — install a package, run a tool
+the lab points you at, anything without a single file behind it? Prefix it
+with `!` and it runs for real, right there:
+
+    > !sudo apt-get install -y jq tshark dnsutils whois ripgrep
+    [runs like it would in any terminal; back at the prompt when it's done]
+
+Unlike `files`/`show`/`edit`, `!` is **not confined to the workspace** —
+it's a real shell command, running exactly what you type. Reach for it for
+things `show`/`edit` have no path argument for; reach for `edit` when
+you're just filling in one named file.
+
 `lab session` runs the exact same flow if you want to type it explicitly.
 Bare `lab` in a script or CI (no terminal on stdin) just prints usage — it
 won't hang waiting for input.
