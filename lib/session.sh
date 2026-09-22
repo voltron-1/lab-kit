@@ -188,9 +188,24 @@ session_lab_loop() {
       started="$id"
     fi
 
-    printf '\n%s%s %s%s — check · hint · brief · files · show · edit · skip · quit\n' \
+    printf '\n%s%s %s%s — check · hint · brief · files · show · edit · !cmd · skip · quit\n' \
       "$C_BOLD" "$track" "$id" "$C_RST"
     session_read "> " || { printf '\nsession closed — progress saved.\n'; return 0; }
+
+    # A leading "!" is a raw shell escape: everything after it runs as one
+    # command, cwd'd into the workspace, exactly as typed — checked before
+    # the word-split below so "!sudo apt-get install -y jq" isn't chopped
+    # into cmd="!sudo" arg="apt-get...". Unlike show/edit this is NOT
+    # confined to the workspace: `files`/`show <name>`/`edit <name>` guard a
+    # single path argument, but there is no way to guard arbitrary shell
+    # syntax the same way, so `!` carries the same trust as your own
+    # terminal — it exists for exactly the things show/edit can't do (e.g.
+    # installing packages), not as a safer alternative to them.
+    if [[ "$SESSION_REPLY" == !* ]]; then
+      ws="$(ws_path "$track" "$id")"
+      ( cd -- "$ws" && bash -c "${SESSION_REPLY#!}" ) || warn "command exited non-zero"
+      continue
+    fi
 
     # Split into a command word and its (optional) argument. `show`/`edit`
     # need the argument verbatim; every other command ignores it, same as
@@ -270,7 +285,7 @@ session_lab_loop() {
         printf 'session closed — progress saved. Pick up with: lab\n'
         return 0
         ;;
-      *) warn "commands: check · hint · brief · files · show <file> · edit <file> · skip · status · quit" ;;
+      *) warn "commands: check · hint · brief · files · show <file> · edit <file> · !<cmd> · skip · status · quit" ;;
     esac
   done
   return 0
