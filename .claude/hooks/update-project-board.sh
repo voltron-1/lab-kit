@@ -47,6 +47,22 @@ declare -A field_id=(
 )
 done_option="98236657"
 
+# The ids above break if a project or its Status field is recreated. Look the
+# live ones up and use them when found; any failed lookup (offline, a field not
+# named "Status", a different gh output shape) leaves the constants in force, so
+# this can only improve on the hardcoded behaviour, never replace it with nothing.
+project_gid="${proj_gid[$proj]}"
+status_field="${field_id[$proj]}"
+live_gid="$(gh project view "$proj" --owner "$owner" --format json 2>/dev/null | jq -r '.id // empty' 2>/dev/null || true)"
+live_fields="$(gh project field-list "$proj" --owner "$owner" --format json 2>/dev/null || true)"
+live_field="$(jq -r '[.fields[]? | select(.name == "Status")][0].id // empty' <<< "$live_fields" 2>/dev/null || true)"
+live_done="$(jq -r '[.fields[]? | select(.name == "Status")][0].options[]? | select(.name == "Done") | .id' <<< "$live_fields" 2>/dev/null | head -1 || true)"
+[[ -n "$live_gid" ]] && project_gid="$live_gid"
+if [[ -n "$live_field" && -n "$live_done" ]]; then
+  status_field="$live_field"
+  done_option="$live_done"
+fi
+
 item_id="$(gh project item-list "$proj" --owner "$owner" --format json --limit 200 2>/dev/null \
   | jq -r --arg t "${lesson} " '.items[] | select(.content.title | startswith($t)) | .id' | head -1)"
 if [[ -z "$item_id" ]]; then
@@ -58,7 +74,7 @@ if [[ -z "$item_id" ]]; then
   exit 0
 fi
 
-gh project item-edit --id "$item_id" --project-id "${proj_gid[$proj]}" \
-  --field-id "${field_id[$proj]}" --single-select-option-id "$done_option" >/dev/null
+gh project item-edit --id "$item_id" --project-id "$project_gid" \
+  --field-id "$status_field" --single-select-option-id "$done_option" >/dev/null
 
 jq -nc --arg m "Project board synced: ${lesson} -> project ${proj} Done" '{systemMessage: $m}'
