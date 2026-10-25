@@ -1,0 +1,22 @@
+# Line endings. The kit targets WSL2, so a checkout from Windows git with
+# core.autocrlf=true is the realistic way a CR gets into a script. A CR after
+# a shebang or inside a heredoc breaks check.sh, and a CR in fixtures breaks
+# the graders' anchored greps. Store and check out LF everywhere.
+* text=auto eol=lf
+
+# Executed or graded content: force LF even if git's text sniffing says
+# otherwise. (21 soc check.sh files embed one literal CR on purpose, in
+# `tr -d '<CR>'`, to strip Windows line endings from learner answers; that
+# makes git sniff them as binary. Forcing text only normalises CRLF, so the
+# lone CR is left alone.)
+*.sh text eol=lf
+bin/lab text eol=lf
+*.ps1 text eol=lf
+*.psm1 text eol=lf
+
+# Real binaries: never convert.
+*.pcap binary
+*.jpg binary
+*.docm binary
+*.pdf binary
+*.exe binary
