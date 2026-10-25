@@ -12,12 +12,15 @@ or an access this repo's CI does not have:
 - [ ] **Enable private vulnerability reporting** (Settings → Code security): `SECURITY.md`
       sends reporters to "Security → Report a vulnerability", which does not exist until then.
       Also confirm the `LICENSE` copyright holder (`voltron-1`).
-- [ ] **`.claude/hooks/update-project-board.sh`** — still hardcodes the project node/field ids
-      (untestable without access to those projects), and only fires for a `gh pr merge` run by
-      Claude Code in a local shell, never for a merge in the GitHub UI.
-- [ ] **tshark 4.6 vs `soc/L2.7/files/capture.pcap`** — `verify.py` fails reading it
-      ("You don't have permission to read the file"). CI is pinned to `ubuntu-24.04`
-      (tshark 4.2) until the pcap is checked against 4.6.
+- [ ] **Board hook for merges done in the GitHub UI.** `.claude/hooks/update-project-board.sh` only
+      fires for a `gh pr merge` run by Claude Code in a local shell. Covering UI merges needs a
+      GitHub Action holding a token that can edit user projects (a PAT stored as a repo secret).
+      The ids themselves are now looked up live with the old constants as fallback (#423); the
+      live path is proven against a stubbed `gh` only, so watch the next real lesson merge for
+      "Project board synced".
+- [ ] **Optional CI speed-up:** no build cache. It needs one more pinned action SHA
+      (`git ls-remote https://github.com/actions/cache 'refs/tags/v4*'`). A learner on Ubuntu 26.04
+      may hit the same tshark AppArmor refusal as CI did; `tshark -r - < capture.pcap` works.
 
 Closed by the audit: Rust CI job that could never fail, `tests/session.sh` not in CI, unpinned
 actions ([#412](https://github.com/voltron-1/lab-kit/pull/412)); undeclared per-track tool
@@ -30,7 +33,12 @@ session's `files`/`show`/`edit`/`!<cmd>` commands
 ([#417](https://github.com/voltron-1/lab-kit/pull/417), closes
 [#409](https://github.com/voltron-1/lab-kit/issues/409)); the board hook exiting silently when a
 card is missing ([#418](https://github.com/voltron-1/lab-kit/pull/418)); no LICENSE /
-SECURITY.md / CODEOWNERS ([#419](https://github.com/voltron-1/lab-kit/pull/419)).
+SECURITY.md / CODEOWNERS ([#419](https://github.com/voltron-1/lab-kit/pull/419)); wiki lint
+false positives on prose and escaped pipes ([#421](https://github.com/voltron-1/lab-kit/pull/421));
+`verify.py` failing on tshark 4.6 / Ubuntu 26.04 because AppArmor refuses `tshark -r <path>` inside
+the checkout, now fed on stdin, plus an `ubuntu-latest` canary job and a runner-toolchain preflight
+([#422](https://github.com/voltron-1/lab-kit/pull/422)); the board hook's hardcoded ids
+([#423](https://github.com/voltron-1/lab-kit/pull/423)).
 
 [x] `genevidence.py` had no `--help`: it performed a full evidence write pass instead
     of printing usage. Closed 2026-09-12 by [PR #406](https://github.com/voltron-1/lab-kit/pull/406)
