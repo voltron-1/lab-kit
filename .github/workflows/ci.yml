@@ -137,3 +137,35 @@ jobs:
             status=1
           fi
           exit $status
+
+  # Canary: the same evidence check on whatever ubuntu-latest is now. It never
+  # fails a PR (continue-on-error) but it shows the next image drift, such as
+  # the 26.04 / tshark 4.6 change that made verify.py fail on soc L2.7's pcap,
+  # before the 24.04 pin above has to move.
+  tshark-canary:
+    name: Evidence check on ubuntu-latest (canary)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y tshark python3-yaml
+
+      - name: Show how tshark reads the L2.7 pcap
+        continue-on-error: true
+        run: |
+          pcap=tracks/soc/phases/p2/L2.7-gate-session-story/files/capture.pcap
+          echo "--- $(lsb_release -ds); $(tshark --version | head -1)"
+          id; ls -ld "$PWD" "$(dirname "$pcap")"; ls -l "$pcap"
+          echo "--- direct path";   tshark -n -r "$pcap" -T fields -e dns.qry.name 2>&1 | head -3 || true
+          echo "--- via stdin";     tshark -n -r - -T fields -e dns.qry.name < "$pcap" 2>&1 | head -3 || true
+          cp "$pcap" /tmp/l27.pcap
+          echo "--- copy in /tmp";  tshark -n -r /tmp/l27.pcap -T fields -e dns.qry.name 2>&1 | head -3 || true
+          echo "--- apparmor";      (sudo aa-status 2>&1 | grep -i -E 'wireshark|tshark|dumpcap' || echo "no wireshark/tshark profile listed")
+
+      - name: Verify SOC evidence
+        run: python3 tools/genevidence/verify.py
