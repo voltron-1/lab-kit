@@ -8,11 +8,14 @@ This document maps security-relevant lessons across the **PowerShell Literacy La
 
 | Lesson | Title / Focus | ATT&CK ID | ATT&CK Technique Name | Category / Context |
 |---|---|---|---|---|
+| `ps L3.1` | .NET Method Calls | `T1105`<br>`T1027`<br>`T1059.001` | Ingress Tool Transfer<br>Obfuscated Files or Information<br>Command and Scripting Interpreter: PowerShell | Download Cradle / Decoding |
+| `ps L3.2` | COM Objects | `T1559.001` | Inter-Process Communication: Component Object Model | Execution |
 | `ps L3.3` | WMI / CIM Integration | `T1047` | Windows Management Instrumentation | Execution / Discovery / Persistence |
 | `ps L3.4` | Windows Registry Paths | `T1547.001` | Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder | Persistence |
 | `ps L3.5` | `Invoke-Expression` (`iex`) | `T1059.001` | Command and Scripting Interpreter: PowerShell | Execution / Stager Evaluation |
 | `ps L3.6` | Remoting & WinRM | `T1021.006` | Remote Services: Windows Remote Management | Lateral Movement |
 | `ps L3.7` | ACL Enumeration & Modification | `T1222.001` | File and Directory Permissions Modification: Windows File and Directory Permissions Modification | Defense Evasion / Privilege Escalation |
+| `ps L3.8` | Phase Gate: Windows Subsystem One-Liners | `T1047`<br>`T1547.001`<br>`T1021.006`<br>`T1222.001`<br>`T1059.001`<br>`T1559.001`<br>`T1105` | Windows Management Instrumentation<br>Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder<br>Remote Services: Windows Remote Management<br>File and Directory Permissions Modification: Windows File and Directory Permissions Modification<br>Command and Scripting Interpreter: PowerShell<br>Inter-Process Communication: Component Object Model<br>Ingress Tool Transfer | Integrative Gate |
 | `ps L4.1` | Download Cradles | `T1105`<br>`T1059.001` | Ingress Tool Transfer<br>Command and Scripting Interpreter: PowerShell | Execution / Command Delivery |
 | `ps L4.2` | Encoded Commands | `T1027`<br>`T1059.001` | Obfuscated Files or Information<br>Command and Scripting Interpreter: PowerShell | Defense Evasion |
 | `ps L4.3` | AMSI Architecture & Bypass | `T1562.001` | Impair Defenses: Disable or Modify Tools | Defense Evasion |
@@ -30,6 +33,8 @@ This document maps security-relevant lessons across the **PowerShell Literacy La
 | `ps L5.6` | Sanitized Real-World Loader | `T1059.001`<br>`T1071.001` | Command and Scripting Interpreter: PowerShell<br>Application Layer Protocol: Web Protocols | Loader Triage |
 | `ps L5.7` | Phase Gate: Three-Layer Payload | `T1027`<br>`T1059.001` | Obfuscated Files or Information<br>Command and Scripting Interpreter: PowerShell | Deobfuscation Gate |
 | `ps L6.1` | Tour: PowerView | `T1087.002`<br>`T1069.002` | Account Discovery: Domain Account<br>Permission Groups Discovery: Domain Groups | Discovery Tool Reading |
+| `ps L6.3` | Tour: Threat Hunt | `T1059.001`<br>`T1027` | Command and Scripting Interpreter: PowerShell<br>Obfuscated Files or Information | Detection (ScriptBlock log hunt) |
+| `ps L6.4` | Tour: Sigma Rule | `T1059.001` | Command and Scripting Interpreter: PowerShell | Detection (Sigma rule) |
 
 ---
 
@@ -41,21 +46,30 @@ This document maps security-relevant lessons across the **PowerShell Literacy La
 | `soc L2.2` | DNS Analysis & Tunnels | `T1071.004` | Application Layer Protocol: DNS | Command and Control / Exfiltration |
 | `soc L2.3` | HTTP / TLS C2 Beacons | `T1071.001` | Application Layer Protocol: Web Protocols | Command and Control |
 | `soc L2.6` | Beaconing & Jitter | `T1071` | Application Layer Protocol | Network Triage |
+| `soc L2.7` | Phase Gate: PCAP + Zeek Session Story | `T1071.004`<br>`T1071.001`<br>`T1105` | Application Layer Protocol: DNS<br>Application Layer Protocol: Web Protocols<br>Ingress Tool Transfer | Command and Control Gate |
 | `soc L3.1` | Windows Security Events | `T1078`<br>`T1059`<br>`T1136.001` | Valid Accounts<br>Command Interpreter<br>Create Account | Endpoint Telemetry |
 | `soc L3.2`–`L3.3` | Sysmon Process Trees & Office Shell Spawning | `T1566.001`<br>`T1059.001` | Phishing: Spearphishing Attachment<br>PowerShell | Execution / Phishing |
 | `soc L3.4` | Endpoint Persistence Spots | `T1547.001`<br>`T1053.005`<br>`T1543.003`<br>`T1053.003` | Registry Run Keys<br>Scheduled Task<br>Windows Service<br>Cron | Persistence |
 | `soc L3.5` | Linux Auth & Audit Logs | `T1110.001`<br>`T1548.003`<br>`T1136.001` | Brute Force: Password Guessing<br>Sudo Abuse<br>Create Account | Credential Access / Privilege Escalation |
 | `soc L3.6` | LOLBins Triage | `T1218`<br>`T1105` | System Binary Proxy Execution<br>Ingress Tool Transfer | Defense Evasion |
+| `soc L3.7` | Phase Gate: Endpoint Compromise Chain | `T1078`<br>`T1059.001`<br>`T1547.001`<br>`T1136.001` | Valid Accounts<br>Command and Scripting Interpreter: PowerShell<br>Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder<br>Create Account: Local Account | Integrative Gate |
 | `soc L4.4` | Brute Force vs Password Spray | `T1110.001`<br>`T1110.003` | Brute Force: Password Guessing<br>Brute Force: Password Spraying | Credential Access |
 | `soc L5.1` | Email Headers & Authentication | `T1566.001`<br>`T1566.002` | Spearphishing Attachment<br>Spearphishing Link | Phishing Triage |
 | `soc L5.2` | URL Analysis & Lookalikes | `T1566.002` | Phishing: Spearphishing Link | Domain Analysis |
 | `soc L5.3` | Attachment Triage & Magic Bytes | `T1566.001`<br>`T1027` | Spearphishing Attachment<br>Obfuscated Files or Information | File Safety Inspection |
 | `soc L5.4` | Sandbox Report Reading | `T1566.001`<br>`T1547.001` | Spearphishing Attachment<br>Registry Run Keys | Detonation Summary |
-| `soc L6.1`–`L6.6` | Investigation & Escalation | `T1566.001`<br>`T1059.001`<br>`T1547.001`<br>`T1136.001` | Phishing<br>PowerShell<br>Run Keys<br>Create Account | Full Incident Chain |
+| `soc L5.5` | The Phish Queue | `T1566.001`<br>`T1566.002` | Phishing: Spearphishing Attachment<br>Phishing: Spearphishing Link | Phishing Triage |
+| `soc L5.6` | Phase Gate: Full Phish Investigation | `T1566.001`<br>`T1566.002` | Phishing: Spearphishing Attachment<br>Phishing: Spearphishing Link | Integrative Gate |
+| `soc L6.1`–`L6.6` | Investigation & Escalation | `T1566.001`<br>`T1059.001`<br>`T1547.001`<br>`T1136.001`<br>`T1071.004`<br>`T1048.003` | Phishing<br>PowerShell<br>Run Keys<br>Create Account<br>Application Layer Protocol: DNS<br>Exfiltration Over Unencrypted Non-C2 Protocol | Full Incident Chain |
 | `soc L7.1`–`L7.7` | The AI-Assisted Analyst | `T1059.001`<br>`T1547.001`<br>`T1136.001` | Execution / Persistence | Verification & Tuning Handoff |
 
 ---
 
 ## 3. Summary Statistics
-- **Total PowerShell (`ps`) Mapped Lessons:** 22 lessons covering 11 distinct MITRE ATT&CK techniques.
-- **Total SOC Analyst (`soc`) Mapped Lessons:** 24 lessons covering 14 distinct MITRE ATT&CK techniques.
+- **Total PowerShell (`ps`) Mapped Lessons:** 27 lessons covering 15 distinct MITRE ATT&CK techniques.
+- **Total SOC Analyst (`soc`) Mapped Lessons:** 39 lessons covering 20 distinct MITRE ATT&CK techniques.
+
+Counts are of table rows above (a range such as `L1.1`–`L1.8` counts every lesson in it). Labs not listed
+do not teach a specific technique: tool and CLI setup, PowerShell language basics (pipeline, control flow,
+functions, modules), the `soc` triage-method labs (P4 apart from L4.4), the `ps` IR-collector and cold-tour
+labs, and `ps` P7 (writing and auditing AI-generated scripts). `soc` P7 is mapped as one aggregate row.
