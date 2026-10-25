@@ -3,11 +3,24 @@
 ## NEXT UP
 **All 4 tracks (rust, bash, ps, soc) are 100% built, tested, tagged, and complete (223 total labs)!**
 
-Next unstarted item: **nothing queued, and nothing open.** Every gap this file
-has tracked is closed: ps p0–p3 acceptance coverage and `verify.py`'s baseline
-invariants (2026-08-29, PR #402), every defect the 2026-09-11 end-to-end test
-found (PR #403, `findings/20260911-e2e-kit-test.md`), and that test's one
-follow-up (PR #406). Docs are current with the code as of 2026-09-14.
+The 2026-10-25 repo audit (gap analysis) is mostly closed. Open items, in order:
+- [ ] **LICENSE / SECURITY.md / CODEOWNERS** — none exist. The licence is the owner's call;
+      the repo ships third-party exhibits (RustScan GPL-3.0-or-later, hexyl, vector, nom)
+      that already carry per-file SPDX/PROVENANCE headers.
+- [ ] **Wiki lab-id lint** — [#409](https://github.com/voltron-1/lab-kit/issues/409).
+- [ ] **`.claude/hooks/update-project-board.sh`** — hardcoded project node ids, and its branch
+      regex (`<track>-p<N>-l<M>.<K>`) never matches `fix/…` or `claude/…` branches.
+- [ ] **tshark 4.6 vs `soc/L2.7/files/capture.pcap`** — `verify.py` fails reading it
+      ("You don't have permission to read the file"). CI is pinned to `ubuntu-24.04`
+      (tshark 4.2) until the pcap is checked against 4.6.
+
+Closed by the audit: Rust CI job that could never fail, `tests/session.sh` not in CI, unpinned
+actions ([#412](https://github.com/voltron-1/lab-kit/pull/412)); undeclared per-track tool
+requirements ([#413](https://github.com/voltron-1/lab-kit/pull/413)); wrong
+`ATTACK_MAPPING.md` counts and nine unmapped labs
+([#414](https://github.com/voltron-1/lab-kit/pull/414)); no `.gitattributes`
+([#415](https://github.com/voltron-1/lab-kit/pull/415)); README/tracker not covering the
+session's `files`/`show`/`edit`/`!<cmd>` commands (this change).
 
 [x] `genevidence.py` had no `--help`: it performed a full evidence write pass instead
     of printing usage. Closed 2026-09-12 by [PR #406](https://github.com/voltron-1/lab-kit/pull/406)
@@ -17,6 +30,24 @@ follow-up (PR #406). Docs are current with the code as of 2026-09-14.
     trees before and after each invocation. Suite 1069 → 1086.
 
 ## LAST SESSION
+2026-10-25 — **REPO AUDIT + CORRECTIONS.** Full gap analysis; see NEXT UP for what is
+still open.
+- **CI** (#412) — `find -execdir cargo … \;` always exits 0, so the documented Clippy gate
+  never gated. Now an explicit loop that carries the status, excluding the two non-crates
+  (`rustscan-src`, `vuln-project`). `tests/session.sh` runs in CI; actions pinned to SHAs;
+  PSScriptAnalyzer pinned to 1.25.0; `permissions: contents: read`; lint/acceptance job
+  pinned to `ubuntu-24.04` after `ubuntu-latest` became 26.04 and tshark 4.6.4 failed on L2.7.
+- **Tool requirements** (#413) — each `track.json` gains `requires: [{cmd, hint}]`; `lab start`
+  warns on stderr (never fails) for a missing tool.
+- **ATT&CK mapping** (#414) — summary counts recomputed (ps 27/15, soc 39/20); nine labs added.
+- **Line endings** (#415) — `.gitattributes` + `.editorconfig`. A `core.autocrlf=true` clone of
+  `main` had 1,991 CRLF files; with the change, none. 21 soc `check.sh` files embed one
+  literal CR on purpose (`tr -d '<CR>'`) and are untouched.
+- **Session commands documented** — the README now lists `files`/`ls`, `show`, `edit` and
+  `!<cmd>` (added by #410/#411) and says plainly that `!<cmd>` is unconfined.
+
+Previous session:
+
 2026-09-14 — **DOCS REFRESH: README + wiki reconciled against the code.** No code
 changes. An audit of the README and all six wiki pages against the repo, after
 PRs #403/#406/#407 landed faster than the docs tracked them.
