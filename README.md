@@ -163,3 +163,14 @@ All check scripts, CLI internals, and lab metadata undergo strict quality contro
 - **MITRE ATT&CK® Mapping:** Security-relevant lessons across the PowerShell and SOC Analyst tracks are mapped to MITRE ATT&CK techniques in [`docs/ATTACK_MAPPING.md`](docs/ATTACK_MAPPING.md).
 - **Content Review Framework:** Offense-adjacent lessons follow strict defensive framing, payload sanitization, and static evaluation rules documented in [`docs/CONTENT_REVIEW_CHECKLIST.md`](docs/CONTENT_REVIEW_CHECKLIST.md).
 - **Contributor Guidelines:** See [`CONTRIBUTING.md`](CONTRIBUTING.md) for full contribution guardrails and quality standards.
+
+---
+
+## License
+
+LAB-KIT's own code, lab text and fixtures are released under the [MIT License](LICENSE).
+
+The Rust track's Phase 6 reads excerpts of real open-source projects as read-only exhibits
+(`tracks/rust/phases/p6/L6.1`–`L6.6`: RustScan, Vector, hexyl, tls-parser). Those files are **not**
+covered by the MIT License. Each keeps its upstream licence, stated by the
+`SPDX-License-Identifier` and `PROVENANCE` lines at the top of the file.
