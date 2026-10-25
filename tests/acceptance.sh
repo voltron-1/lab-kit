@@ -283,6 +283,41 @@ out="$("$LAB" start fixture L0.3 2>&1)"; rc=$?
 assert_eq "a track with no requires starts cleanly" "0" "$rc"
 assert_not_contains "a track with no requires prints no warning" "$out" "not found on PATH"
 
+# --- 6c. project-board hook (.claude/hooks/update-project-board.sh), stubbed gh ---
+note "project-board hook"
+HOOKBIN="$WORK/hookbin"
+mkdir -p "$HOOKBIN"
+cat > "$HOOKBIN/gh" << 'SH'
+#!/usr/bin/env bash
+# stub: only the calls the hook makes. HOOK_BRANCH / HOOK_ITEMS come from the test.
+case "$1 $2" in
+  "repo view") echo "voltron-1/lab-kit" ;;
+  "pr view") echo "$HOOK_BRANCH" ;;
+  "project item-list") echo "$HOOK_ITEMS" ;;
+  "project item-edit") echo "$*" >> "$HOOK_LOG" ;;
+esac
+SH
+chmod 755 "$HOOKBIN/gh"
+HOOK="$COPY/.claude/hooks/update-project-board.sh"
+HOOK_LOG="$WORK/hook-edits.log"
+hook_run() {
+  : > "$HOOK_LOG"
+  printf '{"tool_input":{"command":"gh pr merge 77 --squash"},"tool_response":{"stdout":""}}' |
+    PATH="$HOOKBIN:$PATH" HOOK_BRANCH="$1" HOOK_ITEMS="$2" HOOK_LOG="$HOOK_LOG" bash "$HOOK" 2>&1
+}
+items='{"items":[{"id":"ITEM_A","content":{"title":"L3.2 Sysmon trees"}}]}'
+out="$(hook_run bash-p3-l3.2 "$items")"; rc=$?
+assert_eq "hook on a lesson branch with a matching card exits 0" "0" "$rc"
+assert_contains "hook reports the card was synced" "$out" "Project board synced: L3.2 -> project 18 Done"
+assert_contains "hook moved exactly that card" "$(cat "$HOOK_LOG")" "--id ITEM_A"
+out="$(hook_run bash-p3-l3.9 "$items")"; rc=$?
+assert_eq "hook with no matching card still exits 0" "0" "$rc"
+assert_contains "hook says the board was NOT synced instead of staying silent" "$out" "Project board NOT synced: no item starting with 'L3.9 '"
+assert_eq "hook edited nothing when no card matched" "" "$(cat "$HOOK_LOG")"
+out="$(hook_run fix/e2e-corrections "$items")"; rc=$?
+assert_eq "hook on a non-lesson branch exits 0" "0" "$rc"
+assert_eq "hook stays silent on a non-lesson branch" "" "$out"
+
 # --- 7. bash track P0+P1: fabricated pass + one negative case per lab ---
 # Linear progression means each lab must end up PASSED before the next one
 # unlocks, so every block below drives a negative case (missing artifact ->
