@@ -50,10 +50,15 @@ done_option="98236657"
 item_id="$(gh project item-list "$proj" --owner "$owner" --format json --limit 200 2>/dev/null \
   | jq -r --arg t "${lesson} " '.items[] | select(.content.title | startswith($t)) | .id' | head -1)"
 if [[ -z "$item_id" ]]; then
+  # A lesson branch was recognised, so the board should have moved: say so
+  # instead of leaving a card quietly stale (no item titled "<lesson> ...",
+  # or gh could not list the project).
+  jq -nc --arg m "Project board NOT synced: no item starting with '${lesson} ' in project ${proj} (PR #${pr_number})" \
+    '{systemMessage: $m}'
   exit 0
 fi
 
 gh project item-edit --id "$item_id" --project-id "${proj_gid[$proj]}" \
   --field-id "${field_id[$proj]}" --single-select-option-id "$done_option" >/dev/null
 
-printf '{"systemMessage": "Project board synced: %s -> project %s Done"}' "$lesson" "$proj"
+jq -nc --arg m "Project board synced: ${lesson} -> project ${proj} Done" '{systemMessage: $m}'
