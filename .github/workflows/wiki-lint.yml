@@ -1,0 +1,30 @@
+name: Wiki Lab References
+
+# The wiki is a separate repo with no Actions of its own, so drift there (a lab
+# id that does not exist, or the right id on the wrong track) is only caught by
+# checking it from here. Weekly, plus on demand; deliberately not part of the
+# PR gates in ci.yml, which must not depend on a second repo.
+on:
+  schedule:
+    - cron: '23 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  wiki-lint:
+    name: Lint wiki lab references against tracks/
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Checkout wiki
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          repository: ${{ github.repository }}.wiki
+          path: wiki
+
+      - name: Lint wiki lab references
+        run: ./tools/lint-wiki.sh wiki

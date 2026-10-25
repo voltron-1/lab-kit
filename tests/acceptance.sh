@@ -3698,6 +3698,30 @@ else
   assert_eq "regenerating one scenario changes nothing already committed" "$before" "$(gen_fingerprint)"
 fi
 
+# --- 7z. wiki lab-reference lint (tools/lint-wiki.sh) on fixture pages ---
+note "wiki lab-reference lint"
+WIKI="$WORK/wiki"
+mkdir -p "$WIKI"
+cat > "$WIKI/Rust-Literacy-Lab.md" << 'MD'
+| L5.4 | Channels (`mpsc`) |
+MD
+cat > "$WIKI/Cross-Track-Connections.md" << 'MD'
+| PowerShell L5.1-5.7 | **Bash L4.5 - reading obfuscated shell** |
+MD
+out="$(cd -- "$COPY" && ./tools/lint-wiki.sh "$WIKI" 2>&1)"; rc=$?
+assert_eq "a correct, paraphrased wiki lints clean" "0" "$rc"
+assert_contains "clean run reports 0 problems" "$out" "0 problem(s)"
+echo '| PowerShell L5.1-5.7 | **SOC L4.5 - reading obfuscated shell** |' > "$WIKI/Cross-Track-Connections.md"
+out="$(cd -- "$COPY" && ./tools/lint-wiki.sh "$WIKI" 2>&1)"; rc=$?
+assert_eq "right lab id on the wrong track (the #409 bug) fails" "1" "$rc"
+assert_contains "the finding names the page and line" "$out" "Cross-Track-Connections.md:1: soc L4.5"
+echo '| L5.99 | Not a lab |' > "$WIKI/Rust-Literacy-Lab.md"
+out="$(cd -- "$COPY" && ./tools/lint-wiki.sh "$WIKI" 2>&1)"; rc=$?
+assert_eq "a lab id that exists in no track fails" "1" "$rc"
+assert_contains "the finding says it does not exist" "$out" "rust L5.99 does not exist"
+out="$(cd -- "$COPY" && ./tools/lint-wiki.sh "$WORK/no-such-dir" 2>&1)"; rc=$?
+assert_eq "a missing wiki directory is a usage error (2)" "2" "$rc"
+
 # --- 8. README / planned_execution shape ---
 note "README + planned_execution shape"
 if [[ -f "$COPY/README.md" ]]; then
