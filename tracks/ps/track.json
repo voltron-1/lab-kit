@@ -11,5 +11,11 @@
     "p5": "Deobfuscation & Malware Reading",
     "p6": "Reading Real Security Tools",
     "p7": "Directing & Auditing AI PowerShell"
-  }
+  },
+  "requires": [
+    {
+      "cmd": "pwsh",
+      "hint": "install PowerShell 7 — ps L0.1 walks through it"
+    }
+  ]
 }

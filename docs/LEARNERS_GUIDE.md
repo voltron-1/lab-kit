@@ -21,6 +21,12 @@ platform, but any Linux with those three tools works).
     sudo apt-get install -y jq shellcheck
     export PATH="$PWD/bin:$PATH"   # optional: drop the ./bin/ prefix below
 
+Each track also uses its own tools: `rustc` and `cargo` for rust,
+`shfmt` for bash, `tshark`, `dig`, `whois` and `rg` for soc, and `pwsh`
+(PowerShell 7) for ps. The first lab of each track walks you through
+installing them. If one is missing, `lab start` prints a warning naming it
+and how to install it; the lab still opens.
+
 Everything else — tracks, labs, evidence files — is already in the repo.
 There's nothing to build.
 

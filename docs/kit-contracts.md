@@ -24,8 +24,11 @@ this — it's a deliberate redundancy that catches copy-paste drift during
 authoring). Track name grammar: `^[a-z][a-z0-9_-]*$`. Lab id grammar:
 `^L<phase>\.<n>$`, numeric on both components (`L2.10` sorts after
 `L2.9` — never lexical). A `tracks/<track>/track.json` is optional but
-recommended: `{title, tagline, order, phases: {"p0": "Phase Name", ...}}`
-— presentation only, every field has a filesystem/dirname fallback.
+recommended: `{title, tagline, order, phases: {"p0": "Phase Name", ...},
+requires: [{cmd, hint}, ...]}` — presentation only, every field has a
+filesystem/dirname fallback. `requires` lists tools the track's labs shell
+out to; `lab start` warns on stderr (never fails, never changes the exit
+code) for each `cmd` not on `PATH`, appending `hint` as the install advice.
 
 ## State (`.progress.json`, schema v1)
 

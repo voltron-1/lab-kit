@@ -11,5 +11,15 @@
     "p5": "Concurrency & Async",
     "p6": "Reading Real Security Tools",
     "p7": "Directing & Auditing AI Rust"
-  }
+  },
+  "requires": [
+    {
+      "cmd": "rustc",
+      "hint": "install rustup and rustc — rust L0.1 walks through it"
+    },
+    {
+      "cmd": "cargo",
+      "hint": "comes with rustup — rust L0.1 walks through it"
+    }
+  ]
 }
