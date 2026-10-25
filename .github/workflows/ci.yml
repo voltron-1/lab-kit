@@ -6,13 +6,23 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   shellcheck-and-lint:
     name: ShellCheck & Lab Structural Lint
-    runs-on: ubuntu-latest
+    # Pinned, not ubuntu-latest: the kit targets Ubuntu 24.04 (tshark 4.2), and
+    # on 26.04 (tshark 4.6) verify.py's pcap/zeek check fails reading
+    # L2.7's capture.pcap. Move this when the pcap is checked against 4.6.
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       - name: Install dependencies
         run: |
@@ -29,17 +39,20 @@ jobs:
       - name: Run Acceptance Test Suite
         run: bash tests/acceptance.sh
 
+      - name: Run Interactive Session Suite
+        run: bash tests/session.sh
+
   powershell-lint:
     name: PSScriptAnalyzer (PowerShell)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       - name: Run PSScriptAnalyzer
         shell: pwsh
         run: |
-          Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
+          Install-Module -Name PSScriptAnalyzer -RequiredVersion 1.25.0 -Force -Scope CurrentUser
 
           # These files are lesson content whose PSSA findings ARE the lesson,
           # not bugs -- do not "fix" them to silence this gate:
@@ -82,14 +95,45 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       - name: Set up Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec # stable
         with:
+          toolchain: stable
           components: clippy
 
       - name: Cargo Check & Clippy across Rust Projects
         run: |
-          find tracks/rust -name "Cargo.toml" -execdir cargo check \;
-          find tracks/rust -name "Cargo.toml" -execdir cargo clippy -- -D warnings \;
+          # `find -execdir cargo ... \;` always exits 0 whatever cargo does, so
+          # it can never fail the job. Loop explicitly and carry the status.
+          #
+          # Excluded because they are lesson material, not buildable crates:
+          #   - rustscan-src (L6.1): a read-only exhibit of upstream RustScan;
+          #     its Cargo.toml has no build target by design.
+          #   - vuln-project (L4.8): pins a dependency that must not resolve,
+          #     which is the supply-chain lesson itself.
+          excluded=(
+            tracks/rust/phases/p6/L6.1-rustscan-cli-to-loop/files/rustscan-src/Cargo.toml
+            tracks/rust/phases/p4/L4.8-supply-chain/files/vuln-project/Cargo.toml
+          )
+          status=0
+          checked=0
+          while IFS= read -r manifest; do
+            for skip in "${excluded[@]}"; do
+              [[ "$manifest" == "$skip" ]] && continue 2
+            done
+            echo "::group::$manifest"
+            if (cd "$(dirname "$manifest")" && cargo check && cargo clippy -- -D warnings); then
+              checked=$((checked + 1))
+            else
+              echo "::error file=$manifest::cargo check/clippy failed"
+              status=1
+            fi
+            echo "::endgroup::"
+          done < <(find tracks/rust -name Cargo.toml | sort)
+          if [[ $checked -eq 0 && $status -eq 0 ]]; then
+            echo "::error::no Rust crates were checked"
+            status=1
+          fi
+          exit $status
