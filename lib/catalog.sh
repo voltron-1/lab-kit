@@ -59,6 +59,23 @@ catalog_phase_title() {
   printf '%s\n' "$title"
 }
 
+# catalog_preflight_tools <track> — warn (never fail) about tools the track's
+# labs shell out to that are not on PATH. A track declares them in track.json:
+#   "requires": [{"cmd": "pwsh", "hint": "how to install it"}, ...]
+# Warn-only on purpose: a missing tool only breaks the labs that use it, and
+# the first lab of a track is often the one that installs it.
+catalog_preflight_tools() {
+  local track="$1" cmd hint f
+  f="$TRACKS_DIR/$track/track.json"
+  [[ -f "$f" ]] || return 0
+  while IFS=$'\t' read -r cmd hint; do
+    [[ -n "$cmd" ]] || continue
+    command -v -- "$cmd" > /dev/null 2>&1 && continue
+    warn "'$cmd' not found on PATH — the $track track needs it${hint:+ ($hint)}"
+  done < <(jq -r '(.requires // [])[] | [.cmd, (.hint // "")] | @tsv' "$f" 2> /dev/null || true)
+  return 0
+}
+
 # Resolve <track> <id> to its content directory, or die.
 catalog_lab_dir() {
   local track="$1" id="$2" phase

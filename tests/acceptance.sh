@@ -261,6 +261,28 @@ out="$("$LAB" status 2>&1)"
 assert_contains "L0.1 stays skipped even after passing" "$out" "⏭  L0.1"
 assert_not_contains "L0.1 never shows a pass mark" "$out" "✓  L0.1"
 
+# --- 6b. track.json "requires": warn about missing tools, never fail ---
+note "track tool preflight (warn-only)"
+cp -- "$FIXTURE/track.json" "$WORK/fixture-track.json.orig"
+cat > "$FIXTURE/track.json" << 'JSON'
+{"title":"Fixture","order":999,"phases":{"p0":"Fixture Phase"},
+ "requires":[{"cmd":"lab-kit-no-such-tool","hint":"fixture install hint"},{"cmd":"bash"}]}
+JSON
+out="$("$LAB" start fixture L0.3 2>&1 > /dev/null)"; rc=$?
+assert_eq "start with a missing required tool still exits 0" "0" "$rc"
+assert_contains "warning names the missing tool" "$out" "'lab-kit-no-such-tool' not found on PATH"
+assert_contains "warning carries the install hint" "$out" "fixture install hint"
+assert_not_contains "a tool that is present is not reported" "$out" "'bash' not found"
+out="$("$LAB" start fixture L0.3 2> /dev/null)"
+assert_contains "warning goes to stderr; the brief still prints on stdout" "$out" "fixture lab."
+echo '{"title":"Fixture","order":999,"phases":{"p0":"Fixture Phase"},"requires":"oops"}' > "$FIXTURE/track.json"
+out="$("$LAB" start fixture L0.3 2>&1)"; rc=$?
+assert_eq "a malformed requires field is ignored, start still exits 0" "0" "$rc"
+cp -- "$WORK/fixture-track.json.orig" "$FIXTURE/track.json"
+out="$("$LAB" start fixture L0.3 2>&1)"; rc=$?
+assert_eq "a track with no requires starts cleanly" "0" "$rc"
+assert_not_contains "a track with no requires prints no warning" "$out" "not found on PATH"
+
 # --- 7. bash track P0+P1: fabricated pass + one negative case per lab ---
 # Linear progression means each lab must end up PASSED before the next one
 # unlocks, so every block below drives a negative case (missing artifact ->

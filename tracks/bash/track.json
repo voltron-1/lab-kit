@@ -11,5 +11,15 @@
     "p5": "Text Processing & Pipelines",
     "p6": "Reading Real Deploy Scripts",
     "p7": "Directing & Auditing AI Bash"
-  }
+  },
+  "requires": [
+    {
+      "cmd": "shellcheck",
+      "hint": "sudo apt-get install -y shellcheck"
+    },
+    {
+      "cmd": "shfmt",
+      "hint": "sudo apt-get install -y shfmt"
+    }
+  ]
 }

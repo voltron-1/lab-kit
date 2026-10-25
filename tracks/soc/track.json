@@ -11,5 +11,23 @@
     "p5": "Phishing & Malware Triage",
     "p6": "Investigation & Escalation",
     "p7": "The AI-Assisted Analyst"
-  }
+  },
+  "requires": [
+    {
+      "cmd": "tshark",
+      "hint": "sudo apt-get install -y tshark"
+    },
+    {
+      "cmd": "dig",
+      "hint": "sudo apt-get install -y dnsutils"
+    },
+    {
+      "cmd": "whois",
+      "hint": "sudo apt-get install -y whois"
+    },
+    {
+      "cmd": "rg",
+      "hint": "sudo apt-get install -y ripgrep"
+    }
+  ]
 }

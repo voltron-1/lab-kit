@@ -18,6 +18,17 @@ Terminal training tracks — **rust, bash, soc, ps** — driven by one shared `l
     ./bin/lab start demo L0.0             # 4
     ./bin/lab check demo L0.0             # 5
 
+Each track also needs its own tools, installed as you go (the first lab of a
+track walks through them). `lab start` prints a warning, never an error, when
+one is missing:
+
+| Track | Tools |
+|---|---|
+| `rust` | `rustc`, `cargo` |
+| `bash` | `shellcheck`, `shfmt` |
+| `soc` | `tshark`, `dig`, `whois`, `rg` |
+| `ps` | `pwsh` (PowerShell 7) |
+
 Optional — put `lab` on your `PATH`, either way works:
 
     export PATH="$PWD/bin:$PATH"             # this shell only
@@ -101,7 +112,7 @@ everything the session does goes through them.
 
 ## Adding a Track
 
-Drop `tracks/<name>/` with a `track.json` (title, display order, phase names) and `phases/p<N>/L<phase>.<n>-<slug>/` lab directories. No CLI changes needed — `lab status` automatically discovers new tracks and labs from the filesystem.
+Drop `tracks/<name>/` with a `track.json` (title, display order, phase names, optional `requires` tool list) and `phases/p<N>/L<phase>.<n>-<slug>/` lab directories. No CLI changes needed — `lab status` automatically discovers new tracks and labs from the filesystem.
 
 ---
 
