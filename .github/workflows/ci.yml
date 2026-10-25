@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+
 jobs:
   shellcheck-and-lint:
     name: ShellCheck & Lab Structural Lint
@@ -28,6 +31,9 @@ jobs:
 
       - name: Run Acceptance Test Suite
         run: bash tests/acceptance.sh
+
+      - name: Run Interactive Session Suite
+        run: bash tests/session.sh
 
   powershell-lint:
     name: PSScriptAnalyzer (PowerShell)
@@ -91,5 +97,35 @@ jobs:
 
       - name: Cargo Check & Clippy across Rust Projects
         run: |
-          find tracks/rust -name "Cargo.toml" -execdir cargo check \;
-          find tracks/rust -name "Cargo.toml" -execdir cargo clippy -- -D warnings \;
+          # `find -execdir cargo ... \;` always exits 0 whatever cargo does, so
+          # it can never fail the job. Loop explicitly and carry the status.
+          #
+          # Excluded because they are lesson material, not buildable crates:
+          #   - rustscan-src (L6.1): a read-only exhibit of upstream RustScan;
+          #     its Cargo.toml has no build target by design.
+          #   - vuln-project (L4.8): pins a dependency that must not resolve,
+          #     which is the supply-chain lesson itself.
+          excluded=(
+            tracks/rust/phases/p6/L6.1-rustscan-cli-to-loop/files/rustscan-src/Cargo.toml
+            tracks/rust/phases/p4/L4.8-supply-chain/files/vuln-project/Cargo.toml
+          )
+          status=0
+          checked=0
+          while IFS= read -r manifest; do
+            for skip in "${excluded[@]}"; do
+              [[ "$manifest" == "$skip" ]] && continue 2
+            done
+            echo "::group::$manifest"
+            if (cd "$(dirname "$manifest")" && cargo check && cargo clippy -- -D warnings); then
+              checked=$((checked + 1))
+            else
+              echo "::error file=$manifest::cargo check/clippy failed"
+              status=1
+            fi
+            echo "::endgroup::"
+          done < <(find tracks/rust -name Cargo.toml | sort)
+          if [[ $checked -eq 0 && $status -eq 0 ]]; then
+            echo "::error::no Rust crates were checked"
+            status=1
+          fi
+          exit $status
