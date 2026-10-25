@@ -294,6 +294,8 @@ case "$1 $2" in
   "repo view") echo "voltron-1/lab-kit" ;;
   "pr view") echo "$HOOK_BRANCH" ;;
   "project item-list") echo "$HOOK_ITEMS" ;;
+  "project view") echo "${HOOK_VIEW:-}" ;;
+  "project field-list") echo "${HOOK_FIELDS:-}" ;;
   "project item-edit") echo "$*" >> "$HOOK_LOG" ;;
 esac
 SH
@@ -303,13 +305,32 @@ HOOK_LOG="$WORK/hook-edits.log"
 hook_run() {
   : > "$HOOK_LOG"
   printf '{"tool_input":{"command":"gh pr merge 77 --squash"},"tool_response":{"stdout":""}}' |
-    PATH="$HOOKBIN:$PATH" HOOK_BRANCH="$1" HOOK_ITEMS="$2" HOOK_LOG="$HOOK_LOG" bash "$HOOK" 2>&1
+    PATH="$HOOKBIN:$PATH" HOOK_BRANCH="$1" HOOK_ITEMS="$2" HOOK_LOG="$HOOK_LOG" \
+      HOOK_VIEW="${HOOK_VIEW:-}" HOOK_FIELDS="${HOOK_FIELDS:-}" bash "$HOOK" 2>&1
 }
 items='{"items":[{"id":"ITEM_A","content":{"title":"L3.2 Sysmon trees"}}]}'
 out="$(hook_run bash-p3-l3.2 "$items")"; rc=$?
 assert_eq "hook on a lesson branch with a matching card exits 0" "0" "$rc"
 assert_contains "hook reports the card was synced" "$out" "Project board synced: L3.2 -> project 18 Done"
 assert_contains "hook moved exactly that card" "$(cat "$HOOK_LOG")" "--id ITEM_A"
+# No live lookup (stub prints nothing): the hardcoded ids for project 18 stay in force.
+assert_contains "hook falls back to the hardcoded project id when no live lookup answers" "$(cat "$HOOK_LOG")" "--project-id PVT_kwHODKiy2s4Bdn1z"
+assert_contains "hook falls back to the hardcoded Done option" "$(cat "$HOOK_LOG")" "--single-select-option-id 98236657"
+# A live lookup wins over the constants.
+HOOK_VIEW='{"id":"PVT_LIVE"}'
+HOOK_FIELDS='{"fields":[{"id":"PVTF_other","name":"Title"},{"id":"PVTSSF_LIVE","name":"Status","options":[{"id":"opt_todo","name":"Todo"},{"id":"opt_LIVE","name":"Done"}]}]}'
+hook_run bash-p3-l3.2 "$items" > /dev/null
+assert_contains "hook uses the live project id" "$(cat "$HOOK_LOG")" "--project-id PVT_LIVE"
+assert_contains "hook uses the live Status field id" "$(cat "$HOOK_LOG")" "--field-id PVTSSF_LIVE"
+assert_contains "hook uses the live Done option id" "$(cat "$HOOK_LOG")" "--single-select-option-id opt_LIVE"
+# A live answer with no Status/Done: keep the constants for field and option.
+HOOK_FIELDS='{"fields":[{"id":"PVTF_other","name":"Title"}]}'
+hook_run bash-p3-l3.2 "$items" > /dev/null
+assert_contains "hook keeps the hardcoded field when the live one is not named Status" "$(cat "$HOOK_LOG")" "--field-id PVTSSF_lAHODKiy2s4Bdn1zzhYIF4s"
+HOOK_VIEW=""; HOOK_FIELDS="not json at all"
+hook_run bash-p3-l3.2 "$items" > /dev/null
+assert_contains "hook survives a live lookup that is not JSON" "$(cat "$HOOK_LOG")" "--project-id PVT_kwHODKiy2s4Bdn1z"
+HOOK_VIEW=""; HOOK_FIELDS=""
 out="$(hook_run bash-p3-l3.9 "$items")"; rc=$?
 assert_eq "hook with no matching card still exits 0" "0" "$rc"
 assert_contains "hook says the board was NOT synced instead of staying silent" "$out" "Project board NOT synced: no item starting with 'L3.9 '"
