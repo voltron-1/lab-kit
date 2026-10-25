@@ -59,13 +59,19 @@ def page_track(path):
 
 
 def description(line, end):
-    """Text describing the id that ends at `end`: the next table cell if the id
-    sits alone in its cell, else the rest of its cell/line up to a delimiter."""
+    """The title-like text the page gives for the id that ends at `end`, or "" when
+    the page gives none. Only two shapes count: the next table cell (the id sits
+    alone in its cell), and "<id> - description" with an explicit dash. A lab id
+    mentioned mid-sentence has no description to compare, so it is only checked
+    for existence."""
     rest = line[end:]
     if re.match(r"\s*\|", rest):
-        cells = [c.strip() for c in rest.split("|")[1:]]
+        cells = [c.strip() for c in re.split(r"(?<!\\)\|", rest)[1:]]
         return next((c for c in cells if c), "")
-    return re.split(r"\||\*\*|→", rest.lstrip(" —-:–"))[0].strip()
+    dash = re.match(r"\s*[—–]\s*|\s+-\s+", rest)
+    if not dash:
+        return ""
+    return re.split(r"(?<!\\)\||\*\*|→", rest[dash.end():])[0].strip()
 
 
 def main():
@@ -93,7 +99,7 @@ def main():
                         errors.append(f"{where}: {track} {lab} does not exist")
                         continue
                     desc = description(line, m.end())
-                    if len(ids) == 1 and desc and not overlap(desc, cat[track][lab]):
+                    if len(ids) == 1 and words(desc) and not overlap(desc, cat[track][lab]):
                         errors.append(
                             f"{where}: {track} {lab} is \"{cat[track][lab]}\" but the page says \"{desc[:60]}\"")
     for e in errors:
