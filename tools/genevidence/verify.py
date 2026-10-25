@@ -106,11 +106,11 @@ def check_pcap_zeek_agreement(pcap_path: Path, zeek_log_paths: list) -> list:
 
     fields = ["dns.qry.name", "dns.a", "tls.handshake.extensions_server_name",
               "http.host", "http.request.uri"]
-    cmd = [tshark_bin, "-n", "-r", str(pcap_path), "-T", "fields"]
+    extra = ["-T", "fields"]
     for fld in fields:
-        cmd += ["-e", fld]
+        extra += ["-e", fld]
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30, check=True)
+        result = _run_tshark(tshark_bin, pcap_path, extra)
     except subprocess.CalledProcessError as e:
         return [f"tshark failed reading {pcap_path}: {e} (stderr: {e.stderr!r})"]
     except subprocess.TimeoutExpired as e:
@@ -183,13 +183,24 @@ def _scenario_id_for_lab(check_sh_path: Path) -> str:
 # inside that scenario's declared window (its own `window:`, falling back to
 # universe.yaml's global org.scenario_window when a scenario has none).
 
+def _run_tshark(tshark_bin: str, pcap_path: Path, extra_args: list):
+    """Run tshark over a pcap, feeding the file on stdin rather than `-r <path>`.
+
+    Ubuntu 26.04 confines tshark with an AppArmor profile that refuses to open
+    files inside a checkout by path ("You don't have permission to read the
+    file") while the same bytes read fine on stdin or from /tmp. Raises what
+    subprocess.run raises (CalledProcessError, TimeoutExpired)."""
+    with open(pcap_path, "rb") as fh:
+        return subprocess.run([tshark_bin, "-n", "-r", "-", *extra_args], stdin=fh,
+                              capture_output=True, text=True, timeout=30, check=True)
+
+
 def _extract_pcap_timestamps(pcap_path: Path) -> list:
     tshark_bin = shutil.which("tshark")
     if tshark_bin is None:
         return []
-    cmd = [tshark_bin, "-n", "-r", str(pcap_path), "-T", "fields", "-e", "frame.time_epoch"]
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30, check=True)
+        result = _run_tshark(tshark_bin, pcap_path, ["-T", "fields", "-e", "frame.time_epoch"])
     except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
         return []
     stamps = []
@@ -361,11 +372,11 @@ def check_ips_hosts_resolve(universe: dict, evidence_dir: Path) -> list:
                 continue
             fields = ["ip.src", "ip.dst", "dns.qry.name", "dns.a",
                       "tls.handshake.extensions_server_name", "http.host"]
-            cmd = [tshark_bin, "-n", "-r", str(path), "-T", "fields"]
+            extra = ["-T", "fields"]
             for fld in fields:
-                cmd += ["-e", fld]
+                extra += ["-e", fld]
             try:
-                result = subprocess.run(cmd, capture_output=True, text=True, timeout=30, check=True)
+                result = _run_tshark(tshark_bin, path, extra)
             except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
                 continue
             for line in result.stdout.splitlines():
