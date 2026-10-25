@@ -16,7 +16,10 @@ concurrency:
 jobs:
   shellcheck-and-lint:
     name: ShellCheck & Lab Structural Lint
-    runs-on: ubuntu-latest
+    # Pinned, not ubuntu-latest: the kit targets Ubuntu 24.04 (tshark 4.2), and
+    # on 26.04 (tshark 4.6) verify.py's pcap/zeek check fails reading
+    # L2.7's capture.pcap. Move this when the pcap is checked against 4.6.
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
