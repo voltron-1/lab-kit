@@ -67,6 +67,21 @@ lab id. **Start from the beginning moves the pointer only**: nothing in
 session never hands you a lab past the frontier — `skip` is the only way past
 one, and it marks `⏭` permanently, exactly like `lab start --force`).
 
+The lab's BRIEF and GUIDED STEPS print inline, and you never need a second
+terminal. Inside a lab the prompt takes:
+
+| Command | What it does |
+|---|---|
+| `check` · `hint` · `brief` · `skip` · `status` · `quit` | grade, hint ladder, reprint the brief, skip (with a confirmation), progress, leave |
+| `files` (or `ls`) | list `workspace/<track>/<id>/` |
+| `show <file>` | print one workspace file; a leading `files/` is accepted, as GUIDED STEPS writes it |
+| `edit <file>` | open one workspace file in `$EDITOR` (falls back to `vi`) |
+| `!<command>` | run any shell command in the lab's workspace, e.g. `!sudo apt-get install -y jq` |
+
+`files`, `show` and `edit` are confined to the lab's workspace: a path that
+resolves outside it is refused. **`!<command>` is not confined** — it is
+`bash -c "<command>"` exactly as typed, the same trust as your own terminal.
+
 `lab session` does the same thing explicitly. With no terminal on stdin (a
 script, a pipe, CI) bare `lab` prints usage instead, as it always did.
 
