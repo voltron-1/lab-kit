@@ -30,6 +30,22 @@ jobs:
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
             jq shellcheck ripgrep shfmt tshark whois dnsutils
 
+      - name: Check the runner has the toolchains the acceptance suite needs
+        # Acceptance drives the ps track with pwsh and the rust track with rustc/cargo,
+        # and relies on the runner image shipping them. Fail here, naming the tool,
+        # instead of 300 assertions later with a cascade of rc=2.
+        run: |
+          missing=0
+          for tool in pwsh rustc cargo; do
+            if command -v "$tool" > /dev/null 2>&1; then
+              echo "ok: $tool -> $(command -v "$tool")"
+            else
+              echo "::error::runner image has no '$tool'; install it in this job"
+              missing=1
+            fi
+          done
+          exit "$missing"
+
       - name: Run ShellCheck
         run: ./tools/shellcheck-all.sh
 
