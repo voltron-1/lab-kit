@@ -3,13 +3,17 @@
 ## NEXT UP
 **All 4 tracks (rust, bash, ps, soc) are 100% built, tested, tagged, and complete (223 total labs)!**
 
-The 2026-10-25 repo audit (gap analysis) is mostly closed. Open items, in order:
-- [ ] **LICENSE / SECURITY.md / CODEOWNERS** — none exist. The licence is the owner's call;
-      the repo ships third-party exhibits (RustScan GPL-3.0-or-later, hexyl, vector, nom)
-      that already carry per-file SPDX/PROVENANCE headers.
-- [ ] **Wiki lab-id lint** — [#409](https://github.com/voltron-1/lab-kit/issues/409).
-- [ ] **`.claude/hooks/update-project-board.sh`** — hardcoded project node ids, and its branch
-      regex (`<track>-p<N>-l<M>.<K>`) never matches `fix/…` or `claude/…` branches.
+The 2026-10-25 repo audit (gap analysis) is closed in code. What is left needs a person
+or an access this repo's CI does not have:
+- [ ] **Run `./tools/lint-wiki.sh` once by hand** against the real wiki before trusting the
+      weekly `wiki-lint.yml`: it was built and tested on fixtures only (the wiki is a separate
+      repo). Expect to tune the title-overlap heuristic on the first real run.
+- [ ] **Enable private vulnerability reporting** (Settings → Code security): `SECURITY.md`
+      sends reporters to "Security → Report a vulnerability", which does not exist until then.
+      Also confirm the `LICENSE` copyright holder (`voltron-1`).
+- [ ] **`.claude/hooks/update-project-board.sh`** — still hardcodes the project node/field ids
+      (untestable without access to those projects), and only fires for a `gh pr merge` run by
+      Claude Code in a local shell, never for a merge in the GitHub UI.
 - [ ] **tshark 4.6 vs `soc/L2.7/files/capture.pcap`** — `verify.py` fails reading it
       ("You don't have permission to read the file"). CI is pinned to `ubuntu-24.04`
       (tshark 4.2) until the pcap is checked against 4.6.
@@ -20,7 +24,12 @@ requirements ([#413](https://github.com/voltron-1/lab-kit/pull/413)); wrong
 `ATTACK_MAPPING.md` counts and nine unmapped labs
 ([#414](https://github.com/voltron-1/lab-kit/pull/414)); no `.gitattributes`
 ([#415](https://github.com/voltron-1/lab-kit/pull/415)); README/tracker not covering the
-session's `files`/`show`/`edit`/`!<cmd>` commands (this change).
+session's `files`/`show`/`edit`/`!<cmd>` commands
+([#416](https://github.com/voltron-1/lab-kit/pull/416)); no wiki lab-reference lint
+([#417](https://github.com/voltron-1/lab-kit/pull/417), closes
+[#409](https://github.com/voltron-1/lab-kit/issues/409)); the board hook exiting silently when a
+card is missing ([#418](https://github.com/voltron-1/lab-kit/pull/418)); no LICENSE /
+SECURITY.md / CODEOWNERS ([#419](https://github.com/voltron-1/lab-kit/pull/419)).
 
 [x] `genevidence.py` had no `--help`: it performed a full evidence write pass instead
     of printing usage. Closed 2026-09-12 by [PR #406](https://github.com/voltron-1/lab-kit/pull/406)
@@ -43,8 +52,15 @@ still open.
 - **Line endings** (#415) — `.gitattributes` + `.editorconfig`. A `core.autocrlf=true` clone of
   `main` had 1,991 CRLF files; with the change, none. 21 soc `check.sh` files embed one
   literal CR on purpose (`tr -d '<CR>'`) and are untouched.
-- **Session commands documented** — the README now lists `files`/`ls`, `show`, `edit` and
+- **Session commands documented** (#416) — the README now lists `files`/`ls`, `show`, `edit` and
   `!<cmd>` (added by #410/#411) and says plainly that `!<cmd>` is unconfined.
+- **Wiki lint** (#417) — `tools/lint-wiki.sh [wiki-dir]` fails on a lab id that exists in no track
+  or on the wrong track, and on a description sharing no content word with the real title;
+  weekly + on-demand workflow, not a PR gate. Proven on fixtures, not yet on the real wiki.
+- **Board hook** (#418) — says "NOT synced" instead of staying silent when a recognised lesson
+  has no card; stubbed-`gh` acceptance tests.
+- **Licence** (#419) — MIT `LICENSE`, `SECURITY.md`, `CODEOWNERS`; the README says the Rust P6
+  exhibits keep their upstream licences.
 
 Previous session:
 
