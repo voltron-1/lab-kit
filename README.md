@@ -136,6 +136,11 @@ All check scripts, CLI internals, and lab metadata undergo strict quality contro
   ```bash
   bash tests/session.sh
   ```
+- **Wiki Lab References** (the wiki is a separate repo; checks that every lab id it cites
+  exists on the track it names — also runs weekly in CI):
+  ```bash
+  ./tools/lint-wiki.sh [path-to-wiki-checkout]
+  ```
 - **SOC Evidence Verification** (only needed when authoring or regenerating SOC
   evidence — requires `python3` with `PyYAML`, plus `tshark` for the pcap/zeek
   cross-check):

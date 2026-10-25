@@ -47,6 +47,19 @@ has a unique ip, every assigned user exists), the `cm-` event-id format across
 every SOC lab, zeek `uid` 5-tuple consistency within a bundle, and agreement
 between each pcap and the zeek logs shipped beside it.
 
+**The wiki** lives in a separate repo (`<repo>.wiki.git`) with no CI, so a stale lab id there is
+invisible to the gates above. `./tools/lint-wiki.sh [wiki-dir]` checks every lab reference on its
+pages against `tracks/` (an id that exists in no track, or the right id on the wrong track), and
+`.github/workflows/wiki-lint.yml` runs it weekly and on demand. Run it after editing the wiki or
+renaming a lab:
+```bash
+git clone https://github.com/<owner>/lab-kit.wiki.git ../lab-kit.wiki
+./tools/lint-wiki.sh ../lab-kit.wiki     # or no argument, to clone it for you
+```
+Wiki tables paraphrase lab titles on purpose, so titles are matched by shared content words, not
+exactly. A reference with no track context (no track word before it on a cross-track page) is
+counted and skipped, never guessed.
+
 ---
 
 ## 2. MITRE ATT&CK® Mapping
