@@ -11,11 +11,12 @@ All pull requests and commits to `main` must pass automated CI checks configured
 - **ShellCheck & Lab Structural Lint**:
   - All shell scripts, CLI helpers, and `check.sh` files must pass `./tools/shellcheck-all.sh`.
   - All lab directories must adhere to structural requirements checked by `./tools/lint-labs.sh` (valid `meta.json`, `lab.md`, `check.sh`, `quiz.json`, `hints.json`, and `recap.md`).
-  - Full acceptance test suite (`tests/acceptance.sh`) must pass 100%.
+  - Full acceptance test suite (`tests/acceptance.sh`) and interactive session suite (`tests/session.sh`) must pass 100%.
 - **PSScriptAnalyzer (PowerShell)**:
   - PowerShell scripts and samples under `tracks/ps` are analyzed with `PSScriptAnalyzer` at Error and Warning severity thresholds.
 - **Clippy & Cargo Check (Rust)**:
-  - Rust projects under `tracks/rust` are checked with `cargo check` and `cargo clippy -- -D warnings`.
+  - Rust projects under `tracks/rust` are checked with `cargo check` and `cargo clippy -- -D warnings`; any failure fails the job.
+  - Two crates are excluded in `ci.yml` because they are lesson material, not buildable crates: `rustscan-src` (L6.1, read-only upstream exhibit) and `vuln-project` (L4.8, its unresolvable dependency is the lesson). Add a new exhibit to the `excluded` list there.
 
 Before submitting a pull request, run locally:
 ```bash
