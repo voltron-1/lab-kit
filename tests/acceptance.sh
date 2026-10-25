@@ -3746,6 +3746,16 @@ MD
 out="$(cd -- "$COPY" && ./tools/lint-wiki.sh "$WIKI" 2>&1)"; rc=$?
 assert_eq "a correct, paraphrased wiki lints clean" "0" "$rc"
 assert_contains "clean run reports 0 problems" "$out" "0 problem(s)"
+# A lab id mentioned mid-sentence, or a title with escaped pipes in a table cell, has no
+# comparable description: existence is checked, the wording is not.
+cat > "$WIKI/Bash-Prose.md" << 'MD'
+Bash L0.3 first: the shebang decides the interpreter.
+Bash L4.5 and L4.6 are the labs that pay off directly on the job.
+| L2.4 | `&&` and `\|\|` - short-circuit logic |
+MD
+out="$(cd -- "$COPY" && ./tools/lint-wiki.sh "$WIKI" 2>&1)"; rc=$?
+assert_eq "ids mentioned in prose are not compared against titles" "0" "$rc"
+rm -f "$WIKI/Bash-Prose.md"
 echo '| PowerShell L5.1-5.7 | **SOC L4.5 - reading obfuscated shell** |' > "$WIKI/Cross-Track-Connections.md"
 out="$(cd -- "$COPY" && ./tools/lint-wiki.sh "$WIKI" 2>&1)"; rc=$?
 assert_eq "right lab id on the wrong track (the #409 bug) fails" "1" "$rc"

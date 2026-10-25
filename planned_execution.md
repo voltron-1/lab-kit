@@ -5,9 +5,10 @@
 
 The 2026-10-25 repo audit (gap analysis) is closed in code. What is left needs a person
 or an access this repo's CI does not have:
-- [ ] **Run `./tools/lint-wiki.sh` once by hand** against the real wiki before trusting the
-      weekly `wiki-lint.yml`: it was built and tested on fixtures only (the wiki is a separate
-      repo). Expect to tune the title-overlap heuristic on the first real run.
+- [x] **First real run of `./tools/lint-wiki.sh`** (2026-10-25, owner's checkout): 263 references
+      checked, no lab id missing from its track. The 5 findings were all prose sentences or an
+      escaped-pipe table cell being read as a title; fixed by comparing titles only in table
+      cells and "id — description" phrases (the wiki's ids are still existence-checked).
 - [ ] **Enable private vulnerability reporting** (Settings → Code security): `SECURITY.md`
       sends reporters to "Security → Report a vulnerability", which does not exist until then.
       Also confirm the `LICENSE` copyright holder (`voltron-1`).
