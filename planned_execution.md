@@ -9,9 +9,10 @@ or an access this repo's CI does not have:
       checked, no lab id missing from its track. The 5 findings were all prose sentences or an
       escaped-pipe table cell being read as a title; fixed by comparing titles only in table
       cells and "id — description" phrases (the wiki's ids are still existence-checked).
-- [ ] **Enable private vulnerability reporting** (Settings → Code security): `SECURITY.md`
-      sends reporters to "Security → Report a vulnerability", which does not exist until then.
-      Also confirm the `LICENSE` copyright holder (`voltron-1`).
+- [x] **Private vulnerability reporting enabled** (2026-10-26, by the owner): `SECURITY.md` sends
+      reporters to "Security → Report a vulnerability".
+- [ ] **Confirm the `LICENSE` copyright holder.** It reads `Copyright (c) 2026 voltron-1` (the repo
+      owner's GitHub login); change it if a legal name or organisation should appear instead.
 - [ ] **Board hook for merges done in the GitHub UI.** `.claude/hooks/update-project-board.sh` only
       fires for a `gh pr merge` run by Claude Code in a local shell. Covering UI merges needs a
       GitHub Action holding a token that can edit user projects (a PAT stored as a repo secret).
