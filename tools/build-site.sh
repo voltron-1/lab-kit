@@ -351,15 +351,19 @@ sed -e 's@</@<\\/@g' -e 's@<!--@<\\u0021--@g' "$TMP/bundle.json" > "$TMP/bundle.
 for part in index.html app.js style.css; do
   [[ -f "$SRC/$part" ]] || die "missing $SRC/$part"
 done
+compgen -G "$SRC/term/*.js" >/dev/null || die "missing $SRC/term/*.js"
+# The simulated terminal is authored as ordered parts (00-head.js ... 99-tail.js).
+LC_ALL=C cat "$SRC"/term/*.js > "$TMP/term.js"
 
 BUILD_TMP="$TMP/soc.html"
-awk -v style="$SRC/style.css" -v data="$TMP/bundle.safe.json" -v app="$SRC/app.js" '
+awk -v style="$SRC/style.css" -v data="$TMP/bundle.safe.json" -v app="$SRC/app.js" -v term="$TMP/term.js" '
   function dump(path,   line) {
     while ((getline line < path) > 0) print line
     close(path)
   }
   $0 == "<!--STYLE-->" { dump(style); next }
   $0 == "<!--DATA-->"  { dump(data);  next }
+  $0 == "<!--TERM-->"  { dump(term);  next }
   $0 == "<!--APP-->"   { dump(app);   next }
   { print }
 ' "$SRC/index.html" > "$BUILD_TMP"

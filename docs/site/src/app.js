@@ -38,6 +38,7 @@
       return /^ */.exec(l)[0].length;
     }
 
+    var foldFn = null;
     var LIST_RE = /^(\s*)([-*+]|\d+[.)])(\s+)(.*)$/;
     var FENCE_RE = /^(\s*)(```+|~~~+)\s*([\w-]*)\s*$/;
     var HEAD_RE = /^(#{1,6})\s+(.*?)\s*#*\s*$/;
@@ -133,6 +134,7 @@
           case 'p': return '<p>' + inline(b.text) + '</p>';
           case 'code':
             return '<div class="code"><button type="button" class="copy" data-copy>copy</button>' +
+              (/^(bash|sh|shell|console)$/.test(b.lang || '') ? '<button type="button" class="run" data-run>run</button>' : '') +
               '<pre><code>' + esc(b.text) + '</code></pre></div>';
           case 'list':
             return '<' + (b.ordered ? 'ol' + (b.start !== 1 ? ' start="' + b.start + '"' : '') : 'ul') + '>' +
@@ -140,6 +142,10 @@
                 var inner = blocks(it);
                 var h = html(inner);
                 if (inner.length === 1 && inner[0].t === 'p') { h = inline(inner[0].text); }
+                var label = foldFn ? foldFn(it.join('\n')) : null;
+                if (label) {
+                  return '<li class="fold"><details><summary>' + esc(label) + '</summary>' + h + '</details></li>';
+                }
                 return '<li>' + h + '</li>';
               }).join('') +
               '</' + (b.ordered ? 'ol' : 'ul') + '>';
@@ -148,8 +154,10 @@
       }).join('\n');
     }
 
-    function render(src) {
-      return html(blocks(String(src).replace(/\r\n?/g, '\n').split('\n')));
+    // opts.fold(itemSource) -> label | null: list items to render collapsed.
+    function render(src, opts) {
+      foldFn = opts && opts.fold ? opts.fold : null;
+      try { return html(blocks(String(src).replace(/\r\n?/g, '\n').split('\n'))); } finally { foldFn = null; }
     }
 
     // Split a lab.md into [{title, body}] on "## " headings.
@@ -163,7 +171,16 @@
       return secs.map(function (s) { return { title: s.title, body: s.lines.join('\n') }; });
     }
 
-    return { render: render, sections: sections, esc: esc };
+    // Top-level list items of a section body, each as markdown source (the numbered steps).
+    function steps(src) {
+      var out = [];
+      blocks(String(src).replace(/\r\n?/g, '\n').split('\n')).forEach(function (b) {
+        if (b.t === 'list') { b.items.forEach(function (it) { out.push(it.join('\n')); }); }
+      });
+      return out;
+    }
+
+    return { render: render, sections: sections, steps: steps, esc: esc };
   })();
 
   /* ================= grader: mirrors harness/checklib.sh ================= */
@@ -771,6 +788,114 @@
     return { el: fs, value: getter };
   }
 
+  /* ---------- terminal ---------- */
+  function termPanel(lab, texts, areas, hooks) {
+    var vfs = window.LabTerm.vfsFromLab(lab, {
+      get: function (n) { return texts[n] || ''; },
+      set: function (n, t) {
+        texts[n] = t;
+        if (areas[n]) { areas[n].value = t; areas[n].rows = Math.max(4, Math.min(18, t.split('\n').length + 1)); }
+        writeDraft(lab.id, n, t);
+      }
+    });
+    var sh = window.LabTerm.createShell({ vfs: vfs, hooks: hooks });
+    var log = h('pre', { class: 'term-log', tabindex: '0', 'aria-label': 'Terminal output' });
+    var promptEl = h('span', { class: 'term-prompt' });
+    var input = h('textarea', { class: 'term-in', rows: '1', spellcheck: 'false', autocomplete: 'off', autocapitalize: 'off', autocorrect: 'off', 'aria-label': 'Terminal input' });
+    var hist = [];
+    var hpos = 0;
+    var draft = '';
+    var lastTab = '';
+
+    function promptText() { return 'analyst@soc:' + (sh.cwd ? '~/' + sh.cwd : '~') + '$ '; }
+    function syncPrompt() { promptEl.textContent = promptText(); }
+    function grow() { input.rows = Math.min(8, input.value.split('\n').length); }
+    function append(text, cls) {
+      if (!text) { return; }
+      var span = h('span', { class: cls || null }, text);
+      log.appendChild(span);
+      if (log.textContent.length > 300000) {
+        while (log.firstChild && log.textContent.length > 200000) { log.removeChild(log.firstChild); }
+      }
+      log.scrollTop = log.scrollHeight;
+    }
+    function exec(cmd) {
+      append(promptText(), 'term-prompt');
+      append(cmd + '\n', 'term-cmd');
+      var r = sh.run(cmd);
+      if (r.clear) { log.textContent = ''; }
+      var text = '';
+      r.chunks.forEach(function (c) { append(c.t, c.e ? 'term-err' : null); text += c.t; });
+      syncPrompt();
+      return { text: text, status: r.status };
+    }
+    function submit() {
+      var val = input.value;
+      input.value = '';
+      grow();
+      if (val.trim() !== '') { hist.push(val); }
+      hpos = hist.length;
+      draft = '';
+      exec(val);
+    }
+    input.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' && !ev.shiftKey) {
+        ev.preventDefault();
+        if (window.LabTerm.incomplete(input.value)) { input.value += '\n'; grow(); return; }
+        submit();
+        return;
+      }
+      if (ev.key === 'Enter' && ev.shiftKey) { setTimeout(grow, 0); return; }
+      if (ev.key === 'ArrowUp' && input.value.indexOf('\n') === -1) {
+        if (hpos > 0) { if (hpos === hist.length) { draft = input.value; } hpos--; input.value = hist[hpos]; ev.preventDefault(); }
+        return;
+      }
+      if (ev.key === 'ArrowDown' && input.value.indexOf('\n') === -1) {
+        if (hpos < hist.length) { hpos++; input.value = hpos === hist.length ? draft : hist[hpos]; ev.preventDefault(); }
+        return;
+      }
+      if (ev.key === 'Tab' && !ev.shiftKey) {
+        ev.preventDefault();
+        var pre = input.value.slice(0, input.selectionStart);
+        var rest = input.value.slice(input.selectionStart);
+        var c = sh.complete(pre);
+        if (!c.matches.length) { return; }
+        var common = c.matches[0];
+        c.matches.forEach(function (m) { while (m.indexOf(common) !== 0) { common = common.slice(0, -1); } });
+        if (common.length > c.word.length) {
+          input.value = c.before + common + (c.matches.length === 1 && common.slice(-1) !== '/' ? ' ' : '') + rest;
+        } else if (lastTab === pre) {
+          append(promptText(), 'term-prompt'); append(pre + '\n', 'term-cmd'); append(c.matches.join('  ') + '\n');
+        }
+        lastTab = pre;
+        return;
+      }
+      lastTab = '';
+      if (ev.ctrlKey && (ev.key === 'l' || ev.key === 'L')) { ev.preventDefault(); log.textContent = ''; return; }
+      if (ev.ctrlKey && (ev.key === 'c' || ev.key === 'C') && input.selectionStart === input.selectionEnd) {
+        ev.preventDefault();
+        append(promptText() + input.value + '^C\n', 'term-cmd');
+        input.value = '';
+        grow();
+      }
+    });
+    input.addEventListener('input', grow);
+    log.addEventListener('click', function () { if (!window.getSelection || String(window.getSelection()) === '') { input.focus(); } });
+
+    var el = h('section', { class: 'panel term', id: 'terminal' },
+      h('h2', null, 'Terminal'),
+      h('p', { class: 'muted term-note' }, 'Runs on this lab’s files (nothing leaves your browser). Commands that write a graded file fill its Workspace box. Type help for what it supports.'),
+      log,
+      h('div', { class: 'term-line' }, promptEl, input));
+    syncPrompt();
+    append('Simulated shell in ~/lab-kit/workspace/soc/' + lab.id + ' — type help. Try: ls\n', 'term-banner');
+    return {
+      el: el,
+      exec: exec,
+      focus: function () { input.focus(); }
+    };
+  }
+
   /* ---------- lab view ---------- */
   function readDrafts() {
     try { return JSON.parse(lsGet(DRAFT_KEY) || '{}') || {}; } catch (e) { return {}; }
@@ -812,15 +937,38 @@
       h('h1', null, lab.id + ' — ' + lab.meta.title),
       h('p', { class: 'objective' }, lab.meta.objective),
       h('div', { class: 'badges' }, badges(lab))));
-    root.appendChild(h('p', { class: 'cli-note' },
-      'The steps below come from the terminal kit. Here, skip the shell commands: read the evidence, write your answers in the Workspace boxes, then press Check.'));
 
     if (lab.recall) { root.appendChild(recallPanel(lab)); }
 
     var secs = Md.sections(lab.lab_md);
+    var guidedSteps = [];
+    secs.forEach(function (s) { if (/guided steps/i.test(s.title)) { guidedSteps = Md.steps(s.body); } });
+    // Steps that only matter on a real machine are folded so the first real task is visible.
+    function foldStep(src) {
+      if (/\b(sudo|apt(-get)?)\b[^\n]*\binstall\b/.test(src)) { return 'Install the tools: not needed here, they are built into this page'; }
+      var code = /```\w*\n([\s\S]*?)```/.exec(src);
+      if (code && /^\s*cd\s+(\.\/)?workspace\/soc\/[\w.-]+\s*$/.test(code[1]) && src.replace(code[0], '').length < 400) {
+        return 'Move into your workspace: you are already there';
+      }
+      return null;
+    }
+    var firstReal = 0;
+    while (firstReal < guidedSteps.length && foldStep(guidedSteps[firstReal])) { firstReal++; }
+    var fileNames = lab.graded_files.map(function (g) { return g.name; });
+    var qCount = 0;
+    lab.graded_files.forEach(function (g) {
+      if (g.template) { (g.prefill.match(/^[A-Za-z0-9_]+=/gm) || []).forEach(function () { qCount++; }); }
+    });
+    var taskText;
+    if (!fileNames.length) { taskText = 'Read the evidence, then press Check.'; }
+    else if (qCount) { taskText = 'Fill ' + fileNames.join(', ') + ' (' + qCount + ' answer lines) from the evidence, then press Check.'; }
+    else { taskText = 'Produce ' + fileNames.length + ' file' + (fileNames.length === 1 ? '' : 's') + ': ' + fileNames.join(', ') + '. Each Workspace box shows the step that makes it.'; }
+    if (firstReal > 0 && guidedSteps.length) { taskText += ' Start at step ' + (firstReal + 1) + '.'; }
+    root.appendChild(h('div', { class: 'task', id: 'task' }, h('strong', null, 'Your task: '), taskText));
+
     secs.forEach(function (s) {
       var isOnion = /security onion/i.test(s.title);
-      var inner = '<h2>' + Md.esc(s.title) + '</h2>' + Md.render(s.body);
+      var inner = '<h2>' + Md.esc(s.title) + '</h2>' + Md.render(s.body, /guided steps/i.test(s.title) ? { fold: foldStep } : null);
       if (isOnion) {
         root.appendChild(h('details', { class: 'panel md', html: '<summary>' + Md.esc(s.title) + '</summary>' + Md.render(s.body) }));
       } else {
@@ -828,28 +976,50 @@
       }
     });
 
-    root.appendChild(evidencePanel(lab, ui));
-
-    // workspace
+    // workspace: one box per graded file, each with the guided step(s) that produce it
     var ws = h('section', { class: 'panel', id: 'workspace' }, h('h2', null, 'Workspace'));
     var areas = {};
+    function directionsFor(g) {
+      var re = new RegExp('(^|[^\\w.-])' + g.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^\\w-])');
+      var hits = [];
+      guidedSteps.forEach(function (src, i) { if (re.test(src)) { hits.push({ n: i + 1, src: src }); } });
+      return hits;
+    }
     lab.graded_files.forEach(function (g) {
       var ta = h('textarea', { id: 'ws-' + g.name.replace(/[^\w]/g, '_'), 'data-name': g.name, spellcheck: 'false', autocomplete: 'off', autocapitalize: 'off' });
       ta.value = texts[g.name];
       ta.rows = Math.max(4, Math.min(18, ta.value.split('\n').length + 1));
       ta.addEventListener('input', function () { texts[g.name] = ta.value; writeDraft(lab.id, g.name, ta.value); });
       areas[g.name] = ta;
-      var box = h('div', { class: 'ws-file' }, h('label', { for: ta.id }, g.name), ta);
+      var box = h('div', { class: 'ws-file', 'data-file': g.name }, h('label', { for: ta.id }, g.name));
+      var dirs = directionsFor(g);
+      dirs.forEach(function (d) {
+        box.appendChild(h('div', { class: 'directions' },
+          h('div', { class: 'dir-title' }, 'Step ' + d.n + ' of ' + guidedSteps.length + ' makes this file'),
+          h('div', { class: 'md', html: Md.render(d.src) })));
+      });
+      if (!dirs.length && g.template) {
+        box.appendChild(h('div', { class: 'directions' },
+          h('div', { class: 'dir-title' }, 'What to write here'),
+          h('p', null, 'One answer per line. The text after # on each line says exactly what that line wants; answer it from the evidence, then delete or keep the comment.')));
+      }
+      box.appendChild(ta);
       if (g.tool_output) {
-        box.appendChild(h('p', { class: 'ws-note' },
-          'In the terminal kit this file holds a tool’s output. Paste the output here, or fill it from the expected output.'));
         box.appendChild(h('button', { type: 'button', class: 'fill', onclick: function () {
           ta.value = g.expected; texts[g.name] = g.expected; writeDraft(lab.id, g.name, g.expected);
         } }, 'Fill from expected output'));
       }
       ws.appendChild(box);
     });
-    if (!lab.graded_files.length) { ws.appendChild(h('p', { class: 'muted' }, 'This lab has no files to write.')); }
+    if (!lab.graded_files.length) { ws.appendChild(h('p', { class: 'muted' }, 'This lab has no files to write. Read the evidence, then press Check.')); }
+
+    var term = termPanel(lab, texts, areas, {
+      check: function () { return doCheck(); },
+      hint: function () { return hintText(); },
+      status: function () { var r = State.rec(lab.id); return lab.id + ': ' + (r.status || 'not started') + ' · attempts ' + r.attempts + ' · hints used ' + r.hints_used + '/' + lab.hints.length; }
+    });
+    root.appendChild(term.el);
+    root.appendChild(evidencePanel(lab, ui));
     root.appendChild(ws);
 
     // hints
@@ -874,12 +1044,17 @@
       hintBtn.textContent = used >= total ? 'No more hints' : (used === 0 ? 'Hint' : 'Next hint');
       if (announce && used >= total) { /* last hint already announced inline */ }
     }
-    hintBtn.addEventListener('click', function () {
+    function hintText() {
       var used = State.rec(lab.id).hints_used;
-      if (used >= lab.hints.length) { return; }
-      State.hint(lab.id, lab.hints.length);
+      var total = lab.hints.length;
+      if (used >= total) { return 'no more hints for ' + TRACK_ID + ' ' + lab.id + ' — all ' + total + ' shown.'; }
+      State.hint(lab.id, total);
       drawHints(true);
-    });
+      var rem = total - used - 1;
+      return '\n[hint ' + (used + 1) + '/' + total + '] ' + TRACK_ID + ' ' + lab.id + '\n  ' + lab.hints[used] + '\n\n' +
+        (rem > 0 ? '(' + rem + ' hint' + (rem === 1 ? '' : 's') + ' remaining — run lab hint ' + TRACK_ID + ' ' + lab.id + ' again for the next)' : '(that was the last hint)');
+    }
+    hintBtn.addEventListener('click', function () { hintText(); });
 
     // check + quiz
     var resultsBox = h('div', { id: 'results' });
@@ -948,6 +1123,7 @@
       resultsBox.appendChild(h('p', { class: 'tally', id: 'tally' }, 'checks ' + res.passed + '/' + res.total));
       if (res.pass) { showQuiz(); }
       else { resultsBox.appendChild(h('p', { class: 'muted' }, 'Fix the failing checks, then press Check again.')); }
+      return res;
     }
 
     var checkBtn = h('button', { type: 'button', class: 'primary', id: 'btn-check', onclick: doCheck }, 'Check');
@@ -986,7 +1162,16 @@
         if ((st.status === 'passed' || st.skipped) && idx + 1 < LABS.length) { window.location.hash = '#/lab/' + LABS[idx + 1].id; }
         else { toast('Pass or skip ' + lab.id + ' before moving on.'); }
       },
-      filter: function () { if (ui.filter) { ui.filter(); } }
+      filter: function () { if (ui.filter) { ui.filter(); } },
+      runCode: function (btn) {
+        var holder = btn.closest('.code');
+        var code = holder.querySelector('pre').textContent.replace(/\n+$/, '');
+        var res = term.exec(code);
+        var outEl = holder.nextElementSibling && holder.nextElementSibling.classList.contains('run-out') ? holder.nextElementSibling : null;
+        if (!outEl) { outEl = h('pre', { class: 'run-out' }); holder.parentNode.insertBefore(outEl, holder.nextSibling); }
+        outEl.textContent = res.text === '' ? '(no output — the command succeeded; check the file it wrote in Workspace)' : res.text;
+        outEl.className = 'run-out' + (res.status !== 0 ? ' err' : '');
+      }
     };
   }
 
@@ -1057,6 +1242,8 @@
     });
 
     view.addEventListener('click', function (ev) {
+      var rb = ev.target.closest ? ev.target.closest('[data-run]') : null;
+      if (rb) { if (current && current.runCode) { current.runCode(rb); } return; }
       var b = ev.target.closest ? ev.target.closest('[data-copy]') : null;
       if (!b) { return; }
       var pre = b.parentNode.querySelector('pre');

@@ -2,6 +2,7 @@
 # tests/site.sh — verification for the generated SOC page (docs/site/soc.html).
 #
 #   1. bundle counts            2. in-page grader vs every lab's recorded checks
+#   2b. simulated terminal vs the real tools
 #   3. real-kit cross-check     4. Playwright smoke (skipped if not installed)
 #   5. size budget              6. --check freshness, and that it can fail
 #
@@ -48,6 +49,14 @@ assert_eq "L4.1 records 8 assertions" 8 "$(count '.labs[] | select(.id == "L4.1"
 
 note "2. in-page grader against every lab"
 if node tests/site-grader.mjs "$DATA"; then ok "all labs pass with synthesized answers"; else bad "grader self-consistency"; fi
+
+note "2b. simulated terminal against the real tools"
+if node tests/site-term.mjs "$DATA" >"$WORK/term.out" 2>&1; then
+  ok "site-term.mjs: $(tail -n 2 "$WORK/term.out" | head -n 1)"
+else
+  bad "site-term.mjs"
+  sed 's/^/    | /' "$WORK/term.out" | head -n 40
+fi
 
 note "3. cross-check with the real kit (throwaway copy)"
 COPY="$WORK/kit"

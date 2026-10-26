@@ -28,20 +28,43 @@ lab's own text normaliser (`tr | sed` pipeline) re-implemented per lab. Quiz gra
 `lib/quiz.sh`; the progress store mirrors `lib/state.sh`. Change a lab, rebuild, and the page
 follows. Nothing in `tracks/`, `lib/` or `harness/checklib.sh` is touched.
 
+## What a lab looks like
+
+- **Your task** line under the title: the files to produce (or the answer file and its line count) and
+  which guided step to start at. Install-only and `cd` steps are folded because they do not apply here.
+- **Guided steps** with a **run** button on every command block. Run executes the block in the terminal
+  and shows the output right under it.
+- **Terminal**: a simulated shell on the lab's own files (see below).
+- **Evidence** viewer, then **Workspace**: one box per graded file, each with the guided step(s) that
+  produce it, a run button, and an optional "Fill from expected output".
+- **Check**: the grader and quiz. `lab check soc <id>` typed in the terminal does the same thing.
+
+## The simulated terminal
+
+Authored as ordered parts in `docs/site/src/term/` and inlined by the build. It is a real shell
+language, not a lookup table: pipes, `> >> <  2>&1`, `&& || ;`, `$VAR`, `$(...)`, globs, `{ ...; }`,
+`for`/`while`/`if`. Commands: `ls cat head tail wc cp mv rm mkdir touch find file sha256sum base64 xxd`,
+`grep rg sed awk cut tr sort uniq column nl diff xargs`, `jq` (full filter language), `tshark` (a pcap
+dissector: `-r -Y -T fields -e -z follow,tcp,ascii,N`), and `lab check|hint|status`. `dig` and `whois`
+print their version only (no network). Files the terminal writes into a graded name appear in that
+Workspace box, and the other way round.
+
+`tests/site-term.mjs` runs every fenced bash block in all 52 `lab.md` files, plus about 180 extra commands,
+in real bash and in the page shell and requires identical stdout, exit status and written files (against
+both gawk and mawk). It also replays the labs' own commands and requires the tool-output checks to pass.
+
 ## What it does and does not do
 
-- **Terminal first.** The curriculum calls Tier 1 "a doing job in the terminal". The page drops real
-  `jq`, `tshark`, `dig` and `rg` practice. Assertions that only call a tool (`assert_cmd_ok`, in
-  L0.1, L0.3, L2.4) show as "terminal-only, counted satisfied here" with the install hint. Files
-  that hold a tool's output (`toolcheck.txt`, `dns_q.txt`, `jq_out.txt`, ...) get a "Fill from
-  expected output" button. The terminal kit stays the primary path; the page is a second way in
-  and a preview.
+- **Terminal first, still.** The page terminal is an emulation: it covers the commands above and says so
+  plainly when something is outside them (`python3` only emulates the L2.6 timestamp snippet). The
+  terminal kit stays the primary path; the page is a second way in and a preview.
 - **Keys are visible.** The answers the grader checks are in the page data, exactly as they are in
   each `check.sh`, and a failing check prints the expected literal as `checklib.sh` does. The page
   leaks nothing the repo does not already show.
 - **Unlock rule.** Linear. The first lab that is neither passed nor skipped is the frontier (▶).
   Skipping asks for confirmation and marks ⏭.
-- **Keyboard.** `c` check, `h` hint, `n` next lab, `/` focus the filter.
+- **Keyboard.** `c` check, `h` hint, `n` next lab, `/` focus the filter (when not typing in a box).
+  Terminal: Enter runs (or continues an open quote), Up/Down history, Tab completes, Ctrl+L clears.
 
 ## Progress
 
@@ -77,4 +100,8 @@ Decisions taken during the unattended build, recorded here instead of asked:
   does for every other lab.
 - **Commits.** Steps 3 to 6 are one commit: the page is one `app.js`, so shell, lab view, grader and
   export/import cannot be split after the fact.
+- **Terminal output formats.** `ls` sorts like a UTF-8 locale and `rg` prints the heading format only
+  when its output is the terminal, as the real tools do. `file` uses a short built-in label table.
+- **Directions.** Per-file directions are matched by file name against the numbered guided steps, so a
+  lab that never names a graded file in its steps shows only the generic "what to write here" note.
 - **No fallbacks were needed** for tshark, `file`, empty assertions or the Playwright smoke test.

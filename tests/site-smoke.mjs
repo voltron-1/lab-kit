@@ -37,6 +37,34 @@ ok((await page.locator('.lab-row[data-id="L0.1"] .mark-frontier').count()) === 1
 ok((await page.locator('.lab-row.locked').count()) === 51, '51 locked rows, none are links');
 ok((await page.locator('a.lab-row').count()) === 1, 'only the frontier row is a link');
 
+// 1b. L0.1: each workspace file shows the step that makes it, and Run fills it via the terminal
+await page.goto(url + '#/lab/L0.1');
+await page.waitForSelector('#workspace');
+ok(/Your task: Produce 4 files: jq_out\.txt.*Start at step 3/.test(await page.locator('#task').innerText()), 'L0.1: task line names the 4 files and says to start at step 3');
+ok((await page.locator('li.fold details:not([open])').count()) === 2, 'L0.1: install and cd steps are folded, not shown as tasks');
+ok((await page.locator('#workspace .directions').count()) === 4, 'L0.1: all 4 workspace files carry directions');
+ok(/jq -r '\.user\.name'/.test(await page.locator('.ws-file[data-file="jq_out.txt"] .directions').innerText()), 'jq_out.txt directions show the jq command');
+await page.locator('.ws-file[data-file="jq_out.txt"] [data-run]').first().click();
+ok((await page.locator('#ws-jq_out_txt').inputValue()).trim() === 'm.reyes', 'Run on the jq step writes m.reyes into jq_out.txt');
+ok((await page.locator('.ws-file[data-file="jq_out.txt"] .run-out').count()) === 1, 'Run shows its output under the command');
+for (const f of ['tshark_out.txt', 'rg_out.txt', 'toolcheck.txt']) {
+  await page.locator(`.ws-file[data-file="${f}"] [data-run]`).first().click();
+}
+ok(/coppermine\.example/.test(await page.locator('#ws-tshark_out_txt').inputValue()), 'tshark step fills tshark_out.txt from the pcap');
+ok(/CM-TOOLBELT-7C42/.test(await page.locator('#ws-rg_out_txt').inputValue()), 'rg step fills rg_out.txt');
+ok(/TShark/.test(await page.locator('#ws-toolcheck_txt').inputValue()), 'version step fills toolcheck.txt');
+await page.fill('.term-in', 'ls notes | wc -l; grep -c escalation notes/triage-notes.txt');
+await page.press('.term-in', 'Enter');
+ok(/^\s*1\s*\n?\s*1\s*$/m.test((await page.locator('.term-log').innerText()).slice(-60)) || /1\n1/.test(await page.locator('.term-log').innerText()), 'terminal runs pipes');
+await page.fill('.term-in', 'lab check soc L0.1');
+await page.press('.term-in', 'Enter');
+ok(/checks 14\/14/.test(await page.locator('.term-log').innerText()), 'lab check in the terminal grades 14/14');
+ok((await page.locator('#results .res.ok').count()) === 14, 'lab check in the terminal also fills the Check panel');
+await page.fill('.term-in', 'echo "unterminated');
+await page.press('.term-in', 'Enter');
+ok((await page.locator('.term-in').inputValue()).includes('\n'), 'Enter inside an open quote continues on a new line');
+await page.fill('.term-in', '');
+
 // 2. force L0.1..L3.7 passed
 const ids = await page.evaluate(() => JSON.parse(document.getElementById('lab-data').textContent).labs.map((l) => l.id));
 const upto = ids.indexOf('L4.1');
