@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOC Analyst Lab</title>
+<style>
+<!--STYLE-->
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="#/">
+      <span class="brand-title" id="brand-title">SOC Analyst Lab</span>
+      <span class="brand-tag" id="brand-tag"></span>
+    </a>
+    <nav class="tools" aria-label="Page tools">
+      <button type="button" id="btn-theme" title="Toggle light/dark theme">Theme</button>
+      <button type="button" id="btn-export" title="Download progress.json">Export</button>
+      <button type="button" id="btn-import" title="Load a progress.json">Import</button>
+      <button type="button" id="btn-reset" title="Erase all progress in this browser">Reset</button>
+      <input type="file" id="file-import" accept="application/json,.json" hidden>
+    </nav>
+  </div>
+</header>
+<main id="view" tabindex="-1"></main>
+<footer class="foot">
+  <p>Generated from <code>tracks/soc</code>. Rebuild: <code>./tools/build-site.sh</code>.
+  Keys: <kbd>c</kbd> check · <kbd>h</kbd> hint · <kbd>n</kbd> next · <kbd>/</kbd> filter.
+  Progress lives in this browser only; use Export to keep it.</p>
+</footer>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<script id="lab-data" type="application/json">
+<!--DATA-->
+</script>
+<script>
+<!--APP-->
+</script>
+</body>
+</html>
