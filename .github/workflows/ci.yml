@@ -52,6 +52,14 @@ jobs:
       - name: Run Lab Structural Lint
         run: ./tools/lint-labs.sh
 
+      - name: Check generated site is current
+        run: ./tools/build-site.sh --check
+
+      - name: Run Site Suite
+        # tests/site.sh skips its Playwright part (prints "playwright: skipped")
+        # when the runner has no playwright module.
+        run: bash tests/site.sh
+
       - name: Run Acceptance Test Suite
         run: bash tests/acceptance.sh
 

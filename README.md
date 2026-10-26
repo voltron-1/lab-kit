@@ -40,6 +40,13 @@ and the tracks correctly.
 New here? [`docs/LEARNERS_GUIDE.md`](docs/LEARNERS_GUIDE.md) walks through
 sessions, hints, quizzes, and progress in more depth than this README does.
 
+### Browser version of the SOC track
+
+[`docs/site/soc.html`](docs/site/soc.html) is the whole SOC track as one offline page: open it
+from disk, no install. Progress stays in the browser and exports to the same `progress.json`
+the CLI writes. The terminal stays the primary path (real `jq` and `tshark`); the page is a
+second way in. Regenerate it with `./tools/build-site.sh`.
+
 ---
 
 ## Starting a session

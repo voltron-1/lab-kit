@@ -12,6 +12,8 @@ or an access this repo's CI does not have:
 - [ ] **Enable private vulnerability reporting** (Settings → Code security): `SECURITY.md`
       sends reporters to "Security → Report a vulnerability", which does not exist until then.
       Also confirm the `LICENSE` copyright holder (`voltron-1`).
+- [ ] **Enable GitHub Pages** (Settings → Pages → deploy from `main`, folder `/docs`) so
+      `docs/site/soc.html` is served at a URL instead of only opened from a checkout.
 - [ ] **Board hook for merges done in the GitHub UI.** `.claude/hooks/update-project-board.sh` only
       fires for a `gh pr merge` run by Claude Code in a local shell. Covering UI merges needs a
       GitHub Action holding a token that can edit user projects (a PAT stored as a repo secret).
